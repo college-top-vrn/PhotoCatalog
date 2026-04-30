@@ -1,3 +1,8 @@
+
+* [Конвеции и правила проекта](#docs/TechnicalSpecification.md)
+* [Техническая спецификация проекта](#docs/TechnicalSpecification.md)
+
+
 # Диаграмма прецендентов
 
 ```mermaid
