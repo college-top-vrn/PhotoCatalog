@@ -51,24 +51,24 @@ graph TD
         Logger[File Logger]
     end
 
-    subgraph "Application Layer (Use Cases)"
+    subgraph "Application Layer"
         direction TB
         PC[Photo Controller/API]
         UC_Manage[Catalog Use Cases]
         UC_Search[Search & Tagging Use Cases]
     end
 
-    subgraph "Domain Layer (Сердце системы)"
+    subgraph "Domain Layer"
         direction TB
         
-        subgraph "Entities (Rich Model)"
+        subgraph "Entities"
             E_Photo[Photo Entity]
             E_Album[Album Entity]
             E_Folder[Folder Entity]
             E_Tag[Tag Value Object]
         end
         
-        subgraph "Interfaces (Gateways)"
+        subgraph "Interfaces"
             I_PhotoRepo[IPhotoRepository]
             I_MetaRepo[IMetadataRepository]
             I_FileServer[IFileSystemService]
