@@ -1,5 +1,5 @@
 
-* [Конвеции и правила проекта](docs/TechnicalSpecification.md)
+* [Конвеции и правила проекта](docs/rules/Сonvention.md)
 * [Техническая спецификация проекта](docs/TechnicalSpecification.md)
 
 
