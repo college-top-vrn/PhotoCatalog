@@ -41,3 +41,54 @@ graph LR
     UC_PhysDel --- FS
 ```
 
+# Диаграмма компонентов
+
+```mermaid 
+graph TD
+    subgraph "Infrastructure Layer (Внешний слой)"
+        DB[(ADO.NET Metadata Store)]
+        FS[(Physical Disk Storage)]
+        Logger[File Logger]
+    end
+
+    subgraph "Application Layer (Use Cases)"
+        direction TB
+        PC[Photo Controller/API]
+        UC_Manage[Catalog Use Cases]
+        UC_Search[Search & Tagging Use Cases]
+    end
+
+    subgraph "Domain Layer (Сердце системы)"
+        direction TB
+        
+        subgraph "Entities (Rich Model)"
+            E_Photo[Photo Entity]
+            E_Album[Album Entity]
+            E_Folder[Folder Entity]
+            E_Tag[Tag Value Object]
+        end
+        
+        subgraph "Interfaces (Gateways)"
+            I_PhotoRepo[IPhotoRepository]
+            I_MetaRepo[IMetadataRepository]
+            I_FileServer[IFileSystemService]
+        end
+    end
+
+
+    PC --> UC_Manage
+    PC --> UC_Search
+    
+    UC_Manage --> E_Photo
+    UC_Manage --> E_Album
+    UC_Manage --> I_PhotoRepo
+    
+    UC_Search --> E_Tag
+    UC_Search --> I_MetaRepo
+
+
+    DB -.->|implements| I_MetaRepo
+    FS -.->|implements| I_FileServer
+    DB -.->|implements| I_PhotoRepo
+```
+
