@@ -9,11 +9,17 @@
 
 
     <ItemGroup>
-        <PackageReference Include="xunit.v3"/>
-        <PackageReference Include="xunit.analyzers"/>
-        <PackageReference Include="xunit.runner.visualstudio"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
-        <PackageReference Include="TngTech.ArchUnitNET.xUnit"/>
+        <PackageReference Include="xunit.v3" />
+        <PackageReference Include="xunit.analyzers" />
+        <PackageReference Include="xunit.runner.visualstudio" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="TngTech.ArchUnitNET.xUnit" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
+      <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj" />
     </ItemGroup>
 
 </Project>
