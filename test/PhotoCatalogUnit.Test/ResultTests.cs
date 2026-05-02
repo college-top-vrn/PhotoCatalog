@@ -1,16 +1,16 @@
 ﻿namespace PhotoCatalogUnit.Test;
 
 using PhotoCatalog.Domain.Primitives;
+
 using Xunit;
 
-
 /// <summary>
-/// Тесты для проверки поведения обобщенного объекта <see cref="Result{T}"/>.
+/// Тесты для проверки поведения обобщенного объекта <see cref="ResultVoid{T}"/>.
 /// </summary>
-public class ResultTTests
+public class ResultTests
 {
     /// <summary>
-    /// Проверяет, что явный вызов <see cref="Result{T}.Success"/> корректно устанавливает 
+    /// Проверяет, что явный вызов <see cref="ResultVoid{T}.Success"/> корректно устанавливает 
     /// статус успеха, очищает ошибку и сохраняет переданное значение.
     /// </summary>
     [Fact]
@@ -18,7 +18,7 @@ public class ResultTTests
     {
         string expectedValue = "Тестовая строка";
 
-        var result = Result<string>.Success(expectedValue);
+        var result = ResultVoid<string>.Success(expectedValue);
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
@@ -27,7 +27,7 @@ public class ResultTTests
     }
 
     /// <summary>
-    /// Проверяет, что явный вызов <see cref="Result{T}.Failure"/> корректно устанавливает 
+    /// Проверяет, что явный вызов <see cref="ResultVoid{T}.Failure"/> корректно устанавливает 
     /// статус провала, сохраняет переданную ошибку, а свойство Value безопасно возвращает default(T) 
     /// </summary>
     [Fact]
@@ -35,59 +35,59 @@ public class ResultTTests
     {
         var expectedError = new Error("Test.Failure", "Тестовая ошибка");
 
-        var result = Result<string>.Failure(expectedError);
+        var result = ResultVoid<string>.Failure(expectedError);
 
         Assert.False(result.IsSuccess);
         Assert.True(result.IsFailure);
         Assert.Equal(expectedError, result.Error);
-        Assert.Null(result.Value); 
+        Assert.Null(result.Value);
     }
 
     /// <summary>
     /// Проверяет работу неявного преобразования:
-    /// неявное приведение переменной типа T к типу Result{T} должно автоматически создавать успешный результат.
+    /// неявное приведение переменной типа T к типу ResultVoid{T} должно автоматически создавать успешный результат.
     /// </summary>
     [Fact]
     public void ImplicitOperator_FromValue_ShouldCreateSuccessResult()
     {
         int expectedValue = 42;
 
-        Result<int> result = expectedValue;
+        ResultVoid<int> resultVoid = expectedValue;
 
-        Assert.True(result.IsSuccess);
-        Assert.Equal(expectedValue, result.Value);
+        Assert.True(resultVoid.IsSuccess);
+        Assert.Equal(expectedValue, resultVoid.Value);
     }
 
     /// <summary>
     /// Проверяет работу работу неявного преобразования:
-    /// неявное приведение объекта Error к типу Result{T} должно автоматически создавать провальный результат.
+    /// неявное приведение объекта Error к типу ResultVoid{T} должно автоматически создавать провальный результат.
     /// </summary>
     [Fact]
     public void ImplicitOperator_FromError_ShouldCreateFailureResult()
     {
         var expectedError = new Error("Code", "Message");
 
-        Result<int> result = expectedError;
+        ResultVoid<int> resultVoid = expectedError;
 
-        Assert.True(result.IsFailure);
-        Assert.Equal(expectedError, result.Error);
-        Assert.Equal(0, result.Value); // Для значимых типов (int) default — это 0
+        Assert.True(resultVoid.IsFailure);
+        Assert.Equal(expectedError, resultVoid.Error);
+        Assert.Equal(0, resultVoid.Value); // Для значимых типов (int) default — это 0
     }
 
     /// <summary>
     /// Проверяет работу статического полиморфизма:
-    /// неявное приведение обобщенного Result{T} к базовому нетипизированному Result
+    /// неявное приведение обобщенного ResultVoid{T} к базовому нетипизированному ResultVoid
     /// должно корректно переносить статус (IsSuccess/IsFailure) и детали ошибки, отбрасывая Value.
     /// </summary>
     [Fact]
     public void ImplicitOperator_ToBaseResult_ShouldMapStateCorrectly()
     {
         var error = new Error("Error", "Message");
-        Result<int> successT = 100;
-        Result<int> failureT = error;
+        ResultVoid<int> successT = 100;
+        ResultVoid<int> failureT = error;
 
-        Result baseSuccess = successT;
-        Result baseFailure = failureT;
+        ResultVoid baseSuccess = successT;
+        ResultVoid baseFailure = failureT;
 
         Assert.True(baseSuccess.IsSuccess);
         Assert.True(baseFailure.IsFailure);

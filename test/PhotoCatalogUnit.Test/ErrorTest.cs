@@ -19,7 +19,7 @@ public class ErrorTest
 
         var error1 = new Error(expectedCode, expectedMessage);
         var error2 = new Error(expectedCode, expectedMessage);
-        
+
         Assert.Equal(error1, error2);
     }
 

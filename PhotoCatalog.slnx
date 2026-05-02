@@ -1,8 +1,8 @@
 <Solution>
-  <Project Path="src/PhotoCatalog.Application/PhotoCatalog.Application.csproj" />
-  <Project Path="src/PhotoCatalog.Domain/PhotoCatalog.Domain.csproj" />
-  <Project Path="src/PhotoCatalog.Infrastructure/PhotoCatalog.Infrastructure.csproj" />
-  <Project Path="test/PhotoCatalogArchitectural.Test/PhotoCatalogArchitectural.Test.csproj" />
-  <Project Path="test/PhotoCatalogIntegration.Test/PhotoCatalogIntegration.Test.csproj" />
-  <Project Path="test/PhotoCatalogUnit.Test/PhotoCatalogUnit.Test.csproj" />
+  <Project Path="src/PhotoCatalog.Application/PhotoCatalog.Application.csproj"/>
+  <Project Path="src/PhotoCatalog.Domain/PhotoCatalog.Domain.csproj"/>
+  <Project Path="src/PhotoCatalog.Infrastructure/PhotoCatalog.Infrastructure.csproj"/>
+  <Project Path="test/PhotoCatalogArchitectural.Test/PhotoCatalogArchitectural.Test.csproj"/>
+  <Project Path="test/PhotoCatalogIntegration.Test/PhotoCatalogIntegration.Test.csproj"/>
+  <Project Path="test/PhotoCatalogUnit.Test/PhotoCatalogUnit.Test.csproj"/>
 </Solution>

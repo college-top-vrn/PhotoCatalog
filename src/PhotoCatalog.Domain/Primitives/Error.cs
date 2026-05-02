@@ -13,7 +13,6 @@
 /// </param>
 public readonly record struct Error(string Code, string Message)
 {
-    
     /// <summary>
     /// Специальный объект, обозначающий отсутствие ошибки.
     /// </summary>
