@@ -34,6 +34,12 @@ public class Result<T>
     public T? Value => _value;
 
 
+    /// <summary>
+    /// Инициализирует внутреннее состояние объекта.
+    /// </summary>
+    /// <param name="value"> Результат операции. Имеет значение по умолчанию, если операция провалена.</param>
+    /// <param name="isSuccess">Флаг, указывающий на успешное завершение операции.</param>
+    /// <param name="error">Детализированная бизнес-ошибка. Равна <see cref="Primitives.Error.None"/> при успехе.</param>
     private Result(T? value, bool isSuccess, Error error)
     {
         _value = value;
