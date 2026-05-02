@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
+
 using Xunit;
 
 namespace PhotoCatalogUnit.Test;
@@ -30,21 +32,18 @@ public class PhotoRepositoryMock : IPhotoRepository
 
     public void Update(Photo photo)
     {
-        for (int i = _photoTestList.Count - 1; i >= 0; i--)
+        foreach (var photos in _photoTestList)
         {
-            foreach (var photos in _photoTestList)
-            {
-                _photoTestList.Remove(photos);
-                _photoTestList.Add(photo);
-                return;
-            }
+            _photoTestList.Remove(photos);
+            _photoTestList.Add(photo);
+            return;
         }
+
         _photoTestList.Add(photo);
     }
 
     public void Delete(int id)
     {
-      
         foreach (var photo in _photoTestList)
         {
             if (photo.Id == id)
@@ -66,22 +65,19 @@ public class PhotoRepositoryMock : IPhotoRepository
     }
 }
 
-
-
 public class PhotoRepositoryMockTests
 {
-    private readonly PhotoRepositoryMock _repo= new PhotoRepositoryMock();
-    
+    private readonly PhotoRepositoryMock _repo = new PhotoRepositoryMock();
+
 
     [Fact]
     public void Add_WorksCorrectly()
     {
-        
         var photo = new Photo(1, "test-tag");
 
-    
+
         _repo.Add(photo);
-        
+
         var result = _repo.GetById(1);
         Assert.NotNull(result);
         Assert.Equal("test-tag", result.Tag);
@@ -91,9 +87,9 @@ public class PhotoRepositoryMockTests
     public void GetById_FindsExisting()
     {
         _repo.Add(new Photo(42, "found"));
-        
+
         var result = _repo.GetById(42);
-        
+
         Assert.NotNull(result);
         Assert.Equal(42, result.Id);
     }
@@ -111,9 +107,9 @@ public class PhotoRepositoryMockTests
         var original = new Photo(1, "old");
         var updated = new Photo(1, "new");
         _repo.Add(original);
-        
+
         _repo.Update(updated);
-        
+
         var result = _repo.GetById(1);
         Assert.Equal("new", result.Tag);
     }
@@ -122,9 +118,9 @@ public class PhotoRepositoryMockTests
     public void Delete_RemovesExisting()
     {
         _repo.Add(new Photo(10, "to-delete"));
-        
+
         _repo.Delete(10);
-        
+
         Assert.Null(_repo.GetById(10));
     }
 
