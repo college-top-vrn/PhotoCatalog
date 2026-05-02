@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using PhotoCatalog.Domain.Entities;
 
 namespace PhotoCatalog.Domain.Interfaces.Repositories;
