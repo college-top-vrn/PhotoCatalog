@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 
 using Xunit;
 
-namespace PhotoCatalogUnit.Test;
+namespace PhotoCatalog.Test.Unit;
 
 public class PhotoRepositoryMock : IPhotoRepository
 {
@@ -15,8 +14,13 @@ public class PhotoRepositoryMock : IPhotoRepository
     public Photo? GetById(int id)
     {
         foreach (var photo in _photoTestList)
+        {
             if (photo.Id == id)
+            {
                 return photo;
+            }
+        }
+
         return null;
     }
 
@@ -67,7 +71,7 @@ public class PhotoRepositoryMock : IPhotoRepository
 
 public class PhotoRepositoryMockTests
 {
-    private readonly PhotoRepositoryMock _repo = new PhotoRepositoryMock();
+    private readonly PhotoRepositoryMock _repo = new();
 
 
     [Fact]

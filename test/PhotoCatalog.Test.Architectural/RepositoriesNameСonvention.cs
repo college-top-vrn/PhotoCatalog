@@ -1,14 +1,12 @@
-﻿using ArchUnitNET.Loader;
+﻿using ArchUnitNET.Domain;
+using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
-
-using PhotoCatalog.Domain.Interfaces.Repositories;
-using PhotoCatalog.Domain.Entities.Repositories;
 
 using Xunit;
 
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
-namespace PhotoCatalogArchitectural.Test;
+namespace PhotoCatalog.Test.Architectural;
 
 /// <summary>
 ///     Содержит архитектурные тесты для проверки соблюдения правил проектирования,
@@ -16,7 +14,7 @@ namespace PhotoCatalogArchitectural.Test;
 /// </summary>
 public class RepositoriesNameСonvention
 {
-    private static readonly ArchUnitNET.Domain.Architecture Architecture = new ArchLoader()
+    private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
             typeof(IClassRepository).Assembly,
             typeof(ClassRepository).Assembly

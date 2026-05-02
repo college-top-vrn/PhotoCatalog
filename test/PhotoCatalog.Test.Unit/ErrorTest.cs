@@ -1,13 +1,11 @@
-﻿using System.Diagnostics;
+﻿using PhotoCatalog.Domain.Primitives;
 
 using Xunit;
 
-using PhotoCatalog.Domain.Primitives;
-
-namespace PhotoCatalogUnit.Test;
+namespace PhotoCatalog.Test.Unit;
 
 /// <summary>
-/// Тесты для проверки поведения объекта <see cref="Error"/>.
+///     Тесты для проверки поведения объекта <see cref="Error" />.
 /// </summary>
 public class ErrorTest
 {
@@ -17,16 +15,16 @@ public class ErrorTest
         const string expectedCode = "Tag.EmptyName";
         const string expectedMessage = "Имя тега не может быть пустым.";
 
-        var error1 = new Error(expectedCode, expectedMessage);
-        var error2 = new Error(expectedCode, expectedMessage);
-        
+        Error error1 = new(expectedCode, expectedMessage);
+        Error error2 = new(expectedCode, expectedMessage);
+
         Assert.Equal(error1, error2);
     }
 
     [Fact]
     public void None_ShouldHaveEmptyCodeAndMessage()
     {
-        var noneError = Error.None;
+        Error noneError = Error.None;
 
         Assert.Equal(string.Empty, noneError.Code);
         Assert.Equal(string.Empty, noneError.Message);

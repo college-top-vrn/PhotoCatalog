@@ -13,7 +13,7 @@ public static class DomainErrors
     public static class Dimensions
     {
         /// <summary>
-        ///     Ошибка, когда ширина и высота меньше или равны нулю или меньше разрешенного предела размера.
+        ///     Ошибка, когда ширина и высота меньше или равны нулю, или меньше разрешенного предела размера.
         /// </summary>
         public static readonly Error Invalid = new(
             "Dimensions.Invalid",
