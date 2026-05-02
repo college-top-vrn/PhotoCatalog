@@ -9,7 +9,7 @@ namespace PhotoCatalogUnit.Test;
 /// <summary>
 /// Тесты для проверки поведения объекта <see cref="Error"/>.
 /// </summary>
-public class ErrorTests
+public class ErrorTest
 {
     [Fact]
     public void Errors_WithSameCodeAndMessage_ShouldBeEqual()
