@@ -7,7 +7,7 @@ using Xunit;
 /// <summary>
 /// Тесты для проверки поведения обобщенного объекта <see cref="Result{T}"/>.
 /// </summary>
-public class ResultTTests
+public class ResultTests
 {
     /// <summary>
     /// Проверяет, что явный вызов <see cref="Result{T}.Success"/> корректно устанавливает 
@@ -45,7 +45,7 @@ public class ResultTTests
 
     /// <summary>
     /// Проверяет работу неявного преобразования:
-    /// неявное приведение переменной типа T к типу Result{T} должно автоматически создавать успешный результат.
+    /// неявное приведение переменной типа T к типу ResultVoid{T} должно автоматически создавать успешный результат.
     /// </summary>
     [Fact]
     public void ImplicitOperator_FromValue_ShouldCreateSuccessResult()
@@ -60,7 +60,7 @@ public class ResultTTests
 
     /// <summary>
     /// Проверяет работу работу неявного преобразования:
-    /// неявное приведение объекта Error к типу Result{T} должно автоматически создавать провальный результат.
+    /// неявное приведение объекта Error к типу ResultVoid{T} должно автоматически создавать провальный результат.
     /// </summary>
     [Fact]
     public void ImplicitOperator_FromError_ShouldCreateFailureResult()
@@ -76,7 +76,7 @@ public class ResultTTests
 
     /// <summary>
     /// Проверяет работу статического полиморфизма:
-    /// неявное приведение обобщенного Result{T} к базовому нетипизированному Result
+    /// неявное приведение обобщенного ResultVoid{T} к базовому нетипизированному ResultVoid
     /// должно корректно переносить статус (IsSuccess/IsFailure) и детали ошибки, отбрасывая Value.
     /// </summary>
     [Fact]
@@ -86,8 +86,8 @@ public class ResultTTests
         Result<int> successT = 100;
         Result<int> failureT = error;
 
-        Result baseSuccess = successT;
-        Result baseFailure = failureT;
+        ResultVoid baseSuccess = successT;
+        ResultVoid baseFailure = failureT;
 
         Assert.True(baseSuccess.IsSuccess);
         Assert.True(baseFailure.IsFailure);

@@ -1,17 +1,17 @@
-﻿using System;
-
-namespace PhotoCatalog.Domain.Primitives;
+﻿namespace PhotoCatalog.Domain.Primitives;
 
 /// <summary>
-/// Представляет результат выполнения операции, не возвращающей значение (аналог void).
-/// Инкапсулирует логику успеха или провала.
+/// Представляет результат выполнения операции, возвращающей значение типа <typeparamref name="T"/>.
 /// </summary>
+/// <typeparam name="T">Тип возвращаемого значения.</typeparam>
 /// <remarks>
 /// ВНИМАНИЕ: Не создавайте объект через конструктор по умолчанию.
-/// Для инициализации используйте исключительно статические методы: <see cref="Success"/> или <see cref="Failure"/>.
+/// Используйте неявное приведение типов (return value; / return error;) или фабрики Success/Failure.
 /// </remarks>
-public readonly record struct Result
+public class Result<T>
 {
+    private readonly T? _value;
+
     /// <summary>
     /// Указывает, завершилась ли операция успешно.
     /// </summary>
@@ -23,32 +23,55 @@ public readonly record struct Result
     public bool IsFailure => !IsSuccess;
 
     /// <summary>
-    /// Объект детализированной ошибки. Если операция успешна, содержит <see cref="Primitives.Error.None"/>.
+    /// Объект ошибки. Если операция успешна, содержит <see cref="Primitives.Error.None"/>.
     /// </summary>
     public Error Error { get; }
 
+    /// <summary>
+    /// Возвращает результат операции. 
+    /// Если операция завершилась провалом (<see cref="IsFailure"/> равно true), возвращает значение по умолчанию (default/null).
+    /// </summary>
+    public T? Value => _value;
+
 
     /// <summary>
-    /// Приватный конструктор для инициализации внутреннего состояния.
+    /// Инициализирует внутреннее состояние объекта.
     /// </summary>
-    /// <param name="isSuccess">Флаг успешности операции.</param>
-    /// <param name="error">Объект ошибки.</param>
-    private Result(bool isSuccess, Error error)
+    /// <param name="value"> Результат операции. Имеет значение по умолчанию, если операция провалена.</param>
+    /// <param name="isSuccess">Флаг, указывающий на успешное завершение операции.</param>
+    /// <param name="error">Детализированная бизнес-ошибка. Равна <see cref="Primitives.Error.None"/> при успехе.</param>
+    private Result(T? value, bool isSuccess, Error error)
     {
+        _value = value;
         IsSuccess = isSuccess;
         Error = error;
     }
 
     /// <summary>
-    /// Создает успешный результат без ошибок.
+    /// Создает успешный результат с переданным значением.
     /// </summary>
-    /// <returns>Успешный <see cref="Result"/>, где <see cref="IsSuccess"/> равно true, а <see cref="Error"/> равно <see cref="Primitives.Error.None"/>.</returns>
-    public static Result Success() => new(true, Error.None);
+    public static Result<T> Success(T value) => new(value, true, Error.None);
 
     /// <summary>
-    /// Создает провальный результат с указанной ошибкой.
+    /// Создает провальный результат с указанной ошибкой и значением по умолчанию.
     /// </summary>
-    /// <param name="error">Бизнес-ошибка, объясняющая причину провала.</param>
-    /// <returns>Провальный <see cref="Result"/>, где <see cref="IsFailure"/> равно true, а <see cref="Error"/> содержит переданную ошибку.</returns>
-    public static Result Failure(Error error) => new(false, error);
+    public static Result<T> Failure(Error error) => new(default, false, error);
+
+
+    /// <summary>
+    /// Неявно преобразует значение в успешный результат.
+    /// </summary>
+    public static implicit operator Result<T>(T value) => Success(value);
+
+    /// <summary>
+    /// Неявно преобразует ошибку в провальный результат.
+    /// </summary>
+    public static implicit operator Result<T>(Error error) => Failure(error);
+
+    /// <summary>
+    /// Неявно преобразует ResultVoid обобщенного типа в базовый ResultVoid.
+    /// Обеспечивает статическую диспетчеризацию (полиморфизм) на этапе компиляции.
+    /// </summary>
+    public static implicit operator ResultVoid(Result<T> result) =>
+        result.IsSuccess ? ResultVoid.Success() : ResultVoid.Failure(result.Error);
 }
