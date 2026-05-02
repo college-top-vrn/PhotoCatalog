@@ -25,6 +25,6 @@ public record Dimensions
             return Result<Dimensions>.Success(new Dimensions(width, height));
         }
 
-        return Result<Dimensions>.Failure(new Error("Dimensions.Invalid", "Ширина и высота должны быть больше нуля")); // TODO Добавить ошибку при отрицательной длины ширены
+        return Result<Dimensions>.Failure(DomainErrors.Dimensions.Invalid);
     }
 };

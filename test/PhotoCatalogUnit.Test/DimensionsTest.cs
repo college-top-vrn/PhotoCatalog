@@ -35,7 +35,17 @@ public class DimensionsTest
         var actual = Dimensions.Create(0,0);
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(Result<Dimensions>.Failure(new Error("Dimensions.Invalid", "Ширина и высота должны быть больше нуля")), actual.Error);
+        Assert.Equal(Result<Dimensions>.Failure(DomainErrors.Dimensions.Invalid), actual.Error);
+    }
+
+    [Fact]
+    public void Create_MaxValues_ReturnsFailure()
+    {
+        var actual = Dimensions.Create(3841,2161);
+        Assert.False(actual.IsSuccess);
+        Assert.True(actual.IsFailure);
+        Assert.Equal(Result<Dimensions>.Failure(DomainErrors.Dimensions.Invalid), actual.Error);
+        
     }
     
     public void Create_NegativeValues_ReturnsFailure()
@@ -43,9 +53,10 @@ public class DimensionsTest
         var actual = Dimensions.Create(-1,-1);
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(Result<Dimensions>.Failure(new Error("Dimensions.Invalid", "Ширина и высота должны быть больше нуля")), actual.Error);
+        Assert.Equal(Result<Dimensions>.Failure(DomainErrors.Dimensions.Invalid), actual.Error);
         
     }
+    
     
     
 }
