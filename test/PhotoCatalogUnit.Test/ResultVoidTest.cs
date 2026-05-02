@@ -5,13 +5,13 @@ using Xunit;
 namespace PhotoCatalogUnit.Test;
 
 /// <summary>
-/// Тесты для проверки поведения базового объекта <see cref="ResultVoid"/>.
+/// Содержит набор модульных тестов для проверки логики базового контейнера <see cref="ResultVoid"/>.
 /// </summary>
 public class ResultVoidTests
 {
     /// <summary>
-    /// Проверяет, что вызов <see cref="ResultVoid.Success"/> корректно инициализирует успешное состояние: 
-    /// флаг <see cref="ResultVoid.IsSuccess"/> устанавливается в true, а свойство ошибки содержит <see cref="Error.None"/>.
+    /// Проверяет, что при создании успешного результата без значения 
+    /// устанавливаются правильные флаги состояния и пустая ошибка.
     /// </summary>
     [Fact]
     public void Success_ShouldReturnIsSuccessTrue_And_ErrorNone()
@@ -24,9 +24,8 @@ public class ResultVoidTests
     }
 
     /// <summary>
-    /// Проверяет, что вызов <see cref="ResultVoid.Failure"/> корректно инициализирует провальное состояние: 
-    /// флаг <see cref="ResultVoid.IsFailure"/> устанавливается в true, а свойство <see cref="ResultVoid.Error"/> 
-    /// строго соответствует переданному объекту бизнес-ошибки.
+    /// Проверяет, что провальный результат без значения содержит 
+    /// переданную информацию об ошибке и флаг IsFailure.
     /// </summary>
     [Fact]
     public void Failure_WithValidError_ShouldReturnIsFailureTrue_And_MatchError()

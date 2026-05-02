@@ -5,13 +5,13 @@ using Xunit;
 
 
 /// <summary>
-/// Тесты для проверки поведения обобщенного объекта <see cref="Result{T}"/>.
+/// Содержит набор модульных тестов для проверки логики обобщенного контейнера <see cref="Result{T}"/>.
 /// </summary>
 public class ResultTests
 {
     /// <summary>
-    /// Проверяет, что явный вызов <see cref="Result{T}.Success"/> корректно устанавливает 
-    /// статус успеха, очищает ошибку и сохраняет переданное значение.
+    /// Проверяет, что фабричный метод <see cref="Result{T}.Success"/> возвращает объект 
+    /// в успешном состоянии, содержащий ожидаемое значение и пустую ошибку.
     /// </summary>
     [Fact]
     public void Success_ShouldReturnIsSuccessTrue_And_Value()
@@ -27,8 +27,8 @@ public class ResultTests
     }
 
     /// <summary>
-    /// Проверяет, что явный вызов <see cref="Result{T}.Failure"/> корректно устанавливает 
-    /// статус провала, сохраняет переданную ошибку, а свойство Value безопасно возвращает default(T) 
+    /// Проверяет, что фабричный метод <see cref="Result{T}.Failure"/> возвращает объект 
+    /// в состоянии ошибки, где свойство Value принимает значение по умолчанию (default).
     /// </summary>
     [Fact]
     public void Failure_ShouldReturnIsFailureTrue_And_ValueShouldBeDefault()
@@ -44,8 +44,8 @@ public class ResultTests
     }
 
     /// <summary>
-    /// Проверяет работу неявного преобразования:
-    /// неявное приведение переменной типа T к типу ResultVoid{T} должно автоматически создавать успешный результат.
+    /// Проверяет оператор неявного приведения из типа данных <typeparamref name="T"/> 
+    /// в <see cref="Result{T}"/>, имитируя успешный возврат значения из доменной логики.
     /// </summary>
     [Fact]
     public void ImplicitOperator_FromValue_ShouldCreateSuccessResult()
@@ -59,8 +59,8 @@ public class ResultTests
     }
 
     /// <summary>
-    /// Проверяет работу работу неявного преобразования:
-    /// неявное приведение объекта Error к типу ResultVoid{T} должно автоматически создавать провальный результат.
+    /// Проверяет оператор неявного приведения из <see cref="Error"/> в <see cref="Result{T}"/>, 
+    /// имитируя возврат доменной ошибки вместо ожидаемого объекта.
     /// </summary>
     [Fact]
     public void ImplicitOperator_FromError_ShouldCreateFailureResult()
@@ -75,9 +75,8 @@ public class ResultTests
     }
 
     /// <summary>
-    /// Проверяет работу статического полиморфизма:
-    /// неявное приведение обобщенного ResultVoid{T} к базовому нетипизированному ResultVoid
-    /// должно корректно переносить статус (IsSuccess/IsFailure) и детали ошибки, отбрасывая Value.
+    /// Проверяет корректность маппинга типизированного <see cref="Result{T}"/> в базовый <see cref="ResultVoid"/>, 
+    /// гарантируя сохранение статуса операции и кода ошибки при потере значения.
     /// </summary>
     [Fact]
     public void ImplicitOperator_ToBaseResult_ShouldMapStateCorrectly()
