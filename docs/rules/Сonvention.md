@@ -4,7 +4,12 @@
 Основные типы веток:
 - feature/ — для разработки новых функций (например, feature/user-authentication, feature/login-page)​;
 - improvement/ — для улучшений и оптимизаций (например, improvement/refactor-auth)​;
+- test/ - ветка для тестов создаваяема от ветки feature
 - bugfix/ — для исправления багов​.
+
+Создание тестов для веток feature:
+1. Сделать ветку test от ветки feature, написать в этой ветке test тесты.
+2. Сделать merge ветки test в feature.
 
 # Создание Pull requests
 
