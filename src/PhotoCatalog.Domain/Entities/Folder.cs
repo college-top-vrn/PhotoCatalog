@@ -9,9 +9,9 @@ public class Folder
     public int? ParentFolderId { get; private set; }
     public string Name { get; private set; } = string.Empty;
 
-    public static Folder Create(int id, string name)
+    public static Result<Folder> Create(int id, string name)
     {
-        if (string.IsNullOrWhiteSpace(name)) Result<Folder>.Failure(new Error("Folder.EmptyName", "..."));
+        if (string.IsNullOrWhiteSpace(name)) Result<Folder>.Failure(DomainErrors.Folder.EmptyName);
 
         return new Folder
         {
@@ -22,7 +22,7 @@ public class Folder
 
     public ResultVoid Rename(string newName)
     {
-        if (string.IsNullOrWhiteSpace(newName)) return ResultVoid.Failure(new Error("Folder.EmptyName", "..."));
+        if (string.IsNullOrWhiteSpace(newName)) return ResultVoid.Failure(DomainErrors.Folder.EmptyName);
 
         Name = newName;
 
@@ -31,7 +31,7 @@ public class Folder
 
     public ResultVoid MoveTo(Folder parentFolder)
     {
-        if (parentFolder.Id == Id) return ResultVoid.Failure(new Error("Folder.CannotMoveToSelf", "..."));
+        if (parentFolder.Id == Id) return ResultVoid.Failure(DomainErrors.Folder.CannotMoveToSelf);
 
         ParentFolderId = parentFolder.Id;
 

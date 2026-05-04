@@ -6,7 +6,7 @@ classDiagram
             +ParentFolderId int? [get; -set]
             +Name string [get; -set]
             -Folder() void
-            +Create(string name) Folder$
+            +Create(int id, string name) Folder$
             +Rename(string newName) ResultVoid
             +MoveTo(Folder parentFolder) ResultVoid
             +MoveToRoot() ResultVoid
