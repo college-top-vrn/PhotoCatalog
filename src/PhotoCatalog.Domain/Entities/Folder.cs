@@ -11,14 +11,17 @@ namespace PhotoCatalog.Domain.Entities;
 public class Folder
 {
     private Folder() { }
+
     /// <summary>
     ///     Идентификатор.
     /// </summary>
     public int Id { get; private set; }
+
     /// <summary>
     ///     Идентификатор родителя.
     /// </summary>
     public int? ParentFolderId { get; private set; }
+
     /// <summary>
     ///     Название.
     /// </summary>

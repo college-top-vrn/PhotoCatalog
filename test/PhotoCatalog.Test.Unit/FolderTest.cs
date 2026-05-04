@@ -93,7 +93,7 @@ public class FolderTest
         var folder = Folder.Create(id, name);
 
         var exception = folder.Value!.MoveToRoot();
-        
+
         Assert.True(exception.IsSuccess);
     }
 }
