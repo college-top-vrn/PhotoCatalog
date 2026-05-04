@@ -9,11 +9,15 @@ public class Folder
     public int? ParentFolderId { get; private set; }
     public string Name { get; private set; } = string.Empty;
 
-    public static Folder Create(string name)
+    public static Folder Create(int id, string name)
     {
         if (string.IsNullOrWhiteSpace(name)) Result<Folder>.Failure(new Error("Folder.EmptyName", "..."));
 
-        return new Folder { Name = name };
+        return new Folder
+        {
+            Id = id,
+            Name = name
+        };
     }
 
     public ResultVoid Rename(string newName)
