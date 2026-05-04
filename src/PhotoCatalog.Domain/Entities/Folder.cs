@@ -13,11 +13,7 @@ public class Folder
     {
         if (string.IsNullOrWhiteSpace(name)) Result<Folder>.Failure(DomainErrors.Folder.EmptyName);
 
-        return new Folder
-        {
-            Id = id,
-            Name = name
-        };
+        return new Folder { Id = id, Name = name };
     }
 
     public ResultVoid Rename(string newName)
