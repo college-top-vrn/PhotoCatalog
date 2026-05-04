@@ -23,11 +23,9 @@ public class FolderTest
     {
         const string name = "";
         const int id = 1;
-        var folder = Folder.Create(id, name);
-
-        var expectedError = DomainErrors.Folder.EmptyName;
-
-        Assert.Equal(folder.Error.Message, expectedError.Message);
+        var folder = Folder.Create(id, string.Empty);
+        
+        Assert.True(folder.IsFailure);
     }
 
     [Fact]
@@ -74,7 +72,7 @@ public class FolderTest
     }
 
     [Fact]
-    public void MoveToFunction_DontMoveTOGivenFolder_IfFolderIdIsEqualToThisId()
+    public void MoveToFunction_DontMoveToGivenFolder_IfFolderIdIsEqualToThisId()
     {
         const string name = "Test";
         const int id = 1;

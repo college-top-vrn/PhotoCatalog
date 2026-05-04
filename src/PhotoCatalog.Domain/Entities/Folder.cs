@@ -35,9 +35,9 @@ public class Folder
     /// <returns>Возвращает экземпляр.</returns>
     public static Result<Folder> Create(int id, string name)
     {
-        if (string.IsNullOrWhiteSpace(name)) Result<Folder>.Failure(DomainErrors.Folder.EmptyName);
-
-        return new Folder { Id = id, Name = name };
+        return string.IsNullOrWhiteSpace(name)
+            ? Result<Folder>.Failure(DomainErrors.Folder.EmptyName)
+            : new Folder { Id = id, Name = name };
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class Folder
 
         ParentFolderId = parentFolder.Id;
 
-        return new ResultVoid();
+        return ResultVoid.Success();
     }
 
     /// <summary>
