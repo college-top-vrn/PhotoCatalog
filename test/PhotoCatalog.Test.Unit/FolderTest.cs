@@ -84,4 +84,16 @@ public class FolderTest
 
         Assert.True(result.IsFailure);
     }
+
+    [Fact]
+    public void MoveToRootFunction_MoveToRootSuccessfully()
+    {
+        const string name = "Test";
+        const int id = 1;
+        var folder = Folder.Create(id, name);
+
+        var exception = folder.Value!.MoveToRoot();
+        
+        Assert.True(exception.IsSuccess);
+    }
 }
