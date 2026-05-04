@@ -2,6 +2,8 @@
 using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
 
+using PhotoCatalog.Domain.Interfaces.Repositories;
+
 using Xunit;
 
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
@@ -16,8 +18,7 @@ public class RepositoriesNameСonvention
 {
     private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
-            typeof(IClassRepository).Assembly,
-            typeof(ClassRepository).Assembly
+            typeof(IPhotoRepository).Assembly
         ).Build();
 
     [Fact]
