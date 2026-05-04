@@ -37,7 +37,7 @@ public class RepositoriesNameСonvention
     {
         Classes()
             .That()
-            .ResideInNamespaceMatching(@"^PhotoCatalog.Domain\.Entities\.Repositories(\..*)?$")
+            .ResideInNamespaceMatching(@"^PhotoCatalog.Infrastructure\Repositories(\..*)?$")
             .And().AreNotAbstract()
             .Should().HaveNameMatching(".*Repository$")
             .Because("Реализации репозиториев должны иметь суффикс 'Repository'")
