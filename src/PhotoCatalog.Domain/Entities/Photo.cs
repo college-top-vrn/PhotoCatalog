@@ -15,41 +15,50 @@ public class Photo
     /// Уникальный идентификатор фотографии.
     /// </summary>
     public int Id { get; private set; }
+
     /// <summary>
     /// Полный путь к файлу на диске.
     /// </summary>
     public string RealPath { get; private set; }
+
     /// <summary>
     /// контрольная-сумма файла для проверки целостности.
     /// </summary>
     public string FileHash { get; private set; }
+
     /// <summary>
     /// Размеры изображения (ширина/высота).
     /// </summary>
-    public Dimensions? Dimensions { get; private set; }
+    public Dimensions Dimensions { get; private set; }
+
     /// <summary>
     /// Дата и время добавления фотографии в каталог (UTC).
     /// </summary>
     public DateTime AddedAt { get; private set; }
 
     private readonly List<int> _tagIds = new();
+
     /// <summary>
     /// Список идентификаторов тегов, присвоенных данной фотографии.
     /// </summary>    
     public IReadOnlyCollection<int> TagIds => _tagIds.AsReadOnly();
+
     /// <summary>
     /// Конструктор для инициализации через ORM (Dapper).
     /// </summary>
     private Photo() { }
+
     /// <summary>
     /// Восстанавливает состояние списка тегов из базы данных в обход бизнес-правил.
     /// </summary>
     /// <param name="tags">Список ID тегов.</param>
-    internal void RestoreTags(IEnumerable<int> tags)
+    internal ResultVoid RestoreTags(IEnumerable<int> tags)
     {
         _tagIds.Clear();
         _tagIds.AddRange(tags);
+        return ResultVoid.Success();
     }
+
     /// <summary>
     /// Фабричный метод для создания нового экземпляра фотографии.
     /// </summary>
@@ -64,6 +73,7 @@ public class Photo
 
         return Result<Photo>.Success(default); // TODO Сделать сборку фотографии зная её путь.
     }
+
     /// <summary>
     /// Обновляет хеш-сумму файла.
     /// </summary>
@@ -74,6 +84,7 @@ public class Photo
         FileHash = newHash;
         return ResultVoid.Success();
     }
+
     /// <summary>
     /// Добавляет тег к фотографии.
     /// </summary>
@@ -91,6 +102,7 @@ public class Photo
         _tagIds.Add(tagId);
         return ResultVoid.Success();
     }
+
     /// <summary>
     /// Удаляет тег из коллекции фотографии.
     /// </summary>
