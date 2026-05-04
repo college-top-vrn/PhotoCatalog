@@ -24,7 +24,7 @@ public class FolderTest
         const string name = "";
         const int id = 1;
         var folder = Folder.Create(id, string.Empty);
-        
+
         Assert.True(folder.IsFailure);
     }
 
