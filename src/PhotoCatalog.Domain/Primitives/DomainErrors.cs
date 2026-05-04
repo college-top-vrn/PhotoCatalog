@@ -106,7 +106,7 @@ public static class DomainErrors
             "Album.DuplicatePhoto",
             "Эта фотография уже находится в данном альбоме.");
     }
-    
+
     /// <summary>
     /// Реестр критических системных ошибок, которые не связаны с бизнес-правилами,
     /// а возникают из-за сбоев в потоке выполнения или инфраструктуре.
@@ -114,8 +114,7 @@ public static class DomainErrors
     public static class SystemErrors
     {
         public static readonly Error NullResult = new(
-            "System.NullResult", 
+            "System.NullResult",
             "Получен пустой объект результата (null). Цепочка вычислений прервана.");
     }
-    
 }

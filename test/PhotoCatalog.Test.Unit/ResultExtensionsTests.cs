@@ -17,7 +17,7 @@ namespace PhotoCatalog.Test.Unit;
 public class ResultExtensionsTests
 {
     private static readonly Error TestError = new("Test.Error", "Тестовая ошибка");
-    
+
     private const string NullErrorCode = "System.NullResult";
 
     #region Then (Result -> Result)
