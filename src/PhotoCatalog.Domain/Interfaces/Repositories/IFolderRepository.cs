@@ -15,13 +15,19 @@ public interface IFolderRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с папкой, если она найдена</description></item>
-    ///         <item><description>Ошибка NotFound, если папка не найдена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех с папкой, если она найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если папка не найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
-    public Result<Folder> GetById(int id);
-    
+    Result<Folder> GetById(int id);
+
     /// <summary>
     ///     Добавляет новую папку в репозиторий.
     /// </summary>
@@ -29,12 +35,16 @@ public interface IFolderRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех, если папка успешно добавлена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех, если папка успешно добавлена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Add(Folder folder);
-    
+    ResultVoid Add(Folder folder);
+
     /// <summary>
     ///     Обновляет существующую папку.
     /// </summary>
@@ -42,13 +52,19 @@ public interface IFolderRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех, если папка успешно обновлена</description></item>
-    ///         <item><description>Ошибка NotFound, если папка не найдена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех, если папка успешно обновлена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если папка не найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Update(Folder folder);
-    
+    ResultVoid Update(Folder folder);
+
     /// <summary>
     ///     Удаляет папку по идентификатору.
     /// </summary>
@@ -56,10 +72,16 @@ public interface IFolderRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех, если папка успешно удалена</description></item>
-    ///         <item><description>Ошибка NotFound, если папка не найдена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех, если папка успешно удалена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если папка не найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Delete(int id);
+    ResultVoid Delete(int id);
 }
