@@ -21,7 +21,7 @@ public class Album
     /// <summary>
     /// Получает наименование альбома.
     /// </summary>
-    public string Name { get; private set; }
+    public string Name { get; private set; } = string.Empty;
 
     /// <summary>
     /// Получает идентификатор папки, в которой расположен альбом.
