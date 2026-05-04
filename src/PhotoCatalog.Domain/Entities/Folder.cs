@@ -11,20 +11,14 @@ public class Folder
 
     public static Folder Create(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            Result<Folder>.Failure(new Error("Folder.EmptyName", "..."));
-        }
+        if (string.IsNullOrWhiteSpace(name)) Result<Folder>.Failure(new Error("Folder.EmptyName", "..."));
 
         return new Folder { Name = name };
     }
 
     public ResultVoid Rename(string newName)
     {
-        if (string.IsNullOrWhiteSpace(newName))
-        {
-            return ResultVoid.Failure(new Error("Folder.EmptyName", "..."));
-        }
+        if (string.IsNullOrWhiteSpace(newName)) return ResultVoid.Failure(new Error("Folder.EmptyName", "..."));
 
         Name = newName;
 
@@ -33,7 +27,7 @@ public class Folder
 
     public ResultVoid MoveTo(Folder parentFolder)
     {
-        if (parentFolder.Id == Id) ResultVoid.Failure(new Error("Folder.CannotMoveToSelf", "..."));
+        if (parentFolder.Id == Id) return ResultVoid.Failure(new Error("Folder.CannotMoveToSelf", "..."));
 
         ParentFolderId = parentFolder.Id;
 
