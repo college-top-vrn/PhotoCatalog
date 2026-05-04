@@ -1,4 +1,4 @@
-# Диаграмма классов Dimensions
+# Диаграмма классов 
 
 ```mermaid
 classDiagram
