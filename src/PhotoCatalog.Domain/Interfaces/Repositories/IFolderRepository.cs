@@ -1,4 +1,5 @@
-﻿using PhotoCatalog.Domain.Primitives;
+﻿using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.Interfaces.Repositories;
 
