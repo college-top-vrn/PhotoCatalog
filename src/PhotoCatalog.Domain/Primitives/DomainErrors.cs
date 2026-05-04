@@ -58,6 +58,13 @@ public static class DomainErrors
         public static readonly Error DuplicateTag = new(
             "Photo.DuplicateTag",
             "Данный тег уже привязан к этой фотографии.");
+
+        /// <summary>
+        ///     Ошибка, когда данный тег не существует в этой фотографии.
+        /// </summary>
+        public static readonly Error TagNotExists = new(
+            "Photo.DuplicateTag",
+            "Данный тег не существует в этой фотографии.");
     }
 
     /// <summary>
