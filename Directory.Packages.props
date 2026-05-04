@@ -18,5 +18,9 @@
     <ItemGroup>
         <PackageVersion Include="Serilog" Version="4.3.1"/>
     </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include= "C:\Users\admin.ACADEMY\RiderProjects\PhotoCatalog"
+  </ItemGroup>
 
 </Project>
