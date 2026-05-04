@@ -39,7 +39,7 @@ public static class ResultExtensions
     public static Result<TNextValue> Then<TValue, TNextValue>
         (this Result<TValue>? result, Func<TValue, Result<TNextValue>> nextStep)
     {
-        if (result is null) return Result<TNextValue>.Failure(DomainErrors.SystemErrors.NullResult);
+        if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
 
         return result.IsFailure ? Result<TNextValue>.Failure(result.Error) : nextStep(result.Value!);
     }
@@ -67,7 +67,7 @@ public static class ResultExtensions
     /// </example>
     public static ResultVoid Then<TValue>(this Result<TValue>? result, Func<TValue, ResultVoid> nextStep)
     {
-        if (result is null) return ResultVoid.Failure(DomainErrors.SystemErrors.NullResult);
+        if (result is null) return ResultVoid.Failure(SystemErrors.NullResult);
         return result.IsFailure ? ResultVoid.Failure(result.Error) : nextStep(result.Value!);
     }
 
@@ -96,7 +96,7 @@ public static class ResultExtensions
     public static Result<TNextValue> Transform<TValue, TNextValue>
         (this Result<TValue>? result, Func<TValue, TNextValue> mapper)
     {
-        if (result is null) return Result<TNextValue>.Failure(DomainErrors.SystemErrors.NullResult);
+        if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
 
         return result.IsFailure
             ? Result<TNextValue>.Failure(result.Error)
@@ -124,7 +124,7 @@ public static class ResultExtensions
     {
         if (result is not null && result.IsSuccess) action(result.Value!);
 
-        return result ?? Result<TValue>.Failure(DomainErrors.SystemErrors.NullResult);
+        return result ?? Result<TValue>.Failure(SystemErrors.NullResult);
     }
 
 
@@ -148,8 +148,8 @@ public static class ResultExtensions
     {
         if (result is null)
         {
-            action(DomainErrors.SystemErrors.NullResult);
-            return Result<TValue>.Failure(DomainErrors.SystemErrors.NullResult);
+            action(SystemErrors.NullResult);
+            return Result<TValue>.Failure(SystemErrors.NullResult);
         }
 
         if (result.IsFailure) action(result.Error);
@@ -184,7 +184,7 @@ public static class ResultExtensions
         Func<TValue, TLanding> success,
         Func<Error, TLanding> failure)
     {
-        if (result is null) return failure(DomainErrors.SystemErrors.NullResult);
+        if (result is null) return failure(SystemErrors.NullResult);
 
         return result.IsSuccess
             ? success(result.Value!)

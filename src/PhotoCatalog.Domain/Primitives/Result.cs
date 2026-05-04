@@ -47,10 +47,15 @@ public class Result<T>
 
     /// <summary>
     ///     Создает успешный результат с переданным значением.
+    ///     Гарантирует функциональную безопасность: при передаче null возвращает системную ошибку.
     /// </summary>
+    /// <param name="value">Значение успешной операции.</param>
+    /// <returns>Экземпляр <see cref="Result{T}"/> со статусом успеха или провала (если передан null).</returns>
     public static Result<T> Success(T value)
     {
-        return new Result<T>(value, true, Error.None);
+        return value is null
+            ? Failure(SystemErrors.NullValue)
+            : new Result<T>(value, true, Error.None);
     }
 
     /// <summary>
@@ -64,10 +69,14 @@ public class Result<T>
 
     /// <summary>
     ///     Неявно преобразует значение в успешный результат.
+    ///     Автоматически защищает от неявного возврата null под видом успешного объекта.
     /// </summary>
+    /// <param name="value">Значение для оборачивания.</param>
     public static implicit operator Result<T>(T value)
     {
-        return Success(value);
+        return value is null
+            ? Failure(SystemErrors.NullValue)
+            : Success(value);
     }
 
     /// <summary>
@@ -85,5 +94,18 @@ public class Result<T>
     public static implicit operator ResultVoid(Result<T> result)
     {
         return result.IsSuccess ? ResultVoid.Success() : ResultVoid.Failure(result.Error);
+    }
+
+    /// <summary>
+    ///     Деконструирует объект результата для удобного использования в паттерн-матчинге и кортежах.
+    /// </summary>
+    /// <param name="isSuccess">Флаг успешности.</param>
+    /// <param name="value">Значение (или default при ошибке).</param>
+    /// <param name="error">Объект ошибки.</param>
+    public void Deconstruct(out bool isSuccess, out T? value, out Error error)
+    {
+        isSuccess = IsSuccess;
+        value = Value;
+        error = Error;
     }
 }
