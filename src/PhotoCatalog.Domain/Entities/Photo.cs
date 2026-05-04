@@ -62,7 +62,7 @@ public class Photo
             return Result<Photo>.Failure(DomainErrors.Photo.EmptyPath);
         }
 
-        return Result<Photo>.Success(); // TODO Сделать сборку фотографии зная её путь.
+        return Result<Photo>.Success(default); // TODO Сделать сборку фотографии зная её путь.
     }
     /// <summary>
     /// Обновляет хеш-сумму файла.
