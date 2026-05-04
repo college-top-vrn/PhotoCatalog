@@ -1,7 +1,6 @@
 ﻿using PhotoCatalog.Domain.Primitives;
 
-using Xunit;
-
+using Xunit; 
 namespace PhotoCatalog.Test.Unit;
 
 /// <summary>
