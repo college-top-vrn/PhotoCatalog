@@ -107,6 +107,6 @@ public static class ArchitectureProvider
             .That()
             .Are(DomainLayer)
             .Should()
-            .ResideInNamespaceMatching(@"PhotoCatalog.Domain.*");
+            .ResideInNamespaceMatching("PhotoCatalog.Domain.*");
     }
 }
