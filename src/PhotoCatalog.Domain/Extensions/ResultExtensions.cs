@@ -11,7 +11,7 @@ namespace PhotoCatalog.Domain.Extensions;
 ///     Класс представляет Fluent API для построения цепочек вычислений без использования вложенных <c>if/else</c>.
 ///     Все методы содержат встроенную защиту от <c>NullReferenceException</c>.
 ///     В случае передачи <c>null</c> вместо объекта <see cref="Result{T}"/>, методы генерируют системную ошибку.
-/// </remarks>>
+/// </remarks>
 public static class ResultExtensions
 {
     /// <summary>
@@ -32,8 +32,10 @@ public static class ResultExtensions
     /// </remarks>
     /// <example>
     ///     <code>
-    ///     Result&lt;Photo&gt; photoResult = Dimensions.Create(1920, 1080)
-    ///         .Then(dims => Photo.Create("path/to/file.jpg", dims));
+    ///     // 1. Получаем валидные данные (Result&lt;string&gt;)
+    ///     // 2. Передаем их в парсер, который тоже может вернуть ошибку (Result&lt;int&gt;)
+    ///     Result&lt;int&gt; numberResult = DataProvider.GetData()
+    ///         .Then(text => Parser.ParseToInt(text));
     ///     </code>
     /// </example>
     public static Result<TNextValue> Then<TValue, TNextValue>
@@ -41,7 +43,9 @@ public static class ResultExtensions
     {
         if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
 
-        return result.IsFailure ? Result<TNextValue>.Failure(result.Error) : nextStep(result.Value!);
+        return result.IsFailure
+            ? Result<TNextValue>.Failure(result.Error)
+            : nextStep(result.Value!);
     }
 
 
@@ -61,14 +65,18 @@ public static class ResultExtensions
     /// </remarks>
     /// <example>
     ///     <code>
-    ///     ResultVoid saveResult = Photo.Create("path.jpg", dims)
-    ///         .Then(photo => _repository.Add(photo));
+    ///     // 1. Создаем объект (Result&lt;Entity&gt;)
+    ///     // 2. Сохраняем его, результат сохранения не содержит новых данных (ResultVoid)
+    ///     ResultVoid saveResult = Factory.CreateEntity("Name")
+    ///         .Then(entity => Repository.Save(entity));
     ///     </code>
     /// </example>
     public static ResultVoid Then<TValue>(this Result<TValue>? result, Func<TValue, ResultVoid> nextStep)
     {
         if (result is null) return ResultVoid.Failure(SystemErrors.NullResult);
-        return result.IsFailure ? ResultVoid.Failure(result.Error) : nextStep(result.Value!);
+        return result.IsFailure
+            ? ResultVoid.Failure(result.Error)
+            : nextStep(result.Value!);
     }
 
 
@@ -89,8 +97,9 @@ public static class ResultExtensions
     /// </remarks>
     /// <example>
     ///     <code>
-    ///     Result&lt;int&gt; idResult = _repository.GetPhoto(1)
-    ///         .Transform(photo => photo.Id); // Превращаем Photo в int
+    ///     // Извлекаем конкретное свойство из успешного объекта
+    ///     Result&lt;int&gt; idResult = Repository.GetRecord(1)
+    ///         .Transform(record => record.Id); 
     ///     </code>
     /// </example>
     public static Result<TNextValue> Transform<TValue, TNextValue>
@@ -117,7 +126,7 @@ public static class ResultExtensions
     /// </remarks>
     /// <example>
     ///     <code>
-    ///     .OnSuccess(photo => Log.Info($"Успешно обработано фото {photo.Id}"))
+    ///     .OnSuccess(data => Log.Info($"Успешно обработано: {data}"))
     ///     </code>
     /// </example>
     public static Result<TValue> OnSuccess<TValue>(this Result<TValue>? result, Action<TValue> action)
@@ -174,8 +183,8 @@ public static class ResultExtensions
     /// <example>
     ///     <code>
     ///     string message = result.Finally(
-    ///         success: photo => $"Фото {photo.Id} готово!",
-    ///         failure: error => $"Не удалось: {error.Message}"
+    ///         success: data => $"Операция успешна: {data}",
+    ///         failure: error => $"Произошла ошибка: {error.Message}"
     ///     );
     ///     </code>
     /// </example>
@@ -191,16 +200,119 @@ public static class ResultExtensions
             : failure(result.Error);
     }
 
+    /// <summary>
+    ///     Связывание двух операций, не возвращающих данных.
+    ///     Выполняет следующий шаг, только если предыдущий ResultVoid был успешен.
+    /// </summary>
+    /// <param name="result">Текущий результат (без значения).</param>
+    /// <param name="nextStep">Функция, возвращающая новый ResultVoid.</param>
+    /// <returns>Результат выполнения следующего шага или оригинальная ошибка.</returns>
+    /// <example>
+    ///     <code>
+    ///     // 1. Первая независимая операция (возвращает ResultVoid)
+    ///     // 2. Вторая независимая операция (возвращает ResultVoid)
+    ///     ResultVoid result = Processor.ExecuteFirstStep()
+    ///         .Then(() => Processor.ExecuteSecondStep());
+    ///     </code>
+    /// </example>
+    public static ResultVoid Then(
+        this ResultVoid result,
+        Func<ResultVoid> nextStep)
+    {
+        return result.IsFailure
+            ? result
+            : nextStep();
+    }
+
 
     /// <summary>
-    ///     Проверяет успешный результат на соотвествие заданному условию.
-    ///     Если  условие не выполнено, прерывает цепочку и возвращает указанную ошибку
+    ///     Переход от операции без результата к операции с результатом.
+    ///     Выполняет следующий шаг, только если предыдущий ResultVoid был успешен.
     /// </summary>
-    /// <typeparam name="TValue">Тип значения внутри результат</typeparam>
-    /// <param name="result">Текущий результат</param>
-    /// <param name="predicate">Функция-условие (возвращает true, если условие истино)</param>
-    /// <param name="error">Исходный результат при успехе, либо новый провальный результат</param>
-    /// <returns></returns>
+    /// <typeparam name="TNextValue">Тип значения, которое вернёт следующий шаг.</typeparam>
+    /// <param name="result">Текущий результат (без значения).</param>
+    /// <param name="nextStep">Функция, возвращающая Result с данными.</param>
+    /// <returns>Результат выполнения следующего шага или перенесённая ошибка из текущего результата.</returns>
+    /// <example>
+    ///     <code>
+    ///     // 1. Проверка предварительных условий (возвращает ResultVoid)
+    ///     // 2. Если успешно -> выполняем вычисление (возвращает Result&lt;int&gt;)
+    ///     Result&lt;int&gt; result = Validator.CheckState()
+    ///         .Then(() => Calculator.ComputeValue(10));
+    ///     </code>
+    /// </example>
+    public static Result<TNextValue> Then<TNextValue>(
+        this ResultVoid result,
+        Func<Result<TNextValue>> nextStep)
+    {
+        return result.IsFailure
+            ? Result<TNextValue>.Failure(result.Error)
+            : nextStep();
+    }
+
+
+    /// <summary>
+    ///     Оборачивает значение в объект <see cref="Result{T}"/>.
+    /// </summary>
+    /// <typeparam name="TValue">Тип преобразуемого значения.</typeparam>
+    /// <param name="value">Значение, которое необходимо поместить в контекст результата.</param>
+    /// <returns>
+    ///     Успешный результат, если значение не равно null. 
+    ///     Иначе — провальный результат с системной ошибкой пустого значения.
+    /// </returns>
+    /// <example>
+    ///     <code>
+    ///     // Инициализация цепочки из обычного значения
+    ///     var result = "initial data".ToResult();
+    ///     </code>
+    /// </example>
+    public static Result<TValue> ToResult<TValue>(this TValue value) => value;
+
+    /// <summary>
+    ///     Преобразует потенциально пустое значение в <see cref="Result{T}"/> с заменой null на конкретную ошибку.
+    /// </summary>
+    /// <typeparam name="TValue">Тип преобразуемого значения.</typeparam>
+    /// <param name="value">Значение для проверки на наличие данных.</param>
+    /// <param name="errorIfNull">Ошибка, которая будет возвращена в случае отсутствия данных.</param>
+    /// <returns>
+    ///     Успешный результат с данными, если значение не равно null. 
+    ///     В противном случае — провальный результат с переданной ошибкой.
+    /// </returns>
+    /// <example>
+    ///     <code>
+    ///     // Обработка данных, которые могут отсутствовать во внешнем источнике например БД
+    ///     var result = externalSource.FindData()
+    ///         .ToResult(new Error("Data.NotFound", "Данные не обнаружены"));
+    ///     </code>
+    /// </example>
+    public static Result<TValue> ToResult<TValue>(this TValue? value, Error errorIfNull)
+    {
+        return value is not null
+            ? Result<TValue>.Success(value)
+            : Result<TValue>.Failure(errorIfNull);
+    }
+
+
+    /// <summary>
+    ///     Проверяет успешный результат на соответствие заданному условию.
+    ///     Если условие не выполнено, прерывает цепочку и возвращает указанную ошибку.
+    /// </summary>
+    /// <typeparam name="TValue">Тип значения внутри результата.</typeparam>
+    /// <param name="result">Текущий результат.</param>
+    /// <param name="predicate">Функция-условие (возвращает true, если условие истинно).</param>
+    /// <param name="error">Ошибка, которая вернётся, если условие не выполнено.</param>
+    /// <returns>Исходный результат при успехе, либо новый провальный результат с переданной ошибкой.</returns>
+    /// <example>
+    ///     <code>
+    ///     // Проверяем числовое значение на соответствие правилу.
+    ///     // Если число меньше или равно нулю, цепочка прервется с указанной ошибкой.
+    ///     Result&lt;int&gt; validNumberResult = numericResult
+    ///         .Ensure(
+    ///             value => value > 0, 
+    ///             new Error("Validation.NegativeValue", "Значение должно быть положительным")
+    ///         );
+    ///     </code>
+    /// </example>
     public static Result<TValue> Ensure<TValue>(
         this Result<TValue>? result,
         Func<TValue, bool> predicate,
