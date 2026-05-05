@@ -9,16 +9,22 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.runner.visualstudio" />
-    <PackageReference Include="TngTech.ArchUnitNET.xUnit" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="xunit"/>
+    <PackageReference Include="xunit.runner.visualstudio"/>
+    <PackageReference Include="TngTech.ArchUnitNET.xUnit"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
     <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj"/>
     <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Private.CoreLib">
+      <HintPath>..\..\..\..\..\Program Files\dotnet\shared\Microsoft.NETCore.App\10.0.3\System.Private.CoreLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

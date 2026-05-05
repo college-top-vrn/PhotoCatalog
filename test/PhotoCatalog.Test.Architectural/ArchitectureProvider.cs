@@ -5,9 +5,9 @@ using ArchUnitNET.xUnit;
 using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Domain.Entities;
 
-using static ArchUnitNET.Fluent.ArchRuleDefinition;
-
 using Xunit;
+
+using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
 namespace PhotoCatalog.Test.Architectural;
 
