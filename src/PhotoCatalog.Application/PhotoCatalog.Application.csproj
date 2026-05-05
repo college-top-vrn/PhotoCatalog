@@ -9,5 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
   </ItemGroup>
-
+  
+  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  
 </Project>
