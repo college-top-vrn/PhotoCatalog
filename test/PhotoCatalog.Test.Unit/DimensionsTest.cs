@@ -16,12 +16,11 @@ public class DimensionsTest
     [Fact]
     public void Create_ValidWidthAndHeight_ReturnsSuccess()
     {
-        // Arrange & Act
-        Result<Dimensions> actual = Dimensions.Create(100, 100);
-        Result<Dimensions> expectation = Dimensions.Create(100, 100);
+        var result = Dimensions.Create(100, 100);
 
-        // Assert
-        Assert.Equal(expectation, actual);
+        Assert.True(result.IsSuccess);
+        Assert.Equal(100, result.Value.Width);
+        Assert.Equal(100, result.Value.Height);
     }
 
     /// <summary>
@@ -30,12 +29,12 @@ public class DimensionsTest
     [Fact]
     public void Create_MinimumValidSizeOne_ReturnsSuccess()
     {
-        // Arrange & Act
-        Result<Dimensions> actual = Dimensions.Create(1, 1);
-        Result<Dimensions> expectation = Dimensions.Create(1, 1);
-
-        // Assert
-        Assert.Equal(expectation, actual);
+        
+        Result<Dimensions> result = Dimensions.Create(1, 1);
+        
+        Assert.True(result.IsSuccess);
+        Assert.Equal(1, result.Value.Width);
+        Assert.Equal(1, result.Value.Height);
     }
 
     /// <summary>
@@ -50,7 +49,7 @@ public class DimensionsTest
         // Assert
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(Result<Dimensions>.Failure(DomainErrors.Dimensions.Invalid), actual.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
     }
 
     /// <summary>
@@ -59,13 +58,11 @@ public class DimensionsTest
     [Fact]
     public void Create_MaxValues_ReturnsFailure()
     {
-        // Act
         Result<Dimensions> actual = Dimensions.Create(3841, 2161);
-
-        // Assert
+        
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(Result<Dimensions>.Failure(DomainErrors.Dimensions.Invalid), actual.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
     }
 
     /// <summary>
@@ -74,12 +71,10 @@ public class DimensionsTest
     [Fact]
     public void Create_NegativeValues_ReturnsFailure()
     {
-        // Act
         Result<Dimensions> actual = Dimensions.Create(-1, -1);
-
-        // Assert
+        
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(Result<Dimensions>.Failure(DomainErrors.Dimensions.Invalid), actual.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
     }
 }
