@@ -5,12 +5,12 @@ using PhotoCatalog.Domain.Primitives;
 namespace PhotoCatalog.Domain.Interfaces.Services;
 
 /// <summary>
-/// Контракт для управления транзакциями в доменном слое.
+///     Контракт для управления транзакциями в доменном слое.
 /// </summary>
 /// <remarks>
-/// Очищен от инфраструктурных типов для независимости слоя Domain.
+///     Очищен от инфраструктурных типов для независимости слоя Domain.
 /// </remarks>
-interface IUnitOfWork : IDisposable
+internal interface IUnitOfWork : IDisposable
 {
     /// <summary>Начинает новую транзакцию.</summary>
     /// <returns>Результат операции. Успех или ошибка с детализацией.</returns>
