@@ -14,11 +14,12 @@
     }
   ],
   "build": {
-    "content": [
-      {
-        "files": [
-          "**/*.{md,yml}"
-        ],
+   "content": [
+  {
+    "files": ["../**/*.md", "**/*.md", "**/*.yml"],
+    "exclude": ["_site/**", "bin/**", "obj/**"]
+  }
+],
         "exclude": [
           "_site/**"
         ]
