@@ -21,35 +21,61 @@ public static class ArchitectureProvider
             ).Build();
 
     public static readonly IObjectProvider<IType> ApplicationLayer =
-        Types().That().ResideInNamespaceMatching("PhotoCatalog.Application.*");
+        Types()
+            .That()
+            .ResideInNamespaceMatching("PhotoCatalog.Application.*");
 
     public static readonly IObjectProvider<IType> DomainLayer =
-        Types().That().ResideInNamespaceMatching("PhotoCatalog.Domain.*");
+        Types()
+            .That()
+            .ResideInNamespaceMatching("PhotoCatalog.Domain.*");
 
     public static readonly IObjectProvider<IType> InfrastructureLayer =
-        Types().That().ResideInNamespaceMatching("PhotoCatalog.Infrastructure.*");
+        Types()
+            .That()
+            .ResideInNamespaceMatching("PhotoCatalog.Infrastructure.*");
 
     [Fact]
     public static void Domain_ShouldNot_HaveDependencies_OnOtherLayers()
     {
-        Classes().That().Are(DomainLayer).Should().NotDependOnAny(ApplicationLayer).Check(Architecture);
+        Classes()
+            .That()
+            .Are(DomainLayer)
+            .Should()
+            .NotDependOnAny(ApplicationLayer)
+            .Check(Architecture);
     }
 
     [Fact]
     public static void Application_ShouldNot_HaveDependencies_OnInfrastructure()
     {
-        Classes().That().Are(ApplicationLayer).Should().NotDependOnAny(InfrastructureLayer).Check(Architecture);
+        Classes()
+            .That()
+            .Are(ApplicationLayer)
+            .Should()
+            .NotDependOnAny(InfrastructureLayer)
+            .Check(Architecture);
     }
 
     [Fact]
     public static void Infrastructure_Should_DependOn_Domain()
     {
-        Classes().That().Are(InfrastructureLayer).Should().DependOnAny(DomainLayer).Check(Architecture);
+        Classes()
+            .That()
+            .Are(InfrastructureLayer)
+            .Should()
+            .DependOnAny(DomainLayer)
+            .Because("Отсутствуют классы в инфраструктуре")
+            .Check(Architecture);
     }
 
     [Fact]
     public static void DomainClasses_Should_BeInNamespace_That_StartsWith_PhotoCatalogDomain()
     {
-        Classes().That().Are(DomainLayer).Should().ResideInNamespaceMatching(@"PhotoCatalog.Domain.*");
+        Classes()
+            .That()
+            .Are(DomainLayer)
+            .Should()
+            .ResideInNamespaceMatching(@"PhotoCatalog.Domain.*");
     }
 }
