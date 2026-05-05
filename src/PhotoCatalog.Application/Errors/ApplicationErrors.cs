@@ -1,6 +1,7 @@
 ﻿using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Application.Errors;
+
 /// <summary>
 ///     Единый статический класс (реестр),
 ///     который содержит все ошибки уровня Application
@@ -16,9 +17,10 @@ public static class ApplicationErrors
         /// <summary>
         ///     Ошибка, когда запрашиваемая сущность не найдена.
         /// </summary>
-        public static readonly Error NotFound = 
+        public static readonly Error NotFound =
             new Error("General.NotFound", "Запрашиваемая сущность не найдена.");
     }
+
     /// <summary>
     ///     Ошибки, связанные с файлами.
     /// </summary>
@@ -27,9 +29,10 @@ public static class ApplicationErrors
         /// <summary>
         ///     Ошибка, когда физический файл по указанному пути не найден.
         /// </summary>
-        public static readonly Error FileNotFound  = 
+        public static readonly Error FileNotFound =
             new Error("Files.FileNotFound", "Физический файл по указанному пути не найден.");
     }
+
     /// <summary>
     ///     Ошибки, связанные с папками.
     /// </summary>
@@ -39,7 +42,8 @@ public static class ApplicationErrors
         ///     Ошибка, когда обнаружена циклическая зависимость:
         ///     нельзя переместить папку внутрь её собственного потомка.
         /// </summary>
-        public static readonly Error CycleDetected   = 
-            new Error("Folders.CycleDetected", "Обнаружена циклическая зависимость: нельзя переместить папку внутрь её собственного потомка.");
+        public static readonly Error CycleDetected =
+            new Error("Folders.CycleDetected",
+                "Обнаружена циклическая зависимость: нельзя переместить папку внутрь её собственного потомка.");
     }
 }
