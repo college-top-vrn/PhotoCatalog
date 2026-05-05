@@ -29,9 +29,9 @@ public class DimensionsTest
     [Fact]
     public void Create_MinimumValidSizeOne_ReturnsSuccess()
     {
-        
+
         Result<Dimensions> result = Dimensions.Create(1, 1);
-        
+
         Assert.True(result.IsSuccess);
         Assert.Equal(1, result.Value.Width);
         Assert.Equal(1, result.Value.Height);
@@ -59,7 +59,7 @@ public class DimensionsTest
     public void Create_MaxValues_ReturnsFailure()
     {
         Result<Dimensions> actual = Dimensions.Create(3841, 2161);
-        
+
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
         Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
@@ -72,7 +72,7 @@ public class DimensionsTest
     public void Create_NegativeValues_ReturnsFailure()
     {
         Result<Dimensions> actual = Dimensions.Create(-1, -1);
-        
+
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
         Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
