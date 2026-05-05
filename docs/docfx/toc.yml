@@ -1,4 +1,6 @@
-- name: Docs
-  href: docs/
-- name: API
+- name: Документация API
   href: api/
+- name: Обучение (Tutorials)
+  href: Tutorials/
+- name: О проекте
+  href: docs/TechnicalSpecification.md
