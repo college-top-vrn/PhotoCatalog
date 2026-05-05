@@ -190,4 +190,28 @@ public static class ResultExtensions
             ? success(result.Value!)
             : failure(result.Error);
     }
+
+
+    /// <summary>
+    ///     Проверяет успешный результат на соотвествие заданному условию.
+    ///     Если  условие не выполнено, прерывает цепочку и возвращает указанную ошибку
+    /// </summary>
+    /// <typeparam name="TValue">Тип значения внутри результат</typeparam>
+    /// <param name="result">Текущий результат</param>
+    /// <param name="predicate">Функция-условие (возвращает true, если условие истино)</param>
+    /// <param name="error">Исходный результат при успехе, либо новый провальный результат</param>
+    /// <returns></returns>
+    public static Result<TValue> Ensure<TValue>(
+        this Result<TValue>? result,
+        Func<TValue, bool> predicate,
+        Error error)
+
+    {
+        if (result is null) return Result<TValue>.Failure(SystemErrors.NullResult);
+        if (result.IsFailure) return Result<TValue>.Failure(result.Error);
+
+        return predicate(result.Value!)
+            ? result
+            : Result<TValue>.Failure(error);
+    }
 }
