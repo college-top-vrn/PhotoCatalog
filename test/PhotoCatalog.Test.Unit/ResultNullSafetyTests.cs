@@ -1,8 +1,8 @@
 ﻿namespace PhotoCatalog.Test.Unit;
 
-using Xunit;
-
 using PhotoCatalog.Domain.Primitives;
+
+using Xunit;
 
 /// <summary>
 ///     Набор модульных тестов для проверки функциональной безопасности (Null Safety)
