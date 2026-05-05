@@ -11,8 +11,14 @@ using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
 namespace PhotoCatalog.Test.Architectural;
 
+/// <summary>
+///     Архитектурный тест, проверяющий зависимости своими слоями.
+/// </summary>
 public static class ArchitectureProvider
 {
+    /// <summary>
+    ///     Архитектура.
+    /// </summary>
     public static readonly Architecture Architecture =
         new ArchLoader()
             .LoadAssemblies(
@@ -20,21 +26,33 @@ public static class ArchitectureProvider
                 typeof(Album).Assembly
             ).Build();
 
+    /// <summary>
+    ///     Прикладной выбора.
+    /// </summary>
     public static readonly IObjectProvider<IType> ApplicationLayer =
         Types()
             .That()
             .ResideInNamespaceMatching("PhotoCatalog.Application.*");
 
+    /// <summary>
+    ///     Слой домена.
+    /// </summary>
     public static readonly IObjectProvider<IType> DomainLayer =
         Types()
             .That()
             .ResideInNamespaceMatching("PhotoCatalog.Domain.*");
 
+    /// <summary>
+    ///     Слой инфраструктуры.
+    /// </summary>
     public static readonly IObjectProvider<IType> InfrastructureLayer =
         Types()
             .That()
             .ResideInNamespaceMatching("PhotoCatalog.Infrastructure.*");
 
+    /// <summary>
+    ///     Тест, проверяющий на независимость доменного слоя от других слоёв. 
+    /// </summary>
     [Fact]
     public static void Domain_ShouldNot_HaveDependencies_OnOtherLayers()
     {
@@ -43,9 +61,16 @@ public static class ArchitectureProvider
             .Are(DomainLayer)
             .Should()
             .NotDependOnAny(ApplicationLayer)
+            .AndShould()
+            .NotDependOnAny(InfrastructureLayer)
+            .AndShould()
+            .NotDependOnAny(ApplicationLayer)
             .Check(Architecture);
     }
 
+    /// <summary>
+    ///     Тест, проверяющий на независимость прикладного слоя от слоя инфраструктуры.
+    /// </summary>
     [Fact]
     public static void Application_ShouldNot_HaveDependencies_OnInfrastructure()
     {
@@ -57,6 +82,9 @@ public static class ArchitectureProvider
             .Check(Architecture);
     }
 
+    /// <summary>
+    ///     Тест, проверяющий зависимость слоя инфраструктуры на доменный слой.
+    /// </summary>
     [Fact]
     public static void Infrastructure_Should_DependOn_Domain()
     {
@@ -69,6 +97,9 @@ public static class ArchitectureProvider
             .Check(Architecture);
     }
 
+    /// <summary>
+    ///     Тест, который проверяет, что пространства имён всех классов в PhotoCatalog.Domain начинаются на PhotoCatalog.Domain
+    /// </summary>
     [Fact]
     public static void DomainClasses_Should_BeInNamespace_That_StartsWith_PhotoCatalogDomain()
     {
