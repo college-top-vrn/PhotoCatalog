@@ -20,5 +20,5 @@
     <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj"/>
     <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
   </ItemGroup>
-  
+
 </Project>
