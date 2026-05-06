@@ -124,7 +124,7 @@ public class ResultCompositionTests
     {
         var initial = Result<int>.Failure(TestError);
         var newError = new Error("New.Error", "Fail");
-        
+
         var result = initial.Ensure(v => v > 100, newError);
 
         Assert.True(result.IsFailure);
