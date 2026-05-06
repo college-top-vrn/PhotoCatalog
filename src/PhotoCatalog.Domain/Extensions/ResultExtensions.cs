@@ -465,4 +465,70 @@ public static class ResultExtensions
             return ResultVoid.Failure(errorHandler(ex));
         }
     }
+
+
+    /// <summary>
+    ///     Выполняет проверку (действие с возможным отказом), сохраняя исходные данные в цепочке.
+    ///     Если проверка успешна, передает исходные данные дальше. Если провалена — прерывает цепочку ошибкой проверки.
+    /// </summary>
+    /// <typeparam name="TValue">Тип текущего значения.</typeparam>
+    /// <param name="result">Текущий результат.</param>
+    /// <param name="checker">Функция проверки, которая может вернуть ошибку (ResultVoid).</param>
+    /// <returns>Исходный результат при успехе проверки, либо провальный результат с ошибкой проверки.</returns>
+    /// <example>
+    ///     <code>
+    ///     // 1. Получаем данные (Result&lt;Data&gt;)
+    ///     // 2. Проверяем права в стороннем сервисе
+    ///     // 3. Если права есть, исходные данные едут дальше к процессору
+    ///     Result&lt;Data&gt; processResult = Repository.GetData()
+    ///         .Check(data => Security.ValidateAccess(data.Id))
+    ///         .Then(data => Processor.Execute(data));
+    ///     </code>
+    /// </example>
+    public static Result<TValue> Check<TValue>(
+        this Result<TValue>? result,
+        Func<TValue, ResultVoid> checker)
+
+    {
+        if (result is null) return Result<TValue>.Failure(SystemErrors.NullResult);
+        if (result.IsFailure) return Result<TValue>.Failure(result.Error);
+
+        ResultVoid checkResult = checker(result.Value!);
+
+        return checkResult.IsFailure
+            ? Result<TValue>.Failure(checkResult.Error)
+            : result;
+    }
+
+
+    /// <summary>
+    ///     Выполняет проверку (действие с возвратом других данных), сохраняя исходные данные в цепочке.
+    ///     Возвращаемые данные проверки игнорируются, учитывается только её статус (успех/провал).
+    /// </summary>
+    /// <typeparam name="TValue">Тип текущего значения.</typeparam>
+    /// <typeparam name="TOther">Тип данных, возвращаемых проверкой (будут проигнорированы).</typeparam>
+    /// <param name="result">Текущий результат.</param>
+    /// <param name="checker">Функция проверки, возвращающая сторонний Result.</param>
+    /// <returns>Исходный результат при успехе проверки, либо провальный результат с ошибкой проверки.</returns>
+    /// <example>
+    ///     <code>
+    ///     Result&lt;Order&gt; result = GetOrder()
+    ///         .Check(order => VerifyCustomerExists(order.CustomerId)) // Возвращает Result&lt;Customer&gt;
+    ///         .Then(order => ProcessOrder(order)); // Продолжаем работать с Order
+    ///     </code>
+    /// </example>
+    public static Result<TValue> Check<TValue, TOther>(
+        this Result<TValue>? result,
+        Func<TValue, Result<TOther>> checker)
+
+    {
+        if (result is null) return Result<TValue>.Failure(SystemErrors.NullResult);
+        if (result.IsFailure) return Result<TValue>.Failure(result.Error);
+
+        Result<TOther> checkResult = checker(result.Value!);
+
+        return checkResult.IsFailure
+            ? Result<TValue>.Failure(checkResult.Error)
+            : result;
+    }
 }
