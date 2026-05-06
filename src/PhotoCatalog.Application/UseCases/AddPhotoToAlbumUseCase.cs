@@ -57,7 +57,7 @@ public class AddPhotoToAlbumUseCase
             .Transform(_ => _unitOfWork.BeginTransaction())
             .Ensure(beginResult => beginResult.IsSuccess,
                 default)// TODO сделать ошибку транзакции в ApplicationErrors.
-            .Then(_=>_albumRepository.GetById(albumId)) // TODO Исправить костыль.
+            .Then(_ => _albumRepository.GetById(albumId)) // TODO Исправить костыль.
             .Transform(album => _albumRepository.Update(album))
             .Ensure(updateResult => updateResult.IsSuccess,
                 default) // TODO сделать ошибку транзакции в ApplicationErrors.
