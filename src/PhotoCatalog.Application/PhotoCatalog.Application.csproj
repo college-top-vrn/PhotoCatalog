@@ -10,10 +10,4 @@
     <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="JetBrains.ReSharper.TestRunner.Merged">
-      <HintPath>..\..\..\..\..\..\Program Files\JetBrains\Rider\r2r\2024.3.6R\76E14E7CB317A70D7935AF134C31FB4\TestRunner\netcoreapp3.0\JetBrains.ReSharper.TestRunner.Merged.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
