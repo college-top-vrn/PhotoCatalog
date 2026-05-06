@@ -5,6 +5,7 @@ using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 
+using Serilog;
 
 namespace PhotoCatalog.Application.UseCases;
 
@@ -16,10 +17,10 @@ public class AddPhotoToAlbumUseCase
     private readonly IAlbumRepository _albumRepository;
     private readonly IPhotoRepository _photoRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly Ilogger _logger;
+    private readonly ILogger _logger;
 
     public AddPhotoToAlbumUseCase(IAlbumRepository albumRepository, IPhotoRepository photoRepository,
-        IUnitOfWork unitOfWork, Ilogger logger)
+        IUnitOfWork unitOfWork, ILogger logger)
     {
         _albumRepository = albumRepository;
         _photoRepository = photoRepository;

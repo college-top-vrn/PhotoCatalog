@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
+    <PackageReference Include="Serilog" />
   </ItemGroup>
+  
 
 </Project>
