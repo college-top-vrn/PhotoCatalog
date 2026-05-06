@@ -73,7 +73,9 @@ public class Result<T>
     /// </summary>
     public static implicit operator ResultVoid(Result<T> result)
     {
-        return result.IsSuccess ? ResultVoid.Success() : ResultVoid.Failure(result.Error);
+        return result.IsSuccess
+            ? ResultVoid.Success()
+            : ResultVoid.Failure(result.Error);
     }
 
     /// <summary>

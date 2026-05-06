@@ -266,7 +266,12 @@ public static class ResultExtensions
     ///     var result = "initial data".ToResult();
     ///     </code>
     /// </example>
-    public static Result<TValue> ToResult<TValue>(this TValue value) => value;
+    public static Result<TValue> ToResult<TValue>(this TValue value)
+    {
+        // Явно вызываем фабрику, так как неявное приведение удалено ради строгой типизации.
+        // Фабрика сама обработает ситуацию, если value окажется null.
+        return Result<TValue>.Success(value);
+    }
 
     /// <summary>
     ///     Преобразует потенциально пустое значение в <see cref="Result{T}"/> с заменой null на конкретную ошибку.
@@ -287,11 +292,11 @@ public static class ResultExtensions
     /// </example>
     public static Result<TValue> ToResult<TValue>(this TValue? value, Error errorIfNull)
     {
+        // Этот метод был написан верно, так как он уже явно вызывает фабрики
         return value is not null
             ? Result<TValue>.Success(value)
             : Result<TValue>.Failure(errorIfNull);
     }
-
 
     /// <summary>
     ///     Проверяет успешный результат на соответствие заданному условию.
