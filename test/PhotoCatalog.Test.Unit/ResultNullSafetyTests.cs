@@ -42,7 +42,7 @@ public class ResultNullSafetyTests
         string? nullString = null;
 
 
-        Result<string> result = nullString!;
+        Result<string> result = Result<string>.Success(nullString);
 
 
         Assert.False(result.IsSuccess);
