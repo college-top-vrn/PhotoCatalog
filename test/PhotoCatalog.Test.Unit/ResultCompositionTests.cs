@@ -10,8 +10,8 @@ namespace PhotoCatalog.Test.Unit;
 /// </summary>
 public class ResultCompositionTests
 {
-    private static readonly Error TestError = new("Test.Error", "Тестовая ошибка");
     private const string NullValueErrorCode = "System.NullValue";
+    private static readonly Error TestError = new("Test.Error", "Тестовая ошибка");
 
     /// <summary>
     ///     Проверяет, что ToResult преобразует обычный объект в успешный результат.
@@ -19,8 +19,8 @@ public class ResultCompositionTests
     [Fact]
     public void ToResult_WithValidObject_ReturnsSuccess()
     {
-        var input = "test data";
-        var result = input.ToResult();
+        string input = "test data";
+        Result<string> result = input.ToResult();
 
         Assert.True(result.IsSuccess);
         Assert.Equal(input, result.Value);
@@ -33,7 +33,7 @@ public class ResultCompositionTests
     public void ToResult_WithNull_ReturnsSystemFailure()
     {
         string? input = null;
-        var result = input.ToResult();
+        Result<string?> result = input.ToResult();
 
         Assert.True(result.IsFailure);
         Assert.Equal(NullValueErrorCode, result.Error.Code);
@@ -46,7 +46,7 @@ public class ResultCompositionTests
     public void ToResult_WithCustomError_ReturnsProvidedErrorOnNull()
     {
         string? input = null;
-        var result = input.ToResult(TestError);
+        Result<string> result = input.ToResult(TestError);
 
         Assert.True(result.IsFailure);
         Assert.Equal(TestError, result.Error);
@@ -58,8 +58,8 @@ public class ResultCompositionTests
     [Fact]
     public void ResultVoid_Then_ToResultT_WhenSuccess_ExecutesNextStep()
     {
-        var initial = ResultVoid.Success();
-        var result = initial.Then(() => Result<int>.Success(100));
+        ResultVoid initial = ResultVoid.Success();
+        Result<int> result = initial.Then(() => Result<int>.Success(100));
 
         Assert.True(result.IsSuccess);
         Assert.Equal(100, result.Value);
@@ -71,8 +71,8 @@ public class ResultCompositionTests
     [Fact]
     public void ResultVoid_Then_ToResultT_WhenFailure_ReturnsOriginalError()
     {
-        var initial = ResultVoid.Failure(TestError);
-        var result = initial.Then(() => Result<int>.Success(100));
+        ResultVoid initial = ResultVoid.Failure(TestError);
+        Result<int> result = initial.Then(() => Result<int>.Success(100));
 
         Assert.True(result.IsFailure);
         Assert.Equal(TestError, result.Error);
@@ -84,8 +84,8 @@ public class ResultCompositionTests
     [Fact]
     public void ResultVoid_Then_ToResultVoid_WhenSuccess_ExecutesNextStep()
     {
-        var initial = ResultVoid.Success();
-        var result = initial.Then(() => ResultVoid.Success());
+        ResultVoid initial = ResultVoid.Success();
+        ResultVoid result = initial.Then(() => ResultVoid.Success());
 
         Assert.True(result.IsSuccess);
     }
@@ -96,8 +96,8 @@ public class ResultCompositionTests
     [Fact]
     public void Ensure_WhenPredicateIsTrue_ReturnsSuccess()
     {
-        var initial = Result<int>.Success(10);
-        var result = initial.Ensure(v => v > 0, TestError);
+        Result<int> initial = Result<int>.Success(10);
+        Result<int> result = initial.Ensure(v => v > 0, TestError);
 
         Assert.True(result.IsSuccess);
         Assert.Equal(10, result.Value);
@@ -109,8 +109,8 @@ public class ResultCompositionTests
     [Fact]
     public void Ensure_WhenPredicateIsFalse_ReturnsFailure()
     {
-        var initial = Result<int>.Success(-5);
-        var result = initial.Ensure(v => v > 0, TestError);
+        Result<int> initial = Result<int>.Success(-5);
+        Result<int> result = initial.Ensure(v => v > 0, TestError);
 
         Assert.True(result.IsFailure);
         Assert.Equal(TestError, result.Error);
