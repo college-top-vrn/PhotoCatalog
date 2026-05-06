@@ -331,7 +331,7 @@ public static class ResultExtensions
             ? result
             : Result<TValue>.Failure(error);
     }
-    
+
     /// <summary>
     ///     Безопасно выполняет функцию, возвращающую данные, перехватывая любые исключения.
     ///     Идеально для изоляции внешних вызовов (БД, файловая система, API).
@@ -350,7 +350,7 @@ public static class ResultExtensions
     ///     </code>
     /// </example>
     public static Result<TValue> TryCatch<TValue>(
-        Func<TValue> action, 
+        Func<TValue> action,
         Func<Exception, Error> errorHandler)
     {
         try
@@ -379,7 +379,7 @@ public static class ResultExtensions
     ///     </code>
     /// </example>
     public static ResultVoid TryCatch(
-        Action action, 
+        Action action,
         Func<Exception, Error> errorHandler)
     {
         try
@@ -392,5 +392,77 @@ public static class ResultExtensions
             return ResultVoid.Failure(errorHandler(ex));
         }
     }
-    
+
+
+    /// <summary>
+    ///     Безопасно выполняет следующий шаг в цепочке, перехватывая возможные исключения.
+    /// </summary>
+    /// <typeparam name="TValue">Входящий тип данных.</typeparam>
+    /// <typeparam name="TNextValue">Исходящий тип данных.</typeparam>
+    /// <param name="result">Текущий результат.</param>
+    /// <param name="nextStep">Рискованная функция трансформации.</param>
+    /// <param name="errorHandler">Функция перехвата исключения.</param>
+    /// <returns>Результат следующего шага или перехваченная ошибка.</returns>
+    /// <example>
+    ///     <code>
+    ///     Result&lt;Image&gt; result = filePathResult
+    ///         .ThenTry(
+    ///             path => Image.FromFile(path), 
+    ///             ex => new Error("Image.LoadError", "Файл поврежден или не является изображением.")
+    ///         );
+    ///     </code>
+    /// </example>
+    public static Result<TNextValue> ThenTry<TValue, TNextValue>(
+        this Result<TValue>? result,
+        Func<TValue, TNextValue> nextStep,
+        Func<Exception, Error> errorHandler)
+    {
+        if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
+        if (result.IsFailure) return Result<TNextValue>.Failure(result.Error);
+
+        try
+        {
+            return Result<TNextValue>.Success(nextStep(result.Value!));
+        }
+        catch (Exception ex)
+        {
+            return Result<TNextValue>.Failure(errorHandler(ex));
+        }
+    }
+
+    /// <summary>
+    ///     Безопасно выполняет побочное действие (без возврата данных) в цепочке, перехватывая исключения.
+    /// </summary>
+    /// <typeparam name="TValue">Входящий тип данных.</typeparam>
+    /// <param name="result">Текущий результат.</param>
+    /// <param name="nextStep">Рискованное действие.</param>
+    /// <param name="errorHandler">Функция перехвата исключения.</param>
+    /// <returns>Успешный ResultVoid или перехваченная ошибка.</returns>
+    /// <example>
+    ///     <code>
+    ///     ResultVoid finalResult = photoResult
+    ///         .ThenTry(
+    ///             photo => externalService.Upload(photo),
+    ///             ex => new Error("Network.UploadFailed", "Сбой при выгрузке фото.")
+    ///         );
+    ///     </code>
+    /// </example>
+    public static ResultVoid ThenTry<TValue>(
+        this Result<TValue>? result,
+        Action<TValue> nextStep,
+        Func<Exception, Error> errorHandler)
+    {
+        if (result is null) return ResultVoid.Failure(SystemErrors.NullResult);
+        if (result.IsFailure) return ResultVoid.Failure(result.Error);
+
+        try
+        {
+            nextStep(result.Value!);
+            return ResultVoid.Success();
+        }
+        catch (Exception ex)
+        {
+            return ResultVoid.Failure(errorHandler(ex));
+        }
+    }
 }
