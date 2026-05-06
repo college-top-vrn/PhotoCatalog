@@ -10,7 +10,7 @@ namespace PhotoCatalog.Domain.Interfaces.Services;
 /// <remarks>
 ///     Очищен от инфраструктурных типов для независимости слоя Domain.
 /// </remarks>
-internal interface IUnitOfWork : IDisposable
+public interface IUnitOfWork : IDisposable
 {
     /// <summary>Начинает новую транзакцию.</summary>
     /// <returns>Результат операции. Успех или ошибка с детализацией.</returns>
