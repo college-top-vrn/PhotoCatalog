@@ -17,10 +17,10 @@ namespace PhotoCatalog.Application.UseCases;
 /// </summary>
 public class AddPhotoToAlbumUseCase
 {
-    private IAlbumRepository _albumRepository;
-    private IPhotoRepository _photoRepository;
-    private IUnitOfWork _unitOfWork;
-    private ILogger _logger;
+    private readonly IAlbumRepository _albumRepository;
+    private readonly IPhotoRepository _photoRepository;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ILogger _logger;
 
     public AddPhotoToAlbumUseCase(IAlbumRepository albumRepository, IPhotoRepository photoRepository,
         IUnitOfWork unitOfWork, ILogger logger)
