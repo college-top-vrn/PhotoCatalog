@@ -331,4 +331,66 @@ public static class ResultExtensions
             ? result
             : Result<TValue>.Failure(error);
     }
+    
+    /// <summary>
+    ///     Безопасно выполняет функцию, возвращающую данные, перехватывая любые исключения.
+    ///     Идеально для изоляции внешних вызовов (БД, файловая система, API).
+    /// </summary>
+    /// <typeparam name="TValue">Тип возвращаемых данных.</typeparam>
+    /// <param name="action">Рискованная функция для выполнения.</param>
+    /// <param name="errorHandler">Функция-маппер, превращающая пойманное исключение в доменную ошибку.</param>
+    /// <returns>Успешный результат с данными, либо провал с ошибкой из обработчика.</returns>
+    /// <example>
+    ///     <code>
+    ///     // Изолируем работу с файловой системой
+    ///     Result&lt;byte[]&gt; fileResult = ResultExtensions.TryCatch(
+    ///         () => File.ReadAllBytes(path),
+    ///         ex => new Error("File.ReadError", $"Ошибка чтения файла: {ex.Message}")
+    ///     );
+    ///     </code>
+    /// </example>
+    public static Result<TValue> TryCatch<TValue>(
+        Func<TValue> action, 
+        Func<Exception, Error> errorHandler)
+    {
+        try
+        {
+            // Явный вызов фабрики, которая также обеспечит защиту от возврата null
+            return Result<TValue>.Success(action());
+        }
+        catch (Exception ex)
+        {
+            return Result<TValue>.Failure(errorHandler(ex));
+        }
+    }
+
+    /// <summary>
+    ///     Безопасно выполняет действие без возврата данных, перехватывая любые исключения.
+    /// </summary>
+    /// <param name="action">Рискованное действие (например, запись в БД).</param>
+    /// <param name="errorHandler">Функция-маппер исключения в ошибку.</param>
+    /// <returns>Успешный ResultVoid, либо провал с ошибкой из обработчика.</returns>
+    /// <example>
+    ///     <code>
+    ///     ResultVoid saveResult = ResultExtensions.TryCatch(
+    ///         () => _dbContext.SaveChanges(),
+    ///         ex => new Error("DB.SaveError", "Не удалось сохранить изменения.")
+    ///     );
+    ///     </code>
+    /// </example>
+    public static ResultVoid TryCatch(
+        Action action, 
+        Func<Exception, Error> errorHandler)
+    {
+        try
+        {
+            action();
+            return ResultVoid.Success();
+        }
+        catch (Exception ex)
+        {
+            return ResultVoid.Failure(errorHandler(ex));
+        }
+    }
+    
 }
