@@ -76,7 +76,7 @@ public record Dimensions
     /// </remarks>
     public static Result<Dimensions> Create(int width, int height)
     {
-        if ((width >= MinValues && width <= MaxWidth) || (height >= MinValues && height <= MaxHeight))
+        if (width >= MinValues && width <= MaxWidth && height >= MinValues && height <= MaxHeight)
         {
             return Result<Dimensions>.Success(new Dimensions(width, height));
         }
