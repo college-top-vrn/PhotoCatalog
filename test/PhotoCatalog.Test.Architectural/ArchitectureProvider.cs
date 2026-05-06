@@ -29,7 +29,7 @@ public static class ArchitectureProvider
     /// <summary>
     ///     Прикладной выбора.
     /// </summary>
-    public static readonly IObjectProvider<IType> ApplicationLayer =
+    private static readonly IObjectProvider<IType> ApplicationLayer =
         Types()
             .That()
             .ResideInNamespaceMatching("PhotoCatalog.Application.*");
@@ -37,7 +37,7 @@ public static class ArchitectureProvider
     /// <summary>
     ///     Слой домена.
     /// </summary>
-    public static readonly IObjectProvider<IType> DomainLayer =
+    private static readonly IObjectProvider<IType> DomainLayer =
         Types()
             .That()
             .ResideInNamespaceMatching("PhotoCatalog.Domain.*");
@@ -45,7 +45,7 @@ public static class ArchitectureProvider
     /// <summary>
     ///     Слой инфраструктуры.
     /// </summary>
-    public static readonly IObjectProvider<IType> InfrastructureLayer =
+    private static readonly IObjectProvider<IType> InfrastructureLayer =
         Types()
             .That()
             .ResideInNamespaceMatching("PhotoCatalog.Infrastructure.*");
