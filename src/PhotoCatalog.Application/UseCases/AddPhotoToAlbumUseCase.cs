@@ -1,6 +1,7 @@
 ﻿using System;
 
 using PhotoCatalog.Application.Errors;
+using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
@@ -37,61 +38,33 @@ public class AddPhotoToAlbumUseCase
     public ResultVoid Execute(int albumId, int photoId)
     {
         _logger.Information("Запуск процесса добавления фото {PhotoId} в альбом {AlbumId}", photoId, albumId);
-        var photo = _photoRepository.GetById(photoId);
-
-        if (photo.IsFailure)
-        {
-            _logger.Warning("Фото {PhotoId} не найдено", photoId);
-            return ResultVoid.Failure(ApplicationErrors.General.NotFound);
-        }
-
-        var album = _albumRepository.GetById(albumId);
-
-        if (album.IsFailure)
-        {
-            _logger.Warning("Альбом {AlbumId} не найден", albumId);
-            return ResultVoid.Failure(ApplicationErrors.General.NotFound);
-        }
-
-        var addResult = album.Value!.AddPhoto(photoId);
-
-        if (addResult.IsFailure)
-        {
-            _logger.Warning("Не удалось добавить фото {PhotoId} в альбом {AlbumId}: {Error}", photoId, albumId,
-                addResult.Error);
-            return
-                ResultVoid.Failure(addResult
-                    .Error); // TODO сделать ошибку для album в ApplicationErrors если есть дубликат.
-        }
-
-        var beginResult = _unitOfWork.BeginTransaction();
-        if (beginResult.IsFailure)
-            return ResultVoid.Failure(beginResult.Error); // TODO сделать ошибку транзакции в ApplicationErrors.
-
-        try
-        {
-            var updateResult = _albumRepository.Update(album.Value);
-            if (updateResult.IsFailure)
-            {
-                _unitOfWork.Rollback();
-                return ResultVoid.Failure(updateResult.Error); // TODO сделать ошибку транзакции в ApplicationErrors.
-            }
-
-            var commitResult = _unitOfWork.Commit();
-            if (commitResult.IsSuccess)
-            {
-                _logger.Information("Фото {PhotoId} успешно добавлено в альбом {AlbumId}", photoId, albumId);
-                return ResultVoid.Success();
-            }
-
-            _unitOfWork.Rollback();
-            return ResultVoid.Failure(commitResult.Error); // TODO сделать ошибку транзакции в ApplicationErrors.
-        }
-        catch (Exception ex)
-        {
-            _unitOfWork.Rollback();
-            _logger.Error(ex, "Критическая ошибка при сохранении изменений для альбома {AlbumId}", albumId);
-            return ResultVoid.Failure(default); // TODO сделать системную ошибку в ApplicationErrors.
-        }
+        return _photoRepository.GetById(photoId)
+            .OnSuccess(_ =>
+                _logger.Information("Фото {PhotoId} найдено", photoId))
+            .OnFailure(_ =>
+                _logger.Warning("Фото {PhotoId} не найдено", photoId))
+            .Then(photo =>
+                _albumRepository.GetById(albumId)
+                    .OnSuccess(_ =>
+                        _logger.Information("Альбом {AlbumId} найден", albumId)))
+            .OnFailure(_ =>
+                _logger.Warning("Альбом {AlbumId} не найден", albumId))
+            .Then(album => album.AddPhoto(photoId))
+            .ToResult()
+            .OnFailure(error =>
+                _logger.Warning("Не удалось добавить фото {PhotoId} в альбом {AlbumId}: {Error}", photoId, albumId,
+                    error)) // TODO сделать ошибку для album в ApplicationErrors если есть дубликат.
+            .Transform(_ => _unitOfWork.BeginTransaction())
+            .Ensure(beginResult => beginResult.IsSuccess,
+                default)// TODO сделать ошибку транзакции в ApplicationErrors.
+            .Then(_=>_albumRepository.GetById(albumId)) // TODO Исправить костыль.
+            .Transform(album => _albumRepository.Update(album))
+            .Ensure(updateResult => updateResult.IsSuccess,
+                default) // TODO сделать ошибку транзакции в ApplicationErrors.
+            .Transform(_ => _unitOfWork.Commit())
+            .Ensure(commitResult => commitResult.IsSuccess,
+                default) // TODO сделать ошибку транзакции в ApplicationErrors.
+            .Finally(success: _ => ResultVoid.Success(),
+                failure: error => ResultVoid.Failure(error));// TODO сделать системную ошибку в ApplicationErrors.
     }
 }
