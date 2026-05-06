@@ -16,10 +16,10 @@ public class AddPhotoToAlbumUseCase
     private readonly IAlbumRepository _albumRepository;
     private readonly IPhotoRepository _photoRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger _logger;
+    private readonly Ilogger _logger;
 
     public AddPhotoToAlbumUseCase(IAlbumRepository albumRepository, IPhotoRepository photoRepository,
-        IUnitOfWork unitOfWork, ILogger logger)
+        IUnitOfWork unitOfWork, Ilogger logger)
     {
         _albumRepository = albumRepository;
         _photoRepository = photoRepository;
