@@ -122,10 +122,10 @@ public class ResultCompositionTests
     [Fact]
     public void Ensure_WhenInitialIsFailure_ReturnsInitialError()
     {
-        Result<int> initial = Result<int>.Failure(TestError);
-        Error newError = new("New.Error", "Fail");
+        var initial = Result<int>.Failure(TestError);
+        var newError = new Error("New.Error", "Fail");
 
-        Result<int> result = initial.Ensure(v => v > 100, newError);
+        var result = initial.Ensure(v => v > 100, newError);
 
         Assert.True(result.IsFailure);
         Assert.Equal(TestError, result.Error);
