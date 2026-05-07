@@ -106,7 +106,10 @@ public static class ResultVoidExtensions
         Func<TNextValue> nextStep,
         Func<Exception, Error> errorHandler)
     {
-        if (result.IsFailure) return Result<TNextValue>.Failure(result.Error);
+        if (result.IsFailure)
+        {
+            return Result<TNextValue>.Failure(result.Error);
+        }
 
         try
         {
@@ -139,7 +142,10 @@ public static class ResultVoidExtensions
         Action nextStep,
         Func<Exception, Error> errorHandler)
     {
-        if (result.IsFailure) return result;
+        if (result.IsFailure)
+        {
+            return result;
+        }
 
         try
         {
@@ -165,7 +171,11 @@ public static class ResultVoidExtensions
     /// </example>
     public static ResultVoid OnSuccess(this ResultVoid result, Action action)
     {
-        if (result.IsSuccess) action();
+        if (result.IsSuccess)
+        {
+            action();
+        }
+
         return result;
     }
 
@@ -182,7 +192,11 @@ public static class ResultVoidExtensions
     /// </example>
     public static ResultVoid OnFailure(this ResultVoid result, Action<Error> action)
     {
-        if (result.IsFailure) action(result.Error);
+        if (result.IsFailure)
+        {
+            action(result.Error);
+        }
+
         return result;
     }
 
