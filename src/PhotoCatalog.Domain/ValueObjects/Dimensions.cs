@@ -6,7 +6,7 @@ namespace PhotoCatalog.Domain.ValueObjects;
 
 /// <summary>
 ///     Value Object для хранения габаритов изображения (ширина × высота в пикселях).
-///     Гарантирует инварианты: ширина и высота строго от 1 до максимально допустимого размера.
+///     Гарантирует инварианты: ширина и высота строго положительные числа (> 0).
 /// </summary>
 /// <remarks>
 ///     Dimensions представляет собой неизменяемый объект без идентификатора.
@@ -14,8 +14,8 @@ namespace PhotoCatalog.Domain.ValueObjects;
 ///     <para>
 ///         <b>Инварианты:</b>
 ///     </para>
-///     • Width ∈ [1, 3840]<br />
-///     • Height ∈ [1, 2160]<br />
+///     • Width > 0<br />
+///     • Height > 0<br />
 ///     Создание возможно только через <see cref="Create(int, int)" /> с валидацией.
 /// </remarks>
 /// <example>
@@ -29,8 +29,6 @@ namespace PhotoCatalog.Domain.ValueObjects;
 /// </example>
 public record Dimensions
 {
-    private const int MaxWidth = 3840;
-    private const int MaxHeight = 2160;
     private const int MinValues = 1;
 
     /// <summary>
@@ -49,7 +47,7 @@ public record Dimensions
     ///     Ширина изображения в пикселях.
     /// </summary>
     /// <remarks>
-    ///     Допустимые значения: от <c>1</c> до <see cref="MaxWidth" /> пикселей.
+    ///     Допустимые значения: больше <c>0</c>.
     /// </remarks>
     public int Width { get; init; }
 
@@ -57,26 +55,26 @@ public record Dimensions
     ///     Высота изображения в пикселях.
     /// </summary>
     /// <remarks>
-    ///     Допустимые значения: от <c>1</c> до <see cref="MaxHeight" /> пикселей.
+    ///     Допустимые значения: больше <c>0</c>.
     /// </remarks>
     public int Height { get; init; }
 
     /// <summary>
     ///     Создает объект Dimensions с валидацией инвариантов.
     /// </summary>
-    /// <param name="width">Ширина в пикселях (1-3840)</param>
-    /// <param name="height">Высота в пикселях (1-2160)</param>
+    /// <param name="width">Ширина в пикселях (больше 0)</param>
+    /// <param name="height">Высота в пикселях (больше 0)</param>
     /// <returns>
     ///     <see cref="Result{TSuccess}.Success" /> с валидными габаритами,
     ///     или <see cref="Result{TSuccess}.Failure" /> с <see cref="DomainErrors.Dimensions.Invalid" />.
     /// </returns>
     /// <remarks>
-    ///     Оба измерения должны быть в допустимых пределах.
+    ///     Оба измерения должны быть больше 0.
     ///     Если хотя бы одно измерение невалидно, возвращается ошибка.
     /// </remarks>
     public static Result<Dimensions> Create(int width, int height)
     {
-        if (width >= MinValues && width <= MaxWidth && height >= MinValues && height <= MaxHeight)
+        if (width >= MinValues && height >= MinValues)
         {
             return Result<Dimensions>.Success(new Dimensions(width, height));
         }
