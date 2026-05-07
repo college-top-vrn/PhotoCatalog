@@ -37,7 +37,7 @@ public class Folder
     {
         return string.IsNullOrWhiteSpace(name)
             ? Result<Folder>.Failure(DomainErrors.Folder.EmptyName)
-            : new Folder { Id = id, Name = name };
+            : Result<Folder>.Success(new Folder {Id = id, Name = name}); 
     }
 
     /// <summary>
