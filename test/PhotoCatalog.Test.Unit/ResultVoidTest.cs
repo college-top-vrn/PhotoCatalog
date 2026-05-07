@@ -1,22 +1,24 @@
-﻿using PhotoCatalog.Domain.Primitives;
+﻿
+using PhotoCatalog.Domain.Primitives;
 
 using Xunit;
 
 namespace PhotoCatalog.Test.Unit;
 
 /// <summary>
-///     Содержит набор модульных тестов для проверки логики базового контейнера <see cref="ResultVoid" />.
+///     Тесты для полного покрытия базовых свойств и состояний структуры ResultVoid.
 /// </summary>
-public class ResultVoidTests
+public class ResultVoidCoreTests
 {
+    private static readonly Error TestError = new("Core.Error", "Test message");
+
     /// <summary>
-    ///     Проверяет, что при создании успешного результата без значения
-    ///     устанавливаются правильные флаги состояния и пустая ошибка.
+    ///     Проверяет инициализацию успешного состояния ResultVoid.
     /// </summary>
     [Fact]
-    public void Success_ShouldReturnIsSuccessTrue_And_ErrorNone()
+    public void Success_ShouldInitializeSuccessState()
     {
-        ResultVoid result = ResultVoid.Success();
+        var result = ResultVoid.Success();
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
@@ -24,18 +26,15 @@ public class ResultVoidTests
     }
 
     /// <summary>
-    ///     Проверяет, что провальный результат без значения содержит
-    ///     переданную информацию об ошибке и флаг IsFailure.
+    ///     Проверяет инициализацию провального состояния ResultVoid.
     /// </summary>
     [Fact]
-    public void Failure_WithValidError_ShouldReturnIsFailureTrue_And_MatchError()
+    public void Failure_ShouldInitializeFailureState()
     {
-        Error expectedError = new("Test.Failure", "Тестовое сообщение об ошибке");
-
-        ResultVoid result = ResultVoid.Failure(expectedError);
+        var result = ResultVoid.Failure(TestError);
 
         Assert.False(result.IsSuccess);
         Assert.True(result.IsFailure);
-        Assert.Equal(expectedError, result.Error);
+        Assert.Equal(TestError, result.Error);
     }
 }
