@@ -6,7 +6,7 @@
 /// <typeparam name="T">Тип возвращаемого значения.</typeparam>
 /// <remarks>
 ///     ВНИМАНИЕ: Не создавайте объект через конструктор по умолчанию.
-///     Используйте неявное приведение типов (return value; / return error;) или фабрики Success/Failure.
+///     Используйте фабрики Success/Failure.
 /// </remarks>
 public class Result<T>
 {
@@ -68,32 +68,14 @@ public class Result<T>
 
 
     /// <summary>
-    ///     Неявно преобразует значение в успешный результат.
-    ///     Автоматически защищает от неявного возврата null под видом успешного объекта.
-    /// </summary>
-    /// <param name="value">Значение для оборачивания.</param>
-    public static implicit operator Result<T>(T value)
-    {
-        return value is null
-            ? Failure(SystemErrors.NullValue)
-            : Success(value);
-    }
-
-    /// <summary>
-    ///     Неявно преобразует ошибку в провальный результат.
-    /// </summary>
-    public static implicit operator Result<T>(Error error)
-    {
-        return Failure(error);
-    }
-
-    /// <summary>
-    ///     Неявно преобразует ResultVoid обобщенного типа в базовый ResultVoid.
+    ///     Неявно преобразует Result{T} обобщенного типа в базовый ResultVoid.
     ///     Обеспечивает статическую диспетчеризацию (полиморфизм) на этапе компиляции.
     /// </summary>
     public static implicit operator ResultVoid(Result<T> result)
     {
-        return result.IsSuccess ? ResultVoid.Success() : ResultVoid.Failure(result.Error);
+        return result.IsSuccess
+            ? ResultVoid.Success()
+            : ResultVoid.Failure(result.Error);
     }
 
     /// <summary>
