@@ -50,6 +50,7 @@ public static class ApplicationErrors
             new("Folders.CycleDetected",
                 "Обнаружена циклическая зависимость: нельзя переместить папку внутрь её собственного потомка.");
     }
+
     /// <summary>
     ///     Ошибки, связанные с транзакциями.
     /// </summary>
@@ -71,10 +72,11 @@ public static class ApplicationErrors
                 "Transactions.CommitFailed",
                 "Не удалось зафиксировать изменения в транзакции (commit).");
     }
+
     /// <summary>
     ///     Ошибка, связаная с обновлением альбома 
     /// </summary>
-    public static class  Albums
+    public static class Albums
 
 
     {
