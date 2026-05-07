@@ -11,7 +11,7 @@ namespace PhotoCatalog.Test.Unit;
 public class DimensionsTest
 {
     /// <summary>
-    ///     Проверяет, что валидные размеры (в пределах 1-3840×1-2160) создаются успешно.
+    ///     Проверяет, что валидные размеры (положительные числа) создаются успешно.
     /// </summary>
     [Fact]
     public void Create_ValidWidthAndHeight_ReturnsSuccess()
@@ -29,7 +29,6 @@ public class DimensionsTest
     [Fact]
     public void Create_MinimumValidSizeOne_ReturnsSuccess()
     {
-
         Result<Dimensions> result = Dimensions.Create(1, 1);
 
         Assert.True(result.IsSuccess);
@@ -43,22 +42,7 @@ public class DimensionsTest
     [Fact]
     public void Create_ZeroValues_ReturnsFailure()
     {
-        // Act
         Result<Dimensions> actual = Dimensions.Create(0, 0);
-
-        // Assert
-        Assert.False(actual.IsSuccess);
-        Assert.True(actual.IsFailure);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
-    }
-
-    /// <summary>
-    ///     Проверяет, что превышение максимальных значений (3841×2161) отклоняется.
-    /// </summary>
-    [Fact]
-    public void Create_MaxValues_ReturnsFailure()
-    {
-        Result<Dimensions> actual = Dimensions.Create(3841, 2161);
 
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
@@ -76,5 +60,20 @@ public class DimensionsTest
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
         Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
+    }
+
+    /// <summary>
+    ///     Проверяет, что смешанные невалидные значения (отрицательная ширина, положительная высота) отклоняются.
+    /// </summary>
+    [Fact]
+    public void Create_MixedInvalidValues_ReturnsFailure()
+    {
+        Result<Dimensions> actualNegativeWidth = Dimensions.Create(-100, 500);
+        Assert.False(actualNegativeWidth.IsSuccess);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeWidth.Error);
+
+        Result<Dimensions> actualNegativeHeight = Dimensions.Create(500, -100);
+        Assert.False(actualNegativeHeight.IsSuccess);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeHeight.Error);
     }
 }
