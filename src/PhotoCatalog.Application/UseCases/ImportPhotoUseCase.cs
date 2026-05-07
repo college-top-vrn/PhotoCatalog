@@ -1,6 +1,6 @@
 namespace PhotoCatalog.Application;
 
-public class UseCases
+public class ImportPhotoUseCase
 {
     
 }
