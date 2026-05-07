@@ -35,7 +35,7 @@ public static class ApplicationErrors
         ///     ошибка, когда фаил остается осиротевшим на диске
         /// </summary>
         public static readonly Error OrphanedFile =
-            new Error("Files.OrphanedFile", "Файл осталося осиротевшим на диске");
+            new Error("Files.OrphanedFile", "Файл остался осиротевшим на диске");
     }
 
     /// <summary>
