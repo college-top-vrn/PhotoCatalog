@@ -56,8 +56,8 @@ public static class ApplicationErrors
     public static class Transactions
     {
         /// <summary>
-        /// Ошибка, которая обозначает, что при начале транзакции
-        /// что то пошло не так
+        ///     Ошибка, которая обозначает, что при начале транзакции
+        ///     что то пошло не так
         /// </summary>
         public static readonly Error StartTransactions =
             new Error("Transactions.BeginFailed",
@@ -72,15 +72,17 @@ public static class ApplicationErrors
                 "Не удалось зафиксировать изменения в транзакции (commit).");
     }
     /// <summary>
-    /// Ошибка, связаная с обновлением альбома 
+    ///     Ошибка, связаная с обновлением альбома 
     /// </summary>
-    public static class UpdateAlbums
+    public static class  Albums
+
+
     {
         /// <summary>
-        /// Ошибка, которая обозначает, что при обновлении
-        /// что то пошло не так
+        ///     Ошибка, которая обозначает, что при обновлении
+        ///         что то пошло не так
         /// </summary>
-        public static readonly Error AlbumsUpdate =
+        public static readonly Error UpdateFailed =
             new Error("Albums.UpdateFailed",
                 "Ошибка обновления альбома");
     }
