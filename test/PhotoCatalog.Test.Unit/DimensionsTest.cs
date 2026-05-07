@@ -1,5 +1,6 @@
 ﻿using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
+
 using Xunit;
 
 namespace PhotoCatalog.Test.Unit;
