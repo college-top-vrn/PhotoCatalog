@@ -1,5 +1,4 @@
-﻿
-using PhotoCatalog.Domain.Primitives;
+﻿using PhotoCatalog.Domain.Primitives;
 
 using Xunit;
 

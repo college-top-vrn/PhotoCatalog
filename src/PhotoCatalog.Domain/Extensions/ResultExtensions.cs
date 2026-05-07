@@ -1,4 +1,5 @@
 ﻿using System;
+
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.Extensions;
@@ -90,7 +91,7 @@ public static class ResultExtensions
     ///     </code>
     /// </example>
     public static Result<TNextValue> Then<TValue, TNextValue>(
-        this Result<TValue>? result, 
+        this Result<TValue>? result,
         Func<TValue, Result<TNextValue>> nextStep)
     {
         if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
@@ -114,7 +115,7 @@ public static class ResultExtensions
     ///     </code>
     /// </example>
     public static ResultVoid Then<TValue>(
-        this Result<TValue>? result, 
+        this Result<TValue>? result,
         Func<TValue, ResultVoid> nextStep)
     {
         if (result is null) return ResultVoid.Failure(SystemErrors.NullResult);
@@ -211,7 +212,7 @@ public static class ResultExtensions
     ///     </code>
     /// </example>
     public static Result<TNextValue> Transform<TValue, TNextValue>(
-        this Result<TValue>? result, 
+        this Result<TValue>? result,
         Func<TValue, TNextValue> mapper)
     {
         if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
