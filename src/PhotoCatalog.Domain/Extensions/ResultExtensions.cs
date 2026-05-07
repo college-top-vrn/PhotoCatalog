@@ -1,4 +1,5 @@
 ﻿using System;
+
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.Extensions;
@@ -90,10 +91,13 @@ public static class ResultExtensions
     ///     </code>
     /// </example>
     public static Result<TNextValue> Then<TValue, TNextValue>(
-        this Result<TValue>? result, 
+        this Result<TValue>? result,
         Func<TValue, Result<TNextValue>> nextStep)
     {
-        if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
+        if (result is null)
+        {
+            return Result<TNextValue>.Failure(SystemErrors.NullResult);
+        }
 
         return result.IsFailure
             ? Result<TNextValue>.Failure(result.Error)
@@ -114,10 +118,13 @@ public static class ResultExtensions
     ///     </code>
     /// </example>
     public static ResultVoid Then<TValue>(
-        this Result<TValue>? result, 
+        this Result<TValue>? result,
         Func<TValue, ResultVoid> nextStep)
     {
-        if (result is null) return ResultVoid.Failure(SystemErrors.NullResult);
+        if (result is null)
+        {
+            return ResultVoid.Failure(SystemErrors.NullResult);
+        }
 
         return result.IsFailure
             ? ResultVoid.Failure(result.Error)
@@ -147,8 +154,15 @@ public static class ResultExtensions
         Func<TValue, TNextValue> nextStep,
         Func<Exception, Error> errorHandler)
     {
-        if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
-        if (result.IsFailure) return Result<TNextValue>.Failure(result.Error);
+        if (result is null)
+        {
+            return Result<TNextValue>.Failure(SystemErrors.NullResult);
+        }
+
+        if (result.IsFailure)
+        {
+            return Result<TNextValue>.Failure(result.Error);
+        }
 
         try
         {
@@ -182,8 +196,15 @@ public static class ResultExtensions
         Action<TValue> nextStep,
         Func<Exception, Error> errorHandler)
     {
-        if (result is null) return ResultVoid.Failure(SystemErrors.NullResult);
-        if (result.IsFailure) return ResultVoid.Failure(result.Error);
+        if (result is null)
+        {
+            return ResultVoid.Failure(SystemErrors.NullResult);
+        }
+
+        if (result.IsFailure)
+        {
+            return ResultVoid.Failure(result.Error);
+        }
 
         try
         {
@@ -211,10 +232,13 @@ public static class ResultExtensions
     ///     </code>
     /// </example>
     public static Result<TNextValue> Transform<TValue, TNextValue>(
-        this Result<TValue>? result, 
+        this Result<TValue>? result,
         Func<TValue, TNextValue> mapper)
     {
-        if (result is null) return Result<TNextValue>.Failure(SystemErrors.NullResult);
+        if (result is null)
+        {
+            return Result<TNextValue>.Failure(SystemErrors.NullResult);
+        }
 
         return result.IsFailure
             ? Result<TNextValue>.Failure(result.Error)
@@ -244,8 +268,15 @@ public static class ResultExtensions
         Func<TValue, bool> predicate,
         Error error)
     {
-        if (result is null) return Result<TValue>.Failure(SystemErrors.NullResult);
-        if (result.IsFailure) return Result<TValue>.Failure(result.Error);
+        if (result is null)
+        {
+            return Result<TValue>.Failure(SystemErrors.NullResult);
+        }
+
+        if (result.IsFailure)
+        {
+            return Result<TValue>.Failure(result.Error);
+        }
 
         return predicate(result.Value!)
             ? result
@@ -271,8 +302,15 @@ public static class ResultExtensions
         this Result<TValue>? result,
         Func<TValue, ResultVoid> checker)
     {
-        if (result is null) return Result<TValue>.Failure(SystemErrors.NullResult);
-        if (result.IsFailure) return Result<TValue>.Failure(result.Error);
+        if (result is null)
+        {
+            return Result<TValue>.Failure(SystemErrors.NullResult);
+        }
+
+        if (result.IsFailure)
+        {
+            return Result<TValue>.Failure(result.Error);
+        }
 
         ResultVoid checkResult = checker(result.Value!);
 
@@ -301,8 +339,15 @@ public static class ResultExtensions
         this Result<TValue>? result,
         Func<TValue, Result<TOther>> checker)
     {
-        if (result is null) return Result<TValue>.Failure(SystemErrors.NullResult);
-        if (result.IsFailure) return Result<TValue>.Failure(result.Error);
+        if (result is null)
+        {
+            return Result<TValue>.Failure(SystemErrors.NullResult);
+        }
+
+        if (result.IsFailure)
+        {
+            return Result<TValue>.Failure(result.Error);
+        }
 
         Result<TOther> checkResult = checker(result.Value!);
 
@@ -325,7 +370,11 @@ public static class ResultExtensions
     /// </example>
     public static Result<TValue> OnSuccess<TValue>(this Result<TValue>? result, Action<TValue> action)
     {
-        if (result is not null && result.IsSuccess) action(result.Value!);
+        if (result is not null && result.IsSuccess)
+        {
+            action(result.Value!);
+        }
+
         return result ?? Result<TValue>.Failure(SystemErrors.NullResult);
     }
 
@@ -349,7 +398,11 @@ public static class ResultExtensions
             return Result<TValue>.Failure(SystemErrors.NullResult);
         }
 
-        if (result.IsFailure) action(result.Error);
+        if (result.IsFailure)
+        {
+            action(result.Error);
+        }
+
         return result;
     }
 
@@ -375,7 +428,10 @@ public static class ResultExtensions
         Func<TValue, TLanding> success,
         Func<Error, TLanding> failure)
     {
-        if (result is null) return failure(SystemErrors.NullResult);
+        if (result is null)
+        {
+            return failure(SystemErrors.NullResult);
+        }
 
         return result.IsSuccess
             ? success(result.Value!)
