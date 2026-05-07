@@ -1,6 +1,5 @@
 ﻿using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
-
 using Xunit;
 
 namespace PhotoCatalog.Test.Unit;
@@ -11,7 +10,7 @@ namespace PhotoCatalog.Test.Unit;
 public class DimensionsTest
 {
     /// <summary>
-    ///     Проверяет, что валидные размеры (в пределах 1-3840×1-2160) создаются успешно.
+    ///     Проверяет, что валидные размеры (положительные числа) создаются успешно.
     /// </summary>
     [Fact]
     public void Create_ValidWidthAndHeight_ReturnsSuccess()
@@ -29,7 +28,6 @@ public class DimensionsTest
     [Fact]
     public void Create_MinimumValidSizeOne_ReturnsSuccess()
     {
-
         Result<Dimensions> result = Dimensions.Create(1, 1);
 
         Assert.True(result.IsSuccess);
@@ -43,26 +41,37 @@ public class DimensionsTest
     [Fact]
     public void Create_ZeroValues_ReturnsFailure()
     {
-        // Act
         Result<Dimensions> actual = Dimensions.Create(0, 0);
 
-        // Assert
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
         Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
     }
 
     /// <summary>
-    ///     Проверяет, что превышение максимальных значений (3841×2161) отклоняется.
+    ///     Проверяет, что большие значения (превышающие старые ограничения) успешно создаются.
     /// </summary>
     [Fact]
-    public void Create_MaxValues_ReturnsFailure()
+    public void Create_LargeValues_ReturnsSuccess()
     {
         Result<Dimensions> actual = Dimensions.Create(3841, 2161);
 
-        Assert.False(actual.IsSuccess);
-        Assert.True(actual.IsFailure);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
+        Assert.True(actual.IsSuccess);
+        Assert.Equal(3841, actual.Value.Width);
+        Assert.Equal(2161, actual.Value.Height);
+    }
+
+    /// <summary>
+    ///     Проверяет, что очень большие значения успешно создаются.
+    /// </summary>
+    [Fact]
+    public void Create_VeryLargeValues_ReturnsSuccess()
+    {
+        Result<Dimensions> actual = Dimensions.Create(10000, 8000);
+
+        Assert.True(actual.IsSuccess);
+        Assert.Equal(10000, actual.Value.Width);
+        Assert.Equal(8000, actual.Value.Height);
     }
 
     /// <summary>
@@ -76,5 +85,20 @@ public class DimensionsTest
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
         Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
+    }
+
+    /// <summary>
+    ///     Проверяет, что смешанные невалидные значения (отрицательная ширина, положительная высота) отклоняются.
+    /// </summary>
+    [Fact]
+    public void Create_MixedInvalidValues_ReturnsFailure()
+    {
+        Result<Dimensions> actualNegativeWidth = Dimensions.Create(-100, 500);
+        Assert.False(actualNegativeWidth.IsSuccess);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeWidth.Error);
+
+        Result<Dimensions> actualNegativeHeight = Dimensions.Create(500, -100);
+        Assert.False(actualNegativeHeight.IsSuccess);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeHeight.Error);
     }
 }
