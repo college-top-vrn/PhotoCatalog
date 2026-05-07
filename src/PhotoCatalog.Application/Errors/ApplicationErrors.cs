@@ -68,7 +68,7 @@ public static class ApplicationErrors
     /// <summary>
     /// Ошибка, связаная с обновлением альбома 
     /// </summary>
-    public static class  UpdateAlbums
+    public static class UpdateAlbums
     {
         /// <summary>
         /// Ошибка, которая обозначает, что при обновлении
