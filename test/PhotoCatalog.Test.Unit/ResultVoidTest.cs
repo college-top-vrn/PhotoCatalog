@@ -1,5 +1,4 @@
-﻿
-using PhotoCatalog.Domain.Primitives;
+﻿using PhotoCatalog.Domain.Primitives;
 
 using Xunit;
 
@@ -18,7 +17,7 @@ public class ResultVoidCoreTests
     [Fact]
     public void Success_ShouldInitializeSuccessState()
     {
-        var result = ResultVoid.Success();
+        ResultVoid result = ResultVoid.Success();
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
@@ -31,7 +30,7 @@ public class ResultVoidCoreTests
     [Fact]
     public void Failure_ShouldInitializeFailureState()
     {
-        var result = ResultVoid.Failure(TestError);
+        ResultVoid result = ResultVoid.Failure(TestError);
 
         Assert.False(result.IsSuccess);
         Assert.True(result.IsFailure);
