@@ -53,18 +53,18 @@ public class AddPhotoToAlbumUseCase
             .ToResult()
             .OnFailure(error =>
                 _logger.Warning("Не удалось добавить фото {PhotoId} в альбом {AlbumId}: {Error}", photoId, albumId,
-                    error)) // TODO сделать ошибку для album в ApplicationErrors если есть дубликат.
+                    error))
             .Transform(_ => _unitOfWork.BeginTransaction())
             .Ensure(beginResult => beginResult.IsSuccess,
-                default)// TODO сделать ошибку транзакции в ApplicationErrors.
+                ApplicationErrors.Transactions.StartTransactions)
             .Then(_ => _albumRepository.GetById(albumId)) // TODO Исправить костыль.
             .Transform(album => _albumRepository.Update(album))
             .Ensure(updateResult => updateResult.IsSuccess,
-                default) // TODO сделать ошибку транзакции в ApplicationErrors.
+                ApplicationErrors.Albums.UpdateFailed)
             .Transform(_ => _unitOfWork.Commit())
             .Ensure(commitResult => commitResult.IsSuccess,
-                default) // TODO сделать ошибку транзакции в ApplicationErrors.
+                ApplicationErrors.Transactions.CommitFailed)
             .Finally(success: _ => ResultVoid.Success(),
-                failure: error => ResultVoid.Failure(error));// TODO сделать системную ошибку в ApplicationErrors.
+                failure: error => ResultVoid.Failure(ApplicationErrors.UseCases.SystemFailure));
     }
 }
