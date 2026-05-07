@@ -20,7 +20,7 @@ public record PhotoResponse(
     int Id,
     string RealPath,
     string? FileHash,
-    int? Width,
-    int? Height,
+    int Width,
+    int Height,
     DateTime AddedAt,
     IReadOnlyCollection<int> TagIds);
