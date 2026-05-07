@@ -85,4 +85,18 @@ public static class ApplicationErrors
             new Error("Albums.UpdateFailed",
                 "Ошибка обновления альбома");
     }
+
+    /// <summary>
+    ///     Ошибки, связанные с выполнением use-cases (сценариев приложения).
+    /// </summary>
+    public static class UseCases
+    {
+        /// <summary>
+        ///     Ошибка, возникающая при непредвиденном системном сбое внутри use-case.
+        /// </summary>
+        public static readonly Error SystemFailure =
+            new Error(
+                "UseCases.SystemFailure",
+                "Произошла системная ошибка при выполнении сценария приложения (UseCase).");
+    }
 }
