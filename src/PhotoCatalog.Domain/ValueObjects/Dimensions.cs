@@ -1,4 +1,5 @@
 ﻿using System;
+
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.ValueObjects;
