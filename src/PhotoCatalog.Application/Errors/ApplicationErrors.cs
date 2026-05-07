@@ -31,6 +31,9 @@ public static class ApplicationErrors
         /// </summary>
         public static readonly Error FileNotFound =
             new Error("Files.FileNotFound", "Физический файл по указанному пути не найден.");
+
+        public static readonly Error OrphanedFile =
+            new Error("Files.OrphanedFile", "Файл осталося осиротевшим на диске");
     }
 
     /// <summary>
@@ -46,4 +49,6 @@ public static class ApplicationErrors
             new Error("Folders.CycleDetected",
                 "Обнаружена циклическая зависимость: нельзя переместить папку внутрь её собственного потомка.");
     }
+    
+    
 }
