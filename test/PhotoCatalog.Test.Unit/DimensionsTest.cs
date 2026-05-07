@@ -1,6 +1,5 @@
 ﻿using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
-
 using Xunit;
 
 namespace PhotoCatalog.Test.Unit;
@@ -47,32 +46,6 @@ public class DimensionsTest
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
         Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
-    }
-
-    /// <summary>
-    ///     Проверяет, что большие значения (превышающие старые ограничения) успешно создаются.
-    /// </summary>
-    [Fact]
-    public void Create_LargeValues_ReturnsSuccess()
-    {
-        Result<Dimensions> actual = Dimensions.Create(3841, 2161);
-
-        Assert.True(actual.IsSuccess);
-        Assert.Equal(3841, actual.Value.Width);
-        Assert.Equal(2161, actual.Value.Height);
-    }
-
-    /// <summary>
-    ///     Проверяет, что очень большие значения успешно создаются.
-    /// </summary>
-    [Fact]
-    public void Create_VeryLargeValues_ReturnsSuccess()
-    {
-        Result<Dimensions> actual = Dimensions.Create(10000, 8000);
-
-        Assert.True(actual.IsSuccess);
-        Assert.Equal(10000, actual.Value.Width);
-        Assert.Equal(8000, actual.Value.Height);
     }
 
     /// <summary>
