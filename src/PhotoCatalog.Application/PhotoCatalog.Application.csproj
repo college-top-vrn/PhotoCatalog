@@ -1,15 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
-  </ItemGroup>
+﻿  <Project Sdk="Microsoft.NET.Sdk">
   
-  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PropertyGroup>
+      <TargetFramework>net10.0</TargetFramework>
+      <ImplicitUsings>disable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
   
-</Project>
+    <ItemGroup>
+      <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
+    </ItemGroup>
+    
+    
+    
+  </Project>
