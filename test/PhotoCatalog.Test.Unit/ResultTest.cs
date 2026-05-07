@@ -7,7 +7,7 @@ namespace PhotoCatalog.Test.Unit;
 /// <summary>
 ///     Содержит набор модульных тестов для проверки логики обобщенного контейнера <see cref="Result{T}" />.
 /// </summary>
-public class ResultTests
+public class ResultTest
 {
     /// <summary>
     ///     Проверяет, что фабричный метод <see cref="Result{T}.Success" /> возвращает объект
