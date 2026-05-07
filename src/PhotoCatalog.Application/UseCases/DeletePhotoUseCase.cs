@@ -4,6 +4,7 @@ using PhotoCatalog.Domain.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
 using PhotoCatalog.Application.Errors;
+using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Primitives;
 
@@ -11,7 +12,11 @@ using Serilog;
 
 namespace PhotoCatalog.Application.UseCases;
 
-public class DeletePhotoUseCase(IPhotoRepository photoRepository, IFileStorage fileStorage, IUnitOfWork unitOfWork, ILogger<DeletePhotoUseCase> logger)
+public class DeletePhotoUseCase(
+    IPhotoRepository photoRepository,
+    IFileStorage fileStorage,
+    IUnitOfWork unitOfWork,
+    ILogger<DeletePhotoUseCase> logger)
 {
     private readonly IPhotoRepository _photoRepository = photoRepository;
     private readonly IFileStorage _fileStorage = fileStorage;
@@ -20,11 +25,22 @@ public class DeletePhotoUseCase(IPhotoRepository photoRepository, IFileStorage f
 
     public ResultVoid Execute(int photoId)
     {
-        return _photoRepository
-            .GetById(photoId)
+        var photo = _photoRepository.GetById(photoId)
             .ToResult(ApplicationErrors.General.NotFound)
-            .Then(photo => _unitOfWork.BeginTransaction())
-            .Then(() => _photoRepository.Delete(photoId))
-            .Then(() => _unitOfWork.Commit()).ToResult(new Error("Тест", "Тест"));
+            .Value;
+
+        _unitOfWork.BeginTransaction();
+
+        _photoRepository.Delete(photoId);
+
+        if (_unitOfWork.Commit().IsSuccess)
+        {
+            _fileStorage.DeleteFile(photo!.Value!.RealPath);
+            return ResultVoid.Success();
+        }
+
+        _logger.LogError("Orphaned file left on disk: {Path}", photo!.Value!.RealPath);
+
+        return ResultVoid.Failure(ApplicationErrors);
     }
 }
