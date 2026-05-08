@@ -21,7 +21,7 @@ namespace PhotoCatalog.Infrastructure.Services;
 public sealed class LocalFileStorage : IFileStorage
 {
     private readonly ILogger _logger;
-        private readonly string _storageRootPath;
+    private readonly string _storageRootPath;
 
     /// <summary>
     ///     Инициализирует сервис локального хранилища.
