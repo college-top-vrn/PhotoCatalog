@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | PhotoCatalog Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | PhotoCatalog Documentation ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/docs/docfx/docs/ResultFluentApi.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="PhotoCatalog">
+            PhotoCatalog
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="руководство-по-использованию-паттерна-result-и-его-fluent-api">Руководство по использованию паттерна Result и его Fluent Api</h2>
+<h2 id="1-базовые-типы-контейнеры-результатов">1. Базовые типы: Контейнеры результатов</h2>
+<p>Паттерн строится на двух неизменяемых структурах данных. Они фиксируют состояние операции в момент ее завершения.</p>
+<h3 id="11-resultvoid-операция-без-возвращаемых-данных">1.1. ResultVoid (Операция без возвращаемых данных)</h3>
+<p>Используется для методов, которые выполняют действие, изменяющее состояние системы, но не генерируют новых данных для возврата (аналог <code>void</code>).</p>
+<p><strong>Свойства:</strong></p>
+<ul>
+<li><p><code>IsSuccess</code> (<code>bool</code>): Возвращает <code>true</code>, если операция завершена без ошибок.</p>
+</li>
+<li><p><code>IsFailure</code> (<code>bool</code>): Возвращает <code>true</code>, если произошел сбой. Всегда равно <code>!IsSuccess</code>.</p>
+</li>
+<li><p><code>Error</code> (<code>Error</code>): Объект с информацией об ошибке (код и сообщение). При успешном выполнении содержит <code>Error.None</code>.</p>
+</li>
+</ul>
+<p><strong>Сценарии использования:</strong></p>
+<ul>
+<li><p>Сохранение записи в базу данных.</p>
+</li>
+<li><p>Удаление файла (например, удаление фотографии с диска).</p>
+</li>
+<li><p>Отправка сетевого запроса или email-уведомления.</p>
+</li>
+</ul>
+<h3 id="12-result-операция-с-возвращаемыми-данными">1.2. Result<t> (Операция с возвращаемыми данными)</t></h3>
+<p>Используется, когда метод должен вычислить, найти или создать объект типа <code>T</code> и передать его вызывающему коду.</p>
+<p><strong>Свойства:</strong></p>
+<ul>
+<li><p>Включает все свойства <code>ResultVoid</code> (<code>IsSuccess</code>, <code>IsFailure</code>, <code>Error</code>).</p>
+</li>
+<li><p><code>Value</code> (<code>T</code>): Итоговые данные. <strong>Критическое правило:</strong> обращение к <code>Value</code> допускается только при <code>IsSuccess == true</code>. В противном случае значение равно <code>default</code> или <code>null</code>.</p>
+</li>
+</ul>
+<p><strong>Сценарии использования:</strong></p>
+<ul>
+<li><p>Поиск сущности в репозитории (например, поиск <code>Photo</code> по идентификатору).</p>
+</li>
+<li><p>Создание нового объекта на основе входных параметров.</p>
+</li>
+<li><p>Парсинг строки в числовой формат.</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-инициализация-и-создание-объектов">2. Инициализация и создание объектов</h2>
+<p>Чтобы начать работу, данные необходимо поместить в контекст <code>Result</code>.</p>
+<h3 id="вариант-а-прямое-использование-статических-методов">Вариант А: Прямое использование статических методов</h3>
+<p>Обеспечивает максимальную очевидность намерений в коде.</p>
+<pre><code class="lang-csharp">// Для операций без возвращаемого значения
+ResultVoid deleteResult = ResultVoid.Success();
+ResultVoid deleteError = ResultVoid.Failure(new Error(&quot;File.Locked&quot;, &quot;Файл занят другим процессом&quot;));
+
+// Для операций с данными
+Result&lt;int&gt; calcResult = Result&lt;int&gt;.Success(256);
+Result&lt;int&gt; calcError = Result&lt;int&gt;.Failure(new Error(&quot;Math.DivisionByZero&quot;, &quot;Деление на ноль&quot;));
+</code></pre>
+<h3 id="вариант-б-неявное-приведение-типов-implicit-conversion">Вариант Б: Неявное приведение типов (Implicit Conversion)</h3>
+<p>Язык C# позволяет возвращать непосредственно значение или объект ошибки. Компилятор автоматически трансформирует их в <code>Result&lt;T&gt;</code>.</p>
+<pre><code class="lang-csharp">public Result&lt;Photo&gt; GetPhoto(Guid id)
+{
+    Photo photo = _repository.Find(id);
+    
+    if (photo == null)
+        return new Error(&quot;Photo.NotFound&quot;, &quot;Фотография не найдена&quot;); // Автоматически конвертируется в Result&lt;Photo&gt;.Failure
+
+    return photo; // Автоматически конвертируется в Result&lt;Photo&gt;.Success
+}
+</code></pre>
+<hr>
+<h2 id="3-методы-расширения-построение-цепочек-вызовов-pipeline">3. Методы расширения: Построение цепочек вызовов (Pipeline)</h2>
+<p>Методы расширения позволяют организовать линейный поток выполнения кода.</p>
+<p><strong>Главный принцип механики:</strong> Каждый метод расширения перед выполнением своей логики проверяет состояние входящего <code>Result</code>. Если текущее состояние — <code>IsFailure</code> (ошибка), метод не выполняет переданную в него функцию, а просто возвращает текущую ошибку дальше по цепочке. Это устраняет необходимость писать вложенные проверки <code>if</code>.</p>
+<h3 id="31-метод-toresult">3.1. Метод <code>ToResult</code></h3>
+<p><strong>Назначение:</strong> Точка входа в цепочку. Оборачивает потенциально пустое значение (<code>null</code>) в защищенный контейнер.</p>
+<ul>
+<li><p><strong>Параметр <code>value</code>:</strong> Переменная или результат функции, которые нужно проверить. «Параметр value не нужно писать вручную внутри скобок. Им становится тот объект, у которого вы вызываете метод через точку. Если этот объект окажется null, метод ToResult увидит это и создаст Result со статусом &quot;Ошибка&quot;. Если объект существует — он будет бережно упакован внутрь контейнера».</p>
+</li>
+<li><p><strong>Параметр <code>errorIfNull</code>:</strong> Объект ошибки, который будет сгенерирован, если <code>value</code> равно <code>null</code>.</p>
+</li>
+</ul>
+<p><strong>Сценарий:</strong> Загрузка данных из внешнего источника, где гарантия существования объекта отсутствует.</p>
+<pre><code class="lang-csharp">// Ищем альбом. Если возвращается null, создается ошибка Album.NotFound.
+Result&lt;Album&gt; albumResult = _context.Albums.FirstOrDefault(a =&gt; a.Id == id)
+    .ToResult(new Error(&quot;Album.NotFound&quot;, &quot;Альбом не существует&quot;));
+</code></pre>
+<h3 id="32-метод-ensure">3.2. Метод <code>Ensure</code></h3>
+<p><strong>Назначение:</strong> Строгая проверка условий для текущих данных.</p>
+<ul>
+<li><p><strong>Сигнатура:</strong> <code>Ensure(Func&lt;TValue, bool&gt; predicate, Error error)</code></p>
+</li>
+<li><p><strong>Параметр <code>predicate</code>:</strong> Делегат (функция), принимающий текущее значение и возвращающий <code>true</code> или <code>false</code>.</p>
+</li>
+<li><p><strong>Параметр <code>error</code>:</strong> Ошибка, которая прервет выполнение, если предикат вернет <code>false</code>.</p>
+</li>
+</ul>
+<p><strong>Сценарий:</strong> Проверка корректности входных данных (валидация) до выполнения ресурсоемких операций.</p>
+<pre><code class="lang-csharp">public Result&lt;EvaluationList&gt; CreateList(string title, int maxItems)
+{
+    return title.ToResult(Errors.TitleNull)
+        .Ensure(t =&gt; t.Length &gt;= 3, new Error(&quot;Validation.TitleTooShort&quot;, &quot;Длина должна быть больше 3 символов&quot;))
+        .Ensure(_ =&gt; maxItems &gt; 0, new Error(&quot;Validation.InvalidLimit&quot;, &quot;Лимит элементов должен быть положительным&quot;))
+        .Transform(validTitle =&gt; new EvaluationList(validTitle, maxItems));
+}
+</code></pre>
+<h3 id="33-метод-transform">3.3. Метод <code>Transform</code></h3>
+<p><strong>Назначение:</strong> Изменение структуры или типа данных при условии успешного выполнения предыдущих шагов. Внутренняя функция преобразования не может прервать цепочку ошибкой.</p>
+<ul>
+<li><p><strong>Сигнатура:</strong> <code>Transform&lt;TValue, TNextValue&gt;(Func&lt;TValue, TNextValue&gt; mapper)</code></p>
+</li>
+<li><p><strong>Параметр <code>mapper</code>:</strong> Делегат, который принимает текущие данные (<code>TValue</code>) и возвращает новые данные (<code>TNextValue</code>).</p>
+</li>
+</ul>
+<p><strong>Сценарий:</strong> Конвертация тяжелых сущностей базы данных в легковесные DTO-объекты для передачи по сети.</p>
+<pre><code class="lang-csharp">Result&lt;PhotoDto&gt; dtoResult = _repository.GetPhoto(id)
+    .Transform(photo =&gt; new PhotoDto 
+    { 
+        Id = photo.Id, 
+        FilePath = photo.Path 
+    });
+</code></pre>
+<h3 id="34-метод-then">3.4. Метод <code>Then</code></h3>
+<p><strong>Назначение:</strong> Последовательное выполнение операций, где каждая последующая операция зависит от успешности предыдущей и сама способна вернуть ошибку.</p>
+<ul>
+<li><p><strong>Сигнатура:</strong> <code>Then&lt;TValue, TNextValue&gt;(Func&lt;TValue, Result&lt;TNextValue&gt;&gt; nextStep)</code> (также имеет перегрузки для работы с <code>ResultVoid</code>).</p>
+</li>
+<li><p><strong>Параметр <code>nextStep</code>:</strong> Функция, которая принимает текущее значение и возвращает новый объект <code>Result</code> или <code>ResultVoid</code>.</p>
+</li>
+</ul>
+<p><strong>Сценарий:</strong> Координация нескольких доменных сервисов.</p>
+<pre><code class="lang-csharp">public ResultVoid AssignPhotoToAlbum(Guid photoId, Guid albumId, Guid currentUserId)
+{
+    // 1. Получаем фото
+    return _photoRepository.Get(photoId).ToResult(Errors.PhotoNotFound)
+        // 2. Выполняем проверку прав (возвращает ResultVoid)
+        .Then(photo =&gt; _securityService.CheckAccess(photo, currentUserId))
+        // 3. Если права есть, получаем альбом (возвращает Result&lt;Album&gt;)
+        .Then(() =&gt; _albumRepository.Get(albumId).ToResult(Errors.AlbumNotFound))
+        // 4. Если альбом найден, связываем их и сохраняем (возвращает ResultVoid)
+        .Then(album =&gt; _albumRepository.AddPhoto(album.Id, photoId));
+}
+</code></pre>
+<h3 id="35-методы-onsuccess-и-onfailure">3.5. Методы <code>OnSuccess</code> и <code>OnFailure</code></h3>
+<p><strong>Назначение:</strong> Выполнение операций, не влияющих на основную логику обработки данных и состояние контейнера.</p>
+<ul>
+<li><p><strong>Сигнатуры:</strong> <code>OnSuccess(Action&lt;TValue&gt; action)</code> и <code>OnFailure(Action&lt;Error&gt; action)</code>.</p>
+</li>
+<li><p><strong>Параметр <code>action</code>:</strong> Делегат, выполняющий конечное действие.</p>
+</li>
+</ul>
+<p><strong>Сценарий:</strong> Логирование, аудит, обновление счетчиков в памяти.</p>
+<pre><code class="lang-csharp">var result = processData()
+    .OnSuccess(data =&gt; Console.WriteLine($&quot;Обработано байт: {data.Length}&quot;))
+    .OnFailure(error =&gt; Console.WriteLine($&quot;Операция отклонена. Причина: {error.Code}&quot;));
+</code></pre>
+<h3 id="36-метод-finally">3.6. Метод <code>Finally</code></h3>
+<p><strong>Назначение:</strong> Терминальная (конечная) операция цепочки. Извлекает данные из контекста <code>Result</code> и обязывает программиста предоставить алгоритм обработки как для успешного исхода, так и для ошибки. Возвращает итоговое значение единого типа.</p>
+<ul>
+<li><p><strong>Сигнатура:</strong> <code>Finally&lt;TValue, TLanding&gt;(Func&lt;TValue, TLanding&gt; success, Func&lt;Error, TLanding&gt; failure)</code></p>
+</li>
+<li><p><strong>Параметр <code>success</code>:</strong> Делегат, описывающий, во что превратить данные типа <code>TValue</code>.</p>
+</li>
+<li><p><strong>Параметр <code>failure</code>:</strong> Делегат, описывающий, во что превратить объект <code>Error</code>.</p>
+</li>
+</ul>
+<p><strong>Сценарий:</strong> Преобразование результатов доменного слоя в HTTP-ответы контроллера.</p>
+<pre><code class="lang-csharp">public IActionResult GetEvaluationList(Guid id)
+{
+    return _listService.GetById(id)
+        .Finally(
+            success: list =&gt; Ok(list),
+            failure: error =&gt; error.Code == &quot;List.NotFound&quot; ? NotFound(error) : BadRequest(error)
+        );
+}
+</code></pre>
+<hr>
+<h2 id="4-комплексные-сценарии-применения">4. Комплексные сценарии применения</h2>
+<p>Данный пример демонстрирует полный цикл обработки бизнес-задачи с применением рассмотренных методов. Сценарий: удаление фотографии пользователя.</p>
+<p><strong>Требования к операции:</strong></p>
+<ol>
+<li><p>Файл должен существовать в БД.</p>
+</li>
+<li><p>Текущий пользователь должен являться владельцем файла.</p>
+</li>
+<li><p>Физический файл должен быть удален с диска (операция может завершиться сбоем).</p>
+</li>
+<li><p>Запись в БД должна быть удалена (операция может завершиться сбоем).</p>
+</li>
+<li><p>Необходима запись в лог.</p>
+</li>
+</ol>
+<p><strong>Реализация:</strong></p>
+<pre><code class="lang-csharp">public ResultVoid DeleteUserPhoto(Guid photoId, User currentUser)
+{
+    return _repository.FindById(photoId)
+        .ToResult(new Error(&quot;Photo.NotFound&quot;, &quot;Файл не существует в системе&quot;))
+        
+        .Ensure(
+            predicate: photo =&gt; photo.OwnerId == currentUser.Id, 
+            error: new Error(&quot;Access.Denied&quot;, &quot;Вы не являетесь владельцем файла&quot;)
+        )
+        
+        .Then(photo =&gt; _fileSystem.DeletePhysicalFile(photo.Path)) // Возвращает ResultVoid
+        
+        .Then(() =&gt; _repository.RemoveFromDatabase(photoId)) // Выполняется, только если файл удален с диска
+        
+        .OnSuccess(() =&gt; _logger.LogInformation(&quot;Процесс удаления успешно завершен&quot;))
+        
+        .OnFailure(error =&gt; _logger.LogError($&quot;Сбой удаления: Код {error.Code}, Сообщение: {error.Message}&quot;));
+}
+</code></pre>
+<p><strong>Анализ механики:</strong> Метод полностью лишен операторов ветвления. Если на шаге <code>Ensure</code> пользователь не является владельцем, объект <code>Result</code> получает статус <code>IsFailure</code> с ошибкой &quot;Access.Denied&quot;. Методы <code>Then</code> (удаление файла и записи БД) обнаруживают этот статус и пропускают свое выполнение. Поток управления мгновенно переходит к методу <code>OnFailure</code>.</p>
+<hr>
+<h3 id="шпаргалка-по-выбору-методов-result-">Шпаргалка по выбору методов <code>Result </code></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Метод</strong></th>
+<th><strong>Главный вопрос: &quot;Что мне нужно сделать?&quot;</strong></th>
+<th><strong>Что происходит при Успехе (на входе)?</strong></th>
+<th><strong>Что происходит при Ошибке (на входе)?</strong></th>
+<th><strong>Пример сценария</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>ToResult</code></strong></td>
+<td>Как мне начать цепочку, если объект пришел из базы и может быть <code>null</code>?</td>
+<td>Создает <code>Success</code> и кладет данные внутрь.</td>
+<td>Создает <code>Failure</code> с указанной вами ошибкой.</td>
+<td>Поиск пользователя: <code>_db.Find(id).ToResult(Errors.NotFound)</code></td>
+</tr>
+<tr>
+<td><strong><code>Ensure</code></strong></td>
+<td>Как проверить правило (длину, права доступа, лимиты)?</td>
+<td>Запускает проверку. Если <code>true</code> — пропускает дальше. Если <code>false</code> — выдает новую ошибку.</td>
+<td><strong>Игнорируется.</strong> Ошибка просто летит дальше по цепочке.</td>
+<td>Проверка возраста: <code>.Ensure(u =&gt; u.Age &gt;= 18, Errors.TooYoung)</code></td>
+</tr>
+<tr>
+<td><strong><code>Transform</code></strong></td>
+<td>Как превратить сущность в DTO (и я уверен, что тут не будет сбоев)?</td>
+<td>Выполняет трансформацию и кладет новые данные в новый <code>Result</code>.</td>
+<td><strong>Игнорируется.</strong> Старая ошибка летит дальше по цепочке.</td>
+<td>Создание DTO: <code>.Transform(u =&gt; new UserDto(u.Name))</code></td>
+</tr>
+<tr>
+<td><strong><code>Then</code></strong></td>
+<td>Как вызвать следующий метод, который тоже может выдать ошибку?</td>
+<td>Выполняет следующий метод и берет его <code>Result</code> за основу для дальнейших шагов.</td>
+<td><strong>Игнорируется.</strong> Старая ошибка летит дальше по цепочке.</td>
+<td>Списание денег: <code>.Then(u =&gt; _bank.Charge(u.Id, 100))</code></td>
+</tr>
+<tr>
+<td><code>OnSuccess</code> /<br><br>  <br><br><code>OnFailure</code></td>
+<td>Как записать лог или почистить кэш, не ломая основную логику?</td>
+<td><code>OnSuccess</code> — выполняется. <code>OnFailure</code> — игнорируется. Данные не меняются.</td>
+<td><code>OnFailure</code> — выполняется. <code>OnSuccess</code> — игнорируется. Данные не меняются.</td>
+<td>Логирование: <code>.OnSuccess(u =&gt; _logger.Info(&quot;Успех&quot;))</code></td>
+</tr>
+<tr>
+<td><strong><code>Finally</code></strong></td>
+<td>Как выйти из конвейера и вернуть финальный HTTP-ответ пользователю?</td>
+<td>Выполняет ветку <code>success</code> и возвращает итоговый объект.</td>
+<td>Выполняет ветку <code>failure</code> и возвращает итоговый объект.</td>
+<td>Ответ контроллера: <code>.Finally(ok =&gt; Ok(), err =&gt; BadRequest())</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="быстрый-алгоритм-принятия-решений">Быстрый алгоритм принятия решений:</h3>
+<ol>
+<li><p>Вы только достали данные? → <strong><code>ToResult</code></strong></p>
+</li>
+<li><p>Шаг может провалиться из-за неверных данных? → <strong><code>Ensure</code></strong></p>
+</li>
+<li><p>Шаг может провалиться, потому что вызывает сторонний сервис/БД? → <strong><code>Then</code></strong></p>
+</li>
+<li><p>Шаг 100% безопасен и просто меняет форму данных? → <strong><code>Transform</code></strong></p>
+</li>
+<li><p>Шаг вообще ничего не меняет, а просто &quot;смотрит&quot;? → <strong><code>OnSuccess</code> / <code>OnFailure</code></strong></p>
+</li>
+<li><p>Пора отдавать данные наружу из вашего слоя Application? → <strong><code>Finally</code></strong></p>
+</li>
+</ol>
+<h2 id="5-глоссарий-терминов">5. Глоссарий терминов</h2>
+<ul>
+<li><p><strong>Паттерн Result:</strong> Архитектурный подход инкапсуляции результатов выполнения кода, заменяющий обработку исключений строгой типизацией успешных данных и состояний ошибок.</p>
+</li>
+<li><p><strong>Линейный поток выполнения (Pipeline):</strong> Организация кода в виде последовательности вызовов, где выходные данные одной функции служат входными данными для следующей, формируя единую цепь операций.</p>
+</li>
+<li><p><strong>Делегат (Func / Action):</strong> Ссылка на метод с определенной сигнатурой, передаваемая в качестве параметра. Позволяет отложить выполнение кода.</p>
+</li>
+<li><p><strong>Побочный эффект (Side Effect):</strong> Операция, взаимодействующая с внешним состоянием (сеть, консоль, диск), но не модифицирующая данные внутри текущего потока вычислений (методы <code>OnSuccess</code> / <code>OnFailure</code>).</p>
+</li>
+<li><p><strong>Терминальный метод:</strong> Функция, завершающая линейный поток вычислений и извлекающая данные из внутренних структур (контейнеров) во внешний код.</p>
+</li>
+<li><p><strong>Неявное приведение (Implicit Conversion):</strong> Механизм языка C#, позволяющий компилятору автоматически преобразовывать один тип данных в другой (например, сущность БД в объект <code>Result&lt;T&gt;</code>) без явного указания приведения в коде.</p>
+</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/docs/docfx/docs/ResultFluentApi.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

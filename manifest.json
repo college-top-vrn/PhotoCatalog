@@ -795,6 +795,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/ResultFluentApi.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/ResultFluentApi.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/TechnicalSpecification.md",
       "output": {
         ".html": {
