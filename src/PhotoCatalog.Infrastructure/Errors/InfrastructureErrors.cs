@@ -52,6 +52,19 @@ public static class InfrastructureErrors
         /// </summary>
         public static readonly Error NoActiveTransaction =
             new("Database.NoActiveTransaction", "Нет активной транзакции");
+
+        /// <summary>
+        /// Ошибка, соответствующая <see cref="Microsoft.Data.Sqlite.SqliteException"/>.
+        /// Возникает при ошибке в SQLite запросе.
+        /// </summary>
+        public static readonly Error Sqlite =
+            new("Database.Sqlite", "Ошибка Sqlite.");
+
+        /// <summary>
+        /// Ошибка, когда элемент таблицы базы данных не найден.
+        /// </summary>
+        public static readonly Error NotFound =
+            new("Database.NotFound", "Элемент таблицы базы данных не найден.");
     }
 
     /// <summary>
