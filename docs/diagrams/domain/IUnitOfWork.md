@@ -1,6 +1,7 @@
 ```mermaid
 classDiagram
-    interface IUnitOfWork {
+    class IUnitOfWork {
+<<interface>> 
         +BeginTransaction() ResultVoid
         +Commit() ResultVoid
         +Rollback() ResultVoid
