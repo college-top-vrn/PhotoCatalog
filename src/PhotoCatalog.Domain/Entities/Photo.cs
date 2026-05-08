@@ -86,6 +86,16 @@ public class Photo
     }
 
     /// <summary>
+    /// Устанавливает размеры изображения.
+    /// </summary>
+    /// <param name="newDimensions">Размеры изображения.</param>
+    public ResultVoid SetDimensions(Dimensions newDimensions)
+    {
+        Dimensions = newDimensions;
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
     /// Добавляет тег к фотографии.
     /// </summary>
     /// <param name="tagId">Идентификатор тега.</param>
