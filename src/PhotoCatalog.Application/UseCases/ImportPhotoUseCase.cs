@@ -63,15 +63,13 @@ public class ImportPhotoUseCase
     /// </returns>
     public Result<PhotoResponse> Execute(ImportPhotoRequest request)
     {
-        // 1. Проверка существования файла
         var fileExistsResult = _fileStorage.FileExists(request.SourcePath);
-        if (fileExistsResult.IsFailure || !fileExistsResult.Value)
+        if (fileExistsResult.IsFailure)
         {
             _logger.LogWarning("Файл не найден: {SourcePath}", request.SourcePath);
             return Result<PhotoResponse>.Failure(ApplicationErrors.Files.FileNotFound);
         }
 
-        // 2. Извлечение метаданных
         var hashResult = _metadataExtractor.CalculateHash(request.SourcePath);
         if (hashResult.IsFailure)
         {
@@ -86,7 +84,6 @@ public class ImportPhotoUseCase
             return Result<PhotoResponse>.Failure(dimensionsResult.Error);
         }
 
-        // 3. Копирование файла
         var storeResult = _fileStorage.StoreFile(request.SourcePath, Path.GetFileName(request.SourcePath));
         if (storeResult.IsFailure)
         {
@@ -96,7 +93,6 @@ public class ImportPhotoUseCase
 
         var newFilePath = storeResult.Value;
 
-        // 4. Создание доменной сущности
         var photoResult = Photo.Create(newFilePath);
         if (photoResult.IsFailure)
         {
@@ -104,15 +100,12 @@ public class ImportPhotoUseCase
             _fileStorage.DeleteFile(newFilePath);
             return Result<PhotoResponse>.Failure(photoResult.Error);
         }
-
-        var photo = photoResult.Value;
-
-        // 5. Установка хэша и размеров
-        photo.UpdateHash(hashResult.Value);
-        
         
 
-        // 6. Сохранение в базу данных
+        photoResult.Value.UpdateHash(hashResult.Value);
+        photoResult.Value.SetDimensions(dimensionsResult.Value);
+
+
         var beginResult = _unitOfWork.BeginTransaction();
         if (beginResult.IsFailure)
         {
@@ -121,7 +114,7 @@ public class ImportPhotoUseCase
             return Result<PhotoResponse>.Failure(beginResult.Error);
         }
 
-        _photoRepository.Add(photo);
+        _photoRepository.Add(photoResult.Value);
 
         var commitResult = _unitOfWork.Commit();
         if (commitResult.IsFailure)
@@ -131,17 +124,16 @@ public class ImportPhotoUseCase
             return Result<PhotoResponse>.Failure(commitResult.Error);
         }
 
-        // 7. Маппинг в PhotoResponse
         var response = new PhotoResponse(
-            Id: photo.Id,
-            RealPath: photo.RealPath,
-            FileHash: photo.FileHash,
-            Width: photo.Dimensions.Width,
-            Height: photo.Dimensions.Height,
-            AddedAt: photo.AddedAt,
-            TagIds: photo.TagIds);
+            Id: photoResult.Value.Id,
+            RealPath: photoResult.Value.RealPath,
+            FileHash: photoResult.Value.FileHash,
+            Width: photoResult.Value.Dimensions.Width,
+            Height: photoResult.Value.Dimensions.Height,
+            AddedAt: photoResult.Value.AddedAt,
+            TagIds: photoResult.Value.TagIds);
 
         return Result<PhotoResponse>.Success(response);
     }
+    
 }
-
