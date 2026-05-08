@@ -17,8 +17,7 @@ public static class ApplicationErrors
         /// <summary>
         ///     Ошибка, когда запрашиваемая сущность не найдена.
         /// </summary>
-        public static readonly Error NotFound =
-            new Error("General.NotFound", "Запрашиваемая сущность не найдена.");
+        public static readonly Error NotFound = new("General.NotFound", "Запрашиваемая сущность не найдена.");
     }
 
     /// <summary>
@@ -30,14 +29,14 @@ public static class ApplicationErrors
         ///     Ошибка, когда физический файл по указанному пути не найден.
         /// </summary>
         public static readonly Error FileNotFound =
-            new Error("Files.FileNotFound", "Физический файл по указанному пути не найден.");
+            new("Files.FileNotFound", "Физический файл по указанному пути не найден.");
+
         /// <summary>
         ///     ошибка, когда фаил остается осиротевшим на диске
         /// </summary>
-        public static readonly Error OrphanedFile =
-            new Error("Files.OrphanedFile", "Файл остался осиротевшим на диске");
+        public static readonly Error OrphanedFile = new("Files.OrphanedFile", "Файл остался осиротевшим на диске");
     }
-    
+
     /// <summary>
     ///     Ошибки, связанные с папками.
     /// </summary>
@@ -48,9 +47,7 @@ public static class ApplicationErrors
         ///     нельзя переместить папку внутрь её собственного потомка.
         /// </summary>
         public static readonly Error CycleDetected =
-            new Error("Folders.CycleDetected",
+            new("Folders.CycleDetected",
                 "Обнаружена циклическая зависимость: нельзя переместить папку внутрь её собственного потомка.");
     }
-
-
 }
