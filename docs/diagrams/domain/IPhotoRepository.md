@@ -1,6 +1,7 @@
 ```mermaid
 classDiagram
-    interface IPhotoRepository {
+    class IPhotoRepository {
+<<interface>> 
         +GetById(id: int) Result~Photo~
         +GetByPath(realPath: string) Result~Photo~
         +Add(photo: Photo) ResultVoid
