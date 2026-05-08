@@ -5,7 +5,8 @@ namespace PhotoCatalog.Domain.Entities;
 /// <summary>
 ///     Представляет папку.
 /// </summary>
-/// /// <remarks>
+/// ///
+/// <remarks>
 ///     ВНИМАНИЕ: Не создавайте объект через конструктор по умолчанию.
 /// </remarks>
 public class Folder
@@ -37,7 +38,7 @@ public class Folder
     {
         return string.IsNullOrWhiteSpace(name)
             ? Result<Folder>.Failure(DomainErrors.Folder.EmptyName)
-            : new Folder { Id = id, Name = name };
+            : Result<Folder>.Success(new Folder { Id = id, Name = name });
     }
 
     /// <summary>
@@ -47,7 +48,10 @@ public class Folder
     /// <returns>Возвращает результат выполнения.</returns>
     public ResultVoid Rename(string newName)
     {
-        if (string.IsNullOrWhiteSpace(newName)) return ResultVoid.Failure(DomainErrors.Folder.EmptyName);
+        if (string.IsNullOrWhiteSpace(newName))
+        {
+            return ResultVoid.Failure(DomainErrors.Folder.EmptyName);
+        }
 
         Name = newName;
 
@@ -61,7 +65,10 @@ public class Folder
     /// <returns>Возвращает результата выполнения.</returns>
     public ResultVoid MoveTo(Folder parentFolder)
     {
-        if (parentFolder.Id == Id) return ResultVoid.Failure(DomainErrors.Folder.CannotMoveToSelf);
+        if (parentFolder.Id == Id)
+        {
+            return ResultVoid.Failure(DomainErrors.Folder.CannotMoveToSelf);
+        }
 
         ParentFolderId = parentFolder.Id;
 
