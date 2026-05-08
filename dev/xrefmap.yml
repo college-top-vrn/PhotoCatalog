@@ -604,6 +604,47 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.Execute
   nameWithType: ImportPhotoUseCase.Execute
+- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase
+  name: MoveFolderUseCase
+  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html
+  commentId: T:PhotoCatalog.Application.UseCases.MoveFolderUseCase
+  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase
+  nameWithType: MoveFolderUseCase
+- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: MoveFolderUseCase(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_PhotoCatalog_Domain_Interfaces_Services_IFolderHierarchyValidator_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase.MoveFolderUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Application.UseCases.MoveFolderUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: MoveFolderUseCase.MoveFolderUseCase(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+  nameWithType.vb: MoveFolderUseCase.New(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor*
+  name: MoveFolderUseCase
+  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase__ctor_
+  commentId: Overload:PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase.MoveFolderUseCase
+  fullName.vb: PhotoCatalog.Application.UseCases.MoveFolderUseCase.New
+  nameWithType: MoveFolderUseCase.MoveFolderUseCase
+  nameWithType.vb: MoveFolderUseCase.New
+- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Int32)
+  name: Execute(int, int)
+  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_System_Int32_System_Int32_
+  commentId: M:PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Int32)
+  name.vb: Execute(Integer, Integer)
+  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(int, int)
+  fullName.vb: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(Integer, Integer)
+  nameWithType: MoveFolderUseCase.Execute(int, int)
+  nameWithType.vb: MoveFolderUseCase.Execute(Integer, Integer)
+- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute*
+  name: Execute
+  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_
+  commentId: Overload:PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute
+  nameWithType: MoveFolderUseCase.Execute
 - uid: PhotoCatalog.Domain.Entities
   name: PhotoCatalog.Domain.Entities
   href: api/PhotoCatalog.Domain.Entities.html
@@ -1793,6 +1834,28 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Interfaces.Services.IFileStorage.StoreFile
   nameWithType: IFileStorage.StoreFile
+- uid: PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator
+  name: IFolderHierarchyValidator
+  href: api/PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.html
+  commentId: T:PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator
+  fullName: PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator
+  nameWithType: IFolderHierarchyValidator
+- uid: PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.CheckForCycles(System.Int32,System.Int32)
+  name: CheckForCycles(int, int)
+  href: api/PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.html#PhotoCatalog_Domain_Interfaces_Services_IFolderHierarchyValidator_CheckForCycles_System_Int32_System_Int32_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.CheckForCycles(System.Int32,System.Int32)
+  name.vb: CheckForCycles(Integer, Integer)
+  fullName: PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.CheckForCycles(int, int)
+  fullName.vb: PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.CheckForCycles(Integer, Integer)
+  nameWithType: IFolderHierarchyValidator.CheckForCycles(int, int)
+  nameWithType.vb: IFolderHierarchyValidator.CheckForCycles(Integer, Integer)
+- uid: PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.CheckForCycles*
+  name: CheckForCycles
+  href: api/PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.html#PhotoCatalog_Domain_Interfaces_Services_IFolderHierarchyValidator_CheckForCycles_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.CheckForCycles
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.CheckForCycles
+  nameWithType: IFolderHierarchyValidator.CheckForCycles
 - uid: PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork
   name: IUnitOfWork
   href: api/PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html
