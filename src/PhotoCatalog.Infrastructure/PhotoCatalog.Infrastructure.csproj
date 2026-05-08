@@ -11,4 +11,8 @@
     <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+  </ItemGroup>
+
 </Project>
