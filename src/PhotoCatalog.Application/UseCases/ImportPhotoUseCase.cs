@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 using Microsoft.Extensions.Logging;
@@ -23,13 +22,13 @@ namespace PhotoCatalog.Application.UseCases;
 public class ImportPhotoUseCase
 {
     private readonly IFileStorage _fileStorage;
+    private readonly ILogger<ImportPhotoUseCase> _logger;
     private readonly IFileMetadataExtractor _metadataExtractor;
     private readonly IPhotoRepository _photoRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<ImportPhotoUseCase> _logger;
 
     /// <summary>
-    ///     Инициализирует новый экземпляр класса <see cref="ImportPhotoUseCase"/>.
+    ///     Инициализирует новый экземпляр класса <see cref="ImportPhotoUseCase" />.
     /// </summary>
     /// <param name="fileStorage">Сервис для работы с файловой системой.</param>
     /// <param name="metadataExtractor">Сервис для извлечения метаданных файла.</param>
@@ -57,43 +56,47 @@ public class ImportPhotoUseCase
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с <see cref="PhotoResponse"/>.</description></item>
-    ///         <item><description>Ошибка с детализацией причины.</description></item>
+    ///         <item>
+    ///             <description>Успех с <see cref="PhotoResponse" />.</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка с детализацией причины.</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     public Result<PhotoResponse> Execute(ImportPhotoRequest request)
     {
-        var fileExistsResult = _fileStorage.FileExists(request.SourcePath);
+        Result<bool> fileExistsResult = _fileStorage.FileExists(request.SourcePath);
         if (fileExistsResult.IsFailure)
         {
             _logger.LogWarning("Файл не найден: {SourcePath}", request.SourcePath);
             return Result<PhotoResponse>.Failure(ApplicationErrors.Files.FileNotFound);
         }
 
-        var hashResult = _metadataExtractor.CalculateHash(request.SourcePath);
+        Result<string> hashResult = _metadataExtractor.CalculateHash(request.SourcePath);
         if (hashResult.IsFailure)
         {
             _logger.LogError("Ошибка вычисления хэша: {Error}", hashResult.Error.Message);
             return Result<PhotoResponse>.Failure(hashResult.Error);
         }
 
-        var dimensionsResult = _metadataExtractor.GetDimensions(request.SourcePath);
+        Result<Dimensions> dimensionsResult = _metadataExtractor.GetDimensions(request.SourcePath);
         if (dimensionsResult.IsFailure)
         {
             _logger.LogError("Ошибка получения размеров: {Error}", dimensionsResult.Error.Message);
             return Result<PhotoResponse>.Failure(dimensionsResult.Error);
         }
 
-        var storeResult = _fileStorage.StoreFile(request.SourcePath, Path.GetFileName(request.SourcePath));
+        Result<string> storeResult = _fileStorage.StoreFile(request.SourcePath, Path.GetFileName(request.SourcePath));
         if (storeResult.IsFailure)
         {
             _logger.LogError("Ошибка копирования файла: {Error}", storeResult.Error.Message);
             return Result<PhotoResponse>.Failure(storeResult.Error);
         }
 
-        var newFilePath = storeResult.Value;
+        string? newFilePath = storeResult.Value;
 
-        var photoResult = Photo.Create(newFilePath);
+        Result<Photo> photoResult = Photo.Create(newFilePath);
         if (photoResult.IsFailure)
         {
             _logger.LogError("Ошибка создания сущности Photo: {Error}", photoResult.Error.Message);
@@ -106,7 +109,7 @@ public class ImportPhotoUseCase
         photoResult.Value.SetDimensions(dimensionsResult.Value);
 
 
-        var beginResult = _unitOfWork.BeginTransaction();
+        ResultVoid beginResult = _unitOfWork.BeginTransaction();
         if (beginResult.IsFailure)
         {
             _logger.LogError("Ошибка начала транзакции: {Error}", beginResult.Error.Message);
@@ -116,7 +119,7 @@ public class ImportPhotoUseCase
 
         _photoRepository.Add(photoResult.Value);
 
-        var commitResult = _unitOfWork.Commit();
+        ResultVoid commitResult = _unitOfWork.Commit();
         if (commitResult.IsFailure)
         {
             _logger.LogError("Ошибка коммита транзакции: {Error}", commitResult.Error.Message);
@@ -124,14 +127,14 @@ public class ImportPhotoUseCase
             return Result<PhotoResponse>.Failure(commitResult.Error);
         }
 
-        var response = new PhotoResponse(
-            Id: photoResult.Value.Id,
-            RealPath: photoResult.Value.RealPath,
-            FileHash: photoResult.Value.FileHash,
-            Width: photoResult.Value.Dimensions.Width,
-            Height: photoResult.Value.Dimensions.Height,
-            AddedAt: photoResult.Value.AddedAt,
-            TagIds: photoResult.Value.TagIds);
+        PhotoResponse response = new(
+            photoResult.Value.Id,
+            photoResult.Value.RealPath,
+            photoResult.Value.FileHash,
+            photoResult.Value.Dimensions.Width,
+            photoResult.Value.Dimensions.Height,
+            photoResult.Value.AddedAt,
+            photoResult.Value.TagIds);
 
         return Result<PhotoResponse>.Success(response);
     }
