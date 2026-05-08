@@ -1,3 +1,4 @@
+using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Infrastructure.Errors;
