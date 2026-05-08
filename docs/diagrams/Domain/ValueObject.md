@@ -1,5 +1,3 @@
-# Диаграмма классов
-
 ```mermaid
 classDiagram
     class Dimensions {
