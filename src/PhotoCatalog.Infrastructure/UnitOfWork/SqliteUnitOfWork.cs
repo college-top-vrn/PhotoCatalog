@@ -3,18 +3,25 @@ using System;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 
+using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Infrastructure.Errors;
 
 namespace PhotoCatalog.Infrastructure.UnitOfWork;
 
 /// <summary>
 ///     Реализация <see cref="IUnitOfWork" /> для SQLite.
+/// </summary>
+/// <remarks>
 ///     Инкапсулирует подключение к SQLite, строго контролирует его жизненный цикл
 ///     и гарантирует включение поддержки внешних ключей.
-///     При открытии соединения автоматически выполняется команда PRAGMA foreign_keys = ON.
-/// </summary>
-public class SqliteUnitOfWork : IUnitOfWork
+///     <para>
+///         <b>Важно:</b> При открытии соединения автоматически выполняется команда
+///         <c>PRAGMA foreign_keys = ON</c> для обеспечения целостности данных.
+///     </para>
+/// </remarks>
+public class SqliteUnitOfWork : IUnitOfWork, IDisposable
 {
     private readonly string _connectionString;
     private readonly ILogger<SqliteUnitOfWork> _logger;
@@ -27,6 +34,9 @@ public class SqliteUnitOfWork : IUnitOfWork
     /// </summary>
     /// <param name="connectionString">Строка подключения к базе данных SQLite.</param>
     /// <param name="logger">Логгер для записи ошибок транзакций.</param>
+    /// <exception cref="ArgumentNullException">
+    ///     Выбрасывается, если <paramref name="connectionString" /> или <paramref name="logger" /> равен <c>null</c>.
+    /// </exception>
     public SqliteUnitOfWork(string connectionString, ILogger<SqliteUnitOfWork> logger)
     {
         _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
@@ -50,42 +60,36 @@ public class SqliteUnitOfWork : IUnitOfWork
     /// </summary>
     /// <returns>
     ///     <see cref="ResultVoid.Success" />, если транзакция успешно начата,
-    ///     или <see cref="ResultVoid.Failure" /> с соответствующей ошибкой.
+    ///     или <see cref="ResultVoid.Failure" /> с ошибкой.
     /// </returns>
     public ResultVoid BeginTransaction()
     {
-        try
+        if (_transaction != null)
         {
-            if (_transaction != null)
-            {
-                _logger.LogWarning("Попытка начать новую транзакцию, когда уже есть активная транзакция");
-                var error = new Error("Database.TransactionAlreadyExists", "Транзакция уже существует.");
-                return ResultVoid.Failure(error);
-            }
-
-            if (_connection == null)
-            {
-                _connection = new SqliteConnection(_connectionString);
-                _connection.Open();
-
-                using var command = _connection.CreateCommand();
-                command.CommandText = "PRAGMA foreign_keys = ON;";
-                command.ExecuteNonQuery();
-
-                _logger.LogDebug("Соединение с БД открыто, PRAGMA foreign_keys = ON");
-            }
-
-            _transaction = _connection.BeginTransaction();
-            _logger.LogDebug("Начата новая транзакция");
-
-            return ResultVoid.Success();
+            _logger.LogWarning("Попытка начать новую транзакцию, когда уже есть активная транзакция");
+            return ResultVoid.Failure(InfrastructureErrors.Database.TransactionAlreadyExists);
         }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Ошибка при начале транзакции");
-            var error = new Error("Database.ConnectionFailed", "Не удалось установить соединение с базой данных.");
-            return ResultVoid.Failure(error);
-        }
+
+        return OpenConnectionIfNeeded()
+            .Then(() =>
+            {
+                try
+                {
+                    _transaction = _connection!.BeginTransaction();
+                    _logger.LogDebug("Начата новая транзакция");
+                    return ResultVoid.Success();
+                }
+                catch (SqliteException ex)
+                {
+                    _logger.LogError(ex, "Ошибка SQLite при начале транзакции");
+                    return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    _logger.LogError(ex, "Неверная операция при начале транзакции");
+                    return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                }
+            });
     }
 
     /// <summary>
@@ -93,30 +97,34 @@ public class SqliteUnitOfWork : IUnitOfWork
     /// </summary>
     /// <returns>
     ///     <see cref="ResultVoid.Success" />, если транзакция успешно зафиксирована,
-    ///     или <see cref="ResultVoid.Failure" /> с соответствующей ошибкой.
+    ///     или <see cref="ResultVoid.Failure" /> с ошибкой.
     /// </returns>
     public ResultVoid Commit()
     {
+        
+        if (_transaction == null)
+        {
+            _logger.LogWarning("Попытка зафиксировать транзакцию, когда нет активной транзакции");
+            return ResultVoid.Failure(InfrastructureErrors.Database.NoActiveTransaction);
+        }
+
         try
         {
-            if (_transaction == null)
-            {
-                _logger.LogWarning("Попытка зафиксировать транзакцию, когда нет активной транзакции");
-                var error = new Error("Database.NoActiveTransaction", "Нет активной транзакции.");
-                return ResultVoid.Failure(error);
-            }
-
             _transaction.Commit();
+            _transaction.Dispose();
             _transaction = null;
             _logger.LogDebug("Транзакция успешно зафиксирована");
-
             return ResultVoid.Success();
         }
-        catch (Exception ex)
+        catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка при фиксации транзакции");
-            var error = new Error("Database.ConnectionFailed", "Не удалось установить соединение с базой данных.");
-            return ResultVoid.Failure(error);
+            _logger.LogError(ex, "Ошибка SQLite при фиксации транзакции");
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Неверная операция при фиксации транзакции");
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
@@ -125,30 +133,65 @@ public class SqliteUnitOfWork : IUnitOfWork
     /// </summary>
     /// <returns>
     ///     <see cref="ResultVoid.Success" />, если транзакция успешно отменена,
-    ///     или <see cref="ResultVoid.Failure" /> с соответствующей ошибкой.
+    ///     или <see cref="ResultVoid.Failure" /> с ошибкой.
     /// </returns>
     public ResultVoid Rollback()
     {
+        if (_transaction == null)
+        {
+            _logger.LogWarning("Попытка откатить транзакцию, когда нет активной транзакции");
+            return ResultVoid.Failure(InfrastructureErrors.Database.NoActiveTransaction);
+        }
+
         try
         {
-            if (_transaction == null)
-            {
-                _logger.LogWarning("Попытка откатить транзакцию, когда нет активной транзакции");
-                var error = new Error("Database.NoActiveTransaction", "Нет активной транзакции.");
-                return ResultVoid.Failure(error);
-            }
-
             _transaction.Rollback();
+            _transaction.Dispose();
             _transaction = null;
-            _logger.LogDebug("Транзакция успешно откачена");
-
+            _logger.LogDebug("Транзакция успешно откатана");
             return ResultVoid.Success();
         }
-        catch (Exception ex)
+        catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка при откате транзакции");
-            var error = new Error("Database.ConnectionFailed", "Не удалось установить соединение с базой данных.");
-            return ResultVoid.Failure(error);
+            _logger.LogError(ex, "Ошибка SQLite при откате транзакции");
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Неверная операция при откате транзакции");
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+    }
+
+    /// <summary>
+    ///     Открывает соединение, если оно еще не открыто.
+    /// </summary>
+    private ResultVoid OpenConnectionIfNeeded()
+    {
+        if (_connection != null)
+            return ResultVoid.Success();
+
+        try
+        {
+            _connection = new SqliteConnection(_connectionString);
+            _connection.Open();
+
+            using var command = _connection.CreateCommand();
+            command.CommandText = "PRAGMA foreign_keys = ON;";
+            command.ExecuteNonQuery();
+
+            _logger.LogDebug("Соединение с БД открыто, PRAGMA foreign_keys = ON");
+            return ResultVoid.Success();
+        }
+        catch (SqliteException ex)
+        {
+            _logger.LogError(ex, "Ошибка SQLite при открытии соединения");
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Неверная операция при открытии соединения");
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
@@ -157,13 +200,18 @@ public class SqliteUnitOfWork : IUnitOfWork
     /// </summary>
     public void Dispose()
     {
-        if (_disposed) return;
+        if (_disposed)
+            return;
 
         try
         {
-            _transaction?.Rollback();
-            _transaction?.Dispose();
-            _transaction = null;
+            if (_transaction != null)
+            {
+                _transaction.Rollback();
+                _transaction.Dispose();
+                _transaction = null;
+                _logger.LogDebug("Активная транзакция откатана при освобождении ресурсов");
+            }
 
             if (_connection != null)
             {
@@ -175,7 +223,7 @@ public class SqliteUnitOfWork : IUnitOfWork
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Ошибка при освобождении ресурсов");
+            _logger.LogError(ex, "Ошибка при освобождении ресурсов SqliteUnitOfWork");
         }
 
         _disposed = true;
