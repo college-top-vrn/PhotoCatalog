@@ -1,6 +1,7 @@
 ```mermaid
 classDiagram
-    interface IFolderHierarchyValidator {
+    class IFolderHierarchyValidator {
+<<interface>> 
         +CheckForCycles(sourceFolderId: int, targetFolderId: int) ResultVoid
     }
 ```
