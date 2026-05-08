@@ -46,6 +46,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/_site
-          destination_dir: ${{ github.ref == 'refs/heads/develop' && 'dev' || '' }}
-        # uses: actions/deploy-pages@v4
+          publish_dir: docs/docfx/_site
