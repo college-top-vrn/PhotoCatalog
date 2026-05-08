@@ -17,4 +17,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+  </ItemGroup>
+
 </Project>
