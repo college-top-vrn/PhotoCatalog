@@ -1,6 +1,7 @@
 ```mermaid
 classDiagram
-    interface IFolderRepository {
+    class IFolderRepository {
+<<interface>> 
         +GetById(id: int) Result~Folder~
         +Add(folder: Folder) ResultVoid
         +Update(folder: Folder) ResultVoid
