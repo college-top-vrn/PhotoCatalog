@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+
 using Dapper;
+
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
+
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
@@ -55,7 +58,7 @@ public class SqliteAlbumRepository : IAlbumRepository
                 "SELECT Id, Name, FolderId FROM Albums WHERE Id = @id",
                 new { id },
                 _unitOfWork.Transaction);
-            
+
             if (albumData == null)
             {
                 _logger.LogWarning("Album with id {Id} not found", id);
@@ -64,7 +67,7 @@ public class SqliteAlbumRepository : IAlbumRepository
 
             // Создаем альбом через фабричный метод
             var albumDataName = Convert.ToString(albumData.Name);
-            var albumDataId = Convert.ToInt32(albumData.Id); 
+            var albumDataId = Convert.ToInt32(albumData.Id);
             var createResult = Album.Create(albumDataName, albumDataId);
             if (createResult.IsFailure)
             {
@@ -87,7 +90,7 @@ public class SqliteAlbumRepository : IAlbumRepository
                 _unitOfWork.Transaction).ToList();
 
             // Восстанавливаем фотографии
-            var restoreMethod = typeof(Album).GetMethod("RestorePhotos", 
+            var restoreMethod = typeof(Album).GetMethod("RestorePhotos",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             restoreMethod?.Invoke(album, new object[] { photoIds });
 
@@ -191,7 +194,7 @@ public class SqliteAlbumRepository : IAlbumRepository
                 "UPDATE Albums SET Name = @Name, FolderId = @FolderId WHERE Id = @Id",
                 new { album.Id, album.Name, album.FolderId },
                 _unitOfWork.Transaction);
-            
+
             if (rowsAffected == 0)
             {
                 _logger.LogWarning("Album {Id} not found for update", album.Id);
@@ -263,7 +266,7 @@ public class SqliteAlbumRepository : IAlbumRepository
                 "DELETE FROM Albums WHERE Id = @Id",
                 new { Id = id },
                 _unitOfWork.Transaction);
-            
+
             if (rowsAffected == 0)
             {
                 _logger.LogWarning("Album {Id} not found for delete", id);
