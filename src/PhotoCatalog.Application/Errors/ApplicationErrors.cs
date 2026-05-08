@@ -43,7 +43,7 @@ public static class ApplicationErrors
     public static class Folders
     {
         /// <summary>
-        ///     Ошибка, когда обнаружена циклическая зависимост:
+        ///     Ошибка, когда обнаружена циклическая зависимость:
         ///     нельзя переместить папку внутрь её собственного потомка.
         /// </summary>
         public static readonly Error CycleDetected =
