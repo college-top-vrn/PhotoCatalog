@@ -47,4 +47,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/docfx/_site
-          destination_dir: ${{ github.ref == 'refs/heads/develop' && 'dev' || '' }}
+          # destination_dir: ${{ github.ref == 'refs/heads/develop' && 'dev' || '' }}
