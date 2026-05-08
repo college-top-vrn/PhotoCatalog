@@ -5,10 +5,10 @@ using Microsoft.Extensions.Logging;
 using PhotoCatalog.Application.DTOs;
 using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
-using PhotoCatalog.Domain.ValueObjects;
 
 namespace PhotoCatalog.Application.UseCases;
 
@@ -56,86 +56,55 @@ public class ImportPhotoUseCase
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item>
-    ///             <description>Успех с <see cref="PhotoResponse" />.</description>
-    ///         </item>
-    ///         <item>
-    ///             <description>Ошибка с детализацией причины.</description>
-    ///         </item>
+    ///         <item><description>Успех с <see cref="PhotoResponse"/>.</description></item>
+    ///         <item><description>Ошибка с детализацией причины.</description></item>
     ///     </list>
     /// </returns>
     public Result<PhotoResponse> Execute(ImportPhotoRequest request)
     {
-        Result<bool> fileExistsResult = _fileStorage.FileExists(request.SourcePath);
-        if (fileExistsResult.IsFailure)
-        {
-            _logger.LogWarning("Файл не найден: {SourcePath}", request.SourcePath);
-            return Result<PhotoResponse>.Failure(ApplicationErrors.Files.FileNotFound);
-        }
+        _logger.LogInformation("Начало импорта фотографии. Путь: {SourcePath}", request.SourcePath);
 
-        Result<string> hashResult = _metadataExtractor.CalculateHash(request.SourcePath);
-        if (hashResult.IsFailure)
-        {
-            _logger.LogError("Ошибка вычисления хэша: {Error}", hashResult.Error.Message);
-            return Result<PhotoResponse>.Failure(hashResult.Error);
-        }
-
-        Result<Dimensions> dimensionsResult = _metadataExtractor.GetDimensions(request.SourcePath);
-        if (dimensionsResult.IsFailure)
-        {
-            _logger.LogError("Ошибка получения размеров: {Error}", dimensionsResult.Error.Message);
-            return Result<PhotoResponse>.Failure(dimensionsResult.Error);
-        }
-
-        Result<string> storeResult = _fileStorage.StoreFile(request.SourcePath, Path.GetFileName(request.SourcePath));
-        if (storeResult.IsFailure)
-        {
-            _logger.LogError("Ошибка копирования файла: {Error}", storeResult.Error.Message);
-            return Result<PhotoResponse>.Failure(storeResult.Error);
-        }
-
-        string? newFilePath = storeResult.Value;
-
-        Result<Photo> photoResult = Photo.Create(newFilePath);
-        if (photoResult.IsFailure)
-        {
-            _logger.LogError("Ошибка создания сущности Photo: {Error}", photoResult.Error.Message);
-            _fileStorage.DeleteFile(newFilePath);
-            return Result<PhotoResponse>.Failure(photoResult.Error);
-        }
-
-
-        photoResult.Value.UpdateHash(hashResult.Value);
-        photoResult.Value.SetDimensions(dimensionsResult.Value);
-
-
-        ResultVoid beginResult = _unitOfWork.BeginTransaction();
-        if (beginResult.IsFailure)
-        {
-            _logger.LogError("Ошибка начала транзакции: {Error}", beginResult.Error.Message);
-            _fileStorage.DeleteFile(newFilePath);
-            return Result<PhotoResponse>.Failure(beginResult.Error);
-        }
-
-        _photoRepository.Add(photoResult.Value);
-
-        ResultVoid commitResult = _unitOfWork.Commit();
-        if (commitResult.IsFailure)
-        {
-            _logger.LogError("Ошибка коммита транзакции: {Error}", commitResult.Error.Message);
-            _fileStorage.DeleteFile(newFilePath);
-            return Result<PhotoResponse>.Failure(commitResult.Error);
-        }
-
-        PhotoResponse response = new(
-            photoResult.Value.Id,
-            photoResult.Value.RealPath,
-            photoResult.Value.FileHash,
-            photoResult.Value.Dimensions.Width,
-            photoResult.Value.Dimensions.Height,
-            photoResult.Value.AddedAt,
-            photoResult.Value.TagIds);
-
-        return Result<PhotoResponse>.Success(response);
+        return _fileStorage.FileExists(request.SourcePath)
+            .ToResult(ApplicationErrors.Files.FileNotFound)
+            .OnSuccess(_ => _logger.LogInformation("Файл найден: {SourcePath}", request.SourcePath))
+            .OnFailure(_ => _logger.LogWarning("Файл не найден: {SourcePath}", request.SourcePath))
+            .Then(_ => _metadataExtractor.CalculateHash(request.SourcePath))
+            .OnSuccess(hash => _logger.LogDebug("Хэш вычислен: {Hash}", hash))
+            .Then(hash => _metadataExtractor.GetDimensions(request.SourcePath)
+                .Transform(dimensions => (hash, dimensions)))
+            .OnSuccess(tuple => _logger.LogDebug("Размеры получены: {Width}x{Height}", tuple.dimensions.Width, tuple.dimensions.Height))
+            .Then(tuple => _fileStorage.StoreFile(request.SourcePath, Path.GetFileName(request.SourcePath))
+                .Transform(filePath => (tuple.hash, tuple.dimensions, filePath)))
+            .OnSuccess(tuple => _logger.LogDebug("Файл скопирован: {FilePath}", tuple.filePath))
+            .Then(tuple => Photo.Create(tuple.filePath)
+                .OnSuccess(photo => _logger.LogDebug("Сущность Photo создана: {FilePath}", tuple.filePath))
+                .OnFailure(error => _fileStorage.DeleteFile(tuple.filePath))
+                .Transform(photo => (tuple.hash, tuple.dimensions, photo)))
+            .Then(tuple =>
+            {
+                tuple.photo.UpdateHash(tuple.hash);
+                tuple.photo.SetDimensions(tuple.dimensions);
+                return Result<Photo>.Success(tuple.photo);
+            })
+            .Then(photo => _unitOfWork.BeginTransaction()
+                .ToResult()
+                .Ensure(beginResult => beginResult.IsSuccess, ApplicationErrors.Transactions.StartTransactions)
+                .Then(_ => _photoRepository.Add(photo))
+                .Then(() => _unitOfWork.Commit())
+                .ToResult()
+                .Ensure(commitResult => commitResult.IsSuccess, ApplicationErrors.Transactions.CommitFailed)
+                .Transform(_ => photo))
+            .OnSuccess(photo =>
+                _logger.LogInformation("Импорт фотографии успешно завершен. PhotoId: {PhotoId}", photo.Id))
+            .OnFailure(error =>
+                _logger.LogError("Ошибка импорта: {ErrorCode} - {ErrorMessage}", error.Code, error.Message))
+            .Transform(photo => new PhotoResponse(
+                photo.Id,
+                photo.RealPath,
+                photo.FileHash,
+                photo.Dimensions.Width,
+                photo.Dimensions.Height,
+                photo.AddedAt,
+                photo.TagIds));
     }
 }
