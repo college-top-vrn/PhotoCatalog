@@ -264,6 +264,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.UseCases.DeletePhotoUseCase",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.yml\" sourcestartlinenumber=\"1\">Представляет прикладную сущность для удаления файла из репозитория и диска.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.yml",
       "output": {
         ".html": {

@@ -607,6 +607,47 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute
   nameWithType: AddTagToPhotoUseCase.Execute
+- uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase
+  name: DeletePhotoUseCase
+  href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html
+  commentId: T:PhotoCatalog.Application.UseCases.DeletePhotoUseCase
+  fullName: PhotoCatalog.Application.UseCases.DeletePhotoUseCase
+  nameWithType: DeletePhotoUseCase
+- uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.DeletePhotoUseCase})
+  name: DeletePhotoUseCase(IPhotoRepository, IFileStorage, IUnitOfWork, ILogger<DeletePhotoUseCase>)
+  href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html#PhotoCatalog_Application_UseCases_DeletePhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoRepository_PhotoCatalog_Domain_Interfaces_Services_IFileStorage_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Application_UseCases_DeletePhotoUseCase__
+  commentId: M:PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.DeletePhotoUseCase})
+  name.vb: New(IPhotoRepository, IFileStorage, IUnitOfWork, ILogger(Of DeletePhotoUseCase))
+  fullName: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.DeletePhotoUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository, PhotoCatalog.Domain.Interfaces.Services.IFileStorage, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Microsoft.Extensions.Logging.ILogger<PhotoCatalog.Application.UseCases.DeletePhotoUseCase>)
+  fullName.vb: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository, PhotoCatalog.Domain.Interfaces.Services.IFileStorage, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Microsoft.Extensions.Logging.ILogger(Of PhotoCatalog.Application.UseCases.DeletePhotoUseCase))
+  nameWithType: DeletePhotoUseCase.DeletePhotoUseCase(IPhotoRepository, IFileStorage, IUnitOfWork, ILogger<DeletePhotoUseCase>)
+  nameWithType.vb: DeletePhotoUseCase.New(IPhotoRepository, IFileStorage, IUnitOfWork, ILogger(Of DeletePhotoUseCase))
+- uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor*
+  name: DeletePhotoUseCase
+  href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html#PhotoCatalog_Application_UseCases_DeletePhotoUseCase__ctor_
+  commentId: Overload:PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.DeletePhotoUseCase
+  fullName.vb: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.New
+  nameWithType: DeletePhotoUseCase.DeletePhotoUseCase
+  nameWithType.vb: DeletePhotoUseCase.New
+- uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.Execute(System.Int32)
+  name: Execute(int)
+  href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html#PhotoCatalog_Application_UseCases_DeletePhotoUseCase_Execute_System_Int32_
+  commentId: M:PhotoCatalog.Application.UseCases.DeletePhotoUseCase.Execute(System.Int32)
+  name.vb: Execute(Integer)
+  fullName: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.Execute(int)
+  fullName.vb: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.Execute(Integer)
+  nameWithType: DeletePhotoUseCase.Execute(int)
+  nameWithType.vb: DeletePhotoUseCase.Execute(Integer)
+- uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.Execute*
+  name: Execute
+  href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html#PhotoCatalog_Application_UseCases_DeletePhotoUseCase_Execute_
+  commentId: Overload:PhotoCatalog.Application.UseCases.DeletePhotoUseCase.Execute
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.Execute
+  nameWithType: DeletePhotoUseCase.Execute
 - uid: PhotoCatalog.Application.UseCases.ImportPhotoUseCase
   name: ImportPhotoUseCase
   href: api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.html
