@@ -5,4 +5,4 @@
 - name: О проекте
   href: docs/TechnicalSpecification.md
 - name: Руководство по Result Fluent API
-  href: docs/tutorials/ResultFluentApi.md
+  href: docs/ResultFluentApi.md
