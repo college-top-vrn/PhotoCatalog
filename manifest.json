@@ -250,6 +250,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.yml\" sourcestartlinenumber=\"1\">Сценарий использования для добавления тега к фото.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.yml",
       "output": {
         ".html": {

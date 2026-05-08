@@ -566,6 +566,47 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.Execute
   nameWithType: AddPhotoToAlbumUseCase.Execute
+- uid: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase
+  name: AddTagToPhotoUseCase
+  href: api/PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.html
+  commentId: T:PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase
+  fullName: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase
+  nameWithType: AddTagToPhotoUseCase
+- uid: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: AddTagToPhotoUseCase(ITagRepository, IPhotoRepository, IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.html#PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_ITagRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(ITagRepository, IPhotoRepository, IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.AddTagToPhotoUseCase(PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: AddTagToPhotoUseCase.AddTagToPhotoUseCase(ITagRepository, IPhotoRepository, IUnitOfWork, ILogger)
+  nameWithType.vb: AddTagToPhotoUseCase.New(ITagRepository, IPhotoRepository, IUnitOfWork, ILogger)
+- uid: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.#ctor*
+  name: AddTagToPhotoUseCase
+  href: api/PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.html#PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase__ctor_
+  commentId: Overload:PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.AddTagToPhotoUseCase
+  fullName.vb: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.New
+  nameWithType: AddTagToPhotoUseCase.AddTagToPhotoUseCase
+  nameWithType.vb: AddTagToPhotoUseCase.New
+- uid: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute(System.Int32,System.Int32)
+  name: Execute(int, int)
+  href: api/PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.html#PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase_Execute_System_Int32_System_Int32_
+  commentId: M:PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute(System.Int32,System.Int32)
+  name.vb: Execute(Integer, Integer)
+  fullName: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute(int, int)
+  fullName.vb: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute(Integer, Integer)
+  nameWithType: AddTagToPhotoUseCase.Execute(int, int)
+  nameWithType.vb: AddTagToPhotoUseCase.Execute(Integer, Integer)
+- uid: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute*
+  name: Execute
+  href: api/PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.html#PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase_Execute_
+  commentId: Overload:PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute
+  nameWithType: AddTagToPhotoUseCase.Execute
 - uid: PhotoCatalog.Application.UseCases.ImportPhotoUseCase
   name: ImportPhotoUseCase
   href: api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.html
