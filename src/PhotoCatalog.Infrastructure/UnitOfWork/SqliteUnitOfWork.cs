@@ -1,6 +1,8 @@
 using System;
+
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
+
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 
@@ -65,17 +67,17 @@ public class SqliteUnitOfWork : IUnitOfWork
             {
                 _connection = new SqliteConnection(_connectionString);
                 _connection.Open();
-                
+
                 using var command = _connection.CreateCommand();
                 command.CommandText = "PRAGMA foreign_keys = ON;";
                 command.ExecuteNonQuery();
-                
+
                 _logger.LogDebug("Соединение с БД открыто, PRAGMA foreign_keys = ON");
             }
 
             _transaction = _connection.BeginTransaction();
             _logger.LogDebug("Начата новая транзакция");
-            
+
             return ResultVoid.Success();
         }
         catch (Exception ex)
@@ -107,7 +109,7 @@ public class SqliteUnitOfWork : IUnitOfWork
             _transaction.Commit();
             _transaction = null;
             _logger.LogDebug("Транзакция успешно зафиксирована");
-            
+
             return ResultVoid.Success();
         }
         catch (Exception ex)
@@ -139,7 +141,7 @@ public class SqliteUnitOfWork : IUnitOfWork
             _transaction.Rollback();
             _transaction = null;
             _logger.LogDebug("Транзакция успешно откачена");
-            
+
             return ResultVoid.Success();
         }
         catch (Exception ex)
