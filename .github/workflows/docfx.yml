@@ -42,6 +42,6 @@ jobs:
           path: './docs/docfx/_site'
 
       - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         id: deployment
-          #        uses: actions/deploy-pages@v4
-          uses: peaceiris/actions-gh-pages@v3
+        # uses: actions/deploy-pages@v4
