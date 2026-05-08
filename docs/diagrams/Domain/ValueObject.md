@@ -1,7 +1,7 @@
 ```mermaid
 classDiagram
     class Dimensions {
-        <<record>> <<Value Object>>
+        <<record>>
         -const int MaxWidth
         -const int MaxHeight
         -const int MinValues
