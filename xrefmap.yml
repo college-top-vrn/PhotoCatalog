@@ -2381,6 +2381,18 @@ references:
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.ConstraintViolation
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.ConstraintViolation
   nameWithType: InfrastructureErrors.Database.ConstraintViolation
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.NoActiveTransaction
+  name: NoActiveTransaction
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Database_NoActiveTransaction
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.NoActiveTransaction
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.NoActiveTransaction
+  nameWithType: InfrastructureErrors.Database.NoActiveTransaction
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.TransactionAlreadyExists
+  name: TransactionAlreadyExists
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Database_TransactionAlreadyExists
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.TransactionAlreadyExists
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.TransactionAlreadyExists
+  nameWithType: InfrastructureErrors.Database.TransactionAlreadyExists
 - uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage
   name: InfrastructureErrors.FileStorage
   href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html
@@ -2405,3 +2417,86 @@ references:
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
   nameWithType: InfrastructureErrors.FileStorage.IOError
+- uid: PhotoCatalog.Infrastructure.UnitOfWork
+  name: PhotoCatalog.Infrastructure.UnitOfWork
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.html
+  commentId: N:PhotoCatalog.Infrastructure.UnitOfWork
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork
+  nameWithType: PhotoCatalog.Infrastructure.UnitOfWork
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork
+  name: SqliteUnitOfWork
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html
+  commentId: T:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork
+  nameWithType: SqliteUnitOfWork
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor(System.String,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork})
+  name: SqliteUnitOfWork(string, ILogger<SqliteUnitOfWork>)
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__ctor_System_String_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__
+  commentId: M:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor(System.String,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork})
+  name.vb: New(String, ILogger(Of SqliteUnitOfWork))
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.SqliteUnitOfWork(string, Microsoft.Extensions.Logging.ILogger<PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork>)
+  fullName.vb: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.New(String, Microsoft.Extensions.Logging.ILogger(Of PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork))
+  nameWithType: SqliteUnitOfWork.SqliteUnitOfWork(string, ILogger<SqliteUnitOfWork>)
+  nameWithType.vb: SqliteUnitOfWork.New(String, ILogger(Of SqliteUnitOfWork))
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor*
+  name: SqliteUnitOfWork
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.SqliteUnitOfWork
+  fullName.vb: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.New
+  nameWithType: SqliteUnitOfWork.SqliteUnitOfWork
+  nameWithType.vb: SqliteUnitOfWork.New
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.BeginTransaction
+  name: BeginTransaction()
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_BeginTransaction
+  commentId: M:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.BeginTransaction
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.BeginTransaction()
+  nameWithType: SqliteUnitOfWork.BeginTransaction()
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.BeginTransaction*
+  name: BeginTransaction
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_BeginTransaction_
+  commentId: Overload:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.BeginTransaction
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.BeginTransaction
+  nameWithType: SqliteUnitOfWork.BeginTransaction
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Commit
+  name: Commit()
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Commit
+  commentId: M:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Commit
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Commit()
+  nameWithType: SqliteUnitOfWork.Commit()
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Commit*
+  name: Commit
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Commit_
+  commentId: Overload:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Commit
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Commit
+  nameWithType: SqliteUnitOfWork.Commit
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Dispose
+  name: Dispose()
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Dispose
+  commentId: M:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Dispose
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Dispose()
+  nameWithType: SqliteUnitOfWork.Dispose()
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Dispose*
+  name: Dispose
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Dispose_
+  commentId: Overload:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Dispose
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Dispose
+  nameWithType: SqliteUnitOfWork.Dispose
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback
+  name: Rollback()
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Rollback
+  commentId: M:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback()
+  nameWithType: SqliteUnitOfWork.Rollback()
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback*
+  name: Rollback
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Rollback_
+  commentId: Overload:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback
+  nameWithType: SqliteUnitOfWork.Rollback

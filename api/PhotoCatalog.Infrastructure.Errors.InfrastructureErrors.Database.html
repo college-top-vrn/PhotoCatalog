@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Database" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database" class="text-break">
-Class InfrastructureErrors.Database  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L21"><i class="bi bi-code-slash"></i></a>
+Class InfrastructureErrors.Database  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -156,7 +156,7 @@ Class InfrastructureErrors.Database  <a class="header-action link-secondary" tit
 
   <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Database_ConnectionFailed" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.ConnectionFailed">
   ConnectionFailed
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L27"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Ошибка, когда не удалось установить соединение с базой данных.</p>
@@ -187,7 +187,7 @@ Class InfrastructureErrors.Database  <a class="header-action link-secondary" tit
 
   <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Database_ConstraintViolation" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.ConstraintViolation">
   ConstraintViolation
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L35"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Ошибка, когда нарушена целостность данных
@@ -217,10 +217,76 @@ Class InfrastructureErrors.Database  <a class="header-action link-secondary" tit
 
 
 
+  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Database_NoActiveTransaction" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.NoActiveTransaction">
+  NoActiveTransaction
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Ошибка, возникающая при попытке зафиксировать (Commit) или откатить (Rollback)
+транзакцию, когда активной транзакции не существует.
+Предотвращает некорректные операции с неинициализированным состоянием транзакции.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Error NoActiveTransaction</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Database_TransactionAlreadyExists" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.TransactionAlreadyExists">
+  TransactionAlreadyExists
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Ошибка, возникающая при попытке начать новую транзакцию,
+когда уже существует активная транзакция в текущем UnitOfWork.
+Гарантирует, что в рамках одного UnitOfWork может быть только одна транзакция.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Error TransactionAlreadyExists</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L21" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L22" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -781,6 +781,34 @@
       "Summary": null
     },
     {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.yml\" sourcestartlinenumber=\"1\">Реализация <xref href=\"PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork\" data-throw-if-not-resolved=\"false\"></xref> для SQLite.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.UnitOfWork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.UnitOfWork.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.UnitOfWork",
+      "Summary": null
+    },
+    {
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
