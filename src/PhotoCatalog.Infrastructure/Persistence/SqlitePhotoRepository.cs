@@ -1,4 +1,5 @@
 using System.Data;
+using System.Reflection;
 
 using Dapper;
 
@@ -19,6 +20,8 @@ namespace PhotoCatalog.Infrastructure.Persistence;
 public sealed class SqlitePhotoRepository : IPhotoRepository
 {
     private static readonly Error PhotoNotFound = new("Photo.NotFound", "Фотография не найдена.");
+    private static readonly PropertyInfo? DimensionsProperty =
+        typeof(Photo).GetProperty(nameof(Photo.Dimensions), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
     private readonly ILogger<SqlitePhotoRepository> _logger;
     private readonly SqliteUnitOfWork _unitOfWork;
 
@@ -250,7 +253,7 @@ public sealed class SqlitePhotoRepository : IPhotoRepository
                 (photo, width, height) =>
                 {
                     Dimensions dimensions = Dimensions.Create(width, height).Value!;
-                    photo.SetDimensions(dimensions);
+                    SetPhotoDimensions(photo, dimensions);
                     return photo;
                 },
                 parameters,
@@ -266,7 +269,7 @@ public sealed class SqlitePhotoRepository : IPhotoRepository
                 (photo, width, height) =>
                 {
                     Dimensions dimensions = Dimensions.Create(width, height).Value!;
-                    photo.SetDimensions(dimensions);
+                    SetPhotoDimensions(photo, dimensions);
                     return photo;
                 },
                 parameters,
@@ -354,6 +357,11 @@ public sealed class SqlitePhotoRepository : IPhotoRepository
         return ex.SqliteErrorCode == 19 && ex.Message.Contains("Photos.RealPath", StringComparison.OrdinalIgnoreCase)
             ? InfrastructureErrors.Database.ConstraintViolation
             : InfrastructureErrors.Database.ConnectionFailed;
+    }
+
+    private static void SetPhotoDimensions(Photo photo, Dimensions dimensions)
+    {
+        DimensionsProperty?.SetValue(photo, dimensions);
     }
 
     private sealed record PhotoTagLink(int PhotoId, int TagId);
