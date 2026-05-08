@@ -782,6 +782,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.yml\" sourcestartlinenumber=\"1\">Обработчик типа Dapper для\nvalue object <xref href=\"PhotoCatalog.Domain.ValueObjects.Dimensions\" data-throw-if-not-resolved=\"false\"></xref>.\nОбеспечивает двустороннее преобразование между строкой\nв формате &quot;ширина×высота&quot; (например, &quot;1920x1080&quot;)\nи объектом <xref href=\"PhotoCatalog.Domain.ValueObjects.Dimensions\" data-throw-if-not-resolved=\"false\"></xref> при чтении/записи в базу данных.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Handlers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Handlers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Handlers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.yml",
       "output": {
         ".html": {

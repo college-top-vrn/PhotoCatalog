@@ -2417,6 +2417,50 @@ references:
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
   nameWithType: InfrastructureErrors.FileStorage.IOError
+- uid: PhotoCatalog.Infrastructure.Handlers
+  name: PhotoCatalog.Infrastructure.Handlers
+  href: api/PhotoCatalog.Infrastructure.Handlers.html
+  commentId: N:PhotoCatalog.Infrastructure.Handlers
+  fullName: PhotoCatalog.Infrastructure.Handlers
+  nameWithType: PhotoCatalog.Infrastructure.Handlers
+- uid: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler
+  name: DimensionsTypeHandler
+  href: api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.html
+  commentId: T:PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler
+  fullName: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler
+  nameWithType: DimensionsTypeHandler
+- uid: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.Parse(System.Object)
+  name: Parse(object)
+  href: api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.html#PhotoCatalog_Infrastructure_Handlers_DimensionsTypeHandler_Parse_System_Object_
+  commentId: M:PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.Parse(System.Object)
+  name.vb: Parse(Object)
+  fullName: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.Parse(object)
+  fullName.vb: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.Parse(Object)
+  nameWithType: DimensionsTypeHandler.Parse(object)
+  nameWithType.vb: DimensionsTypeHandler.Parse(Object)
+- uid: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.Parse*
+  name: Parse
+  href: api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.html#PhotoCatalog_Infrastructure_Handlers_DimensionsTypeHandler_Parse_
+  commentId: Overload:PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.Parse
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.Parse
+  nameWithType: DimensionsTypeHandler.Parse
+- uid: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.SetValue(System.Data.IDbDataParameter,PhotoCatalog.Domain.ValueObjects.Dimensions)
+  name: SetValue(IDbDataParameter, Dimensions?)
+  href: api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.html#PhotoCatalog_Infrastructure_Handlers_DimensionsTypeHandler_SetValue_System_Data_IDbDataParameter_PhotoCatalog_Domain_ValueObjects_Dimensions_
+  commentId: M:PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.SetValue(System.Data.IDbDataParameter,PhotoCatalog.Domain.ValueObjects.Dimensions)
+  name.vb: SetValue(IDbDataParameter, Dimensions)
+  fullName: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.SetValue(System.Data.IDbDataParameter, PhotoCatalog.Domain.ValueObjects.Dimensions?)
+  fullName.vb: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.SetValue(System.Data.IDbDataParameter, PhotoCatalog.Domain.ValueObjects.Dimensions)
+  nameWithType: DimensionsTypeHandler.SetValue(IDbDataParameter, Dimensions?)
+  nameWithType.vb: DimensionsTypeHandler.SetValue(IDbDataParameter, Dimensions)
+- uid: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.SetValue*
+  name: SetValue
+  href: api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.html#PhotoCatalog_Infrastructure_Handlers_DimensionsTypeHandler_SetValue_
+  commentId: Overload:PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.SetValue
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.SetValue
+  nameWithType: DimensionsTypeHandler.SetValue
 - uid: PhotoCatalog.Infrastructure.UnitOfWork
   name: PhotoCatalog.Infrastructure.UnitOfWork
   href: api/PhotoCatalog.Infrastructure.UnitOfWork.html
