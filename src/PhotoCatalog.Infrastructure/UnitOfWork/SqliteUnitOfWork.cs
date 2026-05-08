@@ -101,7 +101,7 @@ public class SqliteUnitOfWork : IUnitOfWork, IDisposable
     /// </returns>
     public ResultVoid Commit()
     {
-        
+
         if (_transaction == null)
         {
             _logger.LogWarning("Попытка зафиксировать транзакцию, когда нет активной транзакции");
