@@ -1,0 +1,816 @@
+{
+  "source_base_path": "/home/runner/work/PhotoCatalog/PhotoCatalog/docs/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Caching.CacheKeysFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Caching.CacheKeysFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Caching.CacheKeysFactory",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Caching.CacheKeysFactory.yml\" sourcestartlinenumber=\"1\">Централизованная фабрика строковых идентификаторов\nдля кэширования.\nРазделяет генерацию Key и Tag.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Caching.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Caching.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Caching",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.AlbumResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.AlbumResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.AlbumResponse",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.AlbumResponse.yml\" sourcestartlinenumber=\"1\">DTO record для ответа с альбомом.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.CreateFolderRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.CreateFolderRequest",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.CreateFolderRequest.yml\" sourcestartlinenumber=\"1\">DTO record для запроса создания папки.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.FolderResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.FolderResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.FolderResponse",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.FolderResponse.yml\" sourcestartlinenumber=\"1\">DTO record для ответа с папкой.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.ImportPhotoRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.ImportPhotoRequest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.ImportPhotoRequest",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.ImportPhotoRequest.yml\" sourcestartlinenumber=\"1\">DTO record для запроса импорта фото.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.PhotoResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.PhotoResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.PhotoResponse",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.PhotoResponse.yml\" sourcestartlinenumber=\"1\">DTO record для ответа с фото.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Albums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Albums.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Errors.ApplicationErrors.Albums",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.Albums.yml\" sourcestartlinenumber=\"1\">Ошибка, связаная с обновлением альбома</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Files.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Files.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Errors.ApplicationErrors.Files",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.Files.yml\" sourcestartlinenumber=\"1\">Ошибки, связанные с файлами.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Folders.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Folders.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Errors.ApplicationErrors.Folders",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.Folders.yml\" sourcestartlinenumber=\"1\">Ошибки, связанные с папками.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.General.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.General.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Errors.ApplicationErrors.General",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.General.yml\" sourcestartlinenumber=\"1\">Общие ошибки приложения.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Transactions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Transactions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Errors.ApplicationErrors.Transactions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.Transactions.yml\" sourcestartlinenumber=\"1\">Ошибки, связанные с транзакциями.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.UseCases.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.UseCases.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Errors.ApplicationErrors.UseCases",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.UseCases.yml\" sourcestartlinenumber=\"1\">Ошибки, связанные с выполнением use-cases (сценариев приложения).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Errors.ApplicationErrors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Errors.ApplicationErrors",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все ошибки уровня Application\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.Error\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Errors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Errors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Errors",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.yml\" sourcestartlinenumber=\"1\">Сценарий использования для добавления фотографии в существующий альбом.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.UseCases.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.UseCases.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.UseCases",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Entities.Album.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Entities.Album.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Entities.Album",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Entities.Album.yml\" sourcestartlinenumber=\"1\">Представляет доменную сущность виртуального альбома.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Entities.Folder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Entities.Folder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Entities.Folder",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Entities.Folder.yml\" sourcestartlinenumber=\"1\">Представляет папку.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Entities.Photo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Entities.Photo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Entities.Photo",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Entities.Photo.yml\" sourcestartlinenumber=\"1\">Представляет основную сущность фотографии в системе, привязанную к физическому файлу.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Entities.Tag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Entities.Tag.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Entities.Tag",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Entities.Tag.yml\" sourcestartlinenumber=\"1\">Представляет тег для фотографий.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Entities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Entities.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Entities",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Extensions.ResultExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Extensions.ResultExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Extensions.ResultExtensions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Extensions.ResultExtensions.yml\" sourcestartlinenumber=\"1\">Методы расширения для последовательной обработки результатов, содержащих данные.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Extensions.ResultVoidExtensions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.yml\" sourcestartlinenumber=\"1\">Методы расширения для последовательной обработки результатов без данных.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Extensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.yml\" sourcestartlinenumber=\"1\">Предоставляет методы для управления виртуальными альбомами в репозитории.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс репозитория для управления\nиерархией виртуальных папок.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс репозитория для работы с сущностью Photo.\nОпределяет операции для получения и сохранения фотографий.\nИспользует паттерн Result для безопасной передачи инфраструктурных ошибок.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий для работы с тегами.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor.yml\" sourcestartlinenumber=\"1\">Контракт для извлечения метаданных из файлов.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IFileStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IFileStorage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Services.IFileStorage",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Services.IFileStorage.yml\" sourcestartlinenumber=\"1\">Хранилище файлов.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.yml\" sourcestartlinenumber=\"1\">Контракт для управления транзакциями в доменном слое.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Services",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Album.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Album.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.DomainErrors.Album",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.DomainErrors.Album.yml\" sourcestartlinenumber=\"1\">Ошибки для <xref href=\"PhotoCatalog.Domain.Primitives.DomainErrors.Album\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions.yml\" sourcestartlinenumber=\"1\">Ошибки для <xref href=\"PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Folder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Folder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.DomainErrors.Folder",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.DomainErrors.Folder.yml\" sourcestartlinenumber=\"1\">Ошибки для <xref href=\"PhotoCatalog.Domain.Primitives.DomainErrors.Folder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Photo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Photo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.DomainErrors.Photo",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.DomainErrors.Photo.yml\" sourcestartlinenumber=\"1\">Ошибки для <xref href=\"PhotoCatalog.Domain.Primitives.DomainErrors.Photo\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Tag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.Tag.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.DomainErrors.Tag",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.DomainErrors.Tag.yml\" sourcestartlinenumber=\"1\">Ошибки для <xref href=\"PhotoCatalog.Domain.Primitives.DomainErrors.Tag\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.DomainErrors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.DomainErrors",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.DomainErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все возможные бизнес-ошибки предметной области\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.Error\" data-throw-if-not-resolved=\"false\"></xref>&gt;.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.Error.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.Error.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.Error",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.Error.yml\" sourcestartlinenumber=\"1\">Представляет структуру для стандартизированного описания бизнес-ошибок в домене.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.Result-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.Result-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.Result<T>",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.Result-1.yml\" sourcestartlinenumber=\"1\">Представляет результат выполнения операции, возвращающей значение типа <code class=\"typeparamref\">T</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.ResultVoid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.ResultVoid.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.ResultVoid",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.ResultVoid.yml\" sourcestartlinenumber=\"1\">Представляет результат выполнения операции, не возвращающей значение (аналог void).\nИнкапсулирует логику успеха или провала.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.SystemErrors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.SystemErrors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.SystemErrors",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.SystemErrors.yml\" sourcestartlinenumber=\"1\">Реестр критических системных ошибок, которые не связаны с бизнес-правилами,\nа возникают из-за сбоев в потоке выполнения или инфраструктуре.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.ValueObjects.Dimensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.ValueObjects.Dimensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.ValueObjects.Dimensions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.ValueObjects.Dimensions.yml\" sourcestartlinenumber=\"1\">Value Object для хранения габаритов изображения (ширина × высота в пикселях).\nГарантирует инварианты: ширина и высота строго положительные числа (&gt; 0).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.ValueObjects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.ValueObjects.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.ValueObjects",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.yml\" sourcestartlinenumber=\"1\">Ошибки, связанные с работой базы данных.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.yml\" sourcestartlinenumber=\"1\">Ошибки, связанные с файловым хранилищем.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Errors.InfrastructureErrors",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все ошибки уровня Infrastructure\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.Error\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Errors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Errors",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
