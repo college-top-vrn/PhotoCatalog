@@ -10,7 +10,7 @@ using Serilog;
 namespace PhotoCatalog.Application.UseCases;
 
 /// <summary>
-/// Сценарий использования для перемещения папки.
+///     Сценарий использования для перемещения папки.
 /// </summary>
 /// <param name="folderRepository">Репозиторий папок.</param>
 /// <param name="folderHierarchyValidator">Валидатор иерархии папок.</param>
@@ -22,10 +22,9 @@ public class MoveFolderUseCase(
     IUnitOfWork unitOfWork,
     ILogger logger)
 {
-    
     /// <summary>
-    /// Выполняет перемещение папки с идентификатором <paramref name="folderId"/>
-    /// в родительскую папку с идентификатором <paramref name="newParentId"/>.
+    ///     Выполняет перемещение папки с идентификатором <paramref name="folderId" />
+    ///     в родительскую папку с идентификатором <paramref name="newParentId" />.
     /// </summary>
     /// <param name="folderId">Идентификатор исходной папки.</param>
     /// <param name="newParentId">Идентификатор целевой папки.</param>
@@ -64,7 +63,8 @@ public class MoveFolderUseCase(
                     folderId,
                     newParentId))
             .OnFailure(error =>
-                logger.Warning("Ошибка {ErrorCode}: Найдены циклические зависимостим между папками {SourceId} и {TargetId}.",
+                logger.Warning(
+                    "Ошибка {ErrorCode}: Найдены циклические зависимостим между папками {SourceId} и {TargetId}.",
                     error.Code,
                     folderId,
                     newParentId))
