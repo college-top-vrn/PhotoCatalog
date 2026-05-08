@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Полное Техническое Задание на разработку библиотеки каталогизации фотографий | PhotoCatalog Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Полное Техническое Задание на разработку библиотеки каталогизации фотографий | PhotoCatalog Documentation ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/docs/docfx/docs/TechnicalSpecification.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="PhotoCatalog">
+            PhotoCatalog
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="полное-техническое-задание-на-разработку-библиотеки-каталогизации-фотографий">Полное Техническое Задание на разработку библиотеки каталогизации фотографий</h1>
+
+<h2 id="1-назначение-документа-и-описание-проекта">1. Назначение документа и описание проекта</h2>
+<p><strong>Назначение:</strong> Документ описывает архитектуру, функциональные требования и структуру компонентов для системы каталогизации фотографий.</p>
+<p><strong>Суть проекта:</strong> Разработка ядра (библиотеки) для управления коллекцией фотографий с использованием концепции &quot;виртуальных альбомов&quot;. Физические файлы хранятся в единой директории, а иерархия папок, альбомов и тегов формируется исключительно на логическом уровне в базе данных.</p>
+<h2 id="2-архитектурные-требования-и-стек-технологий">2. Архитектурные требования и стек технологий</h2>
+<p>Система проектируется с соблюдением принципов <strong>Чистой Архитектуры</strong>, <strong>SOLID</strong> и <strong>Богатой Доменной Модели</strong>.</p>
+<ul>
+<li><strong>Основная платформа:</strong> .NET 10</li>
+<li><strong>Язык программирования:</strong> C# 13</li>
+<li><strong>База данных:</strong> SQLite</li>
+<li><strong>Доступ к данным:</strong> <strong>Dapper</strong>. Используется как легковесный ORM для выполнения SQL-запросов и маппинга результатов в доменные объекты, обеспечивая баланс между производительностью, контролем над SQL и удобством разработки.</li>
+<li><strong>Логирование:</strong> <strong>Serilog</strong>. Используется для структурированного логирования бизнес-потоков, отслеживания действий пользователя и фиксации системных сбоев.</li>
+<li><strong>Тестирование:</strong> xUnit (Unit и интеграционные тесты), ArchUnitNET (архитектурные тесты).</li>
+<li><strong>Инверсия зависимостей (DIP):</strong> Внутренние слои (<code>Domain</code>) абсолютно независимы от внешних (<code>Infrastructure</code>, <code>Application</code>, сторонние библиотеки). Взаимодействие происходит строго через контракты (интерфейсы).</li>
+</ul>
+<h2 id="3-функциональные-требования">3. Функциональные требования</h2>
+<h3 id="31-управление-физическими-файлами">3.1. Управление физическими файлами</h3>
+<ul>
+<li><strong>Импорт:</strong> Система принимает путь к файлу, вычисляет его хэш, извлекает метаданные (размер, ширина, высота) и копирует/перемещает его в единую целевую директорию хранилища.</li>
+<li><strong>Синхронизация:</strong> Система проверяет наличие физического файла по сохраненному пути и помечает записи в БД как &quot;осиротевшие&quot;, если файл был удален средствами ОС.</li>
+<li><strong>Физическое удаление:</strong> При явном удалении фотографии из системы, виртуальные связи в БД уничтожаются каскадно в рамках транзакции. Физический файл удаляется с диска строго <strong>после</strong> успешного коммита транзакции в базе данных.</li>
+</ul>
+<h3 id="32-управление-виртуальной-иерархией">3.2. Управление виртуальной иерархией</h3>
+<ul>
+<li><strong>Виртуальные папки:</strong> Создание, переименование, удаление и поддержка вложенности (папка внутри папки). На диске эти папки не создаются. Защита от создания циклических зависимостей (помещение папки внутрь своего потомка) контролируется на слое <code>Application</code>.</li>
+<li><strong>Виртуальные альбомы:</strong> Создание альбомов внутри папок или в корне виртуального дерева.</li>
+<li><strong>Управление контентом:</strong> Добавление фотографии в альбом (создание логической связи). Одна фотография может одновременно находиться в неограниченном количестве альбомов. Удаление фото из альбома удаляет только связь, физический файл остается нетронутым.</li>
+</ul>
+<h3 id="33-тегирование-и-поиск">3.3. Тегирование и поиск</h3>
+<ul>
+<li><strong>Тегирование:</strong> Создание строковых тегов и привязка их к фотографиям.</li>
+<li><strong>Поиск и фильтрация:</strong> Получение списка фотографий по пересечению условий:
+<ul>
+<li>Нахождение в определенном виртуальном альбоме или папке.</li>
+<li>Наличие всех или хотя бы одного из указанных тегов.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-структура-проекта-слои">4. Структура проекта (Слои)</h2>
+<p>Директории (папки) в решении должны именоваться строго в <strong>PascalCase</strong>. Проект разделен на три основных слоя:</p>
+<h3 id="41-photocatalogdomain-ядро">4.1. PhotoCatalog.Domain (Ядро)</h3>
+<p>Не имеет никаких внешних зависимостей. Содержит чистую бизнес-логику. <strong>Свободен от любых библиотек логирования.</strong></p>
+<ul>
+<li><strong>Entities:</strong> <code>Photo</code>, <code>Album</code>, <code>Folder</code>, <code>Tag</code>. Инкапсулируют состояние (используются <code>private</code> или <code>init</code>-only сеттеры). Логика изменения состояния находится внутри самих классов и возвращает объекты <code>Result</code> / <code>ResultVoid</code> вместо выброса исключений при нарушении бизнес-правил.</li>
+<li><strong>Value Objects:</strong> Неизменяемые объекты без идентичности (например, <code>Dimensions</code> для габаритов фото).</li>
+<li><strong>Errors Registry:</strong> Реестр доменных ошибок для контроля бизнес-правил и инвариантов (например, <code>DomainErrors.Tag.TooLong</code>).</li>
+<li><strong>Interfaces:</strong> <code>IPhotoRepository</code>, <code>IFolderRepository</code>, <code>IFileStorage</code>, <code>IUnitOfWork</code>. Контракты репозиториев возвращают <code>Result&lt;T&gt;</code> или <code>ResultVoid</code> для обеспечения консистентности ROP.</li>
+</ul>
+<h3 id="42-photocatalogapplication-сценарии-использования">4.2. PhotoCatalog.Application (Сценарии использования)</h3>
+<p>Зависит только от <code>Domain</code>. Является основным местом для логирования бизнес-потоков.</p>
+<ul>
+<li><strong>Use Cases (Services):</strong> Обработчики команд (например, <code>ImportPhotoUseCase</code>). Оркестрируют логику, <strong>логируют</strong> начало важных операций, их успешное завершение и фиксируют провальные <code>Result</code> (с уровнями Warning/Information) без остановки приложения.</li>
+<li><strong>DTO:</strong> Простые структуры данных для возврата результатов на уровень представления.</li>
+</ul>
+<h3 id="43-photocataloginfrastructure-реализация">4.3. PhotoCatalog.Infrastructure (Реализация)</h3>
+<p>Зависит от <code>Domain</code> и <code>Application</code>. Отвечает за логирование критических системных сбоев.</p>
+<ul>
+<li><strong>Data Access:</strong> Реализация репозиториев для SQLite с использованием <strong>Dapper</strong>. Реализация <code>IUnitOfWork</code> инкапсулирует соединение с базой данных для контроля его жизненного цикла.</li>
+<li><strong>File System:</strong> Реализация <code>IFileStorage</code> через классы <code>System.IO</code>.</li>
+<li><strong>Перехват исключений:</strong> Любые <code>SqlException</code>, <code>IOException</code> и другие системные ошибки отлавливаются здесь, <strong>логируются через Serilog</strong> (с уровнем Error/Fatal и полным StackTrace), а затем безопасно конвертируются в <code>Result.Failure(InfrastructureErrors...)</code>.</li>
+</ul>
+<h2 id="5-проектирование-базы-данных-sqlite">5. Проектирование базы данных SQLite</h2>
+<p>Схема спроектирована для эффективной работы с реляционными связями:</p>
+<ul>
+<li><code>Photos</code>: Id, RealPath (UNIQUE), FileHash, Width, Height, AddedAt.</li>
+<li><code>Folders</code>: Id, Name, ParentFolderId (FK -&gt; Folders.Id).</li>
+<li><code>Albums</code>: Id, Name, FolderId (FK -&gt; Folders.Id).</li>
+<li><code>Tags</code>: Id, Name (UNIQUE).</li>
+<li><code>AlbumPhotos</code>: AlbumId, PhotoId (Composite PK, ON DELETE CASCADE).</li>
+<li><code>PhotoTags</code>: PhotoId, TagId (Composite PK, ON DELETE CASCADE).</li>
+</ul>
+<p><strong>Обязательное требование:</strong> При каждом открытии соединения в <code>Infrastructure</code> необходимо выполнять <code>PRAGMA foreign_keys = ON;</code> для активации ссылочной целостности SQLite. Этот вызов контролируется внутри реализации <code>IUnitOfWork</code>.</p>
+<h2 id="6-нефункциональные-требования-к-коду-и-тестированию">6. Нефункциональные требования к коду и тестированию</h2>
+<ul>
+<li><strong>Стиль кода:</strong> Строгое соблюдение официального Style Guide от Microsoft (C#).</li>
+<li><strong>Архитектурные тесты (ArchUnitNET):</strong> Наличие тестов, проверяющих направления зависимостей (<code>Domain</code> не знает про <code>Infrastructure</code> и <code>Serilog</code>).</li>
+<li><strong>Unit-тесты (xUnit):</strong> Покрытие доменных сущностей и <code>UseCase</code> классов.</li>
+<li><strong>Стратегия логирования (Serilog):</strong> Структурированное логирование в консоль и/или файл. Сообщения должны содержать контекст (например, <code>PhotoId</code>, <code>UseCaseName</code>). Ошибки логируются с сохранением оригинальных кодов из справочников <code>Errors</code>.</li>
+<li><strong>Обработка бизнес-ошибок (ROP):</strong> Обработка ошибок производится с помощью паттерна Result. Использование реестров ошибок для каждого слоя:
+<ul>
+<li><strong><code>DomainErrors</code>:</strong> бизнес-правила (например, <code>DomainErrors.Tag.TooLong</code>).</li>
+<li><strong><code>ApplicationErrors</code>:</strong> ошибки потока (например, <code>ApplicationErrors.Photo.FileNotFoundOnImport</code>).</li>
+<li><strong><code>InfrastructureErrors</code>:</strong> системная грязь (например, <code>InfrastructureErrors.FileStorage.DiskFull</code>). Оборачивается в <code>Result</code> после записи в лог.</li>
+</ul>
+</li>
+<li><strong>Защита инвариантов:</strong> Доменная модель не позволяет перевести систему в невалидное состояние. Валидация происходит строго внутри <code>Domain</code>.</li>
+</ul>
+<h2 id="7-этапы-разработки">7. Этапы разработки</h2>
+<ol>
+<li><strong>Domain &amp; Testing:</strong> Создание сущностей (<code>Photo</code>, <code>Album</code>, <code>Folder</code>) с инкапсуляцией. Реализация возвратов паттерна <code>Result</code> / <code>ResultVoid</code> и написание Unit-тестов.</li>
+<li><strong>Архитектурные тесты:</strong> Настройка ArchUnitNET для фиксации слоев.</li>
+<li><strong>Скелет БД:</strong> Создание DDL-скриптов для генерации файла SQLite со всеми таблицами.</li>
+<li><strong>Data Access &amp; Infrastructure:</strong> Конфигурация <strong>Serilog</strong> в DI-контейнере. Реализация чистой версии <code>UnitOfWork</code>, CRUD-операций и перехвата <code>Exception</code> с записью в лог.</li>
+<li><strong>Use Cases:</strong> Реализация прикладного слоя (<code>Application</code>), внедрение логгера (<code>ILogger&lt;T&gt;</code>) в Use Cases и оркестрация вызовов.</li>
+<li><strong>Интеграционное тестирование:</strong> Запуск In-Memory SQLite (или тестового файла БД), проверка полного цикла работы приложения и анализ сгенерированных файлов логов на предмет корректного отслеживания ошибок.</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/docs/docfx/docs/TechnicalSpecification.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
