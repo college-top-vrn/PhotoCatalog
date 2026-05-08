@@ -1,6 +1,7 @@
 ```mermaid
 classDiagram
-    interface ITagRepository {
+    class ITagRepository {
+<<interface>> 
         +GetById(id: int) Result~Tag~
         +GetByName(name: string) Result~Tag~
         +Add(tag: Tag) ResultVoid
