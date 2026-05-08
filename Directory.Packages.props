@@ -18,6 +18,7 @@
   <ItemGroup>
     <PackageVersion Include="Serilog" Version="4.3.1"/>
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0"/>
+    <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.11"/>
   </ItemGroup>
 
 </Project>
