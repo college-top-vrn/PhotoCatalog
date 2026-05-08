@@ -27,7 +27,7 @@ public class DeletePhotoUseCase(
     /// </summary>
     /// <param name="photoId">идентификатор фотографии.</param>
     /// <returns>
-    ///     Возвращает ResultVoid.Success(), если файл успещно удалился.
+    ///     Возвращает ResultVoid.Success(), если файл успешно удалился.
     ///     Возвращает ResultVoid.Failure(), если файл неуспешно удалился.
     /// </returns>
     public ResultVoid Execute(int photoId)
