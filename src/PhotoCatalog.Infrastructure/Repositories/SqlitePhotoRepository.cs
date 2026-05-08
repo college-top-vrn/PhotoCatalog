@@ -17,7 +17,7 @@ namespace PhotoCatalog.Infrastructure.Persistence;
 /// <summary>
 ///     Реализация <see cref="IPhotoRepository"/> для SQLite на базе Dapper.
 /// </summary>
-public sealed class SqlitePhotoRepository : IPhotoRepository
+public class SqlitePhotoRepository : IPhotoRepository
 {
     private static readonly Error PhotoNotFound = new("Photo.NotFound", "Фотография не найдена.");
     private static readonly PropertyInfo? DimensionsProperty =
@@ -364,5 +364,5 @@ public sealed class SqlitePhotoRepository : IPhotoRepository
         DimensionsProperty?.SetValue(photo, dimensions);
     }
 
-    private sealed record PhotoTagLink(int PhotoId, int TagId);
+    private record PhotoTagLink(int PhotoId, int TagId);
 }
