@@ -10,5 +10,13 @@
   <ItemGroup>
     <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="Microsoft.Data.Sqlite" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="SixLabors.ImageSharp" />
+  </ItemGroup>
 
 </Project>
