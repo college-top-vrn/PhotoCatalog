@@ -250,6 +250,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.UseCases.ImportPhotoUseCase",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.yml\" sourcestartlinenumber=\"1\">Содержит сценарий оркестрации добавления нового фото в каталог.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Application.UseCases.yml",
       "output": {
         ".html": {

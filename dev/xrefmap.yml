@@ -566,6 +566,44 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.Execute
   nameWithType: AddPhotoToAlbumUseCase.Execute
+- uid: PhotoCatalog.Application.UseCases.ImportPhotoUseCase
+  name: ImportPhotoUseCase
+  href: api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.html
+  commentId: T:PhotoCatalog.Application.UseCases.ImportPhotoUseCase
+  fullName: PhotoCatalog.Application.UseCases.ImportPhotoUseCase
+  nameWithType: ImportPhotoUseCase
+- uid: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.ImportPhotoUseCase})
+  name: ImportPhotoUseCase(IFileStorage, IFileMetadataExtractor, IPhotoRepository, IUnitOfWork, ILogger<ImportPhotoUseCase>)
+  href: api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.html#PhotoCatalog_Application_UseCases_ImportPhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Services_IFileStorage_PhotoCatalog_Domain_Interfaces_Services_IFileMetadataExtractor_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Application_UseCases_ImportPhotoUseCase__
+  commentId: M:PhotoCatalog.Application.UseCases.ImportPhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.ImportPhotoUseCase})
+  name.vb: New(IFileStorage, IFileMetadataExtractor, IPhotoRepository, IUnitOfWork, ILogger(Of ImportPhotoUseCase))
+  fullName: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.ImportPhotoUseCase(PhotoCatalog.Domain.Interfaces.Services.IFileStorage, PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Microsoft.Extensions.Logging.ILogger<PhotoCatalog.Application.UseCases.ImportPhotoUseCase>)
+  fullName.vb: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.New(PhotoCatalog.Domain.Interfaces.Services.IFileStorage, PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Microsoft.Extensions.Logging.ILogger(Of PhotoCatalog.Application.UseCases.ImportPhotoUseCase))
+  nameWithType: ImportPhotoUseCase.ImportPhotoUseCase(IFileStorage, IFileMetadataExtractor, IPhotoRepository, IUnitOfWork, ILogger<ImportPhotoUseCase>)
+  nameWithType.vb: ImportPhotoUseCase.New(IFileStorage, IFileMetadataExtractor, IPhotoRepository, IUnitOfWork, ILogger(Of ImportPhotoUseCase))
+- uid: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.#ctor*
+  name: ImportPhotoUseCase
+  href: api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.html#PhotoCatalog_Application_UseCases_ImportPhotoUseCase__ctor_
+  commentId: Overload:PhotoCatalog.Application.UseCases.ImportPhotoUseCase.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.ImportPhotoUseCase
+  fullName.vb: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.New
+  nameWithType: ImportPhotoUseCase.ImportPhotoUseCase
+  nameWithType.vb: ImportPhotoUseCase.New
+- uid: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.Execute(PhotoCatalog.Application.DTOs.ImportPhotoRequest)
+  name: Execute(ImportPhotoRequest)
+  href: api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.html#PhotoCatalog_Application_UseCases_ImportPhotoUseCase_Execute_PhotoCatalog_Application_DTOs_ImportPhotoRequest_
+  commentId: M:PhotoCatalog.Application.UseCases.ImportPhotoUseCase.Execute(PhotoCatalog.Application.DTOs.ImportPhotoRequest)
+  fullName: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.Execute(PhotoCatalog.Application.DTOs.ImportPhotoRequest)
+  nameWithType: ImportPhotoUseCase.Execute(ImportPhotoRequest)
+- uid: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.Execute*
+  name: Execute
+  href: api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.html#PhotoCatalog_Application_UseCases_ImportPhotoUseCase_Execute_
+  commentId: Overload:PhotoCatalog.Application.UseCases.ImportPhotoUseCase.Execute
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.UseCases.ImportPhotoUseCase.Execute
+  nameWithType: ImportPhotoUseCase.Execute
 - uid: PhotoCatalog.Domain.Entities
   name: PhotoCatalog.Domain.Entities
   href: api/PhotoCatalog.Domain.Entities.html
@@ -929,6 +967,19 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Entities.Photo.RemoveTag
   nameWithType: Photo.RemoveTag
+- uid: PhotoCatalog.Domain.Entities.Photo.SetDimensions(PhotoCatalog.Domain.ValueObjects.Dimensions)
+  name: SetDimensions(Dimensions)
+  href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_SetDimensions_PhotoCatalog_Domain_ValueObjects_Dimensions_
+  commentId: M:PhotoCatalog.Domain.Entities.Photo.SetDimensions(PhotoCatalog.Domain.ValueObjects.Dimensions)
+  fullName: PhotoCatalog.Domain.Entities.Photo.SetDimensions(PhotoCatalog.Domain.ValueObjects.Dimensions)
+  nameWithType: Photo.SetDimensions(Dimensions)
+- uid: PhotoCatalog.Domain.Entities.Photo.SetDimensions*
+  name: SetDimensions
+  href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_SetDimensions_
+  commentId: Overload:PhotoCatalog.Domain.Entities.Photo.SetDimensions
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Entities.Photo.SetDimensions
+  nameWithType: Photo.SetDimensions
 - uid: PhotoCatalog.Domain.Entities.Photo.TagIds
   name: TagIds
   href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_TagIds
