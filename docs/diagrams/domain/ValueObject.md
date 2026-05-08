@@ -2,8 +2,6 @@
 classDiagram
     class Dimensions {
         <<record>>
-        -const int MaxWidth
-        -const int MaxHeight
         -const int MinValues
         +int Width
         +int Height
