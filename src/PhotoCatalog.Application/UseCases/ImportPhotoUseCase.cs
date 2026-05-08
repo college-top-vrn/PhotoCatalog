@@ -100,7 +100,7 @@ public class ImportPhotoUseCase
             _fileStorage.DeleteFile(newFilePath);
             return Result<PhotoResponse>.Failure(photoResult.Error);
         }
-        
+
 
         photoResult.Value.UpdateHash(hashResult.Value);
         photoResult.Value.SetDimensions(dimensionsResult.Value);
@@ -135,5 +135,4 @@ public class ImportPhotoUseCase
 
         return Result<PhotoResponse>.Success(response);
     }
-    
 }
