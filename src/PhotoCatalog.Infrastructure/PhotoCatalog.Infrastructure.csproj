@@ -8,7 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PhotoCatalog.Application\PhotoCatalog.Application.csproj" />
     <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
   </ItemGroup>
 
 </Project>
