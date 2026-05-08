@@ -37,14 +37,14 @@ public static class ApplicationErrors
         public static readonly Error OrphanedFile =
             new Error("Files.OrphanedFile", "Файл остался осиротевшим на диске");
     }
-
+    
     /// <summary>
     ///     Ошибки, связанные с папками.
     /// </summary>
     public static class Folders
     {
         /// <summary>
-        ///     Ошибка, когда обнаружена циклическая зависимость:
+        ///     Ошибка, когда обнаружена циклическая зависимост:
         ///     нельзя переместить папку внутрь её собственного потомка.
         /// </summary>
         public static readonly Error CycleDetected =
