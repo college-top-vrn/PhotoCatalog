@@ -42,6 +42,10 @@ jobs:
           path: './docs/docfx/_site'
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
         id: deployment
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_site
+          destination_dir: ${{ github.ref == 'refs/heads/develop' && 'dev' || '' }}
         # uses: actions/deploy-pages@v4
