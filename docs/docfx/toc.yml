@@ -1,7 +1,5 @@
 - name: Документация API
   href: api/
-- name: Обучение (Tutorials)
-  href: Tutorials/
 - name: О проекте
   href: docs/TechnicalSpecification.md
 - name: Руководство по Result Fluent API
