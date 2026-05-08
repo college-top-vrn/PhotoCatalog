@@ -1,3 +1,4 @@
+using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Infrastructure.Errors;
@@ -34,6 +35,23 @@ public static class InfrastructureErrors
         public static readonly Error ConstraintViolation = new(
             "Database.ConstraintViolation",
             "Нарушение целостности данных (например, дублирование уникального ключа).");
+
+        /// <summary>
+        ///     Ошибка, возникающая при попытке начать новую транзакцию,
+        ///     когда уже существует активная транзакция в текущем UnitOfWork.
+        ///     Гарантирует, что в рамках одного UnitOfWork может быть только одна транзакция.
+        /// </summary>        
+        public static readonly Error TransactionAlreadyExists = new(
+            "Database.TransactionAlreadyExists",
+            "Транзакция уже активна");
+
+        /// <summary>
+        ///     Ошибка, возникающая при попытке зафиксировать (Commit) или откатить (Rollback)
+        ///     транзакцию, когда активной транзакции не существует.
+        ///     Предотвращает некорректные операции с неинициализированным состоянием транзакции.
+        /// </summary>
+        public static readonly Error NoActiveTransaction =
+            new("Database.NoActiveTransaction", "Нет активной транзакции");
     }
 
     /// <summary>
