@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj" />
     <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
   </ItemGroup>
 

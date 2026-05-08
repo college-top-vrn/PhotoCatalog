@@ -2,7 +2,7 @@ name: Deploy DocFX site to Pages
 
 on:
   push:
-    branches: ["master", "develop"]
+    branches: [ "master", "develop" ]
   workflow_dispatch:
 
 permissions:
@@ -42,5 +42,6 @@ jobs:
           path: './docs/docfx/_site'
 
       - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         id: deployment
-        uses: actions/deploy-pages@v4
+        # uses: actions/deploy-pages@v4
