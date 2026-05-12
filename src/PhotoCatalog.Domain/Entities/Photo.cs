@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
@@ -127,5 +128,23 @@ public class Photo
 
         _tagIds.Remove(tagId);
         return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Метод для глубокого копирования
+    /// </summary>
+    /// <returns> Возвращает копию объекта <see cref="Photo"/> </returns>
+    public Photo DeepCopy()
+    {
+        var clone = new Photo();
+
+        clone.Id = Id;
+        clone.RealPath = this.RealPath;
+        clone.FileHash = this.FileHash;
+        clone._tagIds.AddRange(this._tagIds);
+        clone.AddedAt = this.AddedAt;
+        clone.Dimensions = this.Dimensions with { };
+
+        return clone;
     }
 }
