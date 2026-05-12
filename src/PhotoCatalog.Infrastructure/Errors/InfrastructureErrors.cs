@@ -9,7 +9,7 @@ namespace PhotoCatalog.Infrastructure.Errors;
 ///     в виде заранее определенных структур <see cref="Error" />.
 /// </summary>
 /// <remarks>
-///     В отличие от <see cref="DomainErrors" /> (бизнес-логика) и 
+///     В отличие от <see cref="DomainErrors" /> (бизнес-логика) и
 ///     <see cref="ApplicationErrors" /> (ошибки потока/поиска),
 ///     этот реестр содержит ошибки, связанные с физическими сбоями систем
 ///     (базы данных, диска, сети).
@@ -29,7 +29,7 @@ public static class InfrastructureErrors
             "Не удалось установить соединение с базой данных.");
 
         /// <summary>
-        ///     Ошибка, когда нарушена целостность данных 
+        ///     Ошибка, когда нарушена целостность данных
         ///     (например, дублирование уникального ключа, нарушение внешнего ключа).
         /// </summary>
         public static readonly Error ConstraintViolation = new(
@@ -40,7 +40,7 @@ public static class InfrastructureErrors
         ///     Ошибка, возникающая при попытке начать новую транзакцию,
         ///     когда уже существует активная транзакция в текущем UnitOfWork.
         ///     Гарантирует, что в рамках одного UnitOfWork может быть только одна транзакция.
-        /// </summary>        
+        /// </summary>
         public static readonly Error TransactionAlreadyExists = new(
             "Database.TransactionAlreadyExists",
             "Транзакция уже активна");
@@ -52,6 +52,25 @@ public static class InfrastructureErrors
         /// </summary>
         public static readonly Error NoActiveTransaction =
             new("Database.NoActiveTransaction", "Нет активной транзакции");
+
+        /// <summary>
+        ///     Ошибка, соответствующая <see cref="Microsoft.Data.Sqlite.SqliteException" />.
+        ///     Возникает при ошибке в SQLite запросе.
+        /// </summary>
+        public static readonly Error Sqlite =
+            new("Database.Sqlite", "Ошибка Sqlite.");
+
+        /// <summary>
+        ///     Ошибка, когда элемент таблицы базы данных не найден.
+        /// </summary>
+        public static readonly Error NotFound =
+            new("Database.NotFound", "Элемент таблицы базы данных не найден.");
+
+        /// <summary>
+        ///     Ошибка, когда при удалении у папки имеются дочерние объекты.
+        /// </summary>
+        public static readonly Error HasChildren =
+            new("Database.HasChildren", "У папки имеются дочерние объекты.");
     }
 
     /// <summary>
