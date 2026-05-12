@@ -4,42 +4,42 @@ classDiagram
         <<static>>
     }
 
-    class GeneralErrors {
+    class General {
         <<static>>
         +NotFound Error
     }
 
-    class FilesErrors {
+    class Files {
         <<static>>
         +FileNotFound Error
         +OrphanedFile Error
     }
 
-    class FoldersErrors {
+    class Folders {
         <<static>>
         +CycleDetected Error
     }
 
-    class TransactionsErrors {
+    class Transactions {
         <<static>>
         +StartTransactions Error
         +CommitFailed Error
     }
 
-    class AlbumsErrors {
+    class Albums {
         <<static>>
         +UpdateFailed Error
     }
 
-    class UseCasesErrors {
+    class UseCases {
         <<static>>
         +SystemFailure Error
     }
     
-    ApplicationErrors --> GeneralErrors
-    ApplicationErrors --> FilesErrors
-    ApplicationErrors --> FoldersErrors
-    ApplicationErrors --> TransactionsErrors
-    ApplicationErrors --> AlbumsErrors
-    ApplicationErrors --> UseCasesErrors
+    ApplicationErrors --> General
+    ApplicationErrors --> Files
+    ApplicationErrors --> Folders
+    ApplicationErrors --> Transactions
+    ApplicationErrors --> Albums
+    ApplicationErrors --> UseCases
 ```
