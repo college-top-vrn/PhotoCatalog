@@ -6,7 +6,7 @@ classDiagram
         -IFileMetadataExtractor _metadataExtractor
         -IPhotoRepository _photoRepository
         -IUnitOfWork _unitOfWork
-        +ImportPhotoUseCase(IFileStorage, IFileMetadataExtractor, IPhotoRepository, IUnitOfWork, ILogger)
+        +ImportPhotoUseCase(IFileStorage, IFileMetadataExtractor, IPhotoRepository, IUnitOfWork, ILogger<ImportPhotoUseCase>)
         +Execute(request: ImportPhotoRequest) Result~PhotoResponse~
     }
 ```
