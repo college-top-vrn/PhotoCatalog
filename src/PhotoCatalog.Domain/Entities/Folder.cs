@@ -89,7 +89,7 @@ public class Folder
     /// <summary>
     ///     Метод для глубокого копирования
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Возвращает копию объекта <see cref="Folder"/> </returns>
     public Folder DeepCopy()
     {
         return new Folder { Id = this.Id, Name = this.Name, ParentFolderId = this.ParentFolderId };

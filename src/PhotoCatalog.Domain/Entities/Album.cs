@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 using PhotoCatalog.Domain.Primitives;
 
@@ -29,7 +31,7 @@ public class Album
     /// <value>Идентификатор папки или null, если альбом не перемещен в папку.</value>
     public int? FolderId { get; private set; }
 
-    private readonly List<int> _photoIds = new();
+    private readonly List<int> _photoIds = [];
 
     /// <summary>
     /// Получает коллекцию идентификаторов фотографий, принадлежащих альбому, доступную только для чтения.
@@ -150,5 +152,22 @@ public class Album
     {
         _photoIds.Remove(photoId);
         return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Метод для глубокого копирования
+    /// </summary>
+    /// <returns>Возвращает копию объекта <see cref="Album"/> </returns>
+    public Album DeepCopy()
+    {
+        var clone = new Album();
+
+        clone.Id = this.Id;
+        clone.Name = this.Name;
+        clone.FolderId = this.FolderId;
+
+        clone._photoIds.AddRange(this._photoIds);
+
+        return clone;
     }
 }

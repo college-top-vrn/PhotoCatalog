@@ -12,7 +12,7 @@ namespace PhotoCatalog.Infrastructure.Fakes;
 /// </summary>
 public class FakeFolderRepository : IFolderRepository
 {
-    private readonly Dictionary<int, Folder> _storage = new();
+    private readonly Dictionary<int, Folder> _storage = [];
 
 
     /// <inheritdoc/>
