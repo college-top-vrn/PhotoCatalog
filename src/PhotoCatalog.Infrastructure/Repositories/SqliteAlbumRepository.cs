@@ -32,16 +32,6 @@ public class SqliteAlbumRepository : IAlbumRepository
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
-
-        if (_unitOfWork == null)
-        {
-            _logger.LogError("UnitOfWork не может быть null");
-        }
-
-        if (_logger == null)
-        {
-            throw new ArgumentNullException(nameof(logger));
-        }
     }
 
     /// <summary>
