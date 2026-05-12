@@ -327,6 +327,6 @@
   "index.html": {
     "href": "index.html",
     "title": "This is the HOMEPAGE. | PhotoCatalog Documentation",
-    "summary": "This is the HOMEPAGE. Refer to Markdown for how to write markdown files. Quick Start Notes: Add images to the images folder if the file is referencing an image."
+    "summary": "This is the HOMEPAGE. Refer to Markdown for how to write markdown files. Quick Start Notes: Add images to the images folder if the file is referencing an image. Test"
   }
 }
