@@ -105,7 +105,7 @@ public static class DomainErrors
         public static readonly Error DuplicatePhoto = new(
             "Album.DuplicatePhoto",
             "Эта фотография уже находится в данном альбоме.");
-        
+
         /// <summary>
         ///     Ошибка, когда альбом не найден.
         /// </summary>

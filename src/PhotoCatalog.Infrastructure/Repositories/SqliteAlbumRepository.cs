@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Dapper;
+
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
+
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
@@ -94,7 +97,7 @@ public class SqliteAlbumRepository : IAlbumRepository
 
             var restoreMethod = typeof(Album).GetMethod("RestorePhotos",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            
+
             if (restoreMethod != null)
             {
                 restoreMethod.Invoke(album, new object[] { photoIds });
