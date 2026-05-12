@@ -11,3 +11,4 @@ Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to wri
 1. Add images to the *images* folder if the file is referencing an image.
 
 [Test](xref:CacheKeysFactory)
+[Test2](xref:PhotoCatalog.Application.Caching)
