@@ -17,10 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj" />
     <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="TestFakes\" />
+    <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -85,4 +85,13 @@ public class Folder
 
         return ResultVoid.Success();
     }
+
+    /// <summary>
+    ///     Метод для глубокого копирования
+    /// </summary>
+    /// <returns></returns>
+    public Folder DeepCopy()
+    {
+        return new Folder { Id = this.Id, Name = this.Name, ParentFolderId = this.ParentFolderId };
+    }
 }
