@@ -123,6 +123,7 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
     /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
+        const int sqliteConstraintErrorCode = 19;
         try
         {
             using SqliteConnection connection = new(connectionString);
@@ -140,7 +141,7 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
             logger.Information("Папка с Id = {FolderId} успешно удалена", id);
             return ResultVoid.Success();
         }
-        catch (SqliteException ex) when (ex.SqliteErrorCode == 19)
+        catch (SqliteException ex) when (ex.SqliteErrorCode == sqliteConstraintErrorCode)
         {
             logger.Warning(ex, "Невозможно удалить папку с Id = {FolderId}: имеются дочерние объекты", id);
             return ResultVoid.Failure(InfrastructureErrors.Database.HasChildren);
