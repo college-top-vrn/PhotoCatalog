@@ -11,8 +11,8 @@ classDiagram
         +Commit() ResultVoid
         +Rollback() ResultVoid
         +Dispose() void
-        #OpenConnectionIfNeeded() ResultVoid
-        +Connection SqliteConnection? (internal)
-        +Transaction SqliteTransaction? (internal)
+        -OpenConnectionIfNeeded() ResultVoid
+        ~Connection(): SqliteConnection?
+        ~Transaction(): SqliteTransaction?
     }
 ```
