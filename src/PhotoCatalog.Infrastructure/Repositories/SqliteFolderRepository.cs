@@ -1,5 +1,3 @@
-using System.Data;
-
 using Dapper;
 
 using Microsoft.Data.Sqlite;
@@ -28,11 +26,11 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
     {
         try
         {
-            using var connection = new SqliteConnection(connectionString);
+            using SqliteConnection connection = new(connectionString);
             connection.Open();
             const string sql = "SELECT Id, ParentFolderId, Name FROM Folders WHERE Id = @Id";
-            var folder = connection.QueryFirstOrDefault<Folder>(sql, new { Id = id });
-            
+            Folder? folder = connection.QueryFirstOrDefault<Folder>(sql, new { Id = id });
+
             return folder is null
                 ? Result<Folder>.Failure(InfrastructureErrors.Database.NotFound)
                 : Result<Folder>.Success(folder);
@@ -49,13 +47,13 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
     {
         try
         {
-            using var connection = new SqliteConnection(connectionString);
+            using SqliteConnection connection = new(connectionString);
             connection.Open();
             const string sql = "SELECT Id, ParentFolderId, Name FROM Folders";
-            var folders = connection.Query<Folder>(sql);
+            IEnumerable<Folder> folders = connection.Query<Folder>(sql);
             IEnumerable<Folder> enumerableFolders = folders.ToList();
-            
-            return enumerableFolders.Any() 
+
+            return enumerableFolders.Any()
                 ? Result<IEnumerable<Folder>>.Failure(InfrastructureErrors.Database.NotFound)
                 : Result<IEnumerable<Folder>>.Success(enumerableFolders);
         }
@@ -71,21 +69,16 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
     {
         try
         {
-            using var connection = new SqliteConnection(connectionString);
+            using SqliteConnection connection = new(connectionString);
             connection.Open();
             const string sql = """
                                INSERT INTO Folders (Id, ParentFolderId, Name)
                                VALUES (@Id, @ParentFolderId, @Name)
                                """;
-            connection.Execute(sql, new
-            {
-                folder.Id,
-                folder.ParentFolderId,
-                folder.Name
-            });
+            connection.Execute(sql, new { folder.Id, folder.ParentFolderId, folder.Name });
 
             logger.Information("Папка с Id = {FolderId} успешно добавлена", folder.Id);
-            
+
             return ResultVoid.Success();
         }
         catch (SqliteException ex)
@@ -100,7 +93,7 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
     {
         try
         {
-            using var connection = new SqliteConnection(connectionString);
+            using SqliteConnection connection = new(connectionString);
             connection.Open();
             const string sql = """
                                UPDATE Folders
@@ -109,12 +102,7 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
                                WHERE Id = @Id
                                """;
 
-            int affectedRows = connection.Execute(sql, new
-            {
-                folder.Id,
-                folder.ParentFolderId,
-                folder.Name
-            });
+            int affectedRows = connection.Execute(sql, new { folder.Id, folder.ParentFolderId, folder.Name });
 
             if (affectedRows == 0)
             {
@@ -137,7 +125,7 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
     {
         try
         {
-            using var connection = new SqliteConnection(connectionString);
+            using SqliteConnection connection = new(connectionString);
             connection.Open();
 
             const string sql = "DELETE FROM Folders WHERE Id = @Id";
