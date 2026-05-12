@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen"/>
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI"/>
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger"/>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
   </ItemGroup>
@@ -15,7 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
     <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
-    <ProjectReference Include="..\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj"/>
   </ItemGroup>
 
 
