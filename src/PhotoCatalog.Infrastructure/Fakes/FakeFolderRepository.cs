@@ -42,7 +42,7 @@ public class FakeFolderRepository : IFolderRepository
             return ResultVoid.Success();
         }
 
-        return ResultVoid.Failure(new Error("FakeFolder.FailedToAdd", "Не удалось добавить"));
+        return ResultVoid.Failure(new Error("FakeFolder.FailedToAdd", "Не удалось добавить папку"));
     }
 
 
