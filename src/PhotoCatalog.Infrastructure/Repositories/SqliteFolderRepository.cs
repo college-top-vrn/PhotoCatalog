@@ -16,6 +16,8 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// <summary>
 ///     Инициализирует экземпляр репозитория
 ///     с переданным подключением к SQLite и логгером.
+///     В строке подключения должен быть включена настройка
+///     <c>Foreign Keys=True</c>.
 /// </summary>
 /// <param name="connectionString">Строка для открытия соединения с базой данных SQLite.</param>
 /// <param name="logger">Логгер для записи диагностических сообщений и ошибок.</param>
@@ -133,6 +135,32 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
     /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            using var connection = new SqliteConnection(connectionString);
+            connection.Open();
+
+            const string sql = "DELETE FROM Folders WHERE Id = @Id";
+            int affectedRows = connection.Execute(sql, new { Id = id });
+
+            if (affectedRows == 0)
+            {
+                logger.Warning("Попытка удалить несуществующую папку с Id = {FolderId}", id);
+                return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
+            }
+
+            logger.Information("Папка с Id = {FolderId} успешно удалена", id);
+            return ResultVoid.Success();
+        }
+        catch (SqliteException ex) when (ex.SqliteErrorCode == 19)
+        {
+            logger.Warning(ex, "Невозможно удалить папку с Id = {FolderId}: имеются дочерние объекты", id);
+            return ResultVoid.Failure(InfrastructureErrors.Database.HasChildren);
+        }
+        catch (SqliteException ex)
+        {
+            logger.Error(ex, "Ошибка SQLite при удалении папки с Id = {FolderId}", id);
+            return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
+        }
     }
 }

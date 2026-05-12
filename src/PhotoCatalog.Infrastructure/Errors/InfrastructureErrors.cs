@@ -65,6 +65,12 @@ public static class InfrastructureErrors
         /// </summary>
         public static readonly Error NotFound =
             new("Database.NotFound", "Элемент таблицы базы данных не найден.");
+        
+        /// <summary>
+        /// Ошибка, когда при удалении у папки имеются дочерние объекты.
+        /// </summary>
+        public static readonly Error HasChildren =
+            new("Database.HasChildren", "У папки имеются дочерние объекты.");
     }
 
     /// <summary>
