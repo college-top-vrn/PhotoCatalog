@@ -838,6 +838,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.yml\" sourcestartlinenumber=\"1\">Инициализирует экземпляр репозитория\nс переданным подключением к SQLite и логгером.\nВ строке подключения должен быть включена настройка\n<code>Foreign Keys=True</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.yml",
       "output": {
         ".html": {

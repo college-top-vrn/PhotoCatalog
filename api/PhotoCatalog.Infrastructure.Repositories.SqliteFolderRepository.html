@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Interface IFolderRepository | PhotoCatalog Documentation </title>
+      <title>Class SqliteFolderRepository | PhotoCatalog Documentation </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Interface IFolderRepository | PhotoCatalog Documentation ">
+      <meta name="title" content="Class SqliteFolderRepository | PhotoCatalog Documentation ">
       
-      <meta name="description" content="Интерфейс репозитория для управления иерархией виртуальных папок.">
+      <meta name="description" content="Инициализирует экземпляр репозитория с переданным подключением к SQLite и логгером. В строке подключения должен быть включена настройка Foreign Keys=True.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository.md&amp;value=---%0Auid%3A%20PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository.md&amp;value=---%0Auid%3A%20PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,34 +84,74 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository">
+        <article data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository">
 
 
 
-  <h1 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository" class="text-break">
-Interface IFolderRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  <h1 id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository" class="text-break">
+Class SqliteFolderRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqliteFolderRepository.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="PhotoCatalog.html">PhotoCatalog</a>.<a class="xref" href="PhotoCatalog.Domain.html">Domain</a>.<a class="xref" href="PhotoCatalog.Domain.Interfaces.html">Interfaces</a>.<a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.html">Repositories</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>PhotoCatalog.Domain.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PhotoCatalog.html">PhotoCatalog</a>.<a class="xref" href="PhotoCatalog.Infrastructure.html">Infrastructure</a>.<a class="xref" href="PhotoCatalog.Infrastructure.Repositories.html">Repositories</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PhotoCatalog.Infrastructure.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Интерфейс репозитория для управления
-иерархией виртуальных папок.</p>
+  <div class="markdown summary"><p>Инициализирует экземпляр репозитория
+с переданным подключением к SQLite и логгером.
+В строке подключения должен быть включена настройка
+<code>Foreign Keys=True</code>.</p>
 </div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IFolderRepository</code></pre>
+    <pre><code class="lang-csharp hljs">public class SqliteFolderRepository : IFolderRepository</code></pre>
   </div>
 
 
 
 
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">SqliteFolderRepository</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html">IFolderRepository</a></div>
+    </dd>
+  </dl>
 
 
-
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
 
   <dl class="typelist extensionMethods">
     <dt>Extension Methods</dt>
@@ -128,15 +168,58 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 
 
 
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository__ctor_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.#ctor*"></a>
+
+  <h3 id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository__ctor_System_String_Serilog_ILogger_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.#ctor(System.String,Serilog.ILogger)">
+  SqliteFolderRepository(string, ILogger)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqliteFolderRepository.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Инициализирует экземпляр репозитория
+с переданным подключением к SQLite и логгером.
+В строке подключения должен быть включена настройка
+<code>Foreign Keys=True</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SqliteFolderRepository(string connectionString, ILogger logger)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>connectionString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Строка для открытия соединения с базой данных SQLite.</p>
+</dd>
+    <dt><code>logger</code> <span class="xref">ILogger</span></dt>
+    <dd><p>Логгер для записи диагностических сообщений и ошибок.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
   <h2 class="section" id="methods">Methods
 </h2>
 
 
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Add_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add*"></a>
+  <a id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Add_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Add_PhotoCatalog_Domain_Entities_Folder_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)">
+  <h3 id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Add_PhotoCatalog_Domain_Entities_Folder_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)">
   Add(Folder)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqliteFolderRepository.cs/#L68"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Добавляет новую папку в репозиторий.</p>
@@ -144,7 +227,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ResultVoid Add(Folder folder)</code></pre>
+    <pre><code class="lang-csharp hljs">public ResultVoid Add(Folder folder)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -172,11 +255,11 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 
 
 
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Delete_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete*"></a>
+  <a id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Delete_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Delete_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete(System.Int32)">
+  <h3 id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Delete_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete(System.Int32)">
   Delete(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqliteFolderRepository.cs/#L124"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Удаляет папку по идентификатору.</p>
@@ -184,7 +267,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ResultVoid Delete(int id)</code></pre>
+    <pre><code class="lang-csharp hljs">public ResultVoid Delete(int id)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -212,11 +295,11 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 
 
 
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetAllFolders_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders*"></a>
+  <a id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_GetAllFolders_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetAllFolders*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetAllFolders" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders">
+  <h3 id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_GetAllFolders" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetAllFolders">
   GetAllFolders()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqliteFolderRepository.cs/#L46"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Получить все папки.</p>
@@ -224,7 +307,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Result&lt;IEnumerable&lt;Folder&gt;&gt; GetAllFolders()</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;IEnumerable&lt;Folder&gt;&gt; GetAllFolders()</code></pre>
   </div>
 
 
@@ -246,11 +329,11 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 
 
 
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetById_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById*"></a>
+  <a id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_GetById_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetById_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById(System.Int32)">
+  <h3 id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_GetById_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById(System.Int32)">
   GetById(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqliteFolderRepository.cs/#L25"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Получить папку по идентификатору.</p>
@@ -258,7 +341,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Result&lt;Folder&gt; GetById(int id)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;Folder&gt; GetById(int id)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -286,11 +369,11 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 
 
 
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Update_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update*"></a>
+  <a id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Update_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Update_PhotoCatalog_Domain_Entities_Folder_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)">
+  <h3 id="PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Update_PhotoCatalog_Domain_Entities_Folder_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)">
   Update(Folder)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqliteFolderRepository.cs/#L92"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Обновляет существующую папку.</p>
@@ -298,7 +381,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ResultVoid Update(Folder folder)</code></pre>
+    <pre><code class="lang-csharp hljs">public ResultVoid Update(Folder folder)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -330,7 +413,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L12" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqliteFolderRepository.cs/#L22" class="edit-link">Edit this page</a>
         </div>
 
 
