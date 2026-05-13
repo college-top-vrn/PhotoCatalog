@@ -1,6 +1,9 @@
+using System;
+
 using Dapper;
 
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Logging;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
@@ -19,6 +22,7 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 public class SqliteTagRepository : ITagRepository
 {
     private readonly string _connectionString;
+    private readonly ILogger<SqliteAlbumRepository> _logger;
 
     /// <summary>
     /// Создает репозиторий с указанной строкой подключения к SQLite.
@@ -26,9 +30,10 @@ public class SqliteTagRepository : ITagRepository
     /// <param name="connectionString">
     /// Строка подключения вида "Data Source=photo.db".
     /// </param>
-    public SqliteTagRepository(string connectionString)
+    public SqliteTagRepository(string connectionString,ILogger<SqliteAlbumRepository> logger)
     {
         _connectionString = connectionString;
+        _logger = logger;
     }
 
     /// <summary>
@@ -53,7 +58,17 @@ public class SqliteTagRepository : ITagRepository
 
     public Result<Tag> GetByName(string name)
     {
-        throw new NotImplementedException();
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        var teg = connection.QuerySingleOrDefault<Tag>(
+            "SELECT * FROM Tags WHERE Name = @Name",
+            new { Name = name });
+        if (teg == null)
+        {
+            return Result<Tag>.Failure(DomainErrors.Tag.EmptyName);
+        }
+
+        return Result<Tag>.Success(teg);
     }
 
     public ResultVoid Add(Tag tag)
@@ -61,7 +76,7 @@ public class SqliteTagRepository : ITagRepository
         throw new NotImplementedException();
     }
 
-    public Result<Tag> Delete(int id)
+    public ResultVoid Delete(int id)
     {
         throw new NotImplementedException();
     }
