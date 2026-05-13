@@ -10,18 +10,20 @@ namespace PhotoCatalog.Infrastructure.Fakes;
 /// <summary>
 ///     Репозиторий фотографий, имитирующий БД, и хранящий данные в оперативной памяти.
 /// </summary>
-public class FakePhotoRepository : IPhotoRepository
+public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPhotoRepository
 {
     /// <summary>
     ///     Идентификатор последнего элемента.
     /// </summary>
-    private int _lastId = 0;
-    
+    private int _lastId;
+
+    private readonly FakeAlbumRepository _fakeAlbumRepository = fakeAlbumRepository;
+
     /// <summary>
     ///     Словарь альбомов.
     /// </summary>
     private readonly ConcurrentDictionary<int, Photo> _data = new();
-    
+
     /// <summary>
     ///     Получение фотографии по идентификатору.
     /// </summary>
@@ -38,9 +40,20 @@ public class FakePhotoRepository : IPhotoRepository
             "Не удалось найти фотографию по идентификатору"));
     }
 
+    /// <summary>
+    ///     Получение фотографии по заданному пути.
+    /// </summary>
+    /// <param name="realPath">путь фотографии.</param>
+    /// <returns>Фотография.</returns>
     public Result<Photo> GetByPath(string realPath)
     {
-        throw new NotImplementedException();
+        foreach (var pair in _data)
+        {
+            if (pair.Value.RealPath == realPath) return pair.Value.ToResult();
+        }
+
+        return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
+            "Не удалось найти фотографию по заданному пути"));
     }
 
     /// <summary>
@@ -57,11 +70,12 @@ public class FakePhotoRepository : IPhotoRepository
             .TryAdd(_lastId, photo)
             .ToResult();
 
-        if (result.IsFailure) return ResultVoid.Failure(new Error("PhotoRepository.CantAddPhoto",
-            "Не удалось добавить фото"));
+        if (result.IsFailure)
+            return ResultVoid.Failure(new Error("PhotoRepository.CantAddPhoto",
+                "Не удалось добавить фото"));
 
         _lastId += 1;
-        
+
         return ResultVoid.Success();
     }
 
@@ -76,9 +90,9 @@ public class FakePhotoRepository : IPhotoRepository
     public ResultVoid Update(Photo photo)
     {
         var deleteResult = Delete(photo.Id);
-        
+
         if (deleteResult.IsFailure) return ResultVoid.Failure(deleteResult.Error);
-        
+
         var addResult = Add(photo);
 
         if (addResult.IsFailure) return ResultVoid.Failure(addResult.Error);
@@ -109,7 +123,21 @@ public class FakePhotoRepository : IPhotoRepository
 
     public Result<IReadOnlyCollection<Photo>> GetByAlbumId(int albumId)
     {
-        throw new NotImplementedException();
+        // var photos = new List<Photo>();
+        //
+        // var album = _fakeAlbumRepository.GetById(albumId);
+        //
+        // if (album.IsFailure) return Result<IReadOnlyCollection<Photo>>.Failure(album.Error);
+        //
+        // foreach (var photoId in album.Value.PhotoIds)
+        // {
+        //     foreach (var photo in _data)
+        //     {
+        //         if (photo.Value.Id == photoId) photos.Add(photo.Value);
+        //     }
+        // }
+        //
+        // return photos.AsReadOnly().ToResult();
     }
 
     public Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds)

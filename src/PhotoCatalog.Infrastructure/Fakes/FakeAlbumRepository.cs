@@ -15,7 +15,7 @@ public class FakeAlbumRepository : IAlbumRepository
     /// <summary>
     ///     Идентификатор последнего элемента.
     /// </summary>
-    private int _lastId = 0;
+    private int _lastId;
     
     /// <summary>
     ///     Словарь альбомов.
