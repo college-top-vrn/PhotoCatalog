@@ -4,14 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 
-
 const string version = "v1";
 const string name = "PhotoCatalog";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddHealthChecks(); 
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -33,12 +32,12 @@ var summaries = new[]
 
 app.MapGet("/summaries", () =>
 {
-    if (summaries.Length == 0 )
+    if (summaries.Length == 0)
     {
-        return Results.NoContent(); 
+        return Results.NoContent();
     }
 
-    return Results.Ok(summaries); 
+    return Results.Ok(summaries);
 });
 
 app.MapHealthChecks("/health");
