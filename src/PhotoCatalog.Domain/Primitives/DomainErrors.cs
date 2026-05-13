@@ -105,5 +105,19 @@ public static class DomainErrors
         public static readonly Error DuplicatePhoto = new(
             "Album.DuplicatePhoto",
             "Эта фотография уже находится в данном альбоме.");
+
+        /// <summary>
+        ///     Ошибка, когда альбом не найден.
+        /// </summary>
+        public static readonly Error NotFound = new(
+            "Album.NotFound",
+            "Альбом не найден.");
+
+        /// <summary>
+        ///     Ошибка, когда передан пустой альбом.
+        /// </summary>
+        public static readonly Error NullAlbum = new(
+            "Album.NullAlbum",
+            "Альбом не может быть null.");
     }
 }

@@ -48,9 +48,11 @@ public class Album
     /// Инициализирует новый экземпляр класса <see cref="Album"/> с указанным наименованием.
     /// </summary>
     /// <param name="name">Наименование альбома.</param>
-    private Album(string name)
+    /// <param name="id"> id альбома</param>
+    private Album(string name, int id)
     {
         Name = name;
+        Id = id;
     }
 
     /// <summary>
@@ -73,6 +75,7 @@ public class Album
     /// Создает новый экземпляр альбома с проверкой валидности наименования.
     /// </summary>
     /// <param name="name">Наименование создаваемого альбома.</param>
+    /// <param name="id">Id создаваемого альбома</param>
     /// <returns>
     /// Результат операции:
     /// <list type="bullet">
@@ -80,14 +83,13 @@ public class Album
     /// <item><description>Ошибка <see cref="DomainErrors.Album.EmptyName"/>, если наименование пустое.</description></item>
     /// </list>
     /// </returns>
-    public static Result<Album> Create(string name)
+    public static Result<Album> Create(string name, int id)
     {
         if (string.IsNullOrEmpty(name))
             return Result<Album>.Failure(DomainErrors.Album.EmptyName);
-
         var trimmedName = name.Trim();
 
-        return Result<Album>.Success(new Album(trimmedName));
+        return Result<Album>.Success(new Album(trimmedName, id));
     }
 
     /// <summary>
