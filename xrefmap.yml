@@ -755,15 +755,15 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Entities.Album.AddPhoto
   nameWithType: Album.AddPhoto
-- uid: PhotoCatalog.Domain.Entities.Album.Create(System.String)
-  name: Create(string)
-  href: api/PhotoCatalog.Domain.Entities.Album.html#PhotoCatalog_Domain_Entities_Album_Create_System_String_
-  commentId: M:PhotoCatalog.Domain.Entities.Album.Create(System.String)
-  name.vb: Create(String)
-  fullName: PhotoCatalog.Domain.Entities.Album.Create(string)
-  fullName.vb: PhotoCatalog.Domain.Entities.Album.Create(String)
-  nameWithType: Album.Create(string)
-  nameWithType.vb: Album.Create(String)
+- uid: PhotoCatalog.Domain.Entities.Album.Create(System.String,System.Int32)
+  name: Create(string, int)
+  href: api/PhotoCatalog.Domain.Entities.Album.html#PhotoCatalog_Domain_Entities_Album_Create_System_String_System_Int32_
+  commentId: M:PhotoCatalog.Domain.Entities.Album.Create(System.String,System.Int32)
+  name.vb: Create(String, Integer)
+  fullName: PhotoCatalog.Domain.Entities.Album.Create(string, int)
+  fullName.vb: PhotoCatalog.Domain.Entities.Album.Create(String, Integer)
+  nameWithType: Album.Create(string, int)
+  nameWithType.vb: Album.Create(String, Integer)
 - uid: PhotoCatalog.Domain.Entities.Album.Create*
   name: Create
   href: api/PhotoCatalog.Domain.Entities.Album.html#PhotoCatalog_Domain_Entities_Album_Create_
@@ -2026,6 +2026,18 @@ references:
   commentId: F:PhotoCatalog.Domain.Primitives.DomainErrors.Album.EmptyName
   fullName: PhotoCatalog.Domain.Primitives.DomainErrors.Album.EmptyName
   nameWithType: DomainErrors.Album.EmptyName
+- uid: PhotoCatalog.Domain.Primitives.DomainErrors.Album.NotFound
+  name: NotFound
+  href: api/PhotoCatalog.Domain.Primitives.DomainErrors.Album.html#PhotoCatalog_Domain_Primitives_DomainErrors_Album_NotFound
+  commentId: F:PhotoCatalog.Domain.Primitives.DomainErrors.Album.NotFound
+  fullName: PhotoCatalog.Domain.Primitives.DomainErrors.Album.NotFound
+  nameWithType: DomainErrors.Album.NotFound
+- uid: PhotoCatalog.Domain.Primitives.DomainErrors.Album.NullAlbum
+  name: NullAlbum
+  href: api/PhotoCatalog.Domain.Primitives.DomainErrors.Album.html#PhotoCatalog_Domain_Primitives_DomainErrors_Album_NullAlbum
+  commentId: F:PhotoCatalog.Domain.Primitives.DomainErrors.Album.NullAlbum
+  fullName: PhotoCatalog.Domain.Primitives.DomainErrors.Album.NullAlbum
+  nameWithType: DomainErrors.Album.NullAlbum
 - uid: PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions
   name: DomainErrors.Dimensions
   href: api/PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions.html
@@ -2580,6 +2592,89 @@ references:
   commentId: N:PhotoCatalog.Infrastructure.Repositories
   fullName: PhotoCatalog.Infrastructure.Repositories
   nameWithType: PhotoCatalog.Infrastructure.Repositories
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository
+  name: SqliteAlbumRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository
+  nameWithType: SqliteAlbumRepository
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.#ctor(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository})
+  name: SqliteAlbumRepository(SqliteUnitOfWork, ILogger<SqliteAlbumRepository>)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository__ctor_PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository__
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.#ctor(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository})
+  name.vb: New(SqliteUnitOfWork, ILogger(Of SqliteAlbumRepository))
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.SqliteAlbumRepository(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork, Microsoft.Extensions.Logging.ILogger<PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository>)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.New(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork, Microsoft.Extensions.Logging.ILogger(Of PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository))
+  nameWithType: SqliteAlbumRepository.SqliteAlbumRepository(SqliteUnitOfWork, ILogger<SqliteAlbumRepository>)
+  nameWithType.vb: SqliteAlbumRepository.New(SqliteUnitOfWork, ILogger(Of SqliteAlbumRepository))
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.#ctor*
+  name: SqliteAlbumRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.SqliteAlbumRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.New
+  nameWithType: SqliteAlbumRepository.SqliteAlbumRepository
+  nameWithType.vb: SqliteAlbumRepository.New
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  name: Add(Album)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  nameWithType: SqliteAlbumRepository.Add(Album)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add*
+  name: Add
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Add_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add
+  nameWithType: SqliteAlbumRepository.Add
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete(System.Int32)
+  name: Delete(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete(System.Int32)
+  name.vb: Delete(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete(Integer)
+  nameWithType: SqliteAlbumRepository.Delete(int)
+  nameWithType.vb: SqliteAlbumRepository.Delete(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete*
+  name: Delete
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Delete_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete
+  nameWithType: SqliteAlbumRepository.Delete
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById(System.Int32)
+  name: GetById(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById(System.Int32)
+  name.vb: GetById(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById(Integer)
+  nameWithType: SqliteAlbumRepository.GetById(int)
+  nameWithType.vb: SqliteAlbumRepository.GetById(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById*
+  name: GetById
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_GetById_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById
+  nameWithType: SqliteAlbumRepository.GetById
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  name: Update(Album)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Update_PhotoCatalog_Domain_Entities_Album_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  nameWithType: SqliteAlbumRepository.Update(Album)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update*
+  name: Update
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Update_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update
+  nameWithType: SqliteAlbumRepository.Update
 - uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository
   name: SqliteFolderRepository
   href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html
