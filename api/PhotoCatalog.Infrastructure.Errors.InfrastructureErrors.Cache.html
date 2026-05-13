@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class InfrastructureErrors.FileStorage | PhotoCatalog Documentation </title>
+      <title>Class InfrastructureErrors.Cache | PhotoCatalog Documentation </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class InfrastructureErrors.FileStorage | PhotoCatalog Documentation ">
+      <meta name="title" content="Class InfrastructureErrors.Cache | PhotoCatalog Documentation ">
       
-      <meta name="description" content="Ошибки, связанные с файловым хранилищем.">
+      <meta name="description" content="Ошибки, связанные с кэшированием.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage.md&amp;value=---%0Auid%3A%20PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Cache.md&amp;value=---%0Auid%3A%20PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,12 +84,12 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage">
+        <article data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache">
 
 
 
-  <h1 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage" class="text-break">
-Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  <h1 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Cache" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache" class="text-break">
+Class InfrastructureErrors.Cache  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L79"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,12 +97,12 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
   <dl><dt>Assembly</dt><dd>PhotoCatalog.Infrastructure.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Ошибки, связанные с файловым хранилищем.</p>
+  <div class="markdown summary"><p>Ошибки, связанные с кэшированием.</p>
 </div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class InfrastructureErrors.FileStorage</code></pre>
+    <pre><code class="lang-csharp hljs">public static class InfrastructureErrors.Cache</code></pre>
   </div>
 
 
@@ -112,7 +112,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">InfrastructureErrors.FileStorage</span></div>
+      <div><span class="xref">InfrastructureErrors.Cache</span></div>
     </dd>
   </dl>
 
@@ -154,79 +154,17 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
 
 
-  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_AccessDenied" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.AccessDenied">
-  AccessDenied
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Cache_UnknownError" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownError">
+  UnknownError
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L84"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Ошибка, когда отказано в доступе к файловой системе.</p>
+  <div class="markdown level1 summary"><p>Ошибка, когда не получается произвести кеширование.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error AccessDenied</code></pre>
-  </div>
-
-
-
-
-  <h4 class="section">Field Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_DiskFull" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.DiskFull">
-  DiskFull
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L104"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Ошибка, когда на диске недостаточно свободного места.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error DiskFull</code></pre>
-  </div>
-
-
-
-
-  <h4 class="section">Field Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_IOError" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError">
-  IOError
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L111"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Ошибка, когда произошла ошибка ввода-вывода при работе с файлом.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error IOError</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly Error UnknownError</code></pre>
   </div>
 
 
@@ -250,7 +188,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L92" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L79" class="edit-link">Edit this page</a>
         </div>
 
 

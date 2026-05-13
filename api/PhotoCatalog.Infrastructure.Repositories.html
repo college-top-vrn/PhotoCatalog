@@ -95,6 +95,15 @@
 Classes
 </h3>
     <dl class="jumplist">
+      <dt><a class="xref" href="PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html">CachedFolderRepository</a></dt>
+      <dd><p>Декоратор репозитория папок, добавляющий кэширование операций чтения с помощью <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.hybrid.hybridcache">HybridCache</a>.
+Оборачивает реальный репозиторий (<a class="xref" href="PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html">SqliteFolderRepository</a>), перехватывая запросы на чтение
+и инвалидируя кэш при успешных операциях изменения (Add, Update, Delete).
+Ошибки, возвращённые внутренним репозиторием, не попадают в кэш благодаря выбрасыванию
+<a class="xref" href="PhotoCatalog.Infrastructure.Errors.CacheBypassException.html">CacheBypassException</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html">SqliteAlbumRepository</a></dt>
       <dd><p>Реализация репозитория для работы с альбомами в SQLite с использованием Dapper.</p>
 </dd>

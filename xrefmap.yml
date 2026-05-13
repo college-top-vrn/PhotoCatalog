@@ -29,6 +29,22 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderAlbumsKey
   nameWithType: CacheKeysFactory.GetFolderAlbumsKey
+- uid: PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey(System.Int32)
+  name: GetFolderKey(int)
+  href: api/PhotoCatalog.Application.Caching.CacheKeysFactory.html#PhotoCatalog_Application_Caching_CacheKeysFactory_GetFolderKey_System_Int32_
+  commentId: M:PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey(System.Int32)
+  name.vb: GetFolderKey(Integer)
+  fullName: PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey(int)
+  fullName.vb: PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey(Integer)
+  nameWithType: CacheKeysFactory.GetFolderKey(int)
+  nameWithType.vb: CacheKeysFactory.GetFolderKey(Integer)
+- uid: PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey*
+  name: GetFolderKey
+  href: api/PhotoCatalog.Application.Caching.CacheKeysFactory.html#PhotoCatalog_Application_Caching_CacheKeysFactory_GetFolderKey_
+  commentId: Overload:PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey
+  nameWithType: CacheKeysFactory.GetFolderKey
 - uid: PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderTag(System.Int32)
   name: GetFolderTag(int)
   href: api/PhotoCatalog.Application.Caching.CacheKeysFactory.html#PhotoCatalog_Application_Caching_CacheKeysFactory_GetFolderTag_System_Int32_
@@ -2694,12 +2710,58 @@ references:
   commentId: N:PhotoCatalog.Infrastructure.Errors
   fullName: PhotoCatalog.Infrastructure.Errors
   nameWithType: PhotoCatalog.Infrastructure.Errors
+- uid: PhotoCatalog.Infrastructure.Errors.CacheBypassException
+  name: CacheBypassException
+  href: api/PhotoCatalog.Infrastructure.Errors.CacheBypassException.html
+  commentId: T:PhotoCatalog.Infrastructure.Errors.CacheBypassException
+  fullName: PhotoCatalog.Infrastructure.Errors.CacheBypassException
+  nameWithType: CacheBypassException
+- uid: PhotoCatalog.Infrastructure.Errors.CacheBypassException.#ctor
+  name: CacheBypassException()
+  href: api/PhotoCatalog.Infrastructure.Errors.CacheBypassException.html#PhotoCatalog_Infrastructure_Errors_CacheBypassException__ctor
+  commentId: M:PhotoCatalog.Infrastructure.Errors.CacheBypassException.#ctor
+  name.vb: New()
+  fullName: PhotoCatalog.Infrastructure.Errors.CacheBypassException.CacheBypassException()
+  fullName.vb: PhotoCatalog.Infrastructure.Errors.CacheBypassException.New()
+  nameWithType: CacheBypassException.CacheBypassException()
+  nameWithType.vb: CacheBypassException.New()
+- uid: PhotoCatalog.Infrastructure.Errors.CacheBypassException.#ctor(System.String)
+  name: CacheBypassException(string)
+  href: api/PhotoCatalog.Infrastructure.Errors.CacheBypassException.html#PhotoCatalog_Infrastructure_Errors_CacheBypassException__ctor_System_String_
+  commentId: M:PhotoCatalog.Infrastructure.Errors.CacheBypassException.#ctor(System.String)
+  name.vb: New(String)
+  fullName: PhotoCatalog.Infrastructure.Errors.CacheBypassException.CacheBypassException(string)
+  fullName.vb: PhotoCatalog.Infrastructure.Errors.CacheBypassException.New(String)
+  nameWithType: CacheBypassException.CacheBypassException(string)
+  nameWithType.vb: CacheBypassException.New(String)
+- uid: PhotoCatalog.Infrastructure.Errors.CacheBypassException.#ctor*
+  name: CacheBypassException
+  href: api/PhotoCatalog.Infrastructure.Errors.CacheBypassException.html#PhotoCatalog_Infrastructure_Errors_CacheBypassException__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Errors.CacheBypassException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Errors.CacheBypassException.CacheBypassException
+  fullName.vb: PhotoCatalog.Infrastructure.Errors.CacheBypassException.New
+  nameWithType: CacheBypassException.CacheBypassException
+  nameWithType.vb: CacheBypassException.New
 - uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors
   name: InfrastructureErrors
   href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.html
   commentId: T:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors
   nameWithType: InfrastructureErrors
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache
+  name: InfrastructureErrors.Cache
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.html
+  commentId: T:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache
+  nameWithType: InfrastructureErrors.Cache
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownError
+  name: UnknownError
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Cache_UnknownError
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownError
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownError
+  nameWithType: InfrastructureErrors.Cache.UnknownError
 - uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database
   name: InfrastructureErrors.Database
   href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.html
@@ -2822,6 +2884,102 @@ references:
   commentId: N:PhotoCatalog.Infrastructure.Repositories
   fullName: PhotoCatalog.Infrastructure.Repositories
   nameWithType: PhotoCatalog.Infrastructure.Repositories
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository
+  name: CachedFolderRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository
+  nameWithType: CachedFolderRepository
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,Microsoft.Extensions.Caching.Hybrid.HybridCache,Serilog.ILogger)
+  name: CachedFolderRepository(IFolderRepository, HybridCache, ILogger)
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Microsoft_Extensions_Caching_Hybrid_HybridCache_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,Microsoft.Extensions.Caching.Hybrid.HybridCache,Serilog.ILogger)
+  name.vb: New(IFolderRepository, HybridCache, ILogger)
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.CachedFolderRepository(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, Microsoft.Extensions.Caching.Hybrid.HybridCache, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, Microsoft.Extensions.Caching.Hybrid.HybridCache, Serilog.ILogger)
+  nameWithType: CachedFolderRepository.CachedFolderRepository(IFolderRepository, HybridCache, ILogger)
+  nameWithType.vb: CachedFolderRepository.New(IFolderRepository, HybridCache, ILogger)
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor*
+  name: CachedFolderRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.CachedFolderRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.New
+  nameWithType: CachedFolderRepository.CachedFolderRepository
+  nameWithType.vb: CachedFolderRepository.New
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  name: Add(Folder)
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_Add_PhotoCatalog_Domain_Entities_Folder_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  nameWithType: CachedFolderRepository.Add(Folder)
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Add*
+  name: Add
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_Add_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Add
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Add
+  nameWithType: CachedFolderRepository.Add
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Delete(System.Int32)
+  name: Delete(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Delete(System.Int32)
+  name.vb: Delete(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Delete(Integer)
+  nameWithType: CachedFolderRepository.Delete(int)
+  nameWithType.vb: CachedFolderRepository.Delete(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Delete*
+  name: Delete
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_Delete_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Delete
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Delete
+  nameWithType: CachedFolderRepository.Delete
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders
+  name: GetAllFolders()
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_GetAllFolders
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders()
+  nameWithType: CachedFolderRepository.GetAllFolders()
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders*
+  name: GetAllFolders
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_GetAllFolders_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders
+  nameWithType: CachedFolderRepository.GetAllFolders
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetById(System.Int32)
+  name: GetById(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetById(System.Int32)
+  name.vb: GetById(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetById(Integer)
+  nameWithType: CachedFolderRepository.GetById(int)
+  nameWithType.vb: CachedFolderRepository.GetById(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetById*
+  name: GetById
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_GetById_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetById
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetById
+  nameWithType: CachedFolderRepository.GetById
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  name: Update(Folder)
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_Update_PhotoCatalog_Domain_Entities_Folder_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  nameWithType: CachedFolderRepository.Update(Folder)
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Update*
+  name: Update
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_Update_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Update
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Update
+  nameWithType: CachedFolderRepository.Update
 - uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository
   name: SqliteAlbumRepository
   href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html

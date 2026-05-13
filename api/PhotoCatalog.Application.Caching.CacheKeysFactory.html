@@ -159,7 +159,7 @@ Class CacheKeysFactory  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Application_Caching_CacheKeysFactory_GetFolderAlbumsKey_System_Int32_" data-uid="PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderAlbumsKey(System.Int32)">
   GetFolderAlbumsKey(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L33"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Ключ для списка альбомов конкретной папки.</p>
@@ -194,11 +194,50 @@ Class CacheKeysFactory  <a class="header-action link-secondary" title="View sour
 
 
 
+  <a id="PhotoCatalog_Application_Caching_CacheKeysFactory_GetFolderKey_" data-uid="PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey*"></a>
+
+  <h3 id="PhotoCatalog_Application_Caching_CacheKeysFactory_GetFolderKey_System_Int32_" data-uid="PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderKey(System.Int32)">
+  GetFolderKey(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Ключ для кэширования отдельной папки по её идентификатору.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetFolderKey(int folderId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>folderId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Идентификатор папки.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Уникальный ключ вида <code>key:folder:{folderId}</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="PhotoCatalog_Application_Caching_CacheKeysFactory_GetFolderTag_" data-uid="PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderTag*"></a>
 
   <h3 id="PhotoCatalog_Application_Caching_CacheKeysFactory_GetFolderTag_System_Int32_" data-uid="PhotoCatalog.Application.Caching.CacheKeysFactory.GetFolderTag(System.Int32)">
   GetFolderTag(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L54"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Тег, связанный с конкретной папкой.
@@ -239,7 +278,7 @@ Class CacheKeysFactory  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Application_Caching_CacheKeysFactory_GetFoldersTreeKey" data-uid="PhotoCatalog.Application.Caching.CacheKeysFactory.GetFoldersTreeKey">
   GetFoldersTreeKey()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L42"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Ключ для полного дерева папок.</p>
@@ -272,7 +311,7 @@ Class CacheKeysFactory  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Application_Caching_CacheKeysFactory_GetFoldersTreeTag" data-uid="PhotoCatalog.Application.Caching.CacheKeysFactory.GetFoldersTreeTag">
   GetFoldersTreeTag()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/Caching/CacheKeysFactory.cs/#L65"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Тег для всего дерева папок.

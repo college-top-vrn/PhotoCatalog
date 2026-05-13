@@ -824,6 +824,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.CacheBypassException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Errors.CacheBypassException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Errors.CacheBypassException",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Errors.CacheBypassException.yml\" sourcestartlinenumber=\"1\">Исключение, которое выбрасывается внутри фабричного метода <xref href=\"Microsoft.Extensions.Caching.Hybrid.HybridCache\" data-throw-if-not-resolved=\"false\"></xref>\nпри получении провального результата от внутреннего репозитория.\nИспользуется для того, чтобы избежать сохранения ошибок в кэше.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.yml\" sourcestartlinenumber=\"1\">Ошибки, связанные с кэшированием.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.yml",
       "output": {
         ".html": {
@@ -905,6 +933,20 @@
       "IsMRef": true,
       "Title": "PhotoCatalog.Infrastructure.Handlers",
       "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.yml\" sourcestartlinenumber=\"1\">Декоратор репозитория папок, добавляющий кэширование операций чтения с помощью <xref href=\"Microsoft.Extensions.Caching.Hybrid.HybridCache\" data-throw-if-not-resolved=\"false\"></xref>.\nОборачивает реальный репозиторий (<xref href=\"PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository\" data-throw-if-not-resolved=\"false\"></xref>), перехватывая запросы на чтение\nи инвалидируя кэш при успешных операциях изменения (Add, Update, Delete).\nОшибки, возвращённые внутренним репозиторием, не попадают в кэш благодаря выбрасыванию\n<xref href=\"PhotoCatalog.Infrastructure.Errors.CacheBypassException\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
