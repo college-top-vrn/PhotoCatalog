@@ -1,11 +1,7 @@
-using System;
-using System.Linq;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using PhotoCatalog.Infrastructure.Repositories;
 
 
 const string version = "v1";
@@ -37,3 +33,4 @@ var summaries = new[]
 };
 
 
+app.Run();
