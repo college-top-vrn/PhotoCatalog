@@ -7,11 +7,26 @@ using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Infrastructure.Fakes;
 
+/// <summary>
+///     Репозиторий папок, имитирующий БД, и хранящий данные в оперативной памяти.
+/// </summary>
 public class FakeFolderRepository : IFolderRepository
 {
+    /// <summary>
+    ///     Идентификатор последнего элемента.
+    /// </summary>
     private int _lastId = 0;
+    
+    /// <summary>
+    ///     Словарь папок.
+    /// </summary>
     private readonly ConcurrentDictionary<int, Folder> _data = new();
 
+    /// <summary>
+    ///     Получение папки по идентификатору.
+    /// </summary>
+    /// <param name="id">идентификатор папки.</param>
+    /// <returns>Папку.</returns>
     public Result<Folder> GetById(int id)
     {
         foreach (var pair in _data)
@@ -23,6 +38,14 @@ public class FakeFolderRepository : IFolderRepository
             "Не удалось найти папку по идентификатору"));
     }
 
+    /// <summary>
+    ///     Добавление папки.
+    /// </summary>
+    /// <param name="folder">папка.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
     public ResultVoid Add(Folder folder)
     {
         var result = _data
@@ -37,6 +60,14 @@ public class FakeFolderRepository : IFolderRepository
         return ResultVoid.Success();
     }
 
+    /// <summary>
+    ///     Обновление папки.
+    /// </summary>
+    /// <param name="folder">папка.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
     public ResultVoid Update(Folder folder)
     {
         var deleteResult = Delete(folder.Id);
@@ -50,6 +81,14 @@ public class FakeFolderRepository : IFolderRepository
         return ResultVoid.Success();
     }
 
+    /// <summary>
+    ///     Удаление папки.
+    /// </summary>
+    /// <param name="id">идентификатор папки.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернёься отрицательный результат.
+    /// </returns>
     public ResultVoid Delete(int id)
     {
         var result = _data
