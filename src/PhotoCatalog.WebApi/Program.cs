@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -30,5 +31,14 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
+app.MapGet("/summaries", () =>
+{
+    if (summaries.Length == 0 )
+    {
+        return Results.NoContent(); 
+    }
+
+    return Results.Ok(summaries); 
+});
 
 app.Run();
