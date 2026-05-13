@@ -54,4 +54,11 @@ public class Tag
 
         return Result<Tag>.Success(new Tag(normalizedName));
     }
+
+
+    /// <summary>
+    ///     Метод для глубокого копирования
+    /// </summary>
+    /// <returns> возвращает копию объекта <see cref="Tag"/> </returns>
+    public Tag DeepCopy() => new Tag { Id = this.Id, Name = this.Name };
 }
