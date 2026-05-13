@@ -34,5 +34,5 @@ public interface ITagRepository
     /// </summary>
     /// <param name="id">ID тега</param>
     /// <returns>Удаленный тег или ошибка</returns>
-    Result<Tag> Delete(int id);
+    ResultVoid Delete(int id);
 }
