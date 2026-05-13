@@ -72,6 +72,19 @@ public static class InfrastructureErrors
         public static readonly Error HasChildren =
             new("Database.HasChildren", "У папки имеются дочерние объекты.");
     }
+    
+    /// <summary>
+    ///     Ошибки, связанные с кэшированием.
+    /// </summary>
+    public static class Cache
+    {
+        /// <summary>
+        ///     Ошибка, когда не получается произвести кеширование.
+        /// </summary>
+        public static readonly Error UnknownError = new(
+            "Cache.UnknownError",
+            "Непредвиденная ошибка при получении элемента из кэша.");
+    }
 
     /// <summary>
     ///     Ошибки, связанные с файловым хранилищем.
