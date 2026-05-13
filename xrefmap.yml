@@ -519,6 +519,184 @@ references:
   commentId: F:PhotoCatalog.Application.Errors.ApplicationErrors.UseCases.SystemFailure
   fullName: PhotoCatalog.Application.Errors.ApplicationErrors.UseCases.SystemFailure
   nameWithType: ApplicationErrors.UseCases.SystemFailure
+- uid: PhotoCatalog.Application.Fakes
+  name: PhotoCatalog.Application.Fakes
+  href: api/PhotoCatalog.Application.Fakes.html
+  commentId: N:PhotoCatalog.Application.Fakes
+  fullName: PhotoCatalog.Application.Fakes
+  nameWithType: PhotoCatalog.Application.Fakes
+- uid: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor
+  name: FakeFileMetadataExtractor
+  href: api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.html
+  commentId: T:PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor
+  fullName: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor
+  nameWithType: FakeFileMetadataExtractor
+- uid: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.CalculateHash(System.String)
+  name: CalculateHash(string)
+  href: api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.html#PhotoCatalog_Application_Fakes_FakeFileMetadataExtractor_CalculateHash_System_String_
+  commentId: M:PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.CalculateHash(System.String)
+  name.vb: CalculateHash(String)
+  fullName: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.CalculateHash(string)
+  fullName.vb: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.CalculateHash(String)
+  nameWithType: FakeFileMetadataExtractor.CalculateHash(string)
+  nameWithType.vb: FakeFileMetadataExtractor.CalculateHash(String)
+- uid: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.CalculateHash*
+  name: CalculateHash
+  href: api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.html#PhotoCatalog_Application_Fakes_FakeFileMetadataExtractor_CalculateHash_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.CalculateHash
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.CalculateHash
+  nameWithType: FakeFileMetadataExtractor.CalculateHash
+- uid: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.GetDimensions(System.String)
+  name: GetDimensions(string)
+  href: api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.html#PhotoCatalog_Application_Fakes_FakeFileMetadataExtractor_GetDimensions_System_String_
+  commentId: M:PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.GetDimensions(System.String)
+  name.vb: GetDimensions(String)
+  fullName: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.GetDimensions(string)
+  fullName.vb: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.GetDimensions(String)
+  nameWithType: FakeFileMetadataExtractor.GetDimensions(string)
+  nameWithType.vb: FakeFileMetadataExtractor.GetDimensions(String)
+- uid: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.GetDimensions*
+  name: GetDimensions
+  href: api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.html#PhotoCatalog_Application_Fakes_FakeFileMetadataExtractor_GetDimensions_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.GetDimensions
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.GetDimensions
+  nameWithType: FakeFileMetadataExtractor.GetDimensions
+- uid: PhotoCatalog.Application.Fakes.FakeFileStorage
+  name: FakeFileStorage
+  href: api/PhotoCatalog.Application.Fakes.FakeFileStorage.html
+  commentId: T:PhotoCatalog.Application.Fakes.FakeFileStorage
+  fullName: PhotoCatalog.Application.Fakes.FakeFileStorage
+  nameWithType: FakeFileStorage
+- uid: PhotoCatalog.Application.Fakes.FakeFileStorage.DeleteFile(System.String)
+  name: DeleteFile(string)
+  href: api/PhotoCatalog.Application.Fakes.FakeFileStorage.html#PhotoCatalog_Application_Fakes_FakeFileStorage_DeleteFile_System_String_
+  commentId: M:PhotoCatalog.Application.Fakes.FakeFileStorage.DeleteFile(System.String)
+  name.vb: DeleteFile(String)
+  fullName: PhotoCatalog.Application.Fakes.FakeFileStorage.DeleteFile(string)
+  fullName.vb: PhotoCatalog.Application.Fakes.FakeFileStorage.DeleteFile(String)
+  nameWithType: FakeFileStorage.DeleteFile(string)
+  nameWithType.vb: FakeFileStorage.DeleteFile(String)
+- uid: PhotoCatalog.Application.Fakes.FakeFileStorage.DeleteFile*
+  name: DeleteFile
+  href: api/PhotoCatalog.Application.Fakes.FakeFileStorage.html#PhotoCatalog_Application_Fakes_FakeFileStorage_DeleteFile_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeFileStorage.DeleteFile
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeFileStorage.DeleteFile
+  nameWithType: FakeFileStorage.DeleteFile
+- uid: PhotoCatalog.Application.Fakes.FakeFileStorage.FileExists(System.String)
+  name: FileExists(string)
+  href: api/PhotoCatalog.Application.Fakes.FakeFileStorage.html#PhotoCatalog_Application_Fakes_FakeFileStorage_FileExists_System_String_
+  commentId: M:PhotoCatalog.Application.Fakes.FakeFileStorage.FileExists(System.String)
+  name.vb: FileExists(String)
+  fullName: PhotoCatalog.Application.Fakes.FakeFileStorage.FileExists(string)
+  fullName.vb: PhotoCatalog.Application.Fakes.FakeFileStorage.FileExists(String)
+  nameWithType: FakeFileStorage.FileExists(string)
+  nameWithType.vb: FakeFileStorage.FileExists(String)
+- uid: PhotoCatalog.Application.Fakes.FakeFileStorage.FileExists*
+  name: FileExists
+  href: api/PhotoCatalog.Application.Fakes.FakeFileStorage.html#PhotoCatalog_Application_Fakes_FakeFileStorage_FileExists_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeFileStorage.FileExists
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeFileStorage.FileExists
+  nameWithType: FakeFileStorage.FileExists
+- uid: PhotoCatalog.Application.Fakes.FakeFileStorage.StoreFile(System.String,System.String)
+  name: StoreFile(string, string)
+  href: api/PhotoCatalog.Application.Fakes.FakeFileStorage.html#PhotoCatalog_Application_Fakes_FakeFileStorage_StoreFile_System_String_System_String_
+  commentId: M:PhotoCatalog.Application.Fakes.FakeFileStorage.StoreFile(System.String,System.String)
+  name.vb: StoreFile(String, String)
+  fullName: PhotoCatalog.Application.Fakes.FakeFileStorage.StoreFile(string, string)
+  fullName.vb: PhotoCatalog.Application.Fakes.FakeFileStorage.StoreFile(String, String)
+  nameWithType: FakeFileStorage.StoreFile(string, string)
+  nameWithType.vb: FakeFileStorage.StoreFile(String, String)
+- uid: PhotoCatalog.Application.Fakes.FakeFileStorage.StoreFile*
+  name: StoreFile
+  href: api/PhotoCatalog.Application.Fakes.FakeFileStorage.html#PhotoCatalog_Application_Fakes_FakeFileStorage_StoreFile_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeFileStorage.StoreFile
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeFileStorage.StoreFile
+  nameWithType: FakeFileStorage.StoreFile
+- uid: PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator
+  name: FakeFolderHierarchyValidator
+  href: api/PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.html
+  commentId: T:PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator
+  fullName: PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator
+  nameWithType: FakeFolderHierarchyValidator
+- uid: PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.CheckForCycles(System.Int32,System.Int32)
+  name: CheckForCycles(int, int)
+  href: api/PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.html#PhotoCatalog_Application_Fakes_FakeFolderHierarchyValidator_CheckForCycles_System_Int32_System_Int32_
+  commentId: M:PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.CheckForCycles(System.Int32,System.Int32)
+  name.vb: CheckForCycles(Integer, Integer)
+  fullName: PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.CheckForCycles(int, int)
+  fullName.vb: PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.CheckForCycles(Integer, Integer)
+  nameWithType: FakeFolderHierarchyValidator.CheckForCycles(int, int)
+  nameWithType.vb: FakeFolderHierarchyValidator.CheckForCycles(Integer, Integer)
+- uid: PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.CheckForCycles*
+  name: CheckForCycles
+  href: api/PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.html#PhotoCatalog_Application_Fakes_FakeFolderHierarchyValidator_CheckForCycles_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.CheckForCycles
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.CheckForCycles
+  nameWithType: FakeFolderHierarchyValidator.CheckForCycles
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork
+  name: FakeUnitOfWork
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html
+  commentId: T:PhotoCatalog.Application.Fakes.FakeUnitOfWork
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork
+  nameWithType: FakeUnitOfWork
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork.BeginTransaction
+  name: BeginTransaction()
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html#PhotoCatalog_Application_Fakes_FakeUnitOfWork_BeginTransaction
+  commentId: M:PhotoCatalog.Application.Fakes.FakeUnitOfWork.BeginTransaction
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork.BeginTransaction()
+  nameWithType: FakeUnitOfWork.BeginTransaction()
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork.BeginTransaction*
+  name: BeginTransaction
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html#PhotoCatalog_Application_Fakes_FakeUnitOfWork_BeginTransaction_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeUnitOfWork.BeginTransaction
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork.BeginTransaction
+  nameWithType: FakeUnitOfWork.BeginTransaction
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Commit
+  name: Commit()
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html#PhotoCatalog_Application_Fakes_FakeUnitOfWork_Commit
+  commentId: M:PhotoCatalog.Application.Fakes.FakeUnitOfWork.Commit
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Commit()
+  nameWithType: FakeUnitOfWork.Commit()
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Commit*
+  name: Commit
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html#PhotoCatalog_Application_Fakes_FakeUnitOfWork_Commit_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeUnitOfWork.Commit
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Commit
+  nameWithType: FakeUnitOfWork.Commit
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Dispose
+  name: Dispose()
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html#PhotoCatalog_Application_Fakes_FakeUnitOfWork_Dispose
+  commentId: M:PhotoCatalog.Application.Fakes.FakeUnitOfWork.Dispose
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Dispose()
+  nameWithType: FakeUnitOfWork.Dispose()
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Dispose*
+  name: Dispose
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html#PhotoCatalog_Application_Fakes_FakeUnitOfWork_Dispose_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeUnitOfWork.Dispose
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Dispose
+  nameWithType: FakeUnitOfWork.Dispose
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Rollback
+  name: Rollback()
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html#PhotoCatalog_Application_Fakes_FakeUnitOfWork_Rollback
+  commentId: M:PhotoCatalog.Application.Fakes.FakeUnitOfWork.Rollback
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Rollback()
+  nameWithType: FakeUnitOfWork.Rollback()
+- uid: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Rollback*
+  name: Rollback
+  href: api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html#PhotoCatalog_Application_Fakes_FakeUnitOfWork_Rollback_
+  commentId: Overload:PhotoCatalog.Application.Fakes.FakeUnitOfWork.Rollback
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.Fakes.FakeUnitOfWork.Rollback
+  nameWithType: FakeUnitOfWork.Rollback
 - uid: PhotoCatalog.Application.UseCases
   name: PhotoCatalog.Application.UseCases
   href: api/PhotoCatalog.Application.UseCases.html

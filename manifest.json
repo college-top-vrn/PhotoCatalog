@@ -236,6 +236,76 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.yml\" sourcestartlinenumber=\"1\">Заглушка извлечения метаданных для тестирования.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Fakes.FakeFileStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Fakes.FakeFileStorage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Fakes.FakeFileStorage",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Fakes.FakeFileStorage.yml\" sourcestartlinenumber=\"1\">Заглушка файлового хранилища для тестирования.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Fakes.FakeFolderHierarchyValidator.yml\" sourcestartlinenumber=\"1\">Заглушка валидатора иерархии папок для тестирования.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Fakes.FakeUnitOfWork",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Fakes.FakeUnitOfWork.yml\" sourcestartlinenumber=\"1\">Заглушка Unit of Work для тестирования без реальной БД.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.Fakes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.Fakes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.Fakes",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.yml",
       "output": {
         ".html": {
