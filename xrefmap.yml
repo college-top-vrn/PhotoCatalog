@@ -771,6 +771,19 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Entities.Album.Create
   nameWithType: Album.Create
+- uid: PhotoCatalog.Domain.Entities.Album.DeepCopy
+  name: DeepCopy()
+  href: api/PhotoCatalog.Domain.Entities.Album.html#PhotoCatalog_Domain_Entities_Album_DeepCopy
+  commentId: M:PhotoCatalog.Domain.Entities.Album.DeepCopy
+  fullName: PhotoCatalog.Domain.Entities.Album.DeepCopy()
+  nameWithType: Album.DeepCopy()
+- uid: PhotoCatalog.Domain.Entities.Album.DeepCopy*
+  name: DeepCopy
+  href: api/PhotoCatalog.Domain.Entities.Album.html#PhotoCatalog_Domain_Entities_Album_DeepCopy_
+  commentId: Overload:PhotoCatalog.Domain.Entities.Album.DeepCopy
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Entities.Album.DeepCopy
+  nameWithType: Album.DeepCopy
 - uid: PhotoCatalog.Domain.Entities.Album.FolderId
   name: FolderId
   href: api/PhotoCatalog.Domain.Entities.Album.html#PhotoCatalog_Domain_Entities_Album_FolderId
@@ -890,6 +903,19 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Entities.Folder.Create
   nameWithType: Folder.Create
+- uid: PhotoCatalog.Domain.Entities.Folder.DeepCopy
+  name: DeepCopy()
+  href: api/PhotoCatalog.Domain.Entities.Folder.html#PhotoCatalog_Domain_Entities_Folder_DeepCopy
+  commentId: M:PhotoCatalog.Domain.Entities.Folder.DeepCopy
+  fullName: PhotoCatalog.Domain.Entities.Folder.DeepCopy()
+  nameWithType: Folder.DeepCopy()
+- uid: PhotoCatalog.Domain.Entities.Folder.DeepCopy*
+  name: DeepCopy
+  href: api/PhotoCatalog.Domain.Entities.Folder.html#PhotoCatalog_Domain_Entities_Folder_DeepCopy_
+  commentId: Overload:PhotoCatalog.Domain.Entities.Folder.DeepCopy
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Entities.Folder.DeepCopy
+  nameWithType: Folder.DeepCopy
 - uid: PhotoCatalog.Domain.Entities.Folder.Id
   name: Id
   href: api/PhotoCatalog.Domain.Entities.Folder.html#PhotoCatalog_Domain_Entities_Folder_Id
@@ -1022,6 +1048,19 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Entities.Photo.Create
   nameWithType: Photo.Create
+- uid: PhotoCatalog.Domain.Entities.Photo.DeepCopy
+  name: DeepCopy()
+  href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_DeepCopy
+  commentId: M:PhotoCatalog.Domain.Entities.Photo.DeepCopy
+  fullName: PhotoCatalog.Domain.Entities.Photo.DeepCopy()
+  nameWithType: Photo.DeepCopy()
+- uid: PhotoCatalog.Domain.Entities.Photo.DeepCopy*
+  name: DeepCopy
+  href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_DeepCopy_
+  commentId: Overload:PhotoCatalog.Domain.Entities.Photo.DeepCopy
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Entities.Photo.DeepCopy
+  nameWithType: Photo.DeepCopy
 - uid: PhotoCatalog.Domain.Entities.Photo.Dimensions
   name: Dimensions
   href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_Dimensions
@@ -1154,6 +1193,19 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Entities.Tag.Create
   nameWithType: Tag.Create
+- uid: PhotoCatalog.Domain.Entities.Tag.DeepCopy
+  name: DeepCopy()
+  href: api/PhotoCatalog.Domain.Entities.Tag.html#PhotoCatalog_Domain_Entities_Tag_DeepCopy
+  commentId: M:PhotoCatalog.Domain.Entities.Tag.DeepCopy
+  fullName: PhotoCatalog.Domain.Entities.Tag.DeepCopy()
+  nameWithType: Tag.DeepCopy()
+- uid: PhotoCatalog.Domain.Entities.Tag.DeepCopy*
+  name: DeepCopy
+  href: api/PhotoCatalog.Domain.Entities.Tag.html#PhotoCatalog_Domain_Entities_Tag_DeepCopy_
+  commentId: Overload:PhotoCatalog.Domain.Entities.Tag.DeepCopy
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Entities.Tag.DeepCopy
+  nameWithType: Tag.DeepCopy
 - uid: PhotoCatalog.Domain.Entities.Tag.Id
   name: Id
   href: api/PhotoCatalog.Domain.Entities.Tag.html#PhotoCatalog_Domain_Entities_Tag_Id
