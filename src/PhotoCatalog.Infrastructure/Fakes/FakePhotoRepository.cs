@@ -1,0 +1,119 @@
+using System.Collections.Concurrent;
+
+using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Extensions;
+using PhotoCatalog.Domain.Interfaces.Repositories;
+using PhotoCatalog.Domain.Primitives;
+
+namespace PhotoCatalog.Infrastructure.Fakes;
+
+/// <summary>
+///     Репозиторий фотографий, имитирующий БД, и хранящий данные в оперативной памяти.
+/// </summary>
+public class FakePhotoRepository : IPhotoRepository
+{
+    /// <summary>
+    ///     Идентификатор последнего элемента.
+    /// </summary>
+    private int _lastId = 0;
+    
+    /// <summary>
+    ///     Словарь альбомов.
+    /// </summary>
+    private readonly ConcurrentDictionary<int, Photo> _data = new();
+    
+    /// <summary>
+    ///     Получение фотографии по идентификатору.
+    /// </summary>
+    /// <param name="id">идентификатор фотографии.</param>
+    /// <returns>Фотография.</returns>
+    public Result<Photo> GetById(int id)
+    {
+        foreach (var pair in _data)
+        {
+            if (pair.Key == id) return pair.Value.ToResult();
+        }
+
+        return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
+            "Не удалось найти фотографию по идентификатору"));
+    }
+
+    public Result<Photo> GetByPath(string realPath)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    ///     Добавление фотографии.
+    /// </summary>
+    /// <param name="photo">фотография.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid Add(Photo photo)
+    {
+        var result = _data
+            .TryAdd(_lastId, photo)
+            .ToResult();
+
+        if (result.IsFailure) return ResultVoid.Failure(new Error("PhotoRepository.CantAddPhoto",
+            "Не удалось добавить фото"));
+
+        _lastId += 1;
+        
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Обновление фотографии.
+    /// </summary>
+    /// <param name="photo">фотография.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid Update(Photo photo)
+    {
+        var deleteResult = Delete(photo.Id);
+        
+        if (deleteResult.IsFailure) return ResultVoid.Failure(deleteResult.Error);
+        
+        var addResult = Add(photo);
+
+        if (addResult.IsFailure) return ResultVoid.Failure(addResult.Error);
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Удаление фотографии.
+    /// </summary>
+    /// <param name="id">идентификатор фотографии.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid Delete(int id)
+    {
+        var result = _data
+            .TryRemove(id, out var photo)
+            .ToResult();
+
+        if (result.IsFailure)
+            return ResultVoid.Failure(new Error("PhotoRepository.CantDeletePhoto",
+                "Не удалось удалить фото"));
+
+        return ResultVoid.Success();
+    }
+
+    public Result<IReadOnlyCollection<Photo>> GetByAlbumId(int albumId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds)
+    {
+        throw new NotImplementedException();
+    }
+}

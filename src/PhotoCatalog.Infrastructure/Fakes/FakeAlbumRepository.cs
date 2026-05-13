@@ -8,9 +8,9 @@ using PhotoCatalog.Domain.Primitives;
 namespace PhotoCatalog.Infrastructure.Fakes;
 
 /// <summary>
-///     Репозиторий папок, имитирующий БД, и хранящий данные в оперативной памяти.
+///     Репозиторий альбомов, имитирующий БД, и хранящий данные в оперативной памяти.
 /// </summary>
-public class FakeFolderRepository : IFolderRepository
+public class FakeAlbumRepository : IAlbumRepository
 {
     /// <summary>
     ///     Идентификатор последнего элемента.
@@ -18,42 +18,42 @@ public class FakeFolderRepository : IFolderRepository
     private int _lastId = 0;
     
     /// <summary>
-    ///     Словарь папок.
+    ///     Словарь альбомов.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Folder> _data = new();
-
+    private readonly ConcurrentDictionary<int, Album> _data = new();
+    
     /// <summary>
-    ///     Получение папки по идентификатору.
+    ///     Получение альбома по идентификатору.
     /// </summary>
-    /// <param name="id">идентификатор папки.</param>
-    /// <returns>Папку.</returns>
-    public Result<Folder> GetById(int id)
+    /// <param name="id">идентификатор альбома.</param>
+    /// <returns>Альбом.</returns>
+    public Result<Album> GetById(int id)
     {
         foreach (var pair in _data)
         {
             if (pair.Key == id) return pair.Value.ToResult();
         }
 
-        return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
-            "Не удалось найти папку по идентификатору"));
+        return Result<Album>.Failure(new Error("AlbumRepository.AlbumNotFound",
+            "Не удалось найти альбом по идентификатору"));
     }
 
     /// <summary>
-    ///     Добавление папки.
+    ///     Добавление альбома.
     /// </summary>
-    /// <param name="folder">папка.</param>
+    /// <param name="folder">альбом.</param>
     /// <returns>
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
     /// </returns>
-    public ResultVoid Add(Folder folder)
+    public ResultVoid Add(Album album)
     {
         var result = _data
-            .TryAdd(_lastId, folder)
+            .TryAdd(_lastId, album)
             .ToResult();
 
-        if (result.IsFailure) return ResultVoid.Failure(new Error("FolderRepository.CantAddFolder",
-            "Не удалось добавить папку"));
+        if (result.IsFailure) return ResultVoid.Failure(new Error("AlbumRepository.CantAddAlbum",
+            "Не удалось добавить альбом"));
 
         _lastId += 1;
         
@@ -61,20 +61,20 @@ public class FakeFolderRepository : IFolderRepository
     }
 
     /// <summary>
-    ///     Обновление папки.
+    ///     Обновление альбома.
     /// </summary>
-    /// <param name="folder">папка.</param>
+    /// <param name="album">альбом.</param>
     /// <returns>
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
     /// </returns>
-    public ResultVoid Update(Folder folder)
+    public ResultVoid Update(Album album)
     {
-        var deleteResult = Delete(folder.Id);
+        var deleteResult = Delete(album.Id);
         
         if (deleteResult.IsFailure) return ResultVoid.Failure(deleteResult.Error);
         
-        var addResult = Add(folder);
+        var addResult = Add(album);
 
         if (addResult.IsFailure) return ResultVoid.Failure(addResult.Error);
 
@@ -82,9 +82,9 @@ public class FakeFolderRepository : IFolderRepository
     }
 
     /// <summary>
-    ///     Удаление папки.
+    ///     Удаление альбома.
     /// </summary>
-    /// <param name="id">идентификатор папки.</param>
+    /// <param name="id">идентификатор альбома.</param>
     /// <returns>
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
@@ -92,12 +92,12 @@ public class FakeFolderRepository : IFolderRepository
     public ResultVoid Delete(int id)
     {
         var result = _data
-            .TryRemove(id, out var folder)
+            .TryRemove(id, out var album)
             .ToResult();
 
         if (result.IsFailure)
-            return ResultVoid.Failure(new Error("FolderRepository.CantDeleteFolder",
-                "Не удалось удалить папку"));
+            return ResultVoid.Failure(new Error("AlbumRepository.CantDeleteAlbum",
+                "Не удалось удалить альбом"));
 
         return ResultVoid.Success();
     }
