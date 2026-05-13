@@ -40,7 +40,7 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
                 options: null,
                 tags: [CacheKeysFactory.GetFolderTag(id), CacheKeysFactory.GetFoldersTreeTag()]
             ).AsTask().GetAwaiter().GetResult();
-            
+
             return Result<Folder>.Success(cachedFolder!);
         }
         catch (CacheBypassException ex)
@@ -114,7 +114,7 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
             {
                 logger.Warning(
                     "Операция {Operation} папки с Id={FolderId} завершилась ошибкой: {ErrorCode} {ErrorMessage}",
-                    operation.GetMethodInfo().Name, folderId, result.Error.Code, result.Error.Message);   
+                    operation.GetMethodInfo().Name, folderId, result.Error.Code, result.Error.Message);
             }
             return result;
         }

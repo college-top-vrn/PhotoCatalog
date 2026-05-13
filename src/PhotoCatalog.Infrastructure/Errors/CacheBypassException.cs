@@ -9,7 +9,7 @@ namespace PhotoCatalog.Infrastructure.Errors;
 ///     Декоратор <see cref="CachedFolderRepository"/> перехватывает это исключение
 ///     и возвращает исходный провальный <see cref="Result"/>.
 /// </remarks>
-public class CacheBypassException: Exception
+public class CacheBypassException : Exception
 {
     /// <summary>
     ///     Инициализирует новый экземпляр с сообщением по умолчанию.

@@ -72,7 +72,7 @@ public static class InfrastructureErrors
         public static readonly Error HasChildren =
             new("Database.HasChildren", "У папки имеются дочерние объекты.");
     }
-    
+
     /// <summary>
     ///     Ошибки, связанные с кэшированием.
     /// </summary>
