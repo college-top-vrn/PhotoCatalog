@@ -11,16 +11,12 @@
     <ProjectReference Include="..\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
     <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
   </ItemGroup>
-
   
   <ItemGroup>
     <PackageReference Include="Dapper"/>
     <PackageReference Include="Microsoft.Data.Sqlite.Core"/>
     <PackageReference Include="Microsoft.Extensions.Logging"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Dapper" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" />
   </ItemGroup>
 
 </Project>
