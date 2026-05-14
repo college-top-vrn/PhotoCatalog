@@ -1,11 +1,11 @@
 ---
-_layout: landing
+layout: page
+title: Документация
 ---
 
-# This is the **HOMEPAGE**.
+# Оглавление
 
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
-
-## Quick Start Notes:
-
-1. Add images to the *images* folder if the file is referencing an image.
+- [Модуль «Application»](./Application/Dockerfile)
+- [Модуль «Domain»](./Domain/Dockerfile)
+- [Модуль «Infrastructure»](./Infrastructure/Dockerfile)
+- [API модуля «WebApi»](./WebApi/Dockerfile)
