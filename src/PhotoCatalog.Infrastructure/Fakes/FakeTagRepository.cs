@@ -20,7 +20,7 @@ public class FakeTagRepository : ITagRepository
     /// <summary>
     ///     Словарь тегов.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Tag> _tags = new();
+    private ConcurrentDictionary<int, Tag> _tags = new();
     
     /// <summary>
     ///     Получение тега по идентификатору.

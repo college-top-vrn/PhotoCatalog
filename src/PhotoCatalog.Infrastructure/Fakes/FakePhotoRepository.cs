@@ -22,7 +22,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// <summary>
     ///     Словарь альбомов.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Photo> _photos = new();
+    private ConcurrentDictionary<int, Photo> _photos = new();
 
     /// <summary>
     ///     Получение фотографии по идентификатору.

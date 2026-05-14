@@ -20,7 +20,7 @@ public class FakeFolderRepository : IFolderRepository
     /// <summary>
     ///     Словарь папок.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Folder> _folders = new();
+    private ConcurrentDictionary<int, Folder> _folders = new();
 
     /// <summary>
     ///     Получение папки по идентификатору.
