@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>This is the HOMEPAGE. | PhotoCatalog Documentation </title>
+      <title>Документация PhotoCatalog | PhotoCatalog Documentation </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="This is the HOMEPAGE. | PhotoCatalog Documentation ">
+      <meta name="title" content="Документация PhotoCatalog | PhotoCatalog Documentation ">
       
       
       <link rel="icon" href="favicon.ico">
@@ -39,7 +39,7 @@
 
   </head>
 
-  <body class="tex2jax_ignore" data-layout="landing" data-yaml-mime="">
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
     <header class="bg-body border-bottom">
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
@@ -71,13 +71,16 @@
         </div>
 
         <article data-uid="">
-<h1 id="this-is-the-homepage">This is the <strong>HOMEPAGE</strong>.</h1>
+<h1 id="документация-photocatalog">Документация PhotoCatalog</h1>
 
-<p>Refer to <a href="http://daringfireball.net/projects/markdown/">Markdown</a> for how to write markdown files.</p>
-<h2 id="quick-start-notes">Quick Start Notes:</h2>
-<ol>
-<li>Add images to the <em>images</em> folder if the file is referencing an image.</li>
-</ol>
+<p>Данная библиотека используется для управления коллекцией фотографий с использованием концепции &quot;виртуальных альбомов&quot;. Физические файлы хранятся в единой директории, а иерархия папок, альбомов и тегов формируется исключительно на логическом уровне в базе данных.
+Внутренние слои (Domain) абсолютно независимы от внешних (Infrastructure, Application, сторонние библиотеки). Взаимодействие происходит строго через контракты (интерфейсы).</p>
+<ul>
+<li><strong><a href="xref:PhotoCatalog.Application">Модуль «PhotoCatalog.Application»</a></strong> - Содержит чистую бизнес‑логику без внешних зависимостей. Включает сущности (Photo, Album, Folder, Tag) и value objects (например, Dimensions). Использует Result/ResultVoid вместо исключений, а также реестр доменных ошибок (Errors Registry) для контроля бизнес‑правил.</li>
+<li><strong><a href="xref:PhotoCatalog.Domain">Модуль «PhotoCatalog.Domain»</a></strong> - Зависит только от Domain. Здесь располагаются use‑cases (например, ImportPhotoUseCase) и DTO. Отвечает за логирование бизнес‑потоков: фиксирует начало операций, их успех или ошибки (с уровнями Warning/Information), не останавливая работу приложения.</li>
+<li><strong><a href="xref:PhotoCatalog.Infrastructure">Модуль «PhotoCatalog.Infrastructure»</a></strong> - Зависит от Domain и Application. Реализует репозитории для SQLite (через Dapper) и работу с файловой системой (через System.IO). Перехватывает системные ошибки (SqlException, IOException), логирует их через Serilog и конвертирует в Result.Failure. Контролирует активацию ссылочной целостности SQLite через PRAGMA foreign_keys = ON.</li>
+<li><strong><a href="xref:PhotoCatalog.WebApi">API модуль «PhotoCatalog.WebApi»</a></strong> - Предоставляет HTTP‑интерфейс для взаимодействия с системой каталогизации фото. Реализован на ASP.NET Core Web API.</li>
+</ul>
 
 </article>
 
