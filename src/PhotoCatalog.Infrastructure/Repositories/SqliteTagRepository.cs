@@ -114,11 +114,10 @@ public class SqliteTagRepository : ITagRepository
     }
 
 
-
-
     /// <inheritdoc />
     public ResultVoid Add(Tag teg)
     {
+        const int sqliteConstraintErrorCode = 19;
         try
         {
             using SqliteConnection connection = new(_connectionString);
@@ -140,6 +139,10 @@ public class SqliteTagRepository : ITagRepository
             _logger.Information("Тег с Id = {Id} успешно обновлен", teg.Id);
             return ResultVoid.Success();
         }
+        catch (SqliteException ex) when (ex.SqliteErrorCode == sqliteConstraintErrorCode)
+        {
+            return Result<Tag>.Failure(InfrastructureErrors.Database.ConstraintViolation);
+        }
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite при обновлении тега с Id = {Id}", teg.Id);
@@ -150,7 +153,6 @@ public class SqliteTagRepository : ITagRepository
     /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
-        
         try
         {
             using SqliteConnection connection = new(_connectionString);
@@ -168,7 +170,7 @@ public class SqliteTagRepository : ITagRepository
             _logger.Information("Тег с Id = {Id} успешно удалена", id);
             return ResultVoid.Success();
         }
-        
+
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite при удалении тега с Id = {Id}", id);
