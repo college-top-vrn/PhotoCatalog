@@ -12,18 +12,28 @@
     <ProjectReference Include="..\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
     <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Dapper"/>
     <PackageReference Include="Microsoft.Data.Sqlite.Core"/>
     <PackageReference Include="Microsoft.Extensions.Logging"/>
-    <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Hybrid"/>
   </ItemGroup>
-  
+
+
+  <ItemGroup>
+    <PackageReference Include="MetadataExtractor"/>
+    <PackageReference Include="PhotoSauce.MagicScaler"/>
+  </ItemGroup>
+
   <ItemGroup>
     <Content Include="..\..\.dockerignore">
       <Link>.dockerignore</Link>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\"/>
   </ItemGroup>
 
 </Project>
