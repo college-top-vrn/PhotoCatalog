@@ -50,22 +50,15 @@ public class SqlitePhotoRepository : IPhotoRepository
                 return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var photoData = connection.QueryFirstOrDefault(
+            var photo = connection.QueryFirstOrDefault<Photo>(
                 "SELECT Id, RealPath, FileHash, Width, Height, AddedAt FROM Photos WHERE Id = @Id",
                 new { Id = id },
                 _unitOfWork.Transaction);
 
-            if (photoData == null)
+            if (photo == null)
             {
                 return Result<Photo>.Failure(DomainErrors.Photo.NotFound);
             }
-
-            var photo = Photo.Create(photoData.RealPath).Value;
-
-            photo.UpdateHash(photoData.FileHash);
-
-            var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
-            photo.SetDimensions(dimensions);
 
             var tagIds = connection.Query<int>(
                 "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
@@ -103,26 +96,19 @@ public class SqlitePhotoRepository : IPhotoRepository
                 return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var photoData = connection.QueryFirstOrDefault(
+            var photo = connection.QueryFirstOrDefault<Photo>(
                 "SELECT Id, RealPath, FileHash, Width, Height, AddedAt FROM Photos WHERE RealPath = @realPath",
                 new { realPath },
                 _unitOfWork.Transaction);
 
-            if (photoData == null)
+            if (photo == null)
             {
                 return Result<Photo>.Failure(DomainErrors.Photo.NotFound);
             }
 
-            var photo = Photo.Create(photoData.RealPath).Value;
-
-            photo.UpdateHash(photoData.FileHash);
-
-            var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
-            photo.SetDimensions(dimensions);
-
             var tagIds = connection.Query<int>(
                 "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
-                new { Id = photoData.Id },
+                new { Id = photo.Id },
                 _unitOfWork.Transaction);
 
             photo.RestoreTags(tagIds);
@@ -315,32 +301,22 @@ public class SqlitePhotoRepository : IPhotoRepository
                 return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var photosData = connection.Query(
+            var photos = connection.Query<Photo>(
                 @"SELECT p.Id, p.RealPath, p.FileHash, p.Width, p.Height, p.AddedAt 
                   FROM Photos p
                   INNER JOIN AlbumPhotos ap ON p.Id = ap.PhotoId
                   WHERE ap.AlbumId = @albumId",
                 new { albumId },
-                _unitOfWork.Transaction);
+                _unitOfWork.Transaction).ToList();
 
-            var photos = new List<Photo>();
-            foreach (var photoData in photosData)
+            foreach (var photo in photos)
             {
-                var photo = Photo.Create(photoData.RealPath).Value;
-
-                photo.UpdateHash(photoData.FileHash);
-
-                var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
-                photo.SetDimensions(dimensions);
-
                 var tagIds = connection.Query<int>(
                     "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
-                    new { Id = photoData.Id },
+                    new { Id = photo.Id },
                     _unitOfWork.Transaction);
 
                 photo.RestoreTags(tagIds);
-
-                photos.Add(photo);
             }
 
             return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
@@ -378,32 +354,22 @@ public class SqlitePhotoRepository : IPhotoRepository
                 return Result<IReadOnlyCollection<Photo>>.Success(new List<Photo>().AsReadOnly());
             }
 
-            var photosData = connection.Query(
+            var photos = connection.Query<Photo>(
                 @"SELECT p.Id, p.RealPath, p.FileHash, p.Width, p.Height, p.AddedAt 
                   FROM Photos p
                   INNER JOIN PhotoTags pt ON p.Id = pt.PhotoId
                   WHERE pt.TagId IN @tagIds",
                 new { tagIds = tagIdList },
-                _unitOfWork.Transaction);
+                _unitOfWork.Transaction).ToList();
 
-            var photos = new List<Photo>();
-            foreach (var photoData in photosData)
+            foreach (var photo in photos)
             {
-                var photo = Photo.Create(photoData.RealPath).Value;
-
-                photo.UpdateHash(photoData.FileHash);
-
-                var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
-                photo.SetDimensions(dimensions);
-
                 var tagIdListForPhoto = connection.Query<int>(
                     "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
-                    new { Id = photoData.Id },
+                    new { Id = photo.Id },
                     _unitOfWork.Transaction);
 
                 photo.RestoreTags(tagIdListForPhoto);
-
-                photos.Add(photo);
             }
 
             return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
