@@ -53,7 +53,7 @@ public class Photo
     /// Восстанавливает состояние списка тегов из базы данных в обход бизнес-правил.
     /// </summary>
     /// <param name="tags">Список ID тегов.</param>
-    internal ResultVoid RestoreTags(IEnumerable<int> tags)
+    public ResultVoid RestoreTags(IEnumerable<int> tags)
     {
         _tagIds.Clear();
         _tagIds.AddRange(tags);
