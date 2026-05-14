@@ -121,27 +121,57 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
         return ResultVoid.Success();
     }
 
+    /// <summary>
+    ///     Получение фотографий по идентификатору альбома.
+    /// </summary>
+    /// <param name="albumId">идентификатор альбома.</param>
+    /// <returns>
+    ///     Возвращает фотографии.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
     public Result<IReadOnlyCollection<Photo>> GetByAlbumId(int albumId)
     {
-        // var photos = new List<Photo>();
-        //
-        // var album = _fakeAlbumRepository.GetById(albumId);
-        //
-        // if (album.IsFailure) return Result<IReadOnlyCollection<Photo>>.Failure(album.Error);
-        //
-        // foreach (var photoId in album.Value.PhotoIds)
-        // {
-        //     foreach (var photo in _data)
-        //     {
-        //         if (photo.Value.Id == photoId) photos.Add(photo.Value);
-        //     }
-        // }
-        //
-        // return photos.AsReadOnly().ToResult();
+        var album = _fakeAlbumRepository.GetById(albumId);
+        
+        if (album.IsFailure) return Result<IReadOnlyCollection<Photo>>.Failure(album.Error);
+
+        var photos = (
+            from photoId in album.Value.PhotoIds
+            from photo in _data
+            where photo.Value.Id == photoId
+            select photo.Value
+            ).ToList();
+
+        if (photos.Count == 0) return Result<IReadOnlyCollection<Photo>>
+            .Failure(new Error("PhotoRepository.PhotosByAlbumAreNotFound",
+                "Не найдены фотографии по соответствующиму альбому"));
+
+        return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
     }
 
+    /// <summary>
+    ///     Получение фотографий по идентификаторам тегов.
+    /// </summary>
+    /// <param name="tagIds">идентификаторы тегов.</param>
+    /// <returns>
+    ///     Возвращает фотографии.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
     public Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds)
     {
-        throw new NotImplementedException();
+        var photos = (
+            from tagId in tagIds 
+            from pair in _data
+            from photoTagId in pair.Value.TagIds
+            where photoTagId == tagId
+            select pair.Value
+            ).ToList();
+
+        if (photos.Count == 0)
+            return Result<IReadOnlyCollection<Photo>>
+                .Failure(new Error("PhotoRepository.PhotosByTagsAreNotFound",
+                    "Не найдены фотографии по соответствующим тегам"));
+        
+        return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
     }
 }
