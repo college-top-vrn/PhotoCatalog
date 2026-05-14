@@ -1,5 +1,8 @@
 <Solution>
   <Project Path="src/PhotoCatalog.WebApi/PhotoCatalog.WebApi.csproj" />
+  <Folder Name="/Solution Items/">
+    <File Path="compose.yaml" />
+  </Folder>
   <Project Path="src/PhotoCatalog.Application/PhotoCatalog.Application.csproj" />
   <Project Path="src/PhotoCatalog.Domain/PhotoCatalog.Domain.csproj" />
   <Project Path="src/PhotoCatalog.Infrastructure/PhotoCatalog.Infrastructure.csproj" />

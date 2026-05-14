@@ -74,6 +74,19 @@ public static class InfrastructureErrors
     }
 
     /// <summary>
+    ///     Ошибки, связанные с кэшированием.
+    /// </summary>
+    public static class Cache
+    {
+        /// <summary>
+        ///     Ошибка, когда не получается произвести кеширование.
+        /// </summary>
+        public static readonly Error UnknownError = new(
+            "Cache.UnknownError",
+            "Непредвиденная ошибка при получении элемента из кэша.");
+    }
+
+    /// <summary>
     ///     Ошибки, связанные с файловым хранилищем.
     /// </summary>
     public static class FileStorage

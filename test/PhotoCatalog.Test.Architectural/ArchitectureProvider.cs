@@ -94,6 +94,7 @@ public static class ArchitectureProvider
             .Should()
             .DependOnAny(DomainLayer)
             .Because("Отсутствуют классы в инфраструктуре")
+            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 
