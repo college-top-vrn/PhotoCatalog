@@ -47,7 +47,7 @@ public class FakeAlbumRepository : IAlbumRepository
     /// </returns>
     public ResultVoid Add(Album? album)
     {
-        if (album == null)
+        if (album is null)
             return ResultVoid.Failure(new Error("AlbumRepository.CantAddAlbum",
                 "Не удалось добавить альбом"));
 
