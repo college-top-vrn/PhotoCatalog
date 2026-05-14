@@ -14,14 +14,14 @@ namespace PhotoCatalog.Infrastructure.Fakes;
 public class FakeTagRepository : ITagRepository
 {
     /// <summary>
-    ///     Идентификатор последнего элемента.
-    /// </summary>
-    private int _lastId;
-
-    /// <summary>
     ///     Словарь тегов.
     /// </summary>
     private readonly ConcurrentDictionary<int, Tag> _tags = new();
+
+    /// <summary>
+    ///     Идентификатор последнего элемента.
+    /// </summary>
+    private int _lastId;
 
     /// <summary>
     ///     Получение тега по идентификатору.
@@ -85,6 +85,29 @@ public class FakeTagRepository : ITagRepository
     }
 
     /// <summary>
+    ///     Удаление тега.
+    /// </summary>
+    /// <param name="id">идентификатор тега.</param>
+    /// <returns>
+    ///     Возвращает тег.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid Delete(int id)
+    {
+        Result<Tag> searchResult = GetById(id);
+
+        if (searchResult.IsFailure)
+        {
+            return ResultVoid.Failure(new Error("FolderRepository.CantDeleteFolder",
+                "Не удалось удалить папку"));
+        }
+
+        _tags.Remove(id, out _);
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
     ///     Добавление папки.
     /// </summary>
     /// <param name="tag">папка.</param>
@@ -109,28 +132,5 @@ public class FakeTagRepository : ITagRepository
         }
 
         return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Удаление тега.
-    /// </summary>
-    /// <param name="id">идентификатор тега.</param>
-    /// <returns>
-    ///     Возвращает тег.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
-    public Result<Tag> Delete(int id)
-    {
-        Result<Tag> searchResult = GetById(id);
-
-        if (searchResult.IsFailure)
-        {
-            return Result<Tag>.Failure(new Error("FolderRepository.CantDeleteFolder",
-                "Не удалось удалить папку"));
-        }
-
-        _tags.Remove(id, out Tag tag);
-
-        return Result<Tag>.Success(tag!);
     }
 }

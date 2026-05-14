@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
@@ -14,14 +15,14 @@ namespace PhotoCatalog.Infrastructure.Fakes;
 public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPhotoRepository
 {
     /// <summary>
-    ///     Идентификатор последнего элемента.
-    /// </summary>
-    private int _lastId;
-
-    /// <summary>
     ///     Словарь альбомов.
     /// </summary>
     private readonly ConcurrentDictionary<int, Photo> _photos = new();
+
+    /// <summary>
+    ///     Идентификатор последнего элемента.
+    /// </summary>
+    private int _lastId;
 
     /// <summary>
     ///     Получение фотографии по идентификатору.
@@ -136,33 +137,6 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     }
 
     /// <summary>
-    ///     Добавление фото.
-    /// </summary>
-    /// <param name="photo">фото.</param>
-    /// <param name="id">идентификатор фото.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
-    public ResultVoid Add(Photo? photo, int id)
-    {
-        if (photo is null)
-        {
-            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
-                "Фото является null"));
-        }
-
-        if (_photos.TryAdd(id, photo).ToResult().IsFailure)
-        {
-            return ResultVoid
-                .Failure(new Error("PhotoRepository.PhotoWithSameIdAlreadyExist",
-                    "Фото с похожим идентификатором уже существует"));
-        }
-
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
     ///     Получение фотографий по идентификатору альбома.
     /// </summary>
     /// <param name="albumId">идентификатор альбома.</param>
@@ -179,7 +153,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
             return Result<IReadOnlyCollection<Photo>>.Failure(album.Error);
         }
 
-        var photos = (
+        List<Photo> photos = (
             from photoId in album.Value.PhotoIds
             from photo in _photos
             where photo.Value.Id == photoId
@@ -206,7 +180,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// </returns>
     public Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds)
     {
-        var photos = (
+        List<Photo> photos = (
             from tagId in tagIds
             from photo in _photos.Values
             from photoTagId in photo.TagIds
@@ -222,5 +196,32 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
         }
 
         return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+    }
+
+    /// <summary>
+    ///     Добавление фото.
+    /// </summary>
+    /// <param name="photo">фото.</param>
+    /// <param name="id">идентификатор фото.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid Add(Photo? photo, int id)
+    {
+        if (photo is null)
+        {
+            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
+                "Фото является null"));
+        }
+
+        if (_photos.TryAdd(id, photo).ToResult().IsFailure)
+        {
+            return ResultVoid
+                .Failure(new Error("PhotoRepository.PhotoWithSameIdAlreadyExist",
+                    "Фото с похожим идентификатором уже существует"));
+        }
+
+        return ResultVoid.Success();
     }
 }

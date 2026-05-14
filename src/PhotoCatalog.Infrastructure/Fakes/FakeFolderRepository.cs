@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
@@ -40,6 +41,26 @@ public class FakeFolderRepository : IFolderRepository
 
         return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
             "Не удалось найти папку по идентификатору"));
+    }
+
+    /// <summary>
+    ///     Получение всех папок.
+    /// </summary>
+    /// <returns>
+    ///     Возвращает перечисление всех папок.
+    ///     В противном случае вернётся отрицательный результат.
+    /// </returns>
+    public Result<IEnumerable<Folder>> GetAllFolders()
+    {
+        if (_folders.IsEmpty)
+        {
+            return Result<IEnumerable<Folder>>
+                .Failure(new Error("FolderRepository.FoldersNotFound", "Не удалось получить все папки"));
+        }
+
+        IEnumerable<Folder> folders = _folders.Values.AsEnumerable();
+
+        return Result<IEnumerable<Folder>>.Success(folders);
     }
 
     /// <summary>
