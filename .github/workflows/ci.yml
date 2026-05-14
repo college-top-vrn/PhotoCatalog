@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-backend
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   publish:
@@ -20,6 +20,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
@@ -31,20 +34,20 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend
           tags: |
-            # Тег latest только для ветки main
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
-            # Тег dev только для ветки develop
+            # Исправлено: заменено 'main' на 'master', чтобы соответствовать вашим веткам
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/master' }}
+            # Тег dev для ветки develop
             type=raw,value=dev,enable=${{ github.ref == 'refs/heads/develop' }}
-            # Всегда добавляем тег с коротким SHA коммита
+            # SHA тег для каждого билда
             type=sha,format=short
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
-          dockerfile: Dockerfile
+          file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
