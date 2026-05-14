@@ -92,24 +92,65 @@ public static class InfrastructureErrors
     public static class FileStorage
     {
         /// <summary>
-        ///     Ошибка, когда отказано в доступе к файловой системе.
+        /// Ошибка доступа к файлу или директории.
+        /// Возникает при отсутствии прав на чтение/запись/удаление.
         /// </summary>
-        public static readonly Error AccessDenied = new(
+        public static readonly Error AccessDenied = new Error(
             "FileStorage.AccessDenied",
-            "Отказано в доступе к файловой системе.");
+            "Отказано в доступе к файлу или директории. Проверьте права приложения.");
 
         /// <summary>
-        ///     Ошибка, когда на диске недостаточно свободного места.
+        /// Ошибка при переполнении дискового пространства.
+        /// Возникает, когда на целевом диске недостаточно места для сохранения файла.
         /// </summary>
-        public static readonly Error DiskFull = new(
+        public static readonly Error DiskFull = new Error(
             "FileStorage.DiskFull",
-            "На диске недостаточно свободного места.");
+            "Недостаточно свободного места на диске для выполнения операции.");
 
         /// <summary>
-        ///     Ошибка, когда произошла ошибка ввода-вывода при работе с файлом.
+        /// Общая ошибка ввода-вывода.
+        /// Возникает при непредвиденных проблемах с файловой системой.
         /// </summary>
-        public static readonly Error IOError = new(
+        public static readonly Error IOError = new Error(
             "FileStorage.IOError",
             "Произошла ошибка ввода-вывода при работе с файлом.");
+
+        /// <summary>
+        /// Ошибка некорректного пути.
+        /// Возникает, когда указанный путь содержит недопустимые символы или имеет неверный формат.
+        /// </summary>
+        public static readonly Error InvalidPath = new Error(
+            "FileStorage.InvalidPath",
+            "Указанный путь к файлу имеет недопустимый формат.");
+    }
+
+    /// <summary>
+    /// Ошибки, возникающие при извлечении метаданных из файлов.
+    /// </summary>
+    public static class MetadataExtractor
+    {
+        /// <summary>
+        /// Ошибка блокировки файла.
+        /// Возникает, когда файл занят другим процессом (обычно при записи).
+        /// </summary>
+        public static readonly Error FileLocked = new Error(
+            "MetadataExtractor.FileLocked",
+            "Файл заблокирован другим процессом. Повторите попытку позже.");
+
+        /// <summary>
+        /// Ошибка поврежденного файла.
+        /// Возникает, когда структура файла нарушена или он неполный.
+        /// </summary>
+        public static readonly Error FileCorrupted = new Error(
+            "MetadataExtractor.FileCorrupted",
+            "Файл поврежден и не может быть прочитан.");
+
+        /// <summary>
+        /// Ошибка неверного формата.
+        /// Возникает, когда файл не является изображением в поддерживаемом формате.
+        /// </summary>
+        public static readonly Error NotAnImage = new Error(
+            "MetadataExtractor.NotAnImage",
+            "Файл не является изображением или его формат не поддерживается.");
     }
 }
