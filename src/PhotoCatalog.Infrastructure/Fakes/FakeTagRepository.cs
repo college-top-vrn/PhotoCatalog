@@ -20,7 +20,7 @@ public class FakeTagRepository : ITagRepository
     /// <summary>
     ///     Словарь тегов.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Tag> _data = new();
+    private readonly ConcurrentDictionary<int, Tag> _tags = new();
     
     /// <summary>
     ///     Получение тега по идентификатору.
@@ -29,7 +29,7 @@ public class FakeTagRepository : ITagRepository
     /// <returns>Тег.</returns>
     public Result<Tag> GetById(int id)
     {
-        foreach (var pair in _data)
+        foreach (var pair in _tags)
         {
             if (pair.Key == id) return pair.Value.ToResult();
         }
@@ -45,7 +45,7 @@ public class FakeTagRepository : ITagRepository
     /// <returns>Тег.</returns>
     public Result<Tag> GetByName(string name)
     {
-        foreach (var pair in _data)
+        foreach (var pair in _tags)
         {
             if (pair.Value.Name == name) return pair.Value.ToResult();
         }
@@ -64,7 +64,7 @@ public class FakeTagRepository : ITagRepository
     /// </returns>
     public ResultVoid Add(Tag tag)
     {
-        var result = _data
+        var result = _tags
             .TryAdd(_lastId, tag)
             .ToResult();
 
@@ -86,7 +86,7 @@ public class FakeTagRepository : ITagRepository
     /// </returns>
     public Result<Tag> Delete(int id)
     {
-        var result = _data
+        var result = _tags
             .TryRemove(id, out var tag)
             .ToResult();
 

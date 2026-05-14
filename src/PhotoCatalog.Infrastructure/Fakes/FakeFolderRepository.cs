@@ -20,7 +20,7 @@ public class FakeFolderRepository : IFolderRepository
     /// <summary>
     ///     Словарь папок.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Folder> _data = new();
+    private readonly ConcurrentDictionary<int, Folder> _folders = new();
 
     /// <summary>
     ///     Получение папки по идентификатору.
@@ -29,7 +29,7 @@ public class FakeFolderRepository : IFolderRepository
     /// <returns>Папку.</returns>
     public Result<Folder> GetById(int id)
     {
-        foreach (var pair in _data)
+        foreach (var pair in _folders)
         {
             if (pair.Key == id) return pair.Value.ToResult();
         }
@@ -48,7 +48,7 @@ public class FakeFolderRepository : IFolderRepository
     /// </returns>
     public ResultVoid Add(Folder folder)
     {
-        var result = _data
+        var result = _folders
             .TryAdd(_lastId, folder)
             .ToResult();
 
@@ -91,7 +91,7 @@ public class FakeFolderRepository : IFolderRepository
     /// </returns>
     public ResultVoid Delete(int id)
     {
-        var result = _data
+        var result = _folders
             .TryRemove(id, out var folder)
             .ToResult();
 

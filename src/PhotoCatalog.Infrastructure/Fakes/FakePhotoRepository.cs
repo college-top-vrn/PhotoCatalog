@@ -22,7 +22,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// <summary>
     ///     Словарь альбомов.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Photo> _data = new();
+    private readonly ConcurrentDictionary<int, Photo> _photos = new();
 
     /// <summary>
     ///     Получение фотографии по идентификатору.
@@ -31,7 +31,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// <returns>Фотография.</returns>
     public Result<Photo> GetById(int id)
     {
-        foreach (var pair in _data)
+        foreach (var pair in _photos)
         {
             if (pair.Key == id) return pair.Value.ToResult();
         }
@@ -47,7 +47,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// <returns>Фотография.</returns>
     public Result<Photo> GetByPath(string realPath)
     {
-        foreach (var pair in _data)
+        foreach (var pair in _photos)
         {
             if (pair.Value.RealPath == realPath) return pair.Value.ToResult();
         }
@@ -66,7 +66,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// </returns>
     public ResultVoid Add(Photo photo)
     {
-        var result = _data
+        var result = _photos
             .TryAdd(_lastId, photo)
             .ToResult();
 
@@ -110,7 +110,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// </returns>
     public ResultVoid Delete(int id)
     {
-        var result = _data
+        var result = _photos
             .TryRemove(id, out var photo)
             .ToResult();
 
@@ -137,7 +137,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
 
         var photos = (
             from photoId in album.Value.PhotoIds
-            from photo in _data
+            from photo in _photos
             where photo.Value.Id == photoId
             select photo.Value
             ).ToList();
@@ -161,7 +161,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     {
         var photos = (
             from tagId in tagIds 
-            from pair in _data
+            from pair in _photos
             from photoTagId in pair.Value.TagIds
             where photoTagId == tagId
             select pair.Value

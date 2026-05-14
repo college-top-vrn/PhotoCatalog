@@ -20,7 +20,7 @@ public class FakeAlbumRepository : IAlbumRepository
     /// <summary>
     ///     Словарь альбомов.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Album> _data = new();
+    private readonly ConcurrentDictionary<int, Album> _albums = new();
     
     /// <summary>
     ///     Получение альбома по идентификатору.
@@ -29,7 +29,7 @@ public class FakeAlbumRepository : IAlbumRepository
     /// <returns>Альбом.</returns>
     public Result<Album> GetById(int id)
     {
-        foreach (var pair in _data)
+        foreach (var pair in _albums)
         {
             if (pair.Key == id) return pair.Value.ToResult();
         }
@@ -48,7 +48,7 @@ public class FakeAlbumRepository : IAlbumRepository
     /// </returns>
     public ResultVoid Add(Album album)
     {
-        var result = _data
+        var result = _albums
             .TryAdd(_lastId, album)
             .ToResult();
 
@@ -91,7 +91,7 @@ public class FakeAlbumRepository : IAlbumRepository
     /// </returns>
     public ResultVoid Delete(int id)
     {
-        var result = _data
+        var result = _albums
             .TryRemove(id, out var album)
             .ToResult();
 
