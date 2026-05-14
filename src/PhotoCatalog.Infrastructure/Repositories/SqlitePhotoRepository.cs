@@ -15,17 +15,30 @@ using PhotoCatalog.Infrastructure.UnitOfWork;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
+/// <summary>
+///     Реализация репозитория для работы с фотографиями в SQLite с использованием Dapper.
+/// </summary>
 public class SqlitePhotoRepository : IPhotoRepository
 {
     private readonly SqliteUnitOfWork _unitOfWork;
-    private readonly ILogger<SqliteAlbumRepository> _logger;
+    private readonly ILogger<SqlitePhotoRepository> _logger;
 
-    public SqlitePhotoRepository(SqliteUnitOfWork unitOfWork, ILogger<SqliteAlbumRepository> logger)
+    /// <summary>
+    ///     Инициализирует новый экземпляр репозитория фотографий.
+    /// </summary>
+    /// <param name="unitOfWork">Экземпляр Unit of Work для доступа к соединению и транзакции.</param>
+    /// <param name="logger">Логгер для записи ошибок.</param>
+    public SqlitePhotoRepository(SqliteUnitOfWork unitOfWork, ILogger<SqlitePhotoRepository> logger)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
 
+    /// <summary>
+    ///     Получает фотографию по уникальному идентификатору.
+    /// </summary>
+    /// <param name="id">Идентификатор фотографии.</param>
+    /// <returns>Результат операции с найденной фотографией или ошибкой.</returns>
     public Result<Photo> GetById(int id)
     {
         try
@@ -72,11 +85,16 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе GetById для фото {Id}", id);
+            _logger.LogError(ex, "Неожиданная ошибка в методе GetById для фотографии {Id}", id);
             return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
+    /// <summary>
+    ///     Получает фотографию по реальному пути к файлу.
+    /// </summary>
+    /// <param name="realPath">Реальный путь к файлу.</param>
+    /// <returns>Результат операции с найденной фотографией или ошибкой.</returns>
     public Result<Photo> GetByPath(string realPath)
     {
         try
@@ -128,6 +146,11 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
     }
 
+    /// <summary>
+    ///     Добавляет новую фотографию в репозиторий.
+    /// </summary>
+    /// <param name="photo">Объект фотографии для добавления.</param>
+    /// <returns>Результат операции.</returns>
     public ResultVoid Add(Photo photo)
     {
         try
@@ -173,6 +196,11 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
     }
 
+    /// <summary>
+    ///     Обновляет существующую фотографию.
+    /// </summary>
+    /// <param name="photo">Объект фотографии с обновленными данными.</param>
+    /// <returns>Результат операции.</returns>
     public ResultVoid Update(Photo photo)
     {
         if (photo == null)
@@ -189,9 +217,10 @@ public class SqlitePhotoRepository : IPhotoRepository
             }
 
             var rowsAffected = connection.Execute(
-                " UPDATE Photos SET RealPath = @RealPath, FileHash = @FileHash, Width = @Width, Height = @Height, AddedAt = @AddedAt WHERE Id = @Id",
+                "UPDATE Photos SET RealPath = @RealPath, FileHash = @FileHash, Width = @Width, Height = @Height, AddedAt = @AddedAt WHERE Id = @Id",
                 new
                 {
+                    photo.Id,
                     photo.RealPath,
                     photo.FileHash,
                     Width = photo.Dimensions.Width,
@@ -199,14 +228,15 @@ public class SqlitePhotoRepository : IPhotoRepository
                     photo.AddedAt
                 },
                 _unitOfWork.Transaction);
+
             if (rowsAffected == 0)
             {
                 return ResultVoid.Failure(DomainErrors.Photo.NotFound);
             }
 
             connection.Execute(
-                "INSERT INTO PhotoTags (PhotoId, TagId) VALUES (@PhotoId, @TagId)",
-                new { PhotoId = photo.Id, TagId = photo.TagIds },
+                "DELETE FROM PhotoTags WHERE PhotoId = @PhotoId",
+                new { PhotoId = photo.Id },
                 _unitOfWork.Transaction);
 
             foreach (var tagId in photo.TagIds)
@@ -221,16 +251,21 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка Sqlite в методе Update {Id}", photo.Id);
+            _logger.LogError(ex, "Ошибка SQLite в методе Update для фотографии {Id}", photo.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе Update {Id}", photo.Id);
+            _logger.LogError(ex, "Неожиданная ошибка в методе Update для фотографии {Id}", photo.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
+    /// <summary>
+    ///     Удаляет фотографию по идентификатору.
+    /// </summary>
+    /// <param name="id">Идентификатор фотографии для удаления.</param>
+    /// <returns>Результат операции.</returns>
     public ResultVoid Delete(int id)
     {
         try
@@ -270,6 +305,11 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
     }
 
+    /// <summary>
+    ///     Получает все фотографии альбома.
+    /// </summary>
+    /// <param name="albumId">Идентификатор альбома.</param>
+    /// <returns>Результат операции с коллекцией фотографий альбома.</returns>
     public Result<IReadOnlyCollection<Photo>> GetByAlbumId(int albumId)
     {
         try
@@ -325,6 +365,11 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
     }
 
+    /// <summary>
+    ///     Получает фотографии по списку идентификаторов тегов.
+    /// </summary>
+    /// <param name="tagIds">Идентификаторы тегов.</param>
+    /// <returns>Результат операции с коллекцией фотографий, содержащих указанные теги.</returns>
     public Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds)
     {
         try
