@@ -3,10 +3,11 @@
 using System;
 using System.IO;
 
-using Serilog;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
+
+using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Services;
 
@@ -90,13 +91,13 @@ public sealed class LocalFileStorage : IFileStorage
 
             // Копирование файла (overwrite = false для предотвращения случайной перезаписи)
             File.Copy(sourcePath, targetFullPath, overwrite: false);
-            
+
             _logger.Information("Файл успешно сохранен: {TargetPath}", targetFullPath);
             return Result<string>.Success(targetFullPath);
         }
         catch (UnauthorizedAccessException ex)
         {
-            _logger.Error(ex, "Отказано в доступе при сохранении файла. SourcePath={SourcePath}, NewFileName={NewFileName}", 
+            _logger.Error(ex, "Отказано в доступе при сохранении файла. SourcePath={SourcePath}, NewFileName={NewFileName}",
                 sourcePath, newFileName);
             return Result<string>.Failure(InfrastructureErrors.FileStorage.AccessDenied);
         }
@@ -107,7 +108,7 @@ public sealed class LocalFileStorage : IFileStorage
         }
         catch (IOException ex)
         {
-            _logger.Error(ex, "Ошибка ввода-вывода при сохранении файла. SourcePath={SourcePath}, Message={ErrorMessage}", 
+            _logger.Error(ex, "Ошибка ввода-вывода при сохранении файла. SourcePath={SourcePath}, Message={ErrorMessage}",
                 sourcePath, ex.Message);
             return Result<string>.Failure(InfrastructureErrors.FileStorage.IOError);
         }
@@ -156,7 +157,7 @@ public sealed class LocalFileStorage : IFileStorage
         }
         catch (IOException ex)
         {
-            _logger.Error(ex, "Ошибка ввода-вывода при удалении файла: {FilePath}, Message={ErrorMessage}", 
+            _logger.Error(ex, "Ошибка ввода-вывода при удалении файла: {FilePath}, Message={ErrorMessage}",
                 filePath, ex.Message);
             return ResultVoid.Failure(InfrastructureErrors.FileStorage.IOError);
         }
@@ -175,10 +176,10 @@ public sealed class LocalFileStorage : IFileStorage
     /// <returns>Всегда возвращает успешный Result, содержащий true, если файл существует, иначе false.</returns>
     public Result<bool> FileExists(string filePath)
     {
-        
+
         try
         {
-            
+
             if (string.IsNullOrWhiteSpace(filePath))
             {
                 _logger.Debug("Путь к файлу пуст, возвращаем false");
@@ -220,7 +221,7 @@ public sealed class LocalFileStorage : IFileStorage
 
             // Предотвращение попыток выхода за пределы базовой директории
             var normalizedPath = fileName.Replace('\\', '/').TrimStart('/');
-            
+
             // Запрещаем использование ".." для навигации вверх
             if (normalizedPath.Contains(".."))
             {
