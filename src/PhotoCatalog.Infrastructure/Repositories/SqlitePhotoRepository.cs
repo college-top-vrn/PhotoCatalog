@@ -114,7 +114,7 @@ public class SqlitePhotoRepository : IPhotoRepository
             }
 
             var photo = Photo.Create(photoData.RealPath).Value;
-            
+
             photo.UpdateHash(photoData.FileHash);
 
             var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
@@ -327,7 +327,7 @@ public class SqlitePhotoRepository : IPhotoRepository
             foreach (var photoData in photosData)
             {
                 var photo = Photo.Create(photoData.RealPath).Value;
-                
+
                 photo.UpdateHash(photoData.FileHash);
 
                 var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
@@ -390,7 +390,7 @@ public class SqlitePhotoRepository : IPhotoRepository
             foreach (var photoData in photosData)
             {
                 var photo = Photo.Create(photoData.RealPath).Value;
-                
+
                 photo.UpdateHash(photoData.FileHash);
 
                 var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
