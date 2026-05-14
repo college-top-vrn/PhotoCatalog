@@ -5,7 +5,8 @@ using System.Linq;
 using Dapper;
 
 using Microsoft.Data.Sqlite;
-using Microsoft.Extensions.Logging;
+
+using Serilog;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
@@ -21,14 +22,14 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 public class SqlitePhotoRepository : IPhotoRepository
 {
     private readonly SqliteUnitOfWork _unitOfWork;
-    private readonly ILogger<SqlitePhotoRepository> _logger;
+    private readonly ILogger _logger;
 
     /// <summary>
     ///     Инициализирует новый экземпляр репозитория фотографий.
     /// </summary>
     /// <param name="unitOfWork">Экземпляр Unit of Work для доступа к соединению и транзакции.</param>
     /// <param name="logger">Логгер для записи ошибок.</param>
-    public SqlitePhotoRepository(SqliteUnitOfWork unitOfWork, ILogger<SqlitePhotoRepository> logger)
+    public SqlitePhotoRepository(SqliteUnitOfWork unitOfWork, ILogger logger)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -80,12 +81,12 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе GetById для фотографии {Id}", id);
+            _logger.Error(ex, "Ошибка SQLite в методе GetById для фотографии {Id}", id);
             return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе GetById для фотографии {Id}", id);
+            _logger.Error(ex, "Неожиданная ошибка в методе GetById для фотографии {Id}", id);
             return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
@@ -136,12 +137,12 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе GetByPath для пути {RealPath}", realPath);
+            _logger.Error(ex, "Ошибка SQLite в методе GetByPath для пути {RealPath}", realPath);
             return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе GetByPath для пути {RealPath}", realPath);
+            _logger.Error(ex, "Неожиданная ошибка в методе GetByPath для пути {RealPath}", realPath);
             return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
@@ -186,12 +187,12 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе Add для фотографии {Id}", photo.Id);
+            _logger.Error(ex, "Ошибка SQLite в методе Add для фотографии {Id}", photo.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе Add для фотографии {Id}", photo.Id);
+            _logger.Error(ex, "Неожиданная ошибка в методе Add для фотографии {Id}", photo.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
@@ -251,12 +252,12 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе Update для фотографии {Id}", photo.Id);
+            _logger.Error(ex, "Ошибка SQLite в методе Update для фотографии {Id}", photo.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе Update для фотографии {Id}", photo.Id);
+            _logger.Error(ex, "Неожиданная ошибка в методе Update для фотографии {Id}", photo.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
@@ -295,12 +296,12 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе Delete для фотографии {Id}", id);
+            _logger.Error(ex, "Ошибка SQLite в методе Delete для фотографии {Id}", id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе Delete для фотографии {Id}", id);
+            _logger.Error(ex, "Неожиданная ошибка в методе Delete для фотографии {Id}", id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
@@ -355,12 +356,12 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе GetByAlbumId для альбома {AlbumId}", albumId);
+            _logger.Error(ex, "Ошибка SQLite в методе GetByAlbumId для альбома {AlbumId}", albumId);
             return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе GetByAlbumId для альбома {AlbumId}", albumId);
+            _logger.Error(ex, "Неожиданная ошибка в методе GetByAlbumId для альбома {AlbumId}", albumId);
             return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
@@ -421,12 +422,12 @@ public class SqlitePhotoRepository : IPhotoRepository
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе GetByTags");
+            _logger.Error(ex, "Ошибка SQLite в методе GetByTags");
             return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе GetByTags");
+            _logger.Error(ex, "Неожиданная ошибка в методе GetByTags");
             return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
