@@ -65,7 +65,7 @@ public static class DomainErrors
         ///     Ошибка, когда данный тег не существует в этой фотографии.
         /// </summary>
         public static readonly Error TagNotExists = new(
-            "Photo.DuplicateTag",
+            "Photo.TagNotExists",
             "Данный тег не существует в этой фотографии.");
 
         /// <summary>
