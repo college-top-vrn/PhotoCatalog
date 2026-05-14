@@ -3,12 +3,13 @@ using System;
 using Dapper;
 
 using Microsoft.Data.Sqlite;
-using Serilog;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
+
+using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
@@ -129,7 +130,7 @@ public class SqliteTagRepository : ITagRepository
                                WHERE Id = @Id
                                """;
 
-            int affectedRows = connection.Execute(sql, new {teg.Id, teg.Name });
+            int affectedRows = connection.Execute(sql, new { teg.Id, teg.Name });
 
             if (affectedRows == 0)
             {
@@ -137,7 +138,7 @@ public class SqliteTagRepository : ITagRepository
                 return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
             }
 
-            _logger.Information("Тег с Id = {Id} успешно обновлен",teg.Id);
+            _logger.Information("Тег с Id = {Id} успешно обновлен", teg.Id);
             return ResultVoid.Success();
         }
         catch (SqliteException ex)
@@ -170,7 +171,7 @@ public class SqliteTagRepository : ITagRepository
         }
         catch (SqliteException ex) when (ex.SqliteErrorCode == sqliteConstraintErrorCode)
         {
-            _logger.Warning(ex, "Невозможно удалить тег с Id = {Id}: имеются дочерние объекты",id);
+            _logger.Warning(ex, "Невозможно удалить тег с Id = {Id}: имеются дочерние объекты", id);
             return ResultVoid.Failure(InfrastructureErrors.Database.HasChildren);
         }
         catch (SqliteException ex)
