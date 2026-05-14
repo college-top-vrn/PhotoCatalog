@@ -60,8 +60,10 @@ public class SqlitePhotoRepository : IPhotoRepository
             }
 
             var photo = Photo.Create(photoData.RealPath).Value;
+
             var idProperty = typeof(Photo).GetProperty("Id");
             idProperty?.SetValue(photo, photoData.Id);
+
             photo.UpdateHash(photoData.FileHash);
 
             var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
@@ -70,11 +72,9 @@ public class SqlitePhotoRepository : IPhotoRepository
             var tagIds = connection.Query<int>(
                 "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
                 new { Id = id },
-                _unitOfWork.Transaction).ToList();
+                _unitOfWork.Transaction);
 
-            var restoreMethod = typeof(Photo).GetMethod("RestoreTags",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            restoreMethod?.Invoke(photo, new object[] { tagIds });
+            photo.RestoreTags(tagIds);
 
             return Result<Photo>.Success(photo);
         }
@@ -116,8 +116,10 @@ public class SqlitePhotoRepository : IPhotoRepository
             }
 
             var photo = Photo.Create(photoData.RealPath).Value;
+
             var idProperty = typeof(Photo).GetProperty("Id");
             idProperty?.SetValue(photo, photoData.Id);
+
             photo.UpdateHash(photoData.FileHash);
 
             var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
@@ -126,11 +128,9 @@ public class SqlitePhotoRepository : IPhotoRepository
             var tagIds = connection.Query<int>(
                 "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
                 new { Id = photoData.Id },
-                _unitOfWork.Transaction).ToList();
+                _unitOfWork.Transaction);
 
-            var restoreMethod = typeof(Photo).GetMethod("RestoreTags",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            restoreMethod?.Invoke(photo, new object[] { tagIds });
+            photo.RestoreTags(tagIds);
 
             return Result<Photo>.Success(photo);
         }
@@ -326,14 +326,16 @@ public class SqlitePhotoRepository : IPhotoRepository
                   INNER JOIN AlbumPhotos ap ON p.Id = ap.PhotoId
                   WHERE ap.AlbumId = @albumId",
                 new { albumId },
-                _unitOfWork.Transaction).ToList();
+                _unitOfWork.Transaction);
 
             var photos = new List<Photo>();
             foreach (var photoData in photosData)
             {
                 var photo = Photo.Create(photoData.RealPath).Value;
+
                 var idProperty = typeof(Photo).GetProperty("Id");
                 idProperty?.SetValue(photo, photoData.Id);
+
                 photo.UpdateHash(photoData.FileHash);
 
                 var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
@@ -342,11 +344,9 @@ public class SqlitePhotoRepository : IPhotoRepository
                 var tagIds = connection.Query<int>(
                     "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
                     new { Id = photoData.Id },
-                    _unitOfWork.Transaction).ToList();
+                    _unitOfWork.Transaction);
 
-                var restoreMethod = typeof(Photo).GetMethod("RestoreTags",
-                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                restoreMethod?.Invoke(photo, new object[] { tagIds });
+                photo.RestoreTags(tagIds);
 
                 photos.Add(photo);
             }
@@ -390,18 +390,18 @@ public class SqlitePhotoRepository : IPhotoRepository
                 @"SELECT p.Id, p.RealPath, p.FileHash, p.Width, p.Height, p.AddedAt 
                   FROM Photos p
                   INNER JOIN PhotoTags pt ON p.Id = pt.PhotoId
-                  WHERE pt.TagId IN @tagIds
-                  GROUP BY p.Id
-                  HAVING COUNT(DISTINCT pt.TagId) = @tagCount",
-                new { tagIds = tagIdList, tagCount = tagIdList.Count },
-                _unitOfWork.Transaction).ToList();
+                  WHERE pt.TagId IN @tagIds",
+                new { tagIds = tagIdList },
+                _unitOfWork.Transaction);
 
             var photos = new List<Photo>();
             foreach (var photoData in photosData)
             {
                 var photo = Photo.Create(photoData.RealPath).Value;
+
                 var idProperty = typeof(Photo).GetProperty("Id");
                 idProperty?.SetValue(photo, photoData.Id);
+
                 photo.UpdateHash(photoData.FileHash);
 
                 var dimensions = Domain.ValueObjects.Dimensions.Create(photoData.Width, photoData.Height).Value;
@@ -410,11 +410,9 @@ public class SqlitePhotoRepository : IPhotoRepository
                 var tagIdListForPhoto = connection.Query<int>(
                     "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
                     new { Id = photoData.Id },
-                    _unitOfWork.Transaction).ToList();
+                    _unitOfWork.Transaction);
 
-                var restoreMethod = typeof(Photo).GetMethod("RestoreTags",
-                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                restoreMethod?.Invoke(photo, new object[] { tagIdListForPhoto });
+                photo.RestoreTags(tagIdListForPhoto);
 
                 photos.Add(photo);
             }
