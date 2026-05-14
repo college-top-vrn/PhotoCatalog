@@ -978,6 +978,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория тегов с использованием SQLite и Dapper.\nРаботает с таблицей Tags (Id, Name).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.yml",
       "output": {
         ".html": {
