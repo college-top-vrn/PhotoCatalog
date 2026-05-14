@@ -1,4 +1,6 @@
-﻿namespace PhotoCatalog.Domain.Primitives;
+﻿using System.Runtime.InteropServices.JavaScript;
+
+namespace PhotoCatalog.Domain.Primitives;
 
 /// <summary>
 ///     Единый статический класс (реестр),
@@ -65,6 +67,20 @@ public static class DomainErrors
         public static readonly Error TagNotExists = new(
             "Photo.DuplicateTag",
             "Данный тег не существует в этой фотографии.");
+
+        /// <summary>
+        ///     Ошибка, когда данная фотография не найдена.
+        /// </summary>
+        public static readonly Error NotFound = new(
+            "Photo.NotFound",
+            "Данная фотография не найдена");
+
+        /// <summary>
+        ///     Ошибка, когда данная фотография пустая.
+        /// </summary>
+        public static readonly Error NullPhoto = new(
+            "Photo.NullPhoto",
+            "Данная фотография пустая");
     }
 
     /// <summary>
