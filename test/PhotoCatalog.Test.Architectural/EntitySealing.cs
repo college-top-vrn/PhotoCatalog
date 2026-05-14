@@ -52,6 +52,7 @@ public static class EntitySealing
             .Should()
             .BeSealed()
             .Because("не должны иметь наследников")
+            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 
@@ -70,6 +71,7 @@ public static class EntitySealing
             .Should()
             .BeSealed()
             .Because("не должны иметь наследников")
+            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 }

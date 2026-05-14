@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 using ArchUnitNET.Domain;
 using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
@@ -7,6 +9,8 @@ using PhotoCatalog.Domain.Interfaces.Repositories;
 using Xunit;
 
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
+
+using Architecture = ArchUnitNET.Domain.Architecture;
 
 namespace PhotoCatalog.Test.Architectural;
 

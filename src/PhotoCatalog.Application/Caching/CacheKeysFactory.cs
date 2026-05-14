@@ -16,6 +16,16 @@ public static class CacheKeysFactory
     private const string TreeTagSuffix = "folders-tree-tag";
 
     /// <summary>
+    ///     Ключ для кэширования отдельной папки по её идентификатору.
+    /// </summary>
+    /// <param name="folderId">Идентификатор папки.</param>
+    /// <returns>Уникальный ключ вида <c>key:folder:{folderId}</c>.</returns>
+    public static string GetFolderKey(int folderId)
+    {
+        return $"{KeyPrefix}:{FolderInfix}:{folderId}";
+    }
+
+    /// <summary>
     ///     Ключ для списка альбомов конкретной папки.
     /// </summary>
     /// <param name="folderId">Идентификатор папки.</param>

@@ -3,6 +3,7 @@ using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
 
 using PhotoCatalog.Domain.Interfaces.Repositories;
+using PhotoCatalog.Infrastructure.Repositories;
 
 using Xunit;
 
@@ -18,7 +19,9 @@ public class RepositoriesNameСonvention
 {
     private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
-            typeof(IPhotoRepository).Assembly
+            typeof(IPhotoRepository).Assembly,
+            typeof(SqliteAlbumRepository).Assembly,
+            typeof(SqliteFolderRepository).Assembly
         ).Build();
 
     [Fact]
@@ -37,7 +40,7 @@ public class RepositoriesNameСonvention
     {
         Classes()
             .That()
-            .ResideInNamespaceMatching(@"^PhotoCatalog.Infrastructure\Repositories(\..*)?$")
+            .ResideInNamespaceMatching(@"^PhotoCatalog.Infrastructure\.Repositories(\..*)?$")
             .And().AreNotAbstract()
             .Should().HaveNameMatching(".*Repository$")
             .Because("Реализации репозиториев должны иметь суффикс 'Repository'")

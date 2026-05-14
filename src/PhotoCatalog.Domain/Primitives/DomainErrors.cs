@@ -1,4 +1,6 @@
-﻿namespace PhotoCatalog.Domain.Primitives;
+﻿using System.Runtime.InteropServices.JavaScript;
+
+namespace PhotoCatalog.Domain.Primitives;
 
 /// <summary>
 ///     Единый статический класс (реестр),
@@ -63,8 +65,22 @@ public static class DomainErrors
         ///     Ошибка, когда данный тег не существует в этой фотографии.
         /// </summary>
         public static readonly Error TagNotExists = new(
-            "Photo.DuplicateTag",
+            "Photo.TagNotExists",
             "Данный тег не существует в этой фотографии.");
+
+        /// <summary>
+        ///     Ошибка, когда данная фотография не найдена.
+        /// </summary>
+        public static readonly Error NotFound = new(
+            "Photo.NotFound",
+            "Данная фотография не найдена");
+
+        /// <summary>
+        ///     Ошибка, когда данная фотография пустая.
+        /// </summary>
+        public static readonly Error NullPhoto = new(
+            "Photo.NullPhoto",
+            "Данная фотография пустая");
     }
 
     /// <summary>
@@ -105,5 +121,19 @@ public static class DomainErrors
         public static readonly Error DuplicatePhoto = new(
             "Album.DuplicatePhoto",
             "Эта фотография уже находится в данном альбоме.");
+
+        /// <summary>
+        ///     Ошибка, когда альбом не найден.
+        /// </summary>
+        public static readonly Error NotFound = new(
+            "Album.NotFound",
+            "Альбом не найден.");
+
+        /// <summary>
+        ///     Ошибка, когда передан пустой альбом.
+        /// </summary>
+        public static readonly Error NullAlbum = new(
+            "Album.NullAlbum",
+            "Альбом не может быть null.");
     }
 }

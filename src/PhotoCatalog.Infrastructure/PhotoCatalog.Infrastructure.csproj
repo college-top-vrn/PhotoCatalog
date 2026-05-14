@@ -2,13 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
+    <ProjectReference Include="..\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
+    <ProjectReference Include="..\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Dapper"/>
+    <PackageReference Include="Microsoft.Data.Sqlite.Core"/>
+    <PackageReference Include="Microsoft.Extensions.Logging"/>
+    <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
   </ItemGroup>
 
 </Project>
