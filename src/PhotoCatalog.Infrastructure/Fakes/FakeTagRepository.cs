@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
@@ -16,12 +17,12 @@ public class FakeTagRepository : ITagRepository
     ///     Идентификатор последнего элемента.
     /// </summary>
     private int _lastId;
-    
+
     /// <summary>
     ///     Словарь тегов.
     /// </summary>
-    private ConcurrentDictionary<int, Tag> _tags = new();
-    
+    private readonly ConcurrentDictionary<int, Tag> _tags = new();
+
     /// <summary>
     ///     Получение тега по идентификатору.
     /// </summary>
@@ -29,9 +30,13 @@ public class FakeTagRepository : ITagRepository
     /// <returns>Тег.</returns>
     public Result<Tag> GetById(int id)
     {
-        foreach (var pair in _tags)
+        foreach (KeyValuePair<int, Tag> pair in _tags)
+        {
             if (pair.Key == id)
+            {
                 return Result<Tag>.Success(pair.Value);
+            }
+        }
 
         return Result<Tag>.Failure(new Error("TagRepository.TagNotFound",
             "Не удалось найти тег по идентификатору"));
@@ -44,9 +49,13 @@ public class FakeTagRepository : ITagRepository
     /// <returns>Тег.</returns>
     public Result<Tag> GetByName(string name)
     {
-        foreach (var pair in _tags.Values)
+        foreach (Tag pair in _tags.Values)
+        {
             if (pair.Name == name)
+            {
                 return Result<Tag>.Success(pair);
+            }
+        }
 
         return Result<Tag>.Failure(new Error("TagRepository.TagNotFound",
             "Не удалось найти тег по идентификатору"));
@@ -63,8 +72,10 @@ public class FakeTagRepository : ITagRepository
     public ResultVoid Add(Tag? tag)
     {
         if (tag is null)
+        {
             return ResultVoid.Failure(new Error("TagRepository.CantAddTag",
                 "Не удалось добавить тег"));
+        }
 
         _lastId += 1;
 
@@ -72,7 +83,7 @@ public class FakeTagRepository : ITagRepository
 
         return ResultVoid.Success();
     }
-    
+
     /// <summary>
     ///     Добавление папки.
     /// </summary>
@@ -85,13 +96,17 @@ public class FakeTagRepository : ITagRepository
     public ResultVoid Add(Tag? tag, int id)
     {
         if (tag is null)
+        {
             return ResultVoid.Failure(new Error("TagRepository.TagIsNull",
                 "Тег является null"));
+        }
 
         if (_tags.TryAdd(id, tag).ToResult().IsFailure)
+        {
             return ResultVoid
                 .Failure(new Error("TagRepository.TagWithSameIdAlreadyExist",
                     "Тег с похожим идентификатором уже существует"));
+        }
 
         return ResultVoid.Success();
     }
@@ -106,11 +121,13 @@ public class FakeTagRepository : ITagRepository
     /// </returns>
     public Result<Tag> Delete(int id)
     {
-        var searchResult = GetById(id);
+        Result<Tag> searchResult = GetById(id);
 
         if (searchResult.IsFailure)
+        {
             return Result<Tag>.Failure(new Error("FolderRepository.CantDeleteFolder",
                 "Не удалось удалить папку"));
+        }
 
         _tags.Remove(id, out Tag tag);
 
