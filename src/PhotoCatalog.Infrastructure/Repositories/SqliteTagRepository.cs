@@ -124,9 +124,8 @@ public class SqliteTagRepository : ITagRepository
             using SqliteConnection connection = new(_connectionString);
             connection.Open();
             const string sql = """
-                               UPDATE Folders
-                               SET ParentFolderId = @ParentFolderId,
-                                   Name = @Name
+                               UPDATE Tags
+                               SET Name = @Name
                                WHERE Id = @Id
                                """;
 
@@ -151,29 +150,25 @@ public class SqliteTagRepository : ITagRepository
     /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
-        const int sqliteConstraintErrorCode = 19;
+        
         try
         {
             using SqliteConnection connection = new(_connectionString);
             connection.Open();
 
-            const string sql = "DELETE FROM Folders WHERE Id = @Id";
+            const string sql = "DELETE FROM Tegs WHERE Id = @Id";
             int affectedRows = connection.Execute(sql, new { Id = id });
 
             if (affectedRows == 0)
             {
-                _logger.Warning("Попытка удалить несуществующий тег с Id = {FolderId}", id);
+                _logger.Warning("Попытка удалить несуществующий тег с Id = {Id}", id);
                 return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
             }
 
             _logger.Information("Тег с Id = {Id} успешно удалена", id);
             return ResultVoid.Success();
         }
-        catch (SqliteException ex) when (ex.SqliteErrorCode == sqliteConstraintErrorCode)
-        {
-            _logger.Warning(ex, "Невозможно удалить тег с Id = {Id}: имеются дочерние объекты", id);
-            return ResultVoid.Failure(InfrastructureErrors.Database.HasChildren);
-        }
+        
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite при удалении тега с Id = {Id}", id);
