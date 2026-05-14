@@ -8,12 +8,11 @@ namespace PhotoCatalog.Test.Unit;
 
 public static class FakeRepositoriesTest
 {
-
     [Fact]
     public static void AlbumRepository_AddAlbum_WithRightValues()
     {
-        var fakeAlbumRepository = new FakeAlbumRepository();
-        
+        FakeAlbumRepository fakeAlbumRepository = new();
+
         fakeAlbumRepository.Add(Album.Create("Test", 0).Value);
 
         string albumName = fakeAlbumRepository.GetById(1).Value.Name;
@@ -24,8 +23,8 @@ public static class FakeRepositoriesTest
     [Fact]
     public static void AlbumRepository_AddAlbum_AddingNull()
     {
-        var fakeAlbumRepository = new FakeAlbumRepository();
-        
+        FakeAlbumRepository fakeAlbumRepository = new();
+
         Error result = fakeAlbumRepository.Add(null).Error;
 
         Error expectedResult = new("AlbumRepository.CantAddAlbum",
@@ -38,8 +37,8 @@ public static class FakeRepositoriesTest
     [Fact]
     public static void AlbumRepository_UpdateAlbum_WithRightValues()
     {
-        var fakeAlbumRepository = new FakeAlbumRepository();
-        
+        FakeAlbumRepository fakeAlbumRepository = new();
+
         fakeAlbumRepository.Add(Album.Create("Test", 1).Value);
 
         Result<Album> oldAlbum = fakeAlbumRepository.GetById(1);
@@ -54,8 +53,8 @@ public static class FakeRepositoriesTest
     [Fact]
     public static void AlbumRepository_UpdateAlbum_UpdatingWithNonexistentId()
     {
-        var fakeAlbumRepository = new FakeAlbumRepository();
-        
+        FakeAlbumRepository fakeAlbumRepository = new();
+
         Error resultError = fakeAlbumRepository.Update(Album.Create("Test3", 40).Value).Error;
 
         Error expectedError = new("AlbumRepository.CantDeleteAlbum",
@@ -68,8 +67,8 @@ public static class FakeRepositoriesTest
     [Fact]
     public static void AlbumRepository_UpdateAlbum_UpdatingWithNull()
     {
-        var fakeAlbumRepository = new FakeAlbumRepository();
-        
+        FakeAlbumRepository fakeAlbumRepository = new();
+
         Error resultError = fakeAlbumRepository.Update(null).Error;
 
         Error expectedError = new("AlbumRepository.AlbumIsNull",
@@ -82,8 +81,8 @@ public static class FakeRepositoriesTest
     [Fact]
     public static void AlbumRepository_DeleteAlbum_WithExistingId()
     {
-        var fakeAlbumRepository = new FakeAlbumRepository();
-        
+        FakeAlbumRepository fakeAlbumRepository = new();
+
         Album? album = Album.Create("Test", 1).Value;
 
         fakeAlbumRepository.Add(album);
@@ -107,8 +106,8 @@ public static class FakeRepositoriesTest
     [Fact]
     public static void AlbumRepository_DeleteAlbum_WithNonexistentId()
     {
-        var fakeAlbumRepository = new FakeAlbumRepository();
-        
+        FakeAlbumRepository fakeAlbumRepository = new();
+
         Album? album = Album.Create("Test", 1).Value;
 
         fakeAlbumRepository.Add(album);
