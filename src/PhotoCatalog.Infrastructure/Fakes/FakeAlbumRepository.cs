@@ -30,9 +30,8 @@ public class FakeAlbumRepository : IAlbumRepository
     public Result<Album> GetById(int id)
     {
         foreach (var pair in _albums)
-        {
-            if (pair.Key == id) return Result<Album>.Success(pair.Value);
-        }
+            if (pair.Key == id)
+                return Result<Album>.Success(pair.Value);
 
         return Result<Album>.Failure(new Error("AlbumRepository.AlbumNotFound",
             "Не удалось найти альбом по идентификатору"));
@@ -48,26 +47,38 @@ public class FakeAlbumRepository : IAlbumRepository
     /// </returns>
     public ResultVoid Add(Album? album)
     {
-        if (album == null) return ResultVoid.Failure(new Error("AlbumRepository.CantAddAlbum",
+        if (album == null)
+            return ResultVoid.Failure(new Error("AlbumRepository.CantAddAlbum",
                 "Не удалось добавить альбом"));
 
         _lastId += 1;
-        
+
         _albums
             .TryAdd(_lastId, album)
             .ToResult();
 
         return ResultVoid.Success();
     }
-    
+
+    /// <summary>
+    ///     Добавление альбома.
+    /// </summary>
+    /// <param name="album">альбом.</param>
+    /// <param name="id">идентификатор альбома.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
     public ResultVoid Add(Album? album, int id)
     {
-        if (album is null) return ResultVoid.Failure(new Error("AlbumRepository.CantAddAlbum",
-            "Не удалось добавить альбом"));
-        
-        _albums
-            .TryAdd(id, album)
-            .ToResult();
+        if (album is null)
+            return ResultVoid.Failure(new Error("AlbumRepository.AlbumIsNull",
+                "Альбом является null"));
+
+        if (_albums.TryAdd(id, album).ToResult().IsFailure)
+            return ResultVoid
+                .Failure(new Error("AlbumRepository.AlbumWithSameIdAlreadyExist",
+                    "Альбом с похожим идентификатором уже существует"));
 
         return ResultVoid.Success();
     }
@@ -82,11 +93,12 @@ public class FakeAlbumRepository : IAlbumRepository
     /// </returns>
     public ResultVoid Update(Album? album)
     {
-        if (album is null) return ResultVoid.Failure(new Error("AlbumRepository.CantAddNull",
-            "Нельзя добавлять null"));
-        
+        if (album is null)
+            return ResultVoid.Failure(new Error("AlbumRepository.AlbumIsNull",
+                "Альбом является null"));
+
         var deleteResult = Delete(album.Id);
-        
+
         if (deleteResult.IsFailure) return ResultVoid.Failure(deleteResult.Error);
 
         Add(album, album.Id);

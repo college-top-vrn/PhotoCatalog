@@ -29,10 +29,7 @@ public class FakeFolderRepository : IFolderRepository
     /// <returns>Папку.</returns>
     public Result<Folder> GetById(int id)
     {
-        foreach (var pair in _folders)
-        {
-            if (pair.Key == id) return pair.Value.ToResult();
-        }
+        foreach (var pair in _folders) if (pair.Key == id) return Result<Folder>.Success(pair.Value);
 
         return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
             "Не удалось найти папку по идентификатору"));
@@ -48,15 +45,36 @@ public class FakeFolderRepository : IFolderRepository
     /// </returns>
     public ResultVoid Add(Folder folder)
     {
-        var result = _folders
-            .TryAdd(_lastId, folder)
-            .ToResult();
-
-        if (result.IsFailure) return ResultVoid.Failure(new Error("FolderRepository.CantAddFolder",
+        if (folder == null) return ResultVoid.Failure(new Error("FolderRepository.CantAddFolder",
             "Не удалось добавить папку"));
 
         _lastId += 1;
         
+        _folders
+            .TryAdd(_lastId, folder)
+            .ToResult();
+
+        return ResultVoid.Success();
+    }
+    
+    /// <summary>
+    ///     Добавление альбома.
+    /// </summary>
+    /// <param name="folder">альбом.</param>
+    /// <param name="id">идентификатор альбома.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid Add(Folder? folder, int id)
+    {
+        if (folder is null) return ResultVoid.Failure(new Error("FolderRepository.CantAddFolder",
+            "Не удалось добавить папку"));
+        
+        _folders
+            .TryAdd(id, folder)
+            .ToResult();
+
         return ResultVoid.Success();
     }
 
