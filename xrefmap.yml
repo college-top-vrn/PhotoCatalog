@@ -1323,6 +1323,22 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Entities.Photo.RemoveTag
   nameWithType: Photo.RemoveTag
+- uid: PhotoCatalog.Domain.Entities.Photo.RestoreTags(System.Collections.Generic.IEnumerable{System.Int32})
+  name: RestoreTags(IEnumerable<int>)
+  href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_RestoreTags_System_Collections_Generic_IEnumerable_System_Int32__
+  commentId: M:PhotoCatalog.Domain.Entities.Photo.RestoreTags(System.Collections.Generic.IEnumerable{System.Int32})
+  name.vb: RestoreTags(IEnumerable(Of Integer))
+  fullName: PhotoCatalog.Domain.Entities.Photo.RestoreTags(System.Collections.Generic.IEnumerable<int>)
+  fullName.vb: PhotoCatalog.Domain.Entities.Photo.RestoreTags(System.Collections.Generic.IEnumerable(Of Integer))
+  nameWithType: Photo.RestoreTags(IEnumerable<int>)
+  nameWithType.vb: Photo.RestoreTags(IEnumerable(Of Integer))
+- uid: PhotoCatalog.Domain.Entities.Photo.RestoreTags*
+  name: RestoreTags
+  href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_RestoreTags_
+  commentId: Overload:PhotoCatalog.Domain.Entities.Photo.RestoreTags
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Entities.Photo.RestoreTags
+  nameWithType: Photo.RestoreTags
 - uid: PhotoCatalog.Domain.Entities.Photo.SetDimensions(PhotoCatalog.Domain.ValueObjects.Dimensions)
   name: SetDimensions(Dimensions)
   href: api/PhotoCatalog.Domain.Entities.Photo.html#PhotoCatalog_Domain_Entities_Photo_SetDimensions_PhotoCatalog_Domain_ValueObjects_Dimensions_
@@ -2332,6 +2348,18 @@ references:
   commentId: F:PhotoCatalog.Domain.Primitives.DomainErrors.Photo.EmptyPath
   fullName: PhotoCatalog.Domain.Primitives.DomainErrors.Photo.EmptyPath
   nameWithType: DomainErrors.Photo.EmptyPath
+- uid: PhotoCatalog.Domain.Primitives.DomainErrors.Photo.NotFound
+  name: NotFound
+  href: api/PhotoCatalog.Domain.Primitives.DomainErrors.Photo.html#PhotoCatalog_Domain_Primitives_DomainErrors_Photo_NotFound
+  commentId: F:PhotoCatalog.Domain.Primitives.DomainErrors.Photo.NotFound
+  fullName: PhotoCatalog.Domain.Primitives.DomainErrors.Photo.NotFound
+  nameWithType: DomainErrors.Photo.NotFound
+- uid: PhotoCatalog.Domain.Primitives.DomainErrors.Photo.NullPhoto
+  name: NullPhoto
+  href: api/PhotoCatalog.Domain.Primitives.DomainErrors.Photo.html#PhotoCatalog_Domain_Primitives_DomainErrors_Photo_NullPhoto
+  commentId: F:PhotoCatalog.Domain.Primitives.DomainErrors.Photo.NullPhoto
+  fullName: PhotoCatalog.Domain.Primitives.DomainErrors.Photo.NullPhoto
+  nameWithType: DomainErrors.Photo.NullPhoto
 - uid: PhotoCatalog.Domain.Primitives.DomainErrors.Photo.TagNotExists
   name: TagNotExists
   href: api/PhotoCatalog.Domain.Primitives.DomainErrors.Photo.html#PhotoCatalog_Domain_Primitives_DomainErrors_Photo_TagNotExists
@@ -3159,6 +3187,137 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update
   nameWithType: SqliteFolderRepository.Update
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository
+  name: SqlitePhotoRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository
+  nameWithType: SqlitePhotoRepository
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.#ctor(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork,Serilog.ILogger)
+  name: SqlitePhotoRepository(SqliteUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository__ctor_PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.#ctor(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork,Serilog.ILogger)
+  name.vb: New(SqliteUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.SqlitePhotoRepository(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.New(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork, Serilog.ILogger)
+  nameWithType: SqlitePhotoRepository.SqlitePhotoRepository(SqliteUnitOfWork, ILogger)
+  nameWithType.vb: SqlitePhotoRepository.New(SqliteUnitOfWork, ILogger)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.#ctor*
+  name: SqlitePhotoRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.SqlitePhotoRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.New
+  nameWithType: SqlitePhotoRepository.SqlitePhotoRepository
+  nameWithType.vb: SqlitePhotoRepository.New
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Add(PhotoCatalog.Domain.Entities.Photo)
+  name: Add(Photo)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_Add_PhotoCatalog_Domain_Entities_Photo_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Add(PhotoCatalog.Domain.Entities.Photo)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Add(PhotoCatalog.Domain.Entities.Photo)
+  nameWithType: SqlitePhotoRepository.Add(Photo)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Add*
+  name: Add
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_Add_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Add
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Add
+  nameWithType: SqlitePhotoRepository.Add
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Delete(System.Int32)
+  name: Delete(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Delete(System.Int32)
+  name.vb: Delete(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Delete(Integer)
+  nameWithType: SqlitePhotoRepository.Delete(int)
+  nameWithType.vb: SqlitePhotoRepository.Delete(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Delete*
+  name: Delete
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_Delete_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Delete
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Delete
+  nameWithType: SqlitePhotoRepository.Delete
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByAlbumId(System.Int32)
+  name: GetByAlbumId(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_GetByAlbumId_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByAlbumId(System.Int32)
+  name.vb: GetByAlbumId(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByAlbumId(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByAlbumId(Integer)
+  nameWithType: SqlitePhotoRepository.GetByAlbumId(int)
+  nameWithType.vb: SqlitePhotoRepository.GetByAlbumId(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByAlbumId*
+  name: GetByAlbumId
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_GetByAlbumId_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByAlbumId
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByAlbumId
+  nameWithType: SqlitePhotoRepository.GetByAlbumId
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetById(System.Int32)
+  name: GetById(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetById(System.Int32)
+  name.vb: GetById(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetById(Integer)
+  nameWithType: SqlitePhotoRepository.GetById(int)
+  nameWithType.vb: SqlitePhotoRepository.GetById(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetById*
+  name: GetById
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_GetById_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetById
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetById
+  nameWithType: SqlitePhotoRepository.GetById
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByPath(System.String)
+  name: GetByPath(string)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_GetByPath_System_String_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByPath(System.String)
+  name.vb: GetByPath(String)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByPath(string)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByPath(String)
+  nameWithType: SqlitePhotoRepository.GetByPath(string)
+  nameWithType.vb: SqlitePhotoRepository.GetByPath(String)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByPath*
+  name: GetByPath
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_GetByPath_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByPath
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByPath
+  nameWithType: SqlitePhotoRepository.GetByPath
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByTags(System.Collections.Generic.IEnumerable{System.Int32})
+  name: GetByTags(IEnumerable<int>)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_GetByTags_System_Collections_Generic_IEnumerable_System_Int32__
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByTags(System.Collections.Generic.IEnumerable{System.Int32})
+  name.vb: GetByTags(IEnumerable(Of Integer))
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByTags(System.Collections.Generic.IEnumerable<int>)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByTags(System.Collections.Generic.IEnumerable(Of Integer))
+  nameWithType: SqlitePhotoRepository.GetByTags(IEnumerable<int>)
+  nameWithType.vb: SqlitePhotoRepository.GetByTags(IEnumerable(Of Integer))
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByTags*
+  name: GetByTags
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_GetByTags_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByTags
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.GetByTags
+  nameWithType: SqlitePhotoRepository.GetByTags
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Update(PhotoCatalog.Domain.Entities.Photo)
+  name: Update(Photo)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_Update_PhotoCatalog_Domain_Entities_Photo_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Update(PhotoCatalog.Domain.Entities.Photo)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Update(PhotoCatalog.Domain.Entities.Photo)
+  nameWithType: SqlitePhotoRepository.Update(Photo)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Update*
+  name: Update
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoRepository_Update_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Update
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.Update
+  nameWithType: SqlitePhotoRepository.Update
 - uid: PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository
   name: SqliteTagRepository
   href: api/PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.html

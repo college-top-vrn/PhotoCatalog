@@ -978,6 +978,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория для работы с фотографиями в SQLite с использованием Dapper.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.yml",
       "output": {
         ".html": {
