@@ -6,13 +6,13 @@ using Dapper;
 
 using Microsoft.Data.Sqlite;
 
-using Serilog;
-
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.UnitOfWork;
+
+using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
