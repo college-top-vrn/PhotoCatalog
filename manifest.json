@@ -908,6 +908,76 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий альбомов, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий папок, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий фотографий, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeTagRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeTagRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeTagRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeTagRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий тегов, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Infrastructure.Handlers.DimensionsTypeHandler.yml",
       "output": {
         ".html": {
@@ -1050,11 +1120,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "api/toc.json"
-        },
         ".html": {
           "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
         }
       },
       "version": ""
@@ -1103,11 +1173,11 @@
       "type": "Toc",
       "source_relative_path": "docs/toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "docs/toc.json"
-        },
         ".html": {
           "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
         }
       },
       "version": ""
@@ -1126,11 +1196,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "toc.json"
-        },
         ".html": {
           "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
         }
       },
       "version": ""
