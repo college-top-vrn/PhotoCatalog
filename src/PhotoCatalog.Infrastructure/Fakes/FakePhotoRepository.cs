@@ -17,8 +17,6 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// </summary>
     private int _lastId;
 
-    private readonly FakeAlbumRepository _fakeAlbumRepository = fakeAlbumRepository;
-
     /// <summary>
     ///     Словарь альбомов.
     /// </summary>
@@ -32,12 +30,11 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     public Result<Photo> GetById(int id)
     {
         foreach (var pair in _photos)
-        {
-            if (pair.Key == id) return pair.Value.ToResult();
-        }
+            if (pair.Key == id)
+                return Result<Photo>.Success(pair.Value);
 
         return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
-            "Не удалось найти фотографию по идентификатору"));
+            "Не удалось найти фото по идентификатору"));
     }
 
     /// <summary>
@@ -48,12 +45,11 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     public Result<Photo> GetByPath(string realPath)
     {
         foreach (var pair in _photos)
-        {
-            if (pair.Value.RealPath == realPath) return pair.Value.ToResult();
-        }
+            if (pair.Value.RealPath == realPath)
+                return Result<Photo>.Success(pair.Value);
 
         return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
-            "Не удалось найти фотографию по заданному пути"));
+            "Не удалось найти фото по заданному пути"));
     }
 
     /// <summary>
@@ -64,17 +60,38 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
     /// </returns>
-    public ResultVoid Add(Photo photo)
+    public ResultVoid Add(Photo? photo)
     {
-        var result = _photos
-            .TryAdd(_lastId, photo)
-            .ToResult();
-
-        if (result.IsFailure)
+        if (photo is null)
             return ResultVoid.Failure(new Error("PhotoRepository.CantAddPhoto",
                 "Не удалось добавить фото"));
 
         _lastId += 1;
+
+        _photos.TryAdd(_lastId, photo);
+
+        return ResultVoid.Success();
+    }
+    
+    /// <summary>
+    ///     Добавление фото.
+    /// </summary>
+    /// <param name="photo">фото.</param>
+    /// <param name="id">идентификатор фото.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid Add(Photo? photo, int id)
+    {
+        if (photo is null)
+            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
+                "Фото является null"));
+
+        if (_photos.TryAdd(id, photo).ToResult().IsFailure)
+            return ResultVoid
+                .Failure(new Error("PhotoRepository.PhotoWithSameIdAlreadyExist",
+                    "Фото с похожим идентификатором уже существует"));
 
         return ResultVoid.Success();
     }
@@ -87,15 +104,17 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
     /// </returns>
-    public ResultVoid Update(Photo photo)
+    public ResultVoid Update(Photo? photo)
     {
+        if (photo is null)
+            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
+                "Фото является null"));
+
         var deleteResult = Delete(photo.Id);
 
         if (deleteResult.IsFailure) return ResultVoid.Failure(deleteResult.Error);
 
-        var addResult = Add(photo);
-
-        if (addResult.IsFailure) return ResultVoid.Failure(addResult.Error);
+        Add(photo, photo.Id);
 
         return ResultVoid.Success();
     }
@@ -110,13 +129,13 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// </returns>
     public ResultVoid Delete(int id)
     {
-        var result = _photos
-            .TryRemove(id, out var photo)
-            .ToResult();
+        var searchResult = GetById(id);
 
-        if (result.IsFailure)
+        if (searchResult.IsFailure)
             return ResultVoid.Failure(new Error("PhotoRepository.CantDeletePhoto",
                 "Не удалось удалить фото"));
+
+        _photos.Remove(id, out _);
 
         return ResultVoid.Success();
     }
@@ -131,7 +150,7 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     /// </returns>
     public Result<IReadOnlyCollection<Photo>> GetByAlbumId(int albumId)
     {
-        var album = _fakeAlbumRepository.GetById(albumId);
+        var album = fakeAlbumRepository.GetById(albumId);
         
         if (album.IsFailure) return Result<IReadOnlyCollection<Photo>>.Failure(album.Error);
 
@@ -161,10 +180,10 @@ public class FakePhotoRepository(FakeAlbumRepository fakeAlbumRepository) : IPho
     {
         var photos = (
             from tagId in tagIds 
-            from pair in _photos
-            from photoTagId in pair.Value.TagIds
+            from photo in _photos.Values
+            from photoTagId in photo.TagIds
             where photoTagId == tagId
-            select pair.Value
+            select photo
             ).ToList();
 
         if (photos.Count == 0)

@@ -51,7 +51,7 @@ public interface IPhotoRepository
     ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
     ///     </list>
     /// </returns>
-    ResultVoid Add(Photo photo);
+    ResultVoid Add(Photo? photo);
 
     /// <summary>
     ///     Обновляет существующую фотографию.

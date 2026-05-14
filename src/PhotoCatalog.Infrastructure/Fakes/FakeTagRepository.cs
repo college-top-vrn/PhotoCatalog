@@ -30,9 +30,8 @@ public class FakeTagRepository : ITagRepository
     public Result<Tag> GetById(int id)
     {
         foreach (var pair in _tags)
-        {
-            if (pair.Key == id) return pair.Value.ToResult();
-        }
+            if (pair.Key == id)
+                return Result<Tag>.Success(pair.Value);
 
         return Result<Tag>.Failure(new Error("TagRepository.TagNotFound",
             "Не удалось найти тег по идентификатору"));
@@ -45,13 +44,12 @@ public class FakeTagRepository : ITagRepository
     /// <returns>Тег.</returns>
     public Result<Tag> GetByName(string name)
     {
-        foreach (var pair in _tags)
-        {
-            if (pair.Value.Name == name) return pair.Value.ToResult();
-        }
+        foreach (var pair in _tags.Values)
+            if (pair.Name == name)
+                return Result<Tag>.Success(pair);
 
         return Result<Tag>.Failure(new Error("TagRepository.TagNotFound",
-            "Не удалось найти тег по имени"));
+            "Не удалось найти тег по идентификатору"));
     }
 
     /// <summary>
@@ -62,17 +60,39 @@ public class FakeTagRepository : ITagRepository
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
     /// </returns>
-    public ResultVoid Add(Tag tag)
+    public ResultVoid Add(Tag? tag)
     {
-        var result = _tags
-            .TryAdd(_lastId, tag)
-            .ToResult();
-
-        if (result.IsFailure) return ResultVoid.Failure(new Error("TagRepository.CantAddTag",
-            "Не удалось добавить тег"));
+        if (tag is null)
+            return ResultVoid.Failure(new Error("TagRepository.CantAddTag",
+                "Не удалось добавить тег"));
 
         _lastId += 1;
-        
+
+        _tags.TryAdd(_lastId, tag);
+
+        return ResultVoid.Success();
+    }
+    
+    /// <summary>
+    ///     Добавление папки.
+    /// </summary>
+    /// <param name="tag">папка.</param>
+    /// <param name="id">идентификатор папки.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid Add(Tag? tag, int id)
+    {
+        if (tag is null)
+            return ResultVoid.Failure(new Error("TagRepository.TagIsNull",
+                "Тег является null"));
+
+        if (_tags.TryAdd(id, tag).ToResult().IsFailure)
+            return ResultVoid
+                .Failure(new Error("TagRepository.TagWithSameIdAlreadyExist",
+                    "Тег с похожим идентификатором уже существует"));
+
         return ResultVoid.Success();
     }
 
@@ -86,13 +106,13 @@ public class FakeTagRepository : ITagRepository
     /// </returns>
     public Result<Tag> Delete(int id)
     {
-        var result = _tags
-            .TryRemove(id, out var tag)
-            .ToResult();
+        var searchResult = GetById(id);
 
-        if (result.IsFailure)
-            return Result<Tag>.Failure(new Error("TagRepository.CantDeleteTag",
-                "Не удалось удалить тег"));
+        if (searchResult.IsFailure)
+            return Result<Tag>.Failure(new Error("FolderRepository.CantDeleteFolder",
+                "Не удалось удалить папку"));
+
+        _tags.Remove(id, out Tag tag);
 
         return Result<Tag>.Success(tag!);
     }

@@ -16,7 +16,7 @@ public class FakeFolderRepository : IFolderRepository
     ///     Идентификатор последнего элемента.
     /// </summary>
     private int _lastId;
-    
+
     /// <summary>
     ///     Словарь папок.
     /// </summary>
@@ -53,13 +53,11 @@ public class FakeFolderRepository : IFolderRepository
 
         _lastId += 1;
 
-        _folders
-            .TryAdd(_lastId, folder)
-            .ToResult();
+        _folders.TryAdd(_lastId, folder);
 
         return ResultVoid.Success();
     }
-    
+
     /// <summary>
     ///     Добавление папки.
     /// </summary>

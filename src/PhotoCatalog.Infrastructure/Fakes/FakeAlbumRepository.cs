@@ -53,9 +53,7 @@ public class FakeAlbumRepository : IAlbumRepository
 
         _lastId += 1;
 
-        _albums
-            .TryAdd(_lastId, album)
-            .ToResult();
+        _albums.TryAdd(_lastId, album);
 
         return ResultVoid.Success();
     }
