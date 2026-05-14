@@ -51,7 +51,7 @@ public class SqlitePhotoRepository : IPhotoRepository
             }
 
             var photo = connection.QueryFirstOrDefault<Photo>(
-                "SELECT Id, RealPath, FileHash, Width, Height, AddedAt FROM Photos WHERE Id = @Id",
+                "SELECT Id, RealPath, FileHash, Dimensions, AddedAt FROM Photos WHERE Id = @Id",
                 new { Id = id },
                 _unitOfWork.Transaction);
 
@@ -97,7 +97,7 @@ public class SqlitePhotoRepository : IPhotoRepository
             }
 
             var photo = connection.QueryFirstOrDefault<Photo>(
-                "SELECT Id, RealPath, FileHash, Width, Height, AddedAt FROM Photos WHERE RealPath = @realPath",
+                "SELECT Id, RealPath, FileHash, Dimensions, AddedAt FROM Photos WHERE RealPath = @realPath",
                 new { realPath },
                 _unitOfWork.Transaction);
 
@@ -142,28 +142,34 @@ public class SqlitePhotoRepository : IPhotoRepository
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
+            var dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
+
             connection.Execute(
-                "INSERT INTO Photos (Id, RealPath, FileHash, Width, Height, AddedAt) VALUES (@Id, @RealPath, @FileHash, @Width, @Height, @AddedAt)",
+                "INSERT INTO Photos (Id, RealPath, FileHash, Dimensions, AddedAt) VALUES (@Id, @RealPath, @FileHash, @Dimensions, @AddedAt)",
                 new
                 {
                     photo.Id,
                     photo.RealPath,
                     photo.FileHash,
-                    Width = photo.Dimensions.Width,
-                    Height = photo.Dimensions.Height,
+                    Dimensions = dimensionsValue,
                     photo.AddedAt
                 },
                 _unitOfWork.Transaction);
 
-            foreach (var tagId in photo.TagIds)
-            {
-                connection.Execute(
-                    "INSERT INTO PhotoTags (PhotoId, TagId) VALUES (@PhotoId, @TagId)",
-                    new { PhotoId = photo.Id, TagId = tagId },
-                    _unitOfWork.Transaction);
-            }
+            var tagValues = photo.TagIds.Select(tagId => new { PhotoId = photo.Id, TagId = tagId });
+
+            connection.Execute(
+                "INSERT INTO PhotoTags (PhotoId, TagId) VALUES (@PhotoId, @TagId)",
+                tagValues,
+                _unitOfWork.Transaction);
+
 
             return ResultVoid.Success();
+        }
+        catch (SqliteException ex) when (ex.SqliteErrorCode == 19)
+        {
+            _logger.Error(ex, "Нарушение уникальности RealPath для фотографии {RealPath}", photo.RealPath);
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation);
         }
         catch (SqliteException ex)
         {
@@ -197,15 +203,16 @@ public class SqlitePhotoRepository : IPhotoRepository
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
+            var dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
+
             var rowsAffected = connection.Execute(
-                "UPDATE Photos SET RealPath = @RealPath, FileHash = @FileHash, Width = @Width, Height = @Height, AddedAt = @AddedAt WHERE Id = @Id",
+                "UPDATE Photos SET RealPath = @RealPath, FileHash = @FileHash, Dimensions = @Dimensions, AddedAt = @AddedAt WHERE Id = @Id",
                 new
                 {
                     photo.Id,
                     photo.RealPath,
                     photo.FileHash,
-                    Width = photo.Dimensions.Width,
-                    Height = photo.Dimensions.Height,
+                    Dimensions = dimensionsValue,
                     photo.AddedAt
                 },
                 _unitOfWork.Transaction);
@@ -220,15 +227,19 @@ public class SqlitePhotoRepository : IPhotoRepository
                 new { PhotoId = photo.Id },
                 _unitOfWork.Transaction);
 
-            foreach (var tagId in photo.TagIds)
-            {
-                connection.Execute(
-                    "INSERT INTO PhotoTags (PhotoId, TagId) VALUES (@PhotoId, @TagId)",
-                    new { PhotoId = photo.Id, TagId = tagId },
-                    _unitOfWork.Transaction);
-            }
+            var tagValues = photo.TagIds.Select(tagId => new { PhotoId = photo.Id, TagId = tagId });
+
+            connection.Execute(
+                "INSERT INTO PhotoTags (PhotoId, TagId) VALUES (@PhotoId, @TagId)",
+                tagValues,
+                _unitOfWork.Transaction);
 
             return ResultVoid.Success();
+        }
+        catch (SqliteException ex) when (ex.SqliteErrorCode == 19)
+        {
+            _logger.Error(ex, "Нарушение уникальности RealPath для фотографии {Id}", photo.Id);
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation);
         }
         catch (SqliteException ex)
         {
@@ -302,7 +313,7 @@ public class SqlitePhotoRepository : IPhotoRepository
             }
 
             var photos = connection.Query<Photo>(
-                @"SELECT p.Id, p.RealPath, p.FileHash, p.Width, p.Height, p.AddedAt 
+                @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
                   FROM Photos p
                   INNER JOIN AlbumPhotos ap ON p.Id = ap.PhotoId
                   WHERE ap.AlbumId = @albumId",
@@ -355,7 +366,7 @@ public class SqlitePhotoRepository : IPhotoRepository
             }
 
             var photos = connection.Query<Photo>(
-                @"SELECT p.Id, p.RealPath, p.FileHash, p.Width, p.Height, p.AddedAt 
+                @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
                   FROM Photos p
                   INNER JOIN PhotoTags pt ON p.Id = pt.PhotoId
                   WHERE pt.TagId IN @tagIds",
