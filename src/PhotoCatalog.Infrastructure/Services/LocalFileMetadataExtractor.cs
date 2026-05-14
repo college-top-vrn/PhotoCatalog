@@ -12,28 +12,40 @@ using Serilog;
 namespace PhotoCatalog.Infrastructure.Services;
 
 /// <summary>
-///     Реализация контракта IFileMetadataExtractor, обеспечивающая извлечение метаданных из файлов.
-///     Класс оптимизирован по потреблению оперативной памяти: хэш вычисляется через потоковое чтение,
-///     а габариты изображений извлекаются без использования сторонних библиотек.
+///     Реализует контракт извлечения метаданных из файлов.
+///     Предоставляет операции вычисления SHA-256-хэша и определения габаритов изображения.
+///     Методы работают потоково и не загружают весь файл в оперативную память.
 /// </summary>
 public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
 {
     private readonly ILogger _logger;
 
     /// <summary>
-    ///     Инициализирует новый экземпляр сервиса извлечения метаданных.
+    ///     Инициализирует новый экземпляр <see cref="LocalFileMetadataExtractor" />.
     /// </summary>
-    /// <param name="logger">Контракт Serilog для записи системных событий и ошибок.</param>
+    /// <param name="logger">
+    ///     Контракт логирования Serilog, используемый для записи диагностических сообщений,
+    ///     предупреждений и ошибок.
+    /// </param>
     public LocalFileMetadataExtractor(ILogger logger)
     {
         _logger = logger;
     }
 
     /// <summary>
-    ///     Вычисляет криптографическую контрольную сумму файла по алгоритму SHA-256.
+    ///     Вычисляет криптографический хэш файла по алгоритму SHA-256.
+    ///     Чтение файла выполняется потоково, без загрузки содержимого целиком в память.
     /// </summary>
-    /// <param name="filePath">Абсолютный путь к файлу.</param>
-    /// <returns>Хэш файла или ошибку инфраструктурного уровня.</returns>
+    /// <param name="filePath">
+    ///     Абсолютный путь к файлу, для которого необходимо вычислить хэш.
+    /// </param>
+    /// <returns>
+    ///     Успешный результат с хэш-строкой в шестнадцатеричном формате,
+    ///     либо провальный результат с ошибкой инфраструктурного уровня.
+    /// </returns>
+    /// <exception cref="UnauthorizedAccessException">
+    ///     Может возникнуть, если у процесса отсутствуют права на чтение файла.
+    /// </exception>
     public Result<string> CalculateHash(string filePath)
     {
         try
@@ -74,11 +86,16 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
     }
 
     /// <summary>
-    ///     Извлекает габариты изображения (ширину и высоту в пикселях) без использования сторонних библиотек.
+    ///     Извлекает габариты изображения: ширину и высоту в пикселях.
     ///     Поддерживаются форматы PNG и JPEG.
     /// </summary>
-    /// <param name="filePath">Абсолютный путь к файлу изображения.</param>
-    /// <returns>Габариты изображения или ошибку инфраструктурного уровня.</returns>
+    /// <param name="filePath">
+    ///     Абсолютный путь к файлу изображения.
+    /// </param>
+    /// <returns>
+    ///     Успешный результат с объектом <see cref="Dimensions" />,
+    ///     либо провальный результат с ошибкой инфраструктурного уровня.
+    /// </returns>
     public Result<Dimensions> GetDimensions(string filePath)
     {
         try
@@ -129,9 +146,20 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
         }
     }
 
+    /// <summary>
+    ///     Определяет формат файла и направляет выполнение в специализированный парсер размеров.
+    /// </summary>
+    /// <param name="stream">
+    ///     Поток, содержащий бинарные данные файла изображения.
+    /// </param>
+    /// <returns>
+    ///     Успешный результат с габаритами изображения,
+    ///     либо провальный результат, если формат не распознан или файл поврежден.
+    /// </returns>
     private Result<Dimensions> TryReadDimensions(Stream stream)
     {
         var header = new byte[8];
+
         if (stream.Read(header, 0, header.Length) != header.Length)
             return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
 
@@ -144,14 +172,42 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
         return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.NotAnImage);
     }
 
+    /// <summary>
+    ///     Проверяет, соответствует ли заголовок сигнатуре PNG.
+    /// </summary>
+    /// <param name="header">
+    ///     Первые байты файла.
+    /// </param>
+    /// <returns>
+    ///     <c>true</c>, если заголовок соответствует PNG; иначе <c>false</c>.
+    /// </returns>
     private static bool IsPng(byte[] header) =>
         header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 &&
         header[4] == 0x0D && header[5] == 0x0A && header[6] == 0x1A && header[7] == 0x0A;
 
+    /// <summary>
+    ///     Проверяет, соответствует ли заголовок сигнатуре JPEG.
+    /// </summary>
+    /// <param name="header">
+    ///     Первые байты файла.
+    /// </param>
+    /// <returns>
+    ///     <c>true</c>, если заголовок соответствует JPEG; иначе <c>false</c>.
+    /// </returns>
     private static bool IsJpeg(byte[] header) =>
         header[0] == 0xFF && header[1] == 0xD8;
 
-
+    /// <summary>
+    ///     Извлекает габариты изображения из PNG-файла.
+    ///     Размеры хранятся в чанке <c>IHDR</c>.
+    /// </summary>
+    /// <param name="stream">
+    ///     Поток, содержащий PNG-файл.
+    /// </param>
+    /// <returns>
+    ///     Успешный результат с шириной и высотой изображения,
+    ///     либо провальный результат, если файл поврежден.
+    /// </returns>
     private Result<Dimensions> ReadPng(Stream stream)
     {
         var lengthBytes = new byte[4];
@@ -176,6 +232,17 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
         return Dimensions.Create(width, height);
     }
 
+    /// <summary>
+    ///     Извлекает габариты изображения из JPEG-файла.
+    ///     Метод ищет сегмент, содержащий данные о ширине и высоте.
+    /// </summary>
+    /// <param name="stream">
+    ///     Поток, содержащий JPEG-файл.
+    /// </param>
+    /// <returns>
+    ///     Успешный результат с шириной и высотой изображения,
+    ///     либо провальный результат, если файл поврежден.
+    /// </returns>
     private Result<Dimensions> ReadJpeg(Stream stream)
     {
         while (true)
@@ -223,6 +290,18 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
         }
     }
 
+    /// <summary>
+    ///     Преобразует 4 байта в целое число в формате big-endian.
+    /// </summary>
+    /// <param name="buffer">
+    ///     Массив байтов, содержащий число.
+    /// </param>
+    /// <param name="offset">
+    ///     Смещение, с которого начинается число.
+    /// </param>
+    /// <returns>
+    ///     Целое число, прочитанное из массива байтов.
+    /// </returns>
     private static int ReadInt32BigEndian(byte[] buffer, int offset) =>
         (buffer[offset] << 24) | (buffer[offset + 1] << 16) | (buffer[offset + 2] << 8) | buffer[offset + 3];
 }
