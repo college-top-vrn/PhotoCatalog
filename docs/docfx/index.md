@@ -1,11 +1,8 @@
----
-_layout: landing
----
+# Документация PhotoCatalog
 
-# This is the **HOMEPAGE**.
-
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
-
-## Quick Start Notes:
-
-1. Add images to the *images* folder if the file is referencing an image.
+Данная библиотека используется для управления коллекцией фотографий с использованием концепции "виртуальных альбомов". Физические файлы хранятся в единой директории, а иерархия папок, альбомов и тегов формируется исключительно на логическом уровне в базе данных.
+Внутренние слои (Domain) абсолютно независимы от внешних (Infrastructure, Application, сторонние библиотеки). Взаимодействие происходит строго через контракты (интерфейсы).
+- **[Модуль «PhotoCatalog.Application»](xref:PhotoCatalog.Application)** - Содержит чистую бизнес‑логику без внешних зависимостей. Включает сущности (Photo, Album, Folder, Tag) и value objects (например, Dimensions). Использует Result/ResultVoid вместо исключений, а также реестр доменных ошибок (Errors Registry) для контроля бизнес‑правил.
+- **[Модуль «PhotoCatalog.Domain»](xref:PhotoCatalog.Domain)** - Зависит только от Domain. Здесь располагаются use‑cases (например, ImportPhotoUseCase) и DTO. Отвечает за логирование бизнес‑потоков: фиксирует начало операций, их успех или ошибки (с уровнями Warning/Information), не останавливая работу приложения.
+- **[Модуль «PhotoCatalog.Infrastructure»](xref:PhotoCatalog.Infrastructure)** - Зависит от Domain и Application. Реализует репозитории для SQLite (через Dapper) и работу с файловой системой (через System.IO). Перехватывает системные ошибки (SqlException, IOException), логирует их через Serilog и конвертирует в Result.Failure. Контролирует активацию ссылочной целостности SQLite через PRAGMA foreign_keys = ON.
+- **[API модуль «PhotoCatalog.WebApi»](xref:PhotoCatalog.WebApi)** - Предоставляет HTTP‑интерфейс для взаимодействия с системой каталогизации фото. Реализован на ASP.NET Core Web API.
