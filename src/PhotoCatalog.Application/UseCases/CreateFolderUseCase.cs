@@ -1,4 +1,3 @@
-using PhotoCatalog.Application.DTOs;
 using PhotoCatalog.Application.DTOs.Folders;
 using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Domain.Entities;
