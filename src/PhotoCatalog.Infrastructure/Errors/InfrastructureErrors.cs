@@ -130,6 +130,13 @@ public static class InfrastructureErrors
         public static readonly Error PathTraversalAttempt = new Error(
             "FileStorage.PathTraversalAttempt",
             "Обнаружена попытка выхода за пределы разрешенной директории хранилища.");
+
+        /// <summary>
+        ///     Ошибка при генерации миниатюры изображения.
+        /// </summary>
+        public static readonly Error ThumbnailGenerationFailed = new(
+            "FileStorage.ThumbnailGenerationFailed",
+            "Не удалось создать миниатюру изображения.");
     }
 
     /// <summary>
