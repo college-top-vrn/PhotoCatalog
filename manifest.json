@@ -54,6 +54,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.CreateTagRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.CreateTagRequest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.CreateTagRequest",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.yml",
       "output": {
         ".html": {
@@ -135,6 +149,20 @@
       "IsMRef": true,
       "Title": "PhotoCatalog.Application.DTOs.PhotoResponse",
       "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.PhotoResponse.yml\" sourcestartlinenumber=\"1\">DTO record для ответа с фото.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.TegResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.TegResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.TegResponse",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -1302,11 +1330,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "api/toc.html"
-        },
         ".json": {
           "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
         }
       },
       "version": ""
@@ -1355,11 +1383,11 @@
       "type": "Toc",
       "source_relative_path": "docs/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "docs/toc.html"
-        },
         ".json": {
           "relative_path": "docs/toc.json"
+        },
+        ".html": {
+          "relative_path": "docs/toc.html"
         }
       },
       "version": ""
@@ -1378,11 +1406,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "toc.html"
-        },
         ".json": {
           "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
         }
       },
       "version": ""

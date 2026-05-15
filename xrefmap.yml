@@ -170,6 +170,44 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.DTOs.AlbumResponse.PhotoIds
   nameWithType: AlbumResponse.PhotoIds
+- uid: PhotoCatalog.Application.DTOs.CreateTagRequest
+  name: CreateTagRequest
+  href: api/PhotoCatalog.Application.DTOs.CreateTagRequest.html
+  commentId: T:PhotoCatalog.Application.DTOs.CreateTagRequest
+  fullName: PhotoCatalog.Application.DTOs.CreateTagRequest
+  nameWithType: CreateTagRequest
+- uid: PhotoCatalog.Application.DTOs.CreateTagRequest.#ctor(System.String)
+  name: CreateTagRequest(string)
+  href: api/PhotoCatalog.Application.DTOs.CreateTagRequest.html#PhotoCatalog_Application_DTOs_CreateTagRequest__ctor_System_String_
+  commentId: M:PhotoCatalog.Application.DTOs.CreateTagRequest.#ctor(System.String)
+  name.vb: New(String)
+  fullName: PhotoCatalog.Application.DTOs.CreateTagRequest.CreateTagRequest(string)
+  fullName.vb: PhotoCatalog.Application.DTOs.CreateTagRequest.New(String)
+  nameWithType: CreateTagRequest.CreateTagRequest(string)
+  nameWithType.vb: CreateTagRequest.New(String)
+- uid: PhotoCatalog.Application.DTOs.CreateTagRequest.#ctor*
+  name: CreateTagRequest
+  href: api/PhotoCatalog.Application.DTOs.CreateTagRequest.html#PhotoCatalog_Application_DTOs_CreateTagRequest__ctor_
+  commentId: Overload:PhotoCatalog.Application.DTOs.CreateTagRequest.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.DTOs.CreateTagRequest.CreateTagRequest
+  fullName.vb: PhotoCatalog.Application.DTOs.CreateTagRequest.New
+  nameWithType: CreateTagRequest.CreateTagRequest
+  nameWithType.vb: CreateTagRequest.New
+- uid: PhotoCatalog.Application.DTOs.CreateTagRequest.Name
+  name: Name
+  href: api/PhotoCatalog.Application.DTOs.CreateTagRequest.html#PhotoCatalog_Application_DTOs_CreateTagRequest_Name
+  commentId: P:PhotoCatalog.Application.DTOs.CreateTagRequest.Name
+  fullName: PhotoCatalog.Application.DTOs.CreateTagRequest.Name
+  nameWithType: CreateTagRequest.Name
+- uid: PhotoCatalog.Application.DTOs.CreateTagRequest.Name*
+  name: Name
+  href: api/PhotoCatalog.Application.DTOs.CreateTagRequest.html#PhotoCatalog_Application_DTOs_CreateTagRequest_Name_
+  commentId: Overload:PhotoCatalog.Application.DTOs.CreateTagRequest.Name
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.DTOs.CreateTagRequest.Name
+  nameWithType: CreateTagRequest.Name
 - uid: PhotoCatalog.Application.DTOs.Folders
   name: PhotoCatalog.Application.DTOs.Folders
   href: api/PhotoCatalog.Application.DTOs.Folders.html
@@ -483,6 +521,57 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.DTOs.PhotoResponse.Width
   nameWithType: PhotoResponse.Width
+- uid: PhotoCatalog.Application.DTOs.TegResponse
+  name: TegResponse
+  href: api/PhotoCatalog.Application.DTOs.TegResponse.html
+  commentId: T:PhotoCatalog.Application.DTOs.TegResponse
+  fullName: PhotoCatalog.Application.DTOs.TegResponse
+  nameWithType: TegResponse
+- uid: PhotoCatalog.Application.DTOs.TegResponse.#ctor(System.Int32,System.String)
+  name: TegResponse(int, string)
+  href: api/PhotoCatalog.Application.DTOs.TegResponse.html#PhotoCatalog_Application_DTOs_TegResponse__ctor_System_Int32_System_String_
+  commentId: M:PhotoCatalog.Application.DTOs.TegResponse.#ctor(System.Int32,System.String)
+  name.vb: New(Integer, String)
+  fullName: PhotoCatalog.Application.DTOs.TegResponse.TegResponse(int, string)
+  fullName.vb: PhotoCatalog.Application.DTOs.TegResponse.New(Integer, String)
+  nameWithType: TegResponse.TegResponse(int, string)
+  nameWithType.vb: TegResponse.New(Integer, String)
+- uid: PhotoCatalog.Application.DTOs.TegResponse.#ctor*
+  name: TegResponse
+  href: api/PhotoCatalog.Application.DTOs.TegResponse.html#PhotoCatalog_Application_DTOs_TegResponse__ctor_
+  commentId: Overload:PhotoCatalog.Application.DTOs.TegResponse.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.DTOs.TegResponse.TegResponse
+  fullName.vb: PhotoCatalog.Application.DTOs.TegResponse.New
+  nameWithType: TegResponse.TegResponse
+  nameWithType.vb: TegResponse.New
+- uid: PhotoCatalog.Application.DTOs.TegResponse.Id
+  name: Id
+  href: api/PhotoCatalog.Application.DTOs.TegResponse.html#PhotoCatalog_Application_DTOs_TegResponse_Id
+  commentId: P:PhotoCatalog.Application.DTOs.TegResponse.Id
+  fullName: PhotoCatalog.Application.DTOs.TegResponse.Id
+  nameWithType: TegResponse.Id
+- uid: PhotoCatalog.Application.DTOs.TegResponse.Id*
+  name: Id
+  href: api/PhotoCatalog.Application.DTOs.TegResponse.html#PhotoCatalog_Application_DTOs_TegResponse_Id_
+  commentId: Overload:PhotoCatalog.Application.DTOs.TegResponse.Id
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.DTOs.TegResponse.Id
+  nameWithType: TegResponse.Id
+- uid: PhotoCatalog.Application.DTOs.TegResponse.Name
+  name: Name
+  href: api/PhotoCatalog.Application.DTOs.TegResponse.html#PhotoCatalog_Application_DTOs_TegResponse_Name
+  commentId: P:PhotoCatalog.Application.DTOs.TegResponse.Name
+  fullName: PhotoCatalog.Application.DTOs.TegResponse.Name
+  nameWithType: TegResponse.Name
+- uid: PhotoCatalog.Application.DTOs.TegResponse.Name*
+  name: Name
+  href: api/PhotoCatalog.Application.DTOs.TegResponse.html#PhotoCatalog_Application_DTOs_TegResponse_Name_
+  commentId: Overload:PhotoCatalog.Application.DTOs.TegResponse.Name
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.DTOs.TegResponse.Name
+  nameWithType: TegResponse.Name
 - uid: PhotoCatalog.Application.Errors
   name: PhotoCatalog.Application.Errors
   href: api/PhotoCatalog.Application.Errors.html
