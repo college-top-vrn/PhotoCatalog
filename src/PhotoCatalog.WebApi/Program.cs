@@ -106,7 +106,7 @@ try
 
         return Results.NotFound();
     });
-    
+
 
     app.MapHealthChecks("/health");
     app.Run();
