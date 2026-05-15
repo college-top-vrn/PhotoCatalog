@@ -1226,7 +1226,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.yml\" sourcestartlinenumber=\"1\">Реализует контракт извлечения метаданных из файлов.\nПредоставляет операции вычисления SHA-256-хэша и определения габаритов изображения.\nМетоды работают потоково и не загружают весь файл в оперативную память.</p>\n"
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.yml\" sourcestartlinenumber=\"1\">Реализует контракт извлечения метаданных из файлов.\nПредоставляет операции вычисления SHA-256-хэша и определения габаритов изображения.\nМетоды работают потоково и не загружают весь файл в оперативную память.\nДля извлечения размеров изображения используется библиотека MetadataExtractor,\nкоторая читает только заголовки файлов без декодирования матрицы пикселей.</p>\n"
     },
     {
       "type": "ManagedReference",

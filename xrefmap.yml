@@ -3008,6 +3008,12 @@ references:
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.FileLocked
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.FileLocked
   nameWithType: InfrastructureErrors.MetadataExtractor.FileLocked
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.MetadataNotFound
+  name: MetadataNotFound
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_MetadataExtractor_MetadataNotFound
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.MetadataNotFound
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.MetadataNotFound
+  nameWithType: InfrastructureErrors.MetadataExtractor.MetadataNotFound
 - uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.NotAnImage
   name: NotAnImage
   href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_MetadataExtractor_NotAnImage

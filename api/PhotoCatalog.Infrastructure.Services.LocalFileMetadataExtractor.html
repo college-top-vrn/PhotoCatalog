@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class LocalFileMetadataExtractor | PhotoCatalog Documentation ">
       
-      <meta name="description" content="Реализует контракт извлечения метаданных из файлов. Предоставляет операции вычисления SHA-256-хэша и определения габаритов изображения. Методы работают потоково и не загружают весь файл в оперативную память.">
+      <meta name="description" content="Реализует контракт извлечения метаданных из файлов. Предоставляет операции вычисления SHA-256-хэша и определения габаритов изображения. Методы работают потоково и не загружают весь файл в оперативную память. Для извлечения размеров изображения используется библиотека MetadataExtractor, которая читает только заголовки файлов без декодирования матрицы пикселей.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor" data-uid="PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor" class="text-break">
-Class LocalFileMetadataExtractor  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L19"><i class="bi bi-code-slash"></i></a>
+Class LocalFileMetadataExtractor  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L27"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -99,7 +99,9 @@ Class LocalFileMetadataExtractor  <a class="header-action link-secondary" title=
 
   <div class="markdown summary"><p>Реализует контракт извлечения метаданных из файлов.
 Предоставляет операции вычисления SHA-256-хэша и определения габаритов изображения.
-Методы работают потоково и не загружают весь файл в оперативную память.</p>
+Методы работают потоково и не загружают весь файл в оперативную память.
+Для извлечения размеров изображения используется библиотека MetadataExtractor,
+которая читает только заголовки файлов без декодирования матрицы пикселей.</p>
 </div>
   <div class="markdown conceptual"></div>
 
@@ -172,7 +174,7 @@ Class LocalFileMetadataExtractor  <a class="header-action link-secondary" title=
 
   <h3 id="PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor__ctor_Serilog_ILogger_" data-uid="PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.#ctor(Serilog.ILogger)">
   LocalFileMetadataExtractor(ILogger)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L38"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Инициализирует новый экземпляр <a class="xref" href="PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html">LocalFileMetadataExtractor</a>.</p>
@@ -210,7 +212,7 @@ Class LocalFileMetadataExtractor  <a class="header-action link-secondary" title=
 
   <h3 id="PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor_CalculateHash_System_String_" data-uid="PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.CalculateHash(System.String)">
   CalculateHash(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L54"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Вычисляет криптографический хэш файла по алгоритму SHA-256.
@@ -244,12 +246,6 @@ Class LocalFileMetadataExtractor  <a class="header-action link-secondary" title=
 
 
 
-  <h4 class="section">Exceptions</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.unauthorizedaccessexception">UnauthorizedAccessException</a></dt>
-    <dd><p>Может возникнуть, если у процесса отсутствуют права на чтение файла.</p>
-</dd>
-  </dl>
 
 
 
@@ -257,11 +253,13 @@ Class LocalFileMetadataExtractor  <a class="header-action link-secondary" title=
 
   <h3 id="PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor_GetDimensions_System_String_" data-uid="PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.GetDimensions(System.String)">
   GetDimensions(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L106"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Извлекает габариты изображения: ширину и высоту в пикселях.
-Поддерживаются форматы PNG и JPEG.</p>
+Метод использует библиотеку MetadataExtractor, которая читает только заголовки файлов
+без декодирования матрицы пикселей, что обеспечивает высокую производительность.
+Поддерживаются различные форматы изображений: JPEG, PNG, GIF, BMP, TIFF и другие.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -298,7 +296,7 @@ Class LocalFileMetadataExtractor  <a class="header-action link-secondary" title=
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L19" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Services/LocalFileMetadataExtractor.cs/#L27" class="edit-link">Edit this page</a>
         </div>
 
 
