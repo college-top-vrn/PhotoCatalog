@@ -9,6 +9,7 @@ using PhotoSauce.MagicScaler;
 namespace PhotoCatalog.Infrastructure.Services;
 
 using Serilog;
+
 /// <summary>
 ///     Сервис для генерации миниатюр изображений с использованием <see cref="MagicImageProcessor" />.
 /// </summary>
@@ -19,6 +20,7 @@ using Serilog;
 public class MagicScalerThumbnailService : IThumbnailService
 {
     private readonly ILogger _logger;
+
     /// <summary>
     ///     Инициализирует новый экземпляр <see cref="MagicScalerThumbnailService" />.
     /// </summary>
@@ -27,16 +29,18 @@ public class MagicScalerThumbnailService : IThumbnailService
     {
         _logger = logger;
     }
+
     /// <inheritdoc />
     public ResultVoid Generate(string sourcePath, string targetPath, int maxSize)
     {
         try
         {
+            _logger.Information(
+                "Начинается генерация миниатюры. Исходный файл: {SourcePath}, результат: {TargetPath}, размер: {MaxSize}",
+                sourcePath, targetPath, maxSize);
             var settings = new ProcessImageSettings
             {
-                Width = maxSize,
-                Height = maxSize,
-                ResizeMode = CropScaleMode.Max
+                Width = maxSize, Height = maxSize, ResizeMode = CropScaleMode.Max
             };
 
             settings.TrySetEncoderFormat(ImageMimeTypes.Jpeg);
