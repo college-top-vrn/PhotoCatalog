@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Http;
 
 using PhotoCatalog.Domain.Primitives;
 
-namespace PhotoCatalog.Domain.Extensions;
+namespace PhotoCatalog.Infrastructure.Extensions;
 
 /// <summary>
-///     Методы расширения для <see cref="Error" />.
+///     Методы расширения <see cref="Error" /> для работы с HTTP.
 /// </summary>
-public static class ErrorExtensions
+public static class ErrorHttpExtensions
 {
     /// <summary>
     ///     Метод расширения для преобразования <see cref="Error" /> в <see cref="IResult" />.
