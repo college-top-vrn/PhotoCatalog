@@ -22,12 +22,11 @@
     <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
     <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <None Update="MagicScalerThumbnailServiceTests\vertical_smartphone.jpeg">
+    <None Update="MagicScalerThumbnailServiceTests/vertical_smartphone.jpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="MagicScalerThumbnailServiceTests\landscape_photo.jpeg">
+    <None Update="MagicScalerThumbnailServiceTests/landscape_photo.jpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
