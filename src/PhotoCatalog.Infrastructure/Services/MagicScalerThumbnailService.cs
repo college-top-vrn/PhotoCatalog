@@ -7,6 +7,7 @@ using PhotoCatalog.Infrastructure.Errors;
 using PhotoSauce.MagicScaler;
 
 namespace PhotoCatalog.Infrastructure.Services;
+
 using Serilog;
 /// <summary>
 ///     Сервис для генерации миниатюр изображений с использованием <see cref="MagicImageProcessor" />.
