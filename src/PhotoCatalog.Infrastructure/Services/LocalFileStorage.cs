@@ -1,5 +1,3 @@
-// Infrastructure/Services/LocalFileStorage.cs
-
 using System;
 using System.IO;
 
@@ -77,17 +75,19 @@ public sealed class LocalFileStorage : IFileStorage
             var destinationPath = NormalizeAndValidatePath(newFileName);
             if (destinationPath.IsFailure)
             {
-                return Result<string>.Failure(destinationPath.Error); // TODO Сделать ошибку в InfrastructureErrors
+                return Result<string>.Failure(destinationPath.Error);
             }
 
             var targetFullPath = Path.Combine(_baseStoragePath, destinationPath.Value!);
             var targetDirectory = Path.GetDirectoryName(targetFullPath);
 
-            if (path is null)
+            // Проверка на null для параметра targetDirectory
+            if (targetDirectory == null)
             {
-                return ResultVoid.Failure(new Error("FileStorage.InvalidPath", "Путь не должен быть null."));
+                _logger.Warning("Не удалось получить директорию для пути: {TargetFullPath}", targetFullPath);
+                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
             }
-            
+
             if (!Directory.Exists(targetDirectory))
             {
                 Directory.CreateDirectory(targetDirectory);
@@ -139,6 +139,13 @@ public sealed class LocalFileStorage : IFileStorage
         {
             _logger.Debug("Начало операции удаления файла: {FilePath}", filePath);
 
+            // Проверка на null параметра filePath
+            if (filePath == null)
+            {
+                _logger.Warning("Параметр filePath равен null - операция удаления пропущена (идемпотентность)");
+                return ResultVoid.Success();
+            }
+
             if (string.IsNullOrWhiteSpace(filePath))
             {
                 _logger.Debug("Путь к файлу пуст - операция удаления пропущена (идемпотентность)");
@@ -181,9 +188,14 @@ public sealed class LocalFileStorage : IFileStorage
     /// <returns>Всегда возвращает успешный Result, содержащий true, если файл существует, иначе false.</returns>
     public Result<bool> FileExists(string filePath)
     {
-
         try
         {
+            // Проверка на null параметра filePath
+            if (filePath == null)
+            {
+                _logger.Debug("Параметр filePath равен null, возвращаем false");
+                return Result<bool>.Success(false);
+            }
 
             if (string.IsNullOrWhiteSpace(filePath))
             {
@@ -211,8 +223,16 @@ public sealed class LocalFileStorage : IFileStorage
     {
         try
         {
+            // Проверка на null параметра fileName
+            if (fileName == null)
+            {
+                _logger.Warning("Параметр fileName равен null при нормализации пути");
+                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
+            }
+
             if (string.IsNullOrWhiteSpace(fileName))
             {
+                _logger.Warning("Имя файла пусто или состоит из пробелов при нормализации пути");
                 return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
             }
 
@@ -231,7 +251,7 @@ public sealed class LocalFileStorage : IFileStorage
             if (normalizedPath.Contains(".."))
             {
                 _logger.Warning("Попытка выхода за пределы базовой директории: {FileName}", fileName);
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
+                return Result<string>.Failure(InfrastructureErrors.FileStorage.PathTraversalAttempt);
             }
 
             return Result<string>.Success(normalizedPath);

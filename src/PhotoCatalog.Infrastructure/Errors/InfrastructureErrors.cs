@@ -122,6 +122,14 @@ public static class InfrastructureErrors
         public static readonly Error InvalidPath = new Error(
             "FileStorage.InvalidPath",
             "Указанный путь к файлу имеет недопустимый формат.");
+
+        /// <summary>
+        /// Ошибка, возникающая при попытке выхода за пределы базовой директории хранилища.
+        /// Возникает, когда относительный путь содержит ".." для навигации вверх.
+        /// </summary>
+        public static readonly Error PathTraversalAttempt = new Error(
+            "FileStorage.PathTraversalAttempt",
+            "Обнаружена попытка выхода за пределы разрешенной директории хранилища.");
     }
 
     /// <summary>
