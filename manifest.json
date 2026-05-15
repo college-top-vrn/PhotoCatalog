@@ -54,31 +54,59 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Application.DTOs.CreateFolderRequest.yml",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html"
+          "relative_path": "api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Application.DTOs.CreateFolderRequest",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.CreateFolderRequest.yml\" sourcestartlinenumber=\"1\">DTO record для запроса создания папки.</p>\n"
+      "Title": "PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.yml\" sourcestartlinenumber=\"1\">Запрос от клиента на создание новой папки.\nПередается в формате JSON из React-фронтенда.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Application.DTOs.FolderResponse.yml",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Application.DTOs.FolderResponse.html"
+          "relative_path": "api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Application.DTOs.FolderResponse",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.FolderResponse.yml\" sourcestartlinenumber=\"1\">DTO record для ответа с папкой.</p>\n"
+      "Title": "PhotoCatalog.Application.DTOs.Folders.FolderResponse",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.yml\" sourcestartlinenumber=\"1\">Ответ сервера при запросе информации о папке.\nСодержит все необходимые данные для отображения папки на клиенте.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.yml\" sourcestartlinenumber=\"1\">Запрос от клиента на перемещение папки в другую директорию.\nИспользуется при Drag-and-Drop операции на клиенте.\nИдентификатор перемещаемой папки передается через URL эндпоинта.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.DTOs.Folders.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.DTOs.Folders.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.DTOs.Folders",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -950,6 +978,62 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.yml\" sourcestartlinenumber=\"1\">Методы расширения <xref href=\"PhotoCatalog.Domain.Primitives.Error\" data-throw-if-not-resolved=\"false\"></xref> для работы с HTTP.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.yml\" sourcestartlinenumber=\"1\">Методы расширения <xref href=\"PhotoCatalog.Domain.Primitives.Result%601\" data-throw-if-not-resolved=\"false\"></xref> для работы с HTTP.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.yml\" sourcestartlinenumber=\"1\">Методы расширения <xref href=\"PhotoCatalog.Domain.Primitives.ResultVoid\" data-throw-if-not-resolved=\"false\"></xref> для работы с HTTP.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Extensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.yml",
       "output": {
         ".html": {
@@ -1218,11 +1302,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "api/toc.json"
-        },
         ".html": {
           "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
         }
       },
       "version": ""
@@ -1271,11 +1355,11 @@
       "type": "Toc",
       "source_relative_path": "docs/toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "docs/toc.json"
-        },
         ".html": {
           "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
         }
       },
       "version": ""
@@ -1294,11 +1378,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "toc.json"
-        },
         ".html": {
           "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
         }
       },
       "version": ""

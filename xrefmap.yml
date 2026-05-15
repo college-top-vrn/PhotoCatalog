@@ -170,121 +170,165 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.DTOs.AlbumResponse.PhotoIds
   nameWithType: AlbumResponse.PhotoIds
-- uid: PhotoCatalog.Application.DTOs.CreateFolderRequest
+- uid: PhotoCatalog.Application.DTOs.Folders
+  name: PhotoCatalog.Application.DTOs.Folders
+  href: api/PhotoCatalog.Application.DTOs.Folders.html
+  commentId: N:PhotoCatalog.Application.DTOs.Folders
+  fullName: PhotoCatalog.Application.DTOs.Folders
+  nameWithType: PhotoCatalog.Application.DTOs.Folders
+- uid: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest
   name: CreateFolderRequest
-  href: api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html
-  commentId: T:PhotoCatalog.Application.DTOs.CreateFolderRequest
-  fullName: PhotoCatalog.Application.DTOs.CreateFolderRequest
+  href: api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html
+  commentId: T:PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest
+  fullName: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest
   nameWithType: CreateFolderRequest
-- uid: PhotoCatalog.Application.DTOs.CreateFolderRequest.#ctor(System.String,System.Nullable{System.Int32})
+- uid: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.#ctor(System.String,System.Nullable{System.Int32})
   name: CreateFolderRequest(string, int?)
-  href: api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_CreateFolderRequest__ctor_System_String_System_Nullable_System_Int32__
-  commentId: M:PhotoCatalog.Application.DTOs.CreateFolderRequest.#ctor(System.String,System.Nullable{System.Int32})
+  href: api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_CreateFolderRequest__ctor_System_String_System_Nullable_System_Int32__
+  commentId: M:PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.#ctor(System.String,System.Nullable{System.Int32})
   name.vb: New(String, Integer?)
-  fullName: PhotoCatalog.Application.DTOs.CreateFolderRequest.CreateFolderRequest(string, int?)
-  fullName.vb: PhotoCatalog.Application.DTOs.CreateFolderRequest.New(String, Integer?)
+  fullName: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.CreateFolderRequest(string, int?)
+  fullName.vb: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.New(String, Integer?)
   nameWithType: CreateFolderRequest.CreateFolderRequest(string, int?)
   nameWithType.vb: CreateFolderRequest.New(String, Integer?)
-- uid: PhotoCatalog.Application.DTOs.CreateFolderRequest.#ctor*
+- uid: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.#ctor*
   name: CreateFolderRequest
-  href: api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_CreateFolderRequest__ctor_
-  commentId: Overload:PhotoCatalog.Application.DTOs.CreateFolderRequest.#ctor
+  href: api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_CreateFolderRequest__ctor_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: PhotoCatalog.Application.DTOs.CreateFolderRequest.CreateFolderRequest
-  fullName.vb: PhotoCatalog.Application.DTOs.CreateFolderRequest.New
+  fullName: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.CreateFolderRequest
+  fullName.vb: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.New
   nameWithType: CreateFolderRequest.CreateFolderRequest
   nameWithType.vb: CreateFolderRequest.New
-- uid: PhotoCatalog.Application.DTOs.CreateFolderRequest.Name
+- uid: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.Name
   name: Name
-  href: api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_CreateFolderRequest_Name
-  commentId: P:PhotoCatalog.Application.DTOs.CreateFolderRequest.Name
-  fullName: PhotoCatalog.Application.DTOs.CreateFolderRequest.Name
+  href: api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_CreateFolderRequest_Name
+  commentId: P:PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.Name
+  fullName: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.Name
   nameWithType: CreateFolderRequest.Name
-- uid: PhotoCatalog.Application.DTOs.CreateFolderRequest.Name*
+- uid: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.Name*
   name: Name
-  href: api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_CreateFolderRequest_Name_
-  commentId: Overload:PhotoCatalog.Application.DTOs.CreateFolderRequest.Name
+  href: api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_CreateFolderRequest_Name_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.Name
   isSpec: "True"
-  fullName: PhotoCatalog.Application.DTOs.CreateFolderRequest.Name
+  fullName: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.Name
   nameWithType: CreateFolderRequest.Name
-- uid: PhotoCatalog.Application.DTOs.CreateFolderRequest.ParentFolderId
+- uid: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.ParentFolderId
   name: ParentFolderId
-  href: api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_CreateFolderRequest_ParentFolderId
-  commentId: P:PhotoCatalog.Application.DTOs.CreateFolderRequest.ParentFolderId
-  fullName: PhotoCatalog.Application.DTOs.CreateFolderRequest.ParentFolderId
+  href: api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_CreateFolderRequest_ParentFolderId
+  commentId: P:PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.ParentFolderId
+  fullName: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.ParentFolderId
   nameWithType: CreateFolderRequest.ParentFolderId
-- uid: PhotoCatalog.Application.DTOs.CreateFolderRequest.ParentFolderId*
+- uid: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.ParentFolderId*
   name: ParentFolderId
-  href: api/PhotoCatalog.Application.DTOs.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_CreateFolderRequest_ParentFolderId_
-  commentId: Overload:PhotoCatalog.Application.DTOs.CreateFolderRequest.ParentFolderId
+  href: api/PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_CreateFolderRequest_ParentFolderId_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.ParentFolderId
   isSpec: "True"
-  fullName: PhotoCatalog.Application.DTOs.CreateFolderRequest.ParentFolderId
+  fullName: PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.ParentFolderId
   nameWithType: CreateFolderRequest.ParentFolderId
-- uid: PhotoCatalog.Application.DTOs.FolderResponse
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse
   name: FolderResponse
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html
-  commentId: T:PhotoCatalog.Application.DTOs.FolderResponse
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html
+  commentId: T:PhotoCatalog.Application.DTOs.Folders.FolderResponse
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse
   nameWithType: FolderResponse
-- uid: PhotoCatalog.Application.DTOs.FolderResponse.#ctor(System.Int32,System.String,System.Nullable{System.Int32})
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse.#ctor(System.Int32,System.String,System.Nullable{System.Int32})
   name: FolderResponse(int, string, int?)
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html#PhotoCatalog_Application_DTOs_FolderResponse__ctor_System_Int32_System_String_System_Nullable_System_Int32__
-  commentId: M:PhotoCatalog.Application.DTOs.FolderResponse.#ctor(System.Int32,System.String,System.Nullable{System.Int32})
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html#PhotoCatalog_Application_DTOs_Folders_FolderResponse__ctor_System_Int32_System_String_System_Nullable_System_Int32__
+  commentId: M:PhotoCatalog.Application.DTOs.Folders.FolderResponse.#ctor(System.Int32,System.String,System.Nullable{System.Int32})
   name.vb: New(Integer, String, Integer?)
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse.FolderResponse(int, string, int?)
-  fullName.vb: PhotoCatalog.Application.DTOs.FolderResponse.New(Integer, String, Integer?)
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse.FolderResponse(int, string, int?)
+  fullName.vb: PhotoCatalog.Application.DTOs.Folders.FolderResponse.New(Integer, String, Integer?)
   nameWithType: FolderResponse.FolderResponse(int, string, int?)
   nameWithType.vb: FolderResponse.New(Integer, String, Integer?)
-- uid: PhotoCatalog.Application.DTOs.FolderResponse.#ctor*
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse.#ctor*
   name: FolderResponse
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html#PhotoCatalog_Application_DTOs_FolderResponse__ctor_
-  commentId: Overload:PhotoCatalog.Application.DTOs.FolderResponse.#ctor
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html#PhotoCatalog_Application_DTOs_Folders_FolderResponse__ctor_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.FolderResponse.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse.FolderResponse
-  fullName.vb: PhotoCatalog.Application.DTOs.FolderResponse.New
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse.FolderResponse
+  fullName.vb: PhotoCatalog.Application.DTOs.Folders.FolderResponse.New
   nameWithType: FolderResponse.FolderResponse
   nameWithType.vb: FolderResponse.New
-- uid: PhotoCatalog.Application.DTOs.FolderResponse.Id
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse.Id
   name: Id
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html#PhotoCatalog_Application_DTOs_FolderResponse_Id
-  commentId: P:PhotoCatalog.Application.DTOs.FolderResponse.Id
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse.Id
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html#PhotoCatalog_Application_DTOs_Folders_FolderResponse_Id
+  commentId: P:PhotoCatalog.Application.DTOs.Folders.FolderResponse.Id
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse.Id
   nameWithType: FolderResponse.Id
-- uid: PhotoCatalog.Application.DTOs.FolderResponse.Id*
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse.Id*
   name: Id
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html#PhotoCatalog_Application_DTOs_FolderResponse_Id_
-  commentId: Overload:PhotoCatalog.Application.DTOs.FolderResponse.Id
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html#PhotoCatalog_Application_DTOs_Folders_FolderResponse_Id_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.FolderResponse.Id
   isSpec: "True"
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse.Id
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse.Id
   nameWithType: FolderResponse.Id
-- uid: PhotoCatalog.Application.DTOs.FolderResponse.Name
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse.Name
   name: Name
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html#PhotoCatalog_Application_DTOs_FolderResponse_Name
-  commentId: P:PhotoCatalog.Application.DTOs.FolderResponse.Name
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse.Name
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html#PhotoCatalog_Application_DTOs_Folders_FolderResponse_Name
+  commentId: P:PhotoCatalog.Application.DTOs.Folders.FolderResponse.Name
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse.Name
   nameWithType: FolderResponse.Name
-- uid: PhotoCatalog.Application.DTOs.FolderResponse.Name*
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse.Name*
   name: Name
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html#PhotoCatalog_Application_DTOs_FolderResponse_Name_
-  commentId: Overload:PhotoCatalog.Application.DTOs.FolderResponse.Name
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html#PhotoCatalog_Application_DTOs_Folders_FolderResponse_Name_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.FolderResponse.Name
   isSpec: "True"
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse.Name
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse.Name
   nameWithType: FolderResponse.Name
-- uid: PhotoCatalog.Application.DTOs.FolderResponse.ParentFolderId
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse.ParentFolderId
   name: ParentFolderId
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html#PhotoCatalog_Application_DTOs_FolderResponse_ParentFolderId
-  commentId: P:PhotoCatalog.Application.DTOs.FolderResponse.ParentFolderId
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse.ParentFolderId
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html#PhotoCatalog_Application_DTOs_Folders_FolderResponse_ParentFolderId
+  commentId: P:PhotoCatalog.Application.DTOs.Folders.FolderResponse.ParentFolderId
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse.ParentFolderId
   nameWithType: FolderResponse.ParentFolderId
-- uid: PhotoCatalog.Application.DTOs.FolderResponse.ParentFolderId*
+- uid: PhotoCatalog.Application.DTOs.Folders.FolderResponse.ParentFolderId*
   name: ParentFolderId
-  href: api/PhotoCatalog.Application.DTOs.FolderResponse.html#PhotoCatalog_Application_DTOs_FolderResponse_ParentFolderId_
-  commentId: Overload:PhotoCatalog.Application.DTOs.FolderResponse.ParentFolderId
+  href: api/PhotoCatalog.Application.DTOs.Folders.FolderResponse.html#PhotoCatalog_Application_DTOs_Folders_FolderResponse_ParentFolderId_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.FolderResponse.ParentFolderId
   isSpec: "True"
-  fullName: PhotoCatalog.Application.DTOs.FolderResponse.ParentFolderId
+  fullName: PhotoCatalog.Application.DTOs.Folders.FolderResponse.ParentFolderId
   nameWithType: FolderResponse.ParentFolderId
+- uid: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest
+  name: MoveFolderRequest
+  href: api/PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.html
+  commentId: T:PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest
+  fullName: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest
+  nameWithType: MoveFolderRequest
+- uid: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.#ctor(System.Nullable{System.Int32})
+  name: MoveFolderRequest(int?)
+  href: api/PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_MoveFolderRequest__ctor_System_Nullable_System_Int32__
+  commentId: M:PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.#ctor(System.Nullable{System.Int32})
+  name.vb: New(Integer?)
+  fullName: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.MoveFolderRequest(int?)
+  fullName.vb: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.New(Integer?)
+  nameWithType: MoveFolderRequest.MoveFolderRequest(int?)
+  nameWithType.vb: MoveFolderRequest.New(Integer?)
+- uid: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.#ctor*
+  name: MoveFolderRequest
+  href: api/PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_MoveFolderRequest__ctor_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.MoveFolderRequest
+  fullName.vb: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.New
+  nameWithType: MoveFolderRequest.MoveFolderRequest
+  nameWithType.vb: MoveFolderRequest.New
+- uid: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.NewParentId
+  name: NewParentId
+  href: api/PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_MoveFolderRequest_NewParentId
+  commentId: P:PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.NewParentId
+  fullName: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.NewParentId
+  nameWithType: MoveFolderRequest.NewParentId
+- uid: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.NewParentId*
+  name: NewParentId
+  href: api/PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.html#PhotoCatalog_Application_DTOs_Folders_MoveFolderRequest_NewParentId_
+  commentId: Overload:PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.NewParentId
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.DTOs.Folders.MoveFolderRequest.NewParentId
+  nameWithType: MoveFolderRequest.NewParentId
 - uid: PhotoCatalog.Application.DTOs.ImportPhotoRequest
   name: ImportPhotoRequest
   href: api/PhotoCatalog.Application.DTOs.ImportPhotoRequest.html
@@ -826,11 +870,11 @@ references:
   fullName.vb: PhotoCatalog.Application.UseCases.CreateFolderUseCase.New
   nameWithType: CreateFolderUseCase.CreateFolderUseCase
   nameWithType.vb: CreateFolderUseCase.New
-- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.CreateFolderRequest)
+- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest)
   name: Execute(CreateFolderRequest)
-  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase_Execute_PhotoCatalog_Application_DTOs_CreateFolderRequest_
-  commentId: M:PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.CreateFolderRequest)
-  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.CreateFolderRequest)
+  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase_Execute_PhotoCatalog_Application_DTOs_Folders_CreateFolderRequest_
+  commentId: M:PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest)
+  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest)
   nameWithType: CreateFolderUseCase.Execute(CreateFolderRequest)
 - uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute*
   name: Execute
@@ -943,15 +987,15 @@ references:
   fullName.vb: PhotoCatalog.Application.UseCases.MoveFolderUseCase.New
   nameWithType: MoveFolderUseCase.MoveFolderUseCase
   nameWithType.vb: MoveFolderUseCase.New
-- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Int32)
-  name: Execute(int, int)
-  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_System_Int32_System_Int32_
-  commentId: M:PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Int32)
-  name.vb: Execute(Integer, Integer)
-  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(int, int)
-  fullName.vb: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(Integer, Integer)
-  nameWithType: MoveFolderUseCase.Execute(int, int)
-  nameWithType.vb: MoveFolderUseCase.Execute(Integer, Integer)
+- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Nullable{System.Int32})
+  name: Execute(int, int?)
+  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_System_Int32_System_Nullable_System_Int32__
+  commentId: M:PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Nullable{System.Int32})
+  name.vb: Execute(Integer, Integer?)
+  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(int, int?)
+  fullName.vb: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(Integer, Integer?)
+  nameWithType: MoveFolderUseCase.Execute(int, int?)
+  nameWithType.vb: MoveFolderUseCase.Execute(Integer, Integer?)
 - uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute*
   name: Execute
   href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_
@@ -2970,6 +3014,72 @@ references:
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.NotAnImage
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.NotAnImage
   nameWithType: InfrastructureErrors.MetadataExtractor.NotAnImage
+- uid: PhotoCatalog.Infrastructure.Extensions
+  name: PhotoCatalog.Infrastructure.Extensions
+  href: api/PhotoCatalog.Infrastructure.Extensions.html
+  commentId: N:PhotoCatalog.Infrastructure.Extensions
+  fullName: PhotoCatalog.Infrastructure.Extensions
+  nameWithType: PhotoCatalog.Infrastructure.Extensions
+- uid: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions
+  name: ErrorHttpExtensions
+  href: api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.html
+  commentId: T:PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions
+  fullName: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions
+  nameWithType: ErrorHttpExtensions
+- uid: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.Error)
+  name: ToHttpResult(Error)
+  href: api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ErrorHttpExtensions_ToHttpResult_PhotoCatalog_Domain_Primitives_Error_
+  commentId: M:PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.Error)
+  fullName: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.Error)
+  nameWithType: ErrorHttpExtensions.ToHttpResult(Error)
+- uid: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult*
+  name: ToHttpResult
+  href: api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ErrorHttpExtensions_ToHttpResult_
+  commentId: Overload:PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult
+  nameWithType: ErrorHttpExtensions.ToHttpResult
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions
+  name: ResultHttpExtensions
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.html
+  commentId: T:PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions
+  nameWithType: ResultHttpExtensions
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.ToHttpResult*
+  name: ToHttpResult
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ResultHttpExtensions_ToHttpResult_
+  commentId: Overload:PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.ToHttpResult
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.ToHttpResult
+  nameWithType: ResultHttpExtensions.ToHttpResult
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.ToHttpResult``1(PhotoCatalog.Domain.Primitives.Result{``0})
+  name: ToHttpResult<T>(Result<T>)
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ResultHttpExtensions_ToHttpResult__1_PhotoCatalog_Domain_Primitives_Result___0__
+  commentId: M:PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.ToHttpResult``1(PhotoCatalog.Domain.Primitives.Result{``0})
+  name.vb: ToHttpResult(Of T)(Result(Of T))
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.ToHttpResult<T>(PhotoCatalog.Domain.Primitives.Result<T>)
+  fullName.vb: PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.ToHttpResult(Of T)(PhotoCatalog.Domain.Primitives.Result(Of T))
+  nameWithType: ResultHttpExtensions.ToHttpResult<T>(Result<T>)
+  nameWithType.vb: ResultHttpExtensions.ToHttpResult(Of T)(Result(Of T))
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions
+  name: ResultVoidHttpExtensions
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.html
+  commentId: T:PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions
+  nameWithType: ResultVoidHttpExtensions
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.ResultVoid)
+  name: ToHttpResult(ResultVoid)
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ResultVoidHttpExtensions_ToHttpResult_PhotoCatalog_Domain_Primitives_ResultVoid_
+  commentId: M:PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.ResultVoid)
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.ResultVoid)
+  nameWithType: ResultVoidHttpExtensions.ToHttpResult(ResultVoid)
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.ToHttpResult*
+  name: ToHttpResult
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ResultVoidHttpExtensions_ToHttpResult_
+  commentId: Overload:PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.ToHttpResult
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultVoidHttpExtensions.ToHttpResult
+  nameWithType: ResultVoidHttpExtensions.ToHttpResult
 - uid: PhotoCatalog.Infrastructure.Fakes
   name: PhotoCatalog.Infrastructure.Fakes
   href: api/PhotoCatalog.Infrastructure.Fakes.html
@@ -3153,15 +3263,15 @@ references:
   commentId: T:PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository
   fullName: PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository
   nameWithType: FakePhotoRepository
-- uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.#ctor(PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository)
-  name: FakePhotoRepository(FakeAlbumRepository)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoRepository__ctor_PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.#ctor(PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository)
-  name.vb: New(FakeAlbumRepository)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.FakePhotoRepository(PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.New(PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository)
-  nameWithType: FakePhotoRepository.FakePhotoRepository(FakeAlbumRepository)
-  nameWithType.vb: FakePhotoRepository.New(FakeAlbumRepository)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)
+  name: FakePhotoRepository(IAlbumRepository)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoRepository__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)
+  name.vb: New(IAlbumRepository)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.FakePhotoRepository(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.New(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)
+  nameWithType: FakePhotoRepository.FakePhotoRepository(IAlbumRepository)
+  nameWithType.vb: FakePhotoRepository.New(IAlbumRepository)
 - uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.#ctor*
   name: FakePhotoRepository
   href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoRepository__ctor_

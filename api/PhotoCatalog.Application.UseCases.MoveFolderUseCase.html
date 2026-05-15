@@ -211,18 +211,19 @@ Class MoveFolderUseCase  <a class="header-action link-secondary" title="View sou
 
   <a id="PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_" data-uid="PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute*"></a>
 
-  <h3 id="PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_System_Int32_System_Int32_" data-uid="PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Int32)">
-  Execute(int, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_System_Int32_System_Nullable_System_Int32__" data-uid="PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Nullable{System.Int32})">
+  Execute(int, int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L36"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Выполняет перемещение папки с идентификатором <code class="paramref">folderId</code>
-в родительскую папку с идентификатором <code class="paramref">newParentId</code>.</p>
+в родительскую папку с идентификатором <code class="paramref">newParentId</code>.
+Если <code class="paramref">newParentId</code> равен null, папка перемещается в корень.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ResultVoid Execute(int folderId, int newParentId)</code></pre>
+    <pre><code class="lang-csharp hljs">public ResultVoid Execute(int folderId, int? newParentId)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -230,8 +231,9 @@ Class MoveFolderUseCase  <a class="header-action link-secondary" title="View sou
     <dt><code>folderId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
     <dd><p>Идентификатор исходной папки.</p>
 </dd>
-    <dt><code>newParentId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Идентификатор целевой папки.</p>
+    <dt><code>newParentId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd><p>Идентификатор целевой папки.
+Если значение равно null, папка перемещается в корневой каталог.</p>
 </dd>
   </dl>
 
