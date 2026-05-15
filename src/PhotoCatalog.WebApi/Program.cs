@@ -65,6 +65,8 @@ try
         });
     }
 
+    app.MapGet("/test", () => "Hello World!");
+    
     app.MapHealthChecks("/health");
     app.Run();
 }
