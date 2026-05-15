@@ -43,7 +43,7 @@ try
     builder.Services.AddSingleton<IFolderHierarchyValidator, FakeFolderHierarchyValidator>();
     builder.Services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
 
-    // TODO: Добавить CreateFolderUseCase: builder.Services.AddTransient<CreateFolderUseCase>();
+    builder.Services.AddTransient<CreateFolderUseCase>();
     builder.Services.AddTransient<DeletePhotoUseCase>();
     builder.Services.AddTransient<AddTagToPhotoUseCase>();
     builder.Services.AddTransient<MoveFolderUseCase>();
