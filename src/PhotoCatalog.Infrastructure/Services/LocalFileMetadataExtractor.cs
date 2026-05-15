@@ -1,18 +1,15 @@
 using System;
 using System.IO;
 using System.Security.Cryptography;
-
 using MetadataExtractor;
 using MetadataExtractor.Formats.Exif;
 using MetadataExtractor.Formats.Gif;
 using MetadataExtractor.Formats.Jpeg;
 using MetadataExtractor.Formats.Png;
-
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
 using PhotoCatalog.Infrastructure.Errors;
-
 using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Services;
