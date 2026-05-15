@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using PhotoCatalog.Application.DTOs;
+using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Primitives;
+
 
 const string version = "v1";
 const string name = "PhotoCatalog";
@@ -38,6 +42,13 @@ app.MapGet("/summaries", () =>
     }
 
     return Results.Ok(summaries);
+});
+
+app.MapGroup("/app/tags");
+
+app.MapGet("/app/tags", () =>
+{
+    
 });
 
 app.MapHealthChecks("/health");
