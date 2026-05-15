@@ -40,7 +40,9 @@ public class MagicScalerThumbnailService : IThumbnailService
                 sourcePath, targetPath, maxSize);
             var settings = new ProcessImageSettings
             {
-                Width = maxSize, Height = maxSize, ResizeMode = CropScaleMode.Max
+                Width = maxSize,
+                Height = maxSize,
+                ResizeMode = CropScaleMode.Max
             };
 
             settings.TrySetEncoderFormat(ImageMimeTypes.Jpeg);
