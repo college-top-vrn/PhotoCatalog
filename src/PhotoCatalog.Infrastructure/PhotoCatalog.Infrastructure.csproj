@@ -22,8 +22,8 @@
 
 
   <ItemGroup>
-    <PackageReference Include="MetadataExtractor"/>
     <PackageReference Include="PhotoSauce.MagicScaler"/>
+    <PackageReference Include="MetadataExtractor" />
   </ItemGroup>
 
   <ItemGroup>
