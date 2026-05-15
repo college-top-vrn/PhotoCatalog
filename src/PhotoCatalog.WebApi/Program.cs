@@ -1,6 +1,7 @@
 using System;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -8,6 +9,7 @@ using PhotoCatalog.Application.Fakes;
 using PhotoCatalog.Application.UseCases;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
+using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Fakes;
 
 using Serilog;
@@ -66,6 +68,45 @@ try
     }
 
     app.MapGet("/test", () => "Hello World!");
+
+    app.MapGroup("/api/tags");
+
+    app.MapGet("/{id}", (int id) =>
+    {
+        FakeTagRepository repository = new FakeTagRepository();
+        var tag = repository.GetById(id);
+        if (tag.IsSuccess)
+        {
+            return Results.Ok(tag);
+        }
+
+        return Results.NotFound();
+    });
+
+    app.MapPost("/{name}", (string name) =>
+    {
+        FakeTagRepository repository = new FakeTagRepository();
+        var tag = repository.GetByName(name);
+        if (tag.IsSuccess)
+        {
+            return Results.Ok(tag);
+        }
+
+        return Results.NotFound();
+    });
+
+    app.MapDelete("/{id}", (int id) =>
+    {
+        FakeTagRepository repository = new FakeTagRepository();
+        var tag = repository.Delete(id);
+        if (tag.IsSuccess)
+        {
+            return Results.Ok(tag);
+        }
+
+        return Results.NotFound();
+    });
+
 
     app.MapHealthChecks("/health");
     app.Run();
