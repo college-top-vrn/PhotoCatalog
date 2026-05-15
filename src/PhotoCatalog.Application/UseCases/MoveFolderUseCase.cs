@@ -50,7 +50,7 @@ public class MoveFolderUseCase(
     private ResultVoid MoveToRoot(int folderId)
     {
         Folder? sourceFolder = null;
-        
+
         return folderRepository.GetById(folderId)
             .OnSuccess(data =>
             {
@@ -90,7 +90,7 @@ public class MoveFolderUseCase(
     {
         Folder? sourceFolder = null;
         Folder? targetFolder = null;
-        
+
         return folderRepository.GetById(folderId)
             .OnSuccess(data =>
             {
