@@ -2,6 +2,12 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 
+using MetadataExtractor;
+using MetadataExtractor.Formats.Exif;
+using MetadataExtractor.Formats.Gif;
+using MetadataExtractor.Formats.Jpeg;
+using MetadataExtractor.Formats.Png;
+
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
@@ -15,6 +21,8 @@ namespace PhotoCatalog.Infrastructure.Services;
 ///     Реализует контракт извлечения метаданных из файлов.
 ///     Предоставляет операции вычисления SHA-256-хэша и определения габаритов изображения.
 ///     Методы работают потоково и не загружают весь файл в оперативную память.
+///     Для извлечения размеров изображения используется библиотека MetadataExtractor,
+///     которая читает только заголовки файлов без декодирования матрицы пикселей.
 /// </summary>
 public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
 {
@@ -43,9 +51,6 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
     ///     Успешный результат с хэш-строкой в шестнадцатеричном формате,
     ///     либо провальный результат с ошибкой инфраструктурного уровня.
     /// </returns>
-    /// <exception cref="UnauthorizedAccessException">
-    ///     Может возникнуть, если у процесса отсутствуют права на чтение файла.
-    /// </exception>
     public Result<string> CalculateHash(string filePath)
     {
         try
@@ -87,7 +92,9 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
 
     /// <summary>
     ///     Извлекает габариты изображения: ширину и высоту в пикселях.
-    ///     Поддерживаются форматы PNG и JPEG.
+    ///     Метод использует библиотеку MetadataExtractor, которая читает только заголовки файлов
+    ///     без декодирования матрицы пикселей, что обеспечивает высокую производительность.
+    ///     Поддерживаются различные форматы изображений: JPEG, PNG, GIF, BMP, TIFF и другие.
     /// </summary>
     /// <param name="filePath">
     ///     Абсолютный путь к файлу изображения.
@@ -102,26 +109,69 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
         {
             _logger.Debug("Начало извлечения габаритов изображения: {FilePath}", filePath);
 
-            using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096);
-            var result = TryReadDimensions(stream);
+            // Используем библиотеку MetadataExtractor для чтения метаданных
+            // Библиотека работает только с заголовками файлов, не декодирует пиксели
+            var directories = ImageMetadataReader.ReadMetadata(filePath);
 
-            if (result.IsSuccess)
+            int? width = null;
+            int? height = null;
+
+            // Обход всех директорий в поисках тегов ширины и высоты
+            foreach (var directory in directories)
             {
-                _logger.Debug(
-                    "Габариты успешно извлечены: {FilePath}, Width={Width}, Height={Height}",
-                    filePath,
-                    result.Value!.Width,
-                    result.Value.Height);
+                // Пропускаем директории с ошибками
+                if (directory.HasError)
+                {
+                    _logger.Debug("Директория {DirectoryName} содержит ошибки: {Errors}",
+                        directory.Name, string.Join(", ", directory.Errors));
+                    continue;
+                }
+
+                // Поиск ширины
+                if (!width.HasValue)
+                {
+                    width = TryGetImageWidth(directory);
+                }
+
+                // Поиск высоты
+                if (!height.HasValue)
+                {
+                    height = TryGetImageHeight(directory);
+                }
+
+                // Если оба значения найдены - прекращаем поиск
+                if (width.HasValue && height.HasValue)
+                {
+                    break;
+                }
             }
-            else
+
+            // Проверка: удалось ли найти оба размера
+            if (!width.HasValue || !height.HasValue)
             {
                 _logger.Error(
-                    "Ошибка извлечения габаритов изображения: {FilePath}, Code={ErrorCode}",
+                    "Не удалось найти размеры изображения в файле: {FilePath}. WidthFound={WidthFound}, HeightFound={HeightFound}",
                     filePath,
-                    result.Error.Code);
+                    width.HasValue,
+                    height.HasValue);
+
+                return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.MetadataNotFound);
             }
 
-            return result;
+            _logger.Debug(
+                "Габариты успешно извлечены: {FilePath}, Width={Width}, Height={Height}",
+                filePath,
+                width.Value,
+                height.Value);
+
+            return Dimensions.Create(width.Value, height.Value);
+        }
+        catch (ImageProcessingException ex)
+        {
+            // Файл не является изображением или имеет неподдерживаемый формат
+            _logger.Error(ex, "Файл не является корректным изображением или формат не поддерживается: {FilePath}",
+                filePath);
+            return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.NotAnImage);
         }
         catch (UnauthorizedAccessException ex)
         {
@@ -147,161 +197,104 @@ public sealed class LocalFileMetadataExtractor : IFileMetadataExtractor
     }
 
     /// <summary>
-    ///     Определяет формат файла и направляет выполнение в специализированный парсер размеров.
+    ///     Пытается извлечь ширину изображения из директории метаданных.
+    ///     Проверяет различные типы директорий и их теги.
     /// </summary>
-    /// <param name="stream">
-    ///     Поток, содержащий бинарные данные файла изображения.
+    /// <param name="directory">
+    ///     Директория с метаданными изображения.
     /// </param>
     /// <returns>
-    ///     Успешный результат с габаритами изображения,
-    ///     либо провальный результат, если формат не распознан или файл поврежден.
+    ///     Значение ширины, если найдено; иначе <c>null</c>.
     /// </returns>
-    private Result<Dimensions> TryReadDimensions(Stream stream)
+    private static int? TryGetImageWidth(MetadataExtractor.Directory directory)
     {
-        var header = new byte[8];
-
-        if (stream.Read(header, 0, header.Length) != header.Length)
-            return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-        if (IsPng(header))
-            return ReadPng(stream);
-
-        if (IsJpeg(header))
-            return ReadJpeg(stream);
-
-        return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.NotAnImage);
-    }
-
-    /// <summary>
-    ///     Проверяет, соответствует ли заголовок сигнатуре PNG.
-    /// </summary>
-    /// <param name="header">
-    ///     Первые байты файла.
-    /// </param>
-    /// <returns>
-    ///     <c>true</c>, если заголовок соответствует PNG; иначе <c>false</c>.
-    /// </returns>
-    private static bool IsPng(byte[] header) =>
-        header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 &&
-        header[4] == 0x0D && header[5] == 0x0A && header[6] == 0x1A && header[7] == 0x0A;
-
-    /// <summary>
-    ///     Проверяет, соответствует ли заголовок сигнатуре JPEG.
-    /// </summary>
-    /// <param name="header">
-    ///     Первые байты файла.
-    /// </param>
-    /// <returns>
-    ///     <c>true</c>, если заголовок соответствует JPEG; иначе <c>false</c>.
-    /// </returns>
-    private static bool IsJpeg(byte[] header) =>
-        header[0] == 0xFF && header[1] == 0xD8;
-
-    /// <summary>
-    ///     Извлекает габариты изображения из PNG-файла.
-    ///     Размеры хранятся в чанке <c>IHDR</c>.
-    /// </summary>
-    /// <param name="stream">
-    ///     Поток, содержащий PNG-файл.
-    /// </param>
-    /// <returns>
-    ///     Успешный результат с шириной и высотой изображения,
-    ///     либо провальный результат, если файл поврежден.
-    /// </returns>
-    private Result<Dimensions> ReadPng(Stream stream)
-    {
-        var lengthBytes = new byte[4];
-        var typeBytes = new byte[4];
-        var data = new byte[8];
-
-        if (stream.Read(lengthBytes, 0, 4) != 4)
-            return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-        if (stream.Read(typeBytes, 0, 4) != 4)
-            return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-        if (System.Text.Encoding.ASCII.GetString(typeBytes) != "IHDR")
-            return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-        if (stream.Read(data, 0, 8) != 8)
-            return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-        int width = ReadInt32BigEndian(data, 0);
-        int height = ReadInt32BigEndian(data, 4);
-
-        return Dimensions.Create(width, height);
-    }
-
-    /// <summary>
-    ///     Извлекает габариты изображения из JPEG-файла.
-    ///     Метод ищет сегмент, содержащий данные о ширине и высоте.
-    /// </summary>
-    /// <param name="stream">
-    ///     Поток, содержащий JPEG-файл.
-    /// </param>
-    /// <returns>
-    ///     Успешный результат с шириной и высотой изображения,
-    ///     либо провальный результат, если файл поврежден.
-    /// </returns>
-    private Result<Dimensions> ReadJpeg(Stream stream)
-    {
-        while (true)
+        // JPEG директория
+        if (directory is JpegDirectory jpegDir)
         {
-            int prefix = stream.ReadByte();
-            if (prefix == -1)
-                return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-            if (prefix != 0xFF)
-                continue;
-
-            int marker = stream.ReadByte();
-            if (marker == -1)
-                return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-            while (marker == 0xFF)
-            {
-                marker = stream.ReadByte();
-                if (marker == -1)
-                    return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-            }
-
-            if (marker is 0xC0 or 0xC1 or 0xC2 or 0xC3 or 0xC5 or 0xC6 or 0xC7 or 0xC9 or 0xCA or 0xCB or 0xCD or 0xCE
-                or 0xCF)
-            {
-                var size = new byte[7];
-                if (stream.Read(size, 0, size.Length) != size.Length)
-                    return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-                int height = (size[3] << 8) | size[4];
-                int width = (size[5] << 8) | size[6];
-
-                return Dimensions.Create(width, height);
-            }
-
-            var lengthBytes = new byte[2];
-            if (stream.Read(lengthBytes, 0, 2) != 2)
-                return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-            int segmentLength = (lengthBytes[0] << 8) | lengthBytes[1];
-            if (segmentLength < 2)
-                return Result<Dimensions>.Failure(InfrastructureErrors.MetadataExtractor.FileCorrupted);
-
-            stream.Seek(segmentLength - 2, SeekOrigin.Current);
+            if (jpegDir.TryGetInt32(JpegDirectory.TagImageWidth, out int width))
+                return width;
         }
+
+        // PNG директория
+        if (directory is PngDirectory pngDir)
+        {
+            if (pngDir.TryGetInt32(PngDirectory.TagImageWidth, out int width))
+                return width;
+        }
+
+        // GIF директория
+        if (directory is GifHeaderDirectory gifDir)
+        {
+            if (gifDir.TryGetInt32(GifHeaderDirectory.TagImageWidth, out int width))
+                return width;
+        }
+
+        // Exif IFD0 директория (содержит базовые теги изображения)
+        if (directory is ExifIfd0Directory exifDir)
+        {
+            if (exifDir.TryGetInt32(ExifIfd0Directory.TagImageWidth, out int width))
+                return width;
+        }
+
+        // Общий поиск по тегам, которые могут содержать ширину
+        var widthTags = new[] { 0xA002, 0x0100, 0x0112 };
+        foreach (var tag in widthTags)
+        {
+            if (directory.TryGetInt32(tag, out int width))
+                return width;
+        }
+
+        return null;
     }
 
     /// <summary>
-    ///     Преобразует 4 байта в целое число в формате big-endian.
+    ///     Пытается извлечь высоту изображения из директории метаданных.
+    ///     Проверяет различные типы директорий и их теги.
     /// </summary>
-    /// <param name="buffer">
-    ///     Массив байтов, содержащий число.
-    /// </param>
-    /// <param name="offset">
-    ///     Смещение, с которого начинается число.
+    /// <param name="directory">
+    ///     Директория с метаданными изображения.
     /// </param>
     /// <returns>
-    ///     Целое число, прочитанное из массива байтов.
+    ///     Значение высоты, если найдено; иначе <c>null</c>.
     /// </returns>
-    private static int ReadInt32BigEndian(byte[] buffer, int offset) =>
-        (buffer[offset] << 24) | (buffer[offset + 1] << 16) | (buffer[offset + 2] << 8) | buffer[offset + 3];
+    private static int? TryGetImageHeight(MetadataExtractor.Directory directory)
+    {
+        // JPEG директория
+        if (directory is JpegDirectory jpegDir)
+        {
+            if (jpegDir.TryGetInt32(JpegDirectory.TagImageHeight, out int height))
+                return height;
+        }
+
+        // PNG директория
+        if (directory is PngDirectory pngDir)
+        {
+            if (pngDir.TryGetInt32(PngDirectory.TagImageHeight, out int height))
+                return height;
+        }
+
+        // GIF директория
+        if (directory is GifHeaderDirectory gifDir)
+        {
+            if (gifDir.TryGetInt32(GifHeaderDirectory.TagImageHeight, out int height))
+                return height;
+        }
+
+        // Exif IFD0 директория (содержит базовые теги изображения)
+        if (directory is ExifIfd0Directory exifDir)
+        {
+            if (exifDir.TryGetInt32(ExifIfd0Directory.TagImageHeight, out int height))
+                return height;
+        }
+
+        // Общий поиск по тегам, которые могут содержать высоту
+        var heightTags = new[] { 0xA003, 0x0101, 0x0117 };
+        foreach (var tag in heightTags)
+        {
+            if (directory.TryGetInt32(tag, out int height))
+                return height;
+        }
+
+        return null;
+    }
 }
