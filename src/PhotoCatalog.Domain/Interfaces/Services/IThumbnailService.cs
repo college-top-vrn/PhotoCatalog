@@ -1,24 +1,18 @@
 ﻿using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.Interfaces.Services;
+
 /// <summary>
-/// Интерфейс сервиса высокопроизводительной генерации миниатюр (превью) для изображений.
+/// Интерфейс сервиса высокопроизводительной генерации миниатюр изображений.
 /// </summary>
 public interface IThumbnailService
 {
     /// <summary>
-    /// Генерирует легковесное превью-изображение с сохранением пропорций, 
-    /// автоматическим применением EXIF-ориентации и конвертацией в цветовой профиль sRGB.
+    /// Генерирует миниатюру изображения по указанным путям и максимальному размеру.
     /// </summary>
-    /// <param name="sourcePath">Полный путь к исходному файлу изображения на диске.</param>
-    /// <param name="targetPath">Полный путь для сохранения сгенерированного превью.</param>
-    /// <param name="maxSize">Максимальный размер (в пикселях) по большей стороне для масштабирования.</param>
-    /// <returns>
-    /// Объект <see cref="ResultVoid"/>, указывающий на успешное завершение операции 
-    /// или содержащий информацию об ошибке в случае сбоя.
-    /// </returns>
-    /// <exception cref="System.ArgumentNullException">Инициируется, если один из путей равен null или пуст.</exception>
-    /// <exception cref="System.ArgumentOutOfRangeException">Инициируется, если <paramref name="maxSize"/> меньше или равен нулю.</exception>
+    /// <param name="sourcePath">Полный путь к исходному файлу изображения.</param>
+    /// <param name="targetPath">Полный путь для сохранения миниатюры.</param>
+    /// <param name="maxSize">Максимальный размер изображения по большей стороне в пикселях.</param>
+    /// <returns>Результат выполнения операции.</returns>
     public ResultVoid Generate(string sourcePath, string targetPath, int maxSize);
-    
 }
