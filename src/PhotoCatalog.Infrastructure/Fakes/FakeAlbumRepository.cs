@@ -44,18 +44,6 @@ public class FakeAlbumRepository : IAlbumRepository
     }
 
     /// <summary>
-    ///     Получение альбомов по идентификатору папки
-    /// </summary>
-    /// <param name="id">идентификатор папки</param>.
-    /// <returns>Альбомы.</returns>
-    public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
-    {
-        var albums = _albums.Values.Where(album => album.FolderId == id).ToList();
-
-        return Result<IReadOnlyCollection<Album>>.Success(albums);
-    }
-
-    /// <summary>
     ///     Добавление альбома.
     /// </summary>
     /// <param name="album">альбом.</param>
@@ -125,6 +113,67 @@ public class FakeAlbumRepository : IAlbumRepository
         }
 
         _albums.Remove(id, out _);
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Получение альбомов по идентификатору папки.
+    /// </summary>
+    /// <param name="id">идентификатор папки.</param>
+    /// <returns>Альбомы.</returns>
+    public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
+    {
+        List<Album> albums = _albums.Values.Where(album => album.FolderId == id).ToList();
+
+        return Result<IReadOnlyCollection<Album>>.Success(albums);
+    }
+
+    /// <summary>
+    ///     Добавляет фото к альбому
+    /// </summary>
+    /// <param name="albumId">идентификатор альбома.</param>
+    /// <param name="photoId">идентификатор фото.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    public ResultVoid AddPhoto(int albumId, int photoId)
+    {
+        Result<Album> searchResult = GetById(albumId);
+
+        if (searchResult.IsFailure)
+        {
+            return ResultVoid.Failure(searchResult.Error);
+        }
+
+        foreach (KeyValuePair<int, Album> pair in _albums)
+        {
+            if (pair.Key == albumId)
+            {
+                pair.Value.AddPhoto(photoId);
+            }
+        }
+
+        return ResultVoid.Success();
+    }
+
+    public ResultVoid DeletePhoto(int albumId, int photoId)
+    {
+        Result<Album> searchResult = GetById(albumId);
+
+        if (searchResult.IsFailure)
+        {
+            return ResultVoid.Failure(searchResult.Error);
+        }
+
+        foreach (KeyValuePair<int, Album> pair in _albums)
+        {
+            if (pair.Key == albumId)
+            {
+                pair.Value.RemovePhoto(photoId);
+            }
+        }
 
         return ResultVoid.Success();
     }

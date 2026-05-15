@@ -2,13 +2,16 @@ using System;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using PhotoCatalog.Application.Fakes;
 using PhotoCatalog.Application.UseCases;
+using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
+using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
 
@@ -72,15 +75,46 @@ try
     app.MapHealthChecks("/health");
     app.Run();
 
-    var albumRepository = app.Services.GetService<FakeAlbumRepository>();
-    
-    var albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
+    FakeAlbumRepository? albumRepository = app.Services.GetService<FakeAlbumRepository>();
+    FakePhotoRepository? photoRepository = app.Services.GetService<FakePhotoRepository>();
+
+    RouteGroupBuilder albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
 
     albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId) => albumRepository!
         .GetByFolderId(folderId)
         .ToHttpResult());
-    
-    
+
+    albumEndpointsGroup.MapPost("/", (Album album) => albumRepository!.Add(album).ToHttpResult());
+
+    albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}", (int albumId, int photoId) =>
+    {
+        Result<Photo> searchResult = photoRepository!.GetById(photoId);
+
+        if (searchResult.IsFailure)
+        {
+            return searchResult.Error.ToHttpResult();
+        }
+
+        return albumRepository!
+            .AddPhoto(albumId, photoId)
+            .ToHttpResult();
+    });
+
+    albumEndpointsGroup.MapDelete("/{albumId:int}/photos/{photoId:int}", (int albumId, int photoId) =>
+    {
+        Result<Photo> searchResult = photoRepository!.GetById(photoId);
+
+        if (searchResult.IsFailure)
+        {
+            return searchResult.Error.ToHttpResult();
+        }
+
+        return albumRepository!
+            .DeletePhoto(albumId, photoId)
+            .ToHttpResult();
+    });
+
+    albumEndpointsGroup.MapDelete("/{id:int}", (int id) => albumRepository!.Delete(id).ToHttpResult());
 }
 catch (Exception e)
 {
