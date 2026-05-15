@@ -156,10 +156,11 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
   <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_AccessDenied" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.AccessDenied">
   AccessDenied
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L98"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Ошибка, когда отказано в доступе к файловой системе.</p>
+  <div class="markdown level1 summary"><p>Ошибка доступа к файлу или директории.
+Возникает при отсутствии прав на чтение/запись/удаление.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -187,10 +188,11 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
   <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_DiskFull" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.DiskFull">
   DiskFull
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L106"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Ошибка, когда на диске недостаточно свободного места.</p>
+  <div class="markdown level1 summary"><p>Ошибка при переполнении дискового пространства.
+Возникает, когда на целевом диске недостаточно места для сохранения файла.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -218,15 +220,80 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
   <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_IOError" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError">
   IOError
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L114"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Ошибка, когда произошла ошибка ввода-вывода при работе с файлом.</p>
+  <div class="markdown level1 summary"><p>Общая ошибка ввода-вывода.
+Возникает при непредвиденных проблемах с файловой системой.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static readonly Error IOError</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_InvalidPath" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.InvalidPath">
+  InvalidPath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Ошибка некорректного пути.
+Возникает, когда указанный путь содержит недопустимые символы или имеет неверный формат.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Error InvalidPath</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_PathTraversalAttempt" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.PathTraversalAttempt">
+  PathTraversalAttempt
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Ошибка, возникающая при попытке выхода за пределы базовой директории хранилища.
+Возникает, когда относительный путь содержит &quot;..&quot; для навигации вверх.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Error PathTraversalAttempt</code></pre>
   </div>
 
 

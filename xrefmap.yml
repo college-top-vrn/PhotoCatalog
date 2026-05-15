@@ -2868,6 +2868,42 @@ references:
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
   nameWithType: InfrastructureErrors.FileStorage.IOError
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.InvalidPath
+  name: InvalidPath
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_InvalidPath
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.InvalidPath
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.InvalidPath
+  nameWithType: InfrastructureErrors.FileStorage.InvalidPath
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.PathTraversalAttempt
+  name: PathTraversalAttempt
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_PathTraversalAttempt
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.PathTraversalAttempt
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.PathTraversalAttempt
+  nameWithType: InfrastructureErrors.FileStorage.PathTraversalAttempt
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor
+  name: InfrastructureErrors.MetadataExtractor
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.html
+  commentId: T:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor
+  nameWithType: InfrastructureErrors.MetadataExtractor
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.FileCorrupted
+  name: FileCorrupted
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_MetadataExtractor_FileCorrupted
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.FileCorrupted
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.FileCorrupted
+  nameWithType: InfrastructureErrors.MetadataExtractor.FileCorrupted
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.FileLocked
+  name: FileLocked
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_MetadataExtractor_FileLocked
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.FileLocked
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.FileLocked
+  nameWithType: InfrastructureErrors.MetadataExtractor.FileLocked
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.NotAnImage
+  name: NotAnImage
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_MetadataExtractor_NotAnImage
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.NotAnImage
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.NotAnImage
+  nameWithType: InfrastructureErrors.MetadataExtractor.NotAnImage
 - uid: PhotoCatalog.Infrastructure.Fakes
   name: PhotoCatalog.Infrastructure.Fakes
   href: api/PhotoCatalog.Infrastructure.Fakes.html
@@ -3812,6 +3848,142 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.GetByName
   nameWithType: SqliteTagRepository.GetByName
+- uid: PhotoCatalog.Infrastructure.Services
+  name: PhotoCatalog.Infrastructure.Services
+  href: api/PhotoCatalog.Infrastructure.Services.html
+  commentId: N:PhotoCatalog.Infrastructure.Services
+  fullName: PhotoCatalog.Infrastructure.Services
+  nameWithType: PhotoCatalog.Infrastructure.Services
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor
+  name: LocalFileMetadataExtractor
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html
+  commentId: T:PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor
+  nameWithType: LocalFileMetadataExtractor
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.#ctor(Serilog.ILogger)
+  name: LocalFileMetadataExtractor(ILogger)
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html#PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor__ctor_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.#ctor(Serilog.ILogger)
+  name.vb: New(ILogger)
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.LocalFileMetadataExtractor(Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.New(Serilog.ILogger)
+  nameWithType: LocalFileMetadataExtractor.LocalFileMetadataExtractor(ILogger)
+  nameWithType.vb: LocalFileMetadataExtractor.New(ILogger)
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.#ctor*
+  name: LocalFileMetadataExtractor
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html#PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.LocalFileMetadataExtractor
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.New
+  nameWithType: LocalFileMetadataExtractor.LocalFileMetadataExtractor
+  nameWithType.vb: LocalFileMetadataExtractor.New
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.CalculateHash(System.String)
+  name: CalculateHash(string)
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html#PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor_CalculateHash_System_String_
+  commentId: M:PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.CalculateHash(System.String)
+  name.vb: CalculateHash(String)
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.CalculateHash(string)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.CalculateHash(String)
+  nameWithType: LocalFileMetadataExtractor.CalculateHash(string)
+  nameWithType.vb: LocalFileMetadataExtractor.CalculateHash(String)
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.CalculateHash*
+  name: CalculateHash
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html#PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor_CalculateHash_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.CalculateHash
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.CalculateHash
+  nameWithType: LocalFileMetadataExtractor.CalculateHash
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.GetDimensions(System.String)
+  name: GetDimensions(string)
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html#PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor_GetDimensions_System_String_
+  commentId: M:PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.GetDimensions(System.String)
+  name.vb: GetDimensions(String)
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.GetDimensions(string)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.GetDimensions(String)
+  nameWithType: LocalFileMetadataExtractor.GetDimensions(string)
+  nameWithType.vb: LocalFileMetadataExtractor.GetDimensions(String)
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.GetDimensions*
+  name: GetDimensions
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html#PhotoCatalog_Infrastructure_Services_LocalFileMetadataExtractor_GetDimensions_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.GetDimensions
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.GetDimensions
+  nameWithType: LocalFileMetadataExtractor.GetDimensions
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage
+  name: LocalFileStorage
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html
+  commentId: T:PhotoCatalog.Infrastructure.Services.LocalFileStorage
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage
+  nameWithType: LocalFileStorage
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage.#ctor(Serilog.ILogger,System.String)
+  name: LocalFileStorage(ILogger, string)
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html#PhotoCatalog_Infrastructure_Services_LocalFileStorage__ctor_Serilog_ILogger_System_String_
+  commentId: M:PhotoCatalog.Infrastructure.Services.LocalFileStorage.#ctor(Serilog.ILogger,System.String)
+  name.vb: New(ILogger, String)
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.LocalFileStorage(Serilog.ILogger, string)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileStorage.New(Serilog.ILogger, String)
+  nameWithType: LocalFileStorage.LocalFileStorage(ILogger, string)
+  nameWithType.vb: LocalFileStorage.New(ILogger, String)
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage.#ctor*
+  name: LocalFileStorage
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html#PhotoCatalog_Infrastructure_Services_LocalFileStorage__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.LocalFileStorage.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.LocalFileStorage
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileStorage.New
+  nameWithType: LocalFileStorage.LocalFileStorage
+  nameWithType.vb: LocalFileStorage.New
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage.DeleteFile(System.String)
+  name: DeleteFile(string)
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html#PhotoCatalog_Infrastructure_Services_LocalFileStorage_DeleteFile_System_String_
+  commentId: M:PhotoCatalog.Infrastructure.Services.LocalFileStorage.DeleteFile(System.String)
+  name.vb: DeleteFile(String)
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.DeleteFile(string)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileStorage.DeleteFile(String)
+  nameWithType: LocalFileStorage.DeleteFile(string)
+  nameWithType.vb: LocalFileStorage.DeleteFile(String)
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage.DeleteFile*
+  name: DeleteFile
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html#PhotoCatalog_Infrastructure_Services_LocalFileStorage_DeleteFile_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.LocalFileStorage.DeleteFile
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.DeleteFile
+  nameWithType: LocalFileStorage.DeleteFile
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage.FileExists(System.String)
+  name: FileExists(string)
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html#PhotoCatalog_Infrastructure_Services_LocalFileStorage_FileExists_System_String_
+  commentId: M:PhotoCatalog.Infrastructure.Services.LocalFileStorage.FileExists(System.String)
+  name.vb: FileExists(String)
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.FileExists(string)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileStorage.FileExists(String)
+  nameWithType: LocalFileStorage.FileExists(string)
+  nameWithType.vb: LocalFileStorage.FileExists(String)
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage.FileExists*
+  name: FileExists
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html#PhotoCatalog_Infrastructure_Services_LocalFileStorage_FileExists_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.LocalFileStorage.FileExists
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.FileExists
+  nameWithType: LocalFileStorage.FileExists
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage.StoreFile(System.String,System.String)
+  name: StoreFile(string, string)
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html#PhotoCatalog_Infrastructure_Services_LocalFileStorage_StoreFile_System_String_System_String_
+  commentId: M:PhotoCatalog.Infrastructure.Services.LocalFileStorage.StoreFile(System.String,System.String)
+  name.vb: StoreFile(String, String)
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.StoreFile(string, string)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.LocalFileStorage.StoreFile(String, String)
+  nameWithType: LocalFileStorage.StoreFile(string, string)
+  nameWithType.vb: LocalFileStorage.StoreFile(String, String)
+- uid: PhotoCatalog.Infrastructure.Services.LocalFileStorage.StoreFile*
+  name: StoreFile
+  href: api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html#PhotoCatalog_Infrastructure_Services_LocalFileStorage_StoreFile_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.LocalFileStorage.StoreFile
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.StoreFile
+  nameWithType: LocalFileStorage.StoreFile
 - uid: PhotoCatalog.Infrastructure.UnitOfWork
   name: PhotoCatalog.Infrastructure.UnitOfWork
   href: api/PhotoCatalog.Infrastructure.UnitOfWork.html

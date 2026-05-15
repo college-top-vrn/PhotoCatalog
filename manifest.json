@@ -880,6 +880,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.yml\" sourcestartlinenumber=\"1\">Ошибки, возникающие при извлечении метаданных из файлов.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.yml",
       "output": {
         ".html": {
@@ -1086,6 +1100,48 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Infrastructure.Repositories",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Services.LocalFileMetadataExtractor.yml\" sourcestartlinenumber=\"1\">Реализует контракт извлечения метаданных из файлов.\nПредоставляет операции вычисления SHA-256-хэша и определения габаритов изображения.\nМетоды работают потоково и не загружают весь файл в оперативную память.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Services.LocalFileStorage",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.yml\" sourcestartlinenumber=\"1\">Реализация контракта IFileStorage, обеспечивающая физическую работу с файлами на локальном жестком диске.\nКласс изолирует ядро приложения от системных исключений файловой системы, преобразуя их в предсказуемые\nобъекты Result с подробным логированием каждого сбоя.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Services",
       "Summary": null
     },
     {
