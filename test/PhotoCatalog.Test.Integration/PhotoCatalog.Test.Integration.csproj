@@ -25,10 +25,10 @@
 
   <ItemGroup>
     <None Update="MagicScalerThumbnailServiceTests\vertical_smartphone.jpeg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="MagicScalerThumbnailServiceTests\landscape_photo.jpeg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
