@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Microsoft.AspNetCore.Http;
+
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.Extensions;
@@ -436,5 +438,15 @@ public static class ResultExtensions
         return result.IsSuccess
             ? success(result.Value!)
             : failure(result.Error);
+    }
+
+    /// <summary>
+    ///     Преобразует <see cref="Result{T}" /> в <see cref="IResult" /> с соответствующим HTTP-статусом.
+    /// </summary>
+    public static IResult ToHttpResult<T>(this Result<T> result)
+    {
+        return result.IsSuccess
+            ? result.Value is null ? Results.NoContent() : Results.Ok(result.Value)
+            : result.Error.ToHttpResult();
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Microsoft.AspNetCore.Http;
+
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.Extensions;
@@ -224,5 +226,15 @@ public static class ResultVoidExtensions
         return result.IsSuccess
             ? success()
             : failure(result.Error);
+    }
+
+    /// <summary>
+    ///     Преобразует <see cref="ResultVoid" /> в <see cref="IResult" />.
+    /// </summary>
+    public static IResult ToHttpResult(this ResultVoid result)
+    {
+        return result.IsSuccess
+            ? Results.NoContent()
+            : result.Error.ToHttpResult();
     }
 }

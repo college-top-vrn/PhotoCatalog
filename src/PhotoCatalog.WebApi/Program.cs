@@ -1,44 +1,79 @@
+using System;
+
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using PhotoCatalog.Application.Fakes;
+using PhotoCatalog.Application.UseCases;
+using PhotoCatalog.Domain.Interfaces.Repositories;
+using PhotoCatalog.Domain.Interfaces.Services;
+using PhotoCatalog.Infrastructure.Fakes;
 
-const string version = "v1";
-const string name = "PhotoCatalog";
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddHealthChecks();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+try
 {
-    app.MapOpenApi();
-    app.UseSwagger();
+    const string version = "v1";
+    const string name = "PhotoCatalog";
 
-    app.UseSwaggerUI(swagg =>
+    Log.Information("Запуск веб-хоста...");
+
+    WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+    Log.Logger = new LoggerConfiguration()
+        .WriteTo.Console()
+        .CreateBootstrapLogger();
+
+    builder.Host.UseSerilog((context, services, configuration) => configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .ReadFrom.Services(services));
+
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+    builder.Services.AddHealthChecks();
+
+    builder.Services.AddSingleton<IFolderRepository, FakeFolderRepository>();
+    builder.Services.AddSingleton<IPhotoRepository, FakePhotoRepository>();
+    builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
+    builder.Services.AddSingleton<ITagRepository, FakeTagRepository>();
+
+    builder.Services.AddSingleton<IFileStorage, FakeFileStorage>();
+    builder.Services.AddSingleton<IFileMetadataExtractor, FakeFileMetadataExtractor>();
+    builder.Services.AddSingleton<IFolderHierarchyValidator, FakeFolderHierarchyValidator>();
+    builder.Services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
+
+    // TODO: Добавить CreateFolderUseCase: builder.Services.AddTransient<CreateFolderUseCase>();
+    builder.Services.AddTransient<DeletePhotoUseCase>();
+    builder.Services.AddTransient<AddTagToPhotoUseCase>();
+    builder.Services.AddTransient<MoveFolderUseCase>();
+    builder.Services.AddTransient<ImportPhotoUseCase>();
+    builder.Services.AddTransient<AddPhotoToAlbumUseCase>();
+
+    WebApplication app = builder.Build();
+
+    app.UseSerilogRequestLogging();
+
+    if (app.Environment.IsDevelopment())
     {
-        swagg.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{name}");
-    });
-}
+        app.MapOpenApi();
+        app.UseSwagger();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/summaries", () =>
-{
-    if (summaries.Length == 0)
-    {
-        return Results.NoContent();
+        app.UseSwaggerUI(swagg =>
+        {
+            swagg.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{name}");
+        });
     }
 
-    return Results.Ok(summaries);
-});
-
-app.MapHealthChecks("/health");
-app.Run();
+    app.MapHealthChecks("/health");
+    app.Run();
+}
+catch (Exception e)
+{
+    Log.Fatal(e, "Необработанное исключение.");
+    throw;
+}
+finally
+{
+    Log.CloseAndFlush();
+}
