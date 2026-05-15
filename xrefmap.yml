@@ -2219,6 +2219,28 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.CheckForCycles
   nameWithType: IFolderHierarchyValidator.CheckForCycles
+- uid: PhotoCatalog.Domain.Interfaces.Services.IThumbnailService
+  name: IThumbnailService
+  href: api/PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.html
+  commentId: T:PhotoCatalog.Domain.Interfaces.Services.IThumbnailService
+  fullName: PhotoCatalog.Domain.Interfaces.Services.IThumbnailService
+  nameWithType: IThumbnailService
+- uid: PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.Generate(System.String,System.String,System.Int32)
+  name: Generate(string, string, int)
+  href: api/PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.html#PhotoCatalog_Domain_Interfaces_Services_IThumbnailService_Generate_System_String_System_String_System_Int32_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.Generate(System.String,System.String,System.Int32)
+  name.vb: Generate(String, String, Integer)
+  fullName: PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.Generate(string, string, int)
+  fullName.vb: PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.Generate(String, String, Integer)
+  nameWithType: IThumbnailService.Generate(string, string, int)
+  nameWithType.vb: IThumbnailService.Generate(String, String, Integer)
+- uid: PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.Generate*
+  name: Generate
+  href: api/PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.html#PhotoCatalog_Domain_Interfaces_Services_IThumbnailService_Generate_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.Generate
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.Generate
+  nameWithType: IThumbnailService.Generate
 - uid: PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork
   name: IUnitOfWork
   href: api/PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html
@@ -2880,6 +2902,12 @@ references:
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.PathTraversalAttempt
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.PathTraversalAttempt
   nameWithType: InfrastructureErrors.FileStorage.PathTraversalAttempt
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.ThumbnailGenerationFailed
+  name: ThumbnailGenerationFailed
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_ThumbnailGenerationFailed
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.ThumbnailGenerationFailed
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.ThumbnailGenerationFailed
+  nameWithType: InfrastructureErrors.FileStorage.ThumbnailGenerationFailed
 - uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor
   name: InfrastructureErrors.MetadataExtractor
   href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.MetadataExtractor.html
@@ -3984,6 +4012,47 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.Services.LocalFileStorage.StoreFile
   nameWithType: LocalFileStorage.StoreFile
+- uid: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService
+  name: MagicScalerThumbnailService
+  href: api/PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.html
+  commentId: T:PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService
+  fullName: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService
+  nameWithType: MagicScalerThumbnailService
+- uid: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.#ctor(Serilog.ILogger)
+  name: MagicScalerThumbnailService(ILogger)
+  href: api/PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.html#PhotoCatalog_Infrastructure_Services_MagicScalerThumbnailService__ctor_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.#ctor(Serilog.ILogger)
+  name.vb: New(ILogger)
+  fullName: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.MagicScalerThumbnailService(Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.New(Serilog.ILogger)
+  nameWithType: MagicScalerThumbnailService.MagicScalerThumbnailService(ILogger)
+  nameWithType.vb: MagicScalerThumbnailService.New(ILogger)
+- uid: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.#ctor*
+  name: MagicScalerThumbnailService
+  href: api/PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.html#PhotoCatalog_Infrastructure_Services_MagicScalerThumbnailService__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.MagicScalerThumbnailService
+  fullName.vb: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.New
+  nameWithType: MagicScalerThumbnailService.MagicScalerThumbnailService
+  nameWithType.vb: MagicScalerThumbnailService.New
+- uid: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.Generate(System.String,System.String,System.Int32)
+  name: Generate(string, string, int)
+  href: api/PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.html#PhotoCatalog_Infrastructure_Services_MagicScalerThumbnailService_Generate_System_String_System_String_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.Generate(System.String,System.String,System.Int32)
+  name.vb: Generate(String, String, Integer)
+  fullName: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.Generate(string, string, int)
+  fullName.vb: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.Generate(String, String, Integer)
+  nameWithType: MagicScalerThumbnailService.Generate(string, string, int)
+  nameWithType.vb: MagicScalerThumbnailService.Generate(String, String, Integer)
+- uid: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.Generate*
+  name: Generate
+  href: api/PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.html#PhotoCatalog_Infrastructure_Services_MagicScalerThumbnailService_Generate_
+  commentId: Overload:PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.Generate
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.Generate
+  nameWithType: MagicScalerThumbnailService.Generate
 - uid: PhotoCatalog.Infrastructure.UnitOfWork
   name: PhotoCatalog.Infrastructure.UnitOfWork
   href: api/PhotoCatalog.Infrastructure.UnitOfWork.html

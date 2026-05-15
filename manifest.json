@@ -614,6 +614,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Services.IThumbnailService",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Services.IThumbnailService.yml\" sourcestartlinenumber=\"1\">Интерфейс сервиса высокопроизводительной генерации миниатюр изображений.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.yml",
       "output": {
         ".html": {
@@ -1129,6 +1143,20 @@
       "IsMRef": true,
       "Title": "PhotoCatalog.Infrastructure.Services.LocalFileStorage",
       "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Services.LocalFileStorage.yml\" sourcestartlinenumber=\"1\">Реализация контракта IFileStorage, обеспечивающая физическую работу с файлами на локальном жестком диске.\nКласс изолирует ядро приложения от системных исключений файловой системы, преобразуя их в предсказуемые\nобъекты Result с подробным логированием каждого сбоя.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Services.MagicScalerThumbnailService.yml\" sourcestartlinenumber=\"1\">Сервис для генерации миниатюр изображений с использованием <xref href=\"PhotoSauce.MagicScaler.MagicImageProcessor\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
