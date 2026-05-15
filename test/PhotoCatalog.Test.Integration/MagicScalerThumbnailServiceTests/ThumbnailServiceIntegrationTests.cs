@@ -21,11 +21,15 @@ public class MagicScalerThumbnailServiceTests : IDisposable
     private readonly string _outputFolder;
 
 
-    private readonly string _landscapeSourcePath =
-        @"C:\Users\college\RiderProjects\PhotoCatalog\test\PhotoCatalog.Test.Integration\MagicScalerThumbnailServiceTests\landscape_photo.jpeg";
+    private readonly string _landscapeSourcePath = Path.Combine(
+        AppContext.BaseDirectory, 
+        "MagicScalerThumbnailServiceTests", 
+        "landscape_photo.jpeg");
 
-    private readonly string _portraitSourcePath =
-        @"C:\Users\college\RiderProjects\PhotoCatalog\test\PhotoCatalog.Test.Integration\MagicScalerThumbnailServiceTests\vertical_smartphone.jpeg";
+    private readonly string _portraitSourcePath = Path.Combine(
+        AppContext.BaseDirectory, 
+        "MagicScalerThumbnailServiceTests", 
+        "vertical_smartphone.jpeg");
 
     public MagicScalerThumbnailServiceTests()
     {
