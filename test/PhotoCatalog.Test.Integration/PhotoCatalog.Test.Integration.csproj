@@ -10,9 +10,26 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="Serilog" />
     <PackageReference Include="xunit"/>
     <PackageReference Include="xunit.runner.visualstudio"/>
     <PackageReference Include="TngTech.ArchUnitNET.xUnit"/>
+    <PackageReference Include="NSubstitute" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj" />
+    <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MagicScalerThumbnailServiceTests\vertical_smartphone.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="MagicScalerThumbnailServiceTests\landscape_photo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

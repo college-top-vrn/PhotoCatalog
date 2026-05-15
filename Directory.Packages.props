@@ -8,7 +8,7 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2"/>
     <PackageVersion Include="TngTech.ArchUnitNET.xUnit" Version="0.13.3"/>
   </ItemGroup>
-  
+
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
@@ -26,12 +26,13 @@
 
   <ItemGroup>
     <PackageVersion Include="MetadataExtractor" Version="2.9.3"/>
-    <PackageVersion Include="PhotoSauce.MagicScaler" Version="0.15.0" />
+    <PackageVersion Include="PhotoSauce.MagicScaler" Version="0.15.0"/>
   </ItemGroup>
 
   <ItemGroup>
     <PackageVersion Include="Serilog" Version="4.3.1"/>
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0"/>
+    <PackageVersion Include="NSubstitute" Version="5.3.0"/>
   </ItemGroup>
 
 </Project>
