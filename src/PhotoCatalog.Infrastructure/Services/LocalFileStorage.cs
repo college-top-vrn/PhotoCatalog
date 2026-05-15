@@ -83,6 +83,11 @@ public sealed class LocalFileStorage : IFileStorage
             var targetFullPath = Path.Combine(_baseStoragePath, destinationPath.Value!);
             var targetDirectory = Path.GetDirectoryName(targetFullPath);
 
+            if (path is null)
+            {
+                return ResultVoid.Failure(new Error("FileStorage.InvalidPath", "Путь не должен быть null."));
+            }
+            
             if (!Directory.Exists(targetDirectory))
             {
                 Directory.CreateDirectory(targetDirectory);
