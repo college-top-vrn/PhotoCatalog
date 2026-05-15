@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
@@ -40,6 +41,18 @@ public class FakeAlbumRepository : IAlbumRepository
 
         return Result<Album>.Failure(new Error("AlbumRepository.AlbumNotFound",
             "Не удалось найти альбом по идентификатору"));
+    }
+
+    /// <summary>
+    ///     Получение альбомов по идентификатору папки
+    /// </summary>
+    /// <param name="id">идентификатор папки</param>.
+    /// <returns>Альбомы.</returns>
+    public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
+    {
+        var albums = _albums.Values.Where(album => album.FolderId == id).ToList();
+
+        return Result<IReadOnlyCollection<Album>>.Success(albums);
     }
 
     /// <summary>

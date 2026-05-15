@@ -9,6 +9,7 @@ using PhotoCatalog.Application.Fakes;
 using PhotoCatalog.Application.UseCases;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
+using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
 
 using Serilog;
@@ -75,10 +76,11 @@ try
     
     var albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
 
-    albumEndpointsGroup.MapGet("/{folderId}/albums", folderId =>
-    {
-        throw new NotImplementedException();
-    });
+    albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId) => albumRepository!
+        .GetByFolderId(folderId)
+        .ToHttpResult());
+    
+    
 }
 catch (Exception e)
 {
