@@ -1,6 +1,7 @@
 using System;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -69,6 +70,15 @@ try
 
     app.MapHealthChecks("/health");
     app.Run();
+
+    var albumRepository = app.Services.GetService<FakeAlbumRepository>();
+    
+    var albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
+
+    albumEndpointsGroup.MapGet("/{folderId}/albums", folderId =>
+    {
+        throw new NotImplementedException();
+    });
 }
 catch (Exception e)
 {
