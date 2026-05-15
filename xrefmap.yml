@@ -801,6 +801,44 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute
   nameWithType: AddTagToPhotoUseCase.Execute
+- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase
+  name: CreateFolderUseCase
+  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html
+  commentId: T:PhotoCatalog.Application.UseCases.CreateFolderUseCase
+  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase
+  nameWithType: CreateFolderUseCase
+- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: CreateFolderUseCase(IFolderRepository, IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(IFolderRepository, IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.CreateFolderUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Application.UseCases.CreateFolderUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: CreateFolderUseCase.CreateFolderUseCase(IFolderRepository, IUnitOfWork, ILogger)
+  nameWithType.vb: CreateFolderUseCase.New(IFolderRepository, IUnitOfWork, ILogger)
+- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor*
+  name: CreateFolderUseCase
+  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase__ctor_
+  commentId: Overload:PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.CreateFolderUseCase
+  fullName.vb: PhotoCatalog.Application.UseCases.CreateFolderUseCase.New
+  nameWithType: CreateFolderUseCase.CreateFolderUseCase
+  nameWithType.vb: CreateFolderUseCase.New
+- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.CreateFolderRequest)
+  name: Execute(CreateFolderRequest)
+  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase_Execute_PhotoCatalog_Application_DTOs_CreateFolderRequest_
+  commentId: M:PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.CreateFolderRequest)
+  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.CreateFolderRequest)
+  nameWithType: CreateFolderUseCase.Execute(CreateFolderRequest)
+- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute*
+  name: Execute
+  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase_Execute_
+  commentId: Overload:PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute
+  nameWithType: CreateFolderUseCase.Execute
 - uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase
   name: DeletePhotoUseCase
   href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html

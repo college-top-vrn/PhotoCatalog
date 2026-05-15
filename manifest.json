@@ -334,6 +334,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Application.UseCases.CreateFolderUseCase",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.yml\" sourcestartlinenumber=\"1\">Сценарий использования для создания папки.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.yml",
       "output": {
         ".html": {
@@ -1204,11 +1218,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "api/toc.html"
-        },
         ".json": {
           "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
         }
       },
       "version": ""
@@ -1257,11 +1271,11 @@
       "type": "Toc",
       "source_relative_path": "docs/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "docs/toc.html"
-        },
         ".json": {
           "relative_path": "docs/toc.json"
+        },
+        ".html": {
+          "relative_path": "docs/toc.html"
         }
       },
       "version": ""
@@ -1280,11 +1294,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "toc.html"
-        },
         ".json": {
           "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
         }
       },
       "version": ""
