@@ -22,13 +22,13 @@ public class MagicScalerThumbnailServiceTests : IDisposable
 
 
     private readonly string _landscapeSourcePath = Path.Combine(
-        AppContext.BaseDirectory, 
-        "MagicScalerThumbnailServiceTests", 
+        AppContext.BaseDirectory,
+        "MagicScalerThumbnailServiceTests",
         "landscape_photo.jpeg");
 
     private readonly string _portraitSourcePath = Path.Combine(
-        AppContext.BaseDirectory, 
-        "MagicScalerThumbnailServiceTests", 
+        AppContext.BaseDirectory,
+        "MagicScalerThumbnailServiceTests",
         "vertical_smartphone.jpeg");
 
     public MagicScalerThumbnailServiceTests()
