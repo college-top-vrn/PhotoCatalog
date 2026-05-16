@@ -39,7 +39,7 @@ public class FakeAlbumRepository : IAlbumRepository
         return Result<Album>.Failure(new Error("AlbumRepository.AlbumNotFound",
             "Не удалось найти альбом по идентификатору"));
     }
-    
+
     /// <inheritdoc />
     public ResultVoid Add(Album? album)
     {
@@ -101,7 +101,7 @@ public class FakeAlbumRepository : IAlbumRepository
 
         return Result<IReadOnlyCollection<Album>>.Success(albums);
     }
-    
+
     /// <inheritdoc />
     public ResultVoid AddPhoto(int albumId, int photoId)
     {

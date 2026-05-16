@@ -19,9 +19,15 @@ public interface IPhotoRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с фотографией, если она найдена</description></item>
-    ///         <item><description>Ошибка NotFound, если фотография не найдена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех с фотографией, если она найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если фотография не найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     Result<Photo> GetById(int id);
@@ -33,9 +39,15 @@ public interface IPhotoRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с фотографией, если она найдена</description></item>
-    ///         <item><description>Ошибка NotFound, если фотография не найдена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех с фотографией, если она найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если фотография не найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     Result<Photo> GetByPath(string realPath);
@@ -47,8 +59,12 @@ public interface IPhotoRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех, если фотография успешно добавлена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех, если фотография успешно добавлена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     ResultVoid Add(Photo? photo);
@@ -60,9 +76,15 @@ public interface IPhotoRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех, если фотография успешно обновлена</description></item>
-    ///         <item><description>Ошибка NotFound, если фотография не найдена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех, если фотография успешно обновлена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если фотография не найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     ResultVoid Update(Photo photo);
@@ -74,9 +96,15 @@ public interface IPhotoRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех, если фотография успешно удалена</description></item>
-    ///         <item><description>Ошибка NotFound, если фотография не найдена</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех, если фотография успешно удалена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если фотография не найдена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     ResultVoid Delete(int id);
@@ -88,8 +116,12 @@ public interface IPhotoRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с неизменяемой коллекцией фотографий альбома (может быть пустой)</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех с неизменяемой коллекцией фотографий альбома (может быть пустой)</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     Result<IReadOnlyCollection<Photo>> GetByAlbumId(int albumId);
@@ -101,8 +133,12 @@ public interface IPhotoRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с неизменяемой коллекцией фотографий, содержащих указанные теги (может быть пустой)</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных</description></item>
+    ///         <item>
+    ///             <description>Успех с неизменяемой коллекцией фотографий, содержащих указанные теги (может быть пустой)</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds);
