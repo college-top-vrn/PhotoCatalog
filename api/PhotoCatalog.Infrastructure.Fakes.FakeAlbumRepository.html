@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository" class="text-break">
-Class FakeAlbumRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L14"><i class="bi bi-code-slash"></i></a>
+Class FakeAlbumRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L15"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -173,10 +173,10 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 
   <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)">
   Add(Album?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L44"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Добавление альбома.</p>
+  <div class="markdown level1 summary"><p>Добавляет новый альбом в репозиторий.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -187,15 +187,16 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>album</code> <a class="xref" href="PhotoCatalog.Domain.Entities.Album.html">Album</a></dt>
-    <dd><p>альбом.</p>
+    <dd><p>Объект альбома для добавления. Не может быть null.</p>
 </dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
-    <dd><p>Возвращает значение успешного выполнения.
-В противном случая вернётся отрицательный результат.</p>
+    <dd><p>Объект <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a>, указывающий на успешность выполнения операции.
+Возвращает успешный результат, если альбом успешно добавлен,
+или неуспешный с описанием ошибки в противном случае.</p>
 </dd>
   </dl>
 
@@ -205,6 +206,10 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 
 
 
+  <h4 class="section" id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Перед добавлением может выполняться проверка уникальности имени альбома
+или других бизнес-правил. В случае нарушения этих правил возвращается ошибка.</p>
+</div>
 
 
 
@@ -213,7 +218,7 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 
   <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album,System.Int32)">
   Add(Album?, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L128"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L149"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Добавление альбома.</p>
@@ -252,14 +257,57 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 
 
 
+  <a id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_AddPhoto_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto*"></a>
+
+  <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_AddPhoto_System_Int32_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto(System.Int32,System.Int32)">
+  AddPhoto(int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Добавляет фото к альбому</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResultVoid AddPhoto(int albumId, int photoId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>albumId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор альбома.</p>
+</dd>
+    <dt><code>photoId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор фото.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
+    <dd><p>Возвращает значение успешного выполнения.
+В противном случая вернётся отрицательный результат.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Delete_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete*"></a>
 
   <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Delete_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete(System.Int32)">
   Delete(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L81"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Удаление альбома.</p>
+  <div class="markdown level1 summary"><p>Удаляет альбом из репозитория по его идентификатору.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -270,7 +318,56 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Уникальный идентификатор альбома для удаления.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
+    <dd><p>Объект <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a>, указывающий на успешность выполнения операции.
+Возвращает успешный результат, если альбом успешно удален,
+или неуспешный с описанием ошибки (например, если альбом не найден).</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Delete_System_Int32__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>При удалении альбома может потребоваться также удалить или обновить связанные
+данные (например, фотографии или ссылки на этот альбом). Рекомендуется
+реализовать каскадное удаление или соответствующую бизнес-логику.</p>
+</div>
+
+
+
+
+  <a id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_DeletePhoto_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto*"></a>
+
+  <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_DeletePhoto_System_Int32_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto(System.Int32,System.Int32)">
+  DeletePhoto(int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Удаляет фото из альбома</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResultVoid DeletePhoto(int albumId, int photoId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>albumId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
     <dd><p>идентификатор альбома.</p>
+</dd>
+    <dt><code>photoId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор фото.</p>
 </dd>
   </dl>
 
@@ -279,6 +376,45 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
     <dd><p>Возвращает значение успешного выполнения.
 В противном случая вернётся отрицательный результат.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_GetByFolderId_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId*"></a>
+
+  <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_GetByFolderId_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId(System.Int32)">
+  GetByFolderId(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Получение альбомов по идентификатору папки.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Result&lt;IReadOnlyCollection&lt;Album&gt;&gt; GetByFolderId(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор папки.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Entities.Album.html">Album</a>&gt;&gt;</dt>
+    <dd><p>Альбомы.</p>
 </dd>
   </dl>
 
@@ -296,10 +432,10 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 
   <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_GetById_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetById(System.Int32)">
   GetById(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L29"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Получение альбома по идентификатору.</p>
+  <div class="markdown level1 summary"><p>Получает альбом по его уникальному идентификатору.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -310,14 +446,15 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>идентификатор альбома.</p>
+    <dd><p>Уникальный идентификатор альбома.</p>
 </dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Entities.Album.html">Album</a>&gt;</dt>
-    <dd><p>Альбом.</p>
+    <dd><p>Объект <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result&lt;T&gt;</a>, содержащий найденный альбом в случае успеха,
+или информацию об ошибке, если альбом не найден или произошла ошибка доступа к данным.</p>
 </dd>
   </dl>
 
@@ -327,6 +464,10 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 
 
 
+  <h4 class="section" id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_GetById_System_Int32__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Если альбом с указанным идентификатором не существует, возвращается
+неуспешный Result с соответствующим сообщением об ошибке.</p>
+</div>
 
 
 
@@ -335,10 +476,10 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 
   <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Update_PhotoCatalog_Domain_Entities_Album_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)">
   Update(Album?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L60"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Обновление альбома.</p>
+  <div class="markdown level1 summary"><p>Обновляет существующий альбом в репозитории.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -349,15 +490,16 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>album</code> <a class="xref" href="PhotoCatalog.Domain.Entities.Album.html">Album</a></dt>
-    <dd><p>альбом.</p>
+    <dd><p>Объект альбома с обновленными данными. Не может быть null.</p>
 </dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
-    <dd><p>Возвращает значение успешного выполнения.
-В противном случая вернётся отрицательный результат.</p>
+    <dd><p>Объект <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a>, указывающий на успешность выполнения операции.
+Возвращает успешный результат, если альбом успешно обновлен,
+или неуспешный с описанием ошибки (например, если альбом не найден).</p>
 </dd>
   </dl>
 
@@ -367,6 +509,10 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 
 
 
+  <h4 class="section" id="PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Update_PhotoCatalog_Domain_Entities_Album__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Обновление выполняется только для существующего альбома. Если альбом с
+указанным идентификатором не найден в репозитории, возвращается ошибка.</p>
+</div>
 
 
 
@@ -375,7 +521,7 @@ Class FakeAlbumRepository  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L14" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeAlbumRepository.cs/#L15" class="edit-link">Edit this page</a>
         </div>
 
 

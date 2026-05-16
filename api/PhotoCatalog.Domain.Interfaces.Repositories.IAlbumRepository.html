@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository" class="text-break">
-Interface IAlbumRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L15"><i class="bi bi-code-slash"></i></a>
+Interface IAlbumRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L17"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -141,7 +141,7 @@ Result или <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html
 
   <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)">
   Add(Album)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L53"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Добавляет новый альбом в репозиторий.</p>
@@ -182,11 +182,97 @@ Result или <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html
 
 
 
+  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Add_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add*"></a>
+
+  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album,System.Int32)">
+  Add(Album?, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Добавление альбома.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ResultVoid Add(Album? album, int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>album</code> <a class="xref" href="PhotoCatalog.Domain.Entities.Album.html">Album</a></dt>
+    <dd><p>альбом.</p>
+</dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор альбома.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
+    <dd><p>Возвращает значение успешного выполнения.
+В противном случая вернётся отрицательный результат.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_AddPhoto_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.AddPhoto*"></a>
+
+  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_AddPhoto_System_Int32_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.AddPhoto(System.Int32,System.Int32)">
+  AddPhoto(int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Добавляет фото к альбому</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ResultVoid AddPhoto(int albumId, int photoId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>albumId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор альбома.</p>
+</dd>
+    <dt><code>photoId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор фото.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
+    <dd><p>Возвращает значение успешного выполнения.
+В противном случая вернётся отрицательный результат.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Delete_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete*"></a>
 
   <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Delete_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete(System.Int32)">
   Delete(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L106"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Удаляет альбом из репозитория по его идентификатору.</p>
@@ -228,11 +314,93 @@ Result или <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html
 
 
 
+  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_DeletePhoto_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.DeletePhoto*"></a>
+
+  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_DeletePhoto_System_Int32_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.DeletePhoto(System.Int32,System.Int32)">
+  DeletePhoto(int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Удаляет фото из альбома</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ResultVoid DeletePhoto(int albumId, int photoId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>albumId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор альбома.</p>
+</dd>
+    <dt><code>photoId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор фото.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
+    <dd><p>Возвращает значение успешного выполнения.
+В противном случая вернётся отрицательный результат.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_GetByFolderId_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetByFolderId*"></a>
+
+  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_GetByFolderId_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetByFolderId(System.Int32)">
+  GetByFolderId(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Получение альбомов по идентификатору папки.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Result&lt;IReadOnlyCollection&lt;Album&gt;&gt; GetByFolderId(int id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>идентификатор папки.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Entities.Album.html">Album</a>&gt;&gt;</dt>
+    <dd><p>Альбомы.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_GetById_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById*"></a>
 
   <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_GetById_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById(System.Int32)">
   GetById(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L31"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Получает альбом по его уникальному идентификатору.</p>
@@ -276,7 +444,7 @@ Result или <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html
 
   <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Update_PhotoCatalog_Domain_Entities_Album_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)">
   Update(Album)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L90"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Обновляет существующий альбом в репозитории.</p>
@@ -321,7 +489,7 @@ Result или <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L15" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IAlbumRepository.cs/#L17" class="edit-link">Edit this page</a>
         </div>
 
 
