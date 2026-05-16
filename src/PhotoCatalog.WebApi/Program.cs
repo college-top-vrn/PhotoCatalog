@@ -116,9 +116,6 @@ try
 
     RouteGroupBuilder albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
 
-    albumEndpointsGroup.MapGet("/get/{id:int}",
-        (int id, IAlbumRepository albumRepository) => albumRepository.GetById(id));
-
     albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId, IAlbumRepository albumRepository) =>
         albumRepository
             .GetByFolderId(folderId)
