@@ -75,8 +75,8 @@ try
 
     app.MapHealthChecks("/health");
 
-    IAlbumRepository? albumRepository = app.Services.GetRequiredService<IAlbumRepository>();
-    IPhotoRepository? photoRepository = app.Services.GetRequiredService<IPhotoRepository>();
+    IAlbumRepository albumRepository = app.Services.GetRequiredService<IAlbumRepository>();
+    IPhotoRepository photoRepository = app.Services.GetRequiredService<IPhotoRepository>();
 
     RouteGroupBuilder albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
 

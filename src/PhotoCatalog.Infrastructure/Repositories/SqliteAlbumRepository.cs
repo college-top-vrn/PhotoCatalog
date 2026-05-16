@@ -108,6 +108,11 @@ public class SqliteAlbumRepository : IAlbumRepository
         }
     }
 
+    public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     ///     Добавляет новый альбом в репозиторий.
     /// </summary>
@@ -163,6 +168,16 @@ public class SqliteAlbumRepository : IAlbumRepository
             _logger.LogError(ex, "Неожиданная ошибка в методе Add для альбома {Id}", album.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
+    }
+
+    public ResultVoid Add(Album? album, int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ResultVoid AddPhoto(int albumId, int photoId)
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -278,5 +293,10 @@ public class SqliteAlbumRepository : IAlbumRepository
             _logger.LogError(ex, "Неожиданная ошибка в методе Delete для альбома {Id}", id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
+    }
+
+    public ResultVoid DeletePhoto(int albumId, int photoId)
+    {
+        throw new NotImplementedException();
     }
 }
