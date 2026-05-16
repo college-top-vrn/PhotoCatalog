@@ -77,8 +77,8 @@ try
 
     app.MapGet("/{id}", (int id) =>
     {
-        FakeTagRepository repository = new FakeTagRepository();
-        var tag = repository.GetById(id);
+        FakeTagRepository repository = new();
+        Result<Tag> tag = repository.GetById(id);
         if (tag.IsSuccess)
         {
             return Results.Ok(tag);
@@ -89,8 +89,8 @@ try
 
     app.MapPost("/{name}", (string name) =>
     {
-        FakeTagRepository repository = new FakeTagRepository();
-        var tag = repository.GetByName(name);
+        FakeTagRepository repository = new();
+        Result<Tag> tag = repository.GetByName(name);
         if (tag.IsSuccess)
         {
             return Results.Ok(tag);
@@ -101,8 +101,8 @@ try
 
     app.MapDelete("/{id}", (int id) =>
     {
-        FakeTagRepository repository = new FakeTagRepository();
-        var tag = repository.Delete(id);
+        FakeTagRepository repository = new();
+        ResultVoid tag = repository.Delete(id);
         if (tag.IsSuccess)
         {
             return Results.Ok(tag);
@@ -158,7 +158,7 @@ try
     });
 
     albumEndpointsGroup.MapDelete("/{id:int}", (int id) => albumRepository.Delete(id).ToHttpResult());
-    
+
     app.Run();
 }
 catch (Exception e)
