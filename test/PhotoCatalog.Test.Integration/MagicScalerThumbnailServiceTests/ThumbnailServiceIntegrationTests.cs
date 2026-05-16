@@ -7,12 +7,14 @@ using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Services;
 
 using PhotoSauce.MagicScaler;
+using PhotoSauce.NativeCodecs.Libjpeg;
+using PhotoSauce.NativeCodecs.Libpng;
 
 using Serilog;
 
 using Xunit;
 
-namespace PhotoCatalog.Tests.Infrastructure.Services;
+namespace PhotoCatalog.Test.Integration.MagicScalerThumbnailServiceTests;
 
 public class MagicScalerThumbnailServiceTests : IDisposable
 {
@@ -43,6 +45,12 @@ public class MagicScalerThumbnailServiceTests : IDisposable
     [Fact]
     public void Generate_ShouldSuccessfullyResizeImage_WhenSourceFileIsValid()
     {
+        PhotoSauce.MagicScaler.CodecManager.Configure(codecs =>
+        {
+            codecs.UseLibjpeg();
+            codecs.UseLibpng();
+        });
+
         string targetPath = Path.Combine(_outputFolder, "landscape_thumb.jpeg");
         int maxSize = 100;
 
@@ -63,6 +71,12 @@ public class MagicScalerThumbnailServiceTests : IDisposable
     [Fact]
     public void Generate_ShouldMaintainCorrectOrientation_ForPortraitSmartphonePhotos()
     {
+        PhotoSauce.MagicScaler.CodecManager.Configure(codecs =>
+        {
+            codecs.UseLibjpeg();
+            codecs.UseLibpng();
+        });
+
         string targetPath = Path.Combine(_outputFolder, "portrait_thumb.jpeg");
         int maxSize = 100;
 
@@ -84,6 +98,12 @@ public class MagicScalerThumbnailServiceTests : IDisposable
     [Fact]
     public void Generate_ShouldExecuteWithOptimizedMemoryAllocations()
     {
+        PhotoSauce.MagicScaler.CodecManager.Configure(codecs =>
+        {
+            codecs.UseLibjpeg();
+            codecs.UseLibpng();
+        });
+
         string targetPath = Path.Combine(_outputFolder, "memory_test_thumb.jpeg");
         int maxSize = 150;
 
