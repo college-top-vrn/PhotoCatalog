@@ -170,16 +170,7 @@ public class SqliteAlbumRepository : IAlbumRepository
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
-
-    public ResultVoid Add(Album? album, int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public ResultVoid AddPhoto(int albumId, int photoId)
-    {
-        throw new NotImplementedException();
-    }
+    
 
     /// <summary>
     ///     Обновляет существующий альбом.
@@ -295,9 +286,5 @@ public class SqliteAlbumRepository : IAlbumRepository
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
-
-    public ResultVoid DeletePhoto(int albumId, int photoId)
-    {
-        throw new NotImplementedException();
-    }
+    
 }
