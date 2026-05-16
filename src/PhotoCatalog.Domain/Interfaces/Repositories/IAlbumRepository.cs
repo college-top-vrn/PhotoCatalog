@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Primitives;
 
@@ -29,6 +31,13 @@ public interface IAlbumRepository
     Result<Album> GetById(int id);
 
     /// <summary>
+    ///     Получение альбомов по идентификатору папки.
+    /// </summary>
+    /// <param name="id">идентификатор папки.</param>
+    /// <returns>Альбомы.</returns>
+    Result<IReadOnlyCollection<Album>> GetByFolderId(int id);
+
+    /// <summary>
     /// Добавляет новый альбом в репозиторий.
     /// </summary>
     /// <param name="album">Объект альбома для добавления. Не может быть null.</param>
@@ -43,6 +52,28 @@ public interface IAlbumRepository
     /// </remarks>
     ResultVoid Add(Album album);
 
+    /// <summary>
+    ///     Добавление альбома.
+    /// </summary>
+    /// <param name="album">альбом.</param>
+    /// <param name="id">идентификатор альбома.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    ResultVoid Add(Album? album, int id);
+
+    /// <summary>
+    ///     Добавляет фото к альбому
+    /// </summary>
+    /// <param name="albumId">идентификатор альбома.</param>
+    /// <param name="photoId">идентификатор фото.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    ResultVoid AddPhoto(int albumId, int photoId);
+    
     /// <summary>
     /// Обновляет существующий альбом в репозитории.
     /// </summary>
@@ -73,4 +104,15 @@ public interface IAlbumRepository
     /// реализовать каскадное удаление или соответствующую бизнес-логику.
     /// </remarks>
     ResultVoid Delete(int id);
+
+    /// <summary>
+    ///     Удаляет фото из альбома
+    /// </summary>
+    /// <param name="albumId">идентификатор альбома.</param>
+    /// <param name="photoId">идентификатор фото.</param>
+    /// <returns>
+    ///     Возвращает значение успешного выполнения.
+    ///     В противном случая вернётся отрицательный результат.
+    /// </returns>
+    ResultVoid DeletePhoto(int albumId, int photoId);
 }

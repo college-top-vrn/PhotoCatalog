@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 using PhotoCatalog.Domain.Primitives;
 
@@ -43,7 +44,7 @@ public class Album
     /// Конструктор является приватным и используется исключительно для материализации объектов библиотекой Dapper.
     /// </remarks>
     private Album() { }
-
+    
     /// <summary>
     /// Инициализирует новый экземпляр класса <see cref="Album"/> с указанным наименованием.
     /// </summary>

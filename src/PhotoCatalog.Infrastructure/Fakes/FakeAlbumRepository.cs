@@ -24,11 +24,8 @@ public class FakeAlbumRepository : IAlbumRepository
     /// </summary>
     private int _lastId;
 
-    /// <summary>
-    ///     Получение альбома по идентификатору.
-    /// </summary>
-    /// <param name="id">идентификатор альбома.</param>
-    /// <returns>Альбом.</returns>
+
+    /// <inheritdoc />
     public Result<Album> GetById(int id)
     {
         foreach (KeyValuePair<int, Album> pair in _albums)
@@ -42,15 +39,8 @@ public class FakeAlbumRepository : IAlbumRepository
         return Result<Album>.Failure(new Error("AlbumRepository.AlbumNotFound",
             "Не удалось найти альбом по идентификатору"));
     }
-
-    /// <summary>
-    ///     Добавление альбома.
-    /// </summary>
-    /// <param name="album">альбом.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+    
+    /// <inheritdoc />
     public ResultVoid Add(Album? album)
     {
         if (album is null)
@@ -66,14 +56,7 @@ public class FakeAlbumRepository : IAlbumRepository
         return ResultVoid.Success();
     }
 
-    /// <summary>
-    ///     Обновление альбома.
-    /// </summary>
-    /// <param name="album">альбом.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+    /// <inheritdoc />
     public ResultVoid Update(Album? album)
     {
         if (album is null)
@@ -94,14 +77,7 @@ public class FakeAlbumRepository : IAlbumRepository
         return ResultVoid.Success();
     }
 
-    /// <summary>
-    ///     Удаление альбома.
-    /// </summary>
-    /// <param name="id">идентификатор альбома.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+    /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
         Result<Album> searchResult = GetById(id);
@@ -117,27 +93,16 @@ public class FakeAlbumRepository : IAlbumRepository
         return ResultVoid.Success();
     }
 
-    /// <summary>
-    ///     Получение альбомов по идентификатору папки.
-    /// </summary>
-    /// <param name="id">идентификатор папки.</param>
-    /// <returns>Альбомы.</returns>
+
+    /// <inheritdoc />
     public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
     {
         List<Album> albums = _albums.Values.Where(album => album.FolderId == id).ToList();
 
         return Result<IReadOnlyCollection<Album>>.Success(albums);
     }
-
-    /// <summary>
-    ///     Добавляет фото к альбому
-    /// </summary>
-    /// <param name="albumId">идентификатор альбома.</param>
-    /// <param name="photoId">идентификатор фото.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+    
+    /// <inheritdoc />
     public ResultVoid AddPhoto(int albumId, int photoId)
     {
         Result<Album> searchResult = GetById(albumId);
@@ -158,6 +123,7 @@ public class FakeAlbumRepository : IAlbumRepository
         return ResultVoid.Success();
     }
 
+    /// <inheritdoc />
     public ResultVoid DeletePhoto(int albumId, int photoId)
     {
         Result<Album> searchResult = GetById(albumId);
@@ -178,15 +144,8 @@ public class FakeAlbumRepository : IAlbumRepository
         return ResultVoid.Success();
     }
 
-    /// <summary>
-    ///     Добавление альбома.
-    /// </summary>
-    /// <param name="album">альбом.</param>
-    /// <param name="id">идентификатор альбома.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+
+    /// <inheritdoc />
     public ResultVoid Add(Album? album, int id)
     {
         if (album is null)

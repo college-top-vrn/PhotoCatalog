@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using PhotoCatalog.Application.DTOs;
 using PhotoCatalog.Application.Fakes;
 using PhotoCatalog.Application.UseCases;
 using PhotoCatalog.Domain.Entities;
@@ -73,18 +74,21 @@ try
     app.MapGet("/test", () => "Hello World!");
 
     app.MapHealthChecks("/health");
-    app.Run();
 
-    FakeAlbumRepository? albumRepository = app.Services.GetService<FakeAlbumRepository>();
-    FakePhotoRepository? photoRepository = app.Services.GetService<FakePhotoRepository>();
+    IAlbumRepository? albumRepository = app.Services.GetRequiredService<IAlbumRepository>();
+    IPhotoRepository? photoRepository = app.Services.GetRequiredService<IPhotoRepository>();
 
     RouteGroupBuilder albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
+
+    albumEndpointsGroup.MapGet("/get/{id:int}", (int id) => albumRepository.GetById(id));
 
     albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId) => albumRepository!
         .GetByFolderId(folderId)
         .ToHttpResult());
 
-    albumEndpointsGroup.MapPost("/", (Album album) => albumRepository!.Add(album).ToHttpResult());
+    albumEndpointsGroup.MapPost("/", (AlbumResponse album) => albumRepository
+        .Add(Album.Create(album.Name, album.Id).Value)
+        .ToHttpResult());
 
     albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}", (int albumId, int photoId) =>
     {
@@ -115,6 +119,8 @@ try
     });
 
     albumEndpointsGroup.MapDelete("/{id:int}", (int id) => albumRepository!.Delete(id).ToHttpResult());
+    
+    app.Run();
 }
 catch (Exception e)
 {
