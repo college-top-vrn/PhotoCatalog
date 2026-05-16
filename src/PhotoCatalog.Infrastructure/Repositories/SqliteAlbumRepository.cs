@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 using Dapper;
 
@@ -20,8 +21,8 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// </summary>
 public class SqliteAlbumRepository : IAlbumRepository
 {
-    private readonly SqliteUnitOfWork _unitOfWork;
     private readonly ILogger<SqliteAlbumRepository> _logger;
+    private readonly SqliteUnitOfWork _unitOfWork;
 
     /// <summary>
     ///     Инициализирует новый экземпляр репозитория альбомов.
@@ -43,14 +44,14 @@ public class SqliteAlbumRepository : IAlbumRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 _logger.LogError("Соединение отсутствует в методе GetById");
                 return Result<Album>.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var albumData = connection.QueryFirstOrDefault(
+            dynamic? albumData = connection.QueryFirstOrDefault(
                 "SELECT Id, Name, FolderId FROM Albums WHERE Id = @id",
                 new { id },
                 _unitOfWork.Transaction);
@@ -61,32 +62,32 @@ public class SqliteAlbumRepository : IAlbumRepository
                 return Result<Album>.Failure(DomainErrors.Album.NotFound);
             }
 
-            var albumDataName = Convert.ToString(albumData.Name);
-            var albumDataId = Convert.ToInt32(albumData.Id);
-            var createResult = Album.Create(albumDataName, albumDataId);
+            dynamic? albumDataName = Convert.ToString(albumData.Name);
+            dynamic? albumDataId = Convert.ToInt32(albumData.Id);
+            dynamic? createResult = Album.Create(albumDataName, albumDataId);
             if (createResult.IsFailure)
             {
                 return Result<Album>.Failure(createResult.Error);
             }
 
-            var album = createResult.Value;
+            dynamic? album = createResult.Value;
 
             if (albumData.FolderId != null)
             {
-                var folderIdProperty = typeof(Album).GetProperty("FolderId");
+                PropertyInfo? folderIdProperty = typeof(Album).GetProperty("FolderId");
                 if (folderIdProperty != null)
                 {
                     folderIdProperty.SetValue(album, albumData.FolderId);
                 }
             }
 
-            var photoIds = connection.Query<int>(
+            List<int> photoIds = connection.Query<int>(
                 "SELECT PhotoId FROM AlbumPhotos WHERE AlbumId = @albumId",
                 new { albumId = id },
                 _unitOfWork.Transaction).ToList();
 
-            var restoreMethod = typeof(Album).GetMethod("RestorePhotos",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            MethodInfo? restoreMethod = typeof(Album).GetMethod("RestorePhotos",
+                BindingFlags.NonPublic | BindingFlags.Instance);
 
             if (restoreMethod != null)
             {
@@ -108,6 +109,11 @@ public class SqliteAlbumRepository : IAlbumRepository
         }
     }
 
+    public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     ///     Добавляет новый альбом в репозиторий.
     /// </summary>
@@ -122,7 +128,7 @@ public class SqliteAlbumRepository : IAlbumRepository
 
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 _logger.LogError("Соединение отсутствует в методе Add");
@@ -134,7 +140,7 @@ public class SqliteAlbumRepository : IAlbumRepository
                 new { album.Id, album.Name, album.FolderId },
                 _unitOfWork.Transaction);
 
-            foreach (var photoId in album.PhotoIds)
+            foreach (int photoId in album.PhotoIds)
             {
                 try
                 {
@@ -164,6 +170,7 @@ public class SqliteAlbumRepository : IAlbumRepository
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
+    
 
     /// <summary>
     ///     Обновляет существующий альбом.
@@ -179,14 +186,14 @@ public class SqliteAlbumRepository : IAlbumRepository
 
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 _logger.LogError("Соединение отсутствует в методе Update");
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var rowsAffected = connection.Execute(
+            int rowsAffected = connection.Execute(
                 "UPDATE Albums SET Name = @Name, FolderId = @FolderId WHERE Id = @Id",
                 new { album.Id, album.Name, album.FolderId },
                 _unitOfWork.Transaction);
@@ -202,7 +209,7 @@ public class SqliteAlbumRepository : IAlbumRepository
                 new { AlbumId = album.Id },
                 _unitOfWork.Transaction);
 
-            foreach (var photoId in album.PhotoIds)
+            foreach (int photoId in album.PhotoIds)
             {
                 try
                 {
@@ -242,7 +249,7 @@ public class SqliteAlbumRepository : IAlbumRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 _logger.LogError("Соединение отсутствует в методе Delete");
@@ -254,7 +261,7 @@ public class SqliteAlbumRepository : IAlbumRepository
                 new { Id = id },
                 _unitOfWork.Transaction);
 
-            var rowsAffected = connection.Execute(
+            int rowsAffected = connection.Execute(
                 "DELETE FROM Albums WHERE Id = @Id",
                 new { Id = id },
                 _unitOfWork.Transaction);
@@ -279,4 +286,5 @@ public class SqliteAlbumRepository : IAlbumRepository
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
+    
 }

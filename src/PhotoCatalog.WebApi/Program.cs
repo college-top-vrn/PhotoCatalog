@@ -2,14 +2,18 @@ using System;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using PhotoCatalog.Application.DTOs;
 using PhotoCatalog.Application.Fakes;
 using PhotoCatalog.Application.UseCases;
+using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
 
 using Serilog;
@@ -73,8 +77,8 @@ try
 
     app.MapGet("/{id}", (int id) =>
     {
-        FakeTagRepository repository = new FakeTagRepository();
-        var tag = repository.GetById(id);
+        FakeTagRepository repository = new();
+        Result<Tag> tag = repository.GetById(id);
         if (tag.IsSuccess)
         {
             return Results.Ok(tag);
@@ -85,8 +89,8 @@ try
 
     app.MapPost("/{name}", (string name) =>
     {
-        FakeTagRepository repository = new FakeTagRepository();
-        var tag = repository.GetByName(name);
+        FakeTagRepository repository = new();
+        Result<Tag> tag = repository.GetByName(name);
         if (tag.IsSuccess)
         {
             return Results.Ok(tag);
@@ -97,8 +101,8 @@ try
 
     app.MapDelete("/{id}", (int id) =>
     {
-        FakeTagRepository repository = new FakeTagRepository();
-        var tag = repository.Delete(id);
+        FakeTagRepository repository = new();
+        ResultVoid tag = repository.Delete(id);
         if (tag.IsSuccess)
         {
             return Results.Ok(tag);
@@ -109,6 +113,51 @@ try
 
 
     app.MapHealthChecks("/health");
+
+    RouteGroupBuilder albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
+
+    albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId, IAlbumRepository albumRepository) =>
+        albumRepository
+            .GetByFolderId(folderId)
+            .ToHttpResult());
+
+    albumEndpointsGroup.MapPost("/", (AlbumResponse album, IAlbumRepository albumRepository) => albumRepository
+        .Add(Album.Create(album.Name, album.Id).Value!)
+        .ToHttpResult());
+
+    albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",
+        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoRepository photoRepository) =>
+        {
+            Result<Photo> searchResult = photoRepository.GetById(photoId);
+
+            if (searchResult.IsFailure)
+            {
+                return searchResult.Error.ToHttpResult();
+            }
+
+            return albumRepository
+                .AddPhoto(albumId, photoId)
+                .ToHttpResult();
+        });
+
+    albumEndpointsGroup.MapDelete("/{albumId:int}/photos/{photoId:int}",
+        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoRepository photoRepository) =>
+        {
+            Result<Photo> searchResult = photoRepository.GetById(photoId);
+
+            if (searchResult.IsFailure)
+            {
+                return searchResult.Error.ToHttpResult();
+            }
+
+            return albumRepository
+                .DeletePhoto(albumId, photoId)
+                .ToHttpResult();
+        });
+
+    albumEndpointsGroup.MapDelete("/{id:int}",
+        (int id, IAlbumRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+
     app.Run();
 }
 catch (Exception e)
