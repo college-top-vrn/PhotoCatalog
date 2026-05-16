@@ -167,5 +167,8 @@ public static class InfrastructureErrors
         public static readonly Error NotAnImage = new Error(
             "MetadataExtractor.NotAnImage",
             "Файл не является изображением или его формат не поддерживается.");
+
+        public static readonly Error MetadataNotFound = new Error(
+            "MetadataExtractor.MetadataNotFound", "Метаданные не найдены. ");
     }
 }

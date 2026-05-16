@@ -73,6 +73,45 @@ try
 
     app.MapGet("/test", () => "Hello World!");
 
+    app.MapGroup("/api/tags");
+
+    app.MapGet("/{id}", (int id) =>
+    {
+        FakeTagRepository repository = new FakeTagRepository();
+        var tag = repository.GetById(id);
+        if (tag.IsSuccess)
+        {
+            return Results.Ok(tag);
+        }
+
+        return Results.NotFound();
+    });
+
+    app.MapPost("/{name}", (string name) =>
+    {
+        FakeTagRepository repository = new FakeTagRepository();
+        var tag = repository.GetByName(name);
+        if (tag.IsSuccess)
+        {
+            return Results.Ok(tag);
+        }
+
+        return Results.NotFound();
+    });
+
+    app.MapDelete("/{id}", (int id) =>
+    {
+        FakeTagRepository repository = new FakeTagRepository();
+        var tag = repository.Delete(id);
+        if (tag.IsSuccess)
+        {
+            return Results.Ok(tag);
+        }
+
+        return Results.NotFound();
+    });
+
+
     app.MapHealthChecks("/health");
 
     IAlbumRepository albumRepository = app.Services.GetRequiredService<IAlbumRepository>();
