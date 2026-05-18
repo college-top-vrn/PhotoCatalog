@@ -32,7 +32,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
     /// </returns>
-    public ResultVoid Add(Photo? photo)
+    public ResultVoid Add(Photo photo)
     {
         if (photo is null)
         {
@@ -49,7 +49,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
 
 
     /// <inheritdoc />
-    public ResultVoid Update(Photo? photo)
+    public ResultVoid Update(Photo photo)
     {
         if (photo is null)
         {
