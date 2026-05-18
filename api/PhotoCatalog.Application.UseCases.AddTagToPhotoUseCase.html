@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase" data-uid="PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase" class="text-break">
-Class AddTagToPhotoUseCase  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddTagToPhotoUseCase.cs/#L19"><i class="bi bi-code-slash"></i></a>
+Class AddTagToPhotoUseCase  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddTagToPhotoUseCase.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -165,9 +165,9 @@ Class AddTagToPhotoUseCase  <a class="header-action link-secondary" title="View 
 
   <a id="PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase__ctor_" data-uid="PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.#ctor*"></a>
 
-  <h3 id="PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_ITagQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_" data-uid="PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.ITagQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)">
-  AddTagToPhotoUseCase(ITagQueryRepository, IPhotoRepository, IUnitOfWork, ILogger)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddTagToPhotoUseCase.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_ITagQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_" data-uid="PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.ITagQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)">
+  AddTagToPhotoUseCase(ITagQueryRepository, IPhotoQueryRepository, IPhotoCommandRepository, IUnitOfWork, ILogger)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddTagToPhotoUseCase.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Сценарий использования для добавления тега к фото.</p>
@@ -175,7 +175,7 @@ Class AddTagToPhotoUseCase  <a class="header-action link-secondary" title="View 
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public AddTagToPhotoUseCase(ITagQueryRepository tagQueryRepository, IPhotoRepository photoRepository, IUnitOfWork unitOfWork, ILogger logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public AddTagToPhotoUseCase(ITagQueryRepository tagQueryRepository, IPhotoQueryRepository photoQueryRepository, IPhotoCommandRepository photoCommandRepository, IUnitOfWork unitOfWork, ILogger logger)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -183,8 +183,11 @@ Class AddTagToPhotoUseCase  <a class="header-action link-secondary" title="View 
     <dt><code>tagQueryRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.ITagQueryRepository.html">ITagQueryRepository</a></dt>
     <dd><p>Репозиторий тегов для получения данных.</p>
 </dd>
-    <dt><code>photoRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.html">IPhotoRepository</a></dt>
-    <dd><p>Репозиторий фото.</p>
+    <dt><code>photoQueryRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html">IPhotoQueryRepository</a></dt>
+    <dd><p>Репозиторий фото для получения.</p>
+</dd>
+    <dt><code>photoCommandRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.html">IPhotoCommandRepository</a></dt>
+    <dd><p>Репозиторий фото для записи.</p>
 </dd>
     <dt><code>unitOfWork</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html">IUnitOfWork</a></dt>
     <dd><p>Едиинца работы.</p>
@@ -213,7 +216,7 @@ Class AddTagToPhotoUseCase  <a class="header-action link-secondary" title="View 
 
   <h3 id="PhotoCatalog_Application_UseCases_AddTagToPhotoUseCase_Execute_System_Int32_System_Int32_" data-uid="PhotoCatalog.Application.UseCases.AddTagToPhotoUseCase.Execute(System.Int32,System.Int32)">
   Execute(int, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddTagToPhotoUseCase.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddTagToPhotoUseCase.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Выполняет добавление тега к фотографии
@@ -256,7 +259,7 @@ Class AddTagToPhotoUseCase  <a class="header-action link-secondary" title="View 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddTagToPhotoUseCase.cs/#L19" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddTagToPhotoUseCase.cs/#L20" class="edit-link">Edit this page</a>
         </div>
 
 

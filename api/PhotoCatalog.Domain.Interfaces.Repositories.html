@@ -106,10 +106,16 @@ Interfaces
 </dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.html">IPhotoRepository</a></dt>
-      <dd><p>Интерфейс репозитория для работы с сущностью Photo.
-Определяет операции для получения и сохранения фотографий.
-Использует паттерн Result для безопасной передачи инфраструктурных ошибок.</p>
+      <dt><a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.html">IPhotoCommandRepository</a></dt>
+      <dd><p>Репозиторий команд для фотографий (CQS — операции записи).
+Содержит методы изменения состояния системы (Add, Update, Delete),
+которые должны выполняться в рамках транзакции, управляемой <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html">IUnitOfWork</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html">IPhotoQueryRepository</a></dt>
+      <dd><p>Репозиторий запросов для фотографий (CQS — операции чтения).
+Содержит только методы выборки данных; не изменяет состояние базы данных.</p>
 </dd>
     </dl>
     <dl class="jumplist">

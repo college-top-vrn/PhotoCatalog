@@ -165,8 +165,8 @@ Class DeletePhotoUseCase  <a class="header-action link-secondary" title="View so
 
   <a id="PhotoCatalog_Application_UseCases_DeletePhotoUseCase__ctor_" data-uid="PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor*"></a>
 
-  <h3 id="PhotoCatalog_Application_UseCases_DeletePhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoRepository_PhotoCatalog_Domain_Interfaces_Services_IFileStorage_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Application_UseCases_DeletePhotoUseCase__" data-uid="PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.DeletePhotoUseCase})">
-  DeletePhotoUseCase(IPhotoRepository, IFileStorage, IUnitOfWork, ILogger&lt;DeletePhotoUseCase&gt;)
+  <h3 id="PhotoCatalog_Application_UseCases_DeletePhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IFileStorage_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Application_UseCases_DeletePhotoUseCase__" data-uid="PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.DeletePhotoUseCase})">
+  DeletePhotoUseCase(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger&lt;DeletePhotoUseCase&gt;)
   <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/DeletePhotoUseCase.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -175,14 +175,15 @@ Class DeletePhotoUseCase  <a class="header-action link-secondary" title="View so
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DeletePhotoUseCase(IPhotoRepository photoRepository, IFileStorage fileStorage, IUnitOfWork unitOfWork, ILogger&lt;DeletePhotoUseCase&gt; logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public DeletePhotoUseCase(IPhotoQueryRepository photoQueryRepository, IPhotoCommandRepository photoCommandRepository, IFileStorage fileStorage, IUnitOfWork unitOfWork, ILogger&lt;DeletePhotoUseCase&gt; logger)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>photoRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.html">IPhotoRepository</a></dt>
-    <dd><p>репозиторий фотографий.</p>
-</dd>
+    <dt><code>photoQueryRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html">IPhotoQueryRepository</a></dt>
+    <dd></dd>
+    <dt><code>photoCommandRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.html">IPhotoCommandRepository</a></dt>
+    <dd></dd>
     <dt><code>fileStorage</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IFileStorage.html">IFileStorage</a></dt>
     <dd><p>хранение файлов.</p>
 </dd>
@@ -213,7 +214,7 @@ Class DeletePhotoUseCase  <a class="header-action link-secondary" title="View so
 
   <h3 id="PhotoCatalog_Application_UseCases_DeletePhotoUseCase_Execute_System_Int32_" data-uid="PhotoCatalog.Application.UseCases.DeletePhotoUseCase.Execute(System.Int32)">
   Execute(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/DeletePhotoUseCase.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/DeletePhotoUseCase.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Метод для удаления файла в репозитории и на диске по идентификатору.</p>

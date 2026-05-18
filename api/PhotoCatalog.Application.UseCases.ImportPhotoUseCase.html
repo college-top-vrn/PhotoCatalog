@@ -169,8 +169,8 @@ Class ImportPhotoUseCase  <a class="header-action link-secondary" title="View so
 
   <a id="PhotoCatalog_Application_UseCases_ImportPhotoUseCase__ctor_" data-uid="PhotoCatalog.Application.UseCases.ImportPhotoUseCase.#ctor*"></a>
 
-  <h3 id="PhotoCatalog_Application_UseCases_ImportPhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Services_IFileStorage_PhotoCatalog_Domain_Interfaces_Services_IFileMetadataExtractor_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Application_UseCases_ImportPhotoUseCase__" data-uid="PhotoCatalog.Application.UseCases.ImportPhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.ImportPhotoUseCase})">
-  ImportPhotoUseCase(IFileStorage, IFileMetadataExtractor, IPhotoRepository, IUnitOfWork, ILogger&lt;ImportPhotoUseCase&gt;)
+  <h3 id="PhotoCatalog_Application_UseCases_ImportPhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Services_IFileStorage_PhotoCatalog_Domain_Interfaces_Services_IFileMetadataExtractor_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Application_UseCases_ImportPhotoUseCase__" data-uid="PhotoCatalog.Application.UseCases.ImportPhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.ImportPhotoUseCase})">
+  ImportPhotoUseCase(IFileStorage, IFileMetadataExtractor, IPhotoCommandRepository, IUnitOfWork, ILogger&lt;ImportPhotoUseCase&gt;)
   <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/ImportPhotoUseCase.cs/#L38"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -179,7 +179,7 @@ Class ImportPhotoUseCase  <a class="header-action link-secondary" title="View so
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ImportPhotoUseCase(IFileStorage fileStorage, IFileMetadataExtractor metadataExtractor, IPhotoRepository photoRepository, IUnitOfWork unitOfWork, ILogger&lt;ImportPhotoUseCase&gt; logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public ImportPhotoUseCase(IFileStorage fileStorage, IFileMetadataExtractor metadataExtractor, IPhotoCommandRepository photoCommandRepository, IUnitOfWork unitOfWork, ILogger&lt;ImportPhotoUseCase&gt; logger)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -190,7 +190,7 @@ Class ImportPhotoUseCase  <a class="header-action link-secondary" title="View so
     <dt><code>metadataExtractor</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IFileMetadataExtractor.html">IFileMetadataExtractor</a></dt>
     <dd><p>Сервис для извлечения метаданных файла.</p>
 </dd>
-    <dt><code>photoRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.html">IPhotoRepository</a></dt>
+    <dt><code>photoCommandRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.html">IPhotoCommandRepository</a></dt>
     <dd><p>Репозиторий для работы с сущностями Photo.</p>
 </dd>
     <dt><code>unitOfWork</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html">IUnitOfWork</a></dt>

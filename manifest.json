@@ -600,17 +600,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.html"
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс репозитория для работы с сущностью Photo.\nОпределяет операции для получения и сохранения фотографий.\nИспользует паттерн Result для безопасной передачи инфраструктурных ошибок.</p>\n"
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий команд для фотографий (CQS — операции записи).\nСодержит методы изменения состояния системы (Add, Update, Delete),\nкоторые должны выполняться в рамках транзакции, управляемой <xref href=\"PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий запросов для фотографий (CQS — операции чтения).\nСодержит только методы выборки данных; не изменяет состояние базы данных.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1104,17 +1118,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakePhotoCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakePhotoCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakePhotoRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий фотографий, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakePhotoCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakePhotoCommandRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий для записи фотографий, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий для получения фотографий, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1230,17 +1258,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория для работы с фотографиями в SQLite с использованием Dapper.</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqlitePhotoCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoCommandRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория для работы с записью фотографий в SQLite с использованием Dapper.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория для работы с получением фотографий в SQLite с использованием Dapper.</p>\n"
     },
     {
       "type": "ManagedReference",
