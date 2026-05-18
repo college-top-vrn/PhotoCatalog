@@ -17,11 +17,8 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
     /// </summary>
     private readonly ConcurrentDictionary<int, Photo> _photos = new();
 
-    /// <summary>
-    ///     Получение фотографии по идентификатору.
-    /// </summary>
-    /// <param name="id">идентификатор фотографии.</param>
-    /// <returns>Фотография.</returns>
+
+    /// <inheritdoc />
     public Result<Photo> GetById(int id)
     {
         foreach (KeyValuePair<int, Photo> pair in _photos)
@@ -36,11 +33,8 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
             "Не удалось найти фото по идентификатору"));
     }
 
-    /// <summary>
-    ///     Получение фотографии по заданному пути.
-    /// </summary>
-    /// <param name="realPath">путь фотографии.</param>
-    /// <returns>Фотография.</returns>
+
+    /// <inheritdoc />
     public Result<Photo> GetByPath(string realPath)
     {
         foreach (KeyValuePair<int, Photo> pair in _photos)
@@ -55,14 +49,8 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
             "Не удалось найти фото по заданному пути"));
     }
 
-    /// <summary>
-    ///     Получение фотографий по идентификатору альбома.
-    /// </summary>
-    /// <param name="albumId">идентификатор альбома.</param>
-    /// <returns>
-    ///     Возвращает фотографии.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+
+    /// <inheritdoc />
     public Result<IReadOnlyCollection<Photo>> GetByAlbumId(int albumId)
     {
         Result<Album> album = fakeAlbumRepository.GetById(albumId);
@@ -89,14 +77,8 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
         return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
     }
 
-    /// <summary>
-    ///     Получение фотографий по идентификаторам тегов.
-    /// </summary>
-    /// <param name="tagIds">идентификаторы тегов.</param>
-    /// <returns>
-    ///     Возвращает фотографии.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+
+    /// <inheritdoc />
     public Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds)
     {
         List<Photo> photos = (

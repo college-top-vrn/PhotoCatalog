@@ -7,6 +7,7 @@ using Dapper;
 using Microsoft.Data.Sqlite;
 
 using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.UnitOfWork;
@@ -18,7 +19,7 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// <summary>
 ///     Реализация репозитория для работы с получением фотографий в SQLite с использованием Dapper.
 /// </summary>
-public class SqlitePhotoQueryRepository
+public class SqlitePhotoQueryRepository : IPhotoQueryRepository
 {
     private readonly SqliteUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
@@ -34,11 +35,8 @@ public class SqlitePhotoQueryRepository
         _logger = logger;
     }
 
-    /// <summary>
-    ///     Получает фотографию по уникальному идентификатору.
-    /// </summary>
-    /// <param name="id">Идентификатор фотографии.</param>
-    /// <returns>Результат операции с найденной фотографией или ошибкой.</returns>
+
+    /// <inheritdoc />
     public Result<Photo> GetById(int id)
     {
         try
@@ -80,11 +78,8 @@ public class SqlitePhotoQueryRepository
         }
     }
 
-    /// <summary>
-    ///     Получает фотографию по реальному пути к файлу.
-    /// </summary>
-    /// <param name="realPath">Реальный путь к файлу.</param>
-    /// <returns>Результат операции с найденной фотографией или ошибкой.</returns>
+
+    /// <inheritdoc />
     public Result<Photo> GetByPath(string realPath)
     {
         try
@@ -126,11 +121,8 @@ public class SqlitePhotoQueryRepository
         }
     }
 
-    /// <summary>
-    ///     Получает все фотографии альбома.
-    /// </summary>
-    /// <param name="albumId">Идентификатор альбома.</param>
-    /// <returns>Результат операции с коллекцией фотографий альбома.</returns>
+
+    /// <inheritdoc />
     public Result<IReadOnlyCollection<Photo>> GetByAlbumId(int albumId)
     {
         try
@@ -173,11 +165,7 @@ public class SqlitePhotoQueryRepository
         }
     }
 
-    /// <summary>
-    ///     Получает фотографии по списку идентификаторов тегов.
-    /// </summary>
-    /// <param name="tagIds">Идентификаторы тегов.</param>
-    /// <returns>Результат операции с коллекцией фотографий, содержащих указанные теги.</returns>
+    /// <inheritdoc />
     public Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds)
     {
         try
@@ -223,6 +211,37 @@ public class SqlitePhotoQueryRepository
         {
             _logger.Error(ex, "Неожиданная ошибка в методе GetByTags");
             return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+    }
+
+    /// <inheritdoc />
+    public Result<IEnumerable<Photo>> GetAll()
+    {
+        try
+        {
+            var connection = _unitOfWork.Connection;
+            if (connection == null)
+            {
+                return Result<IEnumerable<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            }
+
+            var photos = connection.Query<Photo>(
+                @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
+                  FROM Photos p",
+                _unitOfWork.Transaction).ToList();
+
+
+            return Result<IEnumerable<Photo>>.Success(photos.AsReadOnly());
+        }
+        catch (SqliteException ex)
+        {
+            _logger.Error(ex, "Ошибка SQLite в методе GetAll");
+            return Result<IEnumerable<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex, "Неожиданная ошибка в методе GetAll");
+            return Result<IEnumerable<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 }

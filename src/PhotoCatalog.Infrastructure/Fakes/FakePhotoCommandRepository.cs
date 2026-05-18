@@ -47,14 +47,8 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
         return ResultVoid.Success();
     }
 
-    /// <summary>
-    ///     Обновление фотографии.
-    /// </summary>
-    /// <param name="photo">фотография.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+
+    /// <inheritdoc />
     public ResultVoid Update(Photo? photo)
     {
         if (photo is null)
@@ -75,14 +69,8 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
         return ResultVoid.Success();
     }
 
-    /// <summary>
-    ///     Удаление фотографии.
-    /// </summary>
-    /// <param name="id">идентификатор фотографии.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
+
+    /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
         if (_photos.ContainsKey(id))
@@ -102,7 +90,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     /// <param name="photo">фотография.</param>
     /// <param name="id">идентификатор альбома</param>
     /// <returns></returns>
-    public ResultVoid Add(Photo? photo, int id)
+    private ResultVoid Add(Photo? photo, int id)
     {
         if (photo is null)
         {

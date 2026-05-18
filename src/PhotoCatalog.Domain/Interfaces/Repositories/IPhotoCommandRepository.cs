@@ -1,4 +1,5 @@
 ﻿using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.Interfaces.Repositories;
@@ -11,7 +12,7 @@ namespace PhotoCatalog.Domain.Interfaces.Repositories;
 /// <remarks>
 ///     Реализация:
 ///     - Не должна самостоятельно фиксировать транзакцию (Commit/Rollback).
-///     - Должна использовать подключение и транзакцию, предоставляемые текущим экземпляром <see cref="SqliteUnitOfWork"/>.
+///     - Должна использовать подключение и транзакцию, предоставляемые текущим экземпляром SqliteUnitOfWork.
 ///     - Все операции возвращают <see cref="ResultVoid"/> для типизированной обработки ошибок без исключений.
 /// </remarks>
 public interface IPhotoCommandRepository

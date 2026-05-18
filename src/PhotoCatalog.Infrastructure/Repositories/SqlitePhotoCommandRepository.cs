@@ -36,11 +36,7 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
     }
 
 
-    /// <summary>
-    ///     Добавляет новую фотографию в репозиторий.
-    /// </summary>
-    /// <param name="photo">Объект фотографии для добавления.</param>
-    /// <returns>Результат операции.</returns>
+    /// <inheritdoc />
     public ResultVoid Add(Photo photo)
     {
         try
@@ -92,11 +88,8 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
         }
     }
 
-    /// <summary>
-    ///     Обновляет существующую фотографию.
-    /// </summary>
-    /// <param name="photo">Объект фотографии с обновленными данными.</param>
-    /// <returns>Результат операции.</returns>
+
+    /// <inheritdoc />
     public ResultVoid Update(Photo photo)
     {
         if (photo == null)
@@ -162,11 +155,8 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
         }
     }
 
-    /// <summary>
-    ///     Удаляет фотографию по идентификатору.
-    /// </summary>
-    /// <param name="id">Идентификатор фотографии для удаления.</param>
-    /// <returns>Результат операции.</returns>
+
+    /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
         try
