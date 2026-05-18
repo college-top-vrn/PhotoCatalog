@@ -9,19 +9,20 @@ namespace PhotoCatalog.Test.Unit;
 public static class FakeRepositoriesTest
 {
     [Fact]
-    public static void AlbumRepository_AddAlbum_WithRightValues()
+    public static void AlbumRepositoryAddAlbumWithRightValues()
     {
         FakeAlbumRepository fakeAlbumRepository = new();
 
         fakeAlbumRepository.Add(Album.Create("Test", 0).Value);
 
-        string albumName = fakeAlbumRepository.GetById(1).Value.Name;
+        //TODO: Проверить на null
+        string albumName = fakeAlbumRepository.GetById(1).Value!.Name;
 
         Assert.Equal("Test", albumName);
     }
 
     [Fact]
-    public static void AlbumRepository_AddAlbum_AddingNull()
+    public static void AlbumRepositoryAddAlbumAddingNull()
     {
         FakeAlbumRepository fakeAlbumRepository = new();
 
@@ -35,7 +36,7 @@ public static class FakeRepositoriesTest
     }
 
     [Fact]
-    public static void AlbumRepository_UpdateAlbum_WithRightValues()
+    public static void AlbumRepositoryUpdateAlbumWithRightValues()
     {
         FakeAlbumRepository fakeAlbumRepository = new();
 
@@ -47,11 +48,12 @@ public static class FakeRepositoriesTest
 
         Result<Album> newAlbum = fakeAlbumRepository.GetById(1);
 
-        Assert.NotEqual(oldAlbum.Value.Name, newAlbum.Value.Name);
+        //TODO: Проверить на null
+        Assert.NotEqual(oldAlbum.Value!.Name, newAlbum.Value!.Name);
     }
 
     [Fact]
-    public static void AlbumRepository_UpdateAlbum_UpdatingWithNonexistentId()
+    public static void AlbumRepositoryUpdateAlbumUpdatingWithNonexistentId()
     {
         FakeAlbumRepository fakeAlbumRepository = new();
 
@@ -65,7 +67,7 @@ public static class FakeRepositoriesTest
     }
 
     [Fact]
-    public static void AlbumRepository_UpdateAlbum_UpdatingWithNull()
+    public static void AlbumRepositoryUpdateAlbumUpdatingWithNull()
     {
         FakeAlbumRepository fakeAlbumRepository = new();
 
@@ -79,7 +81,7 @@ public static class FakeRepositoriesTest
     }
 
     [Fact]
-    public static void AlbumRepository_DeleteAlbum_WithExistingId()
+    public static void AlbumRepositoryDeleteAlbumWithExistingId()
     {
         FakeAlbumRepository fakeAlbumRepository = new();
 
@@ -89,7 +91,8 @@ public static class FakeRepositoriesTest
 
         Album? addedAlbum = fakeAlbumRepository.GetById(1).Value;
 
-        Assert.Equal(addedAlbum.Name, album.Name);
+        //TODO: Проверить на null
+        Assert.Equal(addedAlbum!.Name, album!.Name);
         Assert.Equal(addedAlbum.Id, album.Id);
 
         fakeAlbumRepository.Delete(1);
@@ -104,7 +107,7 @@ public static class FakeRepositoriesTest
     }
 
     [Fact]
-    public static void AlbumRepository_DeleteAlbum_WithNonexistentId()
+    public static void AlbumRepositoryDeleteAlbumWithNonexistentId()
     {
         FakeAlbumRepository fakeAlbumRepository = new();
 
@@ -114,7 +117,8 @@ public static class FakeRepositoriesTest
 
         Album? addedAlbum = fakeAlbumRepository.GetById(1).Value;
 
-        Assert.Equal(addedAlbum.Name, album.Name);
+        //TODO: Проверить на null
+        Assert.Equal(addedAlbum!.Name, album!.Name);
         Assert.Equal(addedAlbum.Id, album.Id);
 
         ResultVoid deleteResult = fakeAlbumRepository.Delete(2);

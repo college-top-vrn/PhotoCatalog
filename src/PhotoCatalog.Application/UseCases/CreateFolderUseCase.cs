@@ -37,7 +37,7 @@ public class CreateFolderUseCase(IFolderRepository folderRepository, IUnitOfWork
             if (parentResult.IsFailure)
             {
                 logger.Warning("Родительская папка с Id {ParentId} не найдена.", request.ParentFolderId);
-                return Result<FolderResponse>.Failure(ApplicationErrors.General.NotFound);
+                return Result.Failure<FolderResponse>(ApplicationErrors.General.NotFound);
             }
 
             parentFolder = parentResult.Value!;
@@ -50,7 +50,7 @@ public class CreateFolderUseCase(IFolderRepository folderRepository, IUnitOfWork
                 parentFolder.Id,
                 createFolderResult.Error.Code,
                 createFolderResult.Error.Message);
-            return Result<FolderResponse>.Failure(createFolderResult.Error);
+            return Result.Failure<FolderResponse>(createFolderResult.Error);
         }
 
         Folder folder = createFolderResult.Value!;
@@ -70,7 +70,7 @@ public class CreateFolderUseCase(IFolderRepository folderRepository, IUnitOfWork
                 addFolderResult.Error.Code,
                 addFolderResult.Error.Message);
             unitOfWork.Rollback();
-            return Result<FolderResponse>.Failure(addFolderResult.Error);
+            return Result.Failure<FolderResponse>(addFolderResult.Error);
         }
 
         ResultVoid commitResult = unitOfWork.Commit();
@@ -82,6 +82,6 @@ public class CreateFolderUseCase(IFolderRepository folderRepository, IUnitOfWork
         }
 
         FolderResponse response = new(folder.Id, folder.Name, folder.ParentFolderId);
-        return Result<FolderResponse>.Success(response);
+        return Result.Success(response);
     }
 }

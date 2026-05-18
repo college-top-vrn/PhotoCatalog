@@ -1,7 +1,5 @@
 using System.IO;
 
-using Microsoft.Extensions.Logging;
-
 using PhotoCatalog.Application.DTOs;
 using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Domain.Entities;
@@ -9,6 +7,8 @@ using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
+
+using Serilog;
 
 namespace PhotoCatalog.Application.UseCases;
 
@@ -22,7 +22,7 @@ namespace PhotoCatalog.Application.UseCases;
 public class ImportPhotoUseCase
 {
     private readonly IFileStorage _fileStorage;
-    private readonly ILogger<ImportPhotoUseCase> _logger;
+    private readonly ILogger _logger;
     private readonly IFileMetadataExtractor _metadataExtractor;
     private readonly IPhotoCommandRepository _photoRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -40,7 +40,7 @@ public class ImportPhotoUseCase
         IFileMetadataExtractor metadataExtractor,
         IPhotoCommandRepository photoCommandRepository,
         IUnitOfWork unitOfWork,
-        ILogger<ImportPhotoUseCase> logger)
+        ILogger logger)
     {
         _fileStorage = fileStorage;
         _metadataExtractor = metadataExtractor;
@@ -56,35 +56,40 @@ public class ImportPhotoUseCase
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с <see cref="PhotoResponse"/>.</description></item>
-    ///         <item><description>Ошибка с детализацией причины.</description></item>
+    ///         <item>
+    ///             <description>Успех с <see cref="PhotoResponse" />.</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка с детализацией причины.</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     public Result<PhotoResponse> Execute(ImportPhotoRequest request)
     {
-        _logger.LogInformation("Начало импорта фотографии. Путь: {SourcePath}", request.SourcePath);
+        _logger.Information("Начало импорта фотографии. Путь: {SourcePath}", request.SourcePath);
 
         return _fileStorage.FileExists(request.SourcePath)
             .ToResult(ApplicationErrors.Files.FileNotFound)
-            .OnSuccess(_ => _logger.LogInformation("Файл найден: {SourcePath}", request.SourcePath))
-            .OnFailure(_ => _logger.LogWarning("Файл не найден: {SourcePath}", request.SourcePath))
+            .OnSuccess(_ => _logger.Information("Файл найден: {SourcePath}", request.SourcePath))
+            .OnFailure(_ => _logger.Warning("Файл не найден: {SourcePath}", request.SourcePath))
             .Then(_ => _metadataExtractor.CalculateHash(request.SourcePath))
-            .OnSuccess(hash => _logger.LogDebug("Хэш вычислен: {Hash}", hash))
+            .OnSuccess(hash => _logger.Debug("Хэш вычислен: {Hash}", hash))
             .Then(hash => _metadataExtractor.GetDimensions(request.SourcePath)
                 .Transform(dimensions => (hash, dimensions)))
-            .OnSuccess(tuple => _logger.LogDebug("Размеры получены: {Width}x{Height}", tuple.dimensions.Width, tuple.dimensions.Height))
+            .OnSuccess(tuple => _logger.Debug("Размеры получены: {Width}x{Height}", tuple.dimensions.Width,
+                tuple.dimensions.Height))
             .Then(tuple => _fileStorage.StoreFile(request.SourcePath, Path.GetFileName(request.SourcePath))
                 .Transform(filePath => (tuple.hash, tuple.dimensions, filePath)))
-            .OnSuccess(tuple => _logger.LogDebug("Файл скопирован: {FilePath}", tuple.filePath))
+            .OnSuccess(tuple => _logger.Debug("Файл скопирован: {FilePath}", tuple.filePath))
             .Then(tuple => Photo.Create(tuple.filePath)
-                .OnSuccess(photo => _logger.LogDebug("Сущность Photo создана: {FilePath}", tuple.filePath))
-                .OnFailure(error => _fileStorage.DeleteFile(tuple.filePath))
+                .OnSuccess(_ => _logger.Debug("Сущность Photo создана: {FilePath}", tuple.filePath))
+                .OnFailure(_ => _fileStorage.DeleteFile(tuple.filePath))
                 .Transform(photo => (tuple.hash, tuple.dimensions, photo)))
             .Then(tuple =>
             {
                 tuple.photo.UpdateHash(tuple.hash);
                 tuple.photo.SetDimensions(tuple.dimensions);
-                return Result<Photo>.Success(tuple.photo);
+                return Result.Success(tuple.photo);
             })
             .Then(photo => _unitOfWork.BeginTransaction()
                 .ToResult()
@@ -95,9 +100,9 @@ public class ImportPhotoUseCase
                 .Ensure(commitResult => commitResult.IsSuccess, ApplicationErrors.Transactions.CommitFailed)
                 .Transform(_ => photo))
             .OnSuccess(photo =>
-                _logger.LogInformation("Импорт фотографии успешно завершен. PhotoId: {PhotoId}", photo.Id))
+                _logger.Information("Импорт фотографии успешно завершен. PhotoId: {PhotoId}", photo.Id))
             .OnFailure(error =>
-                _logger.LogError("Ошибка импорта: {ErrorCode} - {ErrorMessage}", error.Code, error.Message))
+                _logger.Error("Ошибка импорта: {ErrorCode} - {ErrorMessage}", error.Code, error.Message))
             .Transform(photo => new PhotoResponse(
                 photo.Id,
                 photo.RealPath,

@@ -1,6 +1,5 @@
-using System.Runtime.InteropServices;
+using System;
 
-using ArchUnitNET.Domain;
 using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
 
@@ -29,11 +28,11 @@ public class InterfaceLocalizationTests
     ///     Проверяет, что все интерфейсы находятся только в слое Domain в папке Interfaces.
     /// </summary>
     [Fact]
-    public void AllInterfaces_Should_ResideIn_DomainInterfaces_Namespace()
+    public void AllInterfacesShouldResideInDomainInterfacesNamespace()
     {
         Interfaces()
             .That()
-            .AreNot(typeof(System.IDisposable))
+            .AreNot(typeof(IDisposable))
             .Should()
             .ResideInNamespaceMatching(@"^PhotoCatalog\.Domain\.Interfaces(\..*)?$")
             .Because("Все интерфейсы должны быть в PhotoCatalog.Domain.Interfaces с подпапками")

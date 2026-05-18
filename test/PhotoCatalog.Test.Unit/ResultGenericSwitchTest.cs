@@ -9,17 +9,16 @@ namespace PhotoCatalog.Test.Unit;
 /// </summary>
 public class ResultGenericSwitchTests
 {
-    private static readonly Error SwitchError = new("Auth.Failed", "Invalid credentials");
-
     /// <summary>
     ///     Проверяет извлечение значения из успешного результата через Tuple Pattern.
     /// </summary>
     [Fact]
-    public void Switch_DeconstructPattern_OnSuccess_ShouldExtractValue()
+    public void SwitchDeconstructPatternOnSuccessShouldExtractValue()
     {
-        var result = Result<int>.Success(42);
+        // TODO: Исправить магические числа
+        Result<int> result = Result.Success(42);
 
-        var output = result switch
+        string output = result switch
         {
             (true, var val, _) => $"Value is {val}",
             (false, _, var err) => $"Error is {err.Code}",
@@ -33,14 +32,14 @@ public class ResultGenericSwitchTests
     ///     Проверяет использование дополнительных условий (when clause) совместно с деконструктором.
     /// </summary>
     [Fact]
-    public void Switch_DeconstructWithWhenClause_ShouldApplyConditionsCorrectly()
+    public void SwitchDeconstructWithWhenClauseShouldApplyConditionsCorrectly()
     {
-        var result = Result<int>.Success(150);
+        Result<int> result = Result.Success(150);
 
-        var category = result switch
+        string category = result switch
         {
-            (true, var val, _) when val > 100 => "High",
-            (true, var val, _) when val <= 100 => "Low",
+            (true, > 100, _) => "High",
+            (true, <= 100, _) => "Low",
             (false, _, _) => "Error",
             _ => "Unknown"
         };
@@ -52,15 +51,16 @@ public class ResultGenericSwitchTests
     ///     Проверяет сопоставление с null для предотвращения NullReferenceException.
     /// </summary>
     [Fact]
-    public void Switch_NullCheck_ShouldHandleNullReferenceGracefully()
+    public void SwitchNullCheckShouldHandleNullReferenceGracefully()
     {
         Result<string>? nullResult = null;
 
-        var status = nullResult switch
+        string status = nullResult switch
         {
             null => "IsNull",
             { IsSuccess: true } => "IsSuccess",
-            { IsFailure: true } => "IsFailure"
+            { IsFailure: true } => "IsFailure",
+            _ => "IsNull"
         };
 
         Assert.Equal("IsNull", status);

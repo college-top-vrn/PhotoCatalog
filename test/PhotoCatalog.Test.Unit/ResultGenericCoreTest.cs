@@ -17,9 +17,10 @@ public class ResultGenericCoreTests
     ///     Проверяет инициализацию успешного состояния с валидным значением.
     /// </summary>
     [Fact]
-    public void Success_WithValidValue_ShouldInitializeSuccessState()
+    public void SuccessWithValidValueShouldInitializeSuccessState()
     {
-        var result = Result<int>.Success(10);
+        // TODO: Исправить магические числа
+        Result<int> result = Result.Success(10);
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
@@ -31,9 +32,9 @@ public class ResultGenericCoreTests
     ///     Проверяет защиту от передачи null при инициализации успешного состояния.
     /// </summary>
     [Fact]
-    public void Success_WithNullValue_ShouldReturnSystemNullValueError()
+    public void SuccessWithNullValueShouldReturnSystemNullValueError()
     {
-        var result = Result<string>.Success(null!);
+        Result<string> result = Result.Success<string>(null!);
 
         Assert.True(result.IsFailure);
         Assert.Equal(SystemErrors.NullValue, result.Error);
@@ -43,23 +44,24 @@ public class ResultGenericCoreTests
     ///     Проверяет инициализацию провального состояния.
     /// </summary>
     [Fact]
-    public void Failure_ShouldInitializeFailureStateWithDefaultValue()
+    public void FailureShouldInitializeFailureStateWithDefaultValue()
     {
-        var result = Result<Guid>.Failure(TestError);
+        Result<Guid> result = Result.Failure<Guid>(TestError);
 
         Assert.True(result.IsFailure);
         Assert.Equal(TestError, result.Error);
-        Assert.Equal(default, result.Value);
+        Assert.Equal(Guid.Empty, result.Value);
     }
 
     /// <summary>
     ///     Проверяет неявное приведение обобщенного типа к ResultVoid.
     /// </summary>
     [Fact]
-    public void ImplicitOperator_ToResultVoid_ShouldMapStatusCorrectly()
+    public void ImplicitOperatorToResultVoidShouldMapStatusCorrectly()
     {
-        ResultVoid voidSuccess = Result<int>.Success(100);
-        ResultVoid voidFailure = Result<int>.Failure(TestError);
+        // TODO: Исправить магические числа
+        ResultVoid voidSuccess = Result.Success(100);
+        ResultVoid voidFailure = Result.Failure<int>(TestError);
 
         Assert.True(voidSuccess.IsSuccess);
         Assert.True(voidFailure.IsFailure);

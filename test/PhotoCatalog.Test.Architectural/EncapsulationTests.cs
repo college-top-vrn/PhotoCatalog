@@ -1,4 +1,6 @@
-﻿using ArchUnitNET.Domain;
+﻿using System;
+
+using ArchUnitNET.Domain;
 using ArchUnitNET.Fluent.Conditions;
 using ArchUnitNET.Fluent.Syntax.Elements.Types.Classes;
 using ArchUnitNET.Loader;
@@ -33,7 +35,7 @@ public class EncapsulationTests
     ///     Разрешены только private set; или init;.
     /// </summary>
     [Fact]
-    public void DomainEntities_ShouldNot_HavePublicSetters()
+    public void DomainEntitiesShouldNotHavePublicSetters()
     {
         GivenClassesConjunction? entities = Classes()
             .That()
@@ -61,7 +63,7 @@ public class EncapsulationTests
     ///     (запрет на отдачу наружу изменяемых List&lt;T&gt;).
     /// </summary>
     [Fact]
-    public void DomainEntities_Collections_ShouldBe_ReadOnly()
+    public void DomainEntitiesCollectionsShouldBeReadOnly()
     {
         GivenClassesConjunction? entities = Classes()
             .That()
@@ -86,7 +88,8 @@ public class EncapsulationTests
                     return new ConditionResult(property, true);
                 }
 
-                bool isReadOnly = property.Type.FullName.StartsWith("System.Collections.Generic.IReadOnlyCollection`1");
+                bool isReadOnly = property.Type.FullName.StartsWith("System.Collections.Generic.IReadOnlyCollection`1",
+                    StringComparison.CurrentCulture);
 
                 return new ConditionResult(property, isReadOnly);
             }, "if collection be type IReadOnlyCollection<T>")

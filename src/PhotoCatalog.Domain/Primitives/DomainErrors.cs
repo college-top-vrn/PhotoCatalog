@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-
-namespace PhotoCatalog.Domain.Primitives;
+﻿namespace PhotoCatalog.Domain.Primitives;
 
 /// <summary>
 ///     Единый статический класс (реестр),

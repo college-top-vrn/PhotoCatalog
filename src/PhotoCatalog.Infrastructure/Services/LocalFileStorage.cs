@@ -10,41 +10,46 @@ using Serilog;
 namespace PhotoCatalog.Infrastructure.Services;
 
 /// <summary>
-/// Реализация контракта IFileStorage, обеспечивающая физическую работу с файлами на локальном жестком диске.
-/// Класс изолирует ядро приложения от системных исключений файловой системы, преобразуя их в предсказуемые
-/// объекты Result с подробным логированием каждого сбоя.
+///     Реализация контракта IFileStorage, обеспечивающая физическую работу с файлами на локальном жестком диске.
+///     Класс изолирует ядро приложения от системных исключений файловой системы, преобразуя их в предсказуемые
+///     объекты Result с подробным логированием каждого сбоя.
 /// </summary>
 public sealed class LocalFileStorage : IFileStorage
 {
-    private readonly ILogger _logger;
     private readonly string _baseStoragePath;
+    private readonly ILogger _logger;
 
     /// <summary>
-    /// Инициализирует новый экземпляр сервиса файлового хранилища.
+    ///     Инициализирует новый экземпляр сервиса файлового хранилища.
     /// </summary>
     /// <param name="logger">Сервис логирования Serilog для записи системных событий и ошибок.</param>
-    /// <param name="baseStoragePath">Базовый путь к корневой директории хранилища. Все операции выполняются относительно этого пути.</param>
+    /// <param name="baseStoragePath">
+    ///     Базовый путь к корневой директории хранилища. Все операции выполняются относительно этого
+    ///     пути.
+    /// </param>
     public LocalFileStorage(ILogger logger, string baseStoragePath)
     {
         _logger = logger;
         _baseStoragePath = baseStoragePath;
 
         // Убеждаемся, что базовая директория существует
-        if (!Directory.Exists(_baseStoragePath))
+        if (Directory.Exists(_baseStoragePath))
         {
-            Directory.CreateDirectory(_baseStoragePath);
-            _logger.Information("Создана базовая директория хранилища: {BaseStoragePath}", _baseStoragePath);
+            return;
         }
+
+        Directory.CreateDirectory(_baseStoragePath);
+        _logger.Information("Создана базовая директория хранилища: {BaseStoragePath}", _baseStoragePath);
     }
 
     /// <summary>
-    /// Сохраняет файл в хранилище, копируя его из указанного исходного расположения.
+    ///     Сохраняет файл в хранилище, копируя его из указанного исходного расположения.
     /// </summary>
     /// <param name="sourcePath">Абсолютный путь к исходному файлу, который необходимо скопировать.</param>
     /// <param name="newFileName">Желаемое имя файла в целевом хранилище.</param>
     /// <returns>
-    /// В случае успеха возвращает Result с абсолютным путем к сохраненному файлу.
-    /// При возникновении ошибки возвращает Result с соответствующей инфраструктурной ошибкой.
+    ///     В случае успеха возвращает Result с абсолютным путем к сохраненному файлу.
+    ///     При возникновении ошибки возвращает Result с соответствующей инфраструктурной ошибкой.
     /// </returns>
     public Result<string> StoreFile(string sourcePath, string newFileName)
     {
@@ -56,36 +61,36 @@ public sealed class LocalFileStorage : IFileStorage
             if (string.IsNullOrWhiteSpace(sourcePath))
             {
                 _logger.Warning("Попытка сохранения с пустым исходным путем");
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
+                return Result.Failure<string>(InfrastructureErrors.FileStorage.InvalidPath);
             }
 
             if (string.IsNullOrWhiteSpace(newFileName))
             {
                 _logger.Warning("Попытка сохранения с пустым именем файла");
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
+                return Result.Failure<string>(InfrastructureErrors.FileStorage.InvalidPath);
             }
 
             // Проверка существования исходного файла
             if (!File.Exists(sourcePath))
             {
                 _logger.Warning("Исходный файл не существует: {SourcePath}", sourcePath);
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.IOError);
+                return Result.Failure<string>(InfrastructureErrors.FileStorage.IOError);
             }
 
-            var destinationPath = NormalizeAndValidatePath(newFileName);
+            Result<string> destinationPath = NormalizeAndValidatePath(newFileName);
             if (destinationPath.IsFailure)
             {
-                return Result<string>.Failure(destinationPath.Error);
+                return Result.Failure<string>(destinationPath.Error);
             }
 
-            var targetFullPath = Path.Combine(_baseStoragePath, destinationPath.Value!);
-            var targetDirectory = Path.GetDirectoryName(targetFullPath);
+            string targetFullPath = Path.Combine(_baseStoragePath, destinationPath.Value!);
+            string? targetDirectory = Path.GetDirectoryName(targetFullPath);
 
             // Проверка на null для параметра targetDirectory
             if (targetDirectory == null)
             {
                 _logger.Warning("Не удалось получить директорию для пути: {TargetFullPath}", targetFullPath);
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
+                return Result.Failure<string>(InfrastructureErrors.FileStorage.InvalidPath);
             }
 
             if (!Directory.Exists(targetDirectory))
@@ -95,56 +100,53 @@ public sealed class LocalFileStorage : IFileStorage
             }
 
             // Копирование файла (overwrite = false для предотвращения случайной перезаписи)
-            File.Copy(sourcePath, targetFullPath, overwrite: false);
+            File.Copy(sourcePath, targetFullPath, false);
 
             _logger.Information("Файл успешно сохранен: {TargetPath}", targetFullPath);
-            return Result<string>.Success(targetFullPath);
+            return Result.Success(targetFullPath);
         }
         catch (UnauthorizedAccessException ex)
         {
-            _logger.Error(ex, "Отказано в доступе при сохранении файла. SourcePath={SourcePath}, NewFileName={NewFileName}",
+            _logger.Error(ex,
+                "Отказано в доступе при сохранении файла. SourcePath={SourcePath}, NewFileName={NewFileName}",
                 sourcePath, newFileName);
-            return Result<string>.Failure(InfrastructureErrors.FileStorage.AccessDenied);
+            return Result.Failure<string>(InfrastructureErrors.FileStorage.AccessDenied);
         }
-        catch (IOException ex) when (ex.Message.Contains("not enough space") || ex.Message.Contains("disk full") || ex.HResult == -2147024784)
+        // TODO: Исправить магические числа
+        catch (IOException ex) when (ex.Message.Contains("not enough space") || ex.Message.Contains("disk full") ||
+                                     ex.HResult == -2147024784)
         {
             _logger.Error(ex, "Недостаточно места на диске при сохранении файла. SourcePath={SourcePath}", sourcePath);
-            return Result<string>.Failure(InfrastructureErrors.FileStorage.DiskFull);
+            return Result.Failure<string>(InfrastructureErrors.FileStorage.DiskFull);
         }
         catch (IOException ex)
         {
-            _logger.Error(ex, "Ошибка ввода-вывода при сохранении файла. SourcePath={SourcePath}, Message={ErrorMessage}",
+            _logger.Error(ex,
+                "Ошибка ввода-вывода при сохранении файла. SourcePath={SourcePath}, Message={ErrorMessage}",
                 sourcePath, ex.Message);
-            return Result<string>.Failure(InfrastructureErrors.FileStorage.IOError);
+            return Result.Failure<string>(InfrastructureErrors.FileStorage.IOError);
         }
         catch (Exception ex)
         {
             _logger.Fatal(ex, "Непредвиденная ошибка при сохранении файла. SourcePath={SourcePath}", sourcePath);
-            return Result<string>.Failure(InfrastructureErrors.FileStorage.IOError);
+            return Result.Failure<string>(InfrastructureErrors.FileStorage.IOError);
         }
     }
 
     /// <summary>
-    /// Удаляет файл из файловой системы по указанному пути.
-    /// Операция идемпотентна: если файл уже отсутствует, метод завершается успешно.
+    ///     Удаляет файл из файловой системы по указанному пути.
+    ///     Операция идемпотентна: если файл уже отсутствует, метод завершается успешно.
     /// </summary>
     /// <param name="filePath">Путь к удаляемому файлу (абсолютный или относительный).</param>
     /// <returns>
-    /// В случае успеха возвращает успешный ResultVoid.
-    /// При возникновении ошибки возвращает ResultVoid с соответствующей инфраструктурной ошибкой.
+    ///     В случае успеха возвращает успешный ResultVoid.
+    ///     При возникновении ошибки возвращает ResultVoid с соответствующей инфраструктурной ошибкой.
     /// </returns>
     public ResultVoid DeleteFile(string filePath)
     {
         try
         {
             _logger.Debug("Начало операции удаления файла: {FilePath}", filePath);
-
-            // Проверка на null параметра filePath
-            if (filePath == null)
-            {
-                _logger.Warning("Параметр filePath равен null - операция удаления пропущена (идемпотентность)");
-                return ResultVoid.Success();
-            }
 
             if (string.IsNullOrWhiteSpace(filePath))
             {
@@ -181,8 +183,8 @@ public sealed class LocalFileStorage : IFileStorage
     }
 
     /// <summary>
-    /// Проверяет существование файла в файловой системе.
-    /// Метод никогда не возвращает провальный Result, только успешный Result с булевым значением.
+    ///     Проверяет существование файла в файловой системе.
+    ///     Метод никогда не возвращает провальный Result, только успешный Result с булевым значением.
     /// </summary>
     /// <param name="filePath">Путь к проверяемому файлу.</param>
     /// <returns>Всегда возвращает успешный Result, содержащий true, если файл существует, иначе false.</returns>
@@ -190,32 +192,25 @@ public sealed class LocalFileStorage : IFileStorage
     {
         try
         {
-            // Проверка на null параметра filePath
-            if (filePath == null)
-            {
-                _logger.Debug("Параметр filePath равен null, возвращаем false");
-                return Result<bool>.Success(false);
-            }
-
             if (string.IsNullOrWhiteSpace(filePath))
             {
                 _logger.Debug("Путь к файлу пуст, возвращаем false");
-                return Result<bool>.Success(false);
+                return Result.Success(false);
             }
 
-            var exists = File.Exists(filePath);
+            bool exists = File.Exists(filePath);
             _logger.Debug("Проверка существования файла: {FilePath}, Exists={Exists}", filePath, exists);
-            return Result<bool>.Success(exists);
+            return Result.Success(exists);
         }
         catch (Exception ex)
         {
             _logger.Warning(ex, "Исключение при проверке существования файла: {FilePath}. Возвращаем false.", filePath);
-            return Result<bool>.Success(false);
+            return Result.Success(false);
         }
     }
 
     /// <summary>
-    /// Нормализует и валидирует имя файла, преобразуя его в безопасный относительный путь.
+    ///     Нормализует и валидирует имя файла, преобразуя его в безопасный относительный путь.
     /// </summary>
     /// <param name="fileName">Имя файла для нормализации.</param>
     /// <returns>Результат с нормализованным путем или ошибкой валидации.</returns>
@@ -223,43 +218,36 @@ public sealed class LocalFileStorage : IFileStorage
     {
         try
         {
-            // Проверка на null параметра fileName
-            if (fileName == null)
-            {
-                _logger.Warning("Параметр fileName равен null при нормализации пути");
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
-            }
-
             if (string.IsNullOrWhiteSpace(fileName))
             {
                 _logger.Warning("Имя файла пусто или состоит из пробелов при нормализации пути");
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
+                return Result.Failure<string>(InfrastructureErrors.FileStorage.InvalidPath);
             }
 
             // Проверка на недопустимые символы в имени файла
-            var invalidChars = Path.GetInvalidFileNameChars();
+            char[] invalidChars = Path.GetInvalidFileNameChars();
             if (fileName.IndexOfAny(invalidChars) >= 0)
             {
                 _logger.Warning("Имя файла содержит недопустимые символы: {FileName}", fileName);
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
+                return Result.Failure<string>(InfrastructureErrors.FileStorage.InvalidPath);
             }
 
             // Предотвращение попыток выхода за пределы базовой директории
-            var normalizedPath = fileName.Replace('\\', '/').TrimStart('/');
+            string normalizedPath = fileName.Replace('\\', '/').TrimStart('/');
 
             // Запрещаем использование ".." для навигации вверх
-            if (normalizedPath.Contains(".."))
+            if (!normalizedPath.Contains(".."))
             {
-                _logger.Warning("Попытка выхода за пределы базовой директории: {FileName}", fileName);
-                return Result<string>.Failure(InfrastructureErrors.FileStorage.PathTraversalAttempt);
+                return Result.Success(normalizedPath);
             }
 
-            return Result<string>.Success(normalizedPath);
+            _logger.Warning("Попытка выхода за пределы базовой директории: {FileName}", fileName);
+            return Result.Failure<string>(InfrastructureErrors.FileStorage.PathTraversalAttempt);
         }
         catch (Exception ex)
         {
             _logger.Error(ex, "Ошибка нормализации пути: {FileName}", fileName);
-            return Result<string>.Failure(InfrastructureErrors.FileStorage.InvalidPath);
+            return Result.Failure<string>(InfrastructureErrors.FileStorage.InvalidPath);
         }
     }
 }

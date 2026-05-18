@@ -65,7 +65,7 @@ public interface IFolderRepository
     ///         </item>
     ///     </list>
     /// </returns>
-    ResultVoid Add(Folder? folder);
+    ResultVoid Add(Folder folder);
 
     /// <summary>
     ///     Обновляет существующую папку.

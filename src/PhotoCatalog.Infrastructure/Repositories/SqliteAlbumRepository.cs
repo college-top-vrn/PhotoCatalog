@@ -6,13 +6,14 @@ using System.Reflection;
 using Dapper;
 
 using Microsoft.Data.Sqlite;
-using Microsoft.Extensions.Logging;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.UnitOfWork;
+
+using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
@@ -21,7 +22,7 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// </summary>
 public class SqliteAlbumRepository : IAlbumRepository
 {
-    private readonly ILogger<SqliteAlbumRepository> _logger;
+    private readonly ILogger _logger;
     private readonly SqliteUnitOfWork _unitOfWork;
 
     /// <summary>
@@ -29,7 +30,7 @@ public class SqliteAlbumRepository : IAlbumRepository
     /// </summary>
     /// <param name="unitOfWork">Экземпляр Unit of Work для доступа к соединению и транзакции.</param>
     /// <param name="logger">Логгер для записи ошибок.</param>
-    public SqliteAlbumRepository(SqliteUnitOfWork unitOfWork, ILogger<SqliteAlbumRepository> logger)
+    public SqliteAlbumRepository(SqliteUnitOfWork unitOfWork, ILogger logger)
     {
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -47,8 +48,8 @@ public class SqliteAlbumRepository : IAlbumRepository
             SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
-                _logger.LogError("Соединение отсутствует в методе GetById");
-                return Result<Album>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                _logger.Error("Соединение отсутствует в методе GetById");
+                return Result.Failure<Album>(InfrastructureErrors.Database.ConnectionFailed);
             }
 
             dynamic? albumData = connection.QueryFirstOrDefault(
@@ -58,8 +59,8 @@ public class SqliteAlbumRepository : IAlbumRepository
 
             if (albumData == null)
             {
-                _logger.LogWarning("Альбом с идентификатором {Id} не найден", id);
-                return Result<Album>.Failure(DomainErrors.Album.NotFound);
+                _logger.Warning("Альбом с идентификатором {Id} не найден", id);
+                return Result.Failure<Album>(DomainErrors.Album.NotFound);
             }
 
             dynamic? albumDataName = Convert.ToString(albumData.Name);
@@ -67,7 +68,7 @@ public class SqliteAlbumRepository : IAlbumRepository
             dynamic? createResult = Album.Create(albumDataName, albumDataId);
             if (createResult.IsFailure)
             {
-                return Result<Album>.Failure(createResult.Error);
+                return Result.Failure(createResult.Error);
             }
 
             dynamic? album = createResult.Value;
@@ -94,24 +95,19 @@ public class SqliteAlbumRepository : IAlbumRepository
                 restoreMethod.Invoke(album, new object[] { photoIds });
             }
 
-            _logger.LogDebug("Альбом {Id} получен с {PhotoCount} фотографиями", id, photoIds.Count);
-            return Result<Album>.Success(album);
+            _logger.Debug("Альбом {Id} получен с {PhotoCount} фотографиями", id, photoIds.Count);
+            return Result.Success(album);
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе GetById для альбома {Id}", id);
-            return Result<Album>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            _logger.Error(ex, "Ошибка SQLite в методе GetById для альбома {Id}", id);
+            return Result.Failure<Album>(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе GetById для альбома {Id}", id);
-            return Result<Album>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            _logger.Error(ex, "Неожиданная ошибка в методе GetById для альбома {Id}", id);
+            return Result.Failure<Album>(InfrastructureErrors.Database.ConnectionFailed);
         }
-    }
-
-    public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
-    {
-        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -121,17 +117,12 @@ public class SqliteAlbumRepository : IAlbumRepository
     /// <returns>Результат операции.</returns>
     public ResultVoid Add(Album album)
     {
-        if (album == null)
-        {
-            return ResultVoid.Failure(DomainErrors.Album.NullAlbum);
-        }
-
         try
         {
             SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
-                _logger.LogError("Соединение отсутствует в методе Add");
+                _logger.Error("Соединение отсутствует в методе Add");
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
@@ -151,22 +142,22 @@ public class SqliteAlbumRepository : IAlbumRepository
                 }
                 catch (SqliteException ex) when (ex.SqliteErrorCode == 19)
                 {
-                    _logger.LogWarning(ex, "Дубликат фотографии {PhotoId} в альбоме {AlbumId}", photoId, album.Id);
+                    _logger.Warning(ex, "Дубликат фотографии {PhotoId} в альбоме {AlbumId}", photoId, album.Id);
                     return ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation);
                 }
             }
 
-            _logger.LogDebug("Альбом {Id} успешно добавлен", album.Id);
+            _logger.Debug("Альбом {Id} успешно добавлен", album.Id);
             return ResultVoid.Success();
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе Add для альбома {Id}", album.Id);
+            _logger.Error(ex, "Ошибка SQLite в методе Add для альбома {Id}", album.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе Add для альбома {Id}", album.Id);
+            _logger.Error(ex, "Неожиданная ошибка в методе Add для альбома {Id}", album.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
@@ -179,17 +170,12 @@ public class SqliteAlbumRepository : IAlbumRepository
     /// <returns>Результат операции.</returns>
     public ResultVoid Update(Album album)
     {
-        if (album == null)
-        {
-            return ResultVoid.Failure(DomainErrors.Album.NullAlbum);
-        }
-
         try
         {
             SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
-                _logger.LogError("Соединение отсутствует в методе Update");
+                _logger.Error("Соединение отсутствует в методе Update");
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
@@ -200,7 +186,7 @@ public class SqliteAlbumRepository : IAlbumRepository
 
             if (rowsAffected == 0)
             {
-                _logger.LogWarning("Альбом {Id} не найден для обновления", album.Id);
+                _logger.Warning("Альбом {Id} не найден для обновления", album.Id);
                 return ResultVoid.Failure(DomainErrors.Album.NotFound);
             }
 
@@ -220,22 +206,22 @@ public class SqliteAlbumRepository : IAlbumRepository
                 }
                 catch (SqliteException ex) when (ex.SqliteErrorCode == 19)
                 {
-                    _logger.LogWarning(ex, "Дубликат фотографии {PhotoId} в альбоме {AlbumId}", photoId, album.Id);
+                    _logger.Warning(ex, "Дубликат фотографии {PhotoId} в альбоме {AlbumId}", photoId, album.Id);
                     return ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation);
                 }
             }
 
-            _logger.LogDebug("Альбом {Id} успешно обновлен", album.Id);
+            _logger.Debug("Альбом {Id} успешно обновлен", album.Id);
             return ResultVoid.Success();
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе Update для альбома {Id}", album.Id);
+            _logger.Error(ex, "Ошибка SQLite в методе Update для альбома {Id}", album.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе Update для альбома {Id}", album.Id);
+            _logger.Error(ex, "Неожиданная ошибка в методе Update для альбома {Id}", album.Id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
@@ -252,7 +238,7 @@ public class SqliteAlbumRepository : IAlbumRepository
             SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
-                _logger.LogError("Соединение отсутствует в методе Delete");
+                _logger.Error("Соединение отсутствует в методе Delete");
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
@@ -268,23 +254,33 @@ public class SqliteAlbumRepository : IAlbumRepository
 
             if (rowsAffected == 0)
             {
-                _logger.LogWarning("Альбом {Id} не найден для удаления", id);
+                _logger.Warning("Альбом {Id} не найден для удаления", id);
                 return ResultVoid.Failure(DomainErrors.Album.NotFound);
             }
 
-            _logger.LogDebug("Альбом {Id} успешно удален", id);
+            _logger.Debug("Альбом {Id} успешно удален", id);
             return ResultVoid.Success();
         }
         catch (SqliteException ex)
         {
-            _logger.LogError(ex, "Ошибка SQLite в методе Delete для альбома {Id}", id);
+            _logger.Error(ex, "Ошибка SQLite в методе Delete для альбома {Id}", id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Неожиданная ошибка в методе Delete для альбома {Id}", id);
+            _logger.Error(ex, "Неожиданная ошибка в методе Delete для альбома {Id}", id);
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
+    // TODO: Добавить XML документацию
+    /// <summary>
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

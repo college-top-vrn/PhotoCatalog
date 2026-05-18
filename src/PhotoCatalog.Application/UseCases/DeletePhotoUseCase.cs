@@ -1,11 +1,11 @@
-using Microsoft.Extensions.Logging;
-
 using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
+
+using Serilog;
 
 namespace PhotoCatalog.Application.UseCases;
 
@@ -21,7 +21,7 @@ public class DeletePhotoUseCase(
     IPhotoCommandRepository photoCommandRepository,
     IFileStorage fileStorage,
     IUnitOfWork unitOfWork,
-    ILogger<DeletePhotoUseCase> logger)
+    ILogger logger)
 {
     /// <summary>
     ///     Метод для удаления файла в репозитории и на диске по идентификатору.
@@ -48,7 +48,7 @@ public class DeletePhotoUseCase(
             return ResultVoid.Success();
         }
 
-        logger.LogError("Orphaned file left on disk: {Path}", photo!.Value!.RealPath);
+        logger.Error("Orphaned file left on disk: {Path}", photo!.Value!.RealPath);
 
         return ResultVoid.Failure(ApplicationErrors.Files.OrphanedFile);
     }

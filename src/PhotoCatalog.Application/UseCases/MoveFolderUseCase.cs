@@ -36,12 +36,9 @@ public class MoveFolderUseCase(
     public ResultVoid Execute(int folderId, int? newParentId)
     {
         // Если newParentId == null, перемещаем в корень
-        if (newParentId == null)
-        {
-            return MoveToRoot(folderId);
-        }
-
-        return MoveToFolder(folderId, newParentId.Value);
+        return newParentId == null
+            ? MoveToRoot(folderId)
+            : MoveToFolder(folderId, newParentId.Value);
     }
 
     /// <summary>

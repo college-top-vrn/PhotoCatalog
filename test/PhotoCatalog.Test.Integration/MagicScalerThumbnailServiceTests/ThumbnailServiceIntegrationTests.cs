@@ -18,41 +18,48 @@ namespace PhotoCatalog.Test.Integration.MagicScalerThumbnailServiceTests;
 
 public class MagicScalerThumbnailServiceTests : IDisposable
 {
-    private readonly ILogger _loggerMock;
-    private readonly MagicScalerThumbnailService _service;
-    private readonly string _outputFolder;
-
-
     private readonly string _landscapeSourcePath = Path.Combine(
         AppContext.BaseDirectory,
         "MagicScalerThumbnailServiceTests",
         "landscape_photo.jpeg");
+
+    private readonly string _outputFolder;
 
     private readonly string _portraitSourcePath = Path.Combine(
         AppContext.BaseDirectory,
         "MagicScalerThumbnailServiceTests",
         "vertical_smartphone.jpeg");
 
+    private readonly MagicScalerThumbnailService _service;
+
     public MagicScalerThumbnailServiceTests()
     {
-        _loggerMock = Substitute.For<ILogger>();
-        _service = new MagicScalerThumbnailService(_loggerMock);
+        ILogger loggerMock = Substitute.For<ILogger>();
+        _service = new MagicScalerThumbnailService(loggerMock);
 
         _outputFolder = Path.Combine(Path.GetTempPath(), "ThumbnailTests_" + Guid.NewGuid());
         Directory.CreateDirectory(_outputFolder);
     }
 
-    [Fact]
-    public void Generate_ShouldSuccessfullyResizeImage_WhenSourceFileIsValid()
+    public void Dispose()
     {
-        PhotoSauce.MagicScaler.CodecManager.Configure(codecs =>
+        if (Directory.Exists(_outputFolder))
+        {
+            Directory.Delete(_outputFolder, true);
+        }
+    }
+
+    [Fact]
+    public void GenerateShouldSuccessfullyResizeImageWhenSourceFileIsValid()
+    {
+        CodecManager.Configure(codecs =>
         {
             codecs.UseLibjpeg();
             codecs.UseLibpng();
         });
 
         string targetPath = Path.Combine(_outputFolder, "landscape_thumb.jpeg");
-        int maxSize = 100;
+        const int maxSize = 100;
 
 
         ResultVoid result = _service.Generate(_landscapeSourcePath, targetPath, maxSize);
@@ -61,7 +68,7 @@ public class MagicScalerThumbnailServiceTests : IDisposable
         Assert.True(File.Exists(targetPath));
 
 
-        var thumbFileInfo = ImageFileInfo.Load(targetPath);
+        ImageFileInfo thumbFileInfo = ImageFileInfo.Load(targetPath);
 
 
         Assert.True(thumbFileInfo.Frames[0].Width <= maxSize);
@@ -69,16 +76,16 @@ public class MagicScalerThumbnailServiceTests : IDisposable
     }
 
     [Fact]
-    public void Generate_ShouldMaintainCorrectOrientation_ForPortraitSmartphonePhotos()
+    public void GenerateShouldMaintainCorrectOrientationForPortraitSmartphonePhotos()
     {
-        PhotoSauce.MagicScaler.CodecManager.Configure(codecs =>
+        CodecManager.Configure(codecs =>
         {
             codecs.UseLibjpeg();
             codecs.UseLibpng();
         });
 
         string targetPath = Path.Combine(_outputFolder, "portrait_thumb.jpeg");
-        int maxSize = 100;
+        const int maxSize = 100;
 
 
         ResultVoid result = _service.Generate(_portraitSourcePath, targetPath, maxSize);
@@ -87,8 +94,8 @@ public class MagicScalerThumbnailServiceTests : IDisposable
         Assert.True(result.IsSuccess);
 
 
-        var thumbFileInfo = ImageFileInfo.Load(targetPath);
-        var frame = thumbFileInfo.Frames[0];
+        ImageFileInfo thumbFileInfo = ImageFileInfo.Load(targetPath);
+        ImageFileInfo.FrameInfo frame = thumbFileInfo.Frames[0];
 
 
         Assert.True(frame.Height > frame.Width);
@@ -96,16 +103,16 @@ public class MagicScalerThumbnailServiceTests : IDisposable
     }
 
     [Fact]
-    public void Generate_ShouldExecuteWithOptimizedMemoryAllocations()
+    public void GenerateShouldExecuteWithOptimizedMemoryAllocations()
     {
-        PhotoSauce.MagicScaler.CodecManager.Configure(codecs =>
+        CodecManager.Configure(codecs =>
         {
             codecs.UseLibjpeg();
             codecs.UseLibpng();
         });
 
         string targetPath = Path.Combine(_outputFolder, "memory_test_thumb.jpeg");
-        int maxSize = 150;
+        const int maxSize = 150;
 
         GC.Collect();
         GC.WaitForPendingFinalizers();
@@ -121,16 +128,8 @@ public class MagicScalerThumbnailServiceTests : IDisposable
 
         Assert.True(result.IsSuccess);
 
-        long maxAllowedAllocationsedBytes = 10 * 1024 * 1024;
-        Assert.True(allocatedMemory < maxAllowedAllocationsedBytes,
+        const long maxAllowedAllocationBytes = 10 * 1024 * 1024;
+        Assert.True(allocatedMemory < maxAllowedAllocationBytes,
             $"Генерация миниатюр превысила порог памяти. Выделено байт: {allocatedMemory}");
-    }
-
-    public void Dispose()
-    {
-        if (Directory.Exists(_outputFolder))
-        {
-            Directory.Delete(_outputFolder, true);
-        }
     }
 }

@@ -33,7 +33,7 @@ public class ContractTests
     ///     должны находиться исключительно в слое Domain.
     /// </summary>
     [Fact]
-    public void RepositoryInterfaces_Should_ResideInDomain()
+    public void RepositoryInterfacesShouldResideInDomain()
     {
         Interfaces()
             .That()
@@ -52,7 +52,7 @@ public class ContractTests
     ///     должны реализовывать интерфейсы из слоя Domain.
     /// </summary>
     [Fact]
-    public void InfrastructureServices_Should_ImplementDomainInterfaces()
+    public void InfrastructureServicesShouldImplementDomainInterfaces()
     {
         Classes()
             .That()
@@ -75,7 +75,7 @@ public class ContractTests
     ///     не могут находиться в Domain или Application.
     /// </summary>
     [Fact]
-    public void RepositoryImplementations_Should_ResideInInfrastructure()
+    public void RepositoryImplementationsShouldResideInInfrastructure()
     {
         Classes()
             .That()

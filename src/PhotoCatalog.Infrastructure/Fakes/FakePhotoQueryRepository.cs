@@ -25,11 +25,11 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
         {
             if (pair.Key == id)
             {
-                return Result<Photo>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
+        return Result.Failure<Photo>(new Error("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по идентификатору"));
     }
 
@@ -41,11 +41,11 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
         {
             if (pair.Value.RealPath == realPath)
             {
-                return Result<Photo>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
+        return Result.Failure<Photo>(new Error("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по заданному пути"));
     }
 
@@ -57,7 +57,7 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
 
         if (album.IsFailure)
         {
-            return Result<IReadOnlyCollection<Photo>>.Failure(album.Error);
+            return Result.Failure<IReadOnlyCollection<Photo>>(album.Error);
         }
 
         List<Photo> photos = (
@@ -69,12 +69,12 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
 
         if (photos.Count == 0)
         {
-            return Result<IReadOnlyCollection<Photo>>
-                .Failure(new Error("PhotoRepository.PhotosByAlbumAreNotFound",
+            return Result
+                .Failure<IReadOnlyCollection<Photo>>(new Error("PhotoRepository.PhotosByAlbumAreNotFound",
                     "Не найдены фотографии по соответствующиму альбому"));
         }
 
-        return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+        return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
     }
 
 
@@ -91,17 +91,17 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
 
         if (photos.Count == 0)
         {
-            return Result<IReadOnlyCollection<Photo>>
-                .Failure(new Error("PhotoRepository.PhotosByTagsAreNotFound",
+            return Result
+                .Failure<IReadOnlyCollection<Photo>>(new Error("PhotoRepository.PhotosByTagsAreNotFound",
                     "Не найдены фотографии по соответствующим тегам"));
         }
 
-        return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+        return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
     }
 
     /// <inheritdoc />
     public Result<IEnumerable<Photo>> GetAll()
     {
-        return Result<IEnumerable<Photo>>.Success(_photos.Values);
+        return Result.Success<IEnumerable<Photo>>(_photos.Values);
     }
 }

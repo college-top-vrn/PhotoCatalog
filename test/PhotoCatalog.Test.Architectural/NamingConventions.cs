@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 using ArchUnitNET.Domain;
@@ -20,7 +22,7 @@ namespace PhotoCatalog.Test.Architectural;
 ///     Тесты проверяют соответствие именований пространств имен, классов и интерфейсов
 ///     правилам PascalCase, использованию только латинских символов и отсутствию спецсимволов.
 /// </remarks>
-public class NamingConventions
+public partial class NamingConventions
 {
     private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
@@ -33,37 +35,35 @@ public class NamingConventions
     /// <remarks>
     ///     Правила проверки:
     ///     <list type="bullet">
-    ///         <item><description>Каждый сегмент пространства имен должен начинаться с заглавной буквы</description></item>
-    ///         <item><description>Допускаются только латинские буквы (A-Z, a-z) и цифры (0-9)</description></item>
-    ///         <item><description>Запрещена кириллица и любые другие символы</description></item>
-    ///         <item><description>Запрещены пробелы, подчеркивания (_), дефисы (-) и другие спецсимволы</description></item>
+    ///         <item>
+    ///             <description>Каждый сегмент пространства имен должен начинаться с заглавной буквы</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Допускаются только латинские буквы (A-Z, a-z) и цифры (0-9)</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Запрещена кириллица и любые другие символы</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Запрещены пробелы, подчеркивания (_), дефисы (-) и другие спецсимволы</description>
+    ///         </item>
     ///     </list>
     /// </remarks>
     [Fact]
-    public void Namespaces_Should_BeInPascalCase_And_ContainOnlyLatinCharacters()
+    public void NamespacesShouldBeInPascalCaseAndContainOnlyLatinCharacters()
     {
-        var violations = new List<string>();
+        List<string> violations = [];
 
-        var types = Types().GetObjects(Architecture);
+        IEnumerable<IType>? types = Types().GetObjects(Architecture);
 
-        foreach (var type in types)
-        {
-            var namespaceName = type.Namespace?.FullName;
-
-            if (string.IsNullOrEmpty(namespaceName))
-                continue;
-
-            var segments = namespaceName.Split('.');
-
-            foreach (var segment in segments)
-            {
-                if (!Regex.IsMatch(segment, @"^[A-Z][a-zA-Z0-9]*$"))
-                {
-                    violations.Add(namespaceName);
-                    break;
-                }
-            }
-        }
+        violations.AddRange(from type in types
+                            select type.Namespace?.FullName
+            into namespaceName
+                            where !string.IsNullOrEmpty(namespaceName)
+                            let segments = namespaceName.Split('.')
+                            where segments.Any(segment =>
+                                !MyRegex().IsMatch(segment))
+                            select namespaceName);
 
         Assert.Empty(violations);
     }
@@ -77,14 +77,14 @@ public class NamingConventions
     ///     Generic-типы исключаются из проверки.
     /// </remarks>
     [Fact]
-    public void Classes_Should_Not_Contain_Cyrillic_Or_SpecialCharacters()
+    public void ClassesShouldNotContainCyrillicOrSpecialCharacters()
     {
         // Регулярное выражение также допускает символ ` (backtick) и цифры для generic-типов
         Classes()
             .That()
             .AreNot(typeof(object))
             .Should()
-            .HaveNameMatching(@"^[A-Z][a-zA-Z0-9`]*$")
+            .HaveNameMatching("^[A-Z][a-zA-Z0-9`]*$")
             .Because("Имена классов должны соответствовать PascalCase")
             .Check(Architecture);
     }
@@ -95,22 +95,33 @@ public class NamingConventions
     /// <remarks>
     ///     Интерфейсы должны:
     ///     <list type="bullet">
-    ///         <item><description>Начинаться с префикса "I"</description></item>
-    ///         <item><description>Содержать заглавную букву после префикса</description></item>
-    ///         <item><description>Соответствовать формату PascalCase</description></item>
-    ///         <item><description>Содержать только латинские буквы и цифры</description></item>
+    ///         <item>
+    ///             <description>Начинаться с префикса "I"</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Содержать заглавную букву после префикса</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Соответствовать формату PascalCase</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Содержать только латинские буквы и цифры</description>
+    ///         </item>
     ///     </list>
     ///     Generic-интерфейсы исключаются из проверки.
     /// </remarks>
     [Fact]
-    public void Interfaces_Should_StartWith_I_And_BeInPascalCase()
+    public void InterfacesShouldStartWithIAndBeInPascalCase()
     {
         Interfaces()
             .That()
-            .AreNot(typeof(System.IDisposable))
+            .AreNot(typeof(IDisposable))
             .Should()
             .HaveNameMatching(@"^I[A-Z][a-zA-Z0-9`]*$")
             .Because("Интерфейсы должны начинаться с I и соответствовать PascalCase")
             .Check(Architecture);
     }
+
+    [GeneratedRegex("^[A-Z][a-zA-Z0-9]*$")]
+    private static partial Regex MyRegex();
 }

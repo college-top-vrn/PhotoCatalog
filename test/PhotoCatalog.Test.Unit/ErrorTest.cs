@@ -10,7 +10,7 @@ namespace PhotoCatalog.Test.Unit;
 public class ErrorTest
 {
     [Fact]
-    public void Errors_WithSameCodeAndMessage_ShouldBeEqual()
+    public void ErrorsWithSameCodeAndMessageShouldBeEqual()
     {
         const string expectedCode = "Tag.EmptyName";
         const string expectedMessage = "Имя тега не может быть пустым.";
@@ -22,7 +22,7 @@ public class ErrorTest
     }
 
     [Fact]
-    public void None_ShouldHaveEmptyCodeAndMessage()
+    public void NoneShouldHaveEmptyCodeAndMessage()
     {
         Error noneError = Error.None;
 

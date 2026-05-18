@@ -15,7 +15,7 @@ public class ResultVoidCoreTests
     ///     Проверяет инициализацию успешного состояния ResultVoid.
     /// </summary>
     [Fact]
-    public void Success_ShouldInitializeSuccessState()
+    public void SuccessShouldInitializeSuccessState()
     {
         ResultVoid result = ResultVoid.Success();
 
@@ -28,7 +28,7 @@ public class ResultVoidCoreTests
     ///     Проверяет инициализацию провального состояния ResultVoid.
     /// </summary>
     [Fact]
-    public void Failure_ShouldInitializeFailureState()
+    public void FailureShouldInitializeFailureState()
     {
         ResultVoid result = ResultVoid.Failure(TestError);
 

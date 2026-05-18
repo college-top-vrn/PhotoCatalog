@@ -49,7 +49,7 @@ public class SqliteTagCommandRepository(string connectionString, ILogger logger)
         }
         catch (SqliteException ex) when (ex.SqliteErrorCode == sqliteConstraintErrorCode)
         {
-            return Result<Tag>.Failure(InfrastructureErrors.Database.ConstraintViolation);
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation);
         }
         catch (SqliteException ex)
         {

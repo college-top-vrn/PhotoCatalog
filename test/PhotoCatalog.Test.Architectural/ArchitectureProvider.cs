@@ -19,7 +19,7 @@ public static class ArchitectureProvider
     /// <summary>
     ///     Архитектура.
     /// </summary>
-    public static readonly Architecture Architecture =
+    private static readonly Architecture Architecture =
         new ArchLoader()
             .LoadAssemblies(
                 typeof(ApplicationErrors).Assembly,
@@ -51,10 +51,10 @@ public static class ArchitectureProvider
             .ResideInNamespaceMatching("PhotoCatalog.Infrastructure.*");
 
     /// <summary>
-    ///     Тест, проверяющий на независимость доменного слоя от других слоёв. 
+    ///     Тест, проверяющий на независимость доменного слоя от других слоёв.
     /// </summary>
     [Fact]
-    public static void Domain_ShouldNot_HaveDependencies_OnOtherLayers()
+    public static void DomainShouldNotHaveDependenciesOnOtherLayers()
     {
         Classes()
             .That()
@@ -72,7 +72,7 @@ public static class ArchitectureProvider
     ///     Тест, проверяющий на независимость прикладного слоя от слоя инфраструктуры.
     /// </summary>
     [Fact]
-    public static void Application_ShouldNot_HaveDependencies_OnInfrastructure()
+    public static void ApplicationShouldNotHaveDependenciesOnInfrastructure()
     {
         Classes()
             .That()
@@ -86,7 +86,7 @@ public static class ArchitectureProvider
     ///     Тест, проверяющий зависимость слоя инфраструктуры на доменный слой.
     /// </summary>
     [Fact]
-    public static void Infrastructure_Should_DependOn_Domain()
+    public static void InfrastructureShouldDependOnDomain()
     {
         Classes()
             .That()
@@ -102,7 +102,7 @@ public static class ArchitectureProvider
     ///     Тест, который проверяет, что пространства имён всех классов в PhotoCatalog.Domain начинаются на PhotoCatalog.Domain
     /// </summary>
     [Fact]
-    public static void DomainClasses_Should_BeInNamespace_That_StartsWith_PhotoCatalogDomain()
+    public static void DomainClassesShouldBeInNamespaceThatStartsWithPhotoCatalogDomain()
     {
         Classes()
             .That()

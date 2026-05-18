@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Primitives;
 
@@ -76,5 +74,4 @@ public interface IAlbumRepository
     ///     реализовать каскадное удаление или соответствующую бизнес-логику.
     /// </remarks>
     ResultVoid Delete(int id);
-
 }
