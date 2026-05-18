@@ -1,3 +1,5 @@
+using System;
+
 using Dapper;
 
 using Microsoft.Data.Sqlite;
@@ -12,25 +14,49 @@ using Serilog;
 namespace PhotoCatalog.Infrastructure.Repositories;
 
 /// <inheritdoc />
-public class SqliteFolderQueryRepository(string connectionString, ILogger logger) : IFolderQueryRepository
+public class SqliteFolderQueryRepository : IFolderQueryRepository
 {
+    /// <summary>
+    ///     Создание экземпляра.
+    /// </summary>
+    /// <param name="connectionString">строка соединения.</param>
+    /// <param name="logger">логгер.</param>
+    public SqliteFolderQueryRepository(string connectionString, ILogger logger)
+    {
+        SqliteConnectionStringBuilder builder = new() { DataSource = connectionString, Mode = SqliteOpenMode.ReadOnly };
+
+        _connectionString = builder.ToString();
+        _logger = logger;
+    }
+
+    private readonly string _connectionString;
+
+    private readonly ILogger _logger;
+
     /// <inheritdoc />
     public Result<Folder> GetById(int id)
     {
         try
         {
-            using SqliteConnection connection = new(connectionString);
+            using SqliteConnection connection = new(_connectionString);
+
             connection.Open();
-            const string sql = "SELECT Id, ParentFolderId, Name FROM Folders WHERE Id = @Id";
+
+            const string sql = """
+                               SELECT Id, ParentFolderId, Name
+                               FROM Folders
+                               WHERE Id = @Id
+                               """;
+
             Folder? folder = connection.QueryFirstOrDefault<Folder>(sql, new { Id = id });
 
             return folder is null
                 ? Result<Folder>.Failure(InfrastructureErrors.Database.NotFound)
                 : Result<Folder>.Success(folder);
         }
-        catch (SqliteException ex)
+        catch (SqliteException exception)
         {
-            logger.Error(ex, "Ошибка SQLite при получении папки с Id = {FolderId}.", id);
+            _logger.Error(exception, "Ошибка SQLite при получении папки с Id = {FolderId}.", id);
             return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
         }
     }
