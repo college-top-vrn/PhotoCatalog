@@ -35,18 +35,4 @@ public class FakeFolderQueryRepository : IFolderQueryRepository
         return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
             "Не удалось найти папку по идентификатору"));
     }
-
-    /// <inheritdoc />
-    public Result<IEnumerable<Folder>> GetAllFolders()
-    {
-        if (_folders.IsEmpty)
-        {
-            return Result<IEnumerable<Folder>>
-                .Failure(new Error("FolderRepository.FoldersNotFound", "Не удалось получить все папки"));
-        }
-
-        IEnumerable<Folder> folders = _folders.Values.AsEnumerable();
-
-        return Result<IEnumerable<Folder>>.Success(folders);
-    }
 }
