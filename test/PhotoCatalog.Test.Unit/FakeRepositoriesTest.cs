@@ -13,7 +13,7 @@ public static class FakeRepositoriesTest
     {
         FakeAlbumQueryRepository fakeAlbumQueryRepository = new();
         FakeAlbumCommandRepository fakeAlbumCommandRepository = new();
-        
+
 
         fakeAlbumCommandRepository.Add(Album.Create("Test", 0).Value);
 
