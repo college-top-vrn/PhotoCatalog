@@ -34,12 +34,6 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     /// </returns>
     public ResultVoid Add(Photo photo)
     {
-        if (photo is null)
-        {
-            return ResultVoid.Failure(new Error("PhotoRepository.CantAddPhoto",
-                "Не удалось добавить фото"));
-        }
-
         _lastId += 1;
 
         _photos.TryAdd(_lastId, photo);
@@ -86,12 +80,6 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     /// <returns></returns>
     private ResultVoid Add(Photo photo, int id)
     {
-        if (photo is null)
-        {
-            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
-                "Фото является null"));
-        }
-
         if (_photos.TryAdd(id, photo).ToResult().IsFailure)
         {
             return ResultVoid
