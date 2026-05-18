@@ -27,6 +27,24 @@ public interface IFolderCommandRepository
     ResultVoid Add(Folder? folder);
 
     /// <summary>
+    ///     Добавляет новую папку в репозиторий.
+    /// </summary>
+    /// <param name="folder">Папка для добавления.</param>
+    /// <param name="id">Идентификатор папки</param>
+    /// <returns>
+    ///     Результат операции:
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>Успех, если папка успешно добавлена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    ResultVoid Add(Folder? folder, int id);
+
+    /// <summary>
     ///     Обновляет существующую папку.
     /// </summary>
     /// <param name="folder">Обновленная папка.</param>
