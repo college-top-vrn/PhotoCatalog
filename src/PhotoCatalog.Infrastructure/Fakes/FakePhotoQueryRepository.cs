@@ -1,28 +1,21 @@
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
 using PhotoCatalog.Domain.Entities;
-using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Infrastructure.Fakes;
-
 /// <summary>
-///     Репозиторий фотографий, имитирующий БД, и хранящий данные в оперативной памяти.
+///     Репозиторий для получения фотографий, имитирующий БД, и хранящий данные в оперативной памяти.
 /// </summary>
-public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoCommandRepository
+public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IPhotoQueryRepository
 {
     /// <summary>
     ///     Словарь альбомов.
     /// </summary>
     private readonly ConcurrentDictionary<int, Photo> _photos = new();
-
-    /// <summary>
-    ///     Идентификатор последнего элемента.
-    /// </summary>
-    private int _lastId;
 
     /// <summary>
     ///     Получение фотографии по идентификатору.
@@ -60,80 +53,6 @@ public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoC
 
         return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по заданному пути"));
-    }
-
-    /// <summary>
-    ///     Добавление фотографии.
-    /// </summary>
-    /// <param name="photo">фотография.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
-    public ResultVoid Add(Photo? photo)
-    {
-        if (photo is null)
-        {
-            return ResultVoid.Failure(new Error("PhotoRepository.CantAddPhoto",
-                "Не удалось добавить фото"));
-        }
-
-        _lastId += 1;
-
-        _photos.TryAdd(_lastId, photo);
-
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Обновление фотографии.
-    /// </summary>
-    /// <param name="photo">фотография.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
-    public ResultVoid Update(Photo? photo)
-    {
-        if (photo is null)
-        {
-            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
-                "Фото является null"));
-        }
-
-        ResultVoid deleteResult = Delete(photo.Id);
-
-        if (deleteResult.IsFailure)
-        {
-            return ResultVoid.Failure(deleteResult.Error);
-        }
-
-        Add(photo, photo.Id);
-
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Удаление фотографии.
-    /// </summary>
-    /// <param name="id">идентификатор фотографии.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
-    public ResultVoid Delete(int id)
-    {
-        Result<Photo> searchResult = GetById(id);
-
-        if (searchResult.IsFailure)
-        {
-            return ResultVoid.Failure(new Error("PhotoRepository.CantDeletePhoto",
-                "Не удалось удалить фото"));
-        }
-
-        _photos.Remove(id, out _);
-
-        return ResultVoid.Success();
     }
 
     /// <summary>
@@ -198,30 +117,9 @@ public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoC
         return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
     }
 
-    /// <summary>
-    ///     Добавление фото.
-    /// </summary>
-    /// <param name="photo">фото.</param>
-    /// <param name="id">идентификатор фото.</param>
-    /// <returns>
-    ///     Возвращает значение успешного выполнения.
-    ///     В противном случая вернётся отрицательный результат.
-    /// </returns>
-    public ResultVoid Add(Photo? photo, int id)
+    /// <inheritdoc />
+    public Result<IEnumerable<Photo>> GetAll()
     {
-        if (photo is null)
-        {
-            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
-                "Фото является null"));
-        }
-
-        if (_photos.TryAdd(id, photo).ToResult().IsFailure)
-        {
-            return ResultVoid
-                .Failure(new Error("PhotoRepository.PhotoWithSameIdAlreadyExist",
-                    "Фото с похожим идентификатором уже существует"));
-        }
-
-        return ResultVoid.Success();
+        return Result<IEnumerable<Photo>>.Success(_photos.Values);
     }
 }
