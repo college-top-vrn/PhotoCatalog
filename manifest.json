@@ -614,17 +614,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.ITagCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository.html"
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.ITagCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий для работы с тегами.</p>\n"
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.ITagCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.ITagCommandRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс для изменения тегов в базе данных.\nМетоды этого интерфейса выполняют SQL-команды в базу данных,\nно не фиксируют транзакцию самостоятельно.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.ITagQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.ITagQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.ITagQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.ITagQueryRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс для получения тегов из базы данных.\nМетоды этого интерфейса гарантированно не изменяют состояние базы данных.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1104,17 +1118,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeTagRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeTagCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeTagRepository.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeTagCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeTagRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeTagRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий тегов, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeTagCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeTagCommandRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий тегов, имитирующий БД, и хранящий данные в оперативной памяти.\nТолько для изменения.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeTagQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeTagQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeTagQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeTagQueryRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий тегов, имитирующий БД, и хранящий данные в оперативной памяти.\nТолько для получения.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1216,17 +1244,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория тегов с использованием SQLite и Dapper.\nРаботает с таблицей Tags (Id, Name).</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteTagCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteTagCommandRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий для изменения тегов в базе данных SQLite.\nМетоды этого репозитория выполняют SQL-команды в базу данных,\nно не фиксируют транзакцию самостоятельно.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteTagQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteTagQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteTagQueryRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий для получения тегов из базы данных SQLite.\nМетоды этого репозитория гарантированно не изменяют состояние базы данных.</p>\n"
     },
     {
       "type": "ManagedReference",

@@ -113,8 +113,16 @@ Interfaces
 </dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.ITagRepository.html">ITagRepository</a></dt>
-      <dd><p>Репозиторий для работы с тегами.</p>
+      <dt><a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.ITagCommandRepository.html">ITagCommandRepository</a></dt>
+      <dd><p>Интерфейс для изменения тегов в базе данных.
+Методы этого интерфейса выполняют SQL-команды в базу данных,
+но не фиксируют транзакцию самостоятельно.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.ITagQueryRepository.html">ITagQueryRepository</a></dt>
+      <dd><p>Интерфейс для получения тегов из базы данных.
+Методы этого интерфейса гарантированно не изменяют состояние базы данных.</p>
 </dd>
     </dl>
 

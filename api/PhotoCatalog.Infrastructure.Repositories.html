@@ -122,9 +122,16 @@ Classes
 </dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="PhotoCatalog.Infrastructure.Repositories.SqliteTagRepository.html">SqliteTagRepository</a></dt>
-      <dd><p>Реализация репозитория тегов с использованием SQLite и Dapper.
-Работает с таблицей Tags (Id, Name).</p>
+      <dt><a class="xref" href="PhotoCatalog.Infrastructure.Repositories.SqliteTagCommandRepository.html">SqliteTagCommandRepository</a></dt>
+      <dd><p>Репозиторий для изменения тегов в базе данных SQLite.
+Методы этого репозитория выполняют SQL-команды в базу данных,
+но не фиксируют транзакцию самостоятельно.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="PhotoCatalog.Infrastructure.Repositories.SqliteTagQueryRepository.html">SqliteTagQueryRepository</a></dt>
+      <dd><p>Репозиторий для получения тегов из базы данных SQLite.
+Методы этого репозитория гарантированно не изменяют состояние базы данных.</p>
 </dd>
     </dl>
 
