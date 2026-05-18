@@ -170,7 +170,7 @@ public class SqliteAlbumRepository : IAlbumCommandRepository
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
-    
+
 
     /// <summary>
     ///     Обновляет существующий альбом.
@@ -286,5 +286,5 @@ public class SqliteAlbumRepository : IAlbumCommandRepository
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
-    
+
 }
