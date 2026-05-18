@@ -22,7 +22,7 @@ public class InterfaceLocalizationTests
 {
     private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
-            typeof(IPhotoRepository).Assembly
+            typeof(IPhotoCommandRepository).Assembly
         ).Build();
 
     /// <summary>
