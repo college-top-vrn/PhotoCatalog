@@ -116,12 +116,12 @@ try
 
     RouteGroupBuilder albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
 
-    albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId, IAlbumRepository albumRepository) =>
-        albumRepository
+    albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId, IAlbumQueryRepository albumQueryRepository) =>
+        albumQueryRepository
             .GetByFolderId(folderId)
             .ToHttpResult());
 
-    albumEndpointsGroup.MapPost("/", (AlbumResponse album, IAlbumRepository albumRepository) => albumRepository
+    albumEndpointsGroup.MapPost("/", (AlbumResponse album, IAlbumCommandRepository albumCommandRepository) => albumCommandRepository
         .Add(Album.Create(album.Name, album.Id).Value!)
         .ToHttpResult());
 

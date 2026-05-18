@@ -20,7 +20,7 @@ public class ContractTests
     private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
             typeof(IPhotoRepository).Assembly,
-            typeof(IAlbumRepository).Assembly,
+            typeof(IAlbumCommandRepository).Assembly,
             typeof(IFolderRepository).Assembly,
             typeof(ITagRepository).Assembly
         ).Build();

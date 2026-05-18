@@ -12,7 +12,7 @@ namespace PhotoCatalog.Infrastructure.Fakes;
 /// <summary>
 ///     Репозиторий фотографий, имитирующий БД, и хранящий данные в оперативной памяти.
 /// </summary>
-public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoRepository
+public class FakePhotoRepository(IAlbumQueryRepository fakeAlbumRepository) : IPhotoRepository
 {
     /// <summary>
     ///     Словарь альбомов.
