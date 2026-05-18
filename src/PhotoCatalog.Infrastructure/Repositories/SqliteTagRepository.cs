@@ -14,12 +14,12 @@ using Serilog;
 namespace PhotoCatalog.Infrastructure.Repositories;
 
 /// <summary>
-/// Реализация репозитория тегов с использованием SQLite и Dapper.
-/// Работает с таблицей Tags (Id, Name).
+///     Реализация репозитория тегов с использованием SQLite и Dapper.
+///     Работает с таблицей Tags (Id, Name).
 /// </summary>
 /// <remarks>
-/// Все операции используют Result-паттерн для обработки ошибок.
-/// Имена тегов уникальны и нормализованы к нижнему регистру.
+///     Все операции используют Result-паттерн для обработки ошибок.
+///     Имена тегов уникальны и нормализованы к нижнему регистру.
 /// </remarks>
 public class SqliteTagRepository : ITagRepository
 {
@@ -27,10 +27,10 @@ public class SqliteTagRepository : ITagRepository
     private readonly ILogger _logger;
 
     /// <summary>
-    /// Создает репозиторий с указанной строкой подключения к SQLite.
+    ///     Создает репозиторий с указанной строкой подключения к SQLite.
     /// </summary>
     /// <param name="connectionString">
-    /// Строка подключения вида "Data Source=photo.db".
+    ///     Строка подключения вида "Data Source=photo.db".
     /// </param>
     /// <param name="logger">Логгер для записи диагностических сообщений и ошибок.</param>
     public SqliteTagRepository(string connectionString, ILogger logger)
@@ -40,76 +40,73 @@ public class SqliteTagRepository : ITagRepository
     }
 
     /// <summary>
-    /// Получить тег по уникальному идентификатору.
+    ///     Получить тег по уникальному идентификатору.
     /// </summary>
     /// <param name="id">Идентификатор тега (PRIMARY KEY).</param>
     /// <returns>
-    /// При успехе возвращает объект <see cref="Result{Tag}"/> или ошибка, если не найден.
+    ///     При успехе возвращает объект <see cref="Result{Tag}" /> или ошибка, если не найден.
     /// </returns>
     public Result<Tag> GetById(int id)
     {
-        using var connection = new SqliteConnection(_connectionString);
+        using SqliteConnection connection = new(_connectionString);
         connection.Open();
         try
         {
-            var teg = connection.QuerySingleOrDefault<Tag>(
+            Tag? teg = connection.QuerySingleOrDefault<Tag>(
                 "SELECT * FROM Tags WHERE Id = @Id",
                 new { Id = id });
 
 
             if (teg == null)
             {
-                return Result<Tag>.Failure(DomainErrors.Tag.EmptyName);
+                return Result.Failure<Tag>(DomainErrors.Tag.EmptyName);
             }
 
-            return Result<Tag>.Success(teg);
+            return Result.Success(teg);
         }
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite в методе GetById для тега {Id}", id);
-            return Result<Tag>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<Tag>(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
             _logger.Error(ex, "Неожиданная ошибка в методе GetById для тега {Id}", id);
-            return Result<Tag>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<Tag>(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
     /// <summary>
-    /// Получает тег по имени из SQLite.
+    ///     Получает тег по имени из SQLite.
     /// </summary>
     /// <param name="name">Имя тега.</param>
     /// <returns>
-    /// При успехе возвращает объект <see cref="Result{Tag}"/> или ошибка, если не найден.
+    ///     При успехе возвращает объект <see cref="Result{Tag}" /> или ошибка, если не найден.
     /// </returns>
     public Result<Tag> GetByName(string name)
     {
-        using var connection = new SqliteConnection(_connectionString);
+        using SqliteConnection connection = new(_connectionString);
         connection.Open();
         try
         {
-            var teg = connection.QuerySingleOrDefault<Tag>(
+            Tag? teg = connection.QuerySingleOrDefault<Tag>(
                 "SELECT * FROM Tags WHERE Name = @Name",
                 new { Name = name });
 
 
-            if (teg == null)
-            {
-                return Result<Tag>.Failure(DomainErrors.Tag.EmptyName);
-            }
-
-            return Result<Tag>.Success(teg);
+            return teg == null
+                ? Result.Failure<Tag>(DomainErrors.Tag.EmptyName)
+                : Result.Success(teg);
         }
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite в методе GetByName для тега {Name}", name);
-            return Result<Tag>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<Tag>(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
             _logger.Error(ex, "Неожиданная ошибка в методе GetByName для тега {Name}", name);
-            return Result<Tag>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<Tag>(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
@@ -141,7 +138,7 @@ public class SqliteTagRepository : ITagRepository
         }
         catch (SqliteException ex) when (ex.SqliteErrorCode == sqliteConstraintErrorCode)
         {
-            return Result<Tag>.Failure(InfrastructureErrors.Database.ConstraintViolation);
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation);
         }
         catch (SqliteException ex)
         {
@@ -158,7 +155,7 @@ public class SqliteTagRepository : ITagRepository
             using SqliteConnection connection = new(_connectionString);
             connection.Open();
 
-            const string sql = "DELETE FROM Tegs WHERE Id = @Id";
+            const string sql = "DELETE FROM Tags WHERE Id = @Id";
             int affectedRows = connection.Execute(sql, new { Id = id });
 
             if (affectedRows == 0)

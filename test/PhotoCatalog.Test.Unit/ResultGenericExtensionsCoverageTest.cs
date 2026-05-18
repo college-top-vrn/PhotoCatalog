@@ -21,13 +21,13 @@ public class ResultGenericExtensionsCoverageTests
     ///     Проверяет ветви метода ToResult для nullable-типов.
     /// </summary>
     [Fact]
-    public void ToResultNullable_AllBranches_ShouldCoverNotNullAndNull()
+    public void ToResultNullableAllBranchesShouldCoverNotNullAndNull()
     {
-        string? validString = "data";
+        const string? validString = "data";
         string? nullString = null;
 
-        var successResult = validString.ToResult(NullConditionError);
-        var failureResult = nullString.ToResult(NullConditionError);
+        Result<string> successResult = validString.ToResult(NullConditionError);
+        Result<string> failureResult = nullString.ToResult(NullConditionError);
 
         Assert.True(successResult.IsSuccess);
         Assert.Equal(NullConditionError, failureResult.Error);
@@ -37,15 +37,16 @@ public class ResultGenericExtensionsCoverageTests
     ///     Проверяет ветви метода Then (переход от Result{T} к Result{TNext}).
     /// </summary>
     [Fact]
-    public void ThenGeneric_AllBranches_ShouldCoverNullFailureAndSuccess()
+    public void ThenGenericAllBranchesShouldCoverNullFailureAndSuccess()
     {
         Result<int>? nullResult = null;
-        var failedResult = Result<int>.Failure(DomainError);
-        var successResult = Result<int>.Success(10);
+        Result<int> failedResult = Result.Failure<int>(DomainError);
+        // TODO: Исправить магические числа
+        Result<int> successResult = Result.Success(10);
 
-        var nullOutcome = nullResult.Then(x => Result<string>.Success(x.ToString()));
-        var failedOutcome = failedResult.Then(x => Result<string>.Success(x.ToString()));
-        var successOutcome = successResult.Then(x => Result<string>.Success(x.ToString()));
+        ResultVoid nullOutcome = nullResult.Then(x => Result.Success(x.ToString()));
+        Result<string> failedOutcome = failedResult.Then(x => Result.Success(x.ToString()));
+        Result<string> successOutcome = successResult.Then(x => Result.Success(x.ToString()));
 
         Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
         Assert.Equal(DomainError, failedOutcome.Error);
@@ -56,16 +57,17 @@ public class ResultGenericExtensionsCoverageTests
     ///     Проверяет ветви метода ThenTry (с трансформацией данных).
     /// </summary>
     [Fact]
-    public void ThenTry_AllBranches_ShouldCoverNullFailureTryAndCatch()
+    public void ThenTryAllBranchesShouldCoverNullFailureTryAndCatch()
     {
         Result<int>? nullResult = null;
-        var failedResult = Result<int>.Failure(DomainError);
-        var successResult = Result<int>.Success(10);
+        Result<int> failedResult = Result.Failure<int>(DomainError);
+        Result<int> successResult = Result.Success(10);
 
-        var nullOutcome = nullResult.ThenTry(x => x * 2, _ => ExceptionError);
-        var failedOutcome = failedResult.ThenTry(x => x * 2, _ => ExceptionError);
-        var trySuccessOutcome = successResult.ThenTry(x => x * 2, _ => ExceptionError);
-        var catchOutcome = successResult.ThenTry<int, int>(x => throw new Exception(), _ => ExceptionError);
+        Result<int> nullOutcome = nullResult.ThenTry(x => x * 2, _ => ExceptionError);
+        Result<int> failedOutcome = failedResult.ThenTry(x => x * 2, _ => ExceptionError);
+        Result<int> trySuccessOutcome = successResult.ThenTry(x => x * 2, _ => ExceptionError);
+        //TODO: Выбросить более определенный Exception
+        Result<int> catchOutcome = successResult.ThenTry<int, int>(_ => throw new Exception(), _ => ExceptionError);
 
         Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
         Assert.Equal(DomainError, failedOutcome.Error);
@@ -77,16 +79,16 @@ public class ResultGenericExtensionsCoverageTests
     ///     Проверяет все логические пути метода Ensure.
     /// </summary>
     [Fact]
-    public void Ensure_AllBranches_ShouldCoverAllLogicalPaths()
+    public void EnsureAllBranchesShouldCoverAllLogicalPaths()
     {
         Result<int>? nullResult = null;
-        var failedResult = Result<int>.Failure(DomainError);
-        var successResult = Result<int>.Success(10);
+        Result<int> failedResult = Result.Failure<int>(DomainError);
+        Result<int> successResult = Result.Success(10);
 
-        var nullOutcome = nullResult.Ensure(x => x > 5, EnsureError);
-        var failedOutcome = failedResult.Ensure(x => x > 5, EnsureError);
-        var trueOutcome = successResult.Ensure(x => x > 5, EnsureError);
-        var falseOutcome = successResult.Ensure(x => x > 15, EnsureError);
+        Result<int> nullOutcome = nullResult.Ensure(x => x > 5, EnsureError);
+        Result<int> failedOutcome = failedResult.Ensure(x => x > 5, EnsureError);
+        Result<int> trueOutcome = successResult.Ensure(x => x > 5, EnsureError);
+        Result<int> falseOutcome = successResult.Ensure(x => x > 15, EnsureError);
 
         Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
         Assert.Equal(DomainError, failedOutcome.Error);
@@ -98,14 +100,14 @@ public class ResultGenericExtensionsCoverageTests
     ///     Проверяет поведение методов Check с сохранением исходного значения в цепочке.
     /// </summary>
     [Fact]
-    public void CheckGeneric_AllBranches_ShouldCoverAllLogicalPaths()
+    public void CheckGenericAllBranchesShouldCoverAllLogicalPaths()
     {
         Result<int>? nullResult = null;
-        var successResult = Result<int>.Success(10);
+        Result<int> successResult = Result.Success(10);
 
-        var nullOutcome = nullResult.Check(x => Result<string>.Success("ok"));
-        var checkSuccessOutcome = successResult.Check(x => Result<string>.Success("ok"));
-        var checkFailureOutcome = successResult.Check(x => Result<string>.Failure(EnsureError));
+        Result<int> nullOutcome = nullResult.Check(_ => Result.Success("ok"));
+        Result<int> checkSuccessOutcome = successResult.Check(_ => Result.Success("ok"));
+        Result<int> checkFailureOutcome = successResult.Check(_ => Result.Failure<string>(EnsureError));
 
         Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
         Assert.Equal(10, checkSuccessOutcome.Value);
@@ -116,13 +118,13 @@ public class ResultGenericExtensionsCoverageTests
     ///     Проверяет ветви метода Transform.
     /// </summary>
     [Fact]
-    public void Transform_AllBranches_ShouldCoverNullFailureAndSuccess()
+    public void TransformAllBranchesShouldCoverNullFailureAndSuccess()
     {
         Result<int>? nullResult = null;
-        var successResult = Result<int>.Success(10);
+        Result<int> successResult = Result.Success(10);
 
-        var nullOutcome = nullResult.Transform(x => x.ToString());
-        var successOutcome = successResult.Transform(x => x.ToString());
+        Result<string> nullOutcome = nullResult.Transform(x => x.ToString());
+        Result<string> successOutcome = successResult.Transform(x => x.ToString());
 
         Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
         Assert.Equal("10", successOutcome.Value);
@@ -132,15 +134,15 @@ public class ResultGenericExtensionsCoverageTests
     ///     Проверяет ветви метода Finally.
     /// </summary>
     [Fact]
-    public void Finally_AllBranches_ShouldMapBasedOnStateAndNull()
+    public void FinallyAllBranchesShouldMapBasedOnStateAndNull()
     {
         Result<int>? nullResult = null;
-        var successResult = Result<int>.Success(10);
-        var failureResult = Result<int>.Failure(DomainError);
+        Result<int> successResult = Result.Success(10);
+        Result<int> failureResult = Result.Failure<int>(DomainError);
 
-        var nullMapped = nullResult.Finally(v => "Ok", e => e.Code);
-        var successMapped = successResult.Finally(v => "Ok", e => e.Code);
-        var failureMapped = failureResult.Finally(v => "Ok", e => e.Code);
+        string nullMapped = nullResult.Finally(_ => "Ok", e => e.Code);
+        string successMapped = successResult.Finally(_ => "Ok", e => e.Code);
+        string failureMapped = failureResult.Finally(_ => "Ok", e => e.Code);
 
         Assert.Equal(SystemErrors.NullResult.Code, nullMapped);
         Assert.Equal("Ok", successMapped);
@@ -160,18 +162,18 @@ public class ResultGenericChainsTests
     ///     Проверяет прерывание цепочки (Short-circuiting) на моменте проверки Ensure.
     /// </summary>
     [Fact]
-    public void Chain_InterruptionInMiddle_ShouldShortCircuit()
+    public void ChainInterruptionInMiddleShouldShortCircuit()
     {
-        var transformCalled = false;
+        bool transformCalled = false;
 
-        var finalValue = 5.ToResult()
+        string finalValue = 5.ToResult()
             .Ensure(v => v > 10, StepError)
             .Transform(v =>
             {
                 transformCalled = true;
                 return v.ToString();
             })
-            .Finally(v => "Success", e => e.Code);
+            .Finally(_ => "Success", e => e.Code);
 
         Assert.Equal(StepError.Code, finalValue);
         Assert.False(transformCalled);
@@ -181,16 +183,16 @@ public class ResultGenericChainsTests
     ///     Проверяет перехват исключения внутри цепочки и корректное прохождение через OnFailure.
     /// </summary>
     [Fact]
-    public void Chain_ExceptionCaught_ShouldShortCircuitAndTriggerOnFailure()
+    public void ChainExceptionCaughtShouldShortCircuitAndTriggerOnFailure()
     {
         Error? caughtError = null;
 
-        var result = "Data".ToResult()
+        ResultVoid result = "Data".ToResult()
             .ThenTry<string, int>(
                 _ => throw new FormatException(),
                 _ => ExceptionError)
             .OnFailure(err => caughtError = err)
-            .Then(v => ResultVoid.Success());
+            .Then(_ => ResultVoid.Success());
 
         Assert.True(result.IsFailure);
         Assert.Equal(ExceptionError, caughtError);

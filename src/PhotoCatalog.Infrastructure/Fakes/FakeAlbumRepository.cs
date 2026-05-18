@@ -32,11 +32,11 @@ public class FakeAlbumRepository : IAlbumRepository
         {
             if (pair.Key == id)
             {
-                return Result<Album>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Album>.Failure(new Error("AlbumRepository.AlbumNotFound",
+        return Result.Failure<Album>(new Error("AlbumRepository.AlbumNotFound",
             "Не удалось найти альбом по идентификатору"));
     }
 
@@ -99,7 +99,7 @@ public class FakeAlbumRepository : IAlbumRepository
     {
         List<Album> albums = _albums.Values.Where(album => album.FolderId == id).ToList();
 
-        return Result<IReadOnlyCollection<Album>>.Success(albums);
+        return Result.Success<IReadOnlyCollection<Album>>(albums);
     }
 
     /// <inheritdoc />
@@ -146,7 +146,7 @@ public class FakeAlbumRepository : IAlbumRepository
 
 
     /// <inheritdoc />
-    public ResultVoid Add(Album? album, int id)
+    private ResultVoid Add(Album? album, int id)
     {
         if (album is null)
         {

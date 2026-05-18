@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Primitives;
 
@@ -44,7 +42,7 @@ public interface IAlbumRepository
     ///     или других бизнес-правил. В случае нарушения этих правил возвращается ошибка.
     /// </remarks>
     ResultVoid Add(Album album);
-    
+
 
     /// <summary>
     ///     Обновляет существующий альбом в репозитории.
@@ -76,5 +74,4 @@ public interface IAlbumRepository
     ///     реализовать каскадное удаление или соответствующую бизнес-логику.
     /// </remarks>
     ResultVoid Delete(int id);
-    
 }

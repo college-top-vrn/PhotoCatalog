@@ -34,11 +34,11 @@ public class FakeTagRepository : ITagRepository
         {
             if (pair.Key == id)
             {
-                return Result<Tag>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Tag>.Failure(new Error("TagRepository.TagNotFound",
+        return Result.Failure<Tag>(new Error("TagRepository.TagNotFound",
             "Не удалось найти тег по идентификатору"));
     }
 
@@ -53,11 +53,11 @@ public class FakeTagRepository : ITagRepository
         {
             if (pair.Name == name)
             {
-                return Result<Tag>.Success(pair);
+                return Result.Success(pair);
             }
         }
 
-        return Result<Tag>.Failure(new Error("TagRepository.TagNotFound",
+        return Result.Failure<Tag>(new Error("TagRepository.TagNotFound",
             "Не удалось найти тег по идентификатору"));
     }
 

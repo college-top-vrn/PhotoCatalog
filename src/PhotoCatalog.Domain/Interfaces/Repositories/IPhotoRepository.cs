@@ -67,7 +67,7 @@ public interface IPhotoRepository
     ///         </item>
     ///     </list>
     /// </returns>
-    ResultVoid Add(Photo? photo);
+    ResultVoid Add(Photo photo);
 
     /// <summary>
     ///     Обновляет существующую фотографию.

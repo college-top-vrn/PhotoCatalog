@@ -1,6 +1,33 @@
 ﻿namespace PhotoCatalog.Domain.Primitives;
 
 /// <summary>
+///     Необобщенный базовый класс <see cref="Result{T}" />.
+/// </summary>
+public static class Result
+{
+    /// <summary>
+    ///     Создает успешный результат с переданным значением.
+    ///     Гарантирует функциональную безопасность: при передаче null возвращает системную ошибку.
+    /// </summary>
+    /// <param name="value">Значение успешной операции.</param>
+    /// <returns>Экземпляр <see cref="Result{T}" /> со статусом успеха или провала (если передан null).</returns>
+    public static Result<T> Success<T>(T value)
+    {
+        return value is null
+            ? Failure<T>(SystemErrors.NullValue)
+            : Result<T>.CreateInternal(value, true, Error.None);
+    }
+
+    /// <summary>
+    ///     Создает провальный результат с указанной ошибкой и значением по умолчанию.
+    /// </summary>
+    public static Result<T> Failure<T>(Error error)
+    {
+        return Result<T>.CreateInternal(default, false, error);
+    }
+}
+
+/// <summary>
 ///     Представляет результат выполнения операции, возвращающей значение типа <typeparamref name="T" />.
 /// </summary>
 /// <typeparam name="T">Тип возвращаемого значения.</typeparam>
@@ -13,7 +40,7 @@ public class Result<T>
     /// <summary>
     ///     Инициализирует внутреннее состояние объекта.
     /// </summary>
-    /// <param name="value"> Результат операции. Имеет значение по умолчанию, если операция провалена.</param>
+    /// <param name="value">Результат операции. Имеет значение по умолчанию, если операция провалена.</param>
     /// <param name="isSuccess">Флаг, указывающий на успешное завершение операции.</param>
     /// <param name="error">Детализированная бизнес-ошибка. Равна <see cref="Primitives.Error.None" /> при успехе.</param>
     private Result(T? value, bool isSuccess, Error error)
@@ -46,26 +73,16 @@ public class Result<T>
     public T? Value { get; }
 
     /// <summary>
-    ///     Создает успешный результат с переданным значением.
-    ///     Гарантирует функциональную безопасность: при передаче null возвращает системную ошибку.
+    ///     Внутренний метод для сборки объекта необобщенной фабрикой.
     /// </summary>
-    /// <param name="value">Значение успешной операции.</param>
-    /// <returns>Экземпляр <see cref="Result{T}"/> со статусом успеха или провала (если передан null).</returns>
-    public static Result<T> Success(T value)
+    /// <param name="value">Результат операции. Имеет значение по умолчанию, если операция провалена.</param>
+    /// <param name="isSuccess">Флаг, указывающий на успешное завершение операции.</param>
+    /// <param name="error">Детализированная бизнес-ошибка. Равна <see cref="Primitives.Error.None" /> при успехе.</param>
+    /// <returns>Собранный объект.</returns>
+    internal static Result<T> CreateInternal(T? value, bool isSuccess, Error error)
     {
-        return value is null
-            ? Failure(SystemErrors.NullValue)
-            : new Result<T>(value, true, Error.None);
+        return new Result<T>(value, isSuccess, error);
     }
-
-    /// <summary>
-    ///     Создает провальный результат с указанной ошибкой и значением по умолчанию.
-    /// </summary>
-    public static Result<T> Failure(Error error)
-    {
-        return new Result<T>(default, false, error);
-    }
-
 
     /// <summary>
     ///     Неявно преобразует Result{T} обобщенного типа в базовый ResultVoid.

@@ -1,3 +1,5 @@
+using System;
+
 using Microsoft.AspNetCore.Http;
 
 using PhotoCatalog.Domain.Primitives;
@@ -18,18 +20,21 @@ public static class ErrorHttpExtensions
     {
         return error.Code switch
         {
-            var code when code.EndsWith(".NotFound") => Results.NotFound(error.Message),
+            var code when code.EndsWith(".NotFound", StringComparison.CurrentCulture) =>
+                Results.NotFound(error.Message),
 
-            var code when code.EndsWith(".CannotMoveToSelf") || code.Contains("Duplicate")
-                                                             || code.EndsWith(".CycleDetected") ||
-                                                             code.EndsWith(".OrphanedFile")
-                                                             || code.EndsWith(".HasChildren")
+            var code when code.EndsWith(".CannotMoveToSelf", StringComparison.CurrentCulture) ||
+                          code.Contains("Duplicate")
+                          || code.EndsWith(".CycleDetected", StringComparison.CurrentCulture) ||
+                          code.EndsWith(".OrphanedFile", StringComparison.CurrentCulture)
+                          || code.EndsWith(".HasChildren", StringComparison.CurrentCulture)
                 => Results.Conflict(error.Message),
 
-            var code when code.StartsWith("Cache.") || code.StartsWith("Database.")
-                                                    || code.StartsWith("FileStorage.") ||
-                                                    code.StartsWith("MetadataExtractor.")
-                                                    || code.StartsWith("Transactions.")
+            var code when code.StartsWith("Cache.", StringComparison.CurrentCulture) ||
+                          code.StartsWith("Database.", StringComparison.CurrentCulture)
+                          || code.StartsWith("FileStorage.", StringComparison.CurrentCulture) ||
+                          code.StartsWith("MetadataExtractor.", StringComparison.CurrentCulture)
+                          || code.StartsWith("Transactions.", StringComparison.CurrentCulture)
                 => Results.Problem(error.Message, statusCode: StatusCodes.Status500InternalServerError),
 
             _ => Results.BadRequest(error.Message)

@@ -61,20 +61,20 @@ public static class ApplicationErrors
         ///     что то пошло не так
         /// </summary>
         public static readonly Error StartTransactions =
-            new Error("Transactions.BeginFailed",
+            new("Transactions.BeginFailed",
                 "Ошибка начала транзакции");
 
         /// <summary>
         ///     Ошибка, возникающая при попытке зафиксировать (commit) транзакцию.
         /// </summary>
         public static readonly Error CommitFailed =
-            new Error(
+            new(
                 "Transactions.CommitFailed",
                 "Не удалось зафиксировать изменения в транзакции (commit).");
     }
 
     /// <summary>
-    ///     Ошибка, связаная с обновлением альбома 
+    ///     Ошибка, связаная с обновлением альбома
     /// </summary>
     public static class Albums
 
@@ -82,10 +82,10 @@ public static class ApplicationErrors
     {
         /// <summary>
         ///     Ошибка, которая обозначает, что при обновлении
-        ///         что то пошло не так
+        ///     что то пошло не так
         /// </summary>
         public static readonly Error UpdateFailed =
-            new Error("Albums.UpdateFailed",
+            new("Albums.UpdateFailed",
                 "Ошибка обновления альбома");
     }
 
@@ -98,7 +98,7 @@ public static class ApplicationErrors
         ///     Ошибка, возникающая при непредвиденном системном сбое внутри use-case.
         /// </summary>
         public static readonly Error SystemFailure =
-            new Error(
+            new(
                 "UseCases.SystemFailure",
                 "Произошла системная ошибка при выполнении сценария приложения (UseCase).");
     }

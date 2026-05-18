@@ -35,11 +35,11 @@ public class FakeFolderRepository : IFolderRepository
         {
             if (pair.Key == id)
             {
-                return Result<Folder>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
+        return Result.Failure<Folder>(new Error("FolderRepository.FolderNotFound",
             "Не удалось найти папку по идентификатору"));
     }
 
@@ -54,13 +54,14 @@ public class FakeFolderRepository : IFolderRepository
     {
         if (_folders.IsEmpty)
         {
-            return Result<IEnumerable<Folder>>
-                .Failure(new Error("FolderRepository.FoldersNotFound", "Не удалось получить все папки"));
+            return Result
+                .Failure<IEnumerable<Folder>>(new Error("FolderRepository.FoldersNotFound",
+                    "Не удалось получить все папки"));
         }
 
         IEnumerable<Folder> folders = _folders.Values.AsEnumerable();
 
-        return Result<IEnumerable<Folder>>.Success(folders);
+        return Result.Success(folders);
     }
 
     /// <summary>
@@ -146,7 +147,7 @@ public class FakeFolderRepository : IFolderRepository
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
     /// </returns>
-    public ResultVoid Add(Folder? folder, int id)
+    private ResultVoid Add(Folder? folder, int id)
     {
         if (folder is null)
         {

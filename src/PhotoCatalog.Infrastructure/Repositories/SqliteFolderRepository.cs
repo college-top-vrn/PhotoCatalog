@@ -35,13 +35,13 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
             Folder? folder = connection.QueryFirstOrDefault<Folder>(sql, new { Id = id });
 
             return folder is null
-                ? Result<Folder>.Failure(InfrastructureErrors.Database.NotFound)
-                : Result<Folder>.Success(folder);
+                ? Result.Failure<Folder>(InfrastructureErrors.Database.NotFound)
+                : Result.Success(folder);
         }
         catch (SqliteException ex)
         {
             logger.Error(ex, "Ошибка SQLite при получении папки с Id = {FolderId}.", id);
-            return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
+            return Result.Failure<Folder>(InfrastructureErrors.Database.Sqlite);
         }
     }
 
@@ -57,13 +57,13 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
             IEnumerable<Folder> enumerableFolders = folders.ToList();
 
             return enumerableFolders.Any()
-                ? Result<IEnumerable<Folder>>.Failure(InfrastructureErrors.Database.NotFound)
-                : Result<IEnumerable<Folder>>.Success(enumerableFolders);
+                ? Result.Failure<IEnumerable<Folder>>(InfrastructureErrors.Database.NotFound)
+                : Result.Success(enumerableFolders);
         }
         catch (SqliteException ex)
         {
             logger.Error(ex, "Ошибка SQLite при получении всех папок.");
-            return Result<IEnumerable<Folder>>.Failure(InfrastructureErrors.Database.Sqlite);
+            return Result.Failure<IEnumerable<Folder>>(InfrastructureErrors.Database.Sqlite);
         }
     }
 

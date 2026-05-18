@@ -3,29 +3,20 @@ using PhotoCatalog.Domain.Primitives;
 namespace PhotoCatalog.Domain.Entities;
 
 /// <summary>
-/// Представляет тег для фотографий.
+///     Представляет тег для фотографий.
 /// </summary>
 public class Tag
 {
     /// <summary>
-    /// Уникальный идентификатор тега.
-    /// </summary>
-    public int Id { get; private set; }
-
-    /// <summary>
-    /// Нормализованное имя тега (в нижнем регистре).
-    /// </summary>
-    public string Name { get; private set; }
-
-    /// <summary>
-    /// Конструктор для Dapper.
+    ///     Конструктор для Dapper.
     /// </summary>
     private Tag() { }
 
     /// <summary>
-    /// Приватный конструктор с нормализованным именем.
+    ///     Приватный конструктор с нормализованным именем.
     /// </summary>
-    /// <param name="name">Нормализованное имя тега.
+    /// <param name="name">
+    ///     Нормализованное имя тега.
     /// </param>
     private Tag(string name)
     {
@@ -33,32 +24,50 @@ public class Tag
     }
 
     /// <summary>
-    /// Создает новый валидный тег.
+    ///     Уникальный идентификатор тега.
     /// </summary>
-    /// <param name="name">Имя тега (будет нормализовано).
+    public int Id { get; private init; }
+
+    /// <summary>
+    ///     Нормализованное имя тега (в нижнем регистре).
+    /// </summary>
+    public string Name { get; private init; } = null!;
+
+    /// <summary>
+    ///     Создает новый валидный тег.
+    /// </summary>
+    /// <param name="name">
+    ///     Имя тега (будет нормализовано).
     /// </param>
     /// <returns>
-    /// Результат создания с тегом или ошибкой.
+    ///     Результат создания с тегом или ошибкой.
     /// </returns>
     public static Result<Tag> Create(string name)
     {
         if (string.IsNullOrEmpty(name))
-            return Result<Tag>.Failure(DomainErrors.Tag.EmptyName);
+        {
+            return Result.Failure<Tag>(DomainErrors.Tag.EmptyName);
+        }
 
-        var trimmedName = name.Trim();
+        string trimmedName = name.Trim();
 
         if (trimmedName.Length > 50)
-            return Result<Tag>.Failure(DomainErrors.Tag.TooLong);
+        {
+            return Result.Failure<Tag>(DomainErrors.Tag.TooLong);
+        }
 
-        var normalizedName = trimmedName.ToLowerInvariant();
+        string normalizedName = trimmedName.ToLowerInvariant();
 
-        return Result<Tag>.Success(new Tag(normalizedName));
+        return Result.Success(new Tag(normalizedName));
     }
 
 
     /// <summary>
     ///     Метод для глубокого копирования
     /// </summary>
-    /// <returns> возвращает копию объекта <see cref="Tag"/> </returns>
-    public Tag DeepCopy() => new Tag { Id = this.Id, Name = this.Name };
+    /// <returns> возвращает копию объекта <see cref="Tag" /> </returns>
+    public Tag DeepCopy()
+    {
+        return new Tag { Id = Id, Name = Name };
+    }
 }

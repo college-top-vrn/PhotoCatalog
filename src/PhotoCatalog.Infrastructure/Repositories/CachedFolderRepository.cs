@@ -45,18 +45,18 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
                 [CacheKeysFactory.GetFolderTag(id), CacheKeysFactory.GetFoldersTreeTag()]
             ).AsTask().GetAwaiter().GetResult();
 
-            return Result<Folder>.Success(cachedFolder!);
+            return Result.Success(cachedFolder!);
         }
         catch (CacheBypassException ex)
         {
             logger.Warning(ex,
                 "Не удалось получить папку с Id={FolderId} из внутреннего репозитория – результат не кэширован", id);
-            return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
+            return Result.Failure<Folder>(InfrastructureErrors.Database.Sqlite);
         }
         catch (Exception ex)
         {
             logger.Error(ex, "Непредвиденная ошибка при получении папки с Id={FolderId} из кэша", id);
-            return Result<Folder>.Failure(InfrastructureErrors.Cache.UnknownError);
+            return Result.Failure<Folder>(InfrastructureErrors.Cache.UnknownError);
         }
     }
 
@@ -72,17 +72,17 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
                 [CacheKeysFactory.GetFoldersTreeTag()]
             ).AsTask().GetAwaiter().GetResult();
 
-            return Result<IEnumerable<Folder>>.Success(folders!);
+            return Result.Success(folders!);
         }
         catch (CacheBypassException ex)
         {
             logger.Warning(ex, "Не удалось получить список папок из внутреннего репозитория – результат не кэширован");
-            return Result<IEnumerable<Folder>>.Failure(InfrastructureErrors.Database.Sqlite);
+            return Result.Failure<IEnumerable<Folder>>(InfrastructureErrors.Database.Sqlite);
         }
         catch (Exception ex)
         {
             logger.Error(ex, "Непредвиденная ошибка при получении списка папок из кэша");
-            return Result<IEnumerable<Folder>>.Failure(InfrastructureErrors.Cache.UnknownError);
+            return Result.Failure<IEnumerable<Folder>>(InfrastructureErrors.Cache.UnknownError);
         }
     }
 

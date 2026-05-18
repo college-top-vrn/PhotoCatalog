@@ -21,8 +21,8 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// </summary>
 public class SqlitePhotoRepository : IPhotoRepository
 {
-    private readonly SqliteUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
+    private readonly SqliteUnitOfWork _unitOfWork;
 
     /// <summary>
     ///     Инициализирует новый экземпляр репозитория фотографий.
@@ -44,40 +44,40 @@ public class SqlitePhotoRepository : IPhotoRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
-                return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                return Result.Failure<Photo>(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var photo = connection.QueryFirstOrDefault<Photo>(
+            Photo? photo = connection.QueryFirstOrDefault<Photo>(
                 "SELECT Id, RealPath, FileHash, Dimensions, AddedAt FROM Photos WHERE Id = @Id",
                 new { Id = id },
                 _unitOfWork.Transaction);
 
             if (photo == null)
             {
-                return Result<Photo>.Failure(DomainErrors.Photo.NotFound);
+                return Result.Failure<Photo>(DomainErrors.Photo.NotFound);
             }
 
-            var tagIds = connection.Query<int>(
+            IEnumerable<int> tagIds = connection.Query<int>(
                 "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
                 new { Id = id },
                 _unitOfWork.Transaction);
 
             photo.RestoreTags(tagIds);
 
-            return Result<Photo>.Success(photo);
+            return Result.Success(photo);
         }
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite в методе GetById для фотографии {Id}", id);
-            return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<Photo>(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
             _logger.Error(ex, "Неожиданная ошибка в методе GetById для фотографии {Id}", id);
-            return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<Photo>(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
@@ -90,40 +90,40 @@ public class SqlitePhotoRepository : IPhotoRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
-                return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                return Result.Failure<Photo>(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var photo = connection.QueryFirstOrDefault<Photo>(
+            Photo? photo = connection.QueryFirstOrDefault<Photo>(
                 "SELECT Id, RealPath, FileHash, Dimensions, AddedAt FROM Photos WHERE RealPath = @realPath",
                 new { realPath },
                 _unitOfWork.Transaction);
 
             if (photo == null)
             {
-                return Result<Photo>.Failure(DomainErrors.Photo.NotFound);
+                return Result.Failure<Photo>(DomainErrors.Photo.NotFound);
             }
 
-            var tagIds = connection.Query<int>(
+            IEnumerable<int> tagIds = connection.Query<int>(
                 "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
-                new { Id = photo.Id },
+                new { photo.Id },
                 _unitOfWork.Transaction);
 
             photo.RestoreTags(tagIds);
 
-            return Result<Photo>.Success(photo);
+            return Result.Success(photo);
         }
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite в методе GetByPath для пути {RealPath}", realPath);
-            return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<Photo>(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
             _logger.Error(ex, "Неожиданная ошибка в методе GetByPath для пути {RealPath}", realPath);
-            return Result<Photo>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<Photo>(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
@@ -136,13 +136,13 @@ public class SqlitePhotoRepository : IPhotoRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
+            string dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
 
             connection.Execute(
                 "INSERT INTO Photos (Id, RealPath, FileHash, Dimensions, AddedAt) VALUES (@Id, @RealPath, @FileHash, @Dimensions, @AddedAt)",
@@ -190,22 +190,17 @@ public class SqlitePhotoRepository : IPhotoRepository
     /// <returns>Результат операции.</returns>
     public ResultVoid Update(Photo photo)
     {
-        if (photo == null)
-        {
-            return ResultVoid.Failure(DomainErrors.Photo.NullPhoto);
-        }
-
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
+            string dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
 
-            var rowsAffected = connection.Execute(
+            int rowsAffected = connection.Execute(
                 "UPDATE Photos SET RealPath = @RealPath, FileHash = @FileHash, Dimensions = @Dimensions, AddedAt = @AddedAt WHERE Id = @Id",
                 new
                 {
@@ -262,7 +257,7 @@ public class SqlitePhotoRepository : IPhotoRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
@@ -273,17 +268,14 @@ public class SqlitePhotoRepository : IPhotoRepository
                 new { Id = id },
                 _unitOfWork.Transaction);
 
-            var rowsAffected = connection.Execute(
+            int rowsAffected = connection.Execute(
                 "DELETE FROM Photos WHERE Id = @Id",
                 new { Id = id },
                 _unitOfWork.Transaction);
 
-            if (rowsAffected == 0)
-            {
-                return ResultVoid.Failure(DomainErrors.Photo.NotFound);
-            }
-
-            return ResultVoid.Success();
+            return rowsAffected == 0
+                ? ResultVoid.Failure(DomainErrors.Photo.NotFound)
+                : ResultVoid.Success();
         }
         catch (SqliteException ex)
         {
@@ -306,41 +298,43 @@ public class SqlitePhotoRepository : IPhotoRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
-                return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                return Result.Failure<IReadOnlyCollection<Photo>>(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var photos = connection.Query<Photo>(
-                @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
-                  FROM Photos p
-                  INNER JOIN AlbumPhotos ap ON p.Id = ap.PhotoId
-                  WHERE ap.AlbumId = @albumId",
+            List<Photo> photos = connection.Query<Photo>(
+                """
+                SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
+                                  FROM Photos p
+                                  INNER JOIN AlbumPhotos ap ON p.Id = ap.PhotoId
+                                  WHERE ap.AlbumId = @albumId
+                """,
                 new { albumId },
                 _unitOfWork.Transaction).ToList();
 
-            foreach (var photo in photos)
+            foreach (Photo photo in photos)
             {
-                var tagIds = connection.Query<int>(
+                IEnumerable<int> tagIds = connection.Query<int>(
                     "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
-                    new { Id = photo.Id },
+                    new { photo.Id },
                     _unitOfWork.Transaction);
 
                 photo.RestoreTags(tagIds);
             }
 
-            return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+            return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
         }
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite в методе GetByAlbumId для альбома {AlbumId}", albumId);
-            return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<IReadOnlyCollection<Photo>>(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
             _logger.Error(ex, "Неожиданная ошибка в методе GetByAlbumId для альбома {AlbumId}", albumId);
-            return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<IReadOnlyCollection<Photo>>(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 
@@ -353,19 +347,19 @@ public class SqlitePhotoRepository : IPhotoRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
-                return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                return Result.Failure<IReadOnlyCollection<Photo>>(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var tagIdList = tagIds.ToList();
+            List<int> tagIdList = tagIds.ToList();
             if (!tagIdList.Any())
             {
-                return Result<IReadOnlyCollection<Photo>>.Success(new List<Photo>().AsReadOnly());
+                return Result.Success<IReadOnlyCollection<Photo>>(new List<Photo>().AsReadOnly());
             }
 
-            var photos = connection.Query<Photo>(
+            List<Photo> photos = connection.Query<Photo>(
                 @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
                   FROM Photos p
                   INNER JOIN PhotoTags pt ON p.Id = pt.PhotoId
@@ -373,27 +367,27 @@ public class SqlitePhotoRepository : IPhotoRepository
                 new { tagIds = tagIdList },
                 _unitOfWork.Transaction).ToList();
 
-            foreach (var photo in photos)
+            foreach (Photo photo in photos)
             {
-                var tagIdListForPhoto = connection.Query<int>(
+                IEnumerable<int> tagIdListForPhoto = connection.Query<int>(
                     "SELECT TagId FROM PhotoTags WHERE PhotoId = @Id",
-                    new { Id = photo.Id },
+                    new { photo.Id },
                     _unitOfWork.Transaction);
 
                 photo.RestoreTags(tagIdListForPhoto);
             }
 
-            return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+            return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
         }
         catch (SqliteException ex)
         {
             _logger.Error(ex, "Ошибка SQLite в методе GetByTags");
-            return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<IReadOnlyCollection<Photo>>(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (Exception ex)
         {
             _logger.Error(ex, "Неожиданная ошибка в методе GetByTags");
-            return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
+            return Result.Failure<IReadOnlyCollection<Photo>>(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
 }

@@ -35,11 +35,11 @@ public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoR
         {
             if (pair.Key == id)
             {
-                return Result<Photo>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
+        return Result.Failure<Photo>(new Error("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по идентификатору"));
     }
 
@@ -54,11 +54,11 @@ public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoR
         {
             if (pair.Value.RealPath == realPath)
             {
-                return Result<Photo>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
+        return Result.Failure<Photo>(new Error("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по заданному пути"));
     }
 
@@ -150,11 +150,11 @@ public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoR
 
         if (album.IsFailure)
         {
-            return Result<IReadOnlyCollection<Photo>>.Failure(album.Error);
+            return Result.Failure<IReadOnlyCollection<Photo>>(album.Error);
         }
 
         List<Photo> photos = (
-            from photoId in album.Value.PhotoIds
+            from photoId in album.Value!.PhotoIds
             from photo in _photos
             where photo.Value.Id == photoId
             select photo.Value
@@ -162,12 +162,12 @@ public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoR
 
         if (photos.Count == 0)
         {
-            return Result<IReadOnlyCollection<Photo>>
-                .Failure(new Error("PhotoRepository.PhotosByAlbumAreNotFound",
+            return Result
+                .Failure<IReadOnlyCollection<Photo>>(new Error("PhotoRepository.PhotosByAlbumAreNotFound",
                     "Не найдены фотографии по соответствующиму альбому"));
         }
 
-        return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+        return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
     }
 
     /// <summary>
@@ -190,12 +190,12 @@ public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoR
 
         if (photos.Count == 0)
         {
-            return Result<IReadOnlyCollection<Photo>>
-                .Failure(new Error("PhotoRepository.PhotosByTagsAreNotFound",
+            return Result
+                .Failure<IReadOnlyCollection<Photo>>(new Error("PhotoRepository.PhotosByTagsAreNotFound",
                     "Не найдены фотографии по соответствующим тегам"));
         }
 
-        return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+        return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
     }
 
     /// <summary>
@@ -207,7 +207,7 @@ public class FakePhotoRepository(IAlbumRepository fakeAlbumRepository) : IPhotoR
     ///     Возвращает значение успешного выполнения.
     ///     В противном случая вернётся отрицательный результат.
     /// </returns>
-    public ResultVoid Add(Photo? photo, int id)
+    private ResultVoid Add(Photo? photo, int id)
     {
         if (photo is null)
         {
