@@ -41,7 +41,8 @@ try
 
     builder.Services.AddSingleton<IFolderRepository, FakeFolderRepository>();
     builder.Services.AddSingleton<IPhotoRepository, FakePhotoRepository>();
-    builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
+    builder.Services.AddSingleton<IAlbumQueryRepository, FakeAlbumQueryRepository>();
+    builder.Services.AddSingleton<IAlbumCommandRepository, FakeAlbumCommandRepository>();
     builder.Services.AddSingleton<ITagRepository, FakeTagRepository>();
 
     builder.Services.AddSingleton<IFileStorage, FakeFileStorage>();
@@ -126,7 +127,7 @@ try
         .ToHttpResult());
 
     albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",
-        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoRepository photoRepository) =>
+        (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>
         {
             Result<Photo> searchResult = photoRepository.GetById(photoId);
 
@@ -135,13 +136,13 @@ try
                 return searchResult.Error.ToHttpResult();
             }
 
-            return albumRepository
+            return albumQueryRepository
                 .AddPhoto(albumId, photoId)
                 .ToHttpResult();
         });
 
     albumEndpointsGroup.MapDelete("/{albumId:int}/photos/{photoId:int}",
-        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoRepository photoRepository) =>
+        (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>
         {
             Result<Photo> searchResult = photoRepository.GetById(photoId);
 
@@ -150,13 +151,13 @@ try
                 return searchResult.Error.ToHttpResult();
             }
 
-            return albumRepository
+            return albumQueryRepository
                 .DeletePhoto(albumId, photoId)
                 .ToHttpResult();
         });
 
     albumEndpointsGroup.MapDelete("/{id:int}",
-        (int id, IAlbumRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+        (int id, IAlbumCommandRepository albumCommandRepository) => albumCommandRepository.Delete(id).ToHttpResult());
 
     app.Run();
 }
