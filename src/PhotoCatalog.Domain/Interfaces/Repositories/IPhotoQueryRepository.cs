@@ -46,7 +46,7 @@ public interface IPhotoQueryRepository
     ///     </list>
     /// </returns>
     Result<Photo> GetByPath(string realPath);
-    
+
     /// <summary>
     ///     Получает все фотографии альбома.
     /// </summary>
