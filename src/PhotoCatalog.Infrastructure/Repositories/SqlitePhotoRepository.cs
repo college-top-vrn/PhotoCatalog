@@ -19,7 +19,7 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// <summary>
 ///     Реализация репозитория для работы с фотографиями в SQLite с использованием Dapper.
 /// </summary>
-public class SqlitePhotoRepository : IPhotoRepository
+public class SqlitePhotoRepository : IPhotoCommandRepository
 {
     private readonly SqliteUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
