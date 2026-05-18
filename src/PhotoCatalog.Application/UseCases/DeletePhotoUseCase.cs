@@ -17,7 +17,8 @@ namespace PhotoCatalog.Application.UseCases;
 /// <param name="unitOfWork">единица работы.</param>
 /// <param name="logger">логгер.</param>
 public class DeletePhotoUseCase(
-    IPhotoRepository photoRepository,
+    IPhotoQueryRepository photoQueryRepository,
+    IPhotoCommandRepository photoCommandRepository,
     IFileStorage fileStorage,
     IUnitOfWork unitOfWork,
     ILogger<DeletePhotoUseCase> logger)
@@ -32,13 +33,13 @@ public class DeletePhotoUseCase(
     /// </returns>
     public ResultVoid Execute(int photoId)
     {
-        Result<Photo>? photo = photoRepository.GetById(photoId)
+        Result<Photo>? photo = photoQueryRepository.GetById(photoId)
             .ToResult(ApplicationErrors.General.NotFound)
             .Value;
 
         unitOfWork.BeginTransaction();
 
-        photoRepository.Delete(photoId);
+        photoCommandRepository.Delete(photoId);
 
         if (unitOfWork.Commit().IsSuccess)
         {
