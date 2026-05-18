@@ -20,12 +20,6 @@ public class FakeFolderCommandRepository : IFolderCommandRepository
     /// <inheritdoc />
     public ResultVoid Add(Folder folder)
     {
-        if (folder is null)
-        {
-            return ResultVoid.Failure(new Error("FolderRepository.CantAddFolder",
-                "Не удалось добавить папку"));
-        }
-
         _lastId += 1;
 
         _folders.TryAdd(_lastId, folder);
@@ -36,12 +30,6 @@ public class FakeFolderCommandRepository : IFolderCommandRepository
     /// <inheritdoc />
     public ResultVoid Add(Folder folder, int id)
     {
-        if (folder is null)
-        {
-            return ResultVoid.Failure(new Error("FolderRepository.FolderIsNull",
-                "Папка является null"));
-        }
-
         if (_folders.TryAdd(id, folder).ToResult().IsFailure)
         {
             return ResultVoid
@@ -55,12 +43,6 @@ public class FakeFolderCommandRepository : IFolderCommandRepository
     /// <inheritdoc />
     public ResultVoid Update(Folder folder)
     {
-        if (folder is null)
-        {
-            return ResultVoid.Failure(new Error("FolderRepository.FolderIsNull",
-                "Папка является null"));
-        }
-
         ResultVoid deleteResult = Delete(folder.Id);
 
         if (deleteResult.IsFailure)
