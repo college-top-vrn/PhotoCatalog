@@ -34,4 +34,13 @@ public interface IAlbumQueryRepository
     ///     Ошибка: ConnectionFailed — проблема с БД.
     /// </returns>
     Result<IReadOnlyCollection<Album>> GetByFolderId(int folderId);
+
+    /// <summary>
+    ///     Получает все альбомы в системе.
+    /// </summary>
+    /// <returns>
+    ///     Успех: коллекция всех альбомов (может быть пустой).
+    ///     Ошибка: ConnectionFailed — проблема с БД.
+    /// </returns>
+    Result<IReadOnlyCollection<Album>> GetAll();
 }

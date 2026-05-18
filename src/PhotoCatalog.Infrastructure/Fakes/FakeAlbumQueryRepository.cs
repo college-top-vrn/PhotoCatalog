@@ -51,4 +51,19 @@ public class FakeAlbumQueryRepository : IAlbumQueryRepository
 
         return Result<IReadOnlyCollection<Album>>.Success(albums.AsReadOnly());
     }
+
+    /// <summary>
+    ///     Получает все альбомы в системе.
+    /// </summary>
+    /// <returns>
+    ///     Успех: коллекция всех альбомов (может быть пустой).
+    /// </returns>
+    public Result<IReadOnlyCollection<Album>> GetAll()
+    {
+        List<Album> albums = _albums.Values
+            .Select(album => album.DeepCopy())
+            .ToList();
+
+        return Result<IReadOnlyCollection<Album>>.Success(albums.AsReadOnly());
+    }
 }
