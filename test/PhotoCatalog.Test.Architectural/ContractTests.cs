@@ -19,10 +19,11 @@ public class ContractTests
     // TODO: Добавить в загрузку необходимые классы из Infrastructure, когда они появятся
     private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
-            typeof(IPhotoRepository).Assembly,
+            typeof(IPhotoCommandRepository).Assembly,
             typeof(IAlbumRepository).Assembly,
             typeof(IFolderRepository).Assembly,
-            typeof(ITagRepository).Assembly
+            typeof(ITagQueryRepository).Assembly,
+            typeof(ITagCommandRepository).Assembly
         ).Build();
 
     /// <summary>

@@ -13,7 +13,7 @@ namespace PhotoCatalog.Application.UseCases;
 /// </summary>
 public class AddPhotoToAlbumUseCase(
     IAlbumRepository albumRepository,
-    IPhotoRepository photoRepository,
+    IPhotoQueryRepository photoQueryRepository,
     IUnitOfWork unitOfWork,
     ILogger logger)
 {
@@ -28,7 +28,7 @@ public class AddPhotoToAlbumUseCase(
     public ResultVoid Execute(int albumId, int photoId)
     {
         _logger.Information("Запуск процесса добавления фото {PhotoId} в альбом {AlbumId}", photoId, albumId);
-        return photoRepository.GetById(photoId)
+        return photoQueryRepository.GetById(photoId)
             .OnSuccess(_ =>
                 _logger.Information("Фото {PhotoId} найдено", photoId))
             .OnFailure(_ =>

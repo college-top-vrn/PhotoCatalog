@@ -26,7 +26,7 @@ public partial class NamingConventions
 {
     private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
-            typeof(IPhotoRepository).Assembly
+            typeof(IPhotoCommandRepository).Assembly
         ).Build();
 
     /// <summary>

@@ -57,8 +57,8 @@ public class SqliteFolderRepository(string connectionString, ILogger logger) : I
             IEnumerable<Folder> enumerableFolders = folders.ToList();
 
             return enumerableFolders.Any()
-                ? Result.Failure<IEnumerable<Folder>>(InfrastructureErrors.Database.NotFound)
-                : Result.Success(enumerableFolders);
+                ? Result.Success(enumerableFolders)
+                : Result.Failure<IEnumerable<Folder>>(InfrastructureErrors.Database.NotFound);
         }
         catch (SqliteException ex)
         {

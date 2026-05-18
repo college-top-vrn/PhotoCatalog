@@ -19,7 +19,7 @@ public class RepositoriesNameСonvention
 {
     private static readonly Architecture Architecture = new ArchLoader()
         .LoadAssemblies(
-            typeof(IPhotoRepository).Assembly,
+            typeof(IPhotoCommandRepository).Assembly,
             typeof(SqliteAlbumRepository).Assembly,
             typeof(SqliteFolderRepository).Assembly
         ).Build();
