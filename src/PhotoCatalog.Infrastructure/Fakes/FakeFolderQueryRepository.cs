@@ -20,7 +20,8 @@ public class FakeFolderQueryRepository : IFolderQueryRepository
     ///     Идентификатор последнего элемента.
     /// </summary>
     private int _lastId;
-    
+
+    /// <inheritdoc />
     public Result<Folder> GetById(int id)
     {
         foreach (KeyValuePair<int, Folder> pair in _folders)
@@ -35,6 +36,7 @@ public class FakeFolderQueryRepository : IFolderQueryRepository
             "Не удалось найти папку по идентификатору"));
     }
 
+    /// <inheritdoc />
     public Result<IEnumerable<Folder>> GetAllFolders()
     {
         if (_folders.IsEmpty)
