@@ -12,7 +12,7 @@ namespace PhotoCatalog.Infrastructure.Fakes;
 ///     Репозиторий тегов, имитирующий БД, и хранящий данные в оперативной памяти.
 ///     Только для изменения.
 /// </summary>
-public class FakeTagCommandRepository: ITagCommandRepository
+public class FakeTagCommandRepository : ITagCommandRepository
 {
     /// <summary>
     ///     Словарь тегов.
@@ -29,7 +29,7 @@ public class FakeTagCommandRepository: ITagCommandRepository
     public ResultVoid Add(Tag tag)
     {
         _lastId += 1;
-        
+
         if (_tags.TryAdd(_lastId, tag))
         {
             return ResultVoid.Success();
@@ -47,9 +47,9 @@ public class FakeTagCommandRepository: ITagCommandRepository
         {
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
-        
+
         _tags[tag.Id] = tag;
-        
+
         return ResultVoid.Success();
     }
 

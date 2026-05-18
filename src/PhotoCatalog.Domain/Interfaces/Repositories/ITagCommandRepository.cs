@@ -23,7 +23,7 @@ public interface ITagCommandRepository
     /// <param name="tag">Обновленный тег.</param>
     /// <returns>Результат обновления тега.</returns>
     ResultVoid Update(Tag tag);
-    
+
     /// <summary>
     ///     Удаляет тег из системы по его идентификатору.
     /// </summary>

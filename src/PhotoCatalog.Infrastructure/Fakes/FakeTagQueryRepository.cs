@@ -19,7 +19,7 @@ public class FakeTagQueryRepository : ITagQueryRepository
     ///     Словарь тегов.
     /// </summary>
     private readonly IReadOnlyDictionary<int, Tag> _tags = new ConcurrentDictionary<int, Tag>();
-    
+
     /// <inheritdoc />
     public Result<Tag> GetById(int id)
     {
@@ -44,7 +44,7 @@ public class FakeTagQueryRepository : ITagQueryRepository
             ? Result<IEnumerable<Tag>>.Failure(InfrastructureErrors.Database.NotFound)
             : Result<IEnumerable<Tag>>.Success(result);
     }
-    
+
     /// <inheritdoc />
     public Result<Tag> GetByName(string name)
     {

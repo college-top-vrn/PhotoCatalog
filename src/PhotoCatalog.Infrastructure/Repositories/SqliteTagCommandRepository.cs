@@ -21,7 +21,7 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// </summary>
 /// <param name="connectionString">Строка подключения к базе данных.</param>
 /// <param name="logger">Логгер для записи диагностических сообщений и ошибок.</param>
-public class SqliteTagCommandRepository(string connectionString, ILogger logger): ITagCommandRepository
+public class SqliteTagCommandRepository(string connectionString, ILogger logger) : ITagCommandRepository
 {
     /// <inheritdoc />
     public ResultVoid Add(Tag tag)
