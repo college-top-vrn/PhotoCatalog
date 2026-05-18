@@ -51,12 +51,6 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     /// <inheritdoc />
     public ResultVoid Update(Photo photo)
     {
-        if (photo is null)
-        {
-            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
-                "Фото является null"));
-        }
-
         ResultVoid deleteResult = Delete(photo.Id);
 
         if (deleteResult.IsFailure)
@@ -90,7 +84,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     /// <param name="photo">фотография.</param>
     /// <param name="id">идентификатор альбома</param>
     /// <returns></returns>
-    private ResultVoid Add(Photo? photo, int id)
+    private ResultVoid Add(Photo photo, int id)
     {
         if (photo is null)
         {
