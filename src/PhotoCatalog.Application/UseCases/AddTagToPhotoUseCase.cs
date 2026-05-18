@@ -12,12 +12,13 @@ namespace PhotoCatalog.Application.UseCases;
 /// <summary>
 ///     Сценарий использования для добавления тега к фото.
 /// </summary>
-/// <param name="tagRepository">Репозиторий тегов.</param>
-/// <param name="photoRepository">Репозиторий фото.</param>
+/// <param name="tagQueryRepository">Репозиторий тегов для получения данных.</param>
+/// <param name="photoQueryRepository">Репозиторий фото для получения.</param>
+/// <param name="photoCommandRepository">Репозиторий фото для записи.</param>
 /// <param name="unitOfWork">Едиинца работы.</param>
 /// <param name="logger">Логгер.</param>
 public class AddTagToPhotoUseCase(
-    ITagRepository tagRepository,
+    ITagQueryRepository tagQueryRepository,
     IPhotoQueryRepository photoQueryRepository,
     IPhotoCommandRepository photoCommandRepository,
     IUnitOfWork unitOfWork,
@@ -33,7 +34,7 @@ public class AddTagToPhotoUseCase(
     public ResultVoid Execute(int photoId, int tagId)
     {
         Photo? photoToUpdate = null;
-        return tagRepository.GetById(tagId)
+        return tagQueryRepository.GetById(tagId)
             .OnSuccess(_ =>
                 logger.Information("Тег {TagId} найден.", tagId))
             .OnFailure(error =>

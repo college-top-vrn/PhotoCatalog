@@ -22,7 +22,8 @@ public class ContractTests
             typeof(IPhotoCommandRepository).Assembly,
             typeof(IAlbumRepository).Assembly,
             typeof(IFolderRepository).Assembly,
-            typeof(ITagRepository).Assembly
+            typeof(ITagQueryRepository).Assembly,
+            typeof(ITagCommandRepository).Assembly
         ).Build();
 
     /// <summary>

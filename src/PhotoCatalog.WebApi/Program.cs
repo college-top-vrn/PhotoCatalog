@@ -42,7 +42,8 @@ try
     builder.Services.AddSingleton<IFolderRepository, FakeFolderRepository>();
     builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoRepository>();
     builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
-    builder.Services.AddSingleton<ITagRepository, FakeTagRepository>();
+    builder.Services.AddSingleton<ITagQueryRepository, FakeTagQueryRepository>();
+    builder.Services.AddSingleton<ITagCommandRepository, FakeTagCommandRepository>();
 
     builder.Services.AddSingleton<IFileStorage, FakeFileStorage>();
     builder.Services.AddSingleton<IFileMetadataExtractor, FakeFileMetadataExtractor>();
@@ -77,7 +78,7 @@ try
 
     app.MapGet("/{id}", (int id) =>
     {
-        FakeTagRepository repository = new();
+        FakeTagQueryRepository repository = new();
         Result<Tag> tag = repository.GetById(id);
         if (tag.IsSuccess)
         {
@@ -89,7 +90,7 @@ try
 
     app.MapPost("/{name}", (string name) =>
     {
-        FakeTagRepository repository = new();
+        FakeTagQueryRepository repository = new();
         Result<Tag> tag = repository.GetByName(name);
         if (tag.IsSuccess)
         {
@@ -101,7 +102,7 @@ try
 
     app.MapDelete("/{id}", (int id) =>
     {
-        FakeTagRepository repository = new();
+        FakeTagCommandRepository repository = new();
         ResultVoid tag = repository.Delete(id);
         if (tag.IsSuccess)
         {
