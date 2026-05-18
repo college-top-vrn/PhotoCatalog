@@ -18,7 +18,7 @@ public class FakeFolderCommandRepository : IFolderCommandRepository
     private int _lastId;
     
     /// <inheritdoc />
-    public ResultVoid Add(Folder? folder)
+    public ResultVoid Add(Folder folder)
     {
         if (folder is null)
         {
@@ -34,7 +34,7 @@ public class FakeFolderCommandRepository : IFolderCommandRepository
     }
 
     /// <inheritdoc />
-    public ResultVoid Add(Folder? folder, int id)
+    public ResultVoid Add(Folder folder, int id)
     {
         if (folder is null)
         {

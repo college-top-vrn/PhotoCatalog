@@ -24,7 +24,7 @@ public interface IFolderCommandRepository
     ///         </item>
     ///     </list>
     /// </returns>
-    ResultVoid Add(Folder? folder);
+    ResultVoid Add(Folder folder);
 
     /// <summary>
     ///     Добавляет новую папку в репозиторий.
@@ -42,7 +42,7 @@ public interface IFolderCommandRepository
     ///         </item>
     ///     </list>
     /// </returns>
-    ResultVoid Add(Folder? folder, int id);
+    ResultVoid Add(Folder folder, int id);
 
     /// <summary>
     ///     Обновляет существующую папку.
