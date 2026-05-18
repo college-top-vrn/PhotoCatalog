@@ -17,11 +17,12 @@ public class AddPhotoToAlbumUseCase
 {
     private readonly IAlbumQueryRepository _albumQueryRepository;
     private readonly IAlbumCommandRepository _albumCommandRepository;
-    private readonly IPhotoRepository _photoRepository;
+    private readonly IAlbumRepository _albumRepository;
+    private readonly IPhotoQueryRepository _photoRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
 
-    public AddPhotoToAlbumUseCase(IAlbumQueryRepository albumQueryRepository, IAlbumCommandRepository albumCommandRepository, IPhotoRepository photoRepository,
+    public AddPhotoToAlbumUseCase(IAlbumQueryRepository albumQueryRepository, IAlbumCommandRepository albumCommandRepository, IPhotoQueryRepository photoRepository,
         IUnitOfWork unitOfWork, ILogger logger)
     {
         _albumQueryRepository = albumQueryRepository;

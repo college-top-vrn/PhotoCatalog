@@ -40,10 +40,11 @@ try
     builder.Services.AddHealthChecks();
 
     builder.Services.AddSingleton<IFolderRepository, FakeFolderRepository>();
-    builder.Services.AddSingleton<IPhotoRepository, FakePhotoRepository>();
+    builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoCommandRepository>();
+    builder.Services.AddSingleton<ITagQueryRepository, FakeTagQueryRepository>();
+    builder.Services.AddSingleton<ITagCommandRepository, FakeTagCommandRepository>();
     builder.Services.AddSingleton<IAlbumQueryRepository, FakeAlbumQueryRepository>();
     builder.Services.AddSingleton<IAlbumCommandRepository, FakeAlbumCommandRepository>();
-    builder.Services.AddSingleton<ITagRepository, FakeTagRepository>();
 
     builder.Services.AddSingleton<IFileStorage, FakeFileStorage>();
     builder.Services.AddSingleton<IFileMetadataExtractor, FakeFileMetadataExtractor>();
@@ -78,7 +79,7 @@ try
 
     app.MapGet("/{id}", (int id) =>
     {
-        FakeTagRepository repository = new();
+        FakeTagQueryRepository repository = new();
         Result<Tag> tag = repository.GetById(id);
         if (tag.IsSuccess)
         {
@@ -90,7 +91,7 @@ try
 
     app.MapPost("/{name}", (string name) =>
     {
-        FakeTagRepository repository = new();
+        FakeTagQueryRepository repository = new();
         Result<Tag> tag = repository.GetByName(name);
         if (tag.IsSuccess)
         {
@@ -102,7 +103,7 @@ try
 
     app.MapDelete("/{id}", (int id) =>
     {
-        FakeTagRepository repository = new();
+        FakeTagCommandRepository repository = new();
         ResultVoid tag = repository.Delete(id);
         if (tag.IsSuccess)
         {
@@ -125,39 +126,39 @@ try
     albumEndpointsGroup.MapPost("/", (AlbumResponse album, IAlbumCommandRepository albumCommandRepository) => albumCommandRepository
         .Add(Album.Create(album.Name, album.Id).Value!)
         .ToHttpResult());
-
-    albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",
-        (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>
-        {
-            Result<Photo> searchResult = photoRepository.GetById(photoId);
-
-            if (searchResult.IsFailure)
-            {
-                return searchResult.Error.ToHttpResult();
-            }
-
-            return albumQueryRepository
-                .AddPhoto(albumId, photoId)
-                .ToHttpResult();
-        });
-
-    albumEndpointsGroup.MapDelete("/{albumId:int}/photos/{photoId:int}",
-        (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>
-        {
-            Result<Photo> searchResult = photoRepository.GetById(photoId);
-
-            if (searchResult.IsFailure)
-            {
-                return searchResult.Error.ToHttpResult();
-            }
-
-            return albumQueryRepository
-                .DeletePhoto(albumId, photoId)
-                .ToHttpResult();
-        });
-
-    albumEndpointsGroup.MapDelete("/{id:int}",
-        (int id, IAlbumCommandRepository albumCommandRepository) => albumCommandRepository.Delete(id).ToHttpResult());
+    // TODO исправить код
+    // albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",
+    //     (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>
+    //     {
+    //         Result<Photo> searchResult = photoRepository.GetById(photoId);
+    //
+    //         if (searchResult.IsFailure)
+    //         {
+    //             return searchResult.Error.ToHttpResult();
+    //         }
+    //
+    //         return albumQueryRepository
+    //             .AddPhoto(albumId, photoId)
+    //             .ToHttpResult();
+    //     });
+    //
+    // albumEndpointsGroup.MapDelete("/{albumId:int}/photos/{photoId:int}",
+    //     (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>
+    //     {
+    //         Result<Photo> searchResult = photoRepository.GetById(photoId);
+    //
+    //         if (searchResult.IsFailure)
+    //         {
+    //             return searchResult.Error.ToHttpResult();
+    //         }
+    //
+    //         return albumQueryRepository
+    //             .DeletePhoto(albumId, photoId)
+    //             .ToHttpResult();
+    //     });
+    //
+    // albumEndpointsGroup.MapDelete("/{id:int}",
+    //     (int id, IAlbumCommandRepository albumCommandRepository) => albumCommandRepository.Delete(id).ToHttpResult());
 
     app.Run();
 }

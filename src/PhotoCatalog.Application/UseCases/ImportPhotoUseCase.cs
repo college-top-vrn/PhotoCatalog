@@ -24,7 +24,7 @@ public class ImportPhotoUseCase
     private readonly IFileStorage _fileStorage;
     private readonly ILogger<ImportPhotoUseCase> _logger;
     private readonly IFileMetadataExtractor _metadataExtractor;
-    private readonly IPhotoRepository _photoRepository;
+    private readonly IPhotoCommandRepository _photoRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     /// <summary>
@@ -32,19 +32,19 @@ public class ImportPhotoUseCase
     /// </summary>
     /// <param name="fileStorage">Сервис для работы с файловой системой.</param>
     /// <param name="metadataExtractor">Сервис для извлечения метаданных файла.</param>
-    /// <param name="photoRepository">Репозиторий для работы с сущностями Photo.</param>
+    /// <param name="photoCommandRepository">Репозиторий для работы с сущностями Photo.</param>
     /// <param name="unitOfWork">Контракт для управления транзакциями.</param>
     /// <param name="logger">Сервис для логирования.</param>
     public ImportPhotoUseCase(
         IFileStorage fileStorage,
         IFileMetadataExtractor metadataExtractor,
-        IPhotoRepository photoRepository,
+        IPhotoCommandRepository photoCommandRepository,
         IUnitOfWork unitOfWork,
         ILogger<ImportPhotoUseCase> logger)
     {
         _fileStorage = fileStorage;
         _metadataExtractor = metadataExtractor;
-        _photoRepository = photoRepository;
+        _photoRepository = photoCommandRepository;
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
