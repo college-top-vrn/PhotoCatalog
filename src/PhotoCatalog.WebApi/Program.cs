@@ -40,10 +40,11 @@ try
     builder.Services.AddHealthChecks();
 
     builder.Services.AddSingleton<IFolderRepository, FakeFolderRepository>();
-    builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoRepository>();
-    builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
+    builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoCommandRepository>();
     builder.Services.AddSingleton<ITagQueryRepository, FakeTagQueryRepository>();
     builder.Services.AddSingleton<ITagCommandRepository, FakeTagCommandRepository>();
+    builder.Services.AddSingleton<IAlbumQueryRepository, FakeAlbumQueryRepository>();
+    builder.Services.AddSingleton<IAlbumCommandRepository, FakeAlbumCommandRepository>();
 
     builder.Services.AddSingleton<IFileStorage, FakeFileStorage>();
     builder.Services.AddSingleton<IFileMetadataExtractor, FakeFileMetadataExtractor>();
@@ -117,47 +118,47 @@ try
 
     RouteGroupBuilder albumEndpointsGroup = app.MapGroup("/api/albums").WithTags("Альбомы");
 
-    albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId, IAlbumRepository albumRepository) =>
-        albumRepository
+    albumEndpointsGroup.MapGet("/{folderId:int}/albums", (int folderId, IAlbumQueryRepository albumQueryRepository) =>
+        albumQueryRepository
             .GetByFolderId(folderId)
             .ToHttpResult());
 
-    albumEndpointsGroup.MapPost("/", (AlbumResponse album, IAlbumRepository albumRepository) => albumRepository
+    albumEndpointsGroup.MapPost("/", (AlbumResponse album, IAlbumCommandRepository albumCommandRepository) => albumCommandRepository
         .Add(Album.Create(album.Name, album.Id).Value!)
         .ToHttpResult());
-
-    albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",
-        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoCRepository photoRepository) =>
-        {
-            Result<Photo> searchResult = photoRepository.GetById(photoId);
-
-            if (searchResult.IsFailure)
-            {
-                return searchResult.Error.ToHttpResult();
-            }
-
-            return albumRepository
-                .AddPhoto(albumId, photoId)
-                .ToHttpResult();
-        });
-
-    albumEndpointsGroup.MapDelete("/{albumId:int}/photos/{photoId:int}",
-        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoRepository photoRepository) =>
-        {
-            Result<Photo> searchResult = photoRepository.GetById(photoId);
-
-            if (searchResult.IsFailure)
-            {
-                return searchResult.Error.ToHttpResult();
-            }
-
-            return albumRepository
-                .DeletePhoto(albumId, photoId)
-                .ToHttpResult();
-        });
-
-    albumEndpointsGroup.MapDelete("/{id:int}",
-        (int id, IAlbumRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+    // TODO исправить код
+    // albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",
+    //     (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>
+    //     {
+    //         Result<Photo> searchResult = photoRepository.GetById(photoId);
+    //
+    //         if (searchResult.IsFailure)
+    //         {
+    //             return searchResult.Error.ToHttpResult();
+    //         }
+    //
+    //         return albumQueryRepository
+    //             .AddPhoto(albumId, photoId)
+    //             .ToHttpResult();
+    //     });
+    //
+    // albumEndpointsGroup.MapDelete("/{albumId:int}/photos/{photoId:int}",
+    //     (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>
+    //     {
+    //         Result<Photo> searchResult = photoRepository.GetById(photoId);
+    //
+    //         if (searchResult.IsFailure)
+    //         {
+    //             return searchResult.Error.ToHttpResult();
+    //         }
+    //
+    //         return albumQueryRepository
+    //             .DeletePhoto(albumId, photoId)
+    //             .ToHttpResult();
+    //     });
+    //
+    // albumEndpointsGroup.MapDelete("/{id:int}",
+    //     (int id, IAlbumCommandRepository albumCommandRepository) => albumCommandRepository.Delete(id).ToHttpResult());
 
     app.Run();
 }
