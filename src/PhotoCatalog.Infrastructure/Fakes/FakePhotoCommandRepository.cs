@@ -96,6 +96,12 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
         return ResultVoid.Success();
     }
 
+    /// <summary>
+    /// Добавление фото с альбомом.
+    /// </summary>
+    /// <param name="photo">фотография.</param>
+    /// <param name="id">идентификатор альбома</param>
+    /// <returns></returns>
     public ResultVoid Add(Photo? photo, int id)
     {
         if (photo is null)
