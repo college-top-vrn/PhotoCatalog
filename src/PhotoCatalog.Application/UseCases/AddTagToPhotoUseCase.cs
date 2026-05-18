@@ -18,7 +18,8 @@ namespace PhotoCatalog.Application.UseCases;
 /// <param name="logger">Логгер.</param>
 public class AddTagToPhotoUseCase(
     ITagRepository tagRepository,
-    IPhotoRepository photoRepository,
+    IPhotoQueryRepository photoQueryRepository,
+    IPhotoCommandRepository photoCommandRepository,
     IUnitOfWork unitOfWork,
     ILogger logger)
 {
@@ -41,7 +42,7 @@ public class AddTagToPhotoUseCase(
                     tagId))
             .ToResult()
             .Then(_ =>
-                photoRepository.GetById(photoId))
+                photoQueryRepository.GetById(photoId))
             .OnSuccess(data =>
             {
                 logger.Information("Фото {PhotoId} найдено.", photoId);
@@ -74,7 +75,7 @@ public class AddTagToPhotoUseCase(
                     photoToUpdate != null,
                 ApplicationErrors.General.NotFound)
             .Then(_ =>
-                photoRepository.Update(photoToUpdate!))
+                photoCommandRepository.Update(photoToUpdate!))
             .ToResult()
             .OnSuccess(_ =>
                 logger.Information("Успешно обновлено фото."))
