@@ -1,4 +1,8 @@
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+
 using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 
