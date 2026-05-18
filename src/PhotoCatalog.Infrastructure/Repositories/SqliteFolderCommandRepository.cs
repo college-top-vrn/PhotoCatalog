@@ -39,12 +39,6 @@ public class SqliteFolderCommandRepository(string connectionString, ILogger logg
     }
 
     /// <inheritdoc />
-    public ResultVoid Add(Folder folder, int id)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    /// <inheritdoc />
     public ResultVoid Update(Folder folder)
     {
         try
