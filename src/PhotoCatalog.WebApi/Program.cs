@@ -162,36 +162,31 @@ try
     albumEndpointsGroup.MapDelete("/{id:int}",
         (int id, IAlbumRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
 
-    app.MapGet("/api/photos/{id:int}/thumbnail", (int id, IPhotoQueryRepository photoRepository, IFileStorage fileStorage) =>
-        {
-            var photoResult = photoRepository.GetById(id);
-
-            if (photoResult.IsFailure)
+    app.MapGet("/api/photos/{id:int}/thumbnail",
+            (int id, IPhotoQueryRepository photoRepository, IFileStorage fileStorage) =>
             {
-                if (photoResult.Error.Code == "Photo.NotFound")
+                var photoResult = photoRepository.GetById(id);
+
+                if (photoResult.IsFailure)
                 {
-                    return Results.NotFound(new { error = "Фотография не найдена" });
+                    return photoResult.Error.Code == DomainErrors.Photo.NotFound.Code
+                        ? Results.NotFound()
+                        : Results.StatusCode(500);
                 }
 
-                return Results.StatusCode(500);
-            }
+                var photo = photoResult.Value;
+                var directory = Path.GetDirectoryName(photo.RealPath);
+                var fileName = Path.GetFileNameWithoutExtension(photo.RealPath);
+                var extension = Path.GetExtension(photo.RealPath);
+                var thumbnailPath =
+                    Path.Combine(directory ?? string.Empty, ".thumbnails", $"{fileName}_thumb{extension}");
 
-            var photo = photoResult.Value;
+                var existsResult = fileStorage.FileExists(thumbnailPath);
 
-            var directory = Path.GetDirectoryName(photo.RealPath);
-            var fileName = Path.GetFileNameWithoutExtension(photo.RealPath);
-            var extension = Path.GetExtension(photo.RealPath);
-            var thumbnailPath = Path.Combine(directory ?? string.Empty, ".thumbnails", $"{fileName}_thumb{extension}");
-
-            var existsResult = fileStorage.FileExists(thumbnailPath);
-
-            if (existsResult.IsSuccess && existsResult.Value)
-            {
-                return Results.File(thumbnailPath, "image/jpeg");
-            }
-
-            return Results.File(photo.RealPath, "image/jpeg");
-        })
+                return existsResult.IsSuccess && existsResult.Value
+                    ? Results.File(thumbnailPath, "image/jpeg")
+                    : Results.File(photo.RealPath, "image/jpeg");
+            })
         .WithTags("Фотографии");
 
     app.Run();
