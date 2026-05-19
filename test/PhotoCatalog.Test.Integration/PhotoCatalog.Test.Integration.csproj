@@ -15,7 +15,7 @@
     <PackageReference Include="xunit.runner.visualstudio"/>
     <PackageReference Include="TngTech.ArchUnitNET.xUnit"/>
     <PackageReference Include="NSubstitute"/>
-    <PackageReference Include="Microsoft.Data.Sqlite" />
+    <PackageReference Include="Microsoft.Data.Sqlite"/>
   </ItemGroup>
 
 
@@ -31,10 +31,7 @@
     <None Update="MagicScalerThumbnailServiceTests/landscape_photo.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="SqliteTagCommandQueryRepositoryTest\InitSchemaTest.sql">
+    <None Update="TabelTest\InitSchemaTest.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
