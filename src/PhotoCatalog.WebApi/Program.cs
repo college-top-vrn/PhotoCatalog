@@ -39,7 +39,7 @@ try
     builder.Services.AddSwaggerGen();
     builder.Services.AddHealthChecks();
 
-    builder.Services.AddSingleton<IFolderRepository, FakeFolderRepository>();
+    builder.Services.AddSingleton<IFolderQueryRepository, FakeFolderRepository>();
     builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoRepository>();
     builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
     builder.Services.AddSingleton<ITagQueryRepository, FakeTagQueryRepository>();
@@ -127,7 +127,7 @@ try
         .ToHttpResult());
 
     albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",
-        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoCRepository photoRepository) =>
+        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoQueryRepository photoRepository) =>
         {
             Result<Photo> searchResult = photoRepository.GetById(photoId);
 
@@ -142,7 +142,7 @@ try
         });
 
     albumEndpointsGroup.MapDelete("/{albumId:int}/photos/{photoId:int}",
-        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoRepository photoRepository) =>
+        (int albumId, int photoId, IAlbumRepository albumRepository, IPhotoQueryRepository photoRepository) =>
         {
             Result<Photo> searchResult = photoRepository.GetById(photoId);
 
