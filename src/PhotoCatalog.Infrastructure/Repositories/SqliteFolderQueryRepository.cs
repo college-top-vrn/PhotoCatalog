@@ -15,6 +15,9 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// <inheritdoc />
 public class SqliteFolderQueryRepository : IFolderQueryRepository
 {
+    private readonly SqliteUnitOfWork _unitOfWork;
+    private readonly ILogger<SqliteUnitOfWork> _logger;
+
     /// <summary>
     ///     Создание экземпляра.
     /// </summary>
@@ -28,35 +31,42 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
         _logger = logger;
     }
 
-    private readonly SqliteUnitOfWork _unitOfWork;
-    private readonly ILogger<SqliteUnitOfWork> _logger;
-
     /// <inheritdoc />
     public Result<Folder> GetById(int id)
     {
-        _unitOfWork.BeginTransaction();
+        try
+        {
+            _unitOfWork.BeginTransaction();
 
-        var result = _unitOfWork.Connection!
-            .QueryFirstOrDefault<Folder>(
-                """
-                SELECT Id, ParentFolderId, Name
-                FROM Folders
-                WHERE Id = @Id
-                """,
-                new { Id = id })
-            .ToResult()
-            .Ensure(folder => (
-                    folder is not null),
-                InfrastructureErrors.Database.NotFound)
-            .OnSuccess(_ => _unitOfWork.Commit())
-            .OnFailure(_ =>
-            {
-                _logger.LogError("Ошибка SQLite при получении папки с Id = {FolderId}.", id);
-                _unitOfWork.Rollback();
-            });
+            var foundFolder = _unitOfWork.Connection!
+                .QueryFirstOrDefault<Folder>(
+                    """
+                    SELECT Id, ParentFolderId, Name
+                    FROM Folders
+                    WHERE Id = @Id
+                    """,
+                    new { Id = id });
 
-        _unitOfWork.Dispose();
-
-        return result!;
+            return foundFolder
+                .ToResult(InfrastructureErrors.Database.NotFound)
+                .Finally(
+                    success: _ =>
+                    {
+                        _unitOfWork.Commit();
+                        _unitOfWork.Dispose();
+                        return Result<Folder>.Success(foundFolder);
+                    },
+                    failure: _ =>
+                    {
+                        _unitOfWork.Rollback();
+                        _unitOfWork.Dispose();
+                        return Result<Folder>.Failure(InfrastructureErrors.Database.NotFound);
+                    });
+        }
+        catch (SqliteException)
+        {
+            _logger.LogError("Ошибка SQLite при получении папки с Id = {FolderId}", id);
+            return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
+        }
     }
 }
