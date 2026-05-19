@@ -45,6 +45,8 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
                 """,
                 new { Id = id })
             .ToResult()
-            .Ensure(folder => (folder is not null), InfrastructureErrors.Database.NotFound)!;
+            .Ensure(folder => (
+                    folder is not null),
+                InfrastructureErrors.Database.NotFound)!;
     }
 }
