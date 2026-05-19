@@ -8,7 +8,6 @@ using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Infrastructure.Fakes;
 
-
 /// <summary>
 ///     Репозиторий папок.
 /// </summary>
@@ -23,41 +22,13 @@ public class FakeFolderRepository : IFolderQueryRepository, IFolderCommandReposi
     ///     Идентификатор последнего элемента.
     /// </summary>
     private int _lastId;
-    
-    /// <inheritdoc />
-    public Result<Folder> GetById(int id)
-    {
-        foreach (KeyValuePair<int, Folder> pair in _folders)
-        {
-            if (pair.Key == id)
-            {
-                return Result<Folder>.Success(pair.Value);
-            }
-        }
 
-        return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
-            "Не удалось найти папку по идентификатору"));
-    }
-    
     /// <inheritdoc />
     public ResultVoid Add(Folder folder)
     {
         _lastId += 1;
 
         _folders.TryAdd(_lastId, folder);
-
-        return ResultVoid.Success();
-    }
-
-    /// <inheritdoc />
-    public ResultVoid Add(Folder folder, int id)
-    {
-        if (_folders.TryAdd(id, folder).ToResult().IsFailure)
-        {
-            return ResultVoid
-                .Failure(new Error("FolderRepository.FolderWithSameIdAlreadyExist",
-                    "Папка с похожим идентификатором уже существует"));
-        }
 
         return ResultVoid.Success();
     }
@@ -89,6 +60,34 @@ public class FakeFolderRepository : IFolderQueryRepository, IFolderCommandReposi
         }
 
         _folders.Remove(id, out _);
+
+        return ResultVoid.Success();
+    }
+
+    /// <inheritdoc />
+    public Result<Folder> GetById(int id)
+    {
+        foreach (KeyValuePair<int, Folder> pair in _folders)
+        {
+            if (pair.Key == id)
+            {
+                return Result<Folder>.Success(pair.Value);
+            }
+        }
+
+        return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
+            "Не удалось найти папку по идентификатору"));
+    }
+
+    /// <inheritdoc />
+    public ResultVoid Add(Folder folder, int id)
+    {
+        if (_folders.TryAdd(id, folder).ToResult().IsFailure)
+        {
+            return ResultVoid
+                .Failure(new Error("FolderRepository.FolderWithSameIdAlreadyExist",
+                    "Папка с похожим идентификатором уже существует"));
+        }
 
         return ResultVoid.Success();
     }
