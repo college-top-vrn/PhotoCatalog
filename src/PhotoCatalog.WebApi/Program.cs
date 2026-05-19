@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,7 @@ using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
+using PhotoCatalog.Infrastructure.Services;
 
 using Serilog;
 
@@ -49,6 +51,7 @@ try
     builder.Services.AddSingleton<IFileMetadataExtractor, FakeFileMetadataExtractor>();
     builder.Services.AddSingleton<IFolderHierarchyValidator, FakeFolderHierarchyValidator>();
     builder.Services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
+    builder.Services.AddSingleton<IThumbnailService, ThumbnailService>();
 
     builder.Services.AddTransient<CreateFolderUseCase>();
     builder.Services.AddTransient<DeletePhotoUseCase>();
@@ -158,6 +161,38 @@ try
 
     albumEndpointsGroup.MapDelete("/{id:int}",
         (int id, IAlbumRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+
+    app.MapGet("/api/photos/{id:int}/thumbnail", (int id, IPhotoQueryRepository photoRepository, IFileStorage fileStorage) =>
+        {
+            var photoResult = photoRepository.GetById(id);
+
+            if (photoResult.IsFailure)
+            {
+                if (photoResult.Error.Code == "Photo.NotFound")
+                {
+                    return Results.NotFound(new { error = "Фотография не найдена" });
+                }
+
+                return Results.StatusCode(500);
+            }
+
+            var photo = photoResult.Value;
+
+            var directory = Path.GetDirectoryName(photo.RealPath);
+            var fileName = Path.GetFileNameWithoutExtension(photo.RealPath);
+            var extension = Path.GetExtension(photo.RealPath);
+            var thumbnailPath = Path.Combine(directory ?? string.Empty, ".thumbnails", $"{fileName}_thumb{extension}");
+
+            var existsResult = fileStorage.FileExists(thumbnailPath);
+
+            if (existsResult.IsSuccess && existsResult.Value)
+            {
+                return Results.File(thumbnailPath, "image/jpeg");
+            }
+
+            return Results.File(photo.RealPath, "image/jpeg");
+        })
+        .WithTags("Фотографии");
 
     app.Run();
 }

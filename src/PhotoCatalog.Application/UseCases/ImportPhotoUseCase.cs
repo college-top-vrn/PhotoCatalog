@@ -1,7 +1,5 @@
 using System.IO;
 
-using Microsoft.Extensions.Logging;
-
 using PhotoCatalog.Application.DTOs;
 using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Domain.Entities;
@@ -10,21 +8,20 @@ using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 
+using Serilog;
+
 namespace PhotoCatalog.Application.UseCases;
 
 /// <summary>
 ///     Содержит сценарий оркестрации добавления нового фото в каталог.
+///     Дополнительно генерирует миниатюру изображения (провал не отменяет операцию).
 /// </summary>
-/// <remarks>
-///     UseCase включает работу с файловой системой (копирование, хэш) и базой данных.
-///     Обеспечивает атомарность операции через UnitOfWork и компенсационные механизмы.
-/// </remarks>
 public class ImportPhotoUseCase
 {
     private readonly IFileStorage _fileStorage;
-    private readonly ILogger<ImportPhotoUseCase> _logger;
     private readonly IFileMetadataExtractor _metadataExtractor;
     private readonly IPhotoCommandRepository _photoRepository;
+    private readonly IThumbnailService _thumbnailService;
     private readonly IUnitOfWork _unitOfWork;
 
     /// <summary>
@@ -34,19 +31,19 @@ public class ImportPhotoUseCase
     /// <param name="metadataExtractor">Сервис для извлечения метаданных файла.</param>
     /// <param name="photoCommandRepository">Репозиторий для работы с сущностями Photo.</param>
     /// <param name="unitOfWork">Контракт для управления транзакциями.</param>
-    /// <param name="logger">Сервис для логирования.</param>
+    /// <param name="thumbnailService">Сервис для генерации миниатюр изображений.</param>
     public ImportPhotoUseCase(
         IFileStorage fileStorage,
         IFileMetadataExtractor metadataExtractor,
         IPhotoCommandRepository photoCommandRepository,
         IUnitOfWork unitOfWork,
-        ILogger<ImportPhotoUseCase> logger)
+        IThumbnailService thumbnailService)
     {
         _fileStorage = fileStorage;
         _metadataExtractor = metadataExtractor;
         _photoRepository = photoCommandRepository;
         _unitOfWork = unitOfWork;
-        _logger = logger;
+        _thumbnailService = thumbnailService;
     }
 
     /// <summary>
@@ -62,22 +59,22 @@ public class ImportPhotoUseCase
     /// </returns>
     public Result<PhotoResponse> Execute(ImportPhotoRequest request)
     {
-        _logger.LogInformation("Начало импорта фотографии. Путь: {SourcePath}", request.SourcePath);
+        Log.Information("Начало импорта фотографии. Путь: {SourcePath}", request.SourcePath);
 
         return _fileStorage.FileExists(request.SourcePath)
             .ToResult(ApplicationErrors.Files.FileNotFound)
-            .OnSuccess(_ => _logger.LogInformation("Файл найден: {SourcePath}", request.SourcePath))
-            .OnFailure(_ => _logger.LogWarning("Файл не найден: {SourcePath}", request.SourcePath))
+            .OnSuccess(_ => Log.Information("Файл найден: {SourcePath}", request.SourcePath))
+            .OnFailure(_ => Log.Warning("Файл не найден: {SourcePath}", request.SourcePath))
             .Then(_ => _metadataExtractor.CalculateHash(request.SourcePath))
-            .OnSuccess(hash => _logger.LogDebug("Хэш вычислен: {Hash}", hash))
+            .OnSuccess(hash => Log.Debug("Хэш вычислен: {Hash}", hash))
             .Then(hash => _metadataExtractor.GetDimensions(request.SourcePath)
                 .Transform(dimensions => (hash, dimensions)))
-            .OnSuccess(tuple => _logger.LogDebug("Размеры получены: {Width}x{Height}", tuple.dimensions.Width, tuple.dimensions.Height))
+            .OnSuccess(tuple => Log.Debug("Размеры получены: {Width}x{Height}", tuple.dimensions.Width, tuple.dimensions.Height))
             .Then(tuple => _fileStorage.StoreFile(request.SourcePath, Path.GetFileName(request.SourcePath))
                 .Transform(filePath => (tuple.hash, tuple.dimensions, filePath)))
-            .OnSuccess(tuple => _logger.LogDebug("Файл скопирован: {FilePath}", tuple.filePath))
+            .OnSuccess(tuple => Log.Debug("Файл скопирован: {FilePath}", tuple.filePath))
             .Then(tuple => Photo.Create(tuple.filePath)
-                .OnSuccess(photo => _logger.LogDebug("Сущность Photo создана: {FilePath}", tuple.filePath))
+                .OnSuccess(photo => Log.Debug("Сущность Photo создана: {FilePath}", tuple.filePath))
                 .OnFailure(error => _fileStorage.DeleteFile(tuple.filePath))
                 .Transform(photo => (tuple.hash, tuple.dimensions, photo)))
             .Then(tuple =>
@@ -95,9 +92,14 @@ public class ImportPhotoUseCase
                 .Ensure(commitResult => commitResult.IsSuccess, ApplicationErrors.Transactions.CommitFailed)
                 .Transform(_ => photo))
             .OnSuccess(photo =>
-                _logger.LogInformation("Импорт фотографии успешно завершен. PhotoId: {PhotoId}", photo.Id))
+            {
+                Log.Information("Импорт фотографии успешно завершен. PhotoId: {PhotoId}", photo.Id);
+
+                // Генерация миниатюры после успешной транзакции
+                GenerateThumbnail(photo.RealPath);
+            })
             .OnFailure(error =>
-                _logger.LogError("Ошибка импорта: {ErrorCode} - {ErrorMessage}", error.Code, error.Message))
+                Log.Error("Ошибка импорта: {ErrorCode} - {ErrorMessage}", error.Code, error.Message))
             .Transform(photo => new PhotoResponse(
                 photo.Id,
                 photo.RealPath,
@@ -106,5 +108,39 @@ public class ImportPhotoUseCase
                 photo.Dimensions.Height,
                 photo.AddedAt,
                 photo.TagIds));
+    }
+
+    /// <summary>
+    ///     Генерирует миниатюру для успешно импортированной фотографии.
+    /// </summary>
+    /// <param name="originalFilePath">Путь к оригинальному файлу фотографии.</param>
+    /// <remarks>
+    ///     Провал генерации миниатюры не откатывает операцию импорта.
+    ///     Ошибки логируются как Warning для последующего анализа.
+    /// </remarks>
+    private void GenerateThumbnail(string originalFilePath)
+    {
+        var directory = Path.GetDirectoryName(originalFilePath);
+        var fileName = Path.GetFileNameWithoutExtension(originalFilePath);
+        var extension = Path.GetExtension(originalFilePath);
+
+        var thumbnailDirectory = Path.Combine(directory ?? string.Empty, ".thumbnails");
+        var thumbnailPath = Path.Combine(thumbnailDirectory, $"{fileName}_thumb{extension}");
+
+        var result = _thumbnailService.Generate(originalFilePath, thumbnailPath, 400);
+
+        if (result.IsFailure)
+        {
+            Log.Warning(
+                "Не удалось создать миниатюру для файла {OriginalPath}. " +
+                "Ошибка: {ErrorCode} - {ErrorMessage}. Фронтенд будет использовать оригинальный файл.",
+                originalFilePath,
+                result.Error.Code,
+                result.Error.Message);
+        }
+        else
+        {
+            Log.Debug("Миниатюра успешно создана: {ThumbnailPath}", thumbnailPath);
+        }
     }
 }
