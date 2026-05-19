@@ -29,14 +29,18 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
         SqliteConnectionStringBuilder builder = new() { DataSource = connectionString, Mode = SqliteOpenMode.ReadOnly };
 
         _unitOfWork = new SqliteUnitOfWork(builder.ToString(), logger);
+        _logger = logger;
     }
 
     private readonly SqliteUnitOfWork _unitOfWork;
+    private readonly ILogger<SqliteUnitOfWork> _logger;
 
     /// <inheritdoc />
     public Result<Folder> GetById(int id)
     {
-        return _unitOfWork.Connection!
+        _unitOfWork.BeginTransaction();
+        
+        var result = _unitOfWork.Connection!
             .QueryFirstOrDefault<Folder>(
                 """
                 SELECT Id, ParentFolderId, Name
@@ -47,6 +51,16 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
             .ToResult()
             .Ensure(folder => (
                     folder is not null),
-                InfrastructureErrors.Database.NotFound)!;
+                InfrastructureErrors.Database.NotFound)
+            .OnSuccess(_ => _unitOfWork.Commit())
+            .OnFailure(_ =>
+            {
+                _logger.LogError("Ошибка SQLite при получении папки с Id = {{FolderId}}.");
+                _unitOfWork.Rollback();
+            });
+        
+        _unitOfWork.Dispose();
+
+        return result!;
     }
 }
