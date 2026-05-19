@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 
 using PhotoCatalog.Application.DTOs;
 using PhotoCatalog.Application.DTOs.Folders;
+using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Application.Fakes;
 using PhotoCatalog.Application.UseCases;
 using PhotoCatalog.Domain.Entities;
@@ -129,14 +130,14 @@ try
     {
         if (!request.HasFormContentType)
         {
-            return Results.BadRequest(new { error = "Ожидается multipart/form-data запрос" });
+            return Results.BadRequest(ApplicationErrors.Http.InvalidMultipartRequest);
         }
 
         var file = request.Form.Files.GetFile("file");
 
         if (file == null || file.Length == 0)
         {
-            return Results.BadRequest(new { error = "Файл не загружен или пуст" });
+            return Results.BadRequest(ApplicationErrors.Http.FileNotUploaded);
         }
 
         var tempFilePath = Path.GetTempFileName();
