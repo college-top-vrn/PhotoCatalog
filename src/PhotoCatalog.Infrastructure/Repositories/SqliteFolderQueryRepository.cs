@@ -1,5 +1,3 @@
-using System;
-
 using Dapper;
 
 using Microsoft.Data.Sqlite;
@@ -11,8 +9,6 @@ using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.UnitOfWork;
-
-using ILogger = Serilog.ILogger;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
