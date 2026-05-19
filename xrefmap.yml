@@ -4545,15 +4545,15 @@ references:
   commentId: T:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork
   fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork
   nameWithType: SqliteUnitOfWork
-- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor(System.String,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork})
-  name: SqliteUnitOfWork(string, ILogger<SqliteUnitOfWork>)
-  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__ctor_System_String_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__
-  commentId: M:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor(System.String,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork})
-  name.vb: New(String, ILogger(Of SqliteUnitOfWork))
-  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.SqliteUnitOfWork(string, Microsoft.Extensions.Logging.ILogger<PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork>)
-  fullName.vb: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.New(String, Microsoft.Extensions.Logging.ILogger(Of PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork))
-  nameWithType: SqliteUnitOfWork.SqliteUnitOfWork(string, ILogger<SqliteUnitOfWork>)
-  nameWithType.vb: SqliteUnitOfWork.New(String, ILogger(Of SqliteUnitOfWork))
+- uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor(System.String,Serilog.ILogger)
+  name: SqliteUnitOfWork(string, ILogger)
+  href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__ctor_System_String_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor(System.String,Serilog.ILogger)
+  name.vb: New(String, ILogger)
+  fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.SqliteUnitOfWork(string, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.New(String, Serilog.ILogger)
+  nameWithType: SqliteUnitOfWork.SqliteUnitOfWork(string, ILogger)
+  nameWithType.vb: SqliteUnitOfWork.New(String, ILogger)
 - uid: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor*
   name: SqliteUnitOfWork
   href: api/PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html#PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__ctor_

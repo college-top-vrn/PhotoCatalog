@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork" class="text-break">
-Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L24"><i class="bi bi-code-slash"></i></a>
+Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L25"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -180,9 +180,9 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 
   <a id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__ctor_" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor*"></a>
 
-  <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__ctor_System_String_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor(System.String,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork})">
-  SqliteUnitOfWork(string, ILogger&lt;SqliteUnitOfWork&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork__ctor_System_String_Serilog_ILogger_" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.#ctor(System.String,Serilog.ILogger)">
+  SqliteUnitOfWork(string, ILogger)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L41"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Инициализирует новый экземпляр <a class="xref" href="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html">SqliteUnitOfWork</a>.</p>
@@ -190,7 +190,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SqliteUnitOfWork(string connectionString, ILogger&lt;SqliteUnitOfWork&gt; logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public SqliteUnitOfWork(string connectionString, ILogger logger)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -198,7 +198,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
     <dt><code>connectionString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd><p>Строка подключения к базе данных SQLite.</p>
 </dd>
-    <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html">SqliteUnitOfWork</a>&gt;</dt>
+    <dt><code>logger</code> <span class="xref">ILogger</span></dt>
     <dd><p>Логгер для записи ошибок транзакций.</p>
 </dd>
   </dl>
@@ -228,7 +228,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_BeginTransaction" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.BeginTransaction">
   BeginTransaction()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L66"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Начинает новую транзакцию.</p>
@@ -262,7 +262,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Commit" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Commit">
   Commit()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L103"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Фиксирует все изменения текущей транзакции.</p>
@@ -296,7 +296,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Dispose" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Dispose">
   Dispose()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L201"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Освобождает ресурсы, используемые <a class="xref" href="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html">SqliteUnitOfWork</a>.</p>
@@ -323,7 +323,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Rollback" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback">
   Rollback()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L138"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Отменяет все изменения текущей транзакции.</p>
@@ -357,7 +357,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L24" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L25" class="edit-link">Edit this page</a>
         </div>
 
 
