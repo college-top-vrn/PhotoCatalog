@@ -45,7 +45,8 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
                     FROM Folders
                     WHERE Id = @Id
                     """,
-                    new { Id = id });
+                    new { Id = id }
+                );
 
             return foundFolder
                 .ToResult(InfrastructureErrors.Database.NotFound)
@@ -66,6 +67,8 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
         catch (SqliteException)
         {
             _logger.LogError("Ошибка SQLite при получении папки с Id = {FolderId}", id);
+            _unitOfWork.Rollback();
+            _unitOfWork.Dispose();
             return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
         }
     }
