@@ -25,7 +25,9 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
     /// <inheritdoc />
     public ResultVoid Add(Folder folder)
     {
-        return _unitOfWork.Connection!
+        _unitOfWork.BeginTransaction();
+        
+        var result = _unitOfWork.Connection!
             .Execute(
                 """
                 INSERT INTO Folders (Id, ParentFolderId, Name)
@@ -43,12 +45,18 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                 _logger.LogError("Ошибка SQLite при получении папки с Id = {FolderId}.");
                 _unitOfWork.Rollback();
             });
+        
+        _unitOfWork.Dispose();
+
+        return result;
     }
 
     /// <inheritdoc />
     public ResultVoid Update(Folder folder)
     {
-        return _unitOfWork.Connection!
+        _unitOfWork.BeginTransaction();
+        
+        var result = _unitOfWork.Connection!
             .Execute(
                 """
                 UPDATE Folders
@@ -70,12 +78,18 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                 _logger.LogWarning("Не удалось обновить несуществующую папку с Id = {FolderId}");
                 _unitOfWork.Rollback();
             });
+
+        _unitOfWork.Dispose();
+        
+        return result;
     }
 
     /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
-        return _unitOfWork.Connection!
+        _unitOfWork.BeginTransaction();
+        
+        var result = _unitOfWork.Connection!
             .Execute("DELETE FROM Folders WHERE Id = @Id",
                 new { Id = id })
             .ToResult()
@@ -90,5 +104,9 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                 _logger.LogError("Ошибка SQLite при удалении папки с Id = {FolderId}");
                 _unitOfWork.Rollback();
             });
+        
+        _unitOfWork.Dispose();
+
+        return result;
     }
 }
