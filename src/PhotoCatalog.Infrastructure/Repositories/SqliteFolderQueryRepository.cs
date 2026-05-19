@@ -3,13 +3,16 @@ using System;
 using Dapper;
 
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Logging;
 
 using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
+using PhotoCatalog.Infrastructure.UnitOfWork;
 
-using Serilog;
+using ILogger = Serilog.ILogger;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
@@ -21,43 +24,27 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
     /// </summary>
     /// <param name="connectionString">строка соединения.</param>
     /// <param name="logger">логгер.</param>
-    public SqliteFolderQueryRepository(string connectionString, ILogger logger)
+    public SqliteFolderQueryRepository(string connectionString, ILogger<SqliteUnitOfWork> logger)
     {
         SqliteConnectionStringBuilder builder = new() { DataSource = connectionString, Mode = SqliteOpenMode.ReadOnly };
 
-        _connectionString = builder.ToString();
-        _logger = logger;
+        _unitOfWork = new SqliteUnitOfWork(builder.ToString(), logger);
     }
 
-    private readonly string _connectionString;
-
-    private readonly ILogger _logger;
+    private readonly SqliteUnitOfWork _unitOfWork;
 
     /// <inheritdoc />
     public Result<Folder> GetById(int id)
     {
-        try
-        {
-            using SqliteConnection connection = new(_connectionString);
-
-            connection.Open();
-
-            const string sql = """
-                               SELECT Id, ParentFolderId, Name
-                               FROM Folders
-                               WHERE Id = @Id
-                               """;
-
-            Folder? folder = connection.QueryFirstOrDefault<Folder>(sql, new { Id = id });
-
-            return folder is null
-                ? Result<Folder>.Failure(InfrastructureErrors.Database.NotFound)
-                : Result<Folder>.Success(folder);
-        }
-        catch (SqliteException exception)
-        {
-            _logger.Error(exception, "Ошибка SQLite при получении папки с Id = {FolderId}.", id);
-            return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
-        }
+        return _unitOfWork.Connection!
+            .QueryFirstOrDefault<Folder>(
+                """
+                SELECT Id, ParentFolderId, Name
+                FROM Folders
+                WHERE Id = @Id
+                """,
+                new { Id = id })
+            .ToResult()
+            .Ensure(folder => (folder is not null), InfrastructureErrors.Database.NotFound)!;
     }
 }
