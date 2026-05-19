@@ -55,7 +55,7 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
             .OnSuccess(_ => _unitOfWork.Commit())
             .OnFailure(_ =>
             {
-                _logger.LogError("Ошибка SQLite при получении папки с Id = {{FolderId}}.");
+                _logger.LogError("Ошибка SQLite при получении папки с Id = {FolderId}.", id);
                 _unitOfWork.Rollback();
             });
 
