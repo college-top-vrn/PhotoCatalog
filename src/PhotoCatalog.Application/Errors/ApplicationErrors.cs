@@ -102,4 +102,24 @@ public static class ApplicationErrors
                 "UseCases.SystemFailure",
                 "Произошла системная ошибка при выполнении сценария приложения (UseCase).");
     }
+
+    /// <summary>
+    ///     Ошибки, связанные с HTTP-запросами.
+    /// </summary>
+    public static class Http
+    {
+        /// <summary>
+        ///     Ошибка, когда запрос не соответствует формату multipart/form-data.
+        /// </summary>
+        public static readonly Error InvalidMultipartRequest = new(
+            "Http.InvalidMultipartRequest",
+            "Ожидается multipart/form-data запрос");
+
+        /// <summary>
+        ///     Ошибка, когда файл не загружен или пуст.
+        /// </summary>
+        public static readonly Error FileNotUploaded = new(
+            "Http.FileNotUploaded",
+            "Файл не загружен или пуст");
+    }
 }
