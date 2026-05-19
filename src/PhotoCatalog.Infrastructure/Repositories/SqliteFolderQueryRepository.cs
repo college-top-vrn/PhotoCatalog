@@ -1,7 +1,8 @@
 using Dapper;
 
+using Serilog;
+
 using Microsoft.Data.Sqlite;
-using Microsoft.Extensions.Logging;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
@@ -16,14 +17,14 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 public class SqliteFolderQueryRepository : IFolderQueryRepository
 {
     private readonly SqliteUnitOfWork _unitOfWork;
-    private readonly ILogger<SqliteUnitOfWork> _logger;
+    private readonly ILogger _logger;
 
     /// <summary>
     ///     Создание экземпляра.
     /// </summary>
     /// <param name="connectionString">строка соединения.</param>
     /// <param name="logger">логгер.</param>
-    public SqliteFolderQueryRepository(string connectionString, ILogger<SqliteUnitOfWork> logger)
+    public SqliteFolderQueryRepository(string connectionString, ILogger logger)
     {
         SqliteConnectionStringBuilder builder = new() { DataSource = connectionString, Mode = SqliteOpenMode.ReadOnly };
 
@@ -66,7 +67,7 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
         }
         catch (SqliteException)
         {
-            _logger.LogError("Ошибка SQLite при получении папки с Id = {FolderId}", id);
+            _logger.Error("Ошибка SQLite при получении папки с Id = {FolderId}", id);
             _unitOfWork.Rollback();
             _unitOfWork.Dispose();
             return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
