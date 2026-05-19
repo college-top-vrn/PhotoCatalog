@@ -8,8 +8,11 @@ using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Infrastructure.Fakes;
 
-/// <inheritdoc />
-public class FakeFolderCommandRepository : IFolderCommandRepository
+
+/// <summary>
+///     Репозиторий папок.
+/// </summary>
+public class FakeFolderRepository : IFolderQueryRepository, IFolderCommandRepository
 {
     /// <summary>
     ///     Словарь папок.
@@ -20,6 +23,21 @@ public class FakeFolderCommandRepository : IFolderCommandRepository
     ///     Идентификатор последнего элемента.
     /// </summary>
     private int _lastId;
+    
+    /// <inheritdoc />
+    public Result<Folder> GetById(int id)
+    {
+        foreach (KeyValuePair<int, Folder> pair in _folders)
+        {
+            if (pair.Key == id)
+            {
+                return Result<Folder>.Success(pair.Value);
+            }
+        }
+
+        return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
+            "Не удалось найти папку по идентификатору"));
+    }
     
     /// <inheritdoc />
     public ResultVoid Add(Folder folder)

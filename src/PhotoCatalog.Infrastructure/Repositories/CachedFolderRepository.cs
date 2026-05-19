@@ -22,11 +22,15 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 ///     Ошибки, возвращённые внутренним репозиторием, не попадают в кэш благодаря выбрасыванию
 ///     <see cref="CacheBypassException" />.
 /// </summary>
-/// <param name="innerRepository">Оригинальный репозиторий, выполняющий реальные запросы к базе данных.</param>
+/// <param name="innerQueryRepository">Оригинальный репозиторий, выполняющий реальные запросы к базе данных.</param>
 /// <param name="cache">Сервис гибридного кэширования.</param>
 /// <param name="logger">Логгер для записи событий работы декоратора.</param>
-public class CachedFolderRepository(IFolderRepository innerRepository, HybridCache cache, ILogger logger)
-    : IFolderRepository
+public class CachedFolderRepository(
+    IFolderQueryRepository innerQueryRepository,
+    IFolderCommandRepository innerCommandRepository,
+    HybridCache cache,
+    ILogger logger)
+    : IFolderQueryRepository, IFolderCommandRepository
 {
     /// <inheritdoc />
     /// <remarks>
@@ -61,47 +65,21 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
     }
 
     /// <inheritdoc />
-    public Result<IEnumerable<Folder>> GetAllFolders()
-    {
-        try
-        {
-            IEnumerable<Folder>? folders = cache.GetOrCreateAsync<IEnumerable<Folder>?>(
-                CacheKeysFactory.GetFoldersTreeKey(),
-                _ => GetAllFoldersValueTask(),
-                null,
-                [CacheKeysFactory.GetFoldersTreeTag()]
-            ).AsTask().GetAwaiter().GetResult();
-
-            return Result<IEnumerable<Folder>>.Success(folders!);
-        }
-        catch (CacheBypassException ex)
-        {
-            logger.Warning(ex, "Не удалось получить список папок из внутреннего репозитория – результат не кэширован");
-            return Result<IEnumerable<Folder>>.Failure(InfrastructureErrors.Database.Sqlite);
-        }
-        catch (Exception ex)
-        {
-            logger.Error(ex, "Непредвиденная ошибка при получении списка папок из кэша");
-            return Result<IEnumerable<Folder>>.Failure(InfrastructureErrors.Cache.UnknownError);
-        }
-    }
-
-    /// <inheritdoc />
     public ResultVoid Add(Folder folder)
     {
-        return UpdateAndInvalidate(() => innerRepository.Add(folder), folder.Id);
+        return UpdateAndInvalidate(() => innerCommandRepository.Add(folder), folder.Id);
     }
 
     /// <inheritdoc />
     public ResultVoid Update(Folder folder)
     {
-        return UpdateAndInvalidate(() => innerRepository.Update(folder), folder.Id);
+        return UpdateAndInvalidate(() => innerCommandRepository.Update(folder), folder.Id);
     }
 
     /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
-        return UpdateAndInvalidate(() => innerRepository.Delete(id), id);
+        return UpdateAndInvalidate(() => innerCommandRepository.Delete(id), id);
     }
 
     /// <summary>
@@ -149,7 +127,7 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
     /// </summary>
     private ValueTask<Folder?> GetFolderByIdValueTask(int id)
     {
-        Result<Folder> result = innerRepository.GetById(id);
+        Result<Folder> result = innerQueryRepository.GetById(id);
         if (!result.IsFailure)
         {
             return new ValueTask<Folder?>(result.Value);
@@ -158,21 +136,5 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
         logger.Warning("Папка с Id={FolderId} не получена: {ErrorCode} {ErrorMessage}",
             id, result.Error.Code, result.Error.Message);
         throw new CacheBypassException($"Папка с Id={id} не найдена или ошибка БД.");
-    }
-
-    /// <summary>
-    ///     Синхронно получает все папки и оборачивает результат в ValueTask.
-    /// </summary>
-    private ValueTask<IEnumerable<Folder>?> GetAllFoldersValueTask()
-    {
-        Result<IEnumerable<Folder>> result = innerRepository.GetAllFolders();
-        if (!result.IsFailure)
-        {
-            return new ValueTask<IEnumerable<Folder>?>(result.Value);
-        }
-
-        logger.Warning("Не удалось получить список всех папок: {ErrorCode} {ErrorMessage}",
-            result.Error.Code, result.Error.Message);
-        throw new CacheBypassException("Не удалось получить список всех папок.");
     }
 }

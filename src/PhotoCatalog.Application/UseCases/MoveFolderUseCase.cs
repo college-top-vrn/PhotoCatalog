@@ -12,12 +12,13 @@ namespace PhotoCatalog.Application.UseCases;
 /// <summary>
 ///     Сценарий использования для перемещения папки.
 /// </summary>
-/// <param name="folderRepository">Репозиторий папок.</param>
+/// <param name="folderQueryRepository">Репозиторий папок.</param>
 /// <param name="folderHierarchyValidator">Валидатор иерархии папок.</param>
 /// <param name="unitOfWork">Единица работы.</param>
 /// <param name="logger">Логгер.</param>
 public class MoveFolderUseCase(
-    IFolderRepository folderRepository,
+    IFolderQueryRepository folderQueryRepository,
+    IFolderCommandRepository folderCommandRepository,
     IFolderHierarchyValidator folderHierarchyValidator,
     IUnitOfWork unitOfWork,
     ILogger logger)
@@ -51,7 +52,7 @@ public class MoveFolderUseCase(
     {
         Folder? sourceFolder = null;
 
-        return folderRepository.GetById(folderId)
+        return folderQueryRepository.GetById(folderId)
             .OnSuccess(data =>
             {
                 logger.Information("Исходная папка {FolderId} найдена.", folderId);
@@ -72,7 +73,7 @@ public class MoveFolderUseCase(
             .ToResult()
             .OnSuccess(_ => logger.Information("Успешно начата транзакция."))
             .OnFailure(error => logger.Warning("Ошибка {ErrorCode}: Не удалось начать транзакцию.", error.Code))
-            .Then(_ => folderRepository.Update(sourceFolder!))
+            .Then(_ => folderCommandRepository.Update(sourceFolder!))
             .ToResult()
             .OnSuccess(_ => logger.Information("Успешно обновлена папка."))
             .OnFailure(error => logger.Warning("Ошибка {ErrorCode}: Не удалось обновить папку.", error.Code))
@@ -91,7 +92,7 @@ public class MoveFolderUseCase(
         Folder? sourceFolder = null;
         Folder? targetFolder = null;
 
-        return folderRepository.GetById(folderId)
+        return folderQueryRepository.GetById(folderId)
             .OnSuccess(data =>
             {
                 logger.Information("Исходная папка {FolderId} найдена.", folderId);
@@ -100,7 +101,7 @@ public class MoveFolderUseCase(
             .OnFailure(error =>
                 logger.Warning("Ошибка {ErrorCode}: Исходная папка {FolderId} не найдена.",
                     error.Code, folderId))
-            .Then(_ => folderRepository.GetById(targetFolderId))
+            .Then(_ => folderQueryRepository.GetById(targetFolderId))
             .OnSuccess(data =>
             {
                 logger.Information("Целевая папка {TargetId} найдена.", targetFolderId);
@@ -132,7 +133,7 @@ public class MoveFolderUseCase(
             .ToResult()
             .OnSuccess(_ => logger.Information("Успешно начата транзакция."))
             .OnFailure(error => logger.Warning("Ошибка {ErrorCode}: Не удалось начать транзакцию.", error.Code))
-            .Then(_ => folderRepository.Update(sourceFolder!))
+            .Then(_ => folderCommandRepository.Update(sourceFolder!))
             .ToResult()
             .OnSuccess(_ => logger.Information("Успешно обновлена папка."))
             .OnFailure(error => logger.Warning("Ошибка {ErrorCode}: Не удалось обновить папку.", error.Code))
