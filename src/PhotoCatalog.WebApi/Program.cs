@@ -154,9 +154,9 @@ try
             {
                 file.CopyTo(stream);
             }
-            
+
             var importRequest = new ImportPhotoRequest(tempFilePath);
-            
+
             return importPhotoUseCase.Execute(importRequest)
                 .ToResult()
                 .ToHttpResult();
