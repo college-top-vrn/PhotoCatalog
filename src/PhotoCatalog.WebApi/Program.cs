@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using PhotoCatalog.Application.DTOs;
+using PhotoCatalog.Application.DTOs.Folders;
 using PhotoCatalog.Application.Fakes;
 using PhotoCatalog.Application.UseCases;
 using PhotoCatalog.Domain.Entities;
@@ -158,6 +160,32 @@ try
 
     albumEndpointsGroup.MapDelete("/{id:int}",
         (int id, IAlbumRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+
+    RouteGroupBuilder foldersGroup = app.MapGroup("/api/folders");
+
+    foldersGroup.MapGet("/tree", (IFolderRepository folderRepository) =>
+    {
+        Result<IEnumerable<Folder>> result = folderRepository.GetAllFolders();
+        return result.ToHttpResult();
+    });
+
+    foldersGroup.MapPost("/", (CreateFolderRequest request, CreateFolderUseCase useCase) =>
+    {
+        Result<FolderResponse> result = useCase.Execute(request);
+        return result.ToHttpResult();
+    });
+
+    foldersGroup.MapPut("/{folderId:int}/move", (int folderId, MoveFolderRequest request, MoveFolderUseCase useCase) =>
+    {
+        ResultVoid result = useCase.Execute(folderId, request.NewParentId);
+        return result.ToHttpResult();
+    });
+
+    foldersGroup.MapDelete("/{folderId:int}", (int folderId, IFolderRepository folderRepository) =>
+    {
+        ResultVoid result = folderRepository.Delete(folderId);
+        return result.ToHttpResult();
+    });
 
     app.Run();
 }
