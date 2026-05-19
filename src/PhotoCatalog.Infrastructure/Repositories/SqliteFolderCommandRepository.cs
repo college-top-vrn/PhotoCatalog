@@ -1,7 +1,5 @@
 using Dapper;
 
-using Serilog;
-
 using Microsoft.Data.Sqlite;
 
 using PhotoCatalog.Domain.Entities;
@@ -11,15 +9,17 @@ using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.UnitOfWork;
 
+using Serilog;
+
 namespace PhotoCatalog.Infrastructure.Repositories;
 
 /// <inheritdoc />
 public class SqliteFolderCommandRepository : IFolderCommandRepository
 {
-    private readonly SqliteUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
+    private readonly SqliteUnitOfWork _unitOfWork;
 
-    SqliteFolderCommandRepository(string connectionString, ILogger logger)
+    private SqliteFolderCommandRepository(string connectionString, ILogger logger)
     {
         _unitOfWork = new SqliteUnitOfWork(connectionString, logger);
         _logger = logger;
@@ -41,14 +41,14 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                     new { folder.Id, folder.ParentFolderId, folder.Name })
                 .ToResult()
                 .Finally(
-                    success: _ =>
+                    _ =>
                     {
                         _unitOfWork.Commit();
                         _logger.Information("Папка с Id = {FolderId} успешно добавлена", folder.Id);
                         _unitOfWork.Dispose();
                         return ResultVoid.Success();
                     },
-                    failure: _ =>
+                    _ =>
                     {
                         _unitOfWork.Rollback();
                         _unitOfWork.Dispose();
@@ -84,14 +84,14 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                 .ToResult()
                 .Check(affectedRows => (affectedRows != 0).ToResult())
                 .Finally(
-                    success: _ =>
+                    _ =>
                     {
                         _unitOfWork.Commit();
                         _logger.Information("Папка с Id = {FolderId} успешно обновлена", folder.Id);
                         _unitOfWork.Dispose();
                         return ResultVoid.Success();
                     },
-                    failure: _ =>
+                    _ =>
                     {
                         _unitOfWork.Rollback();
                         _unitOfWork.Dispose();
@@ -125,14 +125,14 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                 .ToResult()
                 .Check(affectedRows => (affectedRows != 0).ToResult())
                 .Finally(
-                    success: _ =>
+                    _ =>
                     {
                         _unitOfWork.Commit();
                         _logger.Information("Папка с Id = {FolderId} успешно удалена", id);
                         _unitOfWork.Dispose();
                         return ResultVoid.Success();
                     },
-                    failure: _ =>
+                    _ =>
                     {
                         _unitOfWork.Rollback();
                         _unitOfWork.Dispose();

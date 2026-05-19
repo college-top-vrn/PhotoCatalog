@@ -1,7 +1,5 @@
 using Dapper;
 
-using Serilog;
-
 using Microsoft.Data.Sqlite;
 
 using PhotoCatalog.Domain.Entities;
@@ -11,13 +9,15 @@ using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.UnitOfWork;
 
+using Serilog;
+
 namespace PhotoCatalog.Infrastructure.Repositories;
 
 /// <inheritdoc />
 public class SqliteFolderQueryRepository : IFolderQueryRepository
 {
-    private readonly SqliteUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
+    private readonly SqliteUnitOfWork _unitOfWork;
 
     /// <summary>
     ///     Создание экземпляра.
@@ -39,7 +39,7 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
         {
             _unitOfWork.BeginTransaction();
 
-            var foundFolder = _unitOfWork.Connection!
+            Folder? foundFolder = _unitOfWork.Connection!
                 .QueryFirstOrDefault<Folder>(
                     """
                     SELECT Id, ParentFolderId, Name
@@ -52,13 +52,13 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
             return foundFolder
                 .ToResult(InfrastructureErrors.Database.NotFound)
                 .Finally(
-                    success: _ =>
+                    _ =>
                     {
                         _unitOfWork.Commit();
                         _unitOfWork.Dispose();
                         return Result<Folder>.Success(foundFolder);
                     },
-                    failure: _ =>
+                    _ =>
                     {
                         _unitOfWork.Rollback();
                         _unitOfWork.Dispose();
