@@ -17,7 +17,8 @@ public sealed class SqliteTagFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        Connection = new SqliteConnection("Data Source=:memory:;");
+        var connString = $"DataSource=file:test{Guid.NewGuid():N}?mode=memory&cache=shared";
+        Connection = new SqliteConnection(connString);
         await Connection.OpenAsync();
         await Connection.ExecuteAsync("PRAGMA foreign_keys = ON;");
 
