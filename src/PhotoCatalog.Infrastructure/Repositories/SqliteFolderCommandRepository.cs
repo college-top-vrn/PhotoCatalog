@@ -1,17 +1,12 @@
 using Dapper;
 
-using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
-using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
-using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.UnitOfWork;
-
-using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
@@ -21,9 +16,11 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
     SqliteFolderCommandRepository(string connectionString, ILogger<SqliteUnitOfWork> logger)
     {
         _unitOfWork = new SqliteUnitOfWork(connectionString, logger);
+        _logger = logger;
     }
 
     private readonly SqliteUnitOfWork _unitOfWork;
+    private readonly ILogger<SqliteUnitOfWork> _logger;
 
     /// <inheritdoc />
     public ResultVoid Add(Folder folder)
@@ -36,8 +33,16 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                 """,
                 new { folder.Id, folder.ParentFolderId, folder.Name })
             .ToResult()
-            .OnSuccess(_ => _unitOfWork.Commit())
-            .OnFailure(_ => _unitOfWork.Rollback());
+            .OnSuccess(_ =>
+            {
+                _logger.LogInformation("Папка с Id = {FolderId} успешно добавлена");
+                _unitOfWork.Commit();
+            })
+            .OnFailure(_ =>
+            {
+                _logger.LogError("Ошибка SQLite при получении папки с Id = {FolderId}.");
+                _unitOfWork.Rollback();
+            });
     }
 
     /// <inheritdoc />
@@ -55,8 +60,16 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
             )
             .ToResult()
             .Check(affectedRows => (affectedRows != 0).ToResult())
-            .OnSuccess(_ => _unitOfWork.Commit())
-            .OnFailure(_ => _unitOfWork.Rollback());
+            .OnSuccess(_ =>
+            {
+                _logger.LogInformation("Папка с Id = {FolderId} успешно обновлена");
+                _unitOfWork.Commit();
+            })
+            .OnFailure(_ =>
+            {
+                _logger.LogWarning("Не удалось обновить несуществующую папку с Id = {FolderId}");
+                _unitOfWork.Rollback();
+            });
     }
 
     /// <inheritdoc />
@@ -67,7 +80,15 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                 new { Id = id })
             .ToResult()
             .Check(affectedRows => (affectedRows != 0).ToResult())
-            .OnSuccess(_ => _unitOfWork.Commit())
-            .OnFailure(_ => _unitOfWork.Rollback());
+            .OnSuccess(_ =>
+            {
+                _logger.LogInformation("Папка с Id = {FolderId} успешно удалена");
+                _unitOfWork.Commit();
+            })
+            .OnFailure(_ =>
+            {
+                _logger.LogError("Ошибка SQLite при удалении папки с Id = {FolderId}");
+                _unitOfWork.Rollback();
+            });
     }
 }

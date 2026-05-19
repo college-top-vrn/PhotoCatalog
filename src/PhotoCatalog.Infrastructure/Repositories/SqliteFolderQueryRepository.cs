@@ -39,7 +39,7 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
     public Result<Folder> GetById(int id)
     {
         _unitOfWork.BeginTransaction();
-        
+
         var result = _unitOfWork.Connection!
             .QueryFirstOrDefault<Folder>(
                 """
@@ -58,7 +58,7 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
                 _logger.LogError("Ошибка SQLite при получении папки с Id = {{FolderId}}.");
                 _unitOfWork.Rollback();
             });
-        
+
         _unitOfWork.Dispose();
 
         return result!;
