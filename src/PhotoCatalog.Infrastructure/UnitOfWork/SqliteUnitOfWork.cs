@@ -1,12 +1,13 @@
 using System;
 
 using Microsoft.Data.Sqlite;
-using Serilog;
 
 using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
+
+using Serilog;
 
 namespace PhotoCatalog.Infrastructure.UnitOfWork;
 

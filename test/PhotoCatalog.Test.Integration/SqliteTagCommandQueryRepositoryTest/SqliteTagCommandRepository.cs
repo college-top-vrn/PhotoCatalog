@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
 
-using Serilog;
-
 using Microsoft.Data.Sqlite;
 
 using NSubstitute;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Infrastructure.Repositories;
+
+using Serilog;
 
 using Xunit;
 
@@ -53,7 +53,7 @@ public class SqliteTagCommandRepositoryTests : IDisposable
         var tag = Tag.Create("лес");
         var result = _repoCommand.Add(tag.Value!);
         var tagNew = _repoQuery.GetByName("лес");
-        
+
 
         Assert.True(result.IsSuccess);
         Assert.True(tagNew.IsSuccess);
@@ -64,39 +64,39 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     public void Add_duplicate_name_returns_failure()
     {
         var tag1 = Tag.Create("горы");
-        var tag2 = Tag.Create("горы"); 
-        
-        
+        var tag2 = Tag.Create("горы");
+
+
         var firstResult = _repoCommand.Add(tag1.Value!);
-        Assert.True(firstResult.IsSuccess); 
-        
+        Assert.True(firstResult.IsSuccess);
+
         var secondResult = _repoCommand.Add(tag2.Value!);
-        
+
         Assert.True(secondResult.IsFailure);
     }
-    
+
     [Fact]
     public void Delete_existing_free_tag_returns_success()
     {
         _repoCommand.Add(Tag.Create("лес").Value!);
-        
+
         var tagId = _repoQuery.GetByName("лес").Value!.Id;
-        
+
         var deleteResult = _repoCommand.Delete(tagId);
-    
+
         Assert.True(deleteResult.IsSuccess);
-    
+
         var result = _repoQuery.GetById(tagId);
         Assert.True(result.IsFailure);
     }
-    
+
     [Fact]
     public void Delete_tag_used_by_photo_returns_failure()
     {
         var invalidId = 9999;
         var deleteResult = _repoCommand.Delete(invalidId);
-        
-    
+
+
         Assert.True(deleteResult.IsFailure);
     }
     public void Dispose()
