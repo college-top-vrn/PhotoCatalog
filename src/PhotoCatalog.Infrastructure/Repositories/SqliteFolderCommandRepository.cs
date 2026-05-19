@@ -21,11 +21,9 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
     SqliteFolderCommandRepository(string connectionString, ILogger<SqliteUnitOfWork> logger)
     {
         _unitOfWork = new SqliteUnitOfWork(connectionString, logger);
-        _logger = logger;
     }
 
     private readonly SqliteUnitOfWork _unitOfWork;
-    private readonly ILogger<SqliteUnitOfWork> _logger;
 
     /// <inheritdoc />
     public ResultVoid Add(Folder folder)
