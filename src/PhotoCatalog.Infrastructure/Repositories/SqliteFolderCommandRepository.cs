@@ -26,7 +26,7 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
     public ResultVoid Add(Folder folder)
     {
         _unitOfWork.BeginTransaction();
-        
+
         var result = _unitOfWork.Connection!
             .Execute(
                 """
@@ -37,15 +37,15 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
             .ToResult()
             .OnSuccess(_ =>
             {
-                _logger.LogInformation("Папка с Id = {FolderId} успешно добавлена");
+                _logger.LogInformation("Папка с Id = {FolderId} успешно добавлена", folder.Id);
                 _unitOfWork.Commit();
             })
             .OnFailure(_ =>
             {
-                _logger.LogError("Ошибка SQLite при получении папки с Id = {FolderId}.");
+                _logger.LogError("Ошибка SQLite при добавлении папки с Id = {FolderId}", folder.Id);
                 _unitOfWork.Rollback();
             });
-        
+
         _unitOfWork.Dispose();
 
         return result;
@@ -55,7 +55,7 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
     public ResultVoid Update(Folder folder)
     {
         _unitOfWork.BeginTransaction();
-        
+
         var result = _unitOfWork.Connection!
             .Execute(
                 """
@@ -70,17 +70,17 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
             .Check(affectedRows => (affectedRows != 0).ToResult())
             .OnSuccess(_ =>
             {
-                _logger.LogInformation("Папка с Id = {FolderId} успешно обновлена");
+                _logger.LogInformation("Папка с Id = {FolderId} успешно обновлена", folder.Id);
                 _unitOfWork.Commit();
             })
             .OnFailure(_ =>
             {
-                _logger.LogWarning("Не удалось обновить несуществующую папку с Id = {FolderId}");
+                _logger.LogWarning("Не удалось обновить несуществующую папку с Id = {FolderId}", folder.Id);
                 _unitOfWork.Rollback();
             });
 
         _unitOfWork.Dispose();
-        
+
         return result;
     }
 
@@ -88,23 +88,27 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
     public ResultVoid Delete(int id)
     {
         _unitOfWork.BeginTransaction();
-        
+
         var result = _unitOfWork.Connection!
-            .Execute("DELETE FROM Folders WHERE Id = @Id",
+            .Execute(
+                """
+                DELETE FROM Folders
+                WHERE Id = @Id
+                """,
                 new { Id = id })
             .ToResult()
             .Check(affectedRows => (affectedRows != 0).ToResult())
             .OnSuccess(_ =>
             {
-                _logger.LogInformation("Папка с Id = {FolderId} успешно удалена");
+                _logger.LogInformation("Папка с Id = {FolderId} успешно удалена", id);
                 _unitOfWork.Commit();
             })
             .OnFailure(_ =>
             {
-                _logger.LogError("Ошибка SQLite при удалении папки с Id = {FolderId}");
+                _logger.LogError("Ошибка SQLite при удалении папки с Id = {FolderId}", id);
                 _unitOfWork.Rollback();
             });
-        
+
         _unitOfWork.Dispose();
 
         return result;
