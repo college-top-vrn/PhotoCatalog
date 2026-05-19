@@ -15,7 +15,7 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
     /// <summary>
     ///     Словарь альбомов.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Photo> _photos = new();
+    private readonly IReadOnlyDictionary<int, Photo> _photos = new ConcurrentDictionary<int, Photo>();
 
 
     /// <inheritdoc />
@@ -61,7 +61,7 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
         }
 
         List<Photo> photos = (
-            from photoId in album.Value.PhotoIds
+            from photoId in album.Value!.PhotoIds
             from photo in _photos
             where photo.Value.Id == photoId
             select photo.Value
@@ -102,6 +102,6 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
     /// <inheritdoc />
     public Result<IEnumerable<Photo>> GetAll()
     {
-        return Result.Success<IEnumerable<Photo>>(_photos.Values);
+        return Result.Success(_photos.Values);
     }
 }
