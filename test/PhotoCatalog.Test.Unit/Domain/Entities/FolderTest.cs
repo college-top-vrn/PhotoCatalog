@@ -3,10 +3,16 @@ using PhotoCatalog.Domain.Primitives;
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Domain.Entities;
 
+/// <summary>
+///     Содержит модульные тесты для проверки работы доменной сущности Folder.
+/// </summary>
 public class FolderTest
 {
+    /// <summary>
+    ///     Проверяет, что папка успешно создается, если переданное имя не пустое.
+    /// </summary>
     [Fact]
     public void CreateFunction_MustCreateFolder_IfParameterNameIsNotEmpty()
     {
@@ -18,6 +24,9 @@ public class FolderTest
         Assert.Equal(name, folder.Value.Name);
     }
 
+    /// <summary>
+    ///     Проверяет, что папка не создается, если переданное имя пустое.
+    /// </summary>
     [Fact]
     public void CreateFunction_DontCreateFolder_IfParameterNameIsEmpty()
     {
@@ -28,6 +37,9 @@ public class FolderTest
         Assert.True(folder.IsFailure);
     }
 
+    /// <summary>
+    ///     Проверяет, что имя папки успешно изменяется, если переданное новое имя не пустое.
+    /// </summary>
     [Fact]
     public void RenameFunction_RenameFolderName_IfParameterNameIsNotEmpty()
     {
@@ -41,6 +53,9 @@ public class FolderTest
         Assert.Equal(newName, folder.Value.Name);
     }
 
+    /// <summary>
+    ///     Проверяет, что имя папки не изменяется, если переданное новое имя пустое.
+    /// </summary>
     [Fact]
     public void RenameFunction_DontRenameFolderName_IfParameterNameIsEmpty()
     {
@@ -55,6 +70,9 @@ public class FolderTest
         Assert.Equal(actualError.IsFailure, ResultVoid.Failure(expectedError).IsFailure);
     }
 
+    /// <summary>
+    ///     Проверяет, что папка успешно перемещается в другую папку, если идентификатор целевой папки не совпадает с идентификатором перемещаемой папки.
+    /// </summary>
     [Fact]
     public void MoveToFunction_MoveToGivenFolder_IfFolderIdIsNotEqualToThisId()
     {
@@ -71,6 +89,9 @@ public class FolderTest
         Assert.True(result.IsSuccess);
     }
 
+    /// <summary>
+    ///     Проверяет, что папка не перемещается в саму себя, если идентификаторы совпадают.
+    /// </summary>
     [Fact]
     public void MoveToFunction_DontMoveToGivenFolder_IfFolderIdIsEqualToThisId()
     {
@@ -83,6 +104,9 @@ public class FolderTest
         Assert.True(result.IsFailure);
     }
 
+    /// <summary>
+    ///     Проверяет, что папка успешно перемещается в корень.
+    /// </summary>
     [Fact]
     public void MoveToRootFunction_MoveToRootSuccessfully()
     {

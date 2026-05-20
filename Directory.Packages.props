@@ -1,6 +1,6 @@
 ﻿<Project>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="10.0.1"/>
+    <PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="10.0.8"/>
     <PackageVersion Include="Microsoft.Extensions.Caching.Hybrid" Version="10.5.0"/>
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.1"/>
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0"/>
@@ -9,6 +9,7 @@
     <PackageVersion Include="xunit" Version="2.9.3"/>
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2"/>
     <PackageVersion Include="TngTech.ArchUnitNET.xUnit" Version="0.13.3"/>
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.8" />
   </ItemGroup>
   
   <PropertyGroup>
