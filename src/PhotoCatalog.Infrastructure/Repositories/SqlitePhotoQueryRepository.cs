@@ -179,16 +179,18 @@ public class SqlitePhotoQueryRepository : IPhotoQueryRepository
             }
 
             List<int> tagIdList = tagIds.ToList();
-            if (!tagIdList.Any())
+            if (tagIdList.Count == 0)
             {
                 return Result.Success<IReadOnlyCollection<Photo>>(new List<Photo>().AsReadOnly());
             }
 
             List<Photo> photos = connection.Query<Photo>(
-                @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
-                  FROM Photos p
-                  INNER JOIN PhotoTags pt ON p.Id = pt.PhotoId
-                  WHERE pt.TagId IN @tagIds",
+                """
+                SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
+                                  FROM Photos p
+                                  INNER JOIN PhotoTags pt ON p.Id = pt.PhotoId
+                                  WHERE pt.TagId IN @tagIds
+                """,
                 new { tagIds = tagIdList },
                 _unitOfWork.Transaction).ToList();
 
@@ -228,8 +230,10 @@ public class SqlitePhotoQueryRepository : IPhotoQueryRepository
             }
 
             List<Photo> photos = connection.Query<Photo>(
-                @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
-                  FROM Photos p",
+                """
+                SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
+                                  FROM Photos p
+                """,
                 _unitOfWork.Transaction).ToList();
 
 

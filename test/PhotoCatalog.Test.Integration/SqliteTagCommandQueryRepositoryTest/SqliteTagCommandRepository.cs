@@ -17,19 +17,17 @@ namespace PhotoCatalog.Test.Integration.SqliteTagCommandQueryRepositoryTest;
 
 public class SqliteTagCommandRepositoryTests : IDisposable
 {
-    private readonly string _connectionString;
     private readonly SqliteConnection _keepAliveConnection;
-    private readonly ILogger _logger;
     private readonly SqliteTagCommandRepository _repoCommand;
     private readonly SqliteTagQueryRepository _repoQuery;
 
     public SqliteTagCommandRepositoryTests()
     {
-        _logger = Substitute.For<ILogger>();
+        ILogger logger = Substitute.For<ILogger>();
 
-        _connectionString = $"DataSource=file:memdb_{Guid.NewGuid()}?mode=memory&cache=shared";
+        string connectionString = $"DataSource=file:memdb_{Guid.NewGuid()}?mode=memory&cache=shared";
 
-        _keepAliveConnection = new SqliteConnection(_connectionString);
+        _keepAliveConnection = new SqliteConnection(connectionString);
         _keepAliveConnection.Open();
         string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TabelTest", "InitSchemaTest.sql");
         if (!File.Exists(scriptPath))
@@ -44,10 +42,11 @@ public class SqliteTagCommandRepositoryTests : IDisposable
             command.ExecuteNonQuery();
         }
 
-        _repoCommand = new SqliteTagCommandRepository(_connectionString, _logger);
-        _repoQuery = new SqliteTagQueryRepository(_connectionString, _logger);
+        _repoCommand = new SqliteTagCommandRepository(connectionString, logger);
+        _repoQuery = new SqliteTagQueryRepository(connectionString, logger);
     }
 
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
     public void Dispose()
     {
         _keepAliveConnection.Close();
@@ -55,7 +54,7 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void Add_new_unique_tag_returns_success_and_persists()
+    public void AddNewUniqueTagReturnsSuccessAndPersists()
     {
         Result<Tag> tag = Tag.Create("лес");
         ResultVoid result = _repoCommand.Add(tag.Value!);
@@ -68,7 +67,7 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void Add_duplicate_name_returns_failure()
+    public void AddDuplicateNameReturnsFailure()
     {
         Result<Tag> tag1 = Tag.Create("горы");
         Result<Tag> tag2 = Tag.Create("горы");
@@ -83,7 +82,7 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void Delete_existing_free_tag_returns_success()
+    public void DeleteExistingFreeTagReturnsSuccess()
     {
         _repoCommand.Add(Tag.Create("лес").Value!);
 
@@ -98,9 +97,9 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void Delete_tag_used_by_photo_returns_failure()
+    public void DeleteTagUsedByPhotoReturnsFailure()
     {
-        int invalidId = 9999;
+        const int invalidId = 9999;
         ResultVoid deleteResult = _repoCommand.Delete(invalidId);
 
 

@@ -117,7 +117,7 @@ public partial class NamingConventions
             .That()
             .AreNot(typeof(IDisposable))
             .Should()
-            .HaveNameMatching(@"^I[A-Z][a-zA-Z0-9`]*$")
+            .HaveNameMatching("^I[A-Z][a-zA-Z0-9`]*$")
             .Because("Интерфейсы должны начинаться с I и соответствовать PascalCase")
             .Check(Architecture);
     }

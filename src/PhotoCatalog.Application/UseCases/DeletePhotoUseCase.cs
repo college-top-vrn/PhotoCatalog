@@ -12,10 +12,11 @@ namespace PhotoCatalog.Application.UseCases;
 /// <summary>
 ///     Представляет прикладную сущность для удаления файла из репозитория и диска.
 /// </summary>
-/// <param name="photoRepository">репозиторий фотографий.</param>
-/// <param name="fileStorage">хранение файлов.</param>
-/// <param name="unitOfWork">единица работы.</param>
-/// <param name="logger">логгер.</param>
+/// <param name="photoQueryRepository">Репозиторий фотографий для получения данных.</param>
+/// <param name="photoCommandRepository">Репозиторий фотографий для добавления данных.</param>
+/// <param name="fileStorage">Хранилище файлов.</param>
+/// <param name="unitOfWork">Единица работы.</param>
+/// <param name="logger">Логгер.</param>
 public class DeletePhotoUseCase(
     IPhotoQueryRepository photoQueryRepository,
     IPhotoCommandRepository photoCommandRepository,

@@ -41,6 +41,7 @@ public class MagicScalerThumbnailServiceTests : IDisposable
         Directory.CreateDirectory(_outputFolder);
     }
 
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
     public void Dispose()
     {
         if (Directory.Exists(_outputFolder))

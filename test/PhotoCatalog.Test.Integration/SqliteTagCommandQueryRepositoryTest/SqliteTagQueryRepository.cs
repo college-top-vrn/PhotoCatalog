@@ -17,20 +17,18 @@ namespace PhotoCatalog.Test.Integration.SqliteTagCommandQueryRepositoryTest;
 
 public class SqliteTagQueryRepositoryTests : IDisposable
 {
-    private readonly string _connectionString;
     private readonly SqliteConnection _keepAliveConnection;
-    private readonly ILogger _logger;
     private readonly SqliteTagQueryRepository _repo;
 
     public SqliteTagQueryRepositoryTests()
     {
-        _logger = Substitute.For<ILogger>();
+        ILogger logger = Substitute.For<ILogger>();
 
-        _connectionString = $"DataSource=file:memdb_{Guid.NewGuid()}?mode=memory&cache=shared";
+        string connectionString = $"DataSource=file:memdb_{Guid.NewGuid()}?mode=memory&cache=shared";
 
-        _keepAliveConnection = new SqliteConnection(_connectionString);
+        _keepAliveConnection = new SqliteConnection(connectionString);
         _keepAliveConnection.Open();
-        string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TabelTest", "InitSchemaTest.sql");
+        string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TableTest", "InitSchemaTest.sql");
         if (!File.Exists(scriptPath))
         {
             scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InitSchemaTest.sql");
@@ -43,9 +41,10 @@ public class SqliteTagQueryRepositoryTests : IDisposable
             command.ExecuteNonQuery();
         }
 
-        _repo = new SqliteTagQueryRepository(_connectionString, _logger);
+        _repo = new SqliteTagQueryRepository(connectionString, logger);
     }
 
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
     public void Dispose()
     {
         _keepAliveConnection.Close();
@@ -54,7 +53,7 @@ public class SqliteTagQueryRepositoryTests : IDisposable
 
 
     [Fact]
-    public void GetById_existing_tag_returns_success()
+    public void GetByIdExistingTagReturnsSuccess()
     {
         using (SqliteCommand cmd = _keepAliveConnection.CreateCommand())
         {
@@ -69,7 +68,7 @@ public class SqliteTagQueryRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void GetById_missing_tag_returns_failure()
+    public void GetByIdMissingTagReturnsFailure()
     {
         Result<Tag> tag = _repo.GetById(0);
 
@@ -77,7 +76,7 @@ public class SqliteTagQueryRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void GetByName_existing_tag_returns_success()
+    public void GetByNameExistingTagReturnsSuccess()
     {
         using (SqliteCommand cmd = _keepAliveConnection.CreateCommand())
         {
@@ -92,7 +91,7 @@ public class SqliteTagQueryRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void GetByName_missing_tag_returns_failure()
+    public void GetByNameMissingTagReturnsFailure()
     {
         Result<Tag> tag = _repo.GetByName("лес");
 

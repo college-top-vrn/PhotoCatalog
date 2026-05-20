@@ -111,7 +111,7 @@ public static class InfrastructureErrors
         ///     Общая ошибка ввода-вывода.
         ///     Возникает при непредвиденных проблемах с файловой системой.
         /// </summary>
-        public static readonly Error IOError = new(
+        public static readonly Error IoError = new(
             "FileStorage.IOError",
             "Произошла ошибка ввода-вывода при работе с файлом.");
 

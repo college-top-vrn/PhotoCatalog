@@ -93,7 +93,7 @@ public class FakeAlbumRepository : IAlbumRepository
         return ResultVoid.Success();
     }
 
-
+    // TODO: Пофиксить доку или добавить эти методы
     /// <inheritdoc />
     public Result<IReadOnlyCollection<Album>> GetByFolderId(int id)
     {

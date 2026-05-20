@@ -91,11 +91,6 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
     /// <inheritdoc />
     public ResultVoid Update(Photo photo)
     {
-        if (photo == null)
-        {
-            return ResultVoid.Failure(DomainErrors.Photo.NullPhoto);
-        }
-
         try
         {
             SqliteConnection? connection = _unitOfWork.Connection;
@@ -176,12 +171,9 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
                 new { Id = id },
                 _unitOfWork.Transaction);
 
-            if (rowsAffected == 0)
-            {
-                return ResultVoid.Failure(DomainErrors.Photo.NotFound);
-            }
-
-            return ResultVoid.Success();
+            return rowsAffected == 0
+                ? ResultVoid.Failure(DomainErrors.Photo.NotFound)
+                : ResultVoid.Success();
         }
         catch (SqliteException ex)
         {
