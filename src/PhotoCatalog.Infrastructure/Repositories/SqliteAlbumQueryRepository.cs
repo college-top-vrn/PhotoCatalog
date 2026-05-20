@@ -123,48 +123,4 @@ public class SqliteAlbumQueryRepository : IAlbumQueryRepository
         _logger.Debug("Получено {Count} альбомов для папки {FolderId}", albums.Count, folderId);
         return Result<IReadOnlyCollection<Album>>.Success(albums.AsReadOnly());
     }
-
-    /// <inheritdoc />
-    public Result<IReadOnlyCollection<Album>> GetAll()
-    {
-        using var connection = new SqliteConnection(_connectionString);
-        connection.Open();
-
-        using var command = connection.CreateCommand();
-        command.CommandText = "PRAGMA foreign_keys = ON;";
-        command.ExecuteNonQuery();
-
-        var albumsData = connection.Query("SELECT Id, Name, FolderId FROM Albums");
-
-        var albums = new List<Album>();
-
-        foreach (var albumData in albumsData)
-        {
-            Result<Album> createResult = Album.Create(albumData.Name, albumData.Id);
-            if (createResult.IsFailure)
-            {
-                _logger.Warning("Пропуск альбома {Id}: {Error}", albumData.Id, createResult.Error.Message);
-                continue;
-            }
-
-            Album album = createResult.Value;
-
-            if (albumData.FolderId != null)
-            {
-                typeof(Album).GetProperty("FolderId")?.SetValue(album, albumData.FolderId);
-            }
-
-            List<int> photoIds = connection.Query<int>(
-                "SELECT PhotoId FROM AlbumPhotos WHERE AlbumId = @AlbumId",
-                new { AlbumId = albumData.Id }).ToList();
-
-            typeof(Album).GetMethod("RestorePhotos", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                ?.Invoke(album, new object[] { photoIds });
-
-            albums.Add(album);
-        }
-
-        _logger.Debug("Получено {Count} альбомов всего", albums.Count);
-        return Result<IReadOnlyCollection<Album>>.Success(albums.AsReadOnly());
-    }
 }
