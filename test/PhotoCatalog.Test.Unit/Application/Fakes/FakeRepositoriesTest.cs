@@ -1,10 +1,12 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.Fakes;
+
 using Xunit;
 
 namespace PhotoCatalog.Tests.Infrastructure.Fakes;
@@ -56,7 +58,7 @@ public class FakeRepositoriesTests
 
         // Assert
         Assert.True(result.IsSuccess);
-        
+
         // Проверяем через QueryRepository, что альбом добавился
         Result<Album> getResult = _queryRepository.GetById(1);
         Assert.True(getResult.IsSuccess);
@@ -73,7 +75,7 @@ public class FakeRepositoriesTests
         Result<Album> createResult = Album.Create("Альбом для удаления", 0);
         Assert.True(createResult.IsSuccess);
         _commandRepository.Add(createResult.Value);
-        
+
         Result<Album> getBeforeDelete = _queryRepository.GetById(1);
         Assert.True(getBeforeDelete.IsSuccess);
 
@@ -82,7 +84,7 @@ public class FakeRepositoriesTests
 
         // Assert
         Assert.True(result.IsSuccess);
-        
+
         // Проверяем через QueryRepository, что альбом удалён
         Result<Album> getAfterDelete = _queryRepository.GetById(1);
         Assert.True(getAfterDelete.IsFailure);
@@ -149,10 +151,10 @@ public class FakeRepositoriesTests
         Result<Album> createResult = Album.Create("Старое имя", 0);
         Assert.True(createResult.IsSuccess);
         _commandRepository.Add(createResult.Value);
-        
+
         Result<Album> getAfterAdd = _queryRepository.GetById(1);
         Assert.True(getAfterAdd.IsSuccess);
-        
+
         ResultVoid renameResult = getAfterAdd.Value.Rename("Новое имя");
         Assert.True(renameResult.IsSuccess);
 
@@ -161,7 +163,7 @@ public class FakeRepositoriesTests
 
         // Assert
         Assert.True(result.IsSuccess);
-        
+
         Result<Album> getAfterUpdate = _queryRepository.GetById(1);
         Assert.True(getAfterUpdate.IsSuccess);
         Assert.Equal("Новое имя", getAfterUpdate.Value.Name);
@@ -209,16 +211,16 @@ public class FakeRepositoriesTests
         // Arrange
         Result<Album> album1 = Album.Create("Альбом 1", 0);
         Result<Album> album2 = Album.Create("Альбом 2", 0);
-        
+
         _commandRepository.Add(album1.Value);
         _commandRepository.Add(album2.Value);
-        
+
         Album? album1FromRepo = _queryRepository.GetById(1).Value;
         Album? album2FromRepo = _queryRepository.GetById(2).Value;
-        
+
         typeof(Album).GetProperty("FolderId")?.SetValue(album1FromRepo, 10);
         typeof(Album).GetProperty("FolderId")?.SetValue(album2FromRepo, 10);
-        
+
         _commandRepository.Update(album1FromRepo);
         _commandRepository.Update(album2FromRepo);
 
