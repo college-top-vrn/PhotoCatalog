@@ -46,6 +46,13 @@ public class SqliteTagCommandRepositoryTests : IDisposable
         _repoQuery = new SqliteTagQueryRepository(connectionString, logger);
     }
 
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
+    public void Dispose()
+    {
+        _keepAliveConnection.Close();
+        _keepAliveConnection.Dispose();
+    }
+
     [Fact]
     public void AddNewUniqueTagReturnsSuccessAndPersists()
     {
@@ -100,15 +107,15 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void Update_existing_free_tag_returns_success_and_persists()
+    public void UpdateExistingFreeTagReturnsSuccessAndPersists()
     {
-        var tagOld = Tag.Create("лес");
+        Result<Tag> tagOld = Tag.Create("лес");
         _repoCommand.Add(tagOld.Value!);
 
 
-        var tagNew = Tag.Create("поляна");
+        Result<Tag> tagNew = Tag.Create("поляна");
 
-        var result = _repoCommand.Update(tagNew.Value!);
+        ResultVoid result = _repoCommand.Update(tagNew.Value!);
 
         Assert.True(result.IsSuccess);
 
@@ -116,18 +123,11 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void Update_tag_returns_failure()
+    public void UpdateTagReturnsFailure()
     {
-        var tagNew = Tag.Create("поляна");
+        Result<Tag> tagNew = Tag.Create("поляна");
 
-        var result = _repoCommand.Update(tagNew.Value!);
+        ResultVoid result = _repoCommand.Update(tagNew.Value!);
         Assert.True(result.IsFailure);
-    }
-
-    // TODO: Заменить вызовом GC.SuppressFinalize(object)
-    public void Dispose()
-    {
-        _keepAliveConnection.Close();
-        _keepAliveConnection.Dispose();
     }
 }
