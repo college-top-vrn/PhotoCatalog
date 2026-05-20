@@ -29,7 +29,7 @@ public class SqliteTagCommandRepositoryTests : IDisposable
 
         _keepAliveConnection = new SqliteConnection(connectionString);
         _keepAliveConnection.Open();
-        string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TabelTest", "InitSchemaTest.sql");
+        string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TableTest", "InitSchemaTest.sql");
         if (!File.Exists(scriptPath))
         {
             scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InitSchemaTest.sql");
