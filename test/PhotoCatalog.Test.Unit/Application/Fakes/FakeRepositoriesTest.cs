@@ -4,10 +4,16 @@ using PhotoCatalog.Infrastructure.Fakes;
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Application.Fakes;
 
+/// <summary>
+///     Содержит модульные тесты для проверки работы FakeAlbumRepository.
+/// </summary>
 public static class FakeRepositoriesTest
 {
+    /// <summary>
+    ///     Проверяет, что альбом успешно добавляется в репозиторий при передаче корректных значений.
+    /// </summary>
     [Fact]
     public static void AlbumRepository_AddAlbum_WithRightValues()
     {
@@ -22,6 +28,9 @@ public static class FakeRepositoriesTest
         Assert.Equal("Test", albumName);
     }
 
+    /// <summary>
+    ///     Проверяет, что при попытке добавить null возвращается ожидаемая ошибка.
+    /// </summary>
     [Fact]
     public static void AlbumRepository_AddAlbum_AddingNull()
     {
@@ -36,6 +45,9 @@ public static class FakeRepositoriesTest
         Assert.Equal(result.Message, expectedResult.Message);
     }
 
+    /// <summary>
+    ///     Проверяет, что альбом успешно обновляется при передаче корректных значений.
+    /// </summary>
     [Fact]
     public static void AlbumRepository_UpdateAlbum_WithRightValues()
     {
@@ -53,6 +65,9 @@ public static class FakeRepositoriesTest
         Assert.NotEqual(oldAlbum.Value.Name, newAlbum.Value.Name);
     }
 
+    /// <summary>
+    ///     Проверяет, что при попытке обновить альбом с несуществующим идентификатором возвращается ошибка.
+    /// </summary>
     [Fact]
     public static void AlbumRepository_UpdateAlbum_UpdatingWithNonexistentId()
     {
@@ -67,6 +82,9 @@ public static class FakeRepositoriesTest
         Assert.Equal(resultError.Message, expectedError.Message);
     }
 
+    /// <summary>
+    ///     Проверяет, что при попытке обновить null возвращается ожидаемая ошибка.
+    /// </summary>
     [Fact]
     public static void AlbumRepository_UpdateAlbum_UpdatingWithNull()
     {
@@ -81,6 +99,9 @@ public static class FakeRepositoriesTest
         Assert.Equal(resultError.Message, expectedError.Message);
     }
 
+    /// <summary>
+    ///     Проверяет, что существующий альбом успешно удаляется.
+    /// </summary>
     [Fact]
     public static void AlbumRepository_DeleteAlbum_WithExistingId()
     {
@@ -107,6 +128,9 @@ public static class FakeRepositoriesTest
         Assert.Equal(expectedError.Message, searchResult.Error.Message);
     }
 
+    /// <summary>
+    ///     Проверяет, что при попытке удалить альбом с несуществующим идентификатором возвращается ошибка.
+    /// </summary>
     [Fact]
     public static void AlbumRepository_DeleteAlbum_WithNonexistentId()
     {

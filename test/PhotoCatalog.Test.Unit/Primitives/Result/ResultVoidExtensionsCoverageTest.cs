@@ -5,7 +5,7 @@ using PhotoCatalog.Domain.Primitives;
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Primitives.Result;
 
 /// <summary>
 ///     Тесты для полного покрытия ветвей методов расширения ResultVoidExtensions.
