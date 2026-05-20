@@ -2,7 +2,7 @@ using PhotoCatalog.Application.Caching;
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Application.Caching;
 
 public class CacheKeysFactoryTests
 {
