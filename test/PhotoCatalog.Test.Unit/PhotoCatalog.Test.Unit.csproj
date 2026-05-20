@@ -21,10 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\" />
-    <Folder Include="Domain\Entities\" />
-    <Folder Include="Domain\ValueObjects\" />
-    <Folder Include="Primitives\" />
+    <Folder Include="Application\UseCases\" />
   </ItemGroup>
 
 </Project>
