@@ -3,7 +3,7 @@ using PhotoCatalog.Domain.Primitives;
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Domain.Entities;
 
 public class FolderTest
 {
