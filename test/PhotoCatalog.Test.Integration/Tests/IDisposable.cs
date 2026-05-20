@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Logging;
-
 using Serilog.Core;
 
 namespace PhotoCatalog.Tests.Integration.UnitOfWork;
@@ -7,12 +5,37 @@ namespace PhotoCatalog.Tests.Integration.UnitOfWork;
 using System;
 using System.Reflection;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Logging;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 using PhotoCatalog.Infrastructure.UnitOfWork;
-using Serilog;
 using Xunit;
+
+/// <summary>
+///     Заглушка логгера для тестирования.
+///     Реализует <see cref="ILogger{T}" /> и ничего не логирует.
+///     Не требует внешних зависимостей, кроме Microsoft.Extensions.Logging.Abstractions.
+/// </summary>
+/// <typeparam name="T">Категория логгера.</typeparam>
+internal sealed class NullLogger<T> : ILogger<T>
+{
+    /// <inheritdoc />
+    public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+    /// <inheritdoc />
+    public bool IsEnabled(LogLevel logLevel) => false;
+
+    /// <inheritdoc />
+    public void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception? exception,
+        Func<TState, Exception?, string> formatter)
+    {
+    }
+}
 
 /// <summary>
 ///     Интеграционные тесты для <see cref="SqliteUnitOfWork" />.
@@ -22,9 +45,6 @@ using Xunit;
 ///     Все тесты используют in-memory базу данных (<c>Data Source=:memory:;</c>), полностью изолированы.
 ///     Доступ к <see cref="SqliteConnection" /> внутри <see cref="SqliteUnitOfWork" /> осуществляется через рефлексию,
 ///     так как публичный API не предоставляет соединения для выполнения произвольных SQL-команд.
-///     <para>
-///         Для логирования используется <see cref="Serilog" /> с минимальной конфигурацией (запись в консоль).
-///     </para>
 /// </remarks>
 public class SqliteUnitOfWorkTests
 {
@@ -32,13 +52,11 @@ public class SqliteUnitOfWorkTests
     private readonly Logger _logger;
 
     /// <summary>
-    ///     Инициализирует тестовый класс, настраивая Serilog для минимального логирования.
+    ///     Инициализирует тестовый класс, создавая заглушку логгера.
     /// </summary>
     public SqliteUnitOfWorkTests()
     {
-        _logger = new LoggerConfiguration()
-            .MinimumLevel.Warning()
-            .CreateLogger();
+        _logger = new NullLogger<SqliteUnitOfWork>();
     }
 
     /// <summary>
@@ -100,10 +118,6 @@ public class SqliteUnitOfWorkTests
         return count > 0;
     }
 
-    // ============================================================================================================
-    // 4.1. Успешный жизненный цикл транзакции
-    // ============================================================================================================
-
     /// <summary>
     ///     Проверяет, что <see cref="IUnitOfWork.Commit" /> успешно фиксирует изменения в базе данных.
     /// </summary>
@@ -136,10 +150,6 @@ public class SqliteUnitOfWorkTests
         // Assert
         Assert.True(RecordExistsInNewConnection("commit_test"), "Запись должна быть видна из другого соединения после Commit");
     }
-
-    // ============================================================================================================
-    // 4.2. Явный откат транзакции
-    // ============================================================================================================
 
     /// <summary>
     ///     Проверяет, что <see cref="IUnitOfWork.Rollback" /> отменяет все изменения, сделанные в транзакции.
@@ -177,10 +187,6 @@ public class SqliteUnitOfWorkTests
         Assert.Equal(0, count);
     }
 
-    // ============================================================================================================
-    // 4.3. Автоматический откат при уничтожении объекта (Dispose)
-    // ============================================================================================================
-
     /// <summary>
     ///     Проверяет, что <see cref="SqliteUnitOfWork.Dispose" /> автоматически откатывает незакоммиченную транзакцию.
     /// </summary>
@@ -215,10 +221,6 @@ public class SqliteUnitOfWorkTests
         Assert.False(RecordExistsInNewConnection(testName), "Запись не должна существовать после Dispose без Commit");
     }
 
-    // ============================================================================================================
-    // 5.2.1. Повторный вызов BeginTransaction
-    // ============================================================================================================
-
     /// <summary>
     ///     Проверяет, что повторный вызов <see cref="IUnitOfWork.BeginTransaction" /> возвращает Failure с ошибкой
     ///     <see cref="InfrastructureErrors.Database.TransactionAlreadyExists" />.
@@ -240,10 +242,6 @@ public class SqliteUnitOfWorkTests
         Assert.Equal(InfrastructureErrors.Database.TransactionAlreadyExists.Code, secondResult.Error.Code);
     }
 
-    // ============================================================================================================
-    // 5.2.2. Commit без активной транзакции
-    // ============================================================================================================
-
     /// <summary>
     ///     Проверяет, что вызов <see cref="IUnitOfWork.Commit" /> без предварительного BeginTransaction
     ///     возвращает Failure с ошибкой <see cref="InfrastructureErrors.Database.NoActiveTransaction" />.
@@ -262,10 +260,6 @@ public class SqliteUnitOfWorkTests
         Assert.Equal(InfrastructureErrors.Database.NoActiveTransaction.Code, result.Error.Code);
     }
 
-    // ============================================================================================================
-    // 5.2.3. Rollback без активной транзакции
-    // ============================================================================================================
-
     /// <summary>
     ///     Проверяет, что вызов <see cref="IUnitOfWork.Rollback" /> без предварительного BeginTransaction
     ///     возвращает Failure с ошибкой <see cref="InfrastructureErrors.Database.NoActiveTransaction" />.
@@ -283,10 +277,6 @@ public class SqliteUnitOfWorkTests
         Assert.True(result.IsFailure, "Rollback без транзакции должен вернуть Failure");
         Assert.Equal(InfrastructureErrors.Database.NoActiveTransaction.Code, result.Error.Code);
     }
-
-    // ============================================================================================================
-    // 5.2.4. Повторный Commit после успешного Commit
-    // ============================================================================================================
 
     /// <summary>
     ///     Проверяет, что повторный вызов <see cref="IUnitOfWork.Commit" /> после успешного коммита
@@ -313,10 +303,6 @@ public class SqliteUnitOfWorkTests
         Assert.True(secondCommit.IsFailure, "Второй Commit должен вернуть Failure");
         Assert.Equal(InfrastructureErrors.Database.NoActiveTransaction.Code, secondCommit.Error.Code);
     }
-
-    // ============================================================================================================
-    // Дополнительно: Rollback после Commit
-    // ============================================================================================================
 
     /// <summary>
     ///     Проверяет, что вызов <see cref="IUnitOfWork.Rollback" /> после успешного Commit

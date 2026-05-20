@@ -8,6 +8,8 @@ using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Errors;
 
+using Serilog.Core;
+
 namespace PhotoCatalog.Infrastructure.UnitOfWork;
 
 /// <summary>
@@ -37,31 +39,16 @@ public class SqliteUnitOfWork : IUnitOfWork, IDisposable
     /// <exception cref="ArgumentNullException">
     ///     Выбрасывается, если <paramref name="connectionString" /> или <paramref name="logger" /> равен <c>null</c>.
     /// </exception>
-    public SqliteUnitOfWork(string connectionString, ILogger<SqliteUnitOfWork> logger)
+    public SqliteUnitOfWork(string connectionString, Logger logger)
     {
         _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    /// <summary>
-    ///     Получает текущее активное подключение к базе данных.
-    ///     Доступно только внутри сборки для использования репозиториями.
-    /// </summary>
     internal SqliteConnection? Connection => _connection;
 
-    /// <summary>
-    ///     Получает текущую активную транзакцию.
-    ///     Доступно только внутри сборки для использования репозиториями.
-    /// </summary>
     internal SqliteTransaction? Transaction => _transaction;
 
-    /// <summary>
-    ///     Начинает новую транзакцию.
-    /// </summary>
-    /// <returns>
-    ///     <see cref="ResultVoid.Success" />, если транзакция успешно начата,
-    ///     или <see cref="ResultVoid.Failure" /> с ошибкой.
-    /// </returns>
     public ResultVoid BeginTransaction()
     {
         if (_transaction != null)
@@ -92,13 +79,6 @@ public class SqliteUnitOfWork : IUnitOfWork, IDisposable
             });
     }
 
-    /// <summary>
-    ///     Фиксирует все изменения текущей транзакции.
-    /// </summary>
-    /// <returns>
-    ///     <see cref="ResultVoid.Success" />, если транзакция успешно зафиксирована,
-    ///     или <see cref="ResultVoid.Failure" /> с ошибкой.
-    /// </returns>
     public ResultVoid Commit()
     {
         if (_transaction == null)
@@ -127,13 +107,6 @@ public class SqliteUnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    /// <summary>
-    ///     Отменяет все изменения текущей транзакции.
-    /// </summary>
-    /// <returns>
-    ///     <see cref="ResultVoid.Success" />, если транзакция успешно отменена,
-    ///     или <see cref="ResultVoid.Failure" /> с ошибкой.
-    /// </returns>
     public ResultVoid Rollback()
     {
         if (_transaction == null)
@@ -162,9 +135,37 @@ public class SqliteUnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    /// <summary>
-    ///     Открывает соединение, если оно еще не открыто.
-    /// </summary>
+    public ResultVoid InsertTestRecord()
+    {
+        if (Connection == null)
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+
+        try
+        {
+            using var command = Connection.CreateCommand();
+            command.CommandText = """
+                INSERT INTO Photos (Name, Path)
+                VALUES ('Test photo', '/tmp/test.jpg');
+                """;
+
+            var rowsAffected = command.ExecuteNonQuery();
+
+            return rowsAffected > 0
+                ? ResultVoid.Success()
+                : ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+        catch (SqliteException ex)
+        {
+            _logger.LogError(ex, "Ошибка SQLite при выполнении тестовой записи");
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Неверная операция при выполнении тестовой записи");
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+        }
+    }
+
     private ResultVoid OpenConnectionIfNeeded()
     {
         if (_connection != null)
@@ -194,9 +195,6 @@ public class SqliteUnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    /// <summary>
-    ///     Освобождает ресурсы, используемые <see cref="SqliteUnitOfWork" />.
-    /// </summary>
     public void Dispose()
     {
         if (_disposed)
