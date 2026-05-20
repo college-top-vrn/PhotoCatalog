@@ -59,10 +59,21 @@ public class FakeFolderCommandRepository(
     }
 
     /// <summary>
+    ///     Добавляет новую папку в репозиторий.
     /// </summary>
-    /// <param name="folder"></param>
-    /// <param name="id"></param>
-    /// <returns></returns>
+    /// <param name="folder">Папка для добавления.</param>
+    /// <param name="id">Идентификатор папки.</param>
+    /// <returns>
+    ///     Результат операции:
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>Успех, если папка успешно добавлена</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных</description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
     public ResultVoid Add(Folder folder, int id)
     {
         if (folders.TryAdd(id, folder).ToResult().IsFailure)
