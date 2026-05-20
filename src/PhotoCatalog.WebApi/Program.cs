@@ -39,7 +39,9 @@ try
     builder.Services.AddSwaggerGen();
     builder.Services.AddHealthChecks();
 
-    builder.Services.AddSingleton<IFolderRepository, FakeFolderRepository>();
+    builder.Services.AddSingleton<FakeDatabase>();
+    builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoCommandRepository>();
+    builder.Services.AddSingleton<IPhotoQueryRepository, FakePhotoQueryRepository>();
     builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoCommandRepository>();
     builder.Services.AddSingleton<ITagQueryRepository, FakeTagQueryRepository>();
     builder.Services.AddSingleton<ITagCommandRepository, FakeTagCommandRepository>();
@@ -126,6 +128,7 @@ try
     albumEndpointsGroup.MapPost("/", (AlbumResponse album, IAlbumCommandRepository albumCommandRepository) => albumCommandRepository
         .Add(Album.Create(album.Name, album.Id).Value!)
         .ToHttpResult());
+
     // TODO исправить код
     // albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",
     //     (int albumId, int photoId, IAlbumQueryRepository albumQueryRepository, IPhotoRepository photoRepository) =>

@@ -21,7 +21,8 @@ public class RepositoriesNameСonvention
         .LoadAssemblies(
             typeof(SqliteAlbumQueryRepository).Assembly,
             typeof(IPhotoCommandRepository).Assembly,
-            typeof(SqliteFolderRepository).Assembly
+            typeof(SqliteFolderQueryRepository).Assembly,
+            typeof(SqliteFolderCommandRepository).Assembly
         ).Build();
 
     [Fact]
