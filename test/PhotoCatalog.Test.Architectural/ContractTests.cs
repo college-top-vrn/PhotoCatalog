@@ -21,7 +21,8 @@ public class ContractTests
         .LoadAssemblies(
             typeof(IPhotoCommandRepository).Assembly,
             typeof(IAlbumRepository).Assembly,
-            typeof(IFolderRepository).Assembly,
+            typeof(IFolderQueryRepository).Assembly,
+            typeof(IFolderCommandRepository).Assembly,
             typeof(ITagQueryRepository).Assembly,
             typeof(ITagCommandRepository).Assembly
         ).Build();

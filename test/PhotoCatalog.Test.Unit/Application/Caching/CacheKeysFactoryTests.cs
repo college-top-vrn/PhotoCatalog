@@ -2,10 +2,16 @@ using PhotoCatalog.Application.Caching;
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Application.Caching;
 
+/// <summary>
+///     Содержит модульные тесты для проверки работы CacheKeysFactory.
+/// </summary>
 public class CacheKeysFactoryTests
 {
+    /// <summary>
+    ///     Проверяет, что метод GetFolderAlbumsKey возвращает ключ в правильном формате для валидного идентификатора.
+    /// </summary>
     [Fact]
     public void GetFolderAlbumsKey_WithValidId_ReturnsExpectedFormat()
     {
@@ -14,6 +20,9 @@ public class CacheKeysFactoryTests
         Assert.Equal("key:folder:42:albums-key", key);
     }
 
+    /// <summary>
+    ///     Проверяет, что метод GetFoldersTreeKey возвращает константное значение.
+    /// </summary>
     [Fact]
     public void GetFoldersTreeKey_ReturnsConstantValue()
     {
@@ -21,6 +30,9 @@ public class CacheKeysFactoryTests
         Assert.Equal("key:folders-tree-key", key);
     }
 
+    /// <summary>
+    ///     Проверяет, что метод GetFolderTag возвращает тег в правильном формате для валидного идентификатора.
+    /// </summary>
     [Fact]
     public void GetFolderTag_WithValidId_ReturnsExpectedFormat()
     {
@@ -29,6 +41,9 @@ public class CacheKeysFactoryTests
         Assert.Equal("tag:folder:10:folder-tag", tag);
     }
 
+    /// <summary>
+    ///     Проверяет, что метод GetFoldersTreeTag возвращает константное значение.
+    /// </summary>
     [Fact]
     public void GetFoldersTreeTag_ReturnsConstantValue()
     {
@@ -36,6 +51,9 @@ public class CacheKeysFactoryTests
         Assert.Equal("tag:folders-tree-tag", tag);
     }
 
+    /// <summary>
+    ///     Проверяет, что ключ и тег для одной и той же папки различаются.
+    /// </summary>
     [Fact]
     public void KeyAndTag_ForSameFolder_ShouldBeDifferent()
     {
@@ -45,6 +63,9 @@ public class CacheKeysFactoryTests
         Assert.NotEqual(key, tag);
     }
 
+    /// <summary>
+    ///     Проверяет, что метод GetFolderAlbumsKey корректно обрабатывает граничные значения идентификатора.
+    /// </summary>
     [Theory]
     [InlineData(0)]
     [InlineData(-1)]
