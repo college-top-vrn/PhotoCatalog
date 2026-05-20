@@ -99,6 +99,33 @@ public class SqliteTagCommandRepositoryTests : IDisposable
 
         Assert.True(deleteResult.IsFailure);
     }
+
+    [Fact]
+    public void Update_existing_free_tag_returns_success_and_persists()
+    {
+        var tagOld = Tag.Create("лес");
+        _repoCommand.Add(tagOld.Value!);
+        
+        
+        var tagNew = Tag.Create("поляна");
+        
+        var result = _repoCommand.Update(tagNew.Value!);
+
+        Assert.True(result.IsSuccess);
+        
+        Assert.Equal("поляна", tagNew.Value!.Name);
+    }
+
+    [Fact]
+    public void Update_tag_returns_failure()
+    {
+        
+        var tagNew = Tag.Create("поляна");
+        
+        var result = _repoCommand.Update(tagNew.Value!);
+        Assert.True(result.IsFailure);
+
+    }
     public void Dispose()
     {
         _keepAliveConnection.Close();
