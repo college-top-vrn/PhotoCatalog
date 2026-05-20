@@ -32,7 +32,7 @@ public interface IPhotoCommandRepository
     ///     - Операция выполняется в рамках транзакции, управляемой <see cref="IUnitOfWork"/>.
     ///     - При необходимости проверки внешних ключей (например, AlbumId) используется включённый режим PRAGMA foreign_keys = ON.
     /// </remarks>
-    ResultVoid Add(Photo? photo);
+    ResultVoid Add(Photo photo);
 
     /// <summary>
     ///     Обновляет существующую фотографию.
