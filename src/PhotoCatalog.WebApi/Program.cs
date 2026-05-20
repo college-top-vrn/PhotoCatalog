@@ -51,7 +51,7 @@ try
     builder.Services.AddSingleton<IFileMetadataExtractor, FakeFileMetadataExtractor>();
     builder.Services.AddSingleton<IFolderHierarchyValidator, FakeFolderHierarchyValidator>();
     builder.Services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
-    builder.Services.AddSingleton<IThumbnailService, ThumbnailService>();
+    builder.Services.AddSingleton<IThumbnailService, MagicScalerThumbnailService>();
 
     builder.Services.AddTransient<CreateFolderUseCase>();
     builder.Services.AddTransient<DeletePhotoUseCase>();
@@ -169,9 +169,7 @@ try
 
                 if (photoResult.IsFailure)
                 {
-                    return photoResult.Error.Code == DomainErrors.Photo.NotFound.Code
-                        ? Results.NotFound()
-                        : Results.StatusCode(500);
+                    return photoResult.ToHttpResult();
                 }
 
                 var photo = photoResult.Value;
@@ -183,9 +181,12 @@ try
 
                 var existsResult = fileStorage.FileExists(thumbnailPath);
 
-                return existsResult.IsSuccess && existsResult.Value
-                    ? Results.File(thumbnailPath, "image/jpeg")
-                    : Results.File(photo.RealPath, "image/jpeg");
+                if (existsResult.IsSuccess && existsResult.Value)
+                {
+                    return Results.File(thumbnailPath, "image/jpeg");
+                }
+
+                return Results.File(photo.RealPath, "image/jpeg");
             })
         .WithTags("Фотографии");
 
