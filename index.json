@@ -79,6 +79,11 @@
     "title": "Class ApplicationErrors.General | PhotoCatalog Documentation",
     "summary": "Class ApplicationErrors.General Namespace PhotoCatalog.Application.Errors Assembly PhotoCatalog.Application.dll Общие ошибки приложения. public static class ApplicationErrors.General Inheritance object ApplicationErrors.General Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields NotFound Ошибка, когда запрашиваемая сущность не найдена. public static readonly Error NotFound Field Value Error"
   },
+  "api/PhotoCatalog.Application.Errors.ApplicationErrors.Http.html": {
+    "href": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Http.html",
+    "title": "Class ApplicationErrors.Http | PhotoCatalog Documentation",
+    "summary": "Class ApplicationErrors.Http Namespace PhotoCatalog.Application.Errors Assembly PhotoCatalog.Application.dll Ошибки, связанные с HTTP-запросами. public static class ApplicationErrors.Http Inheritance object ApplicationErrors.Http Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields FileNotUploaded Ошибка, когда файл не загружен или пуст. public static readonly Error FileNotUploaded Field Value Error InvalidMultipartRequest Ошибка, когда запрос не соответствует формату multipart/form-data. public static readonly Error InvalidMultipartRequest Field Value Error"
+  },
   "api/PhotoCatalog.Application.Errors.ApplicationErrors.Transactions.html": {
     "href": "api/PhotoCatalog.Application.Errors.ApplicationErrors.Transactions.html",
     "title": "Class ApplicationErrors.Transactions | PhotoCatalog Documentation",
@@ -97,7 +102,7 @@
   "api/PhotoCatalog.Application.Errors.html": {
     "href": "api/PhotoCatalog.Application.Errors.html",
     "title": "Namespace PhotoCatalog.Application.Errors | PhotoCatalog Documentation",
-    "summary": "Namespace PhotoCatalog.Application.Errors Classes ApplicationErrors Единый статический класс (реестр), который содержит все ошибки уровня Application в виде заранее определенных структур Error. ApplicationErrors.Albums Ошибка, связаная с обновлением альбома ApplicationErrors.Files Ошибки, связанные с файлами. ApplicationErrors.Folders Ошибки, связанные с папками. ApplicationErrors.General Общие ошибки приложения. ApplicationErrors.Transactions Ошибки, связанные с транзакциями. ApplicationErrors.UseCases Ошибки, связанные с выполнением use-cases (сценариев приложения)."
+    "summary": "Namespace PhotoCatalog.Application.Errors Classes ApplicationErrors Единый статический класс (реестр), который содержит все ошибки уровня Application в виде заранее определенных структур Error. ApplicationErrors.Albums Ошибка, связаная с обновлением альбома ApplicationErrors.Files Ошибки, связанные с файлами. ApplicationErrors.Folders Ошибки, связанные с папками. ApplicationErrors.General Общие ошибки приложения. ApplicationErrors.Http Ошибки, связанные с HTTP-запросами. ApplicationErrors.Transactions Ошибки, связанные с транзакциями. ApplicationErrors.UseCases Ошибки, связанные с выполнением use-cases (сценариев приложения)."
   },
   "api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.html": {
     "href": "api/PhotoCatalog.Application.Fakes.FakeFileMetadataExtractor.html",

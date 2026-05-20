@@ -638,6 +638,24 @@ references:
   commentId: F:PhotoCatalog.Application.Errors.ApplicationErrors.General.NotFound
   fullName: PhotoCatalog.Application.Errors.ApplicationErrors.General.NotFound
   nameWithType: ApplicationErrors.General.NotFound
+- uid: PhotoCatalog.Application.Errors.ApplicationErrors.Http
+  name: ApplicationErrors.Http
+  href: api/PhotoCatalog.Application.Errors.ApplicationErrors.Http.html
+  commentId: T:PhotoCatalog.Application.Errors.ApplicationErrors.Http
+  fullName: PhotoCatalog.Application.Errors.ApplicationErrors.Http
+  nameWithType: ApplicationErrors.Http
+- uid: PhotoCatalog.Application.Errors.ApplicationErrors.Http.FileNotUploaded
+  name: FileNotUploaded
+  href: api/PhotoCatalog.Application.Errors.ApplicationErrors.Http.html#PhotoCatalog_Application_Errors_ApplicationErrors_Http_FileNotUploaded
+  commentId: F:PhotoCatalog.Application.Errors.ApplicationErrors.Http.FileNotUploaded
+  fullName: PhotoCatalog.Application.Errors.ApplicationErrors.Http.FileNotUploaded
+  nameWithType: ApplicationErrors.Http.FileNotUploaded
+- uid: PhotoCatalog.Application.Errors.ApplicationErrors.Http.InvalidMultipartRequest
+  name: InvalidMultipartRequest
+  href: api/PhotoCatalog.Application.Errors.ApplicationErrors.Http.html#PhotoCatalog_Application_Errors_ApplicationErrors_Http_InvalidMultipartRequest
+  commentId: F:PhotoCatalog.Application.Errors.ApplicationErrors.Http.InvalidMultipartRequest
+  fullName: PhotoCatalog.Application.Errors.ApplicationErrors.Http.InvalidMultipartRequest
+  nameWithType: ApplicationErrors.Http.InvalidMultipartRequest
 - uid: PhotoCatalog.Application.Errors.ApplicationErrors.Transactions
   name: ApplicationErrors.Transactions
   href: api/PhotoCatalog.Application.Errors.ApplicationErrors.Transactions.html
