@@ -216,12 +216,6 @@ try
 
     RouteGroupBuilder foldersGroup = app.MapGroup("/api/folders");
 
-    foldersGroup.MapGet("/tree", (IFolderRepository folderRepository) =>
-    {
-        Result<IEnumerable<Folder>> result = folderRepository.GetAllFolders();
-        return result.ToHttpResult();
-    });
-
     foldersGroup.MapPost("/", (CreateFolderRequest request, CreateFolderUseCase useCase) =>
     {
         Result<FolderResponse> result = useCase.Execute(request);
