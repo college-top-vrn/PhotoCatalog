@@ -26,6 +26,8 @@ public class SqliteUnitOfWork : IUnitOfWork
 {
     private readonly string _connectionString;
     private readonly ILogger _logger;
+    private SqliteConnection? _connection;
+    private SqliteTransaction? _transaction;
     private bool _disposed;
 
     /// <summary>
@@ -38,8 +40,8 @@ public class SqliteUnitOfWork : IUnitOfWork
     /// </exception>
     public SqliteUnitOfWork(string connectionString, ILogger logger)
     {
-        _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _connectionString = connectionString;
+        _logger = logger;
     }
 
     /// <summary>
@@ -63,32 +65,32 @@ public class SqliteUnitOfWork : IUnitOfWork
     /// </returns>
     public ResultVoid BeginTransaction()
     {
-        if (Transaction == null)
+        if (Transaction != null)
         {
-            return OpenConnectionIfNeeded()
-                .Then(() =>
-                {
-                    try
-                    {
-                        Transaction = Connection!.BeginTransaction();
-                        _logger.Debug("Начата новая транзакция");
-                        return ResultVoid.Success();
-                    }
-                    catch (SqliteException ex)
-                    {
-                        _logger.Error(ex, "Ошибка SQLite при начале транзакции");
-                        return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
-                    }
-                    catch (InvalidOperationException ex)
-                    {
-                        _logger.Error(ex, "Неверная операция при начале транзакции");
-                        return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
-                    }
-                });
+            _logger.Warning("Попытка начать новую транзакцию, когда уже есть активная транзакция");
+            return ResultVoid.Failure(InfrastructureErrors.Database.TransactionAlreadyExists);
         }
 
-        _logger.Warning("Попытка начать новую транзакцию, когда уже есть активная транзакция");
-        return ResultVoid.Failure(InfrastructureErrors.Database.TransactionAlreadyExists);
+        return OpenConnectionIfNeeded()
+            .Then(() =>
+            {
+                try
+                {
+                    _transaction = _connection!.BeginTransaction();
+                    _logger.Debug("Начата новая транзакция");
+                    return ResultVoid.Success();
+                }
+                catch (SqliteException ex)
+                {
+                    _logger.Error(ex, "Ошибка SQLite при начале транзакции");
+                    return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    _logger.Error(ex, "Неверная операция при начале транзакции");
+                    return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
+                }
+            });
     }
 
     /// <summary>
@@ -162,43 +164,6 @@ public class SqliteUnitOfWork : IUnitOfWork
     }
 
     /// <summary>
-    ///     Освобождает ресурсы, используемые <see cref="SqliteUnitOfWork" />.
-    /// </summary>
-    public void Dispose()
-    {
-        if (_disposed)
-        {
-            return;
-        }
-
-        try
-        {
-            if (Transaction != null)
-            {
-                Transaction.Rollback();
-                Transaction.Dispose();
-                Transaction = null;
-                _logger.Debug("Активная транзакция откатана при освобождении ресурсов");
-            }
-
-            if (Connection != null)
-            {
-                Connection.Close();
-                Connection.Dispose();
-                Connection = null;
-                _logger.Debug("Соединение с БД закрыто");
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.Error(ex, "Ошибка при освобождении ресурсов SqliteUnitOfWork");
-        }
-
-        _disposed = true;
-        GC.SuppressFinalize(this);
-    }
-
-    /// <summary>
     ///     Открывает соединение, если оно еще не открыто.
     /// </summary>
     private ResultVoid OpenConnectionIfNeeded()
@@ -230,5 +195,40 @@ public class SqliteUnitOfWork : IUnitOfWork
             _logger.Error(ex, "Неверная операция при открытии соединения");
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
+    }
+
+    /// <summary>
+    ///     Освобождает ресурсы, используемые <see cref="SqliteUnitOfWork" />.
+    /// </summary>
+    public void Dispose()
+    {
+        if (_disposed)
+            return;
+
+        try
+        {
+            if (_transaction != null)
+            {
+                _transaction.Rollback();
+                _transaction.Dispose();
+                _transaction = null;
+                _logger.Debug("Активная транзакция откатана при освобождении ресурсов");
+            }
+
+            if (_connection != null)
+            {
+                _connection.Close();
+                _connection.Dispose();
+                _connection = null;
+                _logger.Debug("Соединение с БД закрыто");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex, "Ошибка при освобождении ресурсов SqliteUnitOfWork");
+        }
+
+        _disposed = true;
+        GC.SuppressFinalize(this);
     }
 }
