@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -39,11 +38,11 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddHealthChecks();
-    
+
     builder.Services.AddSingleton<FakeDatabase>();
     builder.Services.AddSingleton<IFolderCommandRepository, FakeFolderCommandRepository>();
     builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoCommandRepository>();
-    builder.Services.AddSingleton<IPhotoQueryRepository, FakePhotoQueryRepository>(); 
+    builder.Services.AddSingleton<IPhotoQueryRepository, FakePhotoQueryRepository>();
     builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
     builder.Services.AddSingleton<ITagQueryRepository, FakeTagQueryRepository>();
     builder.Services.AddSingleton<ITagCommandRepository, FakeTagCommandRepository>();
@@ -76,7 +75,7 @@ try
     }
 
     app.MapGet("/test", () => "Hello World!");
-    
+
     app.MapGroup("/api/tags");
 
     app.MapGet("/{id}", (int id) =>

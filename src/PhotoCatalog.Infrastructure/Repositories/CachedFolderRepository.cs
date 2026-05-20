@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -17,7 +16,8 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 
 /// <summary>
 ///     Декоратор репозитория папок, добавляющий кэширование операций чтения с помощью <see cref="HybridCache" />.
-///     Оборачивает реальный репозиторий (<see cref="SqliteFolderRepository" />), перехватывая запросы на чтение
+///     Оборачивает реальные репозитории (<see cref="SqliteFolderCommandRepository" />) и (
+///     <see cref="SqliteFolderQueryRepository" />/>), перехватывая запросы на чтение
 ///     и инвалидируя кэш при успешных операциях изменения (Add, Update, Delete).
 ///     Ошибки, возвращённые внутренним репозиторием, не попадают в кэш благодаря выбрасыванию
 ///     <see cref="CacheBypassException" />.
@@ -32,6 +32,24 @@ public class CachedFolderRepository(
     ILogger logger)
     : IFolderQueryRepository, IFolderCommandRepository
 {
+    /// <inheritdoc />
+    public ResultVoid Add(Folder folder)
+    {
+        return UpdateAndInvalidate(() => innerCommandRepository.Add(folder), folder.Id);
+    }
+
+    /// <inheritdoc />
+    public ResultVoid Update(Folder folder)
+    {
+        return UpdateAndInvalidate(() => innerCommandRepository.Update(folder), folder.Id);
+    }
+
+    /// <inheritdoc />
+    public ResultVoid Delete(int id)
+    {
+        return UpdateAndInvalidate(() => innerCommandRepository.Delete(id), id);
+    }
+
     /// <inheritdoc />
     /// <remarks>
     ///     Данные папки кэшируются с ключом <see cref="CacheKeysFactory.GetFolderKey" /> и тэгами
@@ -62,24 +80,6 @@ public class CachedFolderRepository(
             logger.Error(ex, "Непредвиденная ошибка при получении папки с Id={FolderId} из кэша", id);
             return Result<Folder>.Failure(InfrastructureErrors.Cache.UnknownError);
         }
-    }
-
-    /// <inheritdoc />
-    public ResultVoid Add(Folder folder)
-    {
-        return UpdateAndInvalidate(() => innerCommandRepository.Add(folder), folder.Id);
-    }
-
-    /// <inheritdoc />
-    public ResultVoid Update(Folder folder)
-    {
-        return UpdateAndInvalidate(() => innerCommandRepository.Update(folder), folder.Id);
-    }
-
-    /// <inheritdoc />
-    public ResultVoid Delete(int id)
-    {
-        return UpdateAndInvalidate(() => innerCommandRepository.Delete(id), id);
     }
 
     /// <summary>

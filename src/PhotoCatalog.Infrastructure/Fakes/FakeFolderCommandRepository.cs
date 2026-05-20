@@ -27,24 +27,6 @@ public class FakeFolderCommandRepository(
         return ResultVoid.Success();
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="folder"></param>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public ResultVoid Add(Folder folder, int id)
-    {
-        if (folders.TryAdd(id, folder).ToResult().IsFailure)
-        {
-            return ResultVoid
-                .Failure(new Error("FolderRepository.FolderWithSameIdAlreadyExist",
-                    "Папка с похожим идентификатором уже существует"));
-        }
-
-        return ResultVoid.Success();
-    }
-
     /// <inheritdoc />
     public ResultVoid Update(Folder folder)
     {
@@ -72,6 +54,23 @@ public class FakeFolderCommandRepository(
         }
 
         folders.TryRemove(id, out _);
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    /// </summary>
+    /// <param name="folder"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public ResultVoid Add(Folder folder, int id)
+    {
+        if (folders.TryAdd(id, folder).ToResult().IsFailure)
+        {
+            return ResultVoid
+                .Failure(new Error("FolderRepository.FolderWithSameIdAlreadyExist",
+                    "Папка с похожим идентификатором уже существует"));
+        }
 
         return ResultVoid.Success();
     }
