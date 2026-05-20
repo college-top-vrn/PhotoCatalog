@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
@@ -85,7 +84,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     }
 
     /// <summary>
-    /// Добавление фото с альбомом.
+    ///     Добавление фото с альбомом.
     /// </summary>
     /// <param name="photo">фотография.</param>
     /// <param name="id">идентификатор альбома</param>

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using Dapper;
@@ -21,8 +20,8 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 /// </summary>
 public class SqlitePhotoCommandRepository : IPhotoCommandRepository
 {
-    private readonly SqliteUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
+    private readonly SqliteUnitOfWork _unitOfWork;
 
     /// <summary>
     ///     Инициализирует новый экземпляр репозитория фотографий.
@@ -41,13 +40,13 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
+            string dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
 
             connection.Execute(
                 "INSERT INTO Photos (Id, RealPath, FileHash, Dimensions, AddedAt) VALUES (@Id, @RealPath, @FileHash, @Dimensions, @AddedAt)",
@@ -99,15 +98,15 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
 
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
+            string dimensionsValue = $"{photo.Dimensions.Width}x{photo.Dimensions.Height}";
 
-            var rowsAffected = connection.Execute(
+            int rowsAffected = connection.Execute(
                 "UPDATE Photos SET RealPath = @RealPath, FileHash = @FileHash, Dimensions = @Dimensions, AddedAt = @AddedAt WHERE Id = @Id",
                 new
                 {
@@ -161,7 +160,7 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
@@ -172,7 +171,7 @@ public class SqlitePhotoCommandRepository : IPhotoCommandRepository
                 new { Id = id },
                 _unitOfWork.Transaction);
 
-            var rowsAffected = connection.Execute(
+            int rowsAffected = connection.Execute(
                 "DELETE FROM Photos WHERE Id = @Id",
                 new { Id = id },
                 _unitOfWork.Transaction);

@@ -37,7 +37,6 @@ public class FakeTagCommandRepository : ITagCommandRepository
 
         _lastId -= 1;
         return ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation);
-
     }
 
     /// <inheritdoc />

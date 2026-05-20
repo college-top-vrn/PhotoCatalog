@@ -221,13 +221,13 @@ public class SqlitePhotoQueryRepository : IPhotoQueryRepository
     {
         try
         {
-            var connection = _unitOfWork.Connection;
+            SqliteConnection? connection = _unitOfWork.Connection;
             if (connection == null)
             {
                 return Result.Failure<IEnumerable<Photo>>(InfrastructureErrors.Database.ConnectionFailed);
             }
 
-            var photos = connection.Query<Photo>(
+            List<Photo> photos = connection.Query<Photo>(
                 @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
                   FROM Photos p",
                 _unitOfWork.Transaction).ToList();

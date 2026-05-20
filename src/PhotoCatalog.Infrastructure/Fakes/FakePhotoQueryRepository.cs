@@ -7,6 +7,7 @@ using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Infrastructure.Fakes;
+
 /// <summary>
 ///     Репозиторий для получения фотографий, имитирующий БД, и хранящий данные в оперативной памяти.
 /// </summary>

@@ -26,11 +26,11 @@ public class SqliteTagQueryRepository(string connectionString, ILogger logger) :
     /// <inheritdoc />
     public Result<Tag> GetById(int id)
     {
-        using var connection = new SqliteConnection(connectionString);
+        using SqliteConnection connection = new(connectionString);
         connection.Open();
         try
         {
-            var tag = connection.QuerySingleOrDefault<Tag>(
+            Tag? tag = connection.QuerySingleOrDefault<Tag>(
                 "SELECT Id, Name FROM Tags WHERE Id = @Id",
                 new { Id = id });
 
@@ -53,11 +53,11 @@ public class SqliteTagQueryRepository(string connectionString, ILogger logger) :
     /// <inheritdoc />
     public Result<IEnumerable<Tag>> GetAll()
     {
-        using var connection = new SqliteConnection(connectionString);
+        using SqliteConnection connection = new(connectionString);
         connection.Open();
         try
         {
-            var tags = connection.Query<Tag>("SELECT Id, Name FROM Tags");
+            IEnumerable<Tag> tags = connection.Query<Tag>("SELECT Id, Name FROM Tags");
 
             IEnumerable<Tag> enumerable = tags.ToArray();
             return enumerable.Any()
@@ -79,11 +79,11 @@ public class SqliteTagQueryRepository(string connectionString, ILogger logger) :
     /// <inheritdoc />
     public Result<Tag> GetByName(string name)
     {
-        using var connection = new SqliteConnection(connectionString);
+        using SqliteConnection connection = new(connectionString);
         connection.Open();
         try
         {
-            var tag = connection.QuerySingleOrDefault<Tag>(
+            Tag? tag = connection.QuerySingleOrDefault<Tag>(
                 "SELECT Id, Name FROM Tags WHERE Name = @Name",
                 new { Name = name });
 
