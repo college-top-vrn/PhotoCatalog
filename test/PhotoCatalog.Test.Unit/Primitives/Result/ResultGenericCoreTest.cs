@@ -4,7 +4,7 @@ using PhotoCatalog.Domain.Primitives;
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Primitives.Result;
 
 /// <summary>
 ///     Тесты для покрытия базовых состояний и операторов обобщенного класса Result{T}.

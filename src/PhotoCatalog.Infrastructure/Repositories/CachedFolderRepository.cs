@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -17,17 +16,46 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 
 /// <summary>
 ///     Декоратор репозитория папок, добавляющий кэширование операций чтения с помощью <see cref="HybridCache" />.
-///     Оборачивает реальный репозиторий (<see cref="SqliteFolderRepository" />), перехватывая запросы на чтение
+///     Оборачивает реальные репозитории (<see cref="SqliteFolderCommandRepository" />) и (
+///     <see cref="SqliteFolderQueryRepository" />/>), перехватывая запросы на чтение
 ///     и инвалидируя кэш при успешных операциях изменения (Add, Update, Delete).
 ///     Ошибки, возвращённые внутренним репозиторием, не попадают в кэш благодаря выбрасыванию
 ///     <see cref="CacheBypassException" />.
 /// </summary>
-/// <param name="innerRepository">Оригинальный репозиторий, выполняющий реальные запросы к базе данных.</param>
+/// <param name="innerQueryRepository">
+/// Оригинальный репозиторий, выполняющий
+/// реальные запросы к базе данных для получения данных.</param>
+/// <param name="innerCommandRepository">
+/// Оригинальный репозиторий, выполняющий
+/// реальные запросы к базе данных для изменения данных.
+/// </param>
 /// <param name="cache">Сервис гибридного кэширования.</param>
 /// <param name="logger">Логгер для записи событий работы декоратора.</param>
-public class CachedFolderRepository(IFolderRepository innerRepository, HybridCache cache, ILogger logger)
-    : IFolderRepository
+public class CachedFolderRepository(
+    IFolderQueryRepository innerQueryRepository,
+    IFolderCommandRepository innerCommandRepository,
+    HybridCache cache,
+    ILogger logger)
+    : IFolderQueryRepository, IFolderCommandRepository
 {
+    /// <inheritdoc />
+    public ResultVoid Add(Folder folder)
+    {
+        return UpdateAndInvalidate(() => innerCommandRepository.Add(folder), folder.Id);
+    }
+
+    /// <inheritdoc />
+    public ResultVoid Update(Folder folder)
+    {
+        return UpdateAndInvalidate(() => innerCommandRepository.Update(folder), folder.Id);
+    }
+
+    /// <inheritdoc />
+    public ResultVoid Delete(int id)
+    {
+        return UpdateAndInvalidate(() => innerCommandRepository.Delete(id), id);
+    }
+
     /// <inheritdoc />
     /// <remarks>
     ///     Данные папки кэшируются с ключом <see cref="CacheKeysFactory.GetFolderKey" /> и тэгами
@@ -58,50 +86,6 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
             logger.Error(ex, "Непредвиденная ошибка при получении папки с Id={FolderId} из кэша", id);
             return Result.Failure<Folder>(InfrastructureErrors.Cache.UnknownError);
         }
-    }
-
-    /// <inheritdoc />
-    public Result<IEnumerable<Folder>> GetAllFolders()
-    {
-        try
-        {
-            IEnumerable<Folder>? folders = cache.GetOrCreateAsync<IEnumerable<Folder>?>(
-                CacheKeysFactory.GetFoldersTreeKey(),
-                _ => GetAllFoldersValueTask(),
-                null,
-                [CacheKeysFactory.GetFoldersTreeTag()]
-            ).AsTask().GetAwaiter().GetResult();
-
-            return Result.Success(folders!);
-        }
-        catch (CacheBypassException ex)
-        {
-            logger.Warning(ex, "Не удалось получить список папок из внутреннего репозитория – результат не кэширован");
-            return Result.Failure<IEnumerable<Folder>>(InfrastructureErrors.Database.Sqlite);
-        }
-        catch (Exception ex)
-        {
-            logger.Error(ex, "Непредвиденная ошибка при получении списка папок из кэша");
-            return Result.Failure<IEnumerable<Folder>>(InfrastructureErrors.Cache.UnknownError);
-        }
-    }
-
-    /// <inheritdoc />
-    public ResultVoid Add(Folder folder)
-    {
-        return UpdateAndInvalidate(() => innerRepository.Add(folder), folder.Id);
-    }
-
-    /// <inheritdoc />
-    public ResultVoid Update(Folder folder)
-    {
-        return UpdateAndInvalidate(() => innerRepository.Update(folder), folder.Id);
-    }
-
-    /// <inheritdoc />
-    public ResultVoid Delete(int id)
-    {
-        return UpdateAndInvalidate(() => innerRepository.Delete(id), id);
     }
 
     /// <summary>
@@ -149,7 +133,7 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
     /// </summary>
     private ValueTask<Folder?> GetFolderByIdValueTask(int id)
     {
-        Result<Folder> result = innerRepository.GetById(id);
+        Result<Folder> result = innerQueryRepository.GetById(id);
         if (!result.IsFailure)
         {
             return new ValueTask<Folder?>(result.Value);
@@ -158,21 +142,5 @@ public class CachedFolderRepository(IFolderRepository innerRepository, HybridCac
         logger.Warning("Папка с Id={FolderId} не получена: {ErrorCode} {ErrorMessage}",
             id, result.Error.Code, result.Error.Message);
         throw new CacheBypassException($"Папка с Id={id} не найдена или ошибка БД.");
-    }
-
-    /// <summary>
-    ///     Синхронно получает все папки и оборачивает результат в ValueTask.
-    /// </summary>
-    private ValueTask<IEnumerable<Folder>?> GetAllFoldersValueTask()
-    {
-        Result<IEnumerable<Folder>> result = innerRepository.GetAllFolders();
-        if (!result.IsFailure)
-        {
-            return new ValueTask<IEnumerable<Folder>?>(result.Value);
-        }
-
-        logger.Warning("Не удалось получить список всех папок: {ErrorCode} {ErrorMessage}",
-            result.Error.Code, result.Error.Message);
-        throw new CacheBypassException("Не удалось получить список всех папок.");
     }
 }

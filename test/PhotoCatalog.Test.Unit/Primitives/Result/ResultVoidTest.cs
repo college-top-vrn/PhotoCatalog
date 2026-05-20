@@ -2,7 +2,7 @@
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Primitives.Result;
 
 /// <summary>
 ///     Тесты для полного покрытия базовых свойств и состояний структуры ResultVoid.

@@ -12,10 +12,14 @@ namespace PhotoCatalog.Application.UseCases;
 /// <summary>
 ///     Сценарий использования для создания папки.
 /// </summary>
-/// <param name="folderRepository">Репозиторий папок.</param>
+/// <param name="folderQueryRepository">Репозиторий папок.</param>
 /// <param name="unitOfWork">Единица работы.</param>
 /// <param name="logger">Логгер.</param>
-public class CreateFolderUseCase(IFolderRepository folderRepository, IUnitOfWork unitOfWork, ILogger logger)
+public class CreateFolderUseCase(
+    IFolderQueryRepository folderQueryRepository,
+    IFolderCommandRepository folderCommandRepository,
+    IUnitOfWork unitOfWork,
+    ILogger logger)
 {
     /// <summary>
     ///     Выполняет сценарий создания папки.
@@ -33,7 +37,7 @@ public class CreateFolderUseCase(IFolderRepository folderRepository, IUnitOfWork
         Folder? parentFolder = null;
         if (request.ParentFolderId.HasValue)
         {
-            Result<Folder> parentResult = folderRepository.GetById(request.ParentFolderId.Value);
+            Result<Folder> parentResult = folderQueryRepository.GetById(request.ParentFolderId.Value);
             if (parentResult.IsFailure)
             {
                 logger.Warning("Родительская папка с Id {ParentId} не найдена.", request.ParentFolderId);
@@ -63,7 +67,7 @@ public class CreateFolderUseCase(IFolderRepository folderRepository, IUnitOfWork
                 beginTransactionResult.Error.Message);
         }
 
-        ResultVoid addFolderResult = folderRepository.Add(folder);
+        ResultVoid addFolderResult = folderCommandRepository.Add(folder);
         if (addFolderResult.IsFailure)
         {
             logger.Error("Не удалось добавить папку в репозиторий: {ErrorCode}: {Error}",

@@ -3,7 +3,7 @@ using PhotoCatalog.Domain.ValueObjects;
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Domain.ValueObjects;
 
 /// <summary>
 ///     Unit-тесты для DimensionsTest
