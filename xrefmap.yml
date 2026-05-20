@@ -876,15 +876,15 @@ references:
   commentId: T:PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase
   fullName: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase
   nameWithType: AddPhotoToAlbumUseCase
-- uid: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
-  name: AddPhotoToAlbumUseCase(IAlbumRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
-  href: api/PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.html#PhotoCatalog_Application_UseCases_AddPhotoToAlbumUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
-  commentId: M:PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
-  name.vb: New(IAlbumRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
-  fullName: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.AddPhotoToAlbumUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
-  fullName.vb: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
-  nameWithType: AddPhotoToAlbumUseCase.AddPhotoToAlbumUseCase(IAlbumRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
-  nameWithType.vb: AddPhotoToAlbumUseCase.New(IAlbumRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
+- uid: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: AddPhotoToAlbumUseCase(IAlbumQueryRepository, IAlbumCommandRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.html#PhotoCatalog_Application_UseCases_AddPhotoToAlbumUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumCommandRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(IAlbumQueryRepository, IAlbumCommandRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.AddPhotoToAlbumUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: AddPhotoToAlbumUseCase.AddPhotoToAlbumUseCase(IAlbumQueryRepository, IAlbumCommandRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
+  nameWithType.vb: AddPhotoToAlbumUseCase.New(IAlbumQueryRepository, IAlbumCommandRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
 - uid: PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.#ctor*
   name: AddPhotoToAlbumUseCase
   href: api/PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.html#PhotoCatalog_Application_UseCases_AddPhotoToAlbumUseCase__ctor_
@@ -1962,70 +1962,92 @@ references:
   commentId: N:PhotoCatalog.Domain.Interfaces.Repositories
   fullName: PhotoCatalog.Domain.Interfaces.Repositories
   nameWithType: PhotoCatalog.Domain.Interfaces.Repositories
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository
-  name: IAlbumRepository
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html
-  commentId: T:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository
-  nameWithType: IAlbumRepository
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository
+  name: IAlbumCommandRepository
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html
+  commentId: T:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository
+  nameWithType: IAlbumCommandRepository
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
   name: Add(Album)
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
-  nameWithType: IAlbumRepository.Add(Album)
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add*
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumCommandRepository_Add_PhotoCatalog_Domain_Entities_Album_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  nameWithType: IAlbumCommandRepository.Add(Album)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Add*
   name: Add
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Add_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumCommandRepository_Add_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Add
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Add
-  nameWithType: IAlbumRepository.Add
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete(System.Int32)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Add
+  nameWithType: IAlbumCommandRepository.Add
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Delete(System.Int32)
   name: Delete(int)
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Delete_System_Int32_
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete(System.Int32)
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumCommandRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Delete(System.Int32)
   name.vb: Delete(Integer)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete(int)
-  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete(Integer)
-  nameWithType: IAlbumRepository.Delete(int)
-  nameWithType.vb: IAlbumRepository.Delete(Integer)
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete*
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Delete(Integer)
+  nameWithType: IAlbumCommandRepository.Delete(int)
+  nameWithType.vb: IAlbumCommandRepository.Delete(Integer)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Delete*
   name: Delete
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Delete_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumCommandRepository_Delete_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Delete
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Delete
-  nameWithType: IAlbumRepository.Delete
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById(System.Int32)
-  name: GetById(int)
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_GetById_System_Int32_
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById(System.Int32)
-  name.vb: GetById(Integer)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById(int)
-  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById(Integer)
-  nameWithType: IAlbumRepository.GetById(int)
-  nameWithType.vb: IAlbumRepository.GetById(Integer)
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById*
-  name: GetById
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_GetById_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.GetById
-  nameWithType: IAlbumRepository.GetById
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Delete
+  nameWithType: IAlbumCommandRepository.Delete
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
   name: Update(Album)
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Update_PhotoCatalog_Domain_Entities_Album_
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
-  nameWithType: IAlbumRepository.Update(Album)
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Update*
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumCommandRepository_Update_PhotoCatalog_Domain_Entities_Album_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  nameWithType: IAlbumCommandRepository.Update(Album)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Update*
   name: Update
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_Update_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Update
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumCommandRepository_Update_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Update
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Update
-  nameWithType: IAlbumRepository.Update
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.Update
+  nameWithType: IAlbumCommandRepository.Update
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository
+  name: IAlbumQueryRepository
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.html
+  commentId: T:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository
+  nameWithType: IAlbumQueryRepository
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetByFolderId(System.Int32)
+  name: GetByFolderId(int)
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumQueryRepository_GetByFolderId_System_Int32_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetByFolderId(System.Int32)
+  name.vb: GetByFolderId(Integer)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetByFolderId(int)
+  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetByFolderId(Integer)
+  nameWithType: IAlbumQueryRepository.GetByFolderId(int)
+  nameWithType.vb: IAlbumQueryRepository.GetByFolderId(Integer)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetByFolderId*
+  name: GetByFolderId
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumQueryRepository_GetByFolderId_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetByFolderId
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetByFolderId
+  nameWithType: IAlbumQueryRepository.GetByFolderId
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetById(System.Int32)
+  name: GetById(int)
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumQueryRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetById(System.Int32)
+  name.vb: GetById(Integer)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetById(Integer)
+  nameWithType: IAlbumQueryRepository.GetById(int)
+  nameWithType.vb: IAlbumQueryRepository.GetById(Integer)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetById*
+  name: GetById
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IAlbumQueryRepository_GetById_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetById
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.GetById
+  nameWithType: IAlbumQueryRepository.GetById
 - uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository
   name: IFolderCommandRepository
   href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html
@@ -2150,19 +2172,6 @@ references:
   commentId: T:PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository
   fullName: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository
   nameWithType: IPhotoQueryRepository
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.GetAll
-  name: GetAll()
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_GetAll
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.GetAll
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.GetAll()
-  nameWithType: IPhotoQueryRepository.GetAll()
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.GetAll*
-  name: GetAll
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_GetAll_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.GetAll
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.GetAll
-  nameWithType: IPhotoQueryRepository.GetAll
 - uid: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.GetByAlbumId(System.Int32)
   name: GetByAlbumId(int)
   href: api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_GetByAlbumId_System_Int32_
@@ -3237,133 +3246,130 @@ references:
   commentId: N:PhotoCatalog.Infrastructure.Fakes
   fullName: PhotoCatalog.Infrastructure.Fakes
   nameWithType: PhotoCatalog.Infrastructure.Fakes
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository
-  name: FakeAlbumRepository
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html
-  commentId: T:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository
-  nameWithType: FakeAlbumRepository
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
-  name: Add(Album?)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
-  name.vb: Add(Album)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album?)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
-  nameWithType: FakeAlbumRepository.Add(Album?)
-  nameWithType.vb: FakeAlbumRepository.Add(Album)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album,System.Int32)
-  name: Add(Album?, int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album,System.Int32)
-  name.vb: Add(Album, Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album?, int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album, Integer)
-  nameWithType: FakeAlbumRepository.Add(Album?, int)
-  nameWithType.vb: FakeAlbumRepository.Add(Album, Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add*
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository
+  name: FakeAlbumCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository
+  nameWithType: FakeAlbumCommandRepository
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,PhotoCatalog.Domain.Entities.Album},System.Int32)
+  name: FakeAlbumCommandRepository(ConcurrentDictionary<int, Album>?, int)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumCommandRepository__ctor_System_Collections_Concurrent_ConcurrentDictionary_System_Int32_PhotoCatalog_Domain_Entities_Album__System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,PhotoCatalog.Domain.Entities.Album},System.Int32)
+  name.vb: New(ConcurrentDictionary(Of Integer, Album), Integer)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.FakeAlbumCommandRepository(System.Collections.Concurrent.ConcurrentDictionary<int, PhotoCatalog.Domain.Entities.Album>?, int)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.New(System.Collections.Concurrent.ConcurrentDictionary(Of Integer, PhotoCatalog.Domain.Entities.Album), Integer)
+  nameWithType: FakeAlbumCommandRepository.FakeAlbumCommandRepository(ConcurrentDictionary<int, Album>?, int)
+  nameWithType.vb: FakeAlbumCommandRepository.New(ConcurrentDictionary(Of Integer, Album), Integer)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.#ctor*
+  name: FakeAlbumCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumCommandRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.FakeAlbumCommandRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.New
+  nameWithType: FakeAlbumCommandRepository.FakeAlbumCommandRepository
+  nameWithType.vb: FakeAlbumCommandRepository.New
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  name: Add(Album)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumCommandRepository_Add_PhotoCatalog_Domain_Entities_Album_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  nameWithType: FakeAlbumCommandRepository.Add(Album)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Add*
   name: Add
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Add_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumCommandRepository_Add_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Add
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Add
-  nameWithType: FakeAlbumRepository.Add
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto(System.Int32,System.Int32)
-  name: AddPhoto(int, int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_AddPhoto_System_Int32_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto(System.Int32,System.Int32)
-  name.vb: AddPhoto(Integer, Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto(int, int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto(Integer, Integer)
-  nameWithType: FakeAlbumRepository.AddPhoto(int, int)
-  nameWithType.vb: FakeAlbumRepository.AddPhoto(Integer, Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto*
-  name: AddPhoto
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_AddPhoto_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.AddPhoto
-  nameWithType: FakeAlbumRepository.AddPhoto
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete(System.Int32)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Add
+  nameWithType: FakeAlbumCommandRepository.Add
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Delete(System.Int32)
   name: Delete(int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Delete_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete(System.Int32)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumCommandRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Delete(System.Int32)
   name.vb: Delete(Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete(Integer)
-  nameWithType: FakeAlbumRepository.Delete(int)
-  nameWithType.vb: FakeAlbumRepository.Delete(Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete*
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Delete(Integer)
+  nameWithType: FakeAlbumCommandRepository.Delete(int)
+  nameWithType.vb: FakeAlbumCommandRepository.Delete(Integer)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Delete*
   name: Delete
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Delete_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumCommandRepository_Delete_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Delete
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Delete
-  nameWithType: FakeAlbumRepository.Delete
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto(System.Int32,System.Int32)
-  name: DeletePhoto(int, int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_DeletePhoto_System_Int32_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto(System.Int32,System.Int32)
-  name.vb: DeletePhoto(Integer, Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto(int, int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto(Integer, Integer)
-  nameWithType: FakeAlbumRepository.DeletePhoto(int, int)
-  nameWithType.vb: FakeAlbumRepository.DeletePhoto(Integer, Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto*
-  name: DeletePhoto
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_DeletePhoto_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.DeletePhoto
-  nameWithType: FakeAlbumRepository.DeletePhoto
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId(System.Int32)
-  name: GetByFolderId(int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_GetByFolderId_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId(System.Int32)
-  name.vb: GetByFolderId(Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId(Integer)
-  nameWithType: FakeAlbumRepository.GetByFolderId(int)
-  nameWithType.vb: FakeAlbumRepository.GetByFolderId(Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId*
-  name: GetByFolderId
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_GetByFolderId_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetByFolderId
-  nameWithType: FakeAlbumRepository.GetByFolderId
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetById(System.Int32)
-  name: GetById(int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_GetById_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetById(System.Int32)
-  name.vb: GetById(Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetById(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetById(Integer)
-  nameWithType: FakeAlbumRepository.GetById(int)
-  nameWithType.vb: FakeAlbumRepository.GetById(Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetById*
-  name: GetById
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_GetById_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetById
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.GetById
-  nameWithType: FakeAlbumRepository.GetById
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
-  name: Update(Album?)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Update_PhotoCatalog_Domain_Entities_Album_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
-  name.vb: Update(Album)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album?)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
-  nameWithType: FakeAlbumRepository.Update(Album?)
-  nameWithType.vb: FakeAlbumRepository.Update(Album)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update*
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Delete
+  nameWithType: FakeAlbumCommandRepository.Delete
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  name: Update(Album)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumCommandRepository_Update_PhotoCatalog_Domain_Entities_Album_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  nameWithType: FakeAlbumCommandRepository.Update(Album)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Update*
   name: Update
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumRepository_Update_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumCommandRepository_Update_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Update
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update
-  nameWithType: FakeAlbumRepository.Update
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.Update
+  nameWithType: FakeAlbumCommandRepository.Update
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository
+  name: FakeAlbumQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository
+  nameWithType: FakeAlbumQueryRepository
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,PhotoCatalog.Domain.Entities.Album})
+  name: FakeAlbumQueryRepository(ConcurrentDictionary<int, Album>?)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumQueryRepository__ctor_System_Collections_Concurrent_ConcurrentDictionary_System_Int32_PhotoCatalog_Domain_Entities_Album__
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,PhotoCatalog.Domain.Entities.Album})
+  name.vb: New(ConcurrentDictionary(Of Integer, Album))
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.FakeAlbumQueryRepository(System.Collections.Concurrent.ConcurrentDictionary<int, PhotoCatalog.Domain.Entities.Album>?)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.New(System.Collections.Concurrent.ConcurrentDictionary(Of Integer, PhotoCatalog.Domain.Entities.Album))
+  nameWithType: FakeAlbumQueryRepository.FakeAlbumQueryRepository(ConcurrentDictionary<int, Album>?)
+  nameWithType.vb: FakeAlbumQueryRepository.New(ConcurrentDictionary(Of Integer, Album))
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.#ctor*
+  name: FakeAlbumQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumQueryRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.FakeAlbumQueryRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.New
+  nameWithType: FakeAlbumQueryRepository.FakeAlbumQueryRepository
+  nameWithType.vb: FakeAlbumQueryRepository.New
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetByFolderId(System.Int32)
+  name: GetByFolderId(int)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumQueryRepository_GetByFolderId_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetByFolderId(System.Int32)
+  name.vb: GetByFolderId(Integer)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetByFolderId(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetByFolderId(Integer)
+  nameWithType: FakeAlbumQueryRepository.GetByFolderId(int)
+  nameWithType.vb: FakeAlbumQueryRepository.GetByFolderId(Integer)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetByFolderId*
+  name: GetByFolderId
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumQueryRepository_GetByFolderId_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetByFolderId
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetByFolderId
+  nameWithType: FakeAlbumQueryRepository.GetByFolderId
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetById(System.Int32)
+  name: GetById(int)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumQueryRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetById(System.Int32)
+  name.vb: GetById(Integer)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetById(Integer)
+  nameWithType: FakeAlbumQueryRepository.GetById(int)
+  nameWithType.vb: FakeAlbumQueryRepository.GetById(Integer)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetById*
+  name: GetById
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeAlbumQueryRepository_GetById_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetById
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.GetById
+  nameWithType: FakeAlbumQueryRepository.GetById
 - uid: PhotoCatalog.Infrastructure.Fakes.FakeDatabase
   name: FakeDatabase
   href: api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.html
@@ -3573,15 +3579,15 @@ references:
   commentId: T:PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository
   fullName: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository
   nameWithType: FakePhotoQueryRepository
-- uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)
-  name: FakePhotoQueryRepository(IAlbumRepository)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)
-  name.vb: New(IAlbumRepository)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.FakePhotoQueryRepository(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.New(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)
-  nameWithType: FakePhotoQueryRepository.FakePhotoQueryRepository(IAlbumRepository)
-  nameWithType.vb: FakePhotoQueryRepository.New(IAlbumRepository)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository)
+  name: FakePhotoQueryRepository(IAlbumQueryRepository)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumQueryRepository_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository)
+  name.vb: New(IAlbumQueryRepository)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.FakePhotoQueryRepository(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.New(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository)
+  nameWithType: FakePhotoQueryRepository.FakePhotoQueryRepository(IAlbumQueryRepository)
+  nameWithType.vb: FakePhotoQueryRepository.New(IAlbumQueryRepository)
 - uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.#ctor*
   name: FakePhotoQueryRepository
   href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository__ctor_
@@ -3592,19 +3598,6 @@ references:
   fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.New
   nameWithType: FakePhotoQueryRepository.FakePhotoQueryRepository
   nameWithType.vb: FakePhotoQueryRepository.New
-- uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetAll
-  name: GetAll()
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository_GetAll
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetAll
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetAll()
-  nameWithType: FakePhotoQueryRepository.GetAll()
-- uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetAll*
-  name: GetAll
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository_GetAll_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetAll
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetAll
-  nameWithType: FakePhotoQueryRepository.GetAll
 - uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetByAlbumId(System.Int32)
   name: GetByAlbumId(int)
   href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository_GetByAlbumId_System_Int32_
@@ -3901,105 +3894,130 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Update
   nameWithType: CachedFolderRepository.Update
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository
-  name: SqliteAlbumRepository
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html
-  commentId: T:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository
-  nameWithType: SqliteAlbumRepository
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.#ctor(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository})
-  name: SqliteAlbumRepository(SqliteUnitOfWork, ILogger<SqliteAlbumRepository>)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository__ctor_PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository__
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.#ctor(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository})
-  name.vb: New(SqliteUnitOfWork, ILogger(Of SqliteAlbumRepository))
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.SqliteAlbumRepository(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork, Microsoft.Extensions.Logging.ILogger<PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository>)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.New(PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork, Microsoft.Extensions.Logging.ILogger(Of PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository))
-  nameWithType: SqliteAlbumRepository.SqliteAlbumRepository(SqliteUnitOfWork, ILogger<SqliteAlbumRepository>)
-  nameWithType.vb: SqliteAlbumRepository.New(SqliteUnitOfWork, ILogger(Of SqliteAlbumRepository))
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.#ctor*
-  name: SqliteAlbumRepository
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository__ctor_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.#ctor
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository
+  name: SqliteAlbumCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository
+  nameWithType: SqliteAlbumCommandRepository
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.#ctor(PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: SqliteAlbumCommandRepository(IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumCommandRepository__ctor_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.#ctor(PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.SqliteAlbumCommandRepository(PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.New(PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: SqliteAlbumCommandRepository.SqliteAlbumCommandRepository(IUnitOfWork, ILogger)
+  nameWithType.vb: SqliteAlbumCommandRepository.New(IUnitOfWork, ILogger)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.#ctor*
+  name: SqliteAlbumCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumCommandRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.SqliteAlbumRepository
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.New
-  nameWithType: SqliteAlbumRepository.SqliteAlbumRepository
-  nameWithType.vb: SqliteAlbumRepository.New
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.SqliteAlbumCommandRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.New
+  nameWithType: SqliteAlbumCommandRepository.SqliteAlbumCommandRepository
+  nameWithType.vb: SqliteAlbumCommandRepository.New
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
   name: Add(Album)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Add_PhotoCatalog_Domain_Entities_Album_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add(PhotoCatalog.Domain.Entities.Album)
-  nameWithType: SqliteAlbumRepository.Add(Album)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add*
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumCommandRepository_Add_PhotoCatalog_Domain_Entities_Album_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Add(PhotoCatalog.Domain.Entities.Album)
+  nameWithType: SqliteAlbumCommandRepository.Add(Album)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Add*
   name: Add
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Add_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumCommandRepository_Add_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Add
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Add
-  nameWithType: SqliteAlbumRepository.Add
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete(System.Int32)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Add
+  nameWithType: SqliteAlbumCommandRepository.Add
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Delete(System.Int32)
   name: Delete(int)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Delete_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete(System.Int32)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumCommandRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Delete(System.Int32)
   name.vb: Delete(Integer)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete(Integer)
-  nameWithType: SqliteAlbumRepository.Delete(int)
-  nameWithType.vb: SqliteAlbumRepository.Delete(Integer)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete*
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Delete(Integer)
+  nameWithType: SqliteAlbumCommandRepository.Delete(int)
+  nameWithType.vb: SqliteAlbumCommandRepository.Delete(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Delete*
   name: Delete
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Delete_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumCommandRepository_Delete_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Delete
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Delete
-  nameWithType: SqliteAlbumRepository.Delete
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetByFolderId(System.Int32)
-  name: GetByFolderId(int)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_GetByFolderId_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetByFolderId(System.Int32)
-  name.vb: GetByFolderId(Integer)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetByFolderId(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetByFolderId(Integer)
-  nameWithType: SqliteAlbumRepository.GetByFolderId(int)
-  nameWithType.vb: SqliteAlbumRepository.GetByFolderId(Integer)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetByFolderId*
-  name: GetByFolderId
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_GetByFolderId_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetByFolderId
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetByFolderId
-  nameWithType: SqliteAlbumRepository.GetByFolderId
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById(System.Int32)
-  name: GetById(int)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_GetById_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById(System.Int32)
-  name.vb: GetById(Integer)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById(Integer)
-  nameWithType: SqliteAlbumRepository.GetById(int)
-  nameWithType.vb: SqliteAlbumRepository.GetById(Integer)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById*
-  name: GetById
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_GetById_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.GetById
-  nameWithType: SqliteAlbumRepository.GetById
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Delete
+  nameWithType: SqliteAlbumCommandRepository.Delete
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
   name: Update(Album)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Update_PhotoCatalog_Domain_Entities_Album_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update(PhotoCatalog.Domain.Entities.Album)
-  nameWithType: SqliteAlbumRepository.Update(Album)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update*
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumCommandRepository_Update_PhotoCatalog_Domain_Entities_Album_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Update(PhotoCatalog.Domain.Entities.Album)
+  nameWithType: SqliteAlbumCommandRepository.Update(Album)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Update*
   name: Update
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumRepository_Update_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumCommandRepository_Update_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Update
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update
-  nameWithType: SqliteAlbumRepository.Update
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.Update
+  nameWithType: SqliteAlbumCommandRepository.Update
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository
+  name: SqliteAlbumQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository
+  nameWithType: SqliteAlbumQueryRepository
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.#ctor(System.String,Serilog.ILogger)
+  name: SqliteAlbumQueryRepository(string, ILogger)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumQueryRepository__ctor_System_String_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.#ctor(System.String,Serilog.ILogger)
+  name.vb: New(String, ILogger)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.SqliteAlbumQueryRepository(string, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.New(String, Serilog.ILogger)
+  nameWithType: SqliteAlbumQueryRepository.SqliteAlbumQueryRepository(string, ILogger)
+  nameWithType.vb: SqliteAlbumQueryRepository.New(String, ILogger)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.#ctor*
+  name: SqliteAlbumQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumQueryRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.SqliteAlbumQueryRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.New
+  nameWithType: SqliteAlbumQueryRepository.SqliteAlbumQueryRepository
+  nameWithType.vb: SqliteAlbumQueryRepository.New
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetByFolderId(System.Int32)
+  name: GetByFolderId(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumQueryRepository_GetByFolderId_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetByFolderId(System.Int32)
+  name.vb: GetByFolderId(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetByFolderId(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetByFolderId(Integer)
+  nameWithType: SqliteAlbumQueryRepository.GetByFolderId(int)
+  nameWithType.vb: SqliteAlbumQueryRepository.GetByFolderId(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetByFolderId*
+  name: GetByFolderId
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumQueryRepository_GetByFolderId_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetByFolderId
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetByFolderId
+  nameWithType: SqliteAlbumQueryRepository.GetByFolderId
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetById(System.Int32)
+  name: GetById(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumQueryRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetById(System.Int32)
+  name.vb: GetById(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetById(Integer)
+  nameWithType: SqliteAlbumQueryRepository.GetById(int)
+  nameWithType.vb: SqliteAlbumQueryRepository.GetById(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetById*
+  name: GetById
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteAlbumQueryRepository_GetById_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetById
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.GetById
+  nameWithType: SqliteAlbumQueryRepository.GetById
 - uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository
   name: SqliteFolderCommandRepository
   href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html
@@ -4181,19 +4199,6 @@ references:
   fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.New
   nameWithType: SqlitePhotoQueryRepository.SqlitePhotoQueryRepository
   nameWithType.vb: SqlitePhotoQueryRepository.New
-- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetAll
-  name: GetAll()
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoQueryRepository_GetAll
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetAll
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetAll()
-  nameWithType: SqlitePhotoQueryRepository.GetAll()
-- uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetAll*
-  name: GetAll
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoQueryRepository_GetAll_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetAll
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetAll
-  nameWithType: SqlitePhotoQueryRepository.GetAll
 - uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetByAlbumId(System.Int32)
   name: GetByAlbumId(int)
   href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqlitePhotoQueryRepository_GetByAlbumId_System_Int32_

@@ -586,17 +586,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html"
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.yml\" sourcestartlinenumber=\"1\">Предоставляет методы для управления виртуальными альбомами в репозитории.</p>\n"
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.yml\" sourcestartlinenumber=\"1\">Контракт для операций записи альбомов в соответствии с CQRS.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.yml\" sourcestartlinenumber=\"1\">Контракт для операций чтения альбомов в соответствии с CQRS.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1118,17 +1132,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий альбомов, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumCommandRepository.yml\" sourcestartlinenumber=\"1\">Fake-репозиторий для операций записи альбомов, имитирующий БД в оперативной памяти.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeAlbumQueryRepository.yml\" sourcestartlinenumber=\"1\">Fake-репозиторий для операций чтения альбомов, имитирующий БД в оперативной памяти.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1286,17 +1314,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория для работы с альбомами в SQLite с использованием Dapper.</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumCommandRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория для операций записи альбомов в SQLite.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteAlbumQueryRepository.yml\" sourcestartlinenumber=\"1\">Реализация репозитория для операций чтения альбомов в SQLite.</p>\n"
     },
     {
       "type": "ManagedReference",

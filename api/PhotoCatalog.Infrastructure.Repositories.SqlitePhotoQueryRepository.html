@@ -209,46 +209,6 @@ Class SqlitePhotoQueryRepository  <a class="header-action link-secondary" title=
 </h2>
 
 
-  <a id="PhotoCatalog_Infrastructure_Repositories_SqlitePhotoQueryRepository_GetAll_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetAll*"></a>
-
-  <h3 id="PhotoCatalog_Infrastructure_Repositories_SqlitePhotoQueryRepository_GetAll" data-uid="PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetAll">
-  GetAll()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Repositories/SqlitePhotoQueryRepository.cs/#L218"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Получает все фотографии.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;IEnumerable&lt;Photo&gt;&gt; GetAll()</code></pre>
-  </div>
-
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Entities.Photo.html">Photo</a>&gt;&gt;</dt>
-    <dd><p>Результат операции:</p>
-<ul><li>Успех со списком фотографий (может быть пустой).</li><li>Инфраструктурную ошибку при сбое базы данных.</li></ul>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-  <h4 class="section" id="PhotoCatalog_Infrastructure_Repositories_SqlitePhotoQueryRepository_GetAll_remarks">Remarks</h4>
-  <div class="markdown level1 remarks"><ul>
-<li>Возвращает Enumerable, что позволяет ленивую и постраничную загрузку.</li>
-<li>Не изменяет состояние базы данных.</li>
-</ul>
-</div>
-
-
-
-
   <a id="PhotoCatalog_Infrastructure_Repositories_SqlitePhotoQueryRepository_GetByAlbumId_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetByAlbumId*"></a>
 
   <h3 id="PhotoCatalog_Infrastructure_Repositories_SqlitePhotoQueryRepository_GetByAlbumId_System_Int32_" data-uid="PhotoCatalog.Infrastructure.Repositories.SqlitePhotoQueryRepository.GetByAlbumId(System.Int32)">

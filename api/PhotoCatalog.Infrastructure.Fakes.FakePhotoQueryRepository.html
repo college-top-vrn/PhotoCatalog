@@ -171,8 +171,8 @@ Class FakePhotoQueryRepository  <a class="header-action link-secondary" title="V
 
   <a id="PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository__ctor_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.#ctor*"></a>
 
-  <h3 id="PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumRepository_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository)">
-  FakePhotoQueryRepository(IAlbumRepository)
+  <h3 id="PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumQueryRepository_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository)">
+  FakePhotoQueryRepository(IAlbumQueryRepository)
   <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakePhotoQueryRepository.cs/#L13"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -181,12 +181,12 @@ Class FakePhotoQueryRepository  <a class="header-action link-secondary" title="V
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository)</code></pre>
+    <pre><code class="lang-csharp hljs">public FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>fakeAlbumRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.html">IAlbumRepository</a></dt>
+    <dt><code>fakeAlbumRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository.html">IAlbumQueryRepository</a></dt>
     <dd></dd>
   </dl>
 
@@ -203,46 +203,6 @@ Class FakePhotoQueryRepository  <a class="header-action link-secondary" title="V
 
   <h2 class="section" id="methods">Methods
 </h2>
-
-
-  <a id="PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository_GetAll_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetAll*"></a>
-
-  <h3 id="PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository_GetAll" data-uid="PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetAll">
-  GetAll()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakePhotoQueryRepository.cs/#L103"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Получает все фотографии.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;IEnumerable&lt;Photo&gt;&gt; GetAll()</code></pre>
-  </div>
-
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Entities.Photo.html">Photo</a>&gt;&gt;</dt>
-    <dd><p>Результат операции:</p>
-<ul><li>Успех со списком фотографий (может быть пустой).</li><li>Инфраструктурную ошибку при сбое базы данных.</li></ul>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-  <h4 class="section" id="PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository_GetAll_remarks">Remarks</h4>
-  <div class="markdown level1 remarks"><ul>
-<li>Возвращает Enumerable, что позволяет ленивую и постраничную загрузку.</li>
-<li>Не изменяет состояние базы данных.</li>
-</ul>
-</div>
-
-
 
 
   <a id="PhotoCatalog_Infrastructure_Fakes_FakePhotoQueryRepository_GetByAlbumId_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakePhotoQueryRepository.GetByAlbumId*"></a>
