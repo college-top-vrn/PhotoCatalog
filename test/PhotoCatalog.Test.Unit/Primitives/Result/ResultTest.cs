@@ -2,7 +2,7 @@
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Primitives.Result;
 
 /// <summary>
 ///     Содержит набор модульных тестов для проверки логики обобщенного контейнера <see cref="Result{T}" />.
