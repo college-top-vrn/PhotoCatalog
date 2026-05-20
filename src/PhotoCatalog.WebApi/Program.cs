@@ -40,7 +40,6 @@ try
     builder.Services.AddHealthChecks();
 
     builder.Services.AddSingleton<FakeDatabase>();
-    builder.Services.AddSingleton<IFolderCommandRepository, FakeFolderCommandRepository>();
     builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoCommandRepository>();
     builder.Services.AddSingleton<IPhotoQueryRepository, FakePhotoQueryRepository>();
     builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
