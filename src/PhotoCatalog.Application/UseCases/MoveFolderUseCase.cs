@@ -12,7 +12,8 @@ namespace PhotoCatalog.Application.UseCases;
 /// <summary>
 ///     Сценарий использования для перемещения папки.
 /// </summary>
-/// <param name="folderQueryRepository">Репозиторий папок.</param>
+/// <param name="folderQueryRepository">Репозиторий папок для запросов данных.</param>
+/// <param name="folderCommandRepository">Репозиторий папок для изменения данных.</param>
 /// <param name="folderHierarchyValidator">Валидатор иерархии папок.</param>
 /// <param name="unitOfWork">Единица работы.</param>
 /// <param name="logger">Логгер.</param>
