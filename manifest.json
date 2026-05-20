@@ -586,17 +586,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html"
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс репозитория для управления\nиерархией виртуальных папок.</p>\n"
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс репозитория для управления\nиерархией виртуальных папок.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс репозитория для получения\nданных из иерархии виртуальных папок.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1104,17 +1118,45 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.yml\" sourcestartlinenumber=\"1\">Репозиторий папок, имитирующий БД, и хранящий данные в оперативной памяти.</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeDatabase",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.yml\" sourcestartlinenumber=\"1\">Имитация базы данных.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.yml\" sourcestartlinenumber=\"1\">Supports all classes in the .NET class hierarchy and provides low-level services to derived classes. This is the ultimate base class of all .NET classes; it is the root of the type hierarchy.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.yml\" sourcestartlinenumber=\"1\">Supports all classes in the .NET class hierarchy and provides low-level services to derived classes. This is the ultimate base class of all .NET classes; it is the root of the type hierarchy.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1226,7 +1268,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.yml\" sourcestartlinenumber=\"1\">Декоратор репозитория папок, добавляющий кэширование операций чтения с помощью <xref href=\"Microsoft.Extensions.Caching.Hybrid.HybridCache\" data-throw-if-not-resolved=\"false\"></xref>.\nОборачивает реальный репозиторий (<xref href=\"PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository\" data-throw-if-not-resolved=\"false\"></xref>), перехватывая запросы на чтение\nи инвалидируя кэш при успешных операциях изменения (Add, Update, Delete).\nОшибки, возвращённые внутренним репозиторием, не попадают в кэш благодаря выбрасыванию\n<xref href=\"PhotoCatalog.Infrastructure.Errors.CacheBypassException\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.yml\" sourcestartlinenumber=\"1\">Декоратор репозитория папок, добавляющий кэширование операций чтения с помощью <xref href=\"Microsoft.Extensions.Caching.Hybrid.HybridCache\" data-throw-if-not-resolved=\"false\"></xref>.\nОборачивает реальные репозитории (<xref href=\"PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository\" data-throw-if-not-resolved=\"false\"></xref>) и (\n<xref href=\"PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository\" data-throw-if-not-resolved=\"false\"></xref>/&gt;), перехватывая запросы на чтение\nи инвалидируя кэш при успешных операциях изменения (Add, Update, Delete).\nОшибки, возвращённые внутренним репозиторием, не попадают в кэш благодаря выбрасыванию\n<xref href=\"PhotoCatalog.Infrastructure.Errors.CacheBypassException\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1244,17 +1286,31 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.yml\" sourcestartlinenumber=\"1\">Инициализирует экземпляр репозитория\nс переданным подключением к SQLite и логгером.\nВ строке подключения должен быть включена настройка\n<code>Foreign Keys=True</code>.</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.yml\" sourcestartlinenumber=\"1\">Supports all classes in the .NET class hierarchy and provides low-level services to derived classes. This is the ultimate base class of all .NET classes; it is the root of the type hierarchy.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.yml\" sourcestartlinenumber=\"1\">Supports all classes in the .NET class hierarchy and provides low-level services to derived classes. This is the ultimate base class of all .NET classes; it is the root of the type hierarchy.</p>\n"
     },
     {
       "type": "ManagedReference",

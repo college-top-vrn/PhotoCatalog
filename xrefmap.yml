@@ -940,15 +940,15 @@ references:
   commentId: T:PhotoCatalog.Application.UseCases.CreateFolderUseCase
   fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase
   nameWithType: CreateFolderUseCase
-- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
-  name: CreateFolderUseCase(IFolderRepository, IUnitOfWork, ILogger)
-  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
-  commentId: M:PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
-  name.vb: New(IFolderRepository, IUnitOfWork, ILogger)
-  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.CreateFolderUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
-  fullName.vb: PhotoCatalog.Application.UseCases.CreateFolderUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
-  nameWithType: CreateFolderUseCase.CreateFolderUseCase(IFolderRepository, IUnitOfWork, ILogger)
-  nameWithType.vb: CreateFolderUseCase.New(IFolderRepository, IUnitOfWork, ILogger)
+- uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: CreateFolderUseCase(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.CreateFolderUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Application.UseCases.CreateFolderUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: CreateFolderUseCase.CreateFolderUseCase(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
+  nameWithType.vb: CreateFolderUseCase.New(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
 - uid: PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor*
   name: CreateFolderUseCase
   href: api/PhotoCatalog.Application.UseCases.CreateFolderUseCase.html#PhotoCatalog_Application_UseCases_CreateFolderUseCase__ctor_
@@ -1057,15 +1057,15 @@ references:
   commentId: T:PhotoCatalog.Application.UseCases.MoveFolderUseCase
   fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase
   nameWithType: MoveFolderUseCase
-- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
-  name: MoveFolderUseCase(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
-  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_PhotoCatalog_Domain_Interfaces_Services_IFolderHierarchyValidator_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
-  commentId: M:PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
-  name.vb: New(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
-  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase.MoveFolderUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
-  fullName.vb: PhotoCatalog.Application.UseCases.MoveFolderUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
-  nameWithType: MoveFolderUseCase.MoveFolderUseCase(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
-  nameWithType.vb: MoveFolderUseCase.New(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+- uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: MoveFolderUseCase(IFolderQueryRepository, IFolderCommandRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IFolderHierarchyValidator_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(IFolderQueryRepository, IFolderCommandRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Application.UseCases.MoveFolderUseCase.MoveFolderUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Application.UseCases.MoveFolderUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: MoveFolderUseCase.MoveFolderUseCase(IFolderQueryRepository, IFolderCommandRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+  nameWithType.vb: MoveFolderUseCase.New(IFolderQueryRepository, IFolderCommandRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
 - uid: PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor*
   name: MoveFolderUseCase
   href: api/PhotoCatalog.Application.UseCases.MoveFolderUseCase.html#PhotoCatalog_Application_UseCases_MoveFolderUseCase__ctor_
@@ -2008,86 +2008,76 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Interfaces.Repositories.IAlbumRepository.Update
   nameWithType: IAlbumRepository.Update
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository
-  name: IFolderRepository
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html
-  commentId: T:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository
-  nameWithType: IFolderRepository
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  name: Add(Folder?)
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Add_PhotoCatalog_Domain_Entities_Folder_
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  name.vb: Add(Folder)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder?)
-  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  nameWithType: IFolderRepository.Add(Folder?)
-  nameWithType.vb: IFolderRepository.Add(Folder)
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add*
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository
+  name: IFolderCommandRepository
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html
+  commentId: T:PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository
+  nameWithType: IFolderCommandRepository
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  name: Add(Folder)
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Add_PhotoCatalog_Domain_Entities_Folder_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  nameWithType: IFolderCommandRepository.Add(Folder)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Add*
   name: Add
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Add_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Add_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Add
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add
-  nameWithType: IFolderRepository.Add
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete(System.Int32)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Add
+  nameWithType: IFolderCommandRepository.Add
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete(System.Int32)
   name: Delete(int)
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Delete_System_Int32_
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete(System.Int32)
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete(System.Int32)
   name.vb: Delete(Integer)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete(int)
-  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete(Integer)
-  nameWithType: IFolderRepository.Delete(int)
-  nameWithType.vb: IFolderRepository.Delete(Integer)
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete*
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete(Integer)
+  nameWithType: IFolderCommandRepository.Delete(int)
+  nameWithType.vb: IFolderCommandRepository.Delete(Integer)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete*
   name: Delete
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Delete_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Delete_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete
-  nameWithType: IFolderRepository.Delete
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders
-  name: GetAllFolders()
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetAllFolders
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders()
-  nameWithType: IFolderRepository.GetAllFolders()
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders*
-  name: GetAllFolders
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetAllFolders_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders
-  nameWithType: IFolderRepository.GetAllFolders
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById(System.Int32)
-  name: GetById(int)
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetById_System_Int32_
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById(System.Int32)
-  name.vb: GetById(Integer)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById(int)
-  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById(Integer)
-  nameWithType: IFolderRepository.GetById(int)
-  nameWithType.vb: IFolderRepository.GetById(Integer)
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById*
-  name: GetById
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetById_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById
-  nameWithType: IFolderRepository.GetById
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete
+  nameWithType: IFolderCommandRepository.Delete
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
   name: Update(Folder)
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Update_PhotoCatalog_Domain_Entities_Folder_
-  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
-  nameWithType: IFolderRepository.Update(Folder)
-- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update*
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Update_PhotoCatalog_Domain_Entities_Folder_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  nameWithType: IFolderCommandRepository.Update(Folder)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Update*
   name: Update
-  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Update_
-  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Update_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Update
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update
-  nameWithType: IFolderRepository.Update
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Update
+  nameWithType: IFolderCommandRepository.Update
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository
+  name: IFolderQueryRepository
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.html
+  commentId: T:PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository
+  nameWithType: IFolderQueryRepository
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.GetById(System.Int32)
+  name: GetById(int)
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderQueryRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.GetById(System.Int32)
+  name.vb: GetById(Integer)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.GetById(Integer)
+  nameWithType: IFolderQueryRepository.GetById(int)
+  nameWithType.vb: IFolderQueryRepository.GetById(Integer)
+- uid: PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.GetById*
+  name: GetById
+  href: api/PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IFolderQueryRepository_GetById_
+  commentId: Overload:PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.GetById
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.GetById
+  nameWithType: IFolderQueryRepository.GetById
 - uid: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository
   name: IPhotoCommandRepository
   href: api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.html
@@ -2095,14 +2085,11 @@ references:
   fullName: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository
   nameWithType: IPhotoCommandRepository
 - uid: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Add(PhotoCatalog.Domain.Entities.Photo)
-  name: Add(Photo?)
+  name: Add(Photo)
   href: api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_Add_PhotoCatalog_Domain_Entities_Photo_
   commentId: M:PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Add(PhotoCatalog.Domain.Entities.Photo)
-  name.vb: Add(Photo)
-  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Add(PhotoCatalog.Domain.Entities.Photo?)
-  fullName.vb: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Add(PhotoCatalog.Domain.Entities.Photo)
-  nameWithType: IPhotoCommandRepository.Add(Photo?)
-  nameWithType.vb: IPhotoCommandRepository.Add(Photo)
+  fullName: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Add(PhotoCatalog.Domain.Entities.Photo)
+  nameWithType: IPhotoCommandRepository.Add(Photo)
 - uid: PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Add*
   name: Add
   href: api/PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.html#PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_Add_
@@ -3359,98 +3346,155 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.Fakes.FakeAlbumRepository.Update
   nameWithType: FakeAlbumRepository.Update
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository
-  name: FakeFolderRepository
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html
-  commentId: T:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository
-  nameWithType: FakeFolderRepository
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  name: Add(Folder?)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_Add_PhotoCatalog_Domain_Entities_Folder_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  name.vb: Add(Folder)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder?)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  nameWithType: FakeFolderRepository.Add(Folder?)
-  nameWithType.vb: FakeFolderRepository.Add(Folder)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder,System.Int32)
-  name: Add(Folder?, int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_Add_PhotoCatalog_Domain_Entities_Folder_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder,System.Int32)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeDatabase
+  name: FakeDatabase
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.html
+  commentId: T:PhotoCatalog.Infrastructure.Fakes.FakeDatabase
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeDatabase
+  nameWithType: FakeDatabase
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderCommandRepository
+  name: FakeFolderCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.html#PhotoCatalog_Infrastructure_Fakes_FakeDatabase_FakeFolderCommandRepository
+  commentId: P:PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderCommandRepository
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderCommandRepository
+  nameWithType: FakeDatabase.FakeFolderCommandRepository
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderCommandRepository*
+  name: FakeFolderCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.html#PhotoCatalog_Infrastructure_Fakes_FakeDatabase_FakeFolderCommandRepository_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderCommandRepository
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderCommandRepository
+  nameWithType: FakeDatabase.FakeFolderCommandRepository
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderQueryRepository
+  name: FakeFolderQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.html#PhotoCatalog_Infrastructure_Fakes_FakeDatabase_FakeFolderQueryRepository
+  commentId: P:PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderQueryRepository
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderQueryRepository
+  nameWithType: FakeDatabase.FakeFolderQueryRepository
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderQueryRepository*
+  name: FakeFolderQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeDatabase.html#PhotoCatalog_Infrastructure_Fakes_FakeDatabase_FakeFolderQueryRepository_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderQueryRepository
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderQueryRepository
+  nameWithType: FakeDatabase.FakeFolderQueryRepository
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository
+  name: FakeFolderCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository
+  nameWithType: FakeFolderCommandRepository
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,PhotoCatalog.Domain.Entities.Folder},PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository)
+  name: FakeFolderCommandRepository(ConcurrentDictionary<int, Folder>, FakeFolderQueryRepository)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository__ctor_System_Collections_Concurrent_ConcurrentDictionary_System_Int32_PhotoCatalog_Domain_Entities_Folder__PhotoCatalog_Infrastructure_Fakes_FakeFolderQueryRepository_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,PhotoCatalog.Domain.Entities.Folder},PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository)
+  name.vb: New(ConcurrentDictionary(Of Integer, Folder), FakeFolderQueryRepository)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.FakeFolderCommandRepository(System.Collections.Concurrent.ConcurrentDictionary<int, PhotoCatalog.Domain.Entities.Folder>, PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.New(System.Collections.Concurrent.ConcurrentDictionary(Of Integer, PhotoCatalog.Domain.Entities.Folder), PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository)
+  nameWithType: FakeFolderCommandRepository.FakeFolderCommandRepository(ConcurrentDictionary<int, Folder>, FakeFolderQueryRepository)
+  nameWithType.vb: FakeFolderCommandRepository.New(ConcurrentDictionary(Of Integer, Folder), FakeFolderQueryRepository)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.#ctor*
+  name: FakeFolderCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.FakeFolderCommandRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.New
+  nameWithType: FakeFolderCommandRepository.FakeFolderCommandRepository
+  nameWithType.vb: FakeFolderCommandRepository.New
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  name: Add(Folder)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository_Add_PhotoCatalog_Domain_Entities_Folder_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  nameWithType: FakeFolderCommandRepository.Add(Folder)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder,System.Int32)
+  name: Add(Folder, int)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository_Add_PhotoCatalog_Domain_Entities_Folder_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder,System.Int32)
   name.vb: Add(Folder, Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder?, int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder, Integer)
-  nameWithType: FakeFolderRepository.Add(Folder?, int)
-  nameWithType.vb: FakeFolderRepository.Add(Folder, Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add*
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder, int)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder, Integer)
+  nameWithType: FakeFolderCommandRepository.Add(Folder, int)
+  nameWithType.vb: FakeFolderCommandRepository.Add(Folder, Integer)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add*
   name: Add
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_Add_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository_Add_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Add
-  nameWithType: FakeFolderRepository.Add
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Delete(System.Int32)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Add
+  nameWithType: FakeFolderCommandRepository.Add
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Delete(System.Int32)
   name: Delete(int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_Delete_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Delete(System.Int32)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Delete(System.Int32)
   name.vb: Delete(Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Delete(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Delete(Integer)
-  nameWithType: FakeFolderRepository.Delete(int)
-  nameWithType.vb: FakeFolderRepository.Delete(Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Delete*
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Delete(Integer)
+  nameWithType: FakeFolderCommandRepository.Delete(int)
+  nameWithType.vb: FakeFolderCommandRepository.Delete(Integer)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Delete*
   name: Delete
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_Delete_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Delete
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository_Delete_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Delete
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Delete
-  nameWithType: FakeFolderRepository.Delete
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetAllFolders
-  name: GetAllFolders()
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_GetAllFolders
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetAllFolders
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetAllFolders()
-  nameWithType: FakeFolderRepository.GetAllFolders()
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetAllFolders*
-  name: GetAllFolders
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_GetAllFolders_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetAllFolders
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetAllFolders
-  nameWithType: FakeFolderRepository.GetAllFolders
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetById(System.Int32)
-  name: GetById(int)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_GetById_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetById(System.Int32)
-  name.vb: GetById(Integer)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetById(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetById(Integer)
-  nameWithType: FakeFolderRepository.GetById(int)
-  nameWithType.vb: FakeFolderRepository.GetById(Integer)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetById*
-  name: GetById
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_GetById_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetById
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.GetById
-  nameWithType: FakeFolderRepository.GetById
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
-  name: Update(Folder?)
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_Update_PhotoCatalog_Domain_Entities_Folder_
-  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
-  name.vb: Update(Folder)
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder?)
-  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
-  nameWithType: FakeFolderRepository.Update(Folder?)
-  nameWithType.vb: FakeFolderRepository.Update(Folder)
-- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Update*
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Delete
+  nameWithType: FakeFolderCommandRepository.Delete
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  name: Update(Folder)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository_Update_PhotoCatalog_Domain_Entities_Folder_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  nameWithType: FakeFolderCommandRepository.Update(Folder)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Update*
   name: Update
-  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderRepository_Update_
-  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Update
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderCommandRepository_Update_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Update
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderRepository.Update
-  nameWithType: FakeFolderRepository.Update
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.Update
+  nameWithType: FakeFolderCommandRepository.Update
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository
+  name: FakeFolderQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository
+  nameWithType: FakeFolderQueryRepository
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,PhotoCatalog.Domain.Entities.Folder})
+  name: FakeFolderQueryRepository(ConcurrentDictionary<int, Folder>)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderQueryRepository__ctor_System_Collections_Concurrent_ConcurrentDictionary_System_Int32_PhotoCatalog_Domain_Entities_Folder__
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,PhotoCatalog.Domain.Entities.Folder})
+  name.vb: New(ConcurrentDictionary(Of Integer, Folder))
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.FakeFolderQueryRepository(System.Collections.Concurrent.ConcurrentDictionary<int, PhotoCatalog.Domain.Entities.Folder>)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.New(System.Collections.Concurrent.ConcurrentDictionary(Of Integer, PhotoCatalog.Domain.Entities.Folder))
+  nameWithType: FakeFolderQueryRepository.FakeFolderQueryRepository(ConcurrentDictionary<int, Folder>)
+  nameWithType.vb: FakeFolderQueryRepository.New(ConcurrentDictionary(Of Integer, Folder))
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.#ctor*
+  name: FakeFolderQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderQueryRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.FakeFolderQueryRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.New
+  nameWithType: FakeFolderQueryRepository.FakeFolderQueryRepository
+  nameWithType.vb: FakeFolderQueryRepository.New
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.GetById(System.Int32)
+  name: GetById(int)
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderQueryRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.GetById(System.Int32)
+  name.vb: GetById(Integer)
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.GetById(Integer)
+  nameWithType: FakeFolderQueryRepository.GetById(int)
+  nameWithType.vb: FakeFolderQueryRepository.GetById(Integer)
+- uid: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.GetById*
+  name: GetById
+  href: api/PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.html#PhotoCatalog_Infrastructure_Fakes_FakeFolderQueryRepository_GetById_
+  commentId: Overload:PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.GetById
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.GetById
+  nameWithType: FakeFolderQueryRepository.GetById
 - uid: PhotoCatalog.Infrastructure.Fakes.FakePhotoCommandRepository
   name: FakePhotoCommandRepository
   href: api/PhotoCatalog.Infrastructure.Fakes.FakePhotoCommandRepository.html
@@ -3762,15 +3806,15 @@ references:
   commentId: T:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository
   fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository
   nameWithType: CachedFolderRepository
-- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,Microsoft.Extensions.Caching.Hybrid.HybridCache,Serilog.ILogger)
-  name: CachedFolderRepository(IFolderRepository, HybridCache, ILogger)
-  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Microsoft_Extensions_Caching_Hybrid_HybridCache_Serilog_ILogger_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,Microsoft.Extensions.Caching.Hybrid.HybridCache,Serilog.ILogger)
-  name.vb: New(IFolderRepository, HybridCache, ILogger)
-  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.CachedFolderRepository(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, Microsoft.Extensions.Caching.Hybrid.HybridCache, Serilog.ILogger)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository, Microsoft.Extensions.Caching.Hybrid.HybridCache, Serilog.ILogger)
-  nameWithType: CachedFolderRepository.CachedFolderRepository(IFolderRepository, HybridCache, ILogger)
-  nameWithType.vb: CachedFolderRepository.New(IFolderRepository, HybridCache, ILogger)
+- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,Microsoft.Extensions.Caching.Hybrid.HybridCache,Serilog.ILogger)
+  name: CachedFolderRepository(IFolderQueryRepository, IFolderCommandRepository, HybridCache, ILogger)
+  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Microsoft_Extensions_Caching_Hybrid_HybridCache_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,Microsoft.Extensions.Caching.Hybrid.HybridCache,Serilog.ILogger)
+  name.vb: New(IFolderQueryRepository, IFolderCommandRepository, HybridCache, ILogger)
+  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.CachedFolderRepository(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository, Microsoft.Extensions.Caching.Hybrid.HybridCache, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository, Microsoft.Extensions.Caching.Hybrid.HybridCache, Serilog.ILogger)
+  nameWithType: CachedFolderRepository.CachedFolderRepository(IFolderQueryRepository, IFolderCommandRepository, HybridCache, ILogger)
+  nameWithType.vb: CachedFolderRepository.New(IFolderQueryRepository, IFolderCommandRepository, HybridCache, ILogger)
 - uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.#ctor*
   name: CachedFolderRepository
   href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository__ctor_
@@ -3810,19 +3854,6 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.Delete
   nameWithType: CachedFolderRepository.Delete
-- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders
-  name: GetAllFolders()
-  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_GetAllFolders
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders
-  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders()
-  nameWithType: CachedFolderRepository.GetAllFolders()
-- uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders*
-  name: GetAllFolders
-  href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_GetAllFolders_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetAllFolders
-  nameWithType: CachedFolderRepository.GetAllFolders
 - uid: PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.GetById(System.Int32)
   name: GetById(int)
   href: api/PhotoCatalog.Infrastructure.Repositories.CachedFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_CachedFolderRepository_GetById_System_Int32_
@@ -3951,105 +3982,95 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.Repositories.SqliteAlbumRepository.Update
   nameWithType: SqliteAlbumRepository.Update
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository
-  name: SqliteFolderRepository
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html
-  commentId: T:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository
-  nameWithType: SqliteFolderRepository
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.#ctor(System.String,Serilog.ILogger)
-  name: SqliteFolderRepository(string, ILogger)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository__ctor_System_String_Serilog_ILogger_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.#ctor(System.String,Serilog.ILogger)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository
+  name: SqliteFolderCommandRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository
+  nameWithType: SqliteFolderCommandRepository
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  name: Add(Folder)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Add_PhotoCatalog_Domain_Entities_Folder_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)
+  nameWithType: SqliteFolderCommandRepository.Add(Folder)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Add*
+  name: Add
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Add_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Add
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Add
+  nameWithType: SqliteFolderCommandRepository.Add
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Delete(System.Int32)
+  name: Delete(int)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Delete_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Delete(System.Int32)
+  name.vb: Delete(Integer)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Delete(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Delete(Integer)
+  nameWithType: SqliteFolderCommandRepository.Delete(int)
+  nameWithType.vb: SqliteFolderCommandRepository.Delete(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Delete*
+  name: Delete
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Delete_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Delete
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Delete
+  nameWithType: SqliteFolderCommandRepository.Delete
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  name: Update(Folder)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Update_PhotoCatalog_Domain_Entities_Folder_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
+  nameWithType: SqliteFolderCommandRepository.Update(Folder)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Update*
+  name: Update
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Update_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Update
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Update
+  nameWithType: SqliteFolderCommandRepository.Update
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository
+  name: SqliteFolderQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html
+  commentId: T:PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository
+  nameWithType: SqliteFolderQueryRepository
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.#ctor(System.String,Serilog.ILogger)
+  name: SqliteFolderQueryRepository(string, ILogger)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderQueryRepository__ctor_System_String_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.#ctor(System.String,Serilog.ILogger)
   name.vb: New(String, ILogger)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.SqliteFolderRepository(string, Serilog.ILogger)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.New(String, Serilog.ILogger)
-  nameWithType: SqliteFolderRepository.SqliteFolderRepository(string, ILogger)
-  nameWithType.vb: SqliteFolderRepository.New(String, ILogger)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.#ctor*
-  name: SqliteFolderRepository
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository__ctor_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.#ctor
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.SqliteFolderQueryRepository(string, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.New(String, Serilog.ILogger)
+  nameWithType: SqliteFolderQueryRepository.SqliteFolderQueryRepository(string, ILogger)
+  nameWithType.vb: SqliteFolderQueryRepository.New(String, ILogger)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.#ctor*
+  name: SqliteFolderQueryRepository
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderQueryRepository__ctor_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.SqliteFolderRepository
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.New
-  nameWithType: SqliteFolderRepository.SqliteFolderRepository
-  nameWithType.vb: SqliteFolderRepository.New
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  name: Add(Folder?)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Add_PhotoCatalog_Domain_Entities_Folder_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  name.vb: Add(Folder)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder?)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)
-  nameWithType: SqliteFolderRepository.Add(Folder?)
-  nameWithType.vb: SqliteFolderRepository.Add(Folder)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add*
-  name: Add
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Add_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Add
-  nameWithType: SqliteFolderRepository.Add
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete(System.Int32)
-  name: Delete(int)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Delete_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete(System.Int32)
-  name.vb: Delete(Integer)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete(Integer)
-  nameWithType: SqliteFolderRepository.Delete(int)
-  nameWithType.vb: SqliteFolderRepository.Delete(Integer)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete*
-  name: Delete
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Delete_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Delete
-  nameWithType: SqliteFolderRepository.Delete
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetAllFolders
-  name: GetAllFolders()
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_GetAllFolders
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetAllFolders
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetAllFolders()
-  nameWithType: SqliteFolderRepository.GetAllFolders()
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetAllFolders*
-  name: GetAllFolders
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_GetAllFolders_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetAllFolders
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetAllFolders
-  nameWithType: SqliteFolderRepository.GetAllFolders
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById(System.Int32)
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.SqliteFolderQueryRepository
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.New
+  nameWithType: SqliteFolderQueryRepository.SqliteFolderQueryRepository
+  nameWithType.vb: SqliteFolderQueryRepository.New
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.GetById(System.Int32)
   name: GetById(int)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_GetById_System_Int32_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById(System.Int32)
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderQueryRepository_GetById_System_Int32_
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.GetById(System.Int32)
   name.vb: GetById(Integer)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById(int)
-  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById(Integer)
-  nameWithType: SqliteFolderRepository.GetById(int)
-  nameWithType.vb: SqliteFolderRepository.GetById(Integer)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById*
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.GetById(int)
+  fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.GetById(Integer)
+  nameWithType: SqliteFolderQueryRepository.GetById(int)
+  nameWithType.vb: SqliteFolderQueryRepository.GetById(Integer)
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.GetById*
   name: GetById
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_GetById_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderQueryRepository_GetById_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.GetById
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.GetById
-  nameWithType: SqliteFolderRepository.GetById
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
-  name: Update(Folder)
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Update_PhotoCatalog_Domain_Entities_Folder_
-  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)
-  nameWithType: SqliteFolderRepository.Update(Folder)
-- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update*
-  name: Update
-  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderRepository_Update_
-  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update
-  isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderRepository.Update
-  nameWithType: SqliteFolderRepository.Update
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.GetById
+  nameWithType: SqliteFolderQueryRepository.GetById
 - uid: PhotoCatalog.Infrastructure.Repositories.SqlitePhotoCommandRepository
   name: SqlitePhotoCommandRepository
   href: api/PhotoCatalog.Infrastructure.Repositories.SqlitePhotoCommandRepository.html

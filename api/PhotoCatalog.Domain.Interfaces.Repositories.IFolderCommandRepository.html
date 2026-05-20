@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Interface IFolderRepository | PhotoCatalog Documentation </title>
+      <title>Interface IFolderCommandRepository | PhotoCatalog Documentation </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Interface IFolderRepository | PhotoCatalog Documentation ">
+      <meta name="title" content="Interface IFolderCommandRepository | PhotoCatalog Documentation ">
       
       <meta name="description" content="Интерфейс репозитория для управления иерархией виртуальных папок.">
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository.md&amp;value=---%0Auid%3A%20PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository.md&amp;value=---%0Auid%3A%20PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,12 +84,12 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository">
+        <article data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository">
 
 
 
-  <h1 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository" class="text-break">
-Interface IFolderRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  <h1 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository" class="text-break">
+Interface IFolderCommandRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderCommandRepository.cs/#L10"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -103,7 +103,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IFolderRepository</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IFolderCommandRepository</code></pre>
   </div>
 
 
@@ -132,11 +132,11 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 </h2>
 
 
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Add_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add*"></a>
+  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Add_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Add*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Add_PhotoCatalog_Domain_Entities_Folder_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Add(PhotoCatalog.Domain.Entities.Folder)">
-  Add(Folder?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Add_PhotoCatalog_Domain_Entities_Folder_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Add(PhotoCatalog.Domain.Entities.Folder)">
+  Add(Folder)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderCommandRepository.cs/#L27"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Добавляет новую папку в репозиторий.</p>
@@ -144,7 +144,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ResultVoid Add(Folder? folder)</code></pre>
+    <pre><code class="lang-csharp hljs">ResultVoid Add(Folder folder)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -172,11 +172,11 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 
 
 
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Delete_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete*"></a>
+  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Delete_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Delete_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Delete(System.Int32)">
+  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Delete_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Delete(System.Int32)">
   Delete(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderCommandRepository.cs/#L67"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Удаляет папку по идентификатору.</p>
@@ -212,85 +212,11 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 
 
 
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetAllFolders_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders*"></a>
+  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Update_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Update*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetAllFolders" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetAllFolders">
-  GetAllFolders()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L51"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Получить все папки.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Result&lt;IEnumerable&lt;Folder&gt;&gt; GetAllFolders()</code></pre>
-  </div>
-
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Entities.Folder.html">Folder</a>&gt;&gt;</dt>
-    <dd><p>Результат операции:</p>
-<ul><li>Успех со списком из папок, если они найдены</li><li>Ошибка NotFound, если ни одной папки не найдена</li><li>Инфраструктурную ошибку при сбое базы данных</li></ul>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetById_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById*"></a>
-
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_GetById_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.GetById(System.Int32)">
-  GetById(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L32"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Получить папку по идентификатору.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Result&lt;Folder&gt; GetById(int id)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
-    <dd><p>Идентификатор папки.</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Entities.Folder.html">Folder</a>&gt;</dt>
-    <dd><p>Результат операции:</p>
-<ul><li>Успех с папкой, если она найдена</li><li>Ошибка NotFound, если папка не найдена</li><li>Инфраструктурную ошибку при сбое базы данных</li></ul>
-</dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-  <a id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Update_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update*"></a>
-
-  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_Update_PhotoCatalog_Domain_Entities_Folder_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.Update(PhotoCatalog.Domain.Entities.Folder)">
+  <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_Update_PhotoCatalog_Domain_Entities_Folder_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)">
   Update(Folder)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderCommandRepository.cs/#L47"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Обновляет существующую папку.</p>
@@ -330,7 +256,7 @@ Interface IFolderRepository  <a class="header-action link-secondary" title="View
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderRepository.cs/#L12" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IFolderCommandRepository.cs/#L10" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class CreateFolderUseCase | PhotoCatalog Documentation </title>
+      <title>Class FakeDatabase | PhotoCatalog Documentation </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class CreateFolderUseCase | PhotoCatalog Documentation ">
+      <meta name="title" content="Class FakeDatabase | PhotoCatalog Documentation ">
       
-      <meta name="description" content="Сценарий использования для создания папки.">
+      <meta name="description" content="Имитация базы данных.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Application_UseCases_CreateFolderUseCase.md&amp;value=---%0Auid%3A%20PhotoCatalog.Application.UseCases.CreateFolderUseCase%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Infrastructure_Fakes_FakeDatabase.md&amp;value=---%0Auid%3A%20PhotoCatalog.Infrastructure.Fakes.FakeDatabase%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,25 +84,25 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="PhotoCatalog.Application.UseCases.CreateFolderUseCase">
+        <article data-uid="PhotoCatalog.Infrastructure.Fakes.FakeDatabase">
 
 
 
-  <h1 id="PhotoCatalog_Application_UseCases_CreateFolderUseCase" data-uid="PhotoCatalog.Application.UseCases.CreateFolderUseCase" class="text-break">
-Class CreateFolderUseCase  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/CreateFolderUseCase.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  <h1 id="PhotoCatalog_Infrastructure_Fakes_FakeDatabase" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeDatabase" class="text-break">
+Class FakeDatabase  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeDatabase.cs/#L10"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="PhotoCatalog.html">PhotoCatalog</a>.<a class="xref" href="PhotoCatalog.Application.html">Application</a>.<a class="xref" href="PhotoCatalog.Application.UseCases.html">UseCases</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>PhotoCatalog.Application.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PhotoCatalog.html">PhotoCatalog</a>.<a class="xref" href="PhotoCatalog.Infrastructure.html">Infrastructure</a>.<a class="xref" href="PhotoCatalog.Infrastructure.Fakes.html">Fakes</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PhotoCatalog.Infrastructure.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Сценарий использования для создания папки.</p>
+  <div class="markdown summary"><p>Имитация базы данных.</p>
 </div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CreateFolderUseCase</code></pre>
+    <pre><code class="lang-csharp hljs">public class FakeDatabase</code></pre>
   </div>
 
 
@@ -112,7 +112,7 @@ Class CreateFolderUseCase  <a class="header-action link-secondary" title="View s
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">CreateFolderUseCase</span></div>
+      <div><span class="xref">FakeDatabase</span></div>
     </dd>
   </dl>
 
@@ -159,38 +159,33 @@ Class CreateFolderUseCase  <a class="header-action link-secondary" title="View s
 
 
 
-  <h2 class="section" id="constructors">Constructors
+  <h2 class="section" id="properties">Properties
 </h2>
 
 
-  <a id="PhotoCatalog_Application_UseCases_CreateFolderUseCase__ctor_" data-uid="PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor*"></a>
+  <a id="PhotoCatalog_Infrastructure_Fakes_FakeDatabase_FakeFolderCommandRepository_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderCommandRepository*"></a>
 
-  <h3 id="PhotoCatalog_Application_UseCases_CreateFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_" data-uid="PhotoCatalog.Application.UseCases.CreateFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)">
-  CreateFolderUseCase(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/CreateFolderUseCase.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeDatabase_FakeFolderCommandRepository" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderCommandRepository">
+  FakeFolderCommandRepository
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeDatabase.cs/#L28"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Сценарий использования для создания папки.</p>
+  <div class="markdown level1 summary"><p>Репозиторий папок для изменения данных.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CreateFolderUseCase(IFolderQueryRepository folderQueryRepository, IFolderCommandRepository folderCommandRepository, IUnitOfWork unitOfWork, ILogger logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public static FakeFolderCommandRepository FakeFolderCommandRepository { get; }</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
+
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><code>folderQueryRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.html">IFolderQueryRepository</a></dt>
-    <dd><p>Репозиторий папок.</p>
-</dd>
-    <dt><code>folderCommandRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html">IFolderCommandRepository</a></dt>
+    <dt><a class="xref" href="PhotoCatalog.Infrastructure.Fakes.FakeFolderCommandRepository.html">FakeFolderCommandRepository</a></dt>
     <dd></dd>
-    <dt><code>unitOfWork</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html">IUnitOfWork</a></dt>
-    <dd><p>Единица работы.</p>
-</dd>
-    <dt><code>logger</code> <span class="xref">ILogger</span></dt>
-    <dd><p>Логгер.</p>
-</dd>
   </dl>
 
 
@@ -200,46 +195,30 @@ Class CreateFolderUseCase  <a class="header-action link-secondary" title="View s
 
 
 
+  <a id="PhotoCatalog_Infrastructure_Fakes_FakeDatabase_FakeFolderQueryRepository_" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderQueryRepository*"></a>
 
-
-
-
-  <h2 class="section" id="methods">Methods
-</h2>
-
-
-  <a id="PhotoCatalog_Application_UseCases_CreateFolderUseCase_Execute_" data-uid="PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute*"></a>
-
-  <h3 id="PhotoCatalog_Application_UseCases_CreateFolderUseCase_Execute_PhotoCatalog_Application_DTOs_Folders_CreateFolderRequest_" data-uid="PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute(PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest)">
-  Execute(CreateFolderRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/CreateFolderUseCase.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Infrastructure_Fakes_FakeDatabase_FakeFolderQueryRepository" data-uid="PhotoCatalog.Infrastructure.Fakes.FakeDatabase.FakeFolderQueryRepository">
+  FakeFolderQueryRepository
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeDatabase.cs/#L23"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Выполняет сценарий создания папки.</p>
+  <div class="markdown level1 summary"><p>Репозиторий папок для чтения данных.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;FolderResponse&gt; Execute(CreateFolderRequest request)</code></pre>
+    <pre><code class="lang-csharp hljs">public static FakeFolderQueryRepository FakeFolderQueryRepository { get; }</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
+
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><code>request</code> <a class="xref" href="PhotoCatalog.Application.DTOs.Folders.CreateFolderRequest.html">CreateFolderRequest</a></dt>
-    <dd><p>Данные запроса.</p>
-</dd>
+    <dt><a class="xref" href="PhotoCatalog.Infrastructure.Fakes.FakeFolderQueryRepository.html">FakeFolderQueryRepository</a></dt>
+    <dd></dd>
   </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="PhotoCatalog.Application.DTOs.Folders.FolderResponse.html">FolderResponse</a>&gt;</dt>
-    <dd><p>Результат операции:</p>
-<ul><li>Успех – содержит <a class="xref" href="PhotoCatalog.Application.DTOs.Folders.FolderResponse.html">FolderResponse</a> с данными созданной папки.</li><li>Ошибка – если родитель не найден, доменная валидация не пройдена или произошёл сбой транзакции.</li></ul>
-</dd>
-  </dl>
-
-
-
 
 
 
@@ -252,7 +231,7 @@ Class CreateFolderUseCase  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/CreateFolderUseCase.cs/#L18" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Fakes/FakeDatabase.cs/#L10" class="edit-link">Edit this page</a>
         </div>
 
 

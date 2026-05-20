@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Application_UseCases_MoveFolderUseCase" data-uid="PhotoCatalog.Application.UseCases.MoveFolderUseCase" class="text-break">
-Class MoveFolderUseCase  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L19"><i class="bi bi-code-slash"></i></a>
+Class MoveFolderUseCase  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -165,9 +165,9 @@ Class MoveFolderUseCase  <a class="header-action link-secondary" title="View sou
 
   <a id="PhotoCatalog_Application_UseCases_MoveFolderUseCase__ctor_" data-uid="PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor*"></a>
 
-  <h3 id="PhotoCatalog_Application_UseCases_MoveFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderRepository_PhotoCatalog_Domain_Interfaces_Services_IFolderHierarchyValidator_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_" data-uid="PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository,PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)">
-  MoveFolderUseCase(IFolderRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Application_UseCases_MoveFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IFolderHierarchyValidator_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_" data-uid="PhotoCatalog.Application.UseCases.MoveFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)">
+  MoveFolderUseCase(IFolderQueryRepository, IFolderCommandRepository, IFolderHierarchyValidator, IUnitOfWork, ILogger)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Сценарий использования для перемещения папки.</p>
@@ -175,13 +175,16 @@ Class MoveFolderUseCase  <a class="header-action link-secondary" title="View sou
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MoveFolderUseCase(IFolderRepository folderRepository, IFolderHierarchyValidator folderHierarchyValidator, IUnitOfWork unitOfWork, ILogger logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public MoveFolderUseCase(IFolderQueryRepository folderQueryRepository, IFolderCommandRepository folderCommandRepository, IFolderHierarchyValidator folderHierarchyValidator, IUnitOfWork unitOfWork, ILogger logger)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>folderRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IFolderRepository.html">IFolderRepository</a></dt>
-    <dd><p>Репозиторий папок.</p>
+    <dt><code>folderQueryRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository.html">IFolderQueryRepository</a></dt>
+    <dd><p>Репозиторий папок для запросов данных.</p>
+</dd>
+    <dt><code>folderCommandRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository.html">IFolderCommandRepository</a></dt>
+    <dd><p>Репозиторий папок для изменения данных.</p>
 </dd>
     <dt><code>folderHierarchyValidator</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IFolderHierarchyValidator.html">IFolderHierarchyValidator</a></dt>
     <dd><p>Валидатор иерархии папок.</p>
@@ -213,7 +216,7 @@ Class MoveFolderUseCase  <a class="header-action link-secondary" title="View sou
 
   <h3 id="PhotoCatalog_Application_UseCases_MoveFolderUseCase_Execute_System_Int32_System_Nullable_System_Int32__" data-uid="PhotoCatalog.Application.UseCases.MoveFolderUseCase.Execute(System.Int32,System.Nullable{System.Int32})">
   Execute(int, int?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L38"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Выполняет перемещение папки с идентификатором <code class="paramref">folderId</code>
@@ -258,7 +261,7 @@ Class MoveFolderUseCase  <a class="header-action link-secondary" title="View sou
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L19" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/MoveFolderUseCase.cs/#L20" class="edit-link">Edit this page</a>
         </div>
 
 
