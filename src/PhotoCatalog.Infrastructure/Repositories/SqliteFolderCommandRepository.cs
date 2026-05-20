@@ -1,3 +1,5 @@
+using System;
+
 using Dapper;
 
 using Microsoft.Data.Sqlite;
@@ -13,8 +15,8 @@ using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
-/// <inheritdoc />
-public class SqliteFolderCommandRepository : IFolderCommandRepository
+/// <inheritdoc cref="IFolderCommandRepository" />
+public class SqliteFolderCommandRepository : IFolderCommandRepository, IDisposable
 {
     private readonly ILogger _logger;
     private readonly SqliteUnitOfWork _unitOfWork;
@@ -23,6 +25,13 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
     {
         _unitOfWork = new SqliteUnitOfWork(connectionString, logger);
         _logger = logger;
+    }
+
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
+    /// <inheritdoc />
+    public void Dispose()
+    {
+        _unitOfWork.Dispose();
     }
 
     /// <inheritdoc />
@@ -45,13 +54,11 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                     {
                         _unitOfWork.Commit();
                         _logger.Information("Папка с Id = {FolderId} успешно добавлена", folder.Id);
-                        _unitOfWork.Dispose();
                         return ResultVoid.Success();
                     },
                     _ =>
                     {
                         _unitOfWork.Rollback();
-                        _unitOfWork.Dispose();
                         return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
                     });
         }
@@ -59,7 +66,6 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
         {
             _logger.Error("Ошибка SQLite при добавлении папки с Id = {FolderId}", folder.Id);
             _unitOfWork.Rollback();
-            _unitOfWork.Dispose();
             return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
         }
     }
@@ -88,13 +94,11 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                     {
                         _unitOfWork.Commit();
                         _logger.Information("Папка с Id = {FolderId} успешно обновлена", folder.Id);
-                        _unitOfWork.Dispose();
                         return ResultVoid.Success();
                     },
                     _ =>
                     {
                         _unitOfWork.Rollback();
-                        _unitOfWork.Dispose();
                         return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
                     });
         }
@@ -102,7 +106,6 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
         {
             _logger.Error("Ошибка SQLite при обновлении папки с Id = {FolderId}", folder.Id);
             _unitOfWork.Rollback();
-            _unitOfWork.Dispose();
             return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
         }
     }
@@ -129,13 +132,11 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
                     {
                         _unitOfWork.Commit();
                         _logger.Information("Папка с Id = {FolderId} успешно удалена", id);
-                        _unitOfWork.Dispose();
                         return ResultVoid.Success();
                     },
                     _ =>
                     {
                         _unitOfWork.Rollback();
-                        _unitOfWork.Dispose();
                         return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
                     });
         }
@@ -143,7 +144,6 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
         {
             _logger.Error("Ошибка SQLite при удалении папки с Id = {FolderId}", id);
             _unitOfWork.Rollback();
-            _unitOfWork.Dispose();
             return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
         }
     }

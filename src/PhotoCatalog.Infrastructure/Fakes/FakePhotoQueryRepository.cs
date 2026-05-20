@@ -100,6 +100,7 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
         return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
     }
 
+    // TODO: Пофиксить доку или добавить эти методы
     /// <inheritdoc />
     public Result<IEnumerable<Photo>> GetAll()
     {

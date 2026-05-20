@@ -26,12 +26,12 @@ public class Photo
     /// <summary>
     ///     Полный путь к файлу на диске.
     /// </summary>
-    public string RealPath { get; private init; } = null!;
+    public string RealPath { get; private init; } = string.Empty;
 
     /// <summary>
     ///     контрольная-сумма файла для проверки целостности.
     /// </summary>
-    public string FileHash { get; private set; } = null!;
+    public string FileHash { get; private set; } = string.Empty;
 
     /// <summary>
     ///     Размеры изображения (ширина/высота).

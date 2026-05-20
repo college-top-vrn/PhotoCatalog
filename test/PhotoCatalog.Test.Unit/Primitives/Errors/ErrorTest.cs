@@ -2,7 +2,7 @@
 
 using Xunit;
 
-namespace PhotoCatalog.Test.Unit;
+namespace PhotoCatalog.Test.Unit.Primitives.Errors;
 
 /// <summary>
 ///     Тесты для проверки поведения объекта <see cref="Error" />.

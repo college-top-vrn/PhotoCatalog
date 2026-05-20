@@ -16,7 +16,7 @@ public class ResultGenericSwitchTests
     public void SwitchDeconstructPatternOnSuccessShouldExtractValue()
     {
         // TODO: Исправить магические числа
-        Result<int> result = Result.Success(42);
+        Result<int> result = PhotoCatalog.Domain.Primitives.Result.Success(42);
 
         string output = result switch
         {
@@ -34,7 +34,7 @@ public class ResultGenericSwitchTests
     [Fact]
     public void SwitchDeconstructWithWhenClauseShouldApplyConditionsCorrectly()
     {
-        Result<int> result = Result.Success(150);
+        Result<int> result = PhotoCatalog.Domain.Primitives.Result.Success(150);
 
         string category = result switch
         {

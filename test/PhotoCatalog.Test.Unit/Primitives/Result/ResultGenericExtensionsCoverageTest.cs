@@ -40,13 +40,15 @@ public class ResultGenericExtensionsCoverageTests
     public void ThenGenericAllBranchesShouldCoverNullFailureAndSuccess()
     {
         Result<int>? nullResult = null;
-        Result<int> failedResult = Result.Failure<int>(DomainError);
+        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainError);
         // TODO: Исправить магические числа
-        Result<int> successResult = Result.Success(10);
+        Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
-        ResultVoid nullOutcome = nullResult.Then(x => Result.Success(x.ToString()));
-        Result<string> failedOutcome = failedResult.Then(x => Result.Success(x.ToString()));
-        Result<string> successOutcome = successResult.Then(x => Result.Success(x.ToString()));
+        ResultVoid nullOutcome = nullResult.Then(x => PhotoCatalog.Domain.Primitives.Result.Success(x.ToString()));
+        Result<string> failedOutcome =
+            failedResult.Then(x => PhotoCatalog.Domain.Primitives.Result.Success(x.ToString()));
+        Result<string> successOutcome =
+            successResult.Then(x => PhotoCatalog.Domain.Primitives.Result.Success(x.ToString()));
 
         Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
         Assert.Equal(DomainError, failedOutcome.Error);
@@ -60,8 +62,8 @@ public class ResultGenericExtensionsCoverageTests
     public void ThenTryAllBranchesShouldCoverNullFailureTryAndCatch()
     {
         Result<int>? nullResult = null;
-        Result<int> failedResult = Result.Failure<int>(DomainError);
-        Result<int> successResult = Result.Success(10);
+        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainError);
+        Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
         Result<int> nullOutcome = nullResult.ThenTry(x => x * 2, _ => ExceptionError);
         Result<int> failedOutcome = failedResult.ThenTry(x => x * 2, _ => ExceptionError);
@@ -82,8 +84,8 @@ public class ResultGenericExtensionsCoverageTests
     public void EnsureAllBranchesShouldCoverAllLogicalPaths()
     {
         Result<int>? nullResult = null;
-        Result<int> failedResult = Result.Failure<int>(DomainError);
-        Result<int> successResult = Result.Success(10);
+        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainError);
+        Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
         Result<int> nullOutcome = nullResult.Ensure(x => x > 5, EnsureError);
         Result<int> failedOutcome = failedResult.Ensure(x => x > 5, EnsureError);
@@ -103,11 +105,12 @@ public class ResultGenericExtensionsCoverageTests
     public void CheckGenericAllBranchesShouldCoverAllLogicalPaths()
     {
         Result<int>? nullResult = null;
-        Result<int> successResult = Result.Success(10);
+        Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
-        Result<int> nullOutcome = nullResult.Check(_ => Result.Success("ok"));
-        Result<int> checkSuccessOutcome = successResult.Check(_ => Result.Success("ok"));
-        Result<int> checkFailureOutcome = successResult.Check(_ => Result.Failure<string>(EnsureError));
+        Result<int> nullOutcome = nullResult.Check(_ => PhotoCatalog.Domain.Primitives.Result.Success("ok"));
+        Result<int> checkSuccessOutcome = successResult.Check(_ => PhotoCatalog.Domain.Primitives.Result.Success("ok"));
+        Result<int> checkFailureOutcome =
+            successResult.Check(_ => PhotoCatalog.Domain.Primitives.Result.Failure<string>(EnsureError));
 
         Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
         Assert.Equal(10, checkSuccessOutcome.Value);
@@ -121,7 +124,7 @@ public class ResultGenericExtensionsCoverageTests
     public void TransformAllBranchesShouldCoverNullFailureAndSuccess()
     {
         Result<int>? nullResult = null;
-        Result<int> successResult = Result.Success(10);
+        Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
         Result<string> nullOutcome = nullResult.Transform(x => x.ToString());
         Result<string> successOutcome = successResult.Transform(x => x.ToString());
@@ -137,8 +140,8 @@ public class ResultGenericExtensionsCoverageTests
     public void FinallyAllBranchesShouldMapBasedOnStateAndNull()
     {
         Result<int>? nullResult = null;
-        Result<int> successResult = Result.Success(10);
-        Result<int> failureResult = Result.Failure<int>(DomainError);
+        Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
+        Result<int> failureResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainError);
 
         string nullMapped = nullResult.Finally(_ => "Ok", e => e.Code);
         string successMapped = successResult.Finally(_ => "Ok", e => e.Code);

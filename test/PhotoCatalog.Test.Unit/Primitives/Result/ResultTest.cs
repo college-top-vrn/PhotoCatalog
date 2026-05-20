@@ -18,7 +18,7 @@ public class ResultTest
     {
         const string expectedValue = "Тестовая строка";
 
-        Result<string> result = Result.Success(expectedValue);
+        Result<string> result = PhotoCatalog.Domain.Primitives.Result.Success(expectedValue);
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
@@ -35,7 +35,7 @@ public class ResultTest
     {
         Error expectedError = new("Test.Failure", "Тестовая ошибка");
 
-        Result<string> result = Result.Failure<string>(expectedError);
+        Result<string> result = PhotoCatalog.Domain.Primitives.Result.Failure<string>(expectedError);
 
         Assert.False(result.IsSuccess);
         Assert.True(result.IsFailure);

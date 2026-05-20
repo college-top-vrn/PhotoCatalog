@@ -20,7 +20,7 @@ public class ResultGenericCoreTests
     public void SuccessWithValidValueShouldInitializeSuccessState()
     {
         // TODO: Исправить магические числа
-        Result<int> result = Result.Success(10);
+        Result<int> result = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
@@ -34,7 +34,7 @@ public class ResultGenericCoreTests
     [Fact]
     public void SuccessWithNullValueShouldReturnSystemNullValueError()
     {
-        Result<string> result = Result.Success<string>(null!);
+        Result<string> result = PhotoCatalog.Domain.Primitives.Result.Success<string>(null!);
 
         Assert.True(result.IsFailure);
         Assert.Equal(SystemErrors.NullValue, result.Error);
@@ -46,7 +46,7 @@ public class ResultGenericCoreTests
     [Fact]
     public void FailureShouldInitializeFailureStateWithDefaultValue()
     {
-        Result<Guid> result = Result.Failure<Guid>(TestError);
+        Result<Guid> result = PhotoCatalog.Domain.Primitives.Result.Failure<Guid>(TestError);
 
         Assert.True(result.IsFailure);
         Assert.Equal(TestError, result.Error);
@@ -60,8 +60,8 @@ public class ResultGenericCoreTests
     public void ImplicitOperatorToResultVoidShouldMapStatusCorrectly()
     {
         // TODO: Исправить магические числа
-        ResultVoid voidSuccess = Result.Success(100);
-        ResultVoid voidFailure = Result.Failure<int>(TestError);
+        ResultVoid voidSuccess = PhotoCatalog.Domain.Primitives.Result.Success(100);
+        ResultVoid voidFailure = PhotoCatalog.Domain.Primitives.Result.Failure<int>(TestError);
 
         Assert.True(voidSuccess.IsSuccess);
         Assert.True(voidFailure.IsFailure);

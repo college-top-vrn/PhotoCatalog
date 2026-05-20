@@ -1,3 +1,5 @@
+using System;
+
 using Dapper;
 
 using Microsoft.Data.Sqlite;
@@ -13,8 +15,8 @@ using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
-/// <inheritdoc />
-public class SqliteFolderQueryRepository : IFolderQueryRepository
+/// <inheritdoc cref="IFolderQueryRepository" />
+public class SqliteFolderQueryRepository : IFolderQueryRepository, IDisposable
 {
     private readonly ILogger _logger;
     private readonly SqliteUnitOfWork _unitOfWork;
@@ -30,6 +32,13 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
 
         _unitOfWork = new SqliteUnitOfWork(builder.ToString(), logger);
         _logger = logger;
+    }
+
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
+    /// <inheritdoc />
+    public void Dispose()
+    {
+        _unitOfWork.Dispose();
     }
 
     /// <inheritdoc />
@@ -55,22 +64,19 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository
                     _ =>
                     {
                         _unitOfWork.Commit();
-                        _unitOfWork.Dispose();
-                        return Result<Folder>.Success(foundFolder);
+                        return Result.Success(foundFolder)!;
                     },
                     _ =>
                     {
                         _unitOfWork.Rollback();
-                        _unitOfWork.Dispose();
-                        return Result<Folder>.Failure(InfrastructureErrors.Database.NotFound);
+                        return Result.Failure<Folder>(InfrastructureErrors.Database.NotFound);
                     });
         }
         catch (SqliteException)
         {
             _logger.Error("Ошибка SQLite при получении папки с Id = {FolderId}", id);
             _unitOfWork.Rollback();
-            _unitOfWork.Dispose();
-            return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
+            return Result.Failure<Folder>(InfrastructureErrors.Database.Sqlite);
         }
     }
 }

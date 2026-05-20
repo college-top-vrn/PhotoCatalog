@@ -31,7 +31,7 @@ public class Tag
     /// <summary>
     ///     Нормализованное имя тега (в нижнем регистре).
     /// </summary>
-    public string Name { get; private init; } = null!;
+    public string Name { get; private init; } = string.Empty;
 
     /// <summary>
     ///     Создает новый валидный тег.
