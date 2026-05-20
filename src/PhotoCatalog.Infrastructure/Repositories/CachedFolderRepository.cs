@@ -22,7 +22,13 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 ///     Ошибки, возвращённые внутренним репозиторием, не попадают в кэш благодаря выбрасыванию
 ///     <see cref="CacheBypassException" />.
 /// </summary>
-/// <param name="innerQueryRepository">Оригинальный репозиторий, выполняющий реальные запросы к базе данных.</param>
+/// <param name="innerQueryRepository">
+/// Оригинальный репозиторий, выполняющий
+/// реальные запросы к базе данных для получения данных.</param>
+/// <param name="innerCommandRepository">
+/// Оригинальный репозиторий, выполняющий
+/// реальные запросы к базе данных для изменения данных.
+/// </param>
 /// <param name="cache">Сервис гибридного кэширования.</param>
 /// <param name="logger">Логгер для записи событий работы декоратора.</param>
 public class CachedFolderRepository(
