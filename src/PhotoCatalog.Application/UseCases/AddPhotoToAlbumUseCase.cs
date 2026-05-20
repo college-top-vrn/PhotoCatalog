@@ -1,6 +1,7 @@
 ﻿using System;
 
 using PhotoCatalog.Application.Errors;
+using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
@@ -15,15 +16,17 @@ namespace PhotoCatalog.Application.UseCases;
 /// </summary>
 public class AddPhotoToAlbumUseCase
 {
-    private readonly IAlbumRepository _albumRepository;
+    private readonly IAlbumQueryRepository _albumQueryRepository;
+    private readonly IAlbumCommandRepository _albumCommandRepository;
     private readonly IPhotoQueryRepository _photoRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
 
-    public AddPhotoToAlbumUseCase(IAlbumRepository albumRepository, IPhotoQueryRepository photoRepository,
+    public AddPhotoToAlbumUseCase(IAlbumQueryRepository albumQueryRepository, IAlbumCommandRepository albumCommandRepository, IPhotoQueryRepository photoRepository,
         IUnitOfWork unitOfWork, ILogger logger)
     {
-        _albumRepository = albumRepository;
+        _albumQueryRepository = albumQueryRepository;
+        _albumCommandRepository = albumCommandRepository;
         _photoRepository = photoRepository;
         _unitOfWork = unitOfWork;
         _logger = logger.ForContext<AddPhotoToAlbumUseCase>();
@@ -37,16 +40,20 @@ public class AddPhotoToAlbumUseCase
     /// <returns>Результат выполнения операции (успех или ошибка).</returns>
     public ResultVoid Execute(int albumId, int photoId)
     {
+        Result<Album> albumEntity = null;
         _logger.Information("Запуск процесса добавления фото {PhotoId} в альбом {AlbumId}", photoId, albumId);
         return _photoRepository.GetById(photoId)
             .OnSuccess(_ =>
                 _logger.Information("Фото {PhotoId} найдено", photoId))
             .OnFailure(_ =>
                 _logger.Warning("Фото {PhotoId} не найдено", photoId))
-            .Then(photo =>
-                _albumRepository.GetById(albumId)
-                    .OnSuccess(_ =>
-                        _logger.Information("Альбом {AlbumId} найден", albumId)))
+            .Then(_ =>
+                {
+                    albumEntity = _albumQueryRepository.GetById(albumId);
+                    return albumEntity;
+                })
+                .OnSuccess(_ =>
+                        _logger.Information("Альбом {AlbumId} найден", albumId))
             .OnFailure(_ =>
                 _logger.Warning("Альбом {AlbumId} не найден", albumId))
             .Then(album => album.AddPhoto(photoId))
@@ -57,8 +64,7 @@ public class AddPhotoToAlbumUseCase
             .Transform(_ => _unitOfWork.BeginTransaction())
             .Ensure(beginResult => beginResult.IsSuccess,
                 ApplicationErrors.Transactions.StartTransactions)
-            .Then(_ => _albumRepository.GetById(albumId)) // TODO Исправить костыль.
-            .Transform(album => _albumRepository.Update(album))
+            .Transform(album => _albumCommandRepository.Update(albumEntity!.Value!))
             .Ensure(updateResult => updateResult.IsSuccess,
                 ApplicationErrors.Albums.UpdateFailed)
             .Transform(_ => _unitOfWork.Commit())
