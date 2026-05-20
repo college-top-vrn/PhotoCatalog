@@ -8,13 +8,15 @@ using PhotoCatalog.Domain.Primitives;
 namespace PhotoCatalog.Infrastructure.Fakes;
 
 /// <inheritdoc />
-public class FakeFolderCommandRepository(ConcurrentDictionary<int, Folder> folders, FakeFolderQueryRepository fakeFolderQueryRepository) : IFolderCommandRepository
+public class FakeFolderCommandRepository(
+    ConcurrentDictionary<int, Folder> folders,
+    FakeFolderQueryRepository fakeFolderQueryRepository) : IFolderCommandRepository
 {
     /// <summary>
     ///     Идентификатор последнего элемента.
     /// </summary>
     private int _lastId;
-    
+
     /// <inheritdoc />
     public ResultVoid Add(Folder folder)
     {
@@ -24,7 +26,7 @@ public class FakeFolderCommandRepository(ConcurrentDictionary<int, Folder> folde
 
         return ResultVoid.Success();
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
