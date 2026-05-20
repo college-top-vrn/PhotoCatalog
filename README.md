@@ -51,52 +51,42 @@ graph LR
 ```mermaid 
 graph TD
     subgraph "Infrastructure Layer (Внешний слой)"
-        DB[(ADO.NET Metadata Store)]
-        FS[(Physical Disk Storage)]
-        Logger[File Logger]
+        Errors
+        Extensions
+        Fakes
+        Handlers
+        Repositories
+        Services
+        SqlScripts
+        UnitOfWork
     end
 
     subgraph "Application Layer"
         direction TB
-        PC[Photo Controller/API]
-        UC_Manage[Catalog Use Cases]
+        UseCases
         UC_Search[Search & Tagging Use Cases]
+        ApplicationFakes[Fakes]
+        ApplicationErrors[Errors]
+        DTOs
+        Caching
     end
 
     subgraph "Domain Layer"
         direction TB
-        
-        subgraph "Entities"
-            E_Photo[Photo Entity]
-            E_Album[Album Entity]
-            E_Folder[Folder Entity]
-            E_Tag[Tag Value Object]
-        end
-        
+        Primitives
+        Entities
+        Extensions
+        ValueObjects
         subgraph "Interfaces"
-            I_PhotoRepo[IPhotoRepository]
-            I_MetaRepo[IMetadataRepository]
-            I_FileServer[IFileSystemService]
+            Repositories
+            Services         
+            
         end
     end
 
-
-    PC --> UC_Manage
-    PC --> UC_Search
     
-    UC_Manage --> E_Photo
-    UC_Manage --> E_Album
-    UC_Manage --> I_PhotoRepo
-    
-    UC_Search --> E_Tag
-    UC_Search --> I_MetaRepo
-
-
-    DB -.->|implements| I_MetaRepo
-    FS -.->|implements| I_FileServer
-    DB -.->|implements| I_PhotoRepo
 ```
-
+У наc не доделан Search & Tagging Use Cases
 
 # Технологический стек проекта
 
