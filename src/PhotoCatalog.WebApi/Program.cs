@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 using Microsoft.AspNetCore.Builder;
@@ -111,12 +110,6 @@ try
     app.MapHealthChecks("/health");
 
     RouteGroupBuilder photosGroup = app.MapGroup("/api/photos").WithTags("Фотографии");
-
-    photosGroup.MapGet("/", (IPhotoQueryRepository photoQuery) =>
-    {
-        Result<IEnumerable<Photo>> result = photoQuery.GetAll();
-        return result.ToHttpResult();
-    });
 
     photosGroup.MapPost("/import", (HttpRequest request, ImportPhotoUseCase importPhotoUseCase) =>
     {
