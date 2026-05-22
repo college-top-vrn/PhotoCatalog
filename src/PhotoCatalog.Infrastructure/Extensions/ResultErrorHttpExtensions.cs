@@ -7,37 +7,37 @@ using PhotoCatalog.Domain.Primitives;
 namespace PhotoCatalog.Infrastructure.Extensions;
 
 /// <summary>
-///     Методы расширения <see cref="Error" /> для работы с HTTP.
+///     Методы расширения <see cref="ResultError" /> для работы с HTTP.
 /// </summary>
-public static class ErrorHttpExtensions
+public static class ResultErrorHttpExtensions
 {
     /// <summary>
-    ///     Метод расширения для преобразования <see cref="Error" /> в <see cref="IResult" />.
+    ///     Метод расширения для преобразования <see cref="ResultError" /> в <see cref="IResult" />.
     /// </summary>
-    /// <param name="error"></param>
+    /// <param name="resultError"></param>
     /// <returns></returns>
-    public static IResult ToHttpResult(this Error error)
+    public static IResult ToHttpResult(this ResultError resultError)
     {
-        return error.Code switch
+        return resultError.Code switch
         {
             var code when code.EndsWith(".NotFound", StringComparison.CurrentCulture) =>
-                Results.NotFound(error.Message),
+                Results.NotFound(resultError.Message),
 
             var code when code.EndsWith(".CannotMoveToSelf", StringComparison.CurrentCulture) ||
                           code.Contains("Duplicate")
                           || code.EndsWith(".CycleDetected", StringComparison.CurrentCulture) ||
                           code.EndsWith(".OrphanedFile", StringComparison.CurrentCulture)
                           || code.EndsWith(".HasChildren", StringComparison.CurrentCulture)
-                => Results.Conflict(error.Message),
+                => Results.Conflict(resultError.Message),
 
             var code when code.StartsWith("Cache.", StringComparison.CurrentCulture) ||
                           code.StartsWith("Database.", StringComparison.CurrentCulture)
                           || code.StartsWith("FileStorage.", StringComparison.CurrentCulture) ||
                           code.StartsWith("MetadataExtractor.", StringComparison.CurrentCulture)
                           || code.StartsWith("Transactions.", StringComparison.CurrentCulture)
-                => Results.Problem(error.Message, statusCode: StatusCodes.Status500InternalServerError),
+                => Results.Problem(resultError.Message, statusCode: StatusCodes.Status500InternalServerError),
 
-            _ => Results.BadRequest(error.Message)
+            _ => Results.BadRequest(resultError.Message)
         };
     }
 }

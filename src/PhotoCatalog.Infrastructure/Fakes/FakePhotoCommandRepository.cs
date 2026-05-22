@@ -35,7 +35,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     {
         if (photo is null)
         {
-            return ResultVoid.Failure(new Error("PhotoRepository.CantAddPhoto",
+            return ResultVoid.Failure(new ResultError("PhotoRepository.CantAddPhoto",
                 "Не удалось добавить фото"));
         }
 
@@ -52,7 +52,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     {
         if (photo is null)
         {
-            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
+            return ResultVoid.Failure(new ResultError("PhotoRepository.PhotoIsNull",
                 "Фото является null"));
         }
 
@@ -60,7 +60,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
 
         if (deleteResult.IsFailure)
         {
-            return ResultVoid.Failure(deleteResult.Error);
+            return ResultVoid.Failure(deleteResult.ResultError);
         }
 
         Add(photo, photo.Id);
@@ -74,7 +74,7 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     {
         if (_photos.ContainsKey(id))
         {
-            return ResultVoid.Failure(new Error("PhotoRepository.CantDeletePhoto",
+            return ResultVoid.Failure(new ResultError("PhotoRepository.CantDeletePhoto",
                 "Не удалось удалить фото"));
         }
 
@@ -93,14 +93,14 @@ public class FakePhotoCommandRepository : IPhotoCommandRepository
     {
         if (photo is null)
         {
-            return ResultVoid.Failure(new Error("PhotoRepository.PhotoIsNull",
+            return ResultVoid.Failure(new ResultError("PhotoRepository.PhotoIsNull",
                 "Фото является null"));
         }
 
         if (_photos.TryAdd(id, photo).ToResult().IsFailure)
         {
             return ResultVoid
-                .Failure(new Error("PhotoRepository.PhotoWithSameIdAlreadyExist",
+                .Failure(new ResultError("PhotoRepository.PhotoWithSameIdAlreadyExist",
                     "Фото с похожим идентификатором уже существует"));
         }
 

@@ -72,7 +72,11 @@ public class SqliteUnitOfWork : IUnitOfWork
                 {
                     try
                     {
-                        _transaction = _connection!.BeginTransaction();
+                        if (_connection != null)
+                        {
+                            _transaction = _connection.BeginTransaction();
+                        }
+
                         _logger.Debug("Начата новая транзакция");
                         return ResultVoid.Success();
                     }

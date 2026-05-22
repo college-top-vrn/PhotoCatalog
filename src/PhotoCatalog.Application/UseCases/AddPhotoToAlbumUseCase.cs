@@ -37,12 +37,12 @@ public class AddPhotoToAlbumUseCase(
             .OnFailure(_ =>
                 _logger.Warning("Фото {PhotoId} не найдено", photoId))
             .Then(_ =>
-                {
-                    albumEntity = albumQueryRepository.GetById(albumId);
-                    return albumEntity;
-                })
-                .OnSuccess(_ =>
-                        _logger.Information("Альбом {AlbumId} найден", albumId))
+            {
+                albumEntity = albumQueryRepository.GetById(albumId);
+                return albumEntity;
+            })
+            .OnSuccess(_ =>
+                _logger.Information("Альбом {AlbumId} найден", albumId))
             .OnFailure(_ =>
                 _logger.Warning("Альбом {AlbumId} не найден", albumId))
             .Then(album => album.AddPhoto(photoId))

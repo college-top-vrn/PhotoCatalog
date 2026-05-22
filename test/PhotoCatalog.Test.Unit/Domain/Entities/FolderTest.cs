@@ -5,6 +5,7 @@ using Xunit;
 
 namespace PhotoCatalog.Test.Unit.Domain.Entities;
 
+// TODO: Исправить предупреждения
 /// <summary>
 ///     Содержит модульные тесты для проверки работы доменной сущности Folder.
 /// </summary>
@@ -64,9 +65,9 @@ public class FolderTest
         Result<Folder> folder = Folder.Create(id, name);
 
         ResultVoid actualError = folder.Value!.Rename(newName);
-        Error expectedError = DomainErrors.Folder.EmptyName;
+        ResultError expectedResultError = DomainErrors.Folder.EmptyName;
 
-        Assert.Equal(actualError.IsFailure, ResultVoid.Failure(expectedError).IsFailure);
+        Assert.Equal(actualError.IsFailure, ResultVoid.Failure(expectedResultError).IsFailure);
     }
 
     /// <summary>

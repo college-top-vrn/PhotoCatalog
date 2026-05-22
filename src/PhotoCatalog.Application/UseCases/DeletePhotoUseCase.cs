@@ -38,18 +38,23 @@ public class DeletePhotoUseCase(
             .ToResult(ApplicationErrors.General.NotFound)
             .Value;
 
+        if (photo is { Value: null } or null)
+        {
+            return ResultVoid.Failure(ApplicationErrors.General.NotFound);
+        }
+
         unitOfWork.BeginTransaction();
 
         photoCommandRepository.Delete(photoId);
 
+
         if (unitOfWork.Commit().IsSuccess)
         {
-            fileStorage.DeleteFile(photo!.Value!.RealPath);
-
+            fileStorage.DeleteFile(photo.Value.RealPath);
             return ResultVoid.Success();
         }
 
-        logger.Error("Orphaned file left on disk: {Path}", photo!.Value!.RealPath);
+        logger.Error("Orphaned file left on disk: {Path}", photo.Value.RealPath);
 
         return ResultVoid.Failure(ApplicationErrors.Files.OrphanedFile);
     }

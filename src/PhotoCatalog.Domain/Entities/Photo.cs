@@ -13,6 +13,7 @@ public class Photo
 {
     private readonly List<int> _tagIds = [];
 
+    // TODO: Пофиксить предупреждение
     /// <summary>
     ///     Конструктор для инициализации через ORM (Dapper).
     /// </summary>
@@ -36,7 +37,7 @@ public class Photo
     /// <summary>
     ///     Размеры изображения (ширина/высота).
     /// </summary>
-    public Dimensions Dimensions { get; private set; } = null!;
+    public Dimensions Dimensions { get; private set; }
 
     /// <summary>
     ///     Дата и время добавления фотографии в каталог (UTC).
@@ -68,7 +69,7 @@ public class Photo
     {
         return string.IsNullOrEmpty(realPath)
             ? Result.Failure<Photo>(DomainErrors.Photo.EmptyPath)
-            : Result.Success<Photo>(null!); // TODO Сделать сборку фотографии зная её путь.
+            : Result.Success(new Photo()); // TODO Сделать сборку фотографии зная её путь.
     }
 
     /// <summary>

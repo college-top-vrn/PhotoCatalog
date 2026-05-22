@@ -5,9 +5,9 @@ using Xunit;
 namespace PhotoCatalog.Test.Unit.Primitives.Errors;
 
 /// <summary>
-///     Тесты для проверки поведения объекта <see cref="Error" />.
+///     Тесты для проверки поведения объекта <see cref="ResultError" />.
 /// </summary>
-public class ErrorTest
+public class ResultErrorTest
 {
     [Fact]
     public void ErrorsWithSameCodeAndMessageShouldBeEqual()
@@ -15,8 +15,8 @@ public class ErrorTest
         const string expectedCode = "Tag.EmptyName";
         const string expectedMessage = "Имя тега не может быть пустым.";
 
-        Error error1 = new(expectedCode, expectedMessage);
-        Error error2 = new(expectedCode, expectedMessage);
+        ResultError error1 = new(expectedCode, expectedMessage);
+        ResultError error2 = new(expectedCode, expectedMessage);
 
         Assert.Equal(error1, error2);
     }
@@ -24,9 +24,9 @@ public class ErrorTest
     [Fact]
     public void NoneShouldHaveEmptyCodeAndMessage()
     {
-        Error noneError = Error.None;
+        ResultError noneResultError = ResultError.None;
 
-        Assert.Equal(string.Empty, noneError.Code);
-        Assert.Equal(string.Empty, noneError.Message);
+        Assert.Equal(string.Empty, noneResultError.Code);
+        Assert.Equal(string.Empty, noneResultError.Message);
     }
 }

@@ -15,6 +15,8 @@ using Xunit;
 
 namespace PhotoCatalog.Test.Integration.SqliteTagCommandQueryRepositoryTest;
 
+// TODO: Добавить документацию
+// TODO: Исправить предупржеднеия
 public class SqliteTagCommandRepositoryTests : IDisposable
 {
     private readonly SqliteConnection _keepAliveConnection;

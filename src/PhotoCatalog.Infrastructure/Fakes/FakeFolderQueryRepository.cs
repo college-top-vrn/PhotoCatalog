@@ -21,7 +21,7 @@ public class FakeFolderQueryRepository(ConcurrentDictionary<int, Folder> folders
             }
         }
 
-        return Result.Failure<Folder>(new Error("FolderRepository.FolderNotFound",
+        return Result.Failure<Folder>(new ResultError("FolderRepository.FolderNotFound",
             "Не удалось найти папку по идентификатору"));
     }
 }

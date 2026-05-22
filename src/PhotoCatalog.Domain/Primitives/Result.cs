@@ -15,15 +15,15 @@ public static class Result
     {
         return value is null
             ? Failure<T>(SystemErrors.NullValue)
-            : Result<T>.CreateInternal(value, true, Error.None);
+            : Result<T>.CreateInternal(value, true, ResultError.None);
     }
 
     /// <summary>
     ///     Создает провальный результат с указанной ошибкой и значением по умолчанию.
     /// </summary>
-    public static Result<T> Failure<T>(Error error)
+    public static Result<T> Failure<T>(ResultError resultError)
     {
-        return Result<T>.CreateInternal(default, false, error);
+        return Result<T>.CreateInternal(default, false, resultError);
     }
 }
 
@@ -42,12 +42,12 @@ public class Result<T>
     /// </summary>
     /// <param name="value">Результат операции. Имеет значение по умолчанию, если операция провалена.</param>
     /// <param name="isSuccess">Флаг, указывающий на успешное завершение операции.</param>
-    /// <param name="error">Детализированная бизнес-ошибка. Равна <see cref="Primitives.Error.None" /> при успехе.</param>
-    private Result(T? value, bool isSuccess, Error error)
+    /// <param name="resultError">Детализированная бизнес-ошибка. Равна <see cref="ResultError.None" /> при успехе.</param>
+    private Result(T? value, bool isSuccess, ResultError resultError)
     {
         Value = value;
         IsSuccess = isSuccess;
-        Error = error;
+        ResultError = resultError;
     }
 
     /// <summary>
@@ -61,9 +61,9 @@ public class Result<T>
     public bool IsFailure => !IsSuccess;
 
     /// <summary>
-    ///     Объект ошибки. Если операция успешна, содержит <see cref="Primitives.Error.None" />.
+    ///     Объект ошибки. Если операция успешна, содержит <see cref="ResultError.None" />.
     /// </summary>
-    public Error Error { get; }
+    public ResultError ResultError { get; }
 
     /// <summary>
     ///     Возвращает результат операции.
@@ -77,11 +77,11 @@ public class Result<T>
     /// </summary>
     /// <param name="value">Результат операции. Имеет значение по умолчанию, если операция провалена.</param>
     /// <param name="isSuccess">Флаг, указывающий на успешное завершение операции.</param>
-    /// <param name="error">Детализированная бизнес-ошибка. Равна <see cref="Primitives.Error.None" /> при успехе.</param>
+    /// <param name="resultError">Детализированная бизнес-ошибка. Равна <see cref="ResultError.None" /> при успехе.</param>
     /// <returns>Собранный объект.</returns>
-    internal static Result<T> CreateInternal(T? value, bool isSuccess, Error error)
+    internal static Result<T> CreateInternal(T? value, bool isSuccess, ResultError resultError)
     {
-        return new Result<T>(value, isSuccess, error);
+        return new Result<T>(value, isSuccess, resultError);
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public class Result<T>
     {
         return result.IsSuccess
             ? ResultVoid.Success()
-            : ResultVoid.Failure(result.Error);
+            : ResultVoid.Failure(result.ResultError);
     }
 
     /// <summary>
@@ -100,11 +100,11 @@ public class Result<T>
     /// </summary>
     /// <param name="isSuccess">Флаг успешности.</param>
     /// <param name="value">Значение (или default при ошибке).</param>
-    /// <param name="error">Объект ошибки.</param>
-    public void Deconstruct(out bool isSuccess, out T? value, out Error error)
+    /// <param name="resultError">Объект ошибки.</param>
+    public void Deconstruct(out bool isSuccess, out T? value, out ResultError resultError)
     {
         isSuccess = IsSuccess;
         value = Value;
-        error = Error;
+        resultError = ResultError;
     }
 }

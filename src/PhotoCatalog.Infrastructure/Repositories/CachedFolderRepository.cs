@@ -73,8 +73,9 @@ public class CachedFolderRepository(
                 null,
                 [CacheKeysFactory.GetFolderTag(id), CacheKeysFactory.GetFoldersTreeTag()]
             ).AsTask().GetAwaiter().GetResult();
-
-            return Result.Success(cachedFolder!);
+            return cachedFolder != null
+                ? Result.Success(cachedFolder)
+                : Result.Failure<Folder>(InfrastructureErrors.Cache.UnknownResultError);
         }
         catch (CacheBypassException ex)
         {
@@ -85,7 +86,7 @@ public class CachedFolderRepository(
         catch (Exception ex)
         {
             logger.Error(ex, "Непредвиденная ошибка при получении папки с Id={FolderId} из кэша", id);
-            return Result.Failure<Folder>(InfrastructureErrors.Cache.UnknownError);
+            return Result.Failure<Folder>(InfrastructureErrors.Cache.UnknownResultError);
         }
     }
 
@@ -116,7 +117,7 @@ public class CachedFolderRepository(
             {
                 logger.Warning(
                     "Операция {Operation} папки с Id={FolderId} завершилась ошибкой: {ErrorCode} {ErrorMessage}",
-                    operation.GetMethodInfo().Name, folderId, result.Error.Code, result.Error.Message);
+                    operation.GetMethodInfo().Name, folderId, result.ResultError.Code, result.ResultError.Message);
             }
 
             return result;
@@ -141,7 +142,7 @@ public class CachedFolderRepository(
         }
 
         logger.Warning("Папка с Id={FolderId} не получена: {ErrorCode} {ErrorMessage}",
-            id, result.Error.Code, result.Error.Message);
+            id, result.ResultError.Code, result.ResultError.Message);
         throw new CacheBypassException($"Папка с Id={id} не найдена или ошибка БД.");
     }
 }

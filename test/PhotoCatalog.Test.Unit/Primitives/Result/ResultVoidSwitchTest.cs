@@ -9,7 +9,7 @@ namespace PhotoCatalog.Test.Unit.Primitives.Result;
 /// </summary>
 public class ResultVoidSwitchTests
 {
-    private static readonly Error SwitchError = new("Switch.Error", "Pattern failed");
+    private static readonly ResultError SwitchResultError = new("Switch.Error", "Pattern failed");
 
     /// <summary>
     ///     Проверяет сопоставление успешного результата через паттерн свойств.
@@ -35,15 +35,15 @@ public class ResultVoidSwitchTests
     [Fact]
     public void SwitchNestedPropertyPatternOnFailureShouldExtractNestedData()
     {
-        ResultVoid result = ResultVoid.Failure(SwitchError);
+        ResultVoid result = ResultVoid.Failure(SwitchResultError);
 
         string errorDescription = result switch
         {
             { IsSuccess: true } => "Success",
-            { IsFailure: true, Error.Message: var desc } => desc,
+            { IsFailure: true, ResultError.Message: var desc } => desc,
             _ => "Unknown"
         };
 
-        Assert.Equal(SwitchError.Message, errorDescription);
+        Assert.Equal(SwitchResultError.Message, errorDescription);
     }
 }

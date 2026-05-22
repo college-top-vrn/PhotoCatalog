@@ -12,8 +12,8 @@ namespace PhotoCatalog.Test.Unit.Primitives.Result;
 /// </summary>
 public class ResultVoidExtensionsCoverageTest
 {
-    private static readonly Error DomainError = new("Domain.Error", "Error description");
-    private static readonly Error ExceptionError = new("System.Exception", "Exception caught");
+    private static readonly ResultError DomainResultError = new("Domain.Error", "Error description");
+    private static readonly ResultError ExceptionResultError = new("System.Exception", "Exception caught");
 
     /// <summary>
     ///     Проверяет обе ветви метода Then (переход от ResultVoid к ResultVoid).
@@ -22,11 +22,11 @@ public class ResultVoidExtensionsCoverageTest
     public void ThenVoidAllBranchesShouldExecuteCorrectPath()
     {
         ResultVoid successResult = ResultVoid.Success().Then(ResultVoid.Success);
-        ResultVoid failureResult = ResultVoid.Failure(DomainError).Then(ResultVoid.Success);
+        ResultVoid failureResult = ResultVoid.Failure(DomainResultError).Then(ResultVoid.Success);
 
         Assert.True(successResult.IsSuccess);
         Assert.True(failureResult.IsFailure);
-        Assert.Equal(DomainError, failureResult.Error);
+        Assert.Equal(DomainResultError, failureResult.ResultError);
     }
 
     /// <summary>
@@ -37,15 +37,15 @@ public class ResultVoidExtensionsCoverageTest
     {
         ResultVoid successResult = ResultVoidExtensions.TryCatch(
             () => { },
-            _ => ExceptionError);
+            _ => ExceptionResultError);
 
         ResultVoid exceptionResult = ResultVoidExtensions.TryCatch(
             () => throw new InvalidOperationException(),
-            _ => ExceptionError);
+            _ => ExceptionResultError);
 
         Assert.True(successResult.IsSuccess);
         Assert.True(exceptionResult.IsFailure);
-        Assert.Equal(ExceptionError, exceptionResult.Error);
+        Assert.Equal(ExceptionResultError, exceptionResult.ResultError);
     }
 
     /// <summary>
@@ -54,14 +54,15 @@ public class ResultVoidExtensionsCoverageTest
     [Fact]
     public void ThenTryVoidAllBranchesShouldCoverFailureTryAndCatch()
     {
-        ResultVoid failedPrevious = ResultVoid.Failure(DomainError).ThenTry(() => { }, _ => ExceptionError);
-        ResultVoid trySuccess = ResultVoid.Success().ThenTry(() => { }, _ => ExceptionError);
+        ResultVoid failedPrevious = ResultVoid.Failure(DomainResultError).ThenTry(() => { }, _ => ExceptionResultError);
+        ResultVoid trySuccess = ResultVoid.Success().ThenTry(() => { }, _ => ExceptionResultError);
         //TODO: Выбросить более конкретный Exception
-        ResultVoid catchTriggered = ResultVoid.Success().ThenTry(() => throw new Exception(), _ => ExceptionError);
+        ResultVoid catchTriggered =
+            ResultVoid.Success().ThenTry(() => throw new Exception(), _ => ExceptionResultError);
 
-        Assert.Equal(DomainError, failedPrevious.Error);
+        Assert.Equal(DomainResultError, failedPrevious.ResultError);
         Assert.True(trySuccess.IsSuccess);
-        Assert.Equal(ExceptionError, catchTriggered.Error);
+        Assert.Equal(ExceptionResultError, catchTriggered.ResultError);
     }
 
     /// <summary>
@@ -77,7 +78,7 @@ public class ResultVoidExtensionsCoverageTest
             .OnSuccess(() => successCounter++)
             .OnFailure(_ => failureCounter++);
 
-        ResultVoid.Failure(DomainError)
+        ResultVoid.Failure(DomainResultError)
             .OnSuccess(() => successCounter++)
             .OnFailure(_ => failureCounter++);
 
@@ -92,7 +93,7 @@ public class ResultVoidExtensionsCoverageTest
     public void FinallyAllBranchesShouldMapCorrectly()
     {
         int result1 = ResultVoid.Success().Finally(() => 1, _ => 0);
-        int result2 = ResultVoid.Failure(DomainError).Finally(() => 1, _ => 0);
+        int result2 = ResultVoid.Failure(DomainResultError).Finally(() => 1, _ => 0);
 
         Assert.Equal(1, result1);
         Assert.Equal(0, result2);

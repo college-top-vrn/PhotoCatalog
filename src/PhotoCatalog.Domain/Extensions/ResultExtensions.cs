@@ -30,7 +30,7 @@ public static class ResultExtensions
     /// </summary>
     /// <typeparam name="TValue">Тип преобразуемого значения.</typeparam>
     /// <param name="value">Значение, полученное из внешнего источника.</param>
-    /// <param name="errorIfNull">Доменная ошибка, сигнализирующая об отсутствии данных.</param>
+    /// <param name="resultErrorIfNull">Доменная ошибка, сигнализирующая об отсутствии данных.</param>
     /// <returns>Успешный результат с данными, либо провальный с переданной ошибкой.</returns>
     /// <example>
     ///     <code>
@@ -38,11 +38,11 @@ public static class ResultExtensions
     ///         .ToResult(new Error("Entity.NotFound", "Запись не найдена"));
     ///     </code>
     /// </example>
-    public static Result<TValue> ToResult<TValue>(this TValue? value, Error errorIfNull)
+    public static Result<TValue> ToResult<TValue>(this TValue? value, ResultError resultErrorIfNull)
     {
         return value is not null
             ? Result.Success(value)
-            : Result.Failure<TValue>(errorIfNull);
+            : Result.Failure<TValue>(resultErrorIfNull);
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public static class ResultExtensions
     /// </example>
     public static Result<TValue> TryCatch<TValue>(
         Func<TValue> action,
-        Func<Exception, Error> errorHandler)
+        Func<Exception, ResultError> errorHandler)
     {
         try
         {
@@ -94,14 +94,14 @@ public static class ResultExtensions
         /// </example>
         public Result<TNextValue> Then<TNextValue>(Func<TValue, Result<TNextValue>> nextStep)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return Result.Failure<TNextValue>(SystemErrors.NullResult);
             }
 
             return result.IsFailure
-                ? Result.Failure<TNextValue>(result.Error)
-                : nextStep(result.Value!);
+                ? Result.Failure<TNextValue>(result.ResultError)
+                : nextStep(result.Value);
         }
 
         /// <summary>
@@ -117,14 +117,14 @@ public static class ResultExtensions
         /// </example>
         public ResultVoid Then(Func<TValue, ResultVoid> nextStep)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return ResultVoid.Failure(SystemErrors.NullResult);
             }
 
             return result.IsFailure
-                ? ResultVoid.Failure(result.Error)
-                : nextStep(result.Value!);
+                ? ResultVoid.Failure(result.ResultError)
+                : nextStep(result.Value);
         }
 
         /// <summary>
@@ -144,21 +144,21 @@ public static class ResultExtensions
         ///     </code>
         /// </example>
         public Result<TNextValue> ThenTry<TNextValue>(Func<TValue, TNextValue> nextStep,
-            Func<Exception, Error> errorHandler)
+            Func<Exception, ResultError> errorHandler)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return Result.Failure<TNextValue>(SystemErrors.NullResult);
             }
 
             if (result.IsFailure)
             {
-                return Result.Failure<TNextValue>(result.Error);
+                return Result.Failure<TNextValue>(result.ResultError);
             }
 
             try
             {
-                return Result.Success(nextStep(result.Value!));
+                return Result.Success(nextStep(result.Value));
             }
             catch (Exception ex)
             {
@@ -182,21 +182,21 @@ public static class ResultExtensions
         ///     </code>
         /// </example>
         public ResultVoid ThenTry(Action<TValue> nextStep,
-            Func<Exception, Error> errorHandler)
+            Func<Exception, ResultError> errorHandler)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return ResultVoid.Failure(SystemErrors.NullResult);
             }
 
             if (result.IsFailure)
             {
-                return ResultVoid.Failure(result.Error);
+                return ResultVoid.Failure(result.ResultError);
             }
 
             try
             {
-                nextStep(result.Value!);
+                nextStep(result.Value);
                 return ResultVoid.Success();
             }
             catch (Exception ex)
@@ -219,14 +219,14 @@ public static class ResultExtensions
         /// </example>
         public Result<TNextValue> Transform<TNextValue>(Func<TValue, TNextValue> mapper)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return Result.Failure<TNextValue>(SystemErrors.NullResult);
             }
 
             return result.IsFailure
-                ? Result.Failure<TNextValue>(result.Error)
-                : Result.Success(mapper(result.Value!));
+                ? Result.Failure<TNextValue>(result.ResultError)
+                : Result.Success(mapper(result.Value));
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ public static class ResultExtensions
         ///     Прерывает цепочку указанной ошибкой, если условие не выполнено.
         /// </summary>
         /// <param name="predicate">Функция-условие.</param>
-        /// <param name="error">Ошибка, возвращаемая при несоблюдении условия.</param>
+        /// <param name="resultError">Ошибка, возвращаемая при несоблюдении условия.</param>
         /// <returns>Исходные данные при успехе, либо провальный результат с ошибкой.</returns>
         /// <example>
         ///     <code>
@@ -246,21 +246,21 @@ public static class ResultExtensions
         ///     </code>
         /// </example>
         public Result<TValue> Ensure(Func<TValue, bool> predicate,
-            Error error)
+            ResultError resultError)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return Result.Failure<TValue>(SystemErrors.NullResult);
             }
 
             if (result.IsFailure)
             {
-                return Result.Failure<TValue>(result.Error);
+                return Result.Failure<TValue>(result.ResultError);
             }
 
-            return predicate(result.Value!)
+            return predicate(result.Value)
                 ? result
-                : Result.Failure<TValue>(error);
+                : Result.Failure<TValue>(resultError);
         }
 
         /// <summary>
@@ -278,20 +278,20 @@ public static class ResultExtensions
         /// </example>
         public Result<TValue> Check(Func<TValue, ResultVoid> checker)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return Result.Failure<TValue>(SystemErrors.NullResult);
             }
 
             if (result.IsFailure)
             {
-                return Result.Failure<TValue>(result.Error);
+                return Result.Failure<TValue>(result.ResultError);
             }
 
-            ResultVoid checkResult = checker(result.Value!);
+            ResultVoid checkResult = checker(result.Value);
 
             return checkResult.IsFailure
-                ? Result.Failure<TValue>(checkResult.Error)
+                ? Result.Failure<TValue>(checkResult.ResultError)
                 : result;
         }
 
@@ -311,20 +311,20 @@ public static class ResultExtensions
         /// </example>
         public Result<TValue> Check<TOther>(Func<TValue, Result<TOther>> checker)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return Result.Failure<TValue>(SystemErrors.NullResult);
             }
 
             if (result.IsFailure)
             {
-                return Result.Failure<TValue>(result.Error);
+                return Result.Failure<TValue>(result.ResultError);
             }
 
-            Result<TOther> checkResult = checker(result.Value!);
+            Result<TOther> checkResult = checker(result.Value);
 
             return checkResult.IsFailure
-                ? Result.Failure<TValue>(checkResult.Error)
+                ? Result.Failure<TValue>(checkResult.ResultError)
                 : result;
         }
 
@@ -340,9 +340,9 @@ public static class ResultExtensions
         /// </example>
         public Result<TValue> OnSuccess(Action<TValue> action)
         {
-            if (result is not null && result.IsSuccess)
+            if (result is { Value: not null, IsSuccess: true })
             {
-                action(result.Value!);
+                action(result.Value);
             }
 
             return result ?? Result.Failure<TValue>(SystemErrors.NullResult);
@@ -358,7 +358,7 @@ public static class ResultExtensions
         ///     result.OnFailure(error => Log.Error($"Сбой бизнес-логики: {error.Message}"));
         ///     </code>
         /// </example>
-        public Result<TValue> OnFailure(Action<Error> action)
+        public Result<TValue> OnFailure(Action<ResultError> action)
         {
             if (result is null)
             {
@@ -368,7 +368,7 @@ public static class ResultExtensions
 
             if (result.IsFailure)
             {
-                action(result.Error);
+                action(result.ResultError);
             }
 
             return result;
@@ -390,16 +390,16 @@ public static class ResultExtensions
         ///     </code>
         /// </example>
         public TLanding Finally<TLanding>(Func<TValue, TLanding> success,
-            Func<Error, TLanding> failure)
+            Func<ResultError, TLanding> failure)
         {
-            if (result is null)
+            if (result is null || result.Value is null)
             {
                 return failure(SystemErrors.NullResult);
             }
 
             return result.IsSuccess
-                ? success(result.Value!)
-                : failure(result.Error);
+                ? success(result.Value)
+                : failure(result.ResultError);
         }
     }
 }

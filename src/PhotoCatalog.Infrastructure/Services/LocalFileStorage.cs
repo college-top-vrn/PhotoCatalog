@@ -74,16 +74,21 @@ public sealed class LocalFileStorage : IFileStorage
             if (!File.Exists(sourcePath))
             {
                 _logger.Warning("Исходный файл не существует: {SourcePath}", sourcePath);
-                return Result.Failure<string>(InfrastructureErrors.FileStorage.IoError);
+                return Result.Failure<string>(InfrastructureErrors.FileStorage.IoResultError);
             }
 
             Result<string> destinationPath = NormalizeAndValidatePath(newFileName);
             if (destinationPath.IsFailure)
             {
-                return Result.Failure<string>(destinationPath.Error);
+                return Result.Failure<string>(destinationPath.ResultError);
             }
 
-            string targetFullPath = Path.Combine(_baseStoragePath, destinationPath.Value!);
+            if (destinationPath.Value == null)
+            {
+                return Result.Failure<string>(InfrastructureErrors.FileStorage.IoResultError);
+            }
+
+            string targetFullPath = Path.Combine(_baseStoragePath, destinationPath.Value);
             string? targetDirectory = Path.GetDirectoryName(targetFullPath);
 
             // Проверка на null для параметра targetDirectory
@@ -124,12 +129,12 @@ public sealed class LocalFileStorage : IFileStorage
             _logger.Error(ex,
                 "Ошибка ввода-вывода при сохранении файла. SourcePath={SourcePath}, Message={ErrorMessage}",
                 sourcePath, ex.Message);
-            return Result.Failure<string>(InfrastructureErrors.FileStorage.IoError);
+            return Result.Failure<string>(InfrastructureErrors.FileStorage.IoResultError);
         }
         catch (Exception ex)
         {
             _logger.Fatal(ex, "Непредвиденная ошибка при сохранении файла. SourcePath={SourcePath}", sourcePath);
-            return Result.Failure<string>(InfrastructureErrors.FileStorage.IoError);
+            return Result.Failure<string>(InfrastructureErrors.FileStorage.IoResultError);
         }
     }
 
@@ -173,12 +178,12 @@ public sealed class LocalFileStorage : IFileStorage
         {
             _logger.Error(ex, "Ошибка ввода-вывода при удалении файла: {FilePath}, Message={ErrorMessage}",
                 filePath, ex.Message);
-            return ResultVoid.Failure(InfrastructureErrors.FileStorage.IoError);
+            return ResultVoid.Failure(InfrastructureErrors.FileStorage.IoResultError);
         }
         catch (Exception ex)
         {
             _logger.Fatal(ex, "Непредвиденная ошибка при удалении файла: {FilePath}", filePath);
-            return ResultVoid.Failure(InfrastructureErrors.FileStorage.IoError);
+            return ResultVoid.Failure(InfrastructureErrors.FileStorage.IoResultError);
         }
     }
 

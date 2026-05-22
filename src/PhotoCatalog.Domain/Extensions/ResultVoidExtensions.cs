@@ -26,7 +26,7 @@ public static class ResultVoidExtensions
     /// </example>
     public static ResultVoid TryCatch(
         Action action,
-        Func<Exception, Error> errorHandler)
+        Func<Exception, ResultError> errorHandler)
     {
         try
         {
@@ -77,7 +77,7 @@ public static class ResultVoidExtensions
         public Result<TNextValue> Then<TNextValue>(Func<Result<TNextValue>> nextStep)
         {
             return result.IsFailure
-                ? Result.Failure<TNextValue>(result.Error)
+                ? Result.Failure<TNextValue>(result.ResultError)
                 : nextStep();
         }
 
@@ -98,11 +98,11 @@ public static class ResultVoidExtensions
         ///     </code>
         /// </example>
         public Result<TNextValue> ThenTry<TNextValue>(Func<TNextValue> nextStep,
-            Func<Exception, Error> errorHandler)
+            Func<Exception, ResultError> errorHandler)
         {
             if (result.IsFailure)
             {
-                return Result.Failure<TNextValue>(result.Error);
+                return Result.Failure<TNextValue>(result.ResultError);
             }
 
             try
@@ -131,7 +131,7 @@ public static class ResultVoidExtensions
         ///     </code>
         /// </example>
         public ResultVoid ThenTry(Action nextStep,
-            Func<Exception, Error> errorHandler)
+            Func<Exception, ResultError> errorHandler)
         {
             if (result.IsFailure)
             {
@@ -179,11 +179,11 @@ public static class ResultVoidExtensions
         ///     result.OnFailure(error => Logger.Error($"Сбой: {error.Code}"));
         ///     </code>
         /// </example>
-        public ResultVoid OnFailure(Action<Error> action)
+        public ResultVoid OnFailure(Action<ResultError> action)
         {
             if (result.IsFailure)
             {
-                action(result.Error);
+                action(result.ResultError);
             }
 
             return result;
@@ -205,11 +205,11 @@ public static class ResultVoidExtensions
         ///     </code>
         /// </example>
         public TLanding Finally<TLanding>(Func<TLanding> success,
-            Func<Error, TLanding> failure)
+            Func<ResultError, TLanding> failure)
         {
             return result.IsSuccess
                 ? success()
-                : failure(result.Error);
+                : failure(result.ResultError);
         }
     }
 }

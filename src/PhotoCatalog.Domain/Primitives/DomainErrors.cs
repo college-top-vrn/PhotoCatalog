@@ -3,7 +3,7 @@
 /// <summary>
 ///     Единый статический класс (реестр),
 ///     который содержит все возможные бизнес-ошибки предметной области
-///     в виде заранее определенных структур <see cref="Error" />>.
+///     в виде заранее определенных структур <see cref="ResultError" />>.
 /// </summary>
 public static class DomainErrors
 {
@@ -15,7 +15,7 @@ public static class DomainErrors
         /// <summary>
         ///     Ошибка, когда ширина и высота меньше или равны нулю, или меньше разрешенного предела размера.
         /// </summary>
-        public static readonly Error Invalid = new(
+        public static readonly ResultError Invalid = new(
             "Dimensions.Invalid",
             "Ширина и высота должны быть строго больше нуля или меньше разрешенного предела размера.");
     }
@@ -28,14 +28,14 @@ public static class DomainErrors
         /// <summary>
         ///     Ошибка, когда имя тега пустое или состоит только из пробелов.
         /// </summary>
-        public static readonly Error EmptyName = new(
+        public static readonly ResultError EmptyName = new(
             "Tag.EmptyName",
             "Имя тега не может быть пустым или состоять только из пробелов.");
 
         /// <summary>
         ///     Ошибка, когда имя тега превышает 50 символов.
         /// </summary>
-        public static readonly Error TooLong = new(
+        public static readonly ResultError TooLong = new(
             "Tag.TooLong",
             "Имя тега не должно превышать 50 символов.");
     }
@@ -48,35 +48,35 @@ public static class DomainErrors
         /// <summary>
         ///     Ошибка, когда путь к файлу фотографии пустой.
         /// </summary>
-        public static readonly Error EmptyPath = new(
+        public static readonly ResultError EmptyPath = new(
             "Photo.EmptyPath",
             "Путь к файлу фотографии не может быть пустым.");
 
         /// <summary>
         ///     Ошибка, когда данный тег уже привязан к этой фотографии.
         /// </summary>
-        public static readonly Error DuplicateTag = new(
+        public static readonly ResultError DuplicateTag = new(
             "Photo.DuplicateTag",
             "Данный тег уже привязан к этой фотографии.");
 
         /// <summary>
         ///     Ошибка, когда данный тег не существует в этой фотографии.
         /// </summary>
-        public static readonly Error TagNotExists = new(
+        public static readonly ResultError TagNotExists = new(
             "Photo.TagNotExists",
             "Данный тег не существует в этой фотографии.");
 
         /// <summary>
         ///     Ошибка, когда данная фотография не найдена.
         /// </summary>
-        public static readonly Error NotFound = new(
+        public static readonly ResultError NotFound = new(
             "Photo.NotFound",
             "Данная фотография не найдена");
 
         /// <summary>
         ///     Ошибка, когда данная фотография пустая.
         /// </summary>
-        public static readonly Error NullPhoto = new(
+        public static readonly ResultError NullPhoto = new(
             "Photo.NullPhoto",
             "Данная фотография пустая");
     }
@@ -89,14 +89,14 @@ public static class DomainErrors
         /// <summary>
         ///     Ошибка, когда имя папки пустое.
         /// </summary>
-        public static readonly Error EmptyName = new(
+        public static readonly ResultError EmptyName = new(
             "Folder.EmptyName",
             "Имя папки не может быть пустым.");
 
         /// <summary>
         ///     Ошибка, когда папка перемещается внутрь самой себя (циклическая ссылка).
         /// </summary>
-        public static readonly Error CannotMoveToSelf = new(
+        public static readonly ResultError CannotMoveToSelf = new(
             "Folder.CannotMoveToSelf",
             "Папка не может быть перемещена внутрь самой себя (циклическая ссылка).");
     }
@@ -109,28 +109,28 @@ public static class DomainErrors
         /// <summary>
         ///     Ошибка, когда имя альбома пустое.
         /// </summary>
-        public static readonly Error EmptyName = new(
+        public static readonly ResultError EmptyName = new(
             "Album.EmptyName",
             "Имя альбома не может быть пустым.");
 
         /// <summary>
         ///     Ошибка, когда эта фотография уже находится в данном альбоме.
         /// </summary>
-        public static readonly Error DuplicatePhoto = new(
+        public static readonly ResultError DuplicatePhoto = new(
             "Album.DuplicatePhoto",
             "Эта фотография уже находится в данном альбоме.");
 
         /// <summary>
         ///     Ошибка, когда альбом не найден.
         /// </summary>
-        public static readonly Error NotFound = new(
+        public static readonly ResultError NotFound = new(
             "Album.NotFound",
             "Альбом не найден.");
 
         /// <summary>
         ///     Ошибка, когда передан пустой альбом.
         /// </summary>
-        public static readonly Error NullAlbum = new(
+        public static readonly ResultError NullAlbum = new(
             "Album.NullAlbum",
             "Альбом не может быть null.");
     }

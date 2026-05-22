@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using System.Linq;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
@@ -41,11 +40,6 @@ public class FakeAlbumCommandRepository : IAlbumCommandRepository
     /// <inheritdoc />
     public ResultVoid Add(Album album)
     {
-        if (album == null)
-        {
-            return ResultVoid.Failure(DomainErrors.Album.NullAlbum);
-        }
-
         int newId = ++_lastId;
 
         // Создаем копию, чтобы сохранить состояние на момент добавления
@@ -57,22 +51,14 @@ public class FakeAlbumCommandRepository : IAlbumCommandRepository
             typeof(Album).GetProperty("Id")?.SetValue(albumToAdd, newId);
         }
 
-        if (!_albums.TryAdd(albumToAdd.Id, albumToAdd))
-        {
-            return ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation);
-        }
-
-        return ResultVoid.Success();
+        return !_albums.TryAdd(albumToAdd.Id, albumToAdd)
+            ? ResultVoid.Failure(InfrastructureErrors.Database.ConstraintViolation)
+            : ResultVoid.Success();
     }
 
     /// <inheritdoc />
     public ResultVoid Update(Album album)
     {
-        if (album == null)
-        {
-            return ResultVoid.Failure(DomainErrors.Album.NullAlbum);
-        }
-
         if (!_albums.ContainsKey(album.Id))
         {
             return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
@@ -87,11 +73,8 @@ public class FakeAlbumCommandRepository : IAlbumCommandRepository
     /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
-        if (!_albums.TryRemove(id, out _))
-        {
-            return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
-        }
-
-        return ResultVoid.Success();
+        return !_albums.TryRemove(id, out _)
+            ? ResultVoid.Failure(InfrastructureErrors.Database.NotFound)
+            : ResultVoid.Success();
     }
 }

@@ -48,7 +48,12 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository, IDisposable
         {
             _unitOfWork.BeginTransaction();
 
-            Folder? foundFolder = _unitOfWork.Connection!
+            if (_unitOfWork.Connection == null)
+            {
+                return Result.Failure<Folder>(InfrastructureErrors.Database.NotFound);
+            }
+
+            Folder? foundFolder = _unitOfWork.Connection
                 .QueryFirstOrDefault<Folder>(
                     """
                     SELECT Id, ParentFolderId, Name
@@ -58,13 +63,18 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository, IDisposable
                     new { Id = id }
                 );
 
+            if (foundFolder == null)
+            {
+                return Result.Failure<Folder>(InfrastructureErrors.Database.NotFound);
+            }
+
             return foundFolder
                 .ToResult(InfrastructureErrors.Database.NotFound)
                 .Finally(
                     _ =>
                     {
                         _unitOfWork.Commit();
-                        return Result.Success(foundFolder)!;
+                        return Result.Success(foundFolder);
                     },
                     _ =>
                     {

@@ -6,7 +6,7 @@ namespace PhotoCatalog.Infrastructure.Errors;
 /// <summary>
 ///     Единый статический класс (реестр),
 ///     который содержит все ошибки уровня Infrastructure
-///     в виде заранее определенных структур <see cref="Error" />.
+///     в виде заранее определенных структур <see cref="ResultError" />.
 /// </summary>
 /// <remarks>
 ///     В отличие от <see cref="DomainErrors" /> (бизнес-логика) и
@@ -24,7 +24,7 @@ public static class InfrastructureErrors
         /// <summary>
         ///     Ошибка, когда не удалось установить соединение с базой данных.
         /// </summary>
-        public static readonly Error ConnectionFailed = new(
+        public static readonly ResultError ConnectionFailed = new(
             "Database.ConnectionFailed",
             "Не удалось установить соединение с базой данных.");
 
@@ -32,7 +32,7 @@ public static class InfrastructureErrors
         ///     Ошибка, когда нарушена целостность данных
         ///     (например, дублирование уникального ключа, нарушение внешнего ключа).
         /// </summary>
-        public static readonly Error ConstraintViolation = new(
+        public static readonly ResultError ConstraintViolation = new(
             "Database.ConstraintViolation",
             "Нарушение целостности данных (например, дублирование уникального ключа).");
 
@@ -41,7 +41,7 @@ public static class InfrastructureErrors
         ///     когда уже существует активная транзакция в текущем UnitOfWork.
         ///     Гарантирует, что в рамках одного UnitOfWork может быть только одна транзакция.
         /// </summary>
-        public static readonly Error TransactionAlreadyExists = new(
+        public static readonly ResultError TransactionAlreadyExists = new(
             "Database.TransactionAlreadyExists",
             "Транзакция уже активна");
 
@@ -50,26 +50,26 @@ public static class InfrastructureErrors
         ///     транзакцию, когда активной транзакции не существует.
         ///     Предотвращает некорректные операции с неинициализированным состоянием транзакции.
         /// </summary>
-        public static readonly Error NoActiveTransaction =
+        public static readonly ResultError NoActiveTransaction =
             new("Database.NoActiveTransaction", "Нет активной транзакции");
 
         /// <summary>
         ///     Ошибка, соответствующая <see cref="Microsoft.Data.Sqlite.SqliteException" />.
         ///     Возникает при ошибке в SQLite запросе.
         /// </summary>
-        public static readonly Error Sqlite =
+        public static readonly ResultError Sqlite =
             new("Database.Sqlite", "Ошибка Sqlite.");
 
         /// <summary>
         ///     Ошибка, когда элемент таблицы базы данных не найден.
         /// </summary>
-        public static readonly Error NotFound =
+        public static readonly ResultError NotFound =
             new("Database.NotFound", "Элемент таблицы базы данных не найден.");
 
         /// <summary>
         ///     Ошибка, когда при удалении у папки имеются дочерние объекты.
         /// </summary>
-        public static readonly Error HasChildren =
+        public static readonly ResultError HasChildren =
             new("Database.HasChildren", "У папки имеются дочерние объекты.");
     }
 
@@ -81,7 +81,7 @@ public static class InfrastructureErrors
         /// <summary>
         ///     Ошибка, когда не получается произвести кеширование.
         /// </summary>
-        public static readonly Error UnknownError = new(
+        public static readonly ResultError UnknownResultError = new(
             "Cache.UnknownError",
             "Непредвиденная ошибка при получении элемента из кэша.");
     }
@@ -95,7 +95,7 @@ public static class InfrastructureErrors
         ///     Ошибка доступа к файлу или директории.
         ///     Возникает при отсутствии прав на чтение/запись/удаление.
         /// </summary>
-        public static readonly Error AccessDenied = new(
+        public static readonly ResultError AccessDenied = new(
             "FileStorage.AccessDenied",
             "Отказано в доступе к файлу или директории. Проверьте права приложения.");
 
@@ -103,7 +103,7 @@ public static class InfrastructureErrors
         ///     Ошибка при переполнении дискового пространства.
         ///     Возникает, когда на целевом диске недостаточно места для сохранения файла.
         /// </summary>
-        public static readonly Error DiskFull = new(
+        public static readonly ResultError DiskFull = new(
             "FileStorage.DiskFull",
             "Недостаточно свободного места на диске для выполнения операции.");
 
@@ -111,7 +111,7 @@ public static class InfrastructureErrors
         ///     Общая ошибка ввода-вывода.
         ///     Возникает при непредвиденных проблемах с файловой системой.
         /// </summary>
-        public static readonly Error IoError = new(
+        public static readonly ResultError IoResultError = new(
             "FileStorage.IOError",
             "Произошла ошибка ввода-вывода при работе с файлом.");
 
@@ -119,7 +119,7 @@ public static class InfrastructureErrors
         ///     Ошибка некорректного пути.
         ///     Возникает, когда указанный путь содержит недопустимые символы или имеет неверный формат.
         /// </summary>
-        public static readonly Error InvalidPath = new(
+        public static readonly ResultError InvalidPath = new(
             "FileStorage.InvalidPath",
             "Указанный путь к файлу имеет недопустимый формат.");
 
@@ -127,14 +127,14 @@ public static class InfrastructureErrors
         ///     Ошибка, возникающая при попытке выхода за пределы базовой директории хранилища.
         ///     Возникает, когда относительный путь содержит ".." для навигации вверх.
         /// </summary>
-        public static readonly Error PathTraversalAttempt = new(
+        public static readonly ResultError PathTraversalAttempt = new(
             "FileStorage.PathTraversalAttempt",
             "Обнаружена попытка выхода за пределы разрешенной директории хранилища.");
 
         /// <summary>
         ///     Ошибка при генерации миниатюры изображения.
         /// </summary>
-        public static readonly Error ThumbnailGenerationFailed = new(
+        public static readonly ResultError ThumbnailGenerationFailed = new(
             "FileStorage.ThumbnailGenerationFailed",
             "Не удалось создать миниатюру изображения.");
     }
@@ -148,7 +148,7 @@ public static class InfrastructureErrors
         ///     Ошибка блокировки файла.
         ///     Возникает, когда файл занят другим процессом (обычно при записи).
         /// </summary>
-        public static readonly Error FileLocked = new(
+        public static readonly ResultError FileLocked = new(
             "MetadataExtractor.FileLocked",
             "Файл заблокирован другим процессом. Повторите попытку позже.");
 
@@ -156,7 +156,7 @@ public static class InfrastructureErrors
         ///     Ошибка поврежденного файла.
         ///     Возникает, когда структура файла нарушена или он неполный.
         /// </summary>
-        public static readonly Error FileCorrupted = new(
+        public static readonly ResultError FileCorrupted = new(
             "MetadataExtractor.FileCorrupted",
             "Файл поврежден и не может быть прочитан.");
 
@@ -164,14 +164,14 @@ public static class InfrastructureErrors
         ///     Ошибка неверного формата.
         ///     Возникает, когда файл не является изображением в поддерживаемом формате.
         /// </summary>
-        public static readonly Error NotAnImage = new(
+        public static readonly ResultError NotAnImage = new(
             "MetadataExtractor.NotAnImage",
             "Файл не является изображением или его формат не поддерживается.");
 
         // TODO: Добавить XML документацию
         /// <summary>
         /// </summary>
-        public static readonly Error MetadataNotFound = new(
+        public static readonly ResultError MetadataNotFound = new(
             "MetadataExtractor.MetadataNotFound", "Метаданные не найдены. ");
     }
 }

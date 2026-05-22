@@ -20,7 +20,7 @@ public class DimensionsTest
 
         Assert.True(result.IsSuccess);
         //TODO: Проверить на null
-        Assert.Equal(100, result.Value!.Width);
+        Assert.Equal(100, result.Value.Width);
         Assert.Equal(100, result.Value.Height);
     }
 
@@ -48,7 +48,7 @@ public class DimensionsTest
 
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.ResultError);
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public class DimensionsTest
 
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.ResultError);
     }
 
     /// <summary>
@@ -72,10 +72,10 @@ public class DimensionsTest
     {
         Result<Dimensions> actualNegativeWidth = Dimensions.Create(-100, 500);
         Assert.False(actualNegativeWidth.IsSuccess);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeWidth.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeWidth.ResultError);
 
         Result<Dimensions> actualNegativeHeight = Dimensions.Create(500, -100);
         Assert.False(actualNegativeHeight.IsSuccess);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeHeight.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeHeight.ResultError);
     }
 }

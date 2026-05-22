@@ -5,6 +5,7 @@ using System.Linq;
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Infrastructure.Errors;
 
 namespace PhotoCatalog.Infrastructure.Fakes;
 
@@ -30,7 +31,7 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
             }
         }
 
-        return Result.Failure<Photo>(new Error("PhotoRepository.PhotoNotFound",
+        return Result.Failure<Photo>(new ResultError("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по идентификатору"));
     }
 
@@ -46,7 +47,7 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
             }
         }
 
-        return Result.Failure<Photo>(new Error("PhotoRepository.PhotoNotFound",
+        return Result.Failure<Photo>(new ResultError("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по заданному пути"));
     }
 
@@ -58,11 +59,16 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
 
         if (album.IsFailure)
         {
-            return Result.Failure<IReadOnlyCollection<Photo>>(album.Error);
+            return Result.Failure<IReadOnlyCollection<Photo>>(album.ResultError);
+        }
+
+        if (album.Value == null)
+        {
+            return Result.Failure<IReadOnlyCollection<Photo>>(InfrastructureErrors.Database.NotFound);
         }
 
         List<Photo> photos = (
-            from photoId in album.Value!.PhotoIds
+            from photoId in album.Value.PhotoIds
             from photo in _photos
             where photo.Value.Id == photoId
             select photo.Value
@@ -71,7 +77,7 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
         if (photos.Count == 0)
         {
             return Result
-                .Failure<IReadOnlyCollection<Photo>>(new Error("PhotoRepository.PhotosByAlbumAreNotFound",
+                .Failure<IReadOnlyCollection<Photo>>(new ResultError("PhotoRepository.PhotosByAlbumAreNotFound",
                     "Не найдены фотографии по соответствующиму альбому"));
         }
 
@@ -93,7 +99,7 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
         if (photos.Count == 0)
         {
             return Result
-                .Failure<IReadOnlyCollection<Photo>>(new Error("PhotoRepository.PhotosByTagsAreNotFound",
+                .Failure<IReadOnlyCollection<Photo>>(new ResultError("PhotoRepository.PhotosByTagsAreNotFound",
                     "Не найдены фотографии по соответствующим тегам"));
         }
 

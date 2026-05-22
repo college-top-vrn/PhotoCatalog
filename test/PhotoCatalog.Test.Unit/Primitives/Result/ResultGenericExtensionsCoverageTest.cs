@@ -12,10 +12,10 @@ namespace PhotoCatalog.Test.Unit.Primitives.Result;
 /// </summary>
 public class ResultGenericExtensionsCoverageTests
 {
-    private static readonly Error DomainError = new("Domain.Error", "Error description");
-    private static readonly Error ExceptionError = new("System.Exception", "Exception caught");
-    private static readonly Error NullConditionError = new("Value.Null", "Value cannot be null");
-    private static readonly Error EnsureError = new("Ensure.Failed", "Condition not met");
+    private static readonly ResultError DomainResultError = new("Domain.Error", "Error description");
+    private static readonly ResultError ExceptionResultError = new("System.Exception", "Exception caught");
+    private static readonly ResultError NullConditionResultError = new("Value.Null", "Value cannot be null");
+    private static readonly ResultError EnsureResultError = new("Ensure.Failed", "Condition not met");
 
     /// <summary>
     ///     Проверяет ветви метода ToResult для nullable-типов.
@@ -26,11 +26,11 @@ public class ResultGenericExtensionsCoverageTests
         const string? validString = "data";
         string? nullString = null;
 
-        Result<string> successResult = validString.ToResult(NullConditionError);
-        Result<string> failureResult = nullString.ToResult(NullConditionError);
+        Result<string> successResult = validString.ToResult(NullConditionResultError);
+        Result<string> failureResult = nullString.ToResult(NullConditionResultError);
 
         Assert.True(successResult.IsSuccess);
-        Assert.Equal(NullConditionError, failureResult.Error);
+        Assert.Equal(NullConditionResultError, failureResult.ResultError);
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public class ResultGenericExtensionsCoverageTests
     public void ThenGenericAllBranchesShouldCoverNullFailureAndSuccess()
     {
         Result<int>? nullResult = null;
-        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainError);
+        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainResultError);
         // TODO: Исправить магические числа
         Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
@@ -50,8 +50,8 @@ public class ResultGenericExtensionsCoverageTests
         Result<string> successOutcome =
             successResult.Then(x => PhotoCatalog.Domain.Primitives.Result.Success(x.ToString()));
 
-        Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
-        Assert.Equal(DomainError, failedOutcome.Error);
+        Assert.Equal(SystemErrors.NullResult, nullOutcome.ResultError);
+        Assert.Equal(DomainResultError, failedOutcome.ResultError);
         Assert.Equal("10", successOutcome.Value);
     }
 
@@ -62,19 +62,20 @@ public class ResultGenericExtensionsCoverageTests
     public void ThenTryAllBranchesShouldCoverNullFailureTryAndCatch()
     {
         Result<int>? nullResult = null;
-        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainError);
+        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainResultError);
         Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
-        Result<int> nullOutcome = nullResult.ThenTry(x => x * 2, _ => ExceptionError);
-        Result<int> failedOutcome = failedResult.ThenTry(x => x * 2, _ => ExceptionError);
-        Result<int> trySuccessOutcome = successResult.ThenTry(x => x * 2, _ => ExceptionError);
+        Result<int> nullOutcome = nullResult.ThenTry(x => x * 2, _ => ExceptionResultError);
+        Result<int> failedOutcome = failedResult.ThenTry(x => x * 2, _ => ExceptionResultError);
+        Result<int> trySuccessOutcome = successResult.ThenTry(x => x * 2, _ => ExceptionResultError);
         //TODO: Выбросить более определенный Exception
-        Result<int> catchOutcome = successResult.ThenTry<int, int>(_ => throw new Exception(), _ => ExceptionError);
+        Result<int> catchOutcome =
+            successResult.ThenTry<int, int>(_ => throw new Exception(), _ => ExceptionResultError);
 
-        Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
-        Assert.Equal(DomainError, failedOutcome.Error);
+        Assert.Equal(SystemErrors.NullResult, nullOutcome.ResultError);
+        Assert.Equal(DomainResultError, failedOutcome.ResultError);
         Assert.Equal(20, trySuccessOutcome.Value);
-        Assert.Equal(ExceptionError, catchOutcome.Error);
+        Assert.Equal(ExceptionResultError, catchOutcome.ResultError);
     }
 
     /// <summary>
@@ -84,18 +85,18 @@ public class ResultGenericExtensionsCoverageTests
     public void EnsureAllBranchesShouldCoverAllLogicalPaths()
     {
         Result<int>? nullResult = null;
-        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainError);
+        Result<int> failedResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainResultError);
         Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
-        Result<int> nullOutcome = nullResult.Ensure(x => x > 5, EnsureError);
-        Result<int> failedOutcome = failedResult.Ensure(x => x > 5, EnsureError);
-        Result<int> trueOutcome = successResult.Ensure(x => x > 5, EnsureError);
-        Result<int> falseOutcome = successResult.Ensure(x => x > 15, EnsureError);
+        Result<int> nullOutcome = nullResult.Ensure(x => x > 5, EnsureResultError);
+        Result<int> failedOutcome = failedResult.Ensure(x => x > 5, EnsureResultError);
+        Result<int> trueOutcome = successResult.Ensure(x => x > 5, EnsureResultError);
+        Result<int> falseOutcome = successResult.Ensure(x => x > 15, EnsureResultError);
 
-        Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
-        Assert.Equal(DomainError, failedOutcome.Error);
+        Assert.Equal(SystemErrors.NullResult, nullOutcome.ResultError);
+        Assert.Equal(DomainResultError, failedOutcome.ResultError);
         Assert.Equal(10, trueOutcome.Value);
-        Assert.Equal(EnsureError, falseOutcome.Error);
+        Assert.Equal(EnsureResultError, falseOutcome.ResultError);
     }
 
     /// <summary>
@@ -110,11 +111,11 @@ public class ResultGenericExtensionsCoverageTests
         Result<int> nullOutcome = nullResult.Check(_ => PhotoCatalog.Domain.Primitives.Result.Success("ok"));
         Result<int> checkSuccessOutcome = successResult.Check(_ => PhotoCatalog.Domain.Primitives.Result.Success("ok"));
         Result<int> checkFailureOutcome =
-            successResult.Check(_ => PhotoCatalog.Domain.Primitives.Result.Failure<string>(EnsureError));
+            successResult.Check(_ => PhotoCatalog.Domain.Primitives.Result.Failure<string>(EnsureResultError));
 
-        Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
+        Assert.Equal(SystemErrors.NullResult, nullOutcome.ResultError);
         Assert.Equal(10, checkSuccessOutcome.Value);
-        Assert.Equal(EnsureError, checkFailureOutcome.Error);
+        Assert.Equal(EnsureResultError, checkFailureOutcome.ResultError);
     }
 
     /// <summary>
@@ -129,7 +130,7 @@ public class ResultGenericExtensionsCoverageTests
         Result<string> nullOutcome = nullResult.Transform(x => x.ToString());
         Result<string> successOutcome = successResult.Transform(x => x.ToString());
 
-        Assert.Equal(SystemErrors.NullResult, nullOutcome.Error);
+        Assert.Equal(SystemErrors.NullResult, nullOutcome.ResultError);
         Assert.Equal("10", successOutcome.Value);
     }
 
@@ -141,7 +142,7 @@ public class ResultGenericExtensionsCoverageTests
     {
         Result<int>? nullResult = null;
         Result<int> successResult = PhotoCatalog.Domain.Primitives.Result.Success(10);
-        Result<int> failureResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainError);
+        Result<int> failureResult = PhotoCatalog.Domain.Primitives.Result.Failure<int>(DomainResultError);
 
         string nullMapped = nullResult.Finally(_ => "Ok", e => e.Code);
         string successMapped = successResult.Finally(_ => "Ok", e => e.Code);
@@ -149,7 +150,7 @@ public class ResultGenericExtensionsCoverageTests
 
         Assert.Equal(SystemErrors.NullResult.Code, nullMapped);
         Assert.Equal("Ok", successMapped);
-        Assert.Equal(DomainError.Code, failureMapped);
+        Assert.Equal(DomainResultError.Code, failureMapped);
     }
 }
 
@@ -158,8 +159,8 @@ public class ResultGenericExtensionsCoverageTests
 /// </summary>
 public class ResultGenericChainsTests
 {
-    private static readonly Error StepError = new("Chain.StepError", "Failed at step");
-    private static readonly Error ExceptionError = new("Chain.Exception", "Exception in chain");
+    private static readonly ResultError StepResultError = new("Chain.StepError", "Failed at step");
+    private static readonly ResultError ExceptionResultError = new("Chain.Exception", "Exception in chain");
 
     /// <summary>
     ///     Проверяет прерывание цепочки (Short-circuiting) на моменте проверки Ensure.
@@ -170,7 +171,7 @@ public class ResultGenericChainsTests
         bool transformCalled = false;
 
         string finalValue = 5.ToResult()
-            .Ensure(v => v > 10, StepError)
+            .Ensure(v => v > 10, StepResultError)
             .Transform(v =>
             {
                 transformCalled = true;
@@ -178,7 +179,7 @@ public class ResultGenericChainsTests
             })
             .Finally(_ => "Success", e => e.Code);
 
-        Assert.Equal(StepError.Code, finalValue);
+        Assert.Equal(StepResultError.Code, finalValue);
         Assert.False(transformCalled);
     }
 
@@ -188,16 +189,16 @@ public class ResultGenericChainsTests
     [Fact]
     public void ChainExceptionCaughtShouldShortCircuitAndTriggerOnFailure()
     {
-        Error? caughtError = null;
+        ResultError? caughtError = null;
 
         ResultVoid result = "Data".ToResult()
             .ThenTry<string, int>(
                 _ => throw new FormatException(),
-                _ => ExceptionError)
+                _ => ExceptionResultError)
             .OnFailure(err => caughtError = err)
             .Then(_ => ResultVoid.Success());
 
         Assert.True(result.IsFailure);
-        Assert.Equal(ExceptionError, caughtError);
+        Assert.Equal(ExceptionResultError, caughtError);
     }
 }

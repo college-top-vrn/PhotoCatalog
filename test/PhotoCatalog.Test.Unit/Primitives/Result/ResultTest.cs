@@ -22,7 +22,7 @@ public class ResultTest
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
-        Assert.Equal(Error.None, result.Error);
+        Assert.Equal(ResultError.None, result.ResultError);
         Assert.Equal(expectedValue, result.Value);
     }
 
@@ -33,13 +33,13 @@ public class ResultTest
     [Fact]
     public void FailureShouldReturnIsFailureTrueAndValueShouldBeDefault()
     {
-        Error expectedError = new("Test.Failure", "Тестовая ошибка");
+        ResultError expectedResultError = new("Test.Failure", "Тестовая ошибка");
 
-        Result<string> result = PhotoCatalog.Domain.Primitives.Result.Failure<string>(expectedError);
+        Result<string> result = PhotoCatalog.Domain.Primitives.Result.Failure<string>(expectedResultError);
 
         Assert.False(result.IsSuccess);
         Assert.True(result.IsFailure);
-        Assert.Equal(expectedError, result.Error);
+        Assert.Equal(expectedResultError, result.ResultError);
         Assert.Null(result.Value);
     }
 }

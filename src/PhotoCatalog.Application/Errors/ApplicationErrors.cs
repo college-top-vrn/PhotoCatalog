@@ -5,7 +5,7 @@ namespace PhotoCatalog.Application.Errors;
 /// <summary>
 ///     Единый статический класс (реестр),
 ///     который содержит все ошибки уровня Application
-///     в виде заранее определенных структур <see cref="Error" />.
+///     в виде заранее определенных структур <see cref="ResultError" />.
 /// </summary>
 public static class ApplicationErrors
 {
@@ -17,7 +17,7 @@ public static class ApplicationErrors
         /// <summary>
         ///     Ошибка, когда запрашиваемая сущность не найдена.
         /// </summary>
-        public static readonly Error NotFound = new("General.NotFound", "Запрашиваемая сущность не найдена.");
+        public static readonly ResultError NotFound = new("General.NotFound", "Запрашиваемая сущность не найдена.");
     }
 
     /// <summary>
@@ -28,13 +28,14 @@ public static class ApplicationErrors
         /// <summary>
         ///     Ошибка, когда физический файл по указанному пути не найден.
         /// </summary>
-        public static readonly Error FileNotFound =
+        public static readonly ResultError FileNotFound =
             new("Files.FileNotFound", "Физический файл по указанному пути не найден.");
 
         /// <summary>
         ///     ошибка, когда фаил остается осиротевшим на диске
         /// </summary>
-        public static readonly Error OrphanedFile = new("Files.OrphanedFile", "Файл остался осиротевшим на диске");
+        public static readonly ResultError
+            OrphanedFile = new("Files.OrphanedFile", "Файл остался осиротевшим на диске");
     }
 
     /// <summary>
@@ -46,7 +47,7 @@ public static class ApplicationErrors
         ///     Ошибка, когда обнаружена циклическая зависимость:
         ///     нельзя переместить папку внутрь её собственного потомка.
         /// </summary>
-        public static readonly Error CycleDetected =
+        public static readonly ResultError CycleDetected =
             new("Folders.CycleDetected",
                 "Обнаружена циклическая зависимость: нельзя переместить папку внутрь её собственного потомка.");
     }
@@ -60,14 +61,14 @@ public static class ApplicationErrors
         ///     Ошибка, которая обозначает, что при начале транзакции
         ///     что то пошло не так
         /// </summary>
-        public static readonly Error StartTransactions =
+        public static readonly ResultError StartTransactions =
             new("Transactions.BeginFailed",
                 "Ошибка начала транзакции");
 
         /// <summary>
         ///     Ошибка, возникающая при попытке зафиксировать (commit) транзакцию.
         /// </summary>
-        public static readonly Error CommitFailed =
+        public static readonly ResultError CommitFailed =
             new(
                 "Transactions.CommitFailed",
                 "Не удалось зафиксировать изменения в транзакции (commit).");
@@ -84,7 +85,7 @@ public static class ApplicationErrors
         ///     Ошибка, которая обозначает, что при обновлении
         ///     что то пошло не так
         /// </summary>
-        public static readonly Error UpdateFailed =
+        public static readonly ResultError UpdateFailed =
             new("Albums.UpdateFailed",
                 "Ошибка обновления альбома");
     }
@@ -97,7 +98,7 @@ public static class ApplicationErrors
         /// <summary>
         ///     Ошибка, возникающая при непредвиденном системном сбое внутри use-case.
         /// </summary>
-        public static readonly Error SystemFailure =
+        public static readonly ResultError SystemFailure =
             new(
                 "UseCases.SystemFailure",
                 "Произошла системная ошибка при выполнении сценария приложения (UseCase).");
@@ -111,14 +112,14 @@ public static class ApplicationErrors
         /// <summary>
         ///     Ошибка, когда запрос не соответствует формату multipart/form-data.
         /// </summary>
-        public static readonly Error InvalidMultipartRequest = new(
+        public static readonly ResultError InvalidMultipartRequest = new(
             "Http.InvalidMultipartRequest",
             "Ожидается multipart/form-data запрос");
 
         /// <summary>
         ///     Ошибка, когда файл не загружен или пуст.
         /// </summary>
-        public static readonly Error FileNotUploaded = new(
+        public static readonly ResultError FileNotUploaded = new(
             "Http.FileNotUploaded",
             "Файл не загружен или пуст");
     }

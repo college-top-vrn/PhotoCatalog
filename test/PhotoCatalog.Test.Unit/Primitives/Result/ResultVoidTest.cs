@@ -9,7 +9,7 @@ namespace PhotoCatalog.Test.Unit.Primitives.Result;
 /// </summary>
 public class ResultVoidCoreTests
 {
-    private static readonly Error TestError = new("Core.Error", "Test message");
+    private static readonly ResultError TestResultError = new("Core.Error", "Test message");
 
     /// <summary>
     ///     Проверяет инициализацию успешного состояния ResultVoid.
@@ -21,7 +21,7 @@ public class ResultVoidCoreTests
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
-        Assert.Equal(Error.None, result.Error);
+        Assert.Equal(ResultError.None, result.ResultError);
     }
 
     /// <summary>
@@ -30,10 +30,10 @@ public class ResultVoidCoreTests
     [Fact]
     public void FailureShouldInitializeFailureState()
     {
-        ResultVoid result = ResultVoid.Failure(TestError);
+        ResultVoid result = ResultVoid.Failure(TestResultError);
 
         Assert.False(result.IsSuccess);
         Assert.True(result.IsFailure);
-        Assert.Equal(TestError, result.Error);
+        Assert.Equal(TestResultError, result.ResultError);
     }
 }

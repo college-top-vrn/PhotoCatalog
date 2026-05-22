@@ -121,7 +121,7 @@ try
                 .ToHttpResult();
         }
 
-        var file = request.Form.Files.GetFile("file");
+        IFormFile? file = request.Form.Files.GetFile("file");
 
         if (file == null || file.Length == 0)
         {
@@ -130,16 +130,16 @@ try
                 .ToHttpResult();
         }
 
-        var tempFilePath = Path.GetTempFileName();
+        string tempFilePath = Path.GetTempFileName();
 
         try
         {
-            using (var stream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write))
+            using (FileStream stream = new(tempFilePath, FileMode.Create, FileAccess.Write))
             {
                 file.CopyTo(stream);
             }
 
-            var importRequest = new ImportPhotoRequest(tempFilePath);
+            ImportPhotoRequest importRequest = new(tempFilePath);
 
             return importPhotoUseCase.Execute(importRequest)
                 .ToResult()
