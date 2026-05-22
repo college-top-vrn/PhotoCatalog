@@ -47,7 +47,8 @@ try
     builder.Services.AddSingleton<FakeDatabase>();
     builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoCommandRepository>();
     builder.Services.AddSingleton<IPhotoQueryRepository, FakePhotoQueryRepository>();
-    builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
+    builder.Services.AddSingleton<IAlbumCommandRepository, FakeAlbumCommandRepository>();
+    builder.Services.AddSingleton<IAlbumQueryRepository, FakeAlbumQueryRepository>();
     builder.Services.AddSingleton<ITagQueryRepository, FakeTagQueryRepository>();
     builder.Services.AddSingleton<ITagCommandRepository, FakeTagCommandRepository>();
 
@@ -121,12 +122,6 @@ try
     app.MapHealthChecks("/health");
 
     RouteGroupBuilder photosGroup = app.MapGroup("/api/photos").WithTags("Фотографии");
-
-    photosGroup.MapGet("/", (IPhotoQueryRepository photoQuery) =>
-    {
-        Result<IEnumerable<Photo>> result = photoQuery.GetAll();
-        return result.ToHttpResult();
-    });
 
     photosGroup.MapPost("/import", (HttpRequest request, ImportPhotoUseCase importPhotoUseCase) =>
     {
@@ -212,7 +207,7 @@ try
     //     });
 
     albumEndpointsGroup.MapDelete("/{id:int}",
-        (int id, IAlbumRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+        (int id, IAlbumCommandRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
 
     app.Run();
 }

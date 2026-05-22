@@ -213,35 +213,4 @@ public class SqlitePhotoQueryRepository : IPhotoQueryRepository
             return Result<IReadOnlyCollection<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
     }
-
-    /// <inheritdoc />
-    public Result<IEnumerable<Photo>> GetAll()
-    {
-        try
-        {
-            var connection = _unitOfWork.Connection;
-            if (connection == null)
-            {
-                return Result<IEnumerable<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
-            }
-
-            var photos = connection.Query<Photo>(
-                @"SELECT p.Id, p.RealPath, p.FileHash, p.Dimensions, p.AddedAt 
-                  FROM Photos p",
-                _unitOfWork.Transaction).ToList();
-
-
-            return Result<IEnumerable<Photo>>.Success(photos.AsReadOnly());
-        }
-        catch (SqliteException ex)
-        {
-            _logger.Error(ex, "Ошибка SQLite в методе GetAll");
-            return Result<IEnumerable<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
-        }
-        catch (Exception ex)
-        {
-            _logger.Error(ex, "Неожиданная ошибка в методе GetAll");
-            return Result<IEnumerable<Photo>>.Failure(InfrastructureErrors.Database.ConnectionFailed);
-        }
-    }
 }
