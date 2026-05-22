@@ -45,7 +45,8 @@ try
     builder.Services.AddSingleton<FakeDatabase>();
     builder.Services.AddSingleton<IPhotoCommandRepository, FakePhotoCommandRepository>();
     builder.Services.AddSingleton<IPhotoQueryRepository, FakePhotoQueryRepository>();
-    builder.Services.AddSingleton<IAlbumRepository, FakeAlbumRepository>();
+    builder.Services.AddSingleton<IAlbumCommandRepository, FakeAlbumCommandRepository>();
+    builder.Services.AddSingleton<IAlbumQueryRepository, FakeAlbumQueryRepository>();
     builder.Services.AddSingleton<ITagQueryRepository, FakeTagQueryRepository>();
     builder.Services.AddSingleton<ITagCommandRepository, FakeTagCommandRepository>();
 
@@ -195,7 +196,7 @@ try
     //     });
 
     albumEndpointsGroup.MapDelete("/{id:int}",
-        (int id, IAlbumRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+        (int id, IAlbumCommandRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
 
     app.Run();
 }

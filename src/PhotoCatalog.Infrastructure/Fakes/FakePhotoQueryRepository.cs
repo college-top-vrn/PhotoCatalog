@@ -11,7 +11,7 @@ namespace PhotoCatalog.Infrastructure.Fakes;
 /// <summary>
 ///     Репозиторий для получения фотографий, имитирующий БД, и хранящий данные в оперативной памяти.
 /// </summary>
-public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IPhotoQueryRepository
+public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository) : IPhotoQueryRepository
 {
     /// <summary>
     ///     Словарь альбомов.
@@ -98,12 +98,5 @@ public class FakePhotoQueryRepository(IAlbumRepository fakeAlbumRepository) : IP
         }
 
         return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
-    }
-
-    // TODO: Пофиксить доку или добавить эти методы
-    /// <inheritdoc />
-    public Result<IEnumerable<Photo>> GetAll()
-    {
-        return Result.Success(_photos.Values);
     }
 }

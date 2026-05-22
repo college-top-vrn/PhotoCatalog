@@ -1,4 +1,5 @@
 ﻿using PhotoCatalog.Application.Errors;
+using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
@@ -12,7 +13,8 @@ namespace PhotoCatalog.Application.UseCases;
 ///     Сценарий использования для добавления фотографии в существующий альбом.
 /// </summary>
 public class AddPhotoToAlbumUseCase(
-    IAlbumRepository albumRepository,
+    IAlbumQueryRepository albumQueryRepository,
+    IAlbumCommandRepository albumCommandRepository,
     IPhotoQueryRepository photoQueryRepository,
     IUnitOfWork unitOfWork,
     ILogger logger)
@@ -27,6 +29,7 @@ public class AddPhotoToAlbumUseCase(
     /// <returns>Результат выполнения операции (успех или ошибка).</returns>
     public ResultVoid Execute(int albumId, int photoId)
     {
+        Result<Album> albumEntity = null;
         _logger.Information("Запуск процесса добавления фото {PhotoId} в альбом {AlbumId}", photoId, albumId);
         return photoQueryRepository.GetById(photoId)
             .OnSuccess(_ =>
@@ -34,9 +37,12 @@ public class AddPhotoToAlbumUseCase(
             .OnFailure(_ =>
                 _logger.Warning("Фото {PhotoId} не найдено", photoId))
             .Then(_ =>
-                albumRepository.GetById(albumId)
-                    .OnSuccess(_ =>
-                        _logger.Information("Альбом {AlbumId} найден", albumId)))
+                {
+                    albumEntity = albumQueryRepository.GetById(albumId);
+                    return albumEntity;
+                })
+                .OnSuccess(_ =>
+                        _logger.Information("Альбом {AlbumId} найден", albumId))
             .OnFailure(_ =>
                 _logger.Warning("Альбом {AlbumId} не найден", albumId))
             .Then(album => album.AddPhoto(photoId))
@@ -47,8 +53,7 @@ public class AddPhotoToAlbumUseCase(
             .Transform(_ => unitOfWork.BeginTransaction())
             .Ensure(beginResult => beginResult.IsSuccess,
                 ApplicationErrors.Transactions.StartTransactions)
-            .Then(_ => albumRepository.GetById(albumId)) // TODO Исправить костыль.
-            .Transform(albumRepository.Update)
+            .Transform(album => albumCommandRepository.Update(albumEntity!.Value!))
             .Ensure(updateResult => updateResult.IsSuccess,
                 ApplicationErrors.Albums.UpdateFailed)
             .Transform(_ => unitOfWork.Commit())
