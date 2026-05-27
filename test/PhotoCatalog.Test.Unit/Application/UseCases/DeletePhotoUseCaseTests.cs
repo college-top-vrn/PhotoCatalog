@@ -57,11 +57,9 @@ public class DeletePhotoUseCaseTests
 
         var photo = Photo.Create(realPath).Value;
         photo.SetDimensions(Dimensions.Create(1920, 1080).Value);
-
-        // Add автоматически присвоит Id = 1
+        
         _photoCommandRepository.Add(photo);
-
-        // Act - удаляем фото с Id = 1
+        
         var result = _deletePhotoUseCase.Execute(1);
 
         // Assert
@@ -79,11 +77,9 @@ public class DeletePhotoUseCaseTests
 
         var photo = Photo.Create(realPath).Value;
         photo.SetDimensions(Dimensions.Create(1920, 1080).Value);
-
-        // Add автоматически присвоит Id = 1
+        
         _photoCommandRepository.Add(photo);
-
-        // Act - удаляем фото с Id = 1
+        
         var result = _deletePhotoUseCase.Execute(1);
 
         // Assert
