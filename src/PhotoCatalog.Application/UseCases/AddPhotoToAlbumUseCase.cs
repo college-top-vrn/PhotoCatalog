@@ -29,7 +29,7 @@ public class AddPhotoToAlbumUseCase(
     /// <returns>Результат выполнения операции (успех или ошибка).</returns>
     public ResultVoid Execute(int albumId, int photoId)
     {
-        Result<Album> albumEntity = null;
+        Result<Album>? albumEntity = null;
         _logger.Information("Запуск процесса добавления фото {PhotoId} в альбом {AlbumId}", photoId, albumId);
         return photoQueryRepository.GetById(photoId)
             .OnSuccess(_ =>
@@ -53,7 +53,7 @@ public class AddPhotoToAlbumUseCase(
             .Transform(_ => unitOfWork.BeginTransaction())
             .Ensure(beginResult => beginResult.IsSuccess,
                 ApplicationErrors.Transactions.StartTransactions)
-            .Transform(album => albumCommandRepository.Update(albumEntity!.Value!))
+            .Transform(_ => albumCommandRepository.Update(albumEntity!.Value!))
             .Ensure(updateResult => updateResult.IsSuccess,
                 ApplicationErrors.Albums.UpdateFailed)
             .Transform(_ => unitOfWork.Commit())

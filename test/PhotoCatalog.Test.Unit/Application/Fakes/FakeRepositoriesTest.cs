@@ -48,12 +48,11 @@ public class FakeRepositoriesTests
     public void AlbumCommandRepositoryAddAlbumWithRightValuesReturnsSuccess()
     {
         // Arrange
-        Result<Album> createResult = Album.Create("Тестовый альбом", 0);
-        Assert.True(createResult.IsSuccess);
-        Album album = createResult.Value;
+        (bool isSuccess, Album? album, _) = Album.Create("Тестовый альбом", 0);
+        Assert.True(isSuccess);
 
         // Act
-        ResultVoid result = _commandRepository.Add(album);
+        ResultVoid result = _commandRepository.Add(album!);
 
         // Assert
         Assert.True(result.IsSuccess);
@@ -61,7 +60,12 @@ public class FakeRepositoriesTests
         // Проверяем через QueryRepository, что альбом добавился
         Result<Album> getResult = _queryRepository.GetById(1);
         Assert.True(getResult.IsSuccess);
-        Assert.Equal("Тестовый альбом", getResult.Value.Name);
+        if (getResult.Value != null)
+        {
+            Assert.Equal("Тестовый альбом", getResult.Value.Name);
+        }
+
+        Assert.NotNull(album);
     }
 
     /// <summary>

@@ -19,11 +19,11 @@ namespace PhotoCatalog.Application.UseCases;
 public class ImportPhotoUseCase
 {
     private readonly IFileStorage _fileStorage;
+    private readonly ILogger _logger;
     private readonly IFileMetadataExtractor _metadataExtractor;
     private readonly IPhotoCommandRepository _photoRepository;
     private readonly IThumbnailService _thumbnailService;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger _logger;
 
     /// <summary>
     ///     Инициализирует новый экземпляр класса <see cref="ImportPhotoUseCase" />.
@@ -83,8 +83,8 @@ public class ImportPhotoUseCase
                 .Transform(filePath => (tuple.hash, tuple.dimensions, filePath)))
             .OnSuccess(tuple => _logger.Debug("Файл скопирован: {FilePath}", tuple.filePath))
             .Then(tuple => Photo.Create(tuple.filePath)
-                .OnSuccess(photo => _logger.Debug("Сущность Photo создана: {FilePath}", tuple.filePath))
-                .OnFailure(error => _fileStorage.DeleteFile(tuple.filePath))
+                .OnSuccess(_ => _logger.Debug("Сущность Photo создана: {FilePath}", tuple.filePath))
+                .OnFailure(_ => _fileStorage.DeleteFile(tuple.filePath))
                 .Transform(photo => (tuple.hash, tuple.dimensions, photo)))
             .Then(tuple =>
             {
@@ -107,8 +107,8 @@ public class ImportPhotoUseCase
                 .ToResult()
                 .Ensure(commitResult => commitResult.IsSuccess, ApplicationErrors.Transactions.CommitFailed)
                 .Transform(_ => photo))
-            .OnFailure(
-                error => _logger.Error("Ошибка импорта: {ErrorCode} - {ErrorMessage}", error.Code, error.Message))
+            .OnFailure(error =>
+                _logger.Error("Ошибка импорта: {ErrorCode} - {ErrorMessage}", error.Code, error.Message))
             .Transform(photo => new PhotoResponse(
                 photo.Id,
                 photo.RealPath,
@@ -129,23 +129,21 @@ public class ImportPhotoUseCase
     /// </remarks>
     private void GenerateThumbnail(string originalFilePath)
     {
-        var directory = Path.GetDirectoryName(originalFilePath);
-        var fileName = Path.GetFileNameWithoutExtension(originalFilePath);
-        var extension = Path.GetExtension(originalFilePath);
+        string? directory = Path.GetDirectoryName(originalFilePath);
+        string fileName = Path.GetFileNameWithoutExtension(originalFilePath);
+        string extension = Path.GetExtension(originalFilePath);
 
-        var thumbnailDirectory = Path.Combine(directory ?? string.Empty, ".thumbnails");
-        var thumbnailPath = Path.Combine(thumbnailDirectory, $"{fileName}_thumb{extension}");
+        string thumbnailDirectory = Path.Combine(directory ?? string.Empty, ".thumbnails");
+        string thumbnailPath = Path.Combine(thumbnailDirectory, $"{fileName}_thumb{extension}");
 
-        var result = _thumbnailService.Generate(originalFilePath, thumbnailPath, 400);
+        ResultVoid result = _thumbnailService.Generate(originalFilePath, thumbnailPath, 400);
 
         if (result.IsFailure)
         {
             _logger.Warning(
                 "Не удалось создать миниатюру для файла {OriginalPath}. " +
-                "Ошибка: {ErrorCode} - {ErrorMessage}. Фронтенд будет использовать оригинальный файл.",
-                originalFilePath,
-                result.Error.Code,
-                result.Error.Message);
+                "Фронтенд будет использовать оригинальный файл.",
+                originalFilePath);
         }
         else
         {
