@@ -87,20 +87,4 @@ public interface IPhotoQueryRepository
     ///     - Не изменяет состояние базы данных.
     /// </remarks>
     Result<IReadOnlyCollection<Photo>> GetByTags(IEnumerable<int> tagIds);
-
-    /// <summary>
-    ///     Получает все фотографии.
-    /// </summary>
-    /// <returns>
-    ///     Результат операции:
-    ///     <list type="bullet">
-    ///         <item><description>Успех со списком фотографий (может быть пустой).</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных.</description></item>
-    ///     </list>
-    /// </returns>
-    /// <remarks>
-    ///     - Возвращает Enumerable, что позволяет ленивую и постраничную загрузку.
-    ///     - Не изменяет состояние базы данных.
-    /// </remarks>
-    Result<IEnumerable<Photo>> GetAll();
 }
