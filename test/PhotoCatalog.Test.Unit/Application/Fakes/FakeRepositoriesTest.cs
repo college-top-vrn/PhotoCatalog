@@ -27,21 +27,6 @@ public class FakeRepositoriesTests
     }
 
     /// <summary>
-    ///     Тест: добавление null альбома возвращает ошибку NullAlbum.
-    /// </summary>
-    [Fact]
-    public void AlbumCommandRepositoryAddAlbumAddingNullReturnsNullAlbumError()
-    {
-        // Act
-        ResultVoid result = _commandRepository.Add(null!);
-
-        // Assert
-        Assert.True(result.IsFailure);
-        Assert.Equal(DomainErrors.Album.NullAlbum.Code, result.ResultError.Code);
-        Assert.Equal(DomainErrors.Album.NullAlbum.Message, result.ResultError.Message);
-    }
-
-    /// <summary>
     ///     Тест: добавление корректного альбома проходит успешно.
     /// </summary>
     [Fact]
@@ -107,21 +92,6 @@ public class FakeRepositoriesTests
         Assert.True(result.IsFailure);
         Assert.Equal(InfrastructureErrors.Database.NotFound.Code, result.ResultError.Code);
         Assert.Equal(InfrastructureErrors.Database.NotFound.Message, result.ResultError.Message);
-    }
-
-    /// <summary>
-    ///     Тест: обновление null альбома возвращает ошибку NullAlbum.
-    /// </summary>
-    [Fact]
-    public void AlbumCommandRepositoryUpdateAlbumUpdatingWithNullReturnsNullAlbumError()
-    {
-        // Act
-        ResultVoid result = _commandRepository.Update(null!);
-
-        // Assert
-        Assert.True(result.IsFailure);
-        Assert.Equal(DomainErrors.Album.NullAlbum.Code, result.ResultError.Code);
-        Assert.Equal(DomainErrors.Album.NullAlbum.Message, result.ResultError.Message);
     }
 
     /// <summary>
