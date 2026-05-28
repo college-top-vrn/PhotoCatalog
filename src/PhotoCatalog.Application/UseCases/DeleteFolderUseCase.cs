@@ -8,14 +8,28 @@ using Serilog;
 
 namespace PhotoCatalog.Application.UseCases;
 
+/// <summary>
+///     Сценарий использования для удаления папки.
+/// </summary>
+/// <param name="folderQueryRepository">Репозиторий папок для получения данных.</param>
+/// <param name="folderCommandRepository">Репозиторий папок для изменения данных.</param>
+/// <param name="unitOfWork">Единица работы.</param>
+/// <param name="logger">Логгер.</param>
 public class DeleteFolderUseCase(
-    IFolderRepository folderRepository,
+    IFolderQueryRepository folderQueryRepository,
+    IFolderCommandRepository folderCommandRepository,
     IUnitOfWork unitOfWork,
     ILogger logger)
 {
+
+    /// <summary>
+    ///     Выполняет сценарий удаления папки.
+    /// </summary>
+    /// <param name="folderId">Идентификатор папки для удаления.</param>
+    /// <returns>Результат выполнения сценария.</returns>
     public ResultVoid Execute(int folderId)
     {
-        Result<Folder> folderResult = folderRepository.GetById(folderId);
+        Result<Folder> folderResult = folderQueryRepository.GetById(folderId);
 
         if (folderResult.IsFailure)
         {
@@ -32,7 +46,7 @@ public class DeleteFolderUseCase(
             return ResultVoid.Failure(beginTransactionResult.Error);
         }
 
-        ResultVoid deleteResult = folderRepository.Delete(folderId);
+        ResultVoid deleteResult = folderCommandRepository.Delete(folderId);
         if (deleteResult.IsFailure)
         {
             logger.Error("Не удалось удалить папку с Id {FolderId}: {ErrorCode}: {Error}",
