@@ -442,7 +442,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Application.UseCases.ImportPhotoUseCase",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.yml\" sourcestartlinenumber=\"1\">Содержит сценарий оркестрации добавления нового фото в каталог.</p>\n"
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.UseCases.ImportPhotoUseCase.yml\" sourcestartlinenumber=\"1\">Содержит сценарий оркестрации добавления нового фото в каталог.\nДополнительно генерирует миниатюру изображения (провал не отменяет операцию).</p>\n"
     },
     {
       "type": "ManagedReference",
