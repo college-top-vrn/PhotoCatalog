@@ -209,6 +209,26 @@ try
     albumEndpointsGroup.MapDelete("/{id:int}",
         (int id, IAlbumCommandRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
 
+    RouteGroupBuilder foldersGroup = app.MapGroup("/api/folders");
+
+    foldersGroup.MapPost("/", (CreateFolderRequest request, CreateFolderUseCase useCase) =>
+    {
+        Result<FolderResponse> result = useCase.Execute(request);
+        return result.ToHttpResult();
+    });
+
+    foldersGroup.MapPut("/{id:int}/move", (int id, MoveFolderRequest request, MoveFolderUseCase useCase) =>
+    {
+        ResultVoid result = useCase.Execute(id, request.NewParentId);
+        return result.ToHttpResult();
+    });
+
+    foldersGroup.MapDelete("/{id:int}", (int id, DeleteFolderUseCase useCase) =>
+    {
+        ResultVoid result = useCase.Execute(id);
+        return result.ToHttpResult();
+    });
+
     app.Run();
 }
 catch (Exception e)

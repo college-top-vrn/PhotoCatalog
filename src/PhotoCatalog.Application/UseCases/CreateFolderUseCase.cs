@@ -65,6 +65,7 @@ public class CreateFolderUseCase(
             logger.Error("Не удалось начать транзакцию: {ErrorCode}: {Error}",
                 beginTransactionResult.Error.Code,
                 beginTransactionResult.Error.Message);
+            return Result<FolderResponse>.Failure(beginTransactionResult.Error);
         }
 
         ResultVoid addFolderResult = folderCommandRepository.Add(folder);
@@ -83,6 +84,8 @@ public class CreateFolderUseCase(
             logger.Error("Не удалось зафиксировать изменения транзакции: {ErrorCode}: {Error}",
                 commitResult.Error.Code,
                 commitResult.Error.Message);
+            unitOfWork.Rollback();
+            return Result<FolderResponse>.Failure(commitResult.Error);
         }
 
         FolderResponse response = new(folder.Id, folder.Name, folder.ParentFolderId);
