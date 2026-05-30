@@ -990,6 +990,47 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Application.UseCases.CreateFolderUseCase.Execute
   nameWithType: CreateFolderUseCase.Execute
+- uid: PhotoCatalog.Application.UseCases.DeleteFolderUseCase
+  name: DeleteFolderUseCase
+  href: api/PhotoCatalog.Application.UseCases.DeleteFolderUseCase.html
+  commentId: T:PhotoCatalog.Application.UseCases.DeleteFolderUseCase
+  fullName: PhotoCatalog.Application.UseCases.DeleteFolderUseCase
+  nameWithType: DeleteFolderUseCase
+- uid: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: DeleteFolderUseCase(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Application.UseCases.DeleteFolderUseCase.html#PhotoCatalog_Application_UseCases_DeleteFolderUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IFolderQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IFolderCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Application.UseCases.DeleteFolderUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.DeleteFolderUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IFolderQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IFolderCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: DeleteFolderUseCase.DeleteFolderUseCase(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
+  nameWithType.vb: DeleteFolderUseCase.New(IFolderQueryRepository, IFolderCommandRepository, IUnitOfWork, ILogger)
+- uid: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.#ctor*
+  name: DeleteFolderUseCase
+  href: api/PhotoCatalog.Application.UseCases.DeleteFolderUseCase.html#PhotoCatalog_Application_UseCases_DeleteFolderUseCase__ctor_
+  commentId: Overload:PhotoCatalog.Application.UseCases.DeleteFolderUseCase.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.DeleteFolderUseCase
+  fullName.vb: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.New
+  nameWithType: DeleteFolderUseCase.DeleteFolderUseCase
+  nameWithType.vb: DeleteFolderUseCase.New
+- uid: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.Execute(System.Int32)
+  name: Execute(int)
+  href: api/PhotoCatalog.Application.UseCases.DeleteFolderUseCase.html#PhotoCatalog_Application_UseCases_DeleteFolderUseCase_Execute_System_Int32_
+  commentId: M:PhotoCatalog.Application.UseCases.DeleteFolderUseCase.Execute(System.Int32)
+  name.vb: Execute(Integer)
+  fullName: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.Execute(int)
+  fullName.vb: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.Execute(Integer)
+  nameWithType: DeleteFolderUseCase.Execute(int)
+  nameWithType.vb: DeleteFolderUseCase.Execute(Integer)
+- uid: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.Execute*
+  name: Execute
+  href: api/PhotoCatalog.Application.UseCases.DeleteFolderUseCase.html#PhotoCatalog_Application_UseCases_DeleteFolderUseCase_Execute_
+  commentId: Overload:PhotoCatalog.Application.UseCases.DeleteFolderUseCase.Execute
+  isSpec: "True"
+  fullName: PhotoCatalog.Application.UseCases.DeleteFolderUseCase.Execute
+  nameWithType: DeleteFolderUseCase.Execute
 - uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase
   name: DeletePhotoUseCase
   href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html
