@@ -60,12 +60,12 @@ try
     builder.Services.AddSingleton<IFolderHierarchyValidator, FakeFolderHierarchyValidator>();
     builder.Services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
 
-    builder.Services.AddTransient<CreateFolderUseCase>();
-    builder.Services.AddTransient<DeletePhotoUseCase>();
-    builder.Services.AddTransient<AddTagToPhotoUseCase>();
-    builder.Services.AddTransient<MoveFolderUseCase>();
-    builder.Services.AddTransient<ImportPhotoUseCase>();
-    builder.Services.AddTransient<AddPhotoToAlbumUseCase>();
+    // builder.Services.AddTransient<CreateFolderUseCase>();
+    // builder.Services.AddTransient<DeletePhotoUseCase>();
+    // builder.Services.AddTransient<AddTagToPhotoUseCase>();
+    // builder.Services.AddTransient<MoveFolderUseCase>();
+    // builder.Services.AddTransient<ImportPhotoUseCase>();
+    // builder.Services.AddTransient<AddPhotoToAlbumUseCase>();
 
     WebApplication app = builder.Build();
 
@@ -136,27 +136,27 @@ try
                 .ToResult()
                 .ToHttpResult();
         }
-
+    
         var file = request.Form.Files.GetFile("file");
-
+    
         if (file == null || file.Length == 0)
         {
             return ApplicationErrors.Http.FileNotUploaded
                 .ToResult()
                 .ToHttpResult();
         }
-
+    
         var tempFilePath = Path.GetTempFileName();
-
+    
         try
         {
             using (var stream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write))
             {
                 file.CopyTo(stream);
             }
-
+    
             var importRequest = new ImportPhotoRequest(tempFilePath);
-
+    
             return importPhotoUseCase.Execute(importRequest)
                 .ToResult()
                 .ToHttpResult();
@@ -213,26 +213,26 @@ try
 
     albumEndpointsGroup.MapDelete("/{id:int}",
         (int id, IAlbumCommandRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
-
+    
     RouteGroupBuilder foldersGroup = app.MapGroup("/api/folders");
-
-    foldersGroup.MapPost("/", (CreateFolderRequest request, CreateFolderUseCase useCase) =>
-    {
-        Result<FolderResponse> result = useCase.Execute(request);
-        return result.ToHttpResult();
-    });
-
-    foldersGroup.MapPut("/{id:int}/move", (int id, MoveFolderRequest request, MoveFolderUseCase useCase) =>
-    {
-        ResultVoid result = useCase.Execute(id, request.NewParentId);
-        return result.ToHttpResult();
-    });
-
-    foldersGroup.MapDelete("/{id:int}", (int id, DeleteFolderUseCase useCase) =>
-    {
-        ResultVoid result = useCase.Execute(id);
-        return result.ToHttpResult();
-    });
+    
+    // foldersGroup.MapPost("/", (CreateFolderRequest request, CreateFolderUseCase useCase) =>
+    // {
+    //     Result<FolderResponse> result = useCase.Execute(request);
+    //     return result.ToHttpResult();
+    // });
+    //
+    // foldersGroup.MapPut("/{id:int}/move", (int id, MoveFolderRequest request, MoveFolderUseCase useCase) =>
+    // {
+    //     ResultVoid result = useCase.Execute(id, request.NewParentId);
+    //     return result.ToHttpResult();
+    // });
+    //
+    // foldersGroup.MapDelete("/{id:int}", (int id, DeleteFolderUseCase useCase) =>
+    // {
+    //     ResultVoid result = useCase.Execute(id);
+    //     return result.ToHttpResult();
+    // });
 
     app.Run();
 }
