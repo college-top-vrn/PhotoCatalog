@@ -21,7 +21,6 @@ using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
 using PhotoCatalog.ServiceDefaults;
-
 using Serilog;
 
 try

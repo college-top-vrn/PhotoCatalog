@@ -17,10 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PhotoCatalog.ServiceDefaults\PhotoCatalog.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
     <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
     <ProjectReference Include="..\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj"/>
+    <ProjectReference Include="..\PhotoCatalog.ServiceDefaults\PhotoCatalog.ServiceDefaults.csproj" />
   </ItemGroup>
 
 
