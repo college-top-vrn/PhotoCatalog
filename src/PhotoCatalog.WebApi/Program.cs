@@ -20,6 +20,7 @@ using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
+using PhotoCatalog.ServiceDefaults;
 
 using Serilog;
 
@@ -31,6 +32,9 @@ try
     Log.Information("Запуск веб-хоста...");
 
     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+   
+
+    builder.AddServiceDefaults();
 
     Log.Logger = new LoggerConfiguration()
         .WriteTo.Console()
@@ -65,6 +69,8 @@ try
     builder.Services.AddTransient<AddPhotoToAlbumUseCase>();
 
     WebApplication app = builder.Build();
+
+    app.MapDefaultEndpoints();
 
     app.UseSerilogRequestLogging();
 

@@ -1,0 +1,16 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.3.5">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>7a76752a-0275-4c47-9b5d-73112d868ab3</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\src\PhotoCatalog.WebApi\PhotoCatalog.WebApi.csproj" />
+    </ItemGroup>
+  
+
+</Project>
