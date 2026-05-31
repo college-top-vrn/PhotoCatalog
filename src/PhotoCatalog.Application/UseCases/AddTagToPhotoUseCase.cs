@@ -54,7 +54,7 @@ public class AddTagToPhotoUseCase(
                     photoId))
             .Check(photo =>
                 photo.AddTag(tagId))
-            .OnSuccess( _ =>
+            .OnSuccess(_ =>
                 logger.Information("Добавлен тег {TagId} к фото {PhotoId}.",
                     tagId,
                     photoId))

@@ -56,8 +56,8 @@ public class AddTagToPhotoUseCaseTests
         var expectedTag = CreateTagWithId(tagId);
 
         // Настройка моков
-        _tagQueryRepositoryMock.GetById(tagId).Returns(Result<Tag>.Success(expectedTag));
-        _photoQueryRepositoryMock.GetById(photoId).Returns(Result<Photo>.Success(expectedPhoto));
+        _tagQueryRepositoryMock.GetById(tagId).Returns(Result.Success<Tag>(expectedTag));
+        _photoQueryRepositoryMock.GetById(photoId).Returns(Result.Success<Photo>(expectedPhoto));
         _unitOfWorkMock.BeginTransaction().Returns(ResultVoid.Success());
         _photoCommandRepositoryMock.Update(Arg.Any<Photo>()).Returns(ResultVoid.Success());
         _unitOfWorkMock.Commit().Returns(ResultVoid.Success());
@@ -85,16 +85,16 @@ public class AddTagToPhotoUseCaseTests
         const int photoId = 1;
         const int tagId = 100;
 
-        var expectedError = new Error("Tag.NotFound", "Тег не найден");
+        var expectedError = new ResultError("Tag.NotFound", "Тег не найден");
 
-        _tagQueryRepositoryMock.GetById(tagId).Returns(Result<Tag>.Failure(expectedError));
+        _tagQueryRepositoryMock.GetById(tagId).Returns(Result.Failure<Tag>(expectedError));
 
         // Act
         var result = _useCase.Execute(photoId, tagId);
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(expectedError.Code, result.Error.Code);
+        Assert.Equal(expectedError.Code, result.ResultError.Code);
 
         _photoQueryRepositoryMock.Received(0).GetById(Arg.Any<int>());
         _photoCommandRepositoryMock.Received(0).Update(Arg.Any<Photo>());
@@ -116,15 +116,15 @@ public class AddTagToPhotoUseCaseTests
         var expectedTag = CreateTagWithId(tagId);
         var expectedError = DomainErrors.Photo.NotFound;
 
-        _tagQueryRepositoryMock.GetById(tagId).Returns(Result<Tag>.Success(expectedTag));
-        _photoQueryRepositoryMock.GetById(photoId).Returns(Result<Photo>.Failure(expectedError));
+        _tagQueryRepositoryMock.GetById(tagId).Returns(Result.Success<Tag>(expectedTag));
+        _photoQueryRepositoryMock.GetById(photoId).Returns(Result.Failure<Photo>(expectedError));
 
         // Act
         var result = _useCase.Execute(photoId, tagId);
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(expectedError.Code, result.Error.Code);
+        Assert.Equal(expectedError.Code, result.ResultError.Code);
 
         _unitOfWorkMock.Received(0).BeginTransaction();
         _photoCommandRepositoryMock.Received(0).Update(Arg.Any<Photo>());
@@ -148,15 +148,15 @@ public class AddTagToPhotoUseCaseTests
         var addResult = photo.AddTag(tagId);
         Assert.True(addResult.IsSuccess);
 
-        _tagQueryRepositoryMock.GetById(tagId).Returns(Result<Tag>.Success(tag));
-        _photoQueryRepositoryMock.GetById(photoId).Returns(Result<Photo>.Success(photo));
+        _tagQueryRepositoryMock.GetById(tagId).Returns(Result.Success<Tag>(tag));
+        _photoQueryRepositoryMock.GetById(photoId).Returns(Result.Success<Photo>(photo));
 
         // Act - повторная попытка добавить тот же тег
         var result = _useCase.Execute(photoId, tagId);
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(DomainErrors.Photo.DuplicateTag.Code, result.Error.Code);
+        Assert.Equal(DomainErrors.Photo.DuplicateTag.Code, result.ResultError.Code);
 
         _unitOfWorkMock.Received(0).BeginTransaction();
         _photoCommandRepositoryMock.Received(0).Update(Arg.Any<Photo>());
