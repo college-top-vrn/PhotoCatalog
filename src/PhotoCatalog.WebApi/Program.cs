@@ -18,6 +18,7 @@ using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
+using PhotoCatalog.ServiceDefaults;
 
 using Serilog;
 
@@ -29,6 +30,9 @@ try
     Log.Information("Запуск веб-хоста...");
 
     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+
+    builder.AddServiceDefaults();
 
     Log.Logger = new LoggerConfiguration()
         .WriteTo.Console()
@@ -55,14 +59,16 @@ try
     builder.Services.AddSingleton<IFolderHierarchyValidator, FakeFolderHierarchyValidator>();
     builder.Services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
 
-    builder.Services.AddTransient<CreateFolderUseCase>();
-    builder.Services.AddTransient<DeletePhotoUseCase>();
-    builder.Services.AddTransient<AddTagToPhotoUseCase>();
-    builder.Services.AddTransient<MoveFolderUseCase>();
-    builder.Services.AddTransient<ImportPhotoUseCase>();
-    builder.Services.AddTransient<AddPhotoToAlbumUseCase>();
+    // builder.Services.AddTransient<CreateFolderUseCase>();
+    // builder.Services.AddTransient<DeletePhotoUseCase>();
+    // builder.Services.AddTransient<AddTagToPhotoUseCase>();
+    // builder.Services.AddTransient<MoveFolderUseCase>();
+    // builder.Services.AddTransient<ImportPhotoUseCase>();
+    // builder.Services.AddTransient<AddPhotoToAlbumUseCase>();
 
     WebApplication app = builder.Build();
+
+    app.MapDefaultEndpoints();
 
     app.UseSerilogRequestLogging();
 
@@ -197,6 +203,26 @@ try
 
     albumEndpointsGroup.MapDelete("/{id:int}",
         (int id, IAlbumCommandRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+
+    RouteGroupBuilder foldersGroup = app.MapGroup("/api/folders");
+
+    // foldersGroup.MapPost("/", (CreateFolderRequest request, CreateFolderUseCase useCase) =>
+    // {
+    //     Result<FolderResponse> result = useCase.Execute(request);
+    //     return result.ToHttpResult();
+    // });
+    //
+    // foldersGroup.MapPut("/{id:int}/move", (int id, MoveFolderRequest request, MoveFolderUseCase useCase) =>
+    // {
+    //     ResultVoid result = useCase.Execute(id, request.NewParentId);
+    //     return result.ToHttpResult();
+    // });
+    //
+    // foldersGroup.MapDelete("/{id:int}", (int id, DeleteFolderUseCase useCase) =>
+    // {
+    //     ResultVoid result = useCase.Execute(id);
+    //     return result.ToHttpResult();
+    // });
 
     app.Run();
 }
