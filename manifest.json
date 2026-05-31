@@ -288,7 +288,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Application.Errors.ApplicationErrors",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все ошибки уровня Application\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.Error\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Application.Errors.ApplicationErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все ошибки уровня Application\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.ResultError\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -890,21 +890,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Domain.Primitives.DomainErrors",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.DomainErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все возможные бизнес-ошибки предметной области\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.Error\" data-throw-if-not-resolved=\"false\"></xref>&gt;.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.Error.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PhotoCatalog.Domain.Primitives.Error.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "PhotoCatalog.Domain.Primitives.Error",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.Error.yml\" sourcestartlinenumber=\"1\">Представляет структуру для стандартизированного описания бизнес-ошибок в домене.</p>\n"
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.DomainErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все возможные бизнес-ошибки предметной области\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.ResultError\" data-throw-if-not-resolved=\"false\"></xref>&gt;.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -919,6 +905,34 @@
       "IsMRef": true,
       "Title": "PhotoCatalog.Domain.Primitives.Result<T>",
       "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.Result-1.yml\" sourcestartlinenumber=\"1\">Представляет результат выполнения операции, возвращающей значение типа <code class=\"typeparamref\">T</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.Result.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.Result.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.Result",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.Result.yml\" sourcestartlinenumber=\"1\">Необобщенный базовый класс <xref href=\"PhotoCatalog.Domain.Primitives.Result%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.Domain.Primitives.ResultError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.Domain.Primitives.ResultError.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.Domain.Primitives.ResultError",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Domain.Primitives.ResultError.yml\" sourcestartlinenumber=\"1\">Представляет структуру для стандартизированного описания бизнес-ошибок в домене.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1072,7 +1086,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Infrastructure.Errors.InfrastructureErrors",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все ошибки уровня Infrastructure\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.Error\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.yml\" sourcestartlinenumber=\"1\">Единый статический класс (реестр),\nкоторый содержит все ошибки уровня Infrastructure\nв виде заранее определенных структур <xref href=\"PhotoCatalog.Domain.Primitives.ResultError\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1090,17 +1104,17 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.yml",
+      "source_relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.html"
+          "relative_path": "api/PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.yml\" sourcestartlinenumber=\"1\">Методы расширения <xref href=\"PhotoCatalog.Domain.Primitives.Error\" data-throw-if-not-resolved=\"false\"></xref> для работы с HTTP.</p>\n"
+      "Title": "PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions",
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.yml\" sourcestartlinenumber=\"1\">Методы расширения <xref href=\"PhotoCatalog.Domain.Primitives.ResultError\" data-throw-if-not-resolved=\"false\"></xref> для работы с HTTP.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1366,7 +1380,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.yml\" sourcestartlinenumber=\"1\">Supports all classes in the .NET class hierarchy and provides low-level services to derived classes. This is the ultimate base class of all .NET classes; it is the root of the type hierarchy.</p>\n"
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс репозитория для управления\nиерархией виртуальных папок.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1380,7 +1394,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository",
-      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.yml\" sourcestartlinenumber=\"1\">Supports all classes in the .NET class hierarchy and provides low-level services to derived classes. This is the ultimate base class of all .NET classes; it is the root of the type hierarchy.</p>\n"
+      "Summary": "<p sourcefile=\"api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.yml\" sourcestartlinenumber=\"1\">Интерфейс репозитория для получения\nданных из иерархии виртуальных папок.</p>\n"
     },
     {
       "type": "ManagedReference",

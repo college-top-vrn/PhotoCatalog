@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Domain_ValueObjects_Dimensions" data-uid="PhotoCatalog.Domain.ValueObjects.Dimensions" class="text-break">
-Class Dimensions  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L30"><i class="bi bi-code-slash"></i></a>
+Class Dimensions  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L28"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -158,7 +158,7 @@ Class Dimensions  <a class="header-action link-secondary" title="View source" hr
       <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_">ResultExtensions.ToResult&lt;TValue&gt;(TValue)</a>
   </div>
   <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_Error_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, Error)</a>
+      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_ResultError_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, ResultError)</a>
   </div>
   </dd></dl>
 
@@ -191,7 +191,7 @@ if (dimensions.IsSuccess)
 
   <h3 id="PhotoCatalog_Domain_ValueObjects_Dimensions_Height" data-uid="PhotoCatalog.Domain.ValueObjects.Dimensions.Height">
   Height
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L57"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Высота изображения в пикселях.</p>
@@ -199,7 +199,7 @@ if (dimensions.IsSuccess)
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int Height { get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int Height { get; }</code></pre>
   </div>
 
 
@@ -226,7 +226,7 @@ if (dimensions.IsSuccess)
 
   <h3 id="PhotoCatalog_Domain_ValueObjects_Dimensions_Width" data-uid="PhotoCatalog.Domain.ValueObjects.Dimensions.Width">
   Width
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L49"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Ширина изображения в пикселях.</p>
@@ -234,7 +234,7 @@ if (dimensions.IsSuccess)
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int Width { get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int Width { get; }</code></pre>
   </div>
 
 
@@ -265,7 +265,7 @@ if (dimensions.IsSuccess)
 
   <h3 id="PhotoCatalog_Domain_ValueObjects_Dimensions_Create_System_Int32_System_Int32_" data-uid="PhotoCatalog.Domain.ValueObjects.Dimensions.Create(System.Int32,System.Int32)">
   Create(int, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L72"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Создает объект Dimensions с валидацией инвариантов.</p>
@@ -289,8 +289,8 @@ if (dimensions.IsSuccess)
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;<a class="xref" href="PhotoCatalog.Domain.ValueObjects.Dimensions.html">Dimensions</a>&gt;</dt>
-    <dd><p><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Success__0_">Success(T)</a> с валидными габаритами,
-или <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Failure_PhotoCatalog_Domain_Primitives_Error_">Failure(Error)</a> с <a class="xref" href="PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions.html#PhotoCatalog_Domain_Primitives_DomainErrors_Dimensions_Invalid">Invalid</a>.</p>
+    <dd><p><a class="xref" href="PhotoCatalog.Domain.Primitives.Result.html#PhotoCatalog_Domain_Primitives_Result_Success__1___0_">Success&lt;T&gt;(T)</a> с валидными габаритами,
+или <a class="xref" href="PhotoCatalog.Domain.Primitives.Result.html#PhotoCatalog_Domain_Primitives_Result_Failure__1_PhotoCatalog_Domain_Primitives_ResultError_">Failure&lt;T&gt;(ResultError)</a> с <a class="xref" href="PhotoCatalog.Domain.Primitives.DomainErrors.Dimensions.html#PhotoCatalog_Domain_Primitives_DomainErrors_Dimensions_Invalid">Invalid</a>.</p>
 </dd>
   </dl>
 
@@ -312,7 +312,7 @@ if (dimensions.IsSuccess)
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L30" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/ValueObjects/Dimensions.cs/#L28" class="edit-link">Edit this page</a>
         </div>
 
 

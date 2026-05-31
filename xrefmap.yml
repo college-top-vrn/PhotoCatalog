@@ -1037,15 +1037,15 @@ references:
   commentId: T:PhotoCatalog.Application.UseCases.DeletePhotoUseCase
   fullName: PhotoCatalog.Application.UseCases.DeletePhotoUseCase
   nameWithType: DeletePhotoUseCase
-- uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.DeletePhotoUseCase})
-  name: DeletePhotoUseCase(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger<DeletePhotoUseCase>)
-  href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html#PhotoCatalog_Application_UseCases_DeletePhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IFileStorage_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Microsoft_Extensions_Logging_ILogger_PhotoCatalog_Application_UseCases_DeletePhotoUseCase__
-  commentId: M:PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Microsoft.Extensions.Logging.ILogger{PhotoCatalog.Application.UseCases.DeletePhotoUseCase})
-  name.vb: New(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger(Of DeletePhotoUseCase))
-  fullName: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.DeletePhotoUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IFileStorage, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Microsoft.Extensions.Logging.ILogger<PhotoCatalog.Application.UseCases.DeletePhotoUseCase>)
-  fullName.vb: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IFileStorage, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Microsoft.Extensions.Logging.ILogger(Of PhotoCatalog.Application.UseCases.DeletePhotoUseCase))
-  nameWithType: DeletePhotoUseCase.DeletePhotoUseCase(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger<DeletePhotoUseCase>)
-  nameWithType.vb: DeletePhotoUseCase.New(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger(Of DeletePhotoUseCase))
+- uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name: DeletePhotoUseCase(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger)
+  href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html#PhotoCatalog_Application_UseCases_DeletePhotoUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_PhotoCatalog_Domain_Interfaces_Services_IFileStorage_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_
+  commentId: M:PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository,PhotoCatalog.Domain.Interfaces.Services.IFileStorage,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)
+  name.vb: New(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger)
+  fullName: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.DeletePhotoUseCase(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IFileStorage, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  fullName.vb: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.New(PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository, PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository, PhotoCatalog.Domain.Interfaces.Services.IFileStorage, PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork, Serilog.ILogger)
+  nameWithType: DeletePhotoUseCase.DeletePhotoUseCase(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger)
+  nameWithType.vb: DeletePhotoUseCase.New(IPhotoQueryRepository, IPhotoCommandRepository, IFileStorage, IUnitOfWork, ILogger)
 - uid: PhotoCatalog.Application.UseCases.DeletePhotoUseCase.#ctor*
   name: DeletePhotoUseCase
   href: api/PhotoCatalog.Application.UseCases.DeletePhotoUseCase.html#PhotoCatalog_Application_UseCases_DeletePhotoUseCase__ctor_
@@ -1684,145 +1684,6 @@ references:
   commentId: T:PhotoCatalog.Domain.Extensions.ResultExtensions
   fullName: PhotoCatalog.Domain.Extensions.ResultExtensions
   nameWithType: ResultExtensions
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Check*
-  name: Check
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Check_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultExtensions.Check
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Check
-  nameWithType: ResultExtensions.Check
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Check``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,PhotoCatalog.Domain.Primitives.ResultVoid})
-  name: Check<TValue>(Result<TValue>?, Func<TValue, ResultVoid>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Check__1_PhotoCatalog_Domain_Primitives_Result___0__System_Func___0_PhotoCatalog_Domain_Primitives_ResultVoid__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.Check``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,PhotoCatalog.Domain.Primitives.ResultVoid})
-  name.vb: Check(Of TValue)(Result(Of TValue), Func(Of TValue, ResultVoid))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Check<TValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Func<TValue, PhotoCatalog.Domain.Primitives.ResultVoid>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.Check(Of TValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Func(Of TValue, PhotoCatalog.Domain.Primitives.ResultVoid))
-  nameWithType: ResultExtensions.Check<TValue>(Result<TValue>?, Func<TValue, ResultVoid>)
-  nameWithType.vb: ResultExtensions.Check(Of TValue)(Result(Of TValue), Func(Of TValue, ResultVoid))
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Check``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,PhotoCatalog.Domain.Primitives.Result{``1}})
-  name: Check<TValue, TOther>(Result<TValue>?, Func<TValue, Result<TOther>>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Check__2_PhotoCatalog_Domain_Primitives_Result___0__System_Func___0_PhotoCatalog_Domain_Primitives_Result___1___
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.Check``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,PhotoCatalog.Domain.Primitives.Result{``1}})
-  name.vb: Check(Of TValue, TOther)(Result(Of TValue), Func(Of TValue, Result(Of TOther)))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Check<TValue, TOther>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Func<TValue, PhotoCatalog.Domain.Primitives.Result<TOther>>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.Check(Of TValue, TOther)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Func(Of TValue, PhotoCatalog.Domain.Primitives.Result(Of TOther)))
-  nameWithType: ResultExtensions.Check<TValue, TOther>(Result<TValue>?, Func<TValue, Result<TOther>>)
-  nameWithType.vb: ResultExtensions.Check(Of TValue, TOther)(Result(Of TValue), Func(Of TValue, Result(Of TOther)))
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Ensure*
-  name: Ensure
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Ensure_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultExtensions.Ensure
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Ensure
-  nameWithType: ResultExtensions.Ensure
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Ensure``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,System.Boolean},PhotoCatalog.Domain.Primitives.Error)
-  name: Ensure<TValue>(Result<TValue>?, Func<TValue, bool>, Error)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Ensure__1_PhotoCatalog_Domain_Primitives_Result___0__System_Func___0_System_Boolean__PhotoCatalog_Domain_Primitives_Error_
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.Ensure``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,System.Boolean},PhotoCatalog.Domain.Primitives.Error)
-  name.vb: Ensure(Of TValue)(Result(Of TValue), Func(Of TValue, Boolean), Error)
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Ensure<TValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Func<TValue, bool>, PhotoCatalog.Domain.Primitives.Error)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.Ensure(Of TValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Func(Of TValue, Boolean), PhotoCatalog.Domain.Primitives.Error)
-  nameWithType: ResultExtensions.Ensure<TValue>(Result<TValue>?, Func<TValue, bool>, Error)
-  nameWithType.vb: ResultExtensions.Ensure(Of TValue)(Result(Of TValue), Func(Of TValue, Boolean), Error)
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Finally*
-  name: Finally
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Finally_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultExtensions.Finally
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Finally
-  nameWithType: ResultExtensions.Finally
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Finally``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,``1},System.Func{PhotoCatalog.Domain.Primitives.Error,``1})
-  name: Finally<TValue, TLanding>(Result<TValue>?, Func<TValue, TLanding>, Func<Error, TLanding>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Finally__2_PhotoCatalog_Domain_Primitives_Result___0__System_Func___0___1__System_Func_PhotoCatalog_Domain_Primitives_Error___1__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.Finally``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,``1},System.Func{PhotoCatalog.Domain.Primitives.Error,``1})
-  name.vb: Finally(Of TValue, TLanding)(Result(Of TValue), Func(Of TValue, TLanding), Func(Of Error, TLanding))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Finally<TValue, TLanding>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Func<TValue, TLanding>, System.Func<PhotoCatalog.Domain.Primitives.Error, TLanding>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.Finally(Of TValue, TLanding)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Func(Of TValue, TLanding), System.Func(Of PhotoCatalog.Domain.Primitives.Error, TLanding))
-  nameWithType: ResultExtensions.Finally<TValue, TLanding>(Result<TValue>?, Func<TValue, TLanding>, Func<Error, TLanding>)
-  nameWithType.vb: ResultExtensions.Finally(Of TValue, TLanding)(Result(Of TValue), Func(Of TValue, TLanding), Func(Of Error, TLanding))
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.OnFailure*
-  name: OnFailure
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_OnFailure_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultExtensions.OnFailure
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.OnFailure
-  nameWithType: ResultExtensions.OnFailure
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.OnFailure``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Action{PhotoCatalog.Domain.Primitives.Error})
-  name: OnFailure<TValue>(Result<TValue>?, Action<Error>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_OnFailure__1_PhotoCatalog_Domain_Primitives_Result___0__System_Action_PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.OnFailure``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Action{PhotoCatalog.Domain.Primitives.Error})
-  name.vb: OnFailure(Of TValue)(Result(Of TValue), Action(Of Error))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.OnFailure<TValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Action<PhotoCatalog.Domain.Primitives.Error>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.OnFailure(Of TValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Action(Of PhotoCatalog.Domain.Primitives.Error))
-  nameWithType: ResultExtensions.OnFailure<TValue>(Result<TValue>?, Action<Error>)
-  nameWithType.vb: ResultExtensions.OnFailure(Of TValue)(Result(Of TValue), Action(Of Error))
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.OnSuccess*
-  name: OnSuccess
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_OnSuccess_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultExtensions.OnSuccess
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.OnSuccess
-  nameWithType: ResultExtensions.OnSuccess
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.OnSuccess``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Action{``0})
-  name: OnSuccess<TValue>(Result<TValue>?, Action<TValue>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_OnSuccess__1_PhotoCatalog_Domain_Primitives_Result___0__System_Action___0__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.OnSuccess``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Action{``0})
-  name.vb: OnSuccess(Of TValue)(Result(Of TValue), Action(Of TValue))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.OnSuccess<TValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Action<TValue>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.OnSuccess(Of TValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Action(Of TValue))
-  nameWithType: ResultExtensions.OnSuccess<TValue>(Result<TValue>?, Action<TValue>)
-  nameWithType.vb: ResultExtensions.OnSuccess(Of TValue)(Result(Of TValue), Action(Of TValue))
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Then*
-  name: Then
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Then_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultExtensions.Then
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Then
-  nameWithType: ResultExtensions.Then
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry*
-  name: ThenTry
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ThenTry_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry
-  nameWithType: ResultExtensions.ThenTry
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Action{``0},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name: ThenTry<TValue>(Result<TValue>?, Action<TValue>, Func<Exception, Error>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ThenTry__1_PhotoCatalog_Domain_Primitives_Result___0__System_Action___0__System_Func_System_Exception_PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Action{``0},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name.vb: ThenTry(Of TValue)(Result(Of TValue), Action(Of TValue), Func(Of Exception, Error))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry<TValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Action<TValue>, System.Func<System.Exception, PhotoCatalog.Domain.Primitives.Error>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry(Of TValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Action(Of TValue), System.Func(Of System.Exception, PhotoCatalog.Domain.Primitives.Error))
-  nameWithType: ResultExtensions.ThenTry<TValue>(Result<TValue>?, Action<TValue>, Func<Exception, Error>)
-  nameWithType.vb: ResultExtensions.ThenTry(Of TValue)(Result(Of TValue), Action(Of TValue), Func(Of Exception, Error))
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,``1},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name: ThenTry<TValue, TNextValue>(Result<TValue>?, Func<TValue, TNextValue>, Func<Exception, Error>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ThenTry__2_PhotoCatalog_Domain_Primitives_Result___0__System_Func___0___1__System_Func_System_Exception_PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,``1},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name.vb: ThenTry(Of TValue, TNextValue)(Result(Of TValue), Func(Of TValue, TNextValue), Func(Of Exception, Error))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry<TValue, TNextValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Func<TValue, TNextValue>, System.Func<System.Exception, PhotoCatalog.Domain.Primitives.Error>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.ThenTry(Of TValue, TNextValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Func(Of TValue, TNextValue), System.Func(Of System.Exception, PhotoCatalog.Domain.Primitives.Error))
-  nameWithType: ResultExtensions.ThenTry<TValue, TNextValue>(Result<TValue>?, Func<TValue, TNextValue>, Func<Exception, Error>)
-  nameWithType.vb: ResultExtensions.ThenTry(Of TValue, TNextValue)(Result(Of TValue), Func(Of TValue, TNextValue), Func(Of Exception, Error))
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Then``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,PhotoCatalog.Domain.Primitives.ResultVoid})
-  name: Then<TValue>(Result<TValue>?, Func<TValue, ResultVoid>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Then__1_PhotoCatalog_Domain_Primitives_Result___0__System_Func___0_PhotoCatalog_Domain_Primitives_ResultVoid__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.Then``1(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,PhotoCatalog.Domain.Primitives.ResultVoid})
-  name.vb: Then(Of TValue)(Result(Of TValue), Func(Of TValue, ResultVoid))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Then<TValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Func<TValue, PhotoCatalog.Domain.Primitives.ResultVoid>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.Then(Of TValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Func(Of TValue, PhotoCatalog.Domain.Primitives.ResultVoid))
-  nameWithType: ResultExtensions.Then<TValue>(Result<TValue>?, Func<TValue, ResultVoid>)
-  nameWithType.vb: ResultExtensions.Then(Of TValue)(Result(Of TValue), Func(Of TValue, ResultVoid))
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Then``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,PhotoCatalog.Domain.Primitives.Result{``1}})
-  name: Then<TValue, TNextValue>(Result<TValue>?, Func<TValue, Result<TNextValue>>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Then__2_PhotoCatalog_Domain_Primitives_Result___0__System_Func___0_PhotoCatalog_Domain_Primitives_Result___1___
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.Then``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,PhotoCatalog.Domain.Primitives.Result{``1}})
-  name.vb: Then(Of TValue, TNextValue)(Result(Of TValue), Func(Of TValue, Result(Of TNextValue)))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Then<TValue, TNextValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Func<TValue, PhotoCatalog.Domain.Primitives.Result<TNextValue>>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.Then(Of TValue, TNextValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Func(Of TValue, PhotoCatalog.Domain.Primitives.Result(Of TNextValue)))
-  nameWithType: ResultExtensions.Then<TValue, TNextValue>(Result<TValue>?, Func<TValue, Result<TNextValue>>)
-  nameWithType.vb: ResultExtensions.Then(Of TValue, TNextValue)(Result(Of TValue), Func(Of TValue, Result(Of TNextValue)))
 - uid: PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult*
   name: ToResult
   href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult_
@@ -1839,31 +1700,15 @@ references:
   fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult(Of TValue)(TValue)
   nameWithType: ResultExtensions.ToResult<TValue>(TValue)
   nameWithType.vb: ResultExtensions.ToResult(Of TValue)(TValue)
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult``1(``0,PhotoCatalog.Domain.Primitives.Error)
-  name: ToResult<TValue>(TValue?, Error)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_Error_
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult``1(``0,PhotoCatalog.Domain.Primitives.Error)
-  name.vb: ToResult(Of TValue)(TValue, Error)
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult<TValue>(TValue?, PhotoCatalog.Domain.Primitives.Error)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult(Of TValue)(TValue, PhotoCatalog.Domain.Primitives.Error)
-  nameWithType: ResultExtensions.ToResult<TValue>(TValue?, Error)
-  nameWithType.vb: ResultExtensions.ToResult(Of TValue)(TValue, Error)
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Transform*
-  name: Transform
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Transform_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultExtensions.Transform
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Transform
-  nameWithType: ResultExtensions.Transform
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.Transform``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,``1})
-  name: Transform<TValue, TNextValue>(Result<TValue>?, Func<TValue, TNextValue>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_Transform__2_PhotoCatalog_Domain_Primitives_Result___0__System_Func___0___1__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.Transform``2(PhotoCatalog.Domain.Primitives.Result{``0},System.Func{``0,``1})
-  name.vb: Transform(Of TValue, TNextValue)(Result(Of TValue), Func(Of TValue, TNextValue))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.Transform<TValue, TNextValue>(PhotoCatalog.Domain.Primitives.Result<TValue>?, System.Func<TValue, TNextValue>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.Transform(Of TValue, TNextValue)(PhotoCatalog.Domain.Primitives.Result(Of TValue), System.Func(Of TValue, TNextValue))
-  nameWithType: ResultExtensions.Transform<TValue, TNextValue>(Result<TValue>?, Func<TValue, TNextValue>)
-  nameWithType.vb: ResultExtensions.Transform(Of TValue, TNextValue)(Result(Of TValue), Func(Of TValue, TNextValue))
+- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult``1(``0,PhotoCatalog.Domain.Primitives.ResultError)
+  name: ToResult<TValue>(TValue?, ResultError)
+  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_ResultError_
+  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult``1(``0,PhotoCatalog.Domain.Primitives.ResultError)
+  name.vb: ToResult(Of TValue)(TValue, ResultError)
+  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult<TValue>(TValue?, PhotoCatalog.Domain.Primitives.ResultError)
+  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.ToResult(Of TValue)(TValue, PhotoCatalog.Domain.Primitives.ResultError)
+  nameWithType: ResultExtensions.ToResult<TValue>(TValue?, ResultError)
+  nameWithType.vb: ResultExtensions.ToResult(Of TValue)(TValue, ResultError)
 - uid: PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch*
   name: TryCatch
   href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_TryCatch_
@@ -1871,125 +1716,30 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch
   nameWithType: ResultExtensions.TryCatch
-- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch``1(System.Func{``0},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name: TryCatch<TValue>(Func<TValue>, Func<Exception, Error>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_TryCatch__1_System_Func___0__System_Func_System_Exception_PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch``1(System.Func{``0},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name.vb: TryCatch(Of TValue)(Func(Of TValue), Func(Of Exception, Error))
-  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch<TValue>(System.Func<TValue>, System.Func<System.Exception, PhotoCatalog.Domain.Primitives.Error>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch(Of TValue)(System.Func(Of TValue), System.Func(Of System.Exception, PhotoCatalog.Domain.Primitives.Error))
-  nameWithType: ResultExtensions.TryCatch<TValue>(Func<TValue>, Func<Exception, Error>)
-  nameWithType.vb: ResultExtensions.TryCatch(Of TValue)(Func(Of TValue), Func(Of Exception, Error))
+- uid: PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch``1(System.Func{``0},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.ResultError})
+  name: TryCatch<TValue>(Func<TValue>, Func<Exception, ResultError>)
+  href: api/PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_TryCatch__1_System_Func___0__System_Func_System_Exception_PhotoCatalog_Domain_Primitives_ResultError__
+  commentId: M:PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch``1(System.Func{``0},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.ResultError})
+  name.vb: TryCatch(Of TValue)(Func(Of TValue), Func(Of Exception, ResultError))
+  fullName: PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch<TValue>(System.Func<TValue>, System.Func<System.Exception, PhotoCatalog.Domain.Primitives.ResultError>)
+  fullName.vb: PhotoCatalog.Domain.Extensions.ResultExtensions.TryCatch(Of TValue)(System.Func(Of TValue), System.Func(Of System.Exception, PhotoCatalog.Domain.Primitives.ResultError))
+  nameWithType: ResultExtensions.TryCatch<TValue>(Func<TValue>, Func<Exception, ResultError>)
+  nameWithType.vb: ResultExtensions.TryCatch(Of TValue)(Func(Of TValue), Func(Of Exception, ResultError))
 - uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions
   name: ResultVoidExtensions
   href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html
   commentId: T:PhotoCatalog.Domain.Extensions.ResultVoidExtensions
   fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions
   nameWithType: ResultVoidExtensions
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Finally*
-  name: Finally
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_Finally_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Finally
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Finally
-  nameWithType: ResultVoidExtensions.Finally
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Finally``1(PhotoCatalog.Domain.Primitives.ResultVoid,System.Func{``0},System.Func{PhotoCatalog.Domain.Primitives.Error,``0})
-  name: Finally<TLanding>(ResultVoid, Func<TLanding>, Func<Error, TLanding>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_Finally__1_PhotoCatalog_Domain_Primitives_ResultVoid_System_Func___0__System_Func_PhotoCatalog_Domain_Primitives_Error___0__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Finally``1(PhotoCatalog.Domain.Primitives.ResultVoid,System.Func{``0},System.Func{PhotoCatalog.Domain.Primitives.Error,``0})
-  name.vb: Finally(Of TLanding)(ResultVoid, Func(Of TLanding), Func(Of Error, TLanding))
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Finally<TLanding>(PhotoCatalog.Domain.Primitives.ResultVoid, System.Func<TLanding>, System.Func<PhotoCatalog.Domain.Primitives.Error, TLanding>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Finally(Of TLanding)(PhotoCatalog.Domain.Primitives.ResultVoid, System.Func(Of TLanding), System.Func(Of PhotoCatalog.Domain.Primitives.Error, TLanding))
-  nameWithType: ResultVoidExtensions.Finally<TLanding>(ResultVoid, Func<TLanding>, Func<Error, TLanding>)
-  nameWithType.vb: ResultVoidExtensions.Finally(Of TLanding)(ResultVoid, Func(Of TLanding), Func(Of Error, TLanding))
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnFailure(PhotoCatalog.Domain.Primitives.ResultVoid,System.Action{PhotoCatalog.Domain.Primitives.Error})
-  name: OnFailure(ResultVoid, Action<Error>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_OnFailure_PhotoCatalog_Domain_Primitives_ResultVoid_System_Action_PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnFailure(PhotoCatalog.Domain.Primitives.ResultVoid,System.Action{PhotoCatalog.Domain.Primitives.Error})
-  name.vb: OnFailure(ResultVoid, Action(Of Error))
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnFailure(PhotoCatalog.Domain.Primitives.ResultVoid, System.Action<PhotoCatalog.Domain.Primitives.Error>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnFailure(PhotoCatalog.Domain.Primitives.ResultVoid, System.Action(Of PhotoCatalog.Domain.Primitives.Error))
-  nameWithType: ResultVoidExtensions.OnFailure(ResultVoid, Action<Error>)
-  nameWithType.vb: ResultVoidExtensions.OnFailure(ResultVoid, Action(Of Error))
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnFailure*
-  name: OnFailure
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_OnFailure_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnFailure
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnFailure
-  nameWithType: ResultVoidExtensions.OnFailure
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnSuccess(PhotoCatalog.Domain.Primitives.ResultVoid,System.Action)
-  name: OnSuccess(ResultVoid, Action)
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_OnSuccess_PhotoCatalog_Domain_Primitives_ResultVoid_System_Action_
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnSuccess(PhotoCatalog.Domain.Primitives.ResultVoid,System.Action)
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnSuccess(PhotoCatalog.Domain.Primitives.ResultVoid, System.Action)
-  nameWithType: ResultVoidExtensions.OnSuccess(ResultVoid, Action)
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnSuccess*
-  name: OnSuccess
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_OnSuccess_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnSuccess
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.OnSuccess
-  nameWithType: ResultVoidExtensions.OnSuccess
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then(PhotoCatalog.Domain.Primitives.ResultVoid,System.Func{PhotoCatalog.Domain.Primitives.ResultVoid})
-  name: Then(ResultVoid, Func<ResultVoid>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_Then_PhotoCatalog_Domain_Primitives_ResultVoid_System_Func_PhotoCatalog_Domain_Primitives_ResultVoid__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then(PhotoCatalog.Domain.Primitives.ResultVoid,System.Func{PhotoCatalog.Domain.Primitives.ResultVoid})
-  name.vb: Then(ResultVoid, Func(Of ResultVoid))
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then(PhotoCatalog.Domain.Primitives.ResultVoid, System.Func<PhotoCatalog.Domain.Primitives.ResultVoid>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then(PhotoCatalog.Domain.Primitives.ResultVoid, System.Func(Of PhotoCatalog.Domain.Primitives.ResultVoid))
-  nameWithType: ResultVoidExtensions.Then(ResultVoid, Func<ResultVoid>)
-  nameWithType.vb: ResultVoidExtensions.Then(ResultVoid, Func(Of ResultVoid))
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then*
-  name: Then
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_Then_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then
-  nameWithType: ResultVoidExtensions.Then
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry(PhotoCatalog.Domain.Primitives.ResultVoid,System.Action,System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name: ThenTry(ResultVoid, Action, Func<Exception, Error>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_ThenTry_PhotoCatalog_Domain_Primitives_ResultVoid_System_Action_System_Func_System_Exception_PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry(PhotoCatalog.Domain.Primitives.ResultVoid,System.Action,System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name.vb: ThenTry(ResultVoid, Action, Func(Of Exception, Error))
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry(PhotoCatalog.Domain.Primitives.ResultVoid, System.Action, System.Func<System.Exception, PhotoCatalog.Domain.Primitives.Error>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry(PhotoCatalog.Domain.Primitives.ResultVoid, System.Action, System.Func(Of System.Exception, PhotoCatalog.Domain.Primitives.Error))
-  nameWithType: ResultVoidExtensions.ThenTry(ResultVoid, Action, Func<Exception, Error>)
-  nameWithType.vb: ResultVoidExtensions.ThenTry(ResultVoid, Action, Func(Of Exception, Error))
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry*
-  name: ThenTry
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_ThenTry_
-  commentId: Overload:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry
-  nameWithType: ResultVoidExtensions.ThenTry
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry``1(PhotoCatalog.Domain.Primitives.ResultVoid,System.Func{``0},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name: ThenTry<TNextValue>(ResultVoid, Func<TNextValue>, Func<Exception, Error>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_ThenTry__1_PhotoCatalog_Domain_Primitives_ResultVoid_System_Func___0__System_Func_System_Exception_PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry``1(PhotoCatalog.Domain.Primitives.ResultVoid,System.Func{``0},System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name.vb: ThenTry(Of TNextValue)(ResultVoid, Func(Of TNextValue), Func(Of Exception, Error))
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry<TNextValue>(PhotoCatalog.Domain.Primitives.ResultVoid, System.Func<TNextValue>, System.Func<System.Exception, PhotoCatalog.Domain.Primitives.Error>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.ThenTry(Of TNextValue)(PhotoCatalog.Domain.Primitives.ResultVoid, System.Func(Of TNextValue), System.Func(Of System.Exception, PhotoCatalog.Domain.Primitives.Error))
-  nameWithType: ResultVoidExtensions.ThenTry<TNextValue>(ResultVoid, Func<TNextValue>, Func<Exception, Error>)
-  nameWithType.vb: ResultVoidExtensions.ThenTry(Of TNextValue)(ResultVoid, Func(Of TNextValue), Func(Of Exception, Error))
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then``1(PhotoCatalog.Domain.Primitives.ResultVoid,System.Func{PhotoCatalog.Domain.Primitives.Result{``0}})
-  name: Then<TNextValue>(ResultVoid, Func<Result<TNextValue>>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_Then__1_PhotoCatalog_Domain_Primitives_ResultVoid_System_Func_PhotoCatalog_Domain_Primitives_Result___0___
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then``1(PhotoCatalog.Domain.Primitives.ResultVoid,System.Func{PhotoCatalog.Domain.Primitives.Result{``0}})
-  name.vb: Then(Of TNextValue)(ResultVoid, Func(Of Result(Of TNextValue)))
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then<TNextValue>(PhotoCatalog.Domain.Primitives.ResultVoid, System.Func<PhotoCatalog.Domain.Primitives.Result<TNextValue>>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.Then(Of TNextValue)(PhotoCatalog.Domain.Primitives.ResultVoid, System.Func(Of PhotoCatalog.Domain.Primitives.Result(Of TNextValue)))
-  nameWithType: ResultVoidExtensions.Then<TNextValue>(ResultVoid, Func<Result<TNextValue>>)
-  nameWithType.vb: ResultVoidExtensions.Then(Of TNextValue)(ResultVoid, Func(Of Result(Of TNextValue)))
-- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch(System.Action,System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name: TryCatch(Action, Func<Exception, Error>)
-  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_TryCatch_System_Action_System_Func_System_Exception_PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch(System.Action,System.Func{System.Exception,PhotoCatalog.Domain.Primitives.Error})
-  name.vb: TryCatch(Action, Func(Of Exception, Error))
-  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch(System.Action, System.Func<System.Exception, PhotoCatalog.Domain.Primitives.Error>)
-  fullName.vb: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch(System.Action, System.Func(Of System.Exception, PhotoCatalog.Domain.Primitives.Error))
-  nameWithType: ResultVoidExtensions.TryCatch(Action, Func<Exception, Error>)
-  nameWithType.vb: ResultVoidExtensions.TryCatch(Action, Func(Of Exception, Error))
+- uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch(System.Action,System.Func{System.Exception,PhotoCatalog.Domain.Primitives.ResultError})
+  name: TryCatch(Action, Func<Exception, ResultError>)
+  href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_TryCatch_System_Action_System_Func_System_Exception_PhotoCatalog_Domain_Primitives_ResultError__
+  commentId: M:PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch(System.Action,System.Func{System.Exception,PhotoCatalog.Domain.Primitives.ResultError})
+  name.vb: TryCatch(Action, Func(Of Exception, ResultError))
+  fullName: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch(System.Action, System.Func<System.Exception, PhotoCatalog.Domain.Primitives.ResultError>)
+  fullName.vb: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch(System.Action, System.Func(Of System.Exception, PhotoCatalog.Domain.Primitives.ResultError))
+  nameWithType: ResultVoidExtensions.TryCatch(Action, Func<Exception, ResultError>)
+  nameWithType.vb: ResultVoidExtensions.TryCatch(Action, Func(Of Exception, ResultError))
 - uid: PhotoCatalog.Domain.Extensions.ResultVoidExtensions.TryCatch*
   name: TryCatch
   href: api/PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_TryCatch_
@@ -2689,88 +2439,113 @@ references:
   commentId: F:PhotoCatalog.Domain.Primitives.DomainErrors.Tag.TooLong
   fullName: PhotoCatalog.Domain.Primitives.DomainErrors.Tag.TooLong
   nameWithType: DomainErrors.Tag.TooLong
-- uid: PhotoCatalog.Domain.Primitives.Error
-  name: Error
-  href: api/PhotoCatalog.Domain.Primitives.Error.html
-  commentId: T:PhotoCatalog.Domain.Primitives.Error
-  fullName: PhotoCatalog.Domain.Primitives.Error
-  nameWithType: Error
-- uid: PhotoCatalog.Domain.Primitives.Error.#ctor(System.String,System.String)
-  name: Error(string, string)
-  href: api/PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error__ctor_System_String_System_String_
-  commentId: M:PhotoCatalog.Domain.Primitives.Error.#ctor(System.String,System.String)
+- uid: PhotoCatalog.Domain.Primitives.Result
+  name: Result
+  href: api/PhotoCatalog.Domain.Primitives.Result.html
+  commentId: T:PhotoCatalog.Domain.Primitives.Result
+  fullName: PhotoCatalog.Domain.Primitives.Result
+  nameWithType: Result
+- uid: PhotoCatalog.Domain.Primitives.Result.Failure*
+  name: Failure
+  href: api/PhotoCatalog.Domain.Primitives.Result.html#PhotoCatalog_Domain_Primitives_Result_Failure_
+  commentId: Overload:PhotoCatalog.Domain.Primitives.Result.Failure
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Primitives.Result.Failure
+  nameWithType: Result.Failure
+- uid: PhotoCatalog.Domain.Primitives.Result.Failure``1(PhotoCatalog.Domain.Primitives.ResultError)
+  name: Failure<T>(ResultError)
+  href: api/PhotoCatalog.Domain.Primitives.Result.html#PhotoCatalog_Domain_Primitives_Result_Failure__1_PhotoCatalog_Domain_Primitives_ResultError_
+  commentId: M:PhotoCatalog.Domain.Primitives.Result.Failure``1(PhotoCatalog.Domain.Primitives.ResultError)
+  name.vb: Failure(Of T)(ResultError)
+  fullName: PhotoCatalog.Domain.Primitives.Result.Failure<T>(PhotoCatalog.Domain.Primitives.ResultError)
+  fullName.vb: PhotoCatalog.Domain.Primitives.Result.Failure(Of T)(PhotoCatalog.Domain.Primitives.ResultError)
+  nameWithType: Result.Failure<T>(ResultError)
+  nameWithType.vb: Result.Failure(Of T)(ResultError)
+- uid: PhotoCatalog.Domain.Primitives.Result.Success*
+  name: Success
+  href: api/PhotoCatalog.Domain.Primitives.Result.html#PhotoCatalog_Domain_Primitives_Result_Success_
+  commentId: Overload:PhotoCatalog.Domain.Primitives.Result.Success
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Primitives.Result.Success
+  nameWithType: Result.Success
+- uid: PhotoCatalog.Domain.Primitives.Result.Success``1(``0)
+  name: Success<T>(T)
+  href: api/PhotoCatalog.Domain.Primitives.Result.html#PhotoCatalog_Domain_Primitives_Result_Success__1___0_
+  commentId: M:PhotoCatalog.Domain.Primitives.Result.Success``1(``0)
+  name.vb: Success(Of T)(T)
+  fullName: PhotoCatalog.Domain.Primitives.Result.Success<T>(T)
+  fullName.vb: PhotoCatalog.Domain.Primitives.Result.Success(Of T)(T)
+  nameWithType: Result.Success<T>(T)
+  nameWithType.vb: Result.Success(Of T)(T)
+- uid: PhotoCatalog.Domain.Primitives.ResultError
+  name: ResultError
+  href: api/PhotoCatalog.Domain.Primitives.ResultError.html
+  commentId: T:PhotoCatalog.Domain.Primitives.ResultError
+  fullName: PhotoCatalog.Domain.Primitives.ResultError
+  nameWithType: ResultError
+- uid: PhotoCatalog.Domain.Primitives.ResultError.#ctor(System.String,System.String)
+  name: ResultError(string, string)
+  href: api/PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError__ctor_System_String_System_String_
+  commentId: M:PhotoCatalog.Domain.Primitives.ResultError.#ctor(System.String,System.String)
   name.vb: New(String, String)
-  fullName: PhotoCatalog.Domain.Primitives.Error.Error(string, string)
-  fullName.vb: PhotoCatalog.Domain.Primitives.Error.New(String, String)
-  nameWithType: Error.Error(string, string)
-  nameWithType.vb: Error.New(String, String)
-- uid: PhotoCatalog.Domain.Primitives.Error.#ctor*
-  name: Error
-  href: api/PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error__ctor_
-  commentId: Overload:PhotoCatalog.Domain.Primitives.Error.#ctor
+  fullName: PhotoCatalog.Domain.Primitives.ResultError.ResultError(string, string)
+  fullName.vb: PhotoCatalog.Domain.Primitives.ResultError.New(String, String)
+  nameWithType: ResultError.ResultError(string, string)
+  nameWithType.vb: ResultError.New(String, String)
+- uid: PhotoCatalog.Domain.Primitives.ResultError.#ctor*
+  name: ResultError
+  href: api/PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError__ctor_
+  commentId: Overload:PhotoCatalog.Domain.Primitives.ResultError.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: PhotoCatalog.Domain.Primitives.Error.Error
-  fullName.vb: PhotoCatalog.Domain.Primitives.Error.New
-  nameWithType: Error.Error
-  nameWithType.vb: Error.New
-- uid: PhotoCatalog.Domain.Primitives.Error.Code
+  fullName: PhotoCatalog.Domain.Primitives.ResultError.ResultError
+  fullName.vb: PhotoCatalog.Domain.Primitives.ResultError.New
+  nameWithType: ResultError.ResultError
+  nameWithType.vb: ResultError.New
+- uid: PhotoCatalog.Domain.Primitives.ResultError.Code
   name: Code
-  href: api/PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error_Code
-  commentId: P:PhotoCatalog.Domain.Primitives.Error.Code
-  fullName: PhotoCatalog.Domain.Primitives.Error.Code
-  nameWithType: Error.Code
-- uid: PhotoCatalog.Domain.Primitives.Error.Code*
+  href: api/PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError_Code
+  commentId: P:PhotoCatalog.Domain.Primitives.ResultError.Code
+  fullName: PhotoCatalog.Domain.Primitives.ResultError.Code
+  nameWithType: ResultError.Code
+- uid: PhotoCatalog.Domain.Primitives.ResultError.Code*
   name: Code
-  href: api/PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error_Code_
-  commentId: Overload:PhotoCatalog.Domain.Primitives.Error.Code
+  href: api/PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError_Code_
+  commentId: Overload:PhotoCatalog.Domain.Primitives.ResultError.Code
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Primitives.Error.Code
-  nameWithType: Error.Code
-- uid: PhotoCatalog.Domain.Primitives.Error.Message
+  fullName: PhotoCatalog.Domain.Primitives.ResultError.Code
+  nameWithType: ResultError.Code
+- uid: PhotoCatalog.Domain.Primitives.ResultError.Message
   name: Message
-  href: api/PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error_Message
-  commentId: P:PhotoCatalog.Domain.Primitives.Error.Message
-  fullName: PhotoCatalog.Domain.Primitives.Error.Message
-  nameWithType: Error.Message
-- uid: PhotoCatalog.Domain.Primitives.Error.Message*
+  href: api/PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError_Message
+  commentId: P:PhotoCatalog.Domain.Primitives.ResultError.Message
+  fullName: PhotoCatalog.Domain.Primitives.ResultError.Message
+  nameWithType: ResultError.Message
+- uid: PhotoCatalog.Domain.Primitives.ResultError.Message*
   name: Message
-  href: api/PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error_Message_
-  commentId: Overload:PhotoCatalog.Domain.Primitives.Error.Message
+  href: api/PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError_Message_
+  commentId: Overload:PhotoCatalog.Domain.Primitives.ResultError.Message
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Primitives.Error.Message
-  nameWithType: Error.Message
-- uid: PhotoCatalog.Domain.Primitives.Error.None
+  fullName: PhotoCatalog.Domain.Primitives.ResultError.Message
+  nameWithType: ResultError.Message
+- uid: PhotoCatalog.Domain.Primitives.ResultError.None
   name: None
-  href: api/PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error_None
-  commentId: F:PhotoCatalog.Domain.Primitives.Error.None
-  fullName: PhotoCatalog.Domain.Primitives.Error.None
-  nameWithType: Error.None
+  href: api/PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError_None
+  commentId: F:PhotoCatalog.Domain.Primitives.ResultError.None
+  fullName: PhotoCatalog.Domain.Primitives.ResultError.None
+  nameWithType: ResultError.None
 - uid: PhotoCatalog.Domain.Primitives.ResultVoid
   name: ResultVoid
   href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html
   commentId: T:PhotoCatalog.Domain.Primitives.ResultVoid
   fullName: PhotoCatalog.Domain.Primitives.ResultVoid
   nameWithType: ResultVoid
-- uid: PhotoCatalog.Domain.Primitives.ResultVoid.Error
-  name: Error
-  href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Error
-  commentId: P:PhotoCatalog.Domain.Primitives.ResultVoid.Error
-  fullName: PhotoCatalog.Domain.Primitives.ResultVoid.Error
-  nameWithType: ResultVoid.Error
-- uid: PhotoCatalog.Domain.Primitives.ResultVoid.Error*
-  name: Error
-  href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Error_
-  commentId: Overload:PhotoCatalog.Domain.Primitives.ResultVoid.Error
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Primitives.ResultVoid.Error
-  nameWithType: ResultVoid.Error
-- uid: PhotoCatalog.Domain.Primitives.ResultVoid.Failure(PhotoCatalog.Domain.Primitives.Error)
-  name: Failure(Error)
-  href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_Error_
-  commentId: M:PhotoCatalog.Domain.Primitives.ResultVoid.Failure(PhotoCatalog.Domain.Primitives.Error)
-  fullName: PhotoCatalog.Domain.Primitives.ResultVoid.Failure(PhotoCatalog.Domain.Primitives.Error)
-  nameWithType: ResultVoid.Failure(Error)
+- uid: PhotoCatalog.Domain.Primitives.ResultVoid.Failure(PhotoCatalog.Domain.Primitives.ResultError)
+  name: Failure(ResultError)
+  href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_ResultError_
+  commentId: M:PhotoCatalog.Domain.Primitives.ResultVoid.Failure(PhotoCatalog.Domain.Primitives.ResultError)
+  fullName: PhotoCatalog.Domain.Primitives.ResultVoid.Failure(PhotoCatalog.Domain.Primitives.ResultError)
+  nameWithType: ResultVoid.Failure(ResultError)
 - uid: PhotoCatalog.Domain.Primitives.ResultVoid.Failure*
   name: Failure
   href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_
@@ -2804,6 +2579,19 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Domain.Primitives.ResultVoid.IsSuccess
   nameWithType: ResultVoid.IsSuccess
+- uid: PhotoCatalog.Domain.Primitives.ResultVoid.ResultError
+  name: ResultError
+  href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_ResultError
+  commentId: P:PhotoCatalog.Domain.Primitives.ResultVoid.ResultError
+  fullName: PhotoCatalog.Domain.Primitives.ResultVoid.ResultError
+  nameWithType: ResultVoid.ResultError
+- uid: PhotoCatalog.Domain.Primitives.ResultVoid.ResultError*
+  name: ResultError
+  href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_ResultError_
+  commentId: Overload:PhotoCatalog.Domain.Primitives.ResultVoid.ResultError
+  isSpec: "True"
+  fullName: PhotoCatalog.Domain.Primitives.ResultVoid.ResultError
+  nameWithType: ResultVoid.ResultError
 - uid: PhotoCatalog.Domain.Primitives.ResultVoid.Success
   name: Success()
   href: api/PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Success
@@ -2826,15 +2614,15 @@ references:
   fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T)
   nameWithType: Result<T>
   nameWithType.vb: Result(Of T)
-- uid: PhotoCatalog.Domain.Primitives.Result`1.Deconstruct(System.Boolean@,`0@,PhotoCatalog.Domain.Primitives.Error@)
-  name: Deconstruct(out bool, out T?, out Error)
-  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Deconstruct_System_Boolean___0__PhotoCatalog_Domain_Primitives_Error__
-  commentId: M:PhotoCatalog.Domain.Primitives.Result`1.Deconstruct(System.Boolean@,`0@,PhotoCatalog.Domain.Primitives.Error@)
-  name.vb: Deconstruct(Boolean, T, Error)
-  fullName: PhotoCatalog.Domain.Primitives.Result<T>.Deconstruct(out bool, out T?, out PhotoCatalog.Domain.Primitives.Error)
-  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Deconstruct(Boolean, T, PhotoCatalog.Domain.Primitives.Error)
-  nameWithType: Result<T>.Deconstruct(out bool, out T?, out Error)
-  nameWithType.vb: Result(Of T).Deconstruct(Boolean, T, Error)
+- uid: PhotoCatalog.Domain.Primitives.Result`1.Deconstruct(System.Boolean@,`0@,PhotoCatalog.Domain.Primitives.ResultError@)
+  name: Deconstruct(out bool, out T?, out ResultError)
+  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Deconstruct_System_Boolean___0__PhotoCatalog_Domain_Primitives_ResultError__
+  commentId: M:PhotoCatalog.Domain.Primitives.Result`1.Deconstruct(System.Boolean@,`0@,PhotoCatalog.Domain.Primitives.ResultError@)
+  name.vb: Deconstruct(Boolean, T, ResultError)
+  fullName: PhotoCatalog.Domain.Primitives.Result<T>.Deconstruct(out bool, out T?, out PhotoCatalog.Domain.Primitives.ResultError)
+  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Deconstruct(Boolean, T, PhotoCatalog.Domain.Primitives.ResultError)
+  nameWithType: Result<T>.Deconstruct(out bool, out T?, out ResultError)
+  nameWithType.vb: Result(Of T).Deconstruct(Boolean, T, ResultError)
 - uid: PhotoCatalog.Domain.Primitives.Result`1.Deconstruct*
   name: Deconstruct
   href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Deconstruct_
@@ -2844,40 +2632,6 @@ references:
   fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Deconstruct
   nameWithType: Result<T>.Deconstruct
   nameWithType.vb: Result(Of T).Deconstruct
-- uid: PhotoCatalog.Domain.Primitives.Result`1.Error
-  name: Error
-  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Error
-  commentId: P:PhotoCatalog.Domain.Primitives.Result`1.Error
-  fullName: PhotoCatalog.Domain.Primitives.Result<T>.Error
-  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Error
-  nameWithType: Result<T>.Error
-  nameWithType.vb: Result(Of T).Error
-- uid: PhotoCatalog.Domain.Primitives.Result`1.Error*
-  name: Error
-  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Error_
-  commentId: Overload:PhotoCatalog.Domain.Primitives.Result`1.Error
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Primitives.Result<T>.Error
-  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Error
-  nameWithType: Result<T>.Error
-  nameWithType.vb: Result(Of T).Error
-- uid: PhotoCatalog.Domain.Primitives.Result`1.Failure(PhotoCatalog.Domain.Primitives.Error)
-  name: Failure(Error)
-  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Failure_PhotoCatalog_Domain_Primitives_Error_
-  commentId: M:PhotoCatalog.Domain.Primitives.Result`1.Failure(PhotoCatalog.Domain.Primitives.Error)
-  fullName: PhotoCatalog.Domain.Primitives.Result<T>.Failure(PhotoCatalog.Domain.Primitives.Error)
-  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Failure(PhotoCatalog.Domain.Primitives.Error)
-  nameWithType: Result<T>.Failure(Error)
-  nameWithType.vb: Result(Of T).Failure(Error)
-- uid: PhotoCatalog.Domain.Primitives.Result`1.Failure*
-  name: Failure
-  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Failure_
-  commentId: Overload:PhotoCatalog.Domain.Primitives.Result`1.Failure
-  isSpec: "True"
-  fullName: PhotoCatalog.Domain.Primitives.Result<T>.Failure
-  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Failure
-  nameWithType: Result<T>.Failure
-  nameWithType.vb: Result(Of T).Failure
 - uid: PhotoCatalog.Domain.Primitives.Result`1.IsFailure
   name: IsFailure
   href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_IsFailure
@@ -2912,23 +2666,23 @@ references:
   fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).IsSuccess
   nameWithType: Result<T>.IsSuccess
   nameWithType.vb: Result(Of T).IsSuccess
-- uid: PhotoCatalog.Domain.Primitives.Result`1.Success(`0)
-  name: Success(T)
-  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Success__0_
-  commentId: M:PhotoCatalog.Domain.Primitives.Result`1.Success(`0)
-  fullName: PhotoCatalog.Domain.Primitives.Result<T>.Success(T)
-  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Success(T)
-  nameWithType: Result<T>.Success(T)
-  nameWithType.vb: Result(Of T).Success(T)
-- uid: PhotoCatalog.Domain.Primitives.Result`1.Success*
-  name: Success
-  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Success_
-  commentId: Overload:PhotoCatalog.Domain.Primitives.Result`1.Success
+- uid: PhotoCatalog.Domain.Primitives.Result`1.ResultError
+  name: ResultError
+  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_ResultError
+  commentId: P:PhotoCatalog.Domain.Primitives.Result`1.ResultError
+  fullName: PhotoCatalog.Domain.Primitives.Result<T>.ResultError
+  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).ResultError
+  nameWithType: Result<T>.ResultError
+  nameWithType.vb: Result(Of T).ResultError
+- uid: PhotoCatalog.Domain.Primitives.Result`1.ResultError*
+  name: ResultError
+  href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_ResultError_
+  commentId: Overload:PhotoCatalog.Domain.Primitives.Result`1.ResultError
   isSpec: "True"
-  fullName: PhotoCatalog.Domain.Primitives.Result<T>.Success
-  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).Success
-  nameWithType: Result<T>.Success
-  nameWithType.vb: Result(Of T).Success
+  fullName: PhotoCatalog.Domain.Primitives.Result<T>.ResultError
+  fullName.vb: PhotoCatalog.Domain.Primitives.Result(Of T).ResultError
+  nameWithType: Result<T>.ResultError
+  nameWithType.vb: Result(Of T).ResultError
 - uid: PhotoCatalog.Domain.Primitives.Result`1.Value
   name: Value
   href: api/PhotoCatalog.Domain.Primitives.Result-1.html#PhotoCatalog_Domain_Primitives_Result_1_Value
@@ -3089,12 +2843,12 @@ references:
   commentId: T:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache
   nameWithType: InfrastructureErrors.Cache
-- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownError
-  name: UnknownError
-  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Cache_UnknownError
-  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownError
-  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownError
-  nameWithType: InfrastructureErrors.Cache.UnknownError
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownResultError
+  name: UnknownResultError
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_Cache_UnknownResultError
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownResultError
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Cache.UnknownResultError
+  nameWithType: InfrastructureErrors.Cache.UnknownResultError
 - uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database
   name: InfrastructureErrors.Database
   href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.Database.html
@@ -3161,18 +2915,18 @@ references:
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.DiskFull
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.DiskFull
   nameWithType: InfrastructureErrors.FileStorage.DiskFull
-- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
-  name: IOError
-  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_IOError
-  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
-  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError
-  nameWithType: InfrastructureErrors.FileStorage.IOError
 - uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.InvalidPath
   name: InvalidPath
   href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_InvalidPath
   commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.InvalidPath
   fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.InvalidPath
   nameWithType: InfrastructureErrors.FileStorage.InvalidPath
+- uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IoResultError
+  name: IoResultError
+  href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_IoResultError
+  commentId: F:PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IoResultError
+  fullName: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IoResultError
+  nameWithType: InfrastructureErrors.FileStorage.IoResultError
 - uid: PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.PathTraversalAttempt
   name: PathTraversalAttempt
   href: api/PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.html#PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_PathTraversalAttempt
@@ -3221,25 +2975,25 @@ references:
   commentId: N:PhotoCatalog.Infrastructure.Extensions
   fullName: PhotoCatalog.Infrastructure.Extensions
   nameWithType: PhotoCatalog.Infrastructure.Extensions
-- uid: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions
-  name: ErrorHttpExtensions
-  href: api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.html
-  commentId: T:PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions
-  fullName: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions
-  nameWithType: ErrorHttpExtensions
-- uid: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.Error)
-  name: ToHttpResult(Error)
-  href: api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ErrorHttpExtensions_ToHttpResult_PhotoCatalog_Domain_Primitives_Error_
-  commentId: M:PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.Error)
-  fullName: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.Error)
-  nameWithType: ErrorHttpExtensions.ToHttpResult(Error)
-- uid: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult*
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions
+  name: ResultErrorHttpExtensions
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.html
+  commentId: T:PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions
+  nameWithType: ResultErrorHttpExtensions
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.ResultError)
+  name: ToHttpResult(ResultError)
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ResultErrorHttpExtensions_ToHttpResult_PhotoCatalog_Domain_Primitives_ResultError_
+  commentId: M:PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.ResultError)
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.ResultError)
+  nameWithType: ResultErrorHttpExtensions.ToHttpResult(ResultError)
+- uid: PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.ToHttpResult*
   name: ToHttpResult
-  href: api/PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ErrorHttpExtensions_ToHttpResult_
-  commentId: Overload:PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult
+  href: api/PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.html#PhotoCatalog_Infrastructure_Extensions_ResultErrorHttpExtensions_ToHttpResult_
+  commentId: Overload:PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.ToHttpResult
   isSpec: "True"
-  fullName: PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult
-  nameWithType: ErrorHttpExtensions.ToHttpResult
+  fullName: PhotoCatalog.Infrastructure.Extensions.ResultErrorHttpExtensions.ToHttpResult
+  nameWithType: ResultErrorHttpExtensions.ToHttpResult
 - uid: PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions
   name: ResultHttpExtensions
   href: api/PhotoCatalog.Infrastructure.Extensions.ResultHttpExtensions.html
@@ -4094,6 +3848,19 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Delete
   nameWithType: SqliteFolderCommandRepository.Delete
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Dispose
+  name: Dispose()
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Dispose
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Dispose
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Dispose()
+  nameWithType: SqliteFolderCommandRepository.Dispose()
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Dispose*
+  name: Dispose
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Dispose_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Dispose
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Dispose
+  nameWithType: SqliteFolderCommandRepository.Dispose
 - uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.Update(PhotoCatalog.Domain.Entities.Folder)
   name: Update(Folder)
   href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderCommandRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderCommandRepository_Update_PhotoCatalog_Domain_Entities_Folder_
@@ -4132,6 +3899,19 @@ references:
   fullName.vb: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.New
   nameWithType: SqliteFolderQueryRepository.SqliteFolderQueryRepository
   nameWithType.vb: SqliteFolderQueryRepository.New
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.Dispose
+  name: Dispose()
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderQueryRepository_Dispose
+  commentId: M:PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.Dispose
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.Dispose()
+  nameWithType: SqliteFolderQueryRepository.Dispose()
+- uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.Dispose*
+  name: Dispose
+  href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderQueryRepository_Dispose_
+  commentId: Overload:PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.Dispose
+  isSpec: "True"
+  fullName: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.Dispose
+  nameWithType: SqliteFolderQueryRepository.Dispose
 - uid: PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.GetById(System.Int32)
   name: GetById(int)
   href: api/PhotoCatalog.Infrastructure.Repositories.SqliteFolderQueryRepository.html#PhotoCatalog_Infrastructure_Repositories_SqliteFolderQueryRepository_GetById_System_Int32_

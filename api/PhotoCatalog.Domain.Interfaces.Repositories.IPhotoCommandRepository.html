@@ -121,7 +121,7 @@ Interface IPhotoCommandRepository  <a class="header-action link-secondary" title
       <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_">ResultExtensions.ToResult&lt;TValue&gt;(TValue)</a>
   </div>
   <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_Error_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, Error)</a>
+      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_ResultError_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, ResultError)</a>
   </div>
   </dd></dl>
 
@@ -145,7 +145,7 @@ Interface IPhotoCommandRepository  <a class="header-action link-secondary" title
 
   <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_Add_PhotoCatalog_Domain_Entities_Photo_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Add(PhotoCatalog.Domain.Entities.Photo)">
   Add(Photo)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IPhotoCommandRepository.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IPhotoCommandRepository.cs/#L40"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Добавляет новую фотографию в репозиторий.</p>
@@ -180,7 +180,8 @@ Interface IPhotoCommandRepository  <a class="header-action link-secondary" title
   <h4 class="section" id="PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_Add_PhotoCatalog_Domain_Entities_Photo__remarks">Remarks</h4>
   <div class="markdown level1 remarks"><ul>
 <li>Операция выполняется в рамках транзакции, управляемой <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html">IUnitOfWork</a>.</li>
-<li>При необходимости проверки внешних ключей (например, AlbumId) используется включённый режим PRAGMA foreign_keys = ON.</li>
+<li>При необходимости проверки внешних ключей (например, AlbumId) используется включённый режим PRAGMA foreign_keys =
+ON.</li>
 </ul>
 </div>
 
@@ -191,7 +192,7 @@ Interface IPhotoCommandRepository  <a class="header-action link-secondary" title
 
   <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_Delete_System_Int32_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Delete(System.Int32)">
   Delete(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IPhotoCommandRepository.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IPhotoCommandRepository.cs/#L88"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Удаляет фотографию по идентификатору.</p>
@@ -237,7 +238,7 @@ Interface IPhotoCommandRepository  <a class="header-action link-secondary" title
 
   <h3 id="PhotoCatalog_Domain_Interfaces_Repositories_IPhotoCommandRepository_Update_PhotoCatalog_Domain_Entities_Photo_" data-uid="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoCommandRepository.Update(PhotoCatalog.Domain.Entities.Photo)">
   Update(Photo)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IPhotoCommandRepository.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Interfaces/Repositories/IPhotoCommandRepository.cs/#L64"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Обновляет существующую фотографию.</p>

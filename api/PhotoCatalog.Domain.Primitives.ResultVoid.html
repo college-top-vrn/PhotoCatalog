@@ -148,28 +148,7 @@ Struct ResultVoid  <a class="header-action link-secondary" title="View source" h
       <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_">ResultExtensions.ToResult&lt;TValue&gt;(TValue)</a>
   </div>
   <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_Error_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, Error)</a>
-  </div>
-  <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_Finally__1_PhotoCatalog_Domain_Primitives_ResultVoid_System_Func___0__System_Func_PhotoCatalog_Domain_Primitives_Error___0__">ResultVoidExtensions.Finally&lt;TLanding&gt;(ResultVoid, Func&lt;TLanding&gt;, Func&lt;Error, TLanding&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_OnFailure_PhotoCatalog_Domain_Primitives_ResultVoid_System_Action_PhotoCatalog_Domain_Primitives_Error__">ResultVoidExtensions.OnFailure(ResultVoid, Action&lt;Error&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_OnSuccess_PhotoCatalog_Domain_Primitives_ResultVoid_System_Action_">ResultVoidExtensions.OnSuccess(ResultVoid, Action)</a>
-  </div>
-  <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_Then_PhotoCatalog_Domain_Primitives_ResultVoid_System_Func_PhotoCatalog_Domain_Primitives_ResultVoid__">ResultVoidExtensions.Then(ResultVoid, Func&lt;ResultVoid&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_ThenTry_PhotoCatalog_Domain_Primitives_ResultVoid_System_Action_System_Func_System_Exception_PhotoCatalog_Domain_Primitives_Error__">ResultVoidExtensions.ThenTry(ResultVoid, Action, Func&lt;Exception, Error&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_ThenTry__1_PhotoCatalog_Domain_Primitives_ResultVoid_System_Func___0__System_Func_System_Exception_PhotoCatalog_Domain_Primitives_Error__">ResultVoidExtensions.ThenTry&lt;TNextValue&gt;(ResultVoid, Func&lt;TNextValue&gt;, Func&lt;Exception, Error&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultVoidExtensions.html#PhotoCatalog_Domain_Extensions_ResultVoidExtensions_Then__1_PhotoCatalog_Domain_Primitives_ResultVoid_System_Func_PhotoCatalog_Domain_Primitives_Result___0___">ResultVoidExtensions.Then&lt;TNextValue&gt;(ResultVoid, Func&lt;Result&lt;TNextValue&gt;&gt;)</a>
+      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_ResultError_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, ResultError)</a>
   </div>
   </dd></dl>
 
@@ -177,44 +156,12 @@ Struct ResultVoid  <a class="header-action link-secondary" title="View source" h
 
   <h2 id="PhotoCatalog_Domain_Primitives_ResultVoid_remarks">Remarks</h2>
   <div class="markdown level0 remarks"><p>ВНИМАНИЕ: Не создавайте объект через конструктор по умолчанию.
-Для инициализации используйте исключительно статические методы: <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Success">Success()</a> или <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_Error_">Failure(Error)</a>.</p>
+Для инициализации используйте исключительно статические методы: <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Success">Success()</a> или <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_ResultError_">Failure(ResultError)</a>.</p>
 </div>
 
 
   <h2 class="section" id="properties">Properties
 </h2>
-
-
-  <a id="PhotoCatalog_Domain_Primitives_ResultVoid_Error_" data-uid="PhotoCatalog.Domain.Primitives.ResultVoid.Error*"></a>
-
-  <h3 id="PhotoCatalog_Domain_Primitives_ResultVoid_Error" data-uid="PhotoCatalog.Domain.Primitives.ResultVoid.Error">
-  Error
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultVoid.cs/#L37"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Объект детализированной ошибки. Если операция успешна, содержит <a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error_None">None</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Error Error { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h4 class="section">Property Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
 
 
   <a id="PhotoCatalog_Domain_Primitives_ResultVoid_IsFailure_" data-uid="PhotoCatalog.Domain.Primitives.ResultVoid.IsFailure*"></a>
@@ -281,15 +228,47 @@ Struct ResultVoid  <a class="header-action link-secondary" title="View source" h
 
 
 
+  <a id="PhotoCatalog_Domain_Primitives_ResultVoid_ResultError_" data-uid="PhotoCatalog.Domain.Primitives.ResultVoid.ResultError*"></a>
+
+  <h3 id="PhotoCatalog_Domain_Primitives_ResultVoid_ResultError" data-uid="PhotoCatalog.Domain.Primitives.ResultVoid.ResultError">
+  ResultError
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultVoid.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Объект детализированной ошибки. Если операция успешна, содержит <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError_None">None</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResultError ResultError { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <h2 class="section" id="methods">Methods
 </h2>
 
 
   <a id="PhotoCatalog_Domain_Primitives_ResultVoid_Failure_" data-uid="PhotoCatalog.Domain.Primitives.ResultVoid.Failure*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_Error_" data-uid="PhotoCatalog.Domain.Primitives.ResultVoid.Failure(PhotoCatalog.Domain.Primitives.Error)">
-  Failure(Error)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultVoid.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_ResultError_" data-uid="PhotoCatalog.Domain.Primitives.ResultVoid.Failure(PhotoCatalog.Domain.Primitives.ResultError)">
+  Failure(ResultError)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultVoid.cs/#L60"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Создает провальный результат с указанной ошибкой.</p>
@@ -297,12 +276,12 @@ Struct ResultVoid  <a class="header-action link-secondary" title="View source" h
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ResultVoid Failure(Error error)</code></pre>
+    <pre><code class="lang-csharp hljs">public static ResultVoid Failure(ResultError resultError)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>error</code> <a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dt><code>resultError</code> <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
     <dd><p>Бизнес-ошибка, объясняющая причину провала.</p>
 </dd>
   </dl>
@@ -310,7 +289,8 @@ Struct ResultVoid  <a class="header-action link-secondary" title="View source" h
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
-    <dd><p>Провальный <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a>, где <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_IsFailure">IsFailure</a> равно true, а <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Error">Error</a> содержит
+    <dd><p>Провальный <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a>, где <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_IsFailure">IsFailure</a> равно true, а <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_ResultError">ResultError</a>
+содержит
 переданную ошибку.</p>
 </dd>
   </dl>
@@ -344,8 +324,8 @@ Struct ResultVoid  <a class="header-action link-secondary" title="View source" h
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
-    <dd><p>Успешный <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a>, где <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_IsSuccess">IsSuccess</a> равно true, а <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Error">Error</a> равно
-<a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html#PhotoCatalog_Domain_Primitives_Error_None">None</a>.</p>
+    <dd><p>Успешный <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a>, где <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_IsSuccess">IsSuccess</a> равно true, а <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_ResultError">ResultError</a> равно
+<a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html#PhotoCatalog_Domain_Primitives_ResultError_None">None</a>.</p>
 </dd>
   </dl>
 

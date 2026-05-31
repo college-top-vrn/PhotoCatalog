@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Struct Error | PhotoCatalog Documentation </title>
+      <title>Struct ResultError | PhotoCatalog Documentation </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Struct Error | PhotoCatalog Documentation ">
+      <meta name="title" content="Struct ResultError | PhotoCatalog Documentation ">
       
       <meta name="description" content="Представляет структуру для стандартизированного описания бизнес-ошибок в домене.">
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Domain_Primitives_Error.md&amp;value=---%0Auid%3A%20PhotoCatalog.Domain.Primitives.Error%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Domain_Primitives_ResultError.md&amp;value=---%0Auid%3A%20PhotoCatalog.Domain.Primitives.ResultError%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,12 +84,12 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="PhotoCatalog.Domain.Primitives.Error">
+        <article data-uid="PhotoCatalog.Domain.Primitives.ResultError">
 
 
 
-  <h1 id="PhotoCatalog_Domain_Primitives_Error" data-uid="PhotoCatalog.Domain.Primitives.Error" class="text-break">
-Struct Error  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Error.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  <h1 id="PhotoCatalog_Domain_Primitives_ResultError" data-uid="PhotoCatalog.Domain.Primitives.ResultError" class="text-break">
+Struct ResultError  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultError.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +102,7 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly record struct Error : IEquatable&lt;Error&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public readonly record struct ResultError : IEquatable&lt;ResultError&gt;</code></pre>
   </div>
 
 
@@ -112,7 +112,7 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
   <dl class="typelist implements">
     <dt>Implements</dt>
     <dd>
-      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a>&gt;</div>
     </dd>
   </dl>
 
@@ -147,7 +147,7 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
       <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_">ResultExtensions.ToResult&lt;TValue&gt;(TValue)</a>
   </div>
   <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_Error_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, Error)</a>
+      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_ResultError_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, ResultError)</a>
   </div>
   </dd></dl>
 
@@ -159,11 +159,11 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
 </h2>
 
 
-  <a id="PhotoCatalog_Domain_Primitives_Error__ctor_" data-uid="PhotoCatalog.Domain.Primitives.Error.#ctor*"></a>
+  <a id="PhotoCatalog_Domain_Primitives_ResultError__ctor_" data-uid="PhotoCatalog.Domain.Primitives.ResultError.#ctor*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Primitives_Error__ctor_System_String_System_String_" data-uid="PhotoCatalog.Domain.Primitives.Error.#ctor(System.String,System.String)">
-  Error(string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Error.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Domain_Primitives_ResultError__ctor_System_String_System_String_" data-uid="PhotoCatalog.Domain.Primitives.ResultError.#ctor(System.String,System.String)">
+  ResultError(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultError.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Представляет структуру для стандартизированного описания бизнес-ошибок в домене.</p>
@@ -171,7 +171,7 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Error(string Code, string Message)</code></pre>
+    <pre><code class="lang-csharp hljs">public ResultError(string Code, string Message)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -202,9 +202,9 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
 
 
 
-  <h3 id="PhotoCatalog_Domain_Primitives_Error_None" data-uid="PhotoCatalog.Domain.Primitives.Error.None">
+  <h3 id="PhotoCatalog_Domain_Primitives_ResultError_None" data-uid="PhotoCatalog.Domain.Primitives.ResultError.None">
   None
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Error.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultError.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Специальный объект, обозначающий отсутствие ошибки.</p>
@@ -212,7 +212,7 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error None</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly ResultError None</code></pre>
   </div>
 
 
@@ -220,7 +220,7 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
 
   <h4 class="section">Field Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
     <dd></dd>
   </dl>
 
@@ -236,11 +236,11 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
 </h2>
 
 
-  <a id="PhotoCatalog_Domain_Primitives_Error_Code_" data-uid="PhotoCatalog.Domain.Primitives.Error.Code*"></a>
+  <a id="PhotoCatalog_Domain_Primitives_ResultError_Code_" data-uid="PhotoCatalog.Domain.Primitives.ResultError.Code*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Primitives_Error_Code" data-uid="PhotoCatalog.Domain.Primitives.Error.Code">
+  <h3 id="PhotoCatalog_Domain_Primitives_ResultError_Code" data-uid="PhotoCatalog.Domain.Primitives.ResultError.Code">
   Code
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Error.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultError.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Уникальный строковый идентификатор ошибки (например, &quot;Tag.EmptyName&quot;).
@@ -269,11 +269,11 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
 
 
 
-  <a id="PhotoCatalog_Domain_Primitives_Error_Message_" data-uid="PhotoCatalog.Domain.Primitives.Error.Message*"></a>
+  <a id="PhotoCatalog_Domain_Primitives_ResultError_Message_" data-uid="PhotoCatalog.Domain.Primitives.ResultError.Message*"></a>
 
-  <h3 id="PhotoCatalog_Domain_Primitives_Error_Message" data-uid="PhotoCatalog.Domain.Primitives.Error.Message">
+  <h3 id="PhotoCatalog_Domain_Primitives_ResultError_Message" data-uid="PhotoCatalog.Domain.Primitives.ResultError.Message">
   Message
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Error.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultError.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Понятное описание проблемы на естественном языке.
@@ -306,7 +306,7 @@ Struct Error  <a class="header-action link-secondary" title="View source" href="
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Error.cs/#L14" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/ResultError.cs/#L14" class="edit-link">Edit this page</a>
         </div>
 
 

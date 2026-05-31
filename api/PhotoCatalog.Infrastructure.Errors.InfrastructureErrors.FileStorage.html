@@ -165,7 +165,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error AccessDenied</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly ResultError AccessDenied</code></pre>
   </div>
 
 
@@ -173,7 +173,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
   <h4 class="section">Field Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
     <dd></dd>
   </dl>
 
@@ -197,7 +197,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error DiskFull</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly ResultError DiskFull</code></pre>
   </div>
 
 
@@ -205,39 +205,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
   <h4 class="section">Field Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_IOError" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IOError">
-  IOError
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L114"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Общая ошибка ввода-вывода.
-Возникает при непредвиденных проблемах с файловой системой.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error IOError</code></pre>
-  </div>
-
-
-
-
-  <h4 class="section">Field Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
     <dd></dd>
   </dl>
 
@@ -261,7 +229,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error InvalidPath</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly ResultError InvalidPath</code></pre>
   </div>
 
 
@@ -269,7 +237,39 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
   <h4 class="section">Field Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="PhotoCatalog_Infrastructure_Errors_InfrastructureErrors_FileStorage_IoResultError" data-uid="PhotoCatalog.Infrastructure.Errors.InfrastructureErrors.FileStorage.IoResultError">
+  IoResultError
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Errors/InfrastructureErrors.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Общая ошибка ввода-вывода.
+Возникает при непредвиденных проблемах с файловой системой.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly ResultError IoResultError</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
     <dd></dd>
   </dl>
 
@@ -293,7 +293,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error PathTraversalAttempt</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly ResultError PathTraversalAttempt</code></pre>
   </div>
 
 
@@ -301,7 +301,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
   <h4 class="section">Field Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
     <dd></dd>
   </dl>
 
@@ -324,7 +324,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly Error ThumbnailGenerationFailed</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly ResultError ThumbnailGenerationFailed</code></pre>
   </div>
 
 
@@ -332,7 +332,7 @@ Class InfrastructureErrors.FileStorage  <a class="header-action link-secondary" 
 
   <h4 class="section">Field Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
     <dd></dd>
   </dl>
 

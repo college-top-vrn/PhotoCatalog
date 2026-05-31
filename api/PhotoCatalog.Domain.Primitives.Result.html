@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class ErrorHttpExtensions | PhotoCatalog Documentation </title>
+      <title>Class Result | PhotoCatalog Documentation </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class ErrorHttpExtensions | PhotoCatalog Documentation ">
+      <meta name="title" content="Class Result | PhotoCatalog Documentation ">
       
-      <meta name="description" content="Методы расширения  для работы с HTTP.">
+      <meta name="description" content="Необобщенный базовый класс .">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Infrastructure_Extensions_ErrorHttpExtensions.md&amp;value=---%0Auid%3A%20PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/college-top-vrn/PhotoCatalog/new/develop/apiSpec/new?filename=PhotoCatalog_Domain_Primitives_Result.md&amp;value=---%0Auid%3A%20PhotoCatalog.Domain.Primitives.Result%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,25 +84,25 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions">
+        <article data-uid="PhotoCatalog.Domain.Primitives.Result">
 
 
 
-  <h1 id="PhotoCatalog_Infrastructure_Extensions_ErrorHttpExtensions" data-uid="PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions" class="text-break">
-Class ErrorHttpExtensions  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Extensions/ErrorHttpExtensions.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  <h1 id="PhotoCatalog_Domain_Primitives_Result" data-uid="PhotoCatalog.Domain.Primitives.Result" class="text-break">
+Class Result  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Result.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="PhotoCatalog.html">PhotoCatalog</a>.<a class="xref" href="PhotoCatalog.Infrastructure.html">Infrastructure</a>.<a class="xref" href="PhotoCatalog.Infrastructure.Extensions.html">Extensions</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>PhotoCatalog.Infrastructure.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PhotoCatalog.html">PhotoCatalog</a>.<a class="xref" href="PhotoCatalog.Domain.html">Domain</a>.<a class="xref" href="PhotoCatalog.Domain.Primitives.html">Primitives</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PhotoCatalog.Domain.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Методы расширения <a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a> для работы с HTTP.</p>
+  <div class="markdown summary"><p>Необобщенный базовый класс <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result&lt;T&gt;</a>.</p>
 </div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class ErrorHttpExtensions</code></pre>
+    <pre><code class="lang-csharp hljs">public static class Result</code></pre>
   </div>
 
 
@@ -112,7 +112,7 @@ Class ErrorHttpExtensions  <a class="header-action link-secondary" title="View s
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">ErrorHttpExtensions</span></div>
+      <div><span class="xref">Result</span></div>
     </dd>
   </dl>
 
@@ -153,33 +153,83 @@ Class ErrorHttpExtensions  <a class="header-action link-secondary" title="View s
 </h2>
 
 
-  <a id="PhotoCatalog_Infrastructure_Extensions_ErrorHttpExtensions_ToHttpResult_" data-uid="PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult*"></a>
+  <a id="PhotoCatalog_Domain_Primitives_Result_Failure_" data-uid="PhotoCatalog.Domain.Primitives.Result.Failure*"></a>
 
-  <h3 id="PhotoCatalog_Infrastructure_Extensions_ErrorHttpExtensions_ToHttpResult_PhotoCatalog_Domain_Primitives_Error_" data-uid="PhotoCatalog.Infrastructure.Extensions.ErrorHttpExtensions.ToHttpResult(PhotoCatalog.Domain.Primitives.Error)">
-  ToHttpResult(Error)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Extensions/ErrorHttpExtensions.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PhotoCatalog_Domain_Primitives_Result_Failure__1_PhotoCatalog_Domain_Primitives_ResultError_" data-uid="PhotoCatalog.Domain.Primitives.Result.Failure``1(PhotoCatalog.Domain.Primitives.ResultError)">
+  Failure&lt;T&gt;(ResultError)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Result.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Метод расширения для преобразования <a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a> в <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http.iresult">IResult</a>.</p>
+  <div class="markdown level1 summary"><p>Создает провальный результат с указанной ошибкой и значением по умолчанию.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IResult ToHttpResult(this Error error)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Result&lt;T&gt; Failure&lt;T&gt;(ResultError resultError)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>error</code> <a class="xref" href="PhotoCatalog.Domain.Primitives.Error.html">Error</a></dt>
+    <dt><code>resultError</code> <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultError.html">ResultError</a></dt>
     <dd></dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http.iresult">IResult</a></dt>
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;T&gt;</dt>
     <dd></dd>
   </dl>
 
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="PhotoCatalog_Domain_Primitives_Result_Success_" data-uid="PhotoCatalog.Domain.Primitives.Result.Success*"></a>
+
+  <h3 id="PhotoCatalog_Domain_Primitives_Result_Success__1___0_" data-uid="PhotoCatalog.Domain.Primitives.Result.Success``1(``0)">
+  Success&lt;T&gt;(T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Result.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Создает успешный результат с переданным значением.
+Гарантирует функциональную безопасность: при передаче null возвращает системную ошибку.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Result&lt;T&gt; Success&lt;T&gt;(T value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">T</span></dt>
+    <dd><p>Значение успешной операции.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result</a>&lt;T&gt;</dt>
+    <dd><p>Экземпляр <a class="xref" href="PhotoCatalog.Domain.Primitives.Result-1.html">Result&lt;T&gt;</a> со статусом успеха или провала (если передан null).</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -194,7 +244,7 @@ Class ErrorHttpExtensions  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/Extensions/ErrorHttpExtensions.cs/#L10" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Domain/Primitives/Result.cs/#L6" class="edit-link">Edit this page</a>
         </div>
 
 

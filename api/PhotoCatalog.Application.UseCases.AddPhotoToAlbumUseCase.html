@@ -89,7 +89,7 @@
 
 
   <h1 id="PhotoCatalog_Application_UseCases_AddPhotoToAlbumUseCase" data-uid="PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase" class="text-break">
-Class AddPhotoToAlbumUseCase  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddPhotoToAlbumUseCase.cs/#L17"><i class="bi bi-code-slash"></i></a>
+Class AddPhotoToAlbumUseCase  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddPhotoToAlbumUseCase.cs/#L15"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -151,7 +151,7 @@ Class AddPhotoToAlbumUseCase  <a class="header-action link-secondary" title="Vie
       <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_">ResultExtensions.ToResult&lt;TValue&gt;(TValue)</a>
   </div>
   <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_Error_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, Error)</a>
+      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_ResultError_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, ResultError)</a>
   </div>
   </dd></dl>
 
@@ -167,14 +167,15 @@ Class AddPhotoToAlbumUseCase  <a class="header-action link-secondary" title="Vie
 
   <h3 id="PhotoCatalog_Application_UseCases_AddPhotoToAlbumUseCase__ctor_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumQueryRepository_PhotoCatalog_Domain_Interfaces_Repositories_IAlbumCommandRepository_PhotoCatalog_Domain_Interfaces_Repositories_IPhotoQueryRepository_PhotoCatalog_Domain_Interfaces_Services_IUnitOfWork_Serilog_ILogger_" data-uid="PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.#ctor(PhotoCatalog.Domain.Interfaces.Repositories.IAlbumQueryRepository,PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository,PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository,PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork,Serilog.ILogger)">
   AddPhotoToAlbumUseCase(IAlbumQueryRepository, IAlbumCommandRepository, IPhotoQueryRepository, IUnitOfWork, ILogger)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddPhotoToAlbumUseCase.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddPhotoToAlbumUseCase.cs/#L15"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Сценарий использования для добавления фотографии в существующий альбом.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public AddPhotoToAlbumUseCase(IAlbumQueryRepository albumQueryRepository, IAlbumCommandRepository albumCommandRepository, IPhotoQueryRepository photoRepository, IUnitOfWork unitOfWork, ILogger logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public AddPhotoToAlbumUseCase(IAlbumQueryRepository albumQueryRepository, IAlbumCommandRepository albumCommandRepository, IPhotoQueryRepository photoQueryRepository, IUnitOfWork unitOfWork, ILogger logger)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -183,7 +184,7 @@ Class AddPhotoToAlbumUseCase  <a class="header-action link-secondary" title="Vie
     <dd></dd>
     <dt><code>albumCommandRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IAlbumCommandRepository.html">IAlbumCommandRepository</a></dt>
     <dd></dd>
-    <dt><code>photoRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html">IPhotoQueryRepository</a></dt>
+    <dt><code>photoQueryRepository</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Repositories.IPhotoQueryRepository.html">IPhotoQueryRepository</a></dt>
     <dd></dd>
     <dt><code>unitOfWork</code> <a class="xref" href="PhotoCatalog.Domain.Interfaces.Services.IUnitOfWork.html">IUnitOfWork</a></dt>
     <dd></dd>
@@ -210,7 +211,7 @@ Class AddPhotoToAlbumUseCase  <a class="header-action link-secondary" title="Vie
 
   <h3 id="PhotoCatalog_Application_UseCases_AddPhotoToAlbumUseCase_Execute_System_Int32_System_Int32_" data-uid="PhotoCatalog.Application.UseCases.AddPhotoToAlbumUseCase.Execute(System.Int32,System.Int32)">
   Execute(int, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddPhotoToAlbumUseCase.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddPhotoToAlbumUseCase.cs/#L30"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Выполняет добавление фотографии в альбом с сохранением изменений в рамках транзакции.</p>
@@ -252,7 +253,7 @@ Class AddPhotoToAlbumUseCase  <a class="header-action link-secondary" title="Vie
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddPhotoToAlbumUseCase.cs/#L17" class="edit-link">Edit this page</a>
+          <a href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Application/UseCases/AddPhotoToAlbumUseCase.cs/#L15" class="edit-link">Edit this page</a>
         </div>
 
 

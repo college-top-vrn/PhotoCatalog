@@ -158,7 +158,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
       <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_">ResultExtensions.ToResult&lt;TValue&gt;(TValue)</a>
   </div>
   <div>
-      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_Error_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, Error)</a>
+      <a class="xref" href="PhotoCatalog.Domain.Extensions.ResultExtensions.html#PhotoCatalog_Domain_Extensions_ResultExtensions_ToResult__1___0_PhotoCatalog_Domain_Primitives_ResultError_">ResultExtensions.ToResult&lt;TValue&gt;(TValue?, ResultError)</a>
   </div>
   </dd></dl>
 
@@ -244,7 +244,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
     <dd><p><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Success">Success()</a>, если транзакция успешно начата,
-или <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_Error_">Failure(Error)</a> с ошибкой.</p>
+или <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_ResultError_">Failure(ResultError)</a> с ошибкой.</p>
 </dd>
   </dl>
 
@@ -262,7 +262,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Commit" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Commit">
   Commit()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L107"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Фиксирует все изменения текущей транзакции.</p>
@@ -278,7 +278,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
     <dd><p><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Success">Success()</a>, если транзакция успешно зафиксирована,
-или <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_Error_">Failure(Error)</a> с ошибкой.</p>
+или <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_ResultError_">Failure(ResultError)</a> с ошибкой.</p>
 </dd>
   </dl>
 
@@ -296,7 +296,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Dispose" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Dispose">
   Dispose()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L173"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Освобождает ресурсы, используемые <a class="xref" href="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.html">SqliteUnitOfWork</a>.</p>
@@ -323,7 +323,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
 
   <h3 id="PhotoCatalog_Infrastructure_UnitOfWork_SqliteUnitOfWork_Rollback" data-uid="PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback">
   Rollback()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/college-top-vrn/PhotoCatalog/blob/develop/src/PhotoCatalog.Infrastructure/UnitOfWork/SqliteUnitOfWork.cs/#L142"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Отменяет все изменения текущей транзакции.</p>
@@ -339,7 +339,7 @@ Class SqliteUnitOfWork  <a class="header-action link-secondary" title="View sour
   <dl class="parameters">
     <dt><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html">ResultVoid</a></dt>
     <dd><p><a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Success">Success()</a>, если транзакция успешно отменена,
-или <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_Error_">Failure(Error)</a> с ошибкой.</p>
+или <a class="xref" href="PhotoCatalog.Domain.Primitives.ResultVoid.html#PhotoCatalog_Domain_Primitives_ResultVoid_Failure_PhotoCatalog_Domain_Primitives_ResultError_">Failure(ResultError)</a> с ошибкой.</p>
 </dd>
   </dl>
 
