@@ -4701,3 +4701,133 @@ references:
   isSpec: "True"
   fullName: PhotoCatalog.Infrastructure.UnitOfWork.SqliteUnitOfWork.Rollback
   nameWithType: SqliteUnitOfWork.Rollback
+- uid: PhotoCatalog.ServiceDefaults
+  name: PhotoCatalog.ServiceDefaults
+  href: api/PhotoCatalog.ServiceDefaults.html
+  commentId: N:PhotoCatalog.ServiceDefaults
+  fullName: PhotoCatalog.ServiceDefaults
+  nameWithType: PhotoCatalog.ServiceDefaults
+- uid: PhotoCatalog.ServiceDefaults.Extensions
+  name: Extensions
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html
+  commentId: T:PhotoCatalog.ServiceDefaults.Extensions
+  fullName: PhotoCatalog.ServiceDefaults.Extensions
+  nameWithType: Extensions
+- uid: PhotoCatalog.ServiceDefaults.Extensions.AddDefaultHealthChecks*
+  name: AddDefaultHealthChecks
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html#PhotoCatalog_ServiceDefaults_Extensions_AddDefaultHealthChecks_
+  commentId: Overload:PhotoCatalog.ServiceDefaults.Extensions.AddDefaultHealthChecks
+  isSpec: "True"
+  fullName: PhotoCatalog.ServiceDefaults.Extensions.AddDefaultHealthChecks
+  nameWithType: Extensions.AddDefaultHealthChecks
+- uid: PhotoCatalog.ServiceDefaults.Extensions.AddDefaultHealthChecks``1(``0)
+  name: AddDefaultHealthChecks<TBuilder>(TBuilder)
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html#PhotoCatalog_ServiceDefaults_Extensions_AddDefaultHealthChecks__1___0_
+  commentId: M:PhotoCatalog.ServiceDefaults.Extensions.AddDefaultHealthChecks``1(``0)
+  name.vb: AddDefaultHealthChecks(Of TBuilder)(TBuilder)
+  fullName: PhotoCatalog.ServiceDefaults.Extensions.AddDefaultHealthChecks<TBuilder>(TBuilder)
+  fullName.vb: PhotoCatalog.ServiceDefaults.Extensions.AddDefaultHealthChecks(Of TBuilder)(TBuilder)
+  nameWithType: Extensions.AddDefaultHealthChecks<TBuilder>(TBuilder)
+  nameWithType.vb: Extensions.AddDefaultHealthChecks(Of TBuilder)(TBuilder)
+- uid: PhotoCatalog.ServiceDefaults.Extensions.AddServiceDefaults*
+  name: AddServiceDefaults
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html#PhotoCatalog_ServiceDefaults_Extensions_AddServiceDefaults_
+  commentId: Overload:PhotoCatalog.ServiceDefaults.Extensions.AddServiceDefaults
+  isSpec: "True"
+  fullName: PhotoCatalog.ServiceDefaults.Extensions.AddServiceDefaults
+  nameWithType: Extensions.AddServiceDefaults
+- uid: PhotoCatalog.ServiceDefaults.Extensions.AddServiceDefaults``1(``0)
+  name: AddServiceDefaults<TBuilder>(TBuilder)
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html#PhotoCatalog_ServiceDefaults_Extensions_AddServiceDefaults__1___0_
+  commentId: M:PhotoCatalog.ServiceDefaults.Extensions.AddServiceDefaults``1(``0)
+  name.vb: AddServiceDefaults(Of TBuilder)(TBuilder)
+  fullName: PhotoCatalog.ServiceDefaults.Extensions.AddServiceDefaults<TBuilder>(TBuilder)
+  fullName.vb: PhotoCatalog.ServiceDefaults.Extensions.AddServiceDefaults(Of TBuilder)(TBuilder)
+  nameWithType: Extensions.AddServiceDefaults<TBuilder>(TBuilder)
+  nameWithType.vb: Extensions.AddServiceDefaults(Of TBuilder)(TBuilder)
+- uid: PhotoCatalog.ServiceDefaults.Extensions.ConfigureOpenTelemetry*
+  name: ConfigureOpenTelemetry
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html#PhotoCatalog_ServiceDefaults_Extensions_ConfigureOpenTelemetry_
+  commentId: Overload:PhotoCatalog.ServiceDefaults.Extensions.ConfigureOpenTelemetry
+  isSpec: "True"
+  fullName: PhotoCatalog.ServiceDefaults.Extensions.ConfigureOpenTelemetry
+  nameWithType: Extensions.ConfigureOpenTelemetry
+- uid: PhotoCatalog.ServiceDefaults.Extensions.ConfigureOpenTelemetry``1(``0)
+  name: ConfigureOpenTelemetry<TBuilder>(TBuilder)
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html#PhotoCatalog_ServiceDefaults_Extensions_ConfigureOpenTelemetry__1___0_
+  commentId: M:PhotoCatalog.ServiceDefaults.Extensions.ConfigureOpenTelemetry``1(``0)
+  name.vb: ConfigureOpenTelemetry(Of TBuilder)(TBuilder)
+  fullName: PhotoCatalog.ServiceDefaults.Extensions.ConfigureOpenTelemetry<TBuilder>(TBuilder)
+  fullName.vb: PhotoCatalog.ServiceDefaults.Extensions.ConfigureOpenTelemetry(Of TBuilder)(TBuilder)
+  nameWithType: Extensions.ConfigureOpenTelemetry<TBuilder>(TBuilder)
+  nameWithType.vb: Extensions.ConfigureOpenTelemetry(Of TBuilder)(TBuilder)
+- uid: PhotoCatalog.ServiceDefaults.Extensions.MapDefaultEndpoints(Microsoft.AspNetCore.Builder.WebApplication)
+  name: MapDefaultEndpoints(WebApplication)
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html#PhotoCatalog_ServiceDefaults_Extensions_MapDefaultEndpoints_Microsoft_AspNetCore_Builder_WebApplication_
+  commentId: M:PhotoCatalog.ServiceDefaults.Extensions.MapDefaultEndpoints(Microsoft.AspNetCore.Builder.WebApplication)
+  fullName: PhotoCatalog.ServiceDefaults.Extensions.MapDefaultEndpoints(Microsoft.AspNetCore.Builder.WebApplication)
+  nameWithType: Extensions.MapDefaultEndpoints(WebApplication)
+- uid: PhotoCatalog.ServiceDefaults.Extensions.MapDefaultEndpoints*
+  name: MapDefaultEndpoints
+  href: api/PhotoCatalog.ServiceDefaults.Extensions.html#PhotoCatalog_ServiceDefaults_Extensions_MapDefaultEndpoints_
+  commentId: Overload:PhotoCatalog.ServiceDefaults.Extensions.MapDefaultEndpoints
+  isSpec: "True"
+  fullName: PhotoCatalog.ServiceDefaults.Extensions.MapDefaultEndpoints
+  nameWithType: Extensions.MapDefaultEndpoints
+- uid: Projects
+  name: Projects
+  href: api/Projects.html
+  commentId: N:Projects
+  fullName: Projects
+  nameWithType: Projects
+- uid: Projects.PhotoCatalog_AppHost
+  name: PhotoCatalog_AppHost
+  href: api/Projects.PhotoCatalog_AppHost.html
+  commentId: T:Projects.PhotoCatalog_AppHost
+  fullName: Projects.PhotoCatalog_AppHost
+  nameWithType: PhotoCatalog_AppHost
+- uid: Projects.PhotoCatalog_AppHost.ProjectPath
+  name: ProjectPath
+  href: api/Projects.PhotoCatalog_AppHost.html#Projects_PhotoCatalog_AppHost_ProjectPath
+  commentId: P:Projects.PhotoCatalog_AppHost.ProjectPath
+  fullName: Projects.PhotoCatalog_AppHost.ProjectPath
+  nameWithType: PhotoCatalog_AppHost.ProjectPath
+- uid: Projects.PhotoCatalog_AppHost.ProjectPath*
+  name: ProjectPath
+  href: api/Projects.PhotoCatalog_AppHost.html#Projects_PhotoCatalog_AppHost_ProjectPath_
+  commentId: Overload:Projects.PhotoCatalog_AppHost.ProjectPath
+  isSpec: "True"
+  fullName: Projects.PhotoCatalog_AppHost.ProjectPath
+  nameWithType: PhotoCatalog_AppHost.ProjectPath
+- uid: Projects.PhotoCatalog_WebApi
+  name: PhotoCatalog_WebApi
+  href: api/Projects.PhotoCatalog_WebApi.html
+  commentId: T:Projects.PhotoCatalog_WebApi
+  fullName: Projects.PhotoCatalog_WebApi
+  nameWithType: PhotoCatalog_WebApi
+- uid: Projects.PhotoCatalog_WebApi.ProjectPath
+  name: ProjectPath
+  href: api/Projects.PhotoCatalog_WebApi.html#Projects_PhotoCatalog_WebApi_ProjectPath
+  commentId: P:Projects.PhotoCatalog_WebApi.ProjectPath
+  fullName: Projects.PhotoCatalog_WebApi.ProjectPath
+  nameWithType: PhotoCatalog_WebApi.ProjectPath
+- uid: Projects.PhotoCatalog_WebApi.ProjectPath*
+  name: ProjectPath
+  href: api/Projects.PhotoCatalog_WebApi.html#Projects_PhotoCatalog_WebApi_ProjectPath_
+  commentId: Overload:Projects.PhotoCatalog_WebApi.ProjectPath
+  isSpec: "True"
+  fullName: Projects.PhotoCatalog_WebApi.ProjectPath
+  nameWithType: PhotoCatalog_WebApi.ProjectPath
+- uid: Projects.PhotoCatalog_WebApi.SuppressBuild
+  name: SuppressBuild
+  href: api/Projects.PhotoCatalog_WebApi.html#Projects_PhotoCatalog_WebApi_SuppressBuild
+  commentId: P:Projects.PhotoCatalog_WebApi.SuppressBuild
+  fullName: Projects.PhotoCatalog_WebApi.SuppressBuild
+  nameWithType: PhotoCatalog_WebApi.SuppressBuild
+- uid: Projects.PhotoCatalog_WebApi.SuppressBuild*
+  name: SuppressBuild
+  href: api/Projects.PhotoCatalog_WebApi.html#Projects_PhotoCatalog_WebApi_SuppressBuild_
+  commentId: Overload:Projects.PhotoCatalog_WebApi.SuppressBuild
+  isSpec: "True"
+  fullName: Projects.PhotoCatalog_WebApi.SuppressBuild
+  nameWithType: PhotoCatalog_WebApi.SuppressBuild

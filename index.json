@@ -544,6 +544,31 @@
     "title": "Namespace PhotoCatalog.Infrastructure.UnitOfWork | PhotoCatalog Documentation",
     "summary": "Namespace PhotoCatalog.Infrastructure.UnitOfWork Classes SqliteUnitOfWork Реализация IUnitOfWork для SQLite."
   },
+  "api/PhotoCatalog.ServiceDefaults.Extensions.html": {
+    "href": "api/PhotoCatalog.ServiceDefaults.Extensions.html",
+    "title": "Class Extensions | PhotoCatalog Documentation",
+    "summary": "Class Extensions Namespace PhotoCatalog.ServiceDefaults Assembly PhotoCatalog.ServiceDefaults.dll public static class Extensions Inheritance object Extensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods AddDefaultHealthChecks<TBuilder>(TBuilder) public static TBuilder AddDefaultHealthChecks<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder Parameters builder TBuilder Returns TBuilder Type Parameters TBuilder AddServiceDefaults<TBuilder>(TBuilder) public static TBuilder AddServiceDefaults<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder Parameters builder TBuilder Returns TBuilder Type Parameters TBuilder ConfigureOpenTelemetry<TBuilder>(TBuilder) public static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder Parameters builder TBuilder Returns TBuilder Type Parameters TBuilder MapDefaultEndpoints(WebApplication) public static WebApplication MapDefaultEndpoints(this WebApplication app) Parameters app WebApplication Returns WebApplication"
+  },
+  "api/PhotoCatalog.ServiceDefaults.html": {
+    "href": "api/PhotoCatalog.ServiceDefaults.html",
+    "title": "Namespace PhotoCatalog.ServiceDefaults | PhotoCatalog Documentation",
+    "summary": "Namespace PhotoCatalog.ServiceDefaults Classes Extensions"
+  },
+  "api/Projects.PhotoCatalog_AppHost.html": {
+    "href": "api/Projects.PhotoCatalog_AppHost.html",
+    "title": "Class PhotoCatalog_AppHost | PhotoCatalog Documentation",
+    "summary": "Class PhotoCatalog_AppHost Namespace Projects Assembly PhotoCatalog.AppHost.dll Metadata for the Aspire AppHost project. [ExcludeFromCodeCoverage(Justification = \"Generated code.\")] public class PhotoCatalog_AppHost Inheritance object PhotoCatalog_AppHost Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Extension Methods ResultExtensions.ToResult<TValue>(TValue) ResultExtensions.ToResult<TValue>(TValue?, Error) Properties ProjectPath The path to the Aspire Host project. public static string ProjectPath { get; } Property Value string"
+  },
+  "api/Projects.PhotoCatalog_WebApi.html": {
+    "href": "api/Projects.PhotoCatalog_WebApi.html",
+    "title": "Class PhotoCatalog_WebApi | PhotoCatalog Documentation",
+    "summary": "Class PhotoCatalog_WebApi Namespace Projects Assembly PhotoCatalog.AppHost.dll Metadata for the PhotoCatalog_WebApi project. [ExcludeFromCodeCoverage(Justification = \"Generated code.\")] public class PhotoCatalog_WebApi : IProjectMetadata, IResourceAnnotation Inheritance object PhotoCatalog_WebApi Implements IProjectMetadata IResourceAnnotation Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Extension Methods ResultExtensions.ToResult<TValue>(TValue) ResultExtensions.ToResult<TValue>(TValue?, Error) Properties ProjectPath The path to the PhotoCatalog_WebApi project. public string ProjectPath { get; } Property Value string SuppressBuild Gets a value indicating whether building the project before running it should be suppressed. public bool SuppressBuild { get; } Property Value bool Remarks Projects added via ProjectReference items in the AppHost project file are built as part of building the AppHost project process so building them again before running is unnecessary. This property always returns true."
+  },
+  "api/Projects.html": {
+    "href": "api/Projects.html",
+    "title": "Namespace Projects | PhotoCatalog Documentation",
+    "summary": "Namespace Projects Classes PhotoCatalog_AppHost Metadata for the Aspire AppHost project. PhotoCatalog_WebApi Metadata for the PhotoCatalog_WebApi project."
+  },
   "docs/ResultFluentApi.html": {
     "href": "docs/ResultFluentApi.html",
     "title": "| PhotoCatalog Documentation",

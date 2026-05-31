@@ -1537,6 +1537,76 @@
       "Summary": null
     },
     {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.ServiceDefaults.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.ServiceDefaults.Extensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.ServiceDefaults.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PhotoCatalog.ServiceDefaults.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PhotoCatalog.ServiceDefaults.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PhotoCatalog.ServiceDefaults",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.PhotoCatalog_AppHost.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.PhotoCatalog_AppHost.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Projects.PhotoCatalog_AppHost",
+      "Summary": "<p sourcefile=\"api/Projects.PhotoCatalog_AppHost.yml\" sourcestartlinenumber=\"1\">Metadata for the Aspire AppHost project.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.PhotoCatalog_WebApi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.PhotoCatalog_WebApi.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Projects.PhotoCatalog_WebApi",
+      "Summary": "<p sourcefile=\"api/Projects.PhotoCatalog_WebApi.yml\" sourcestartlinenumber=\"1\">Metadata for the PhotoCatalog_WebApi project.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Projects",
+      "Summary": null
+    },
+    {
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
