@@ -2,7 +2,10 @@
   <Project Path="src/PhotoCatalog.WebApi/PhotoCatalog.WebApi.csproj"/>
   <Folder Name="/Solution Items/">
     <File Path="compose.yaml"/>
+    <File Path="Directory.Packages.props"/>
   </Folder>
+  <Project Path="src/PhotoCatalog.AppHost/PhotoCatalog.AppHost.csproj"/>
+  <Project Path="src/PhotoCatalog.ServiceDefaults/PhotoCatalog.ServiceDefaults.csproj"/>
   <Project Path="src/PhotoCatalog.Application/PhotoCatalog.Application.csproj"/>
   <Project Path="src/PhotoCatalog.Domain/PhotoCatalog.Domain.csproj"/>
   <Project Path="src/PhotoCatalog.Infrastructure/PhotoCatalog.Infrastructure.csproj"/>
