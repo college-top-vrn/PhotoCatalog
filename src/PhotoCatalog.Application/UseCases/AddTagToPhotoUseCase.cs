@@ -41,7 +41,6 @@ public class AddTagToPhotoUseCase(
                 logger.Warning("Ошибка {ErrorCode}: Тег {TagId} не найден.",
                     error.Code,
                     tagId))
-            .ToResult()
             .Then(_ =>
                 photoQueryRepository.GetById(photoId))
             .OnSuccess(data =>
@@ -53,9 +52,8 @@ public class AddTagToPhotoUseCase(
                 logger.Warning("Ошибка {ErrorCode}: Фото {PhotoId} не найдено.",
                     error.Code,
                     photoId))
-            .Then(photo =>
+            .Check(photo =>
                 photo.AddTag(tagId))
-            .ToResult()
             .OnSuccess(_ =>
                 logger.Information("Добавлен тег {TagId} к фото {PhotoId}.",
                     tagId,
@@ -66,31 +64,25 @@ public class AddTagToPhotoUseCase(
                     tagId,
                     photoId))
             .Then(_ => unitOfWork.BeginTransaction())
-            .ToResult()
-            .OnSuccess(_ =>
+            .OnSuccess(() =>
                 logger.Information("Успешно начата транзакция."))
             .OnFailure(error =>
                 logger.Warning("Ошибка {ErrorCode}: Не удалось начать транзакцию.",
                     error.Code))
-            .Ensure(_ =>
-                    photoToUpdate != null,
-                ApplicationErrors.General.NotFound)
-            .Then(_ =>
+            .Then(() =>
                 photoCommandRepository.Update(photoToUpdate!))
-            .ToResult()
-            .OnSuccess(_ =>
+            .OnSuccess(() =>
                 logger.Information("Успешно обновлено фото."))
             .OnFailure(error =>
                 logger.Warning("Ошибка {ErrorCode}: Не удалось обновить фото.",
                     error.Code))
-            .Then(_ => unitOfWork.Commit())
-            .ToResult()
-            .OnSuccess(_ =>
+            .Then(() => unitOfWork.Commit())
+            .OnSuccess(() =>
                 logger.Information("Успешно выполнена транзакция."))
             .OnFailure(error =>
                 logger.Warning("Ошибка {ErrorCode}: Не удалось завершить транзакцию",
                     error.Code))
-            .Finally(_ => ResultVoid.Success(),
-                ResultVoid.Failure);
+            .Finally(success: () => ResultVoid.Success(),
+                failure: ResultVoid.Failure);
     }
 }

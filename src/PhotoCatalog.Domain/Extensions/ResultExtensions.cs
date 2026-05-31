@@ -94,14 +94,14 @@ public static class ResultExtensions
         /// </example>
         public Result<TNextValue> Then<TNextValue>(Func<TValue, Result<TNextValue>> nextStep)
         {
-            if (result is null || result.Value is null)
+            if (result is null)
             {
                 return Result.Failure<TNextValue>(SystemErrors.NullResult);
             }
 
             return result.IsFailure
                 ? Result.Failure<TNextValue>(result.ResultError)
-                : nextStep(result.Value);
+                : nextStep(result.Value!);
         }
 
         /// <summary>
@@ -117,14 +117,14 @@ public static class ResultExtensions
         /// </example>
         public ResultVoid Then(Func<TValue, ResultVoid> nextStep)
         {
-            if (result is null || result.Value is null)
+            if (result is null)
             {
                 return ResultVoid.Failure(SystemErrors.NullResult);
             }
 
             return result.IsFailure
                 ? ResultVoid.Failure(result.ResultError)
-                : nextStep(result.Value);
+                : nextStep(result.Value!);
         }
 
         /// <summary>
@@ -219,14 +219,14 @@ public static class ResultExtensions
         /// </example>
         public Result<TNextValue> Transform<TNextValue>(Func<TValue, TNextValue> mapper)
         {
-            if (result is null || result.Value is null)
+            if (result is null)
             {
                 return Result.Failure<TNextValue>(SystemErrors.NullResult);
             }
 
             return result.IsFailure
                 ? Result.Failure<TNextValue>(result.ResultError)
-                : Result.Success(mapper(result.Value));
+                : Result.Success(mapper(result.Value!));
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ public static class ResultExtensions
         public Result<TValue> Ensure(Func<TValue, bool> predicate,
             ResultError resultError)
         {
-            if (result is null || result.Value is null)
+            if (result is null)
             {
                 return Result.Failure<TValue>(SystemErrors.NullResult);
             }
@@ -258,7 +258,7 @@ public static class ResultExtensions
                 return Result.Failure<TValue>(result.ResultError);
             }
 
-            return predicate(result.Value)
+            return predicate(result.Value!)
                 ? result
                 : Result.Failure<TValue>(resultError);
         }
@@ -278,7 +278,7 @@ public static class ResultExtensions
         /// </example>
         public Result<TValue> Check(Func<TValue, ResultVoid> checker)
         {
-            if (result is null || result.Value is null)
+            if (result is null)
             {
                 return Result.Failure<TValue>(SystemErrors.NullResult);
             }
@@ -288,7 +288,7 @@ public static class ResultExtensions
                 return Result.Failure<TValue>(result.ResultError);
             }
 
-            ResultVoid checkResult = checker(result.Value);
+            ResultVoid checkResult = checker(result.Value!);
 
             return checkResult.IsFailure
                 ? Result.Failure<TValue>(checkResult.ResultError)
@@ -311,7 +311,7 @@ public static class ResultExtensions
         /// </example>
         public Result<TValue> Check<TOther>(Func<TValue, Result<TOther>> checker)
         {
-            if (result is null || result.Value is null)
+            if (result is null)
             {
                 return Result.Failure<TValue>(SystemErrors.NullResult);
             }
@@ -321,7 +321,7 @@ public static class ResultExtensions
                 return Result.Failure<TValue>(result.ResultError);
             }
 
-            Result<TOther> checkResult = checker(result.Value);
+            Result<TOther> checkResult = checker(result.Value!);
 
             return checkResult.IsFailure
                 ? Result.Failure<TValue>(checkResult.ResultError)
@@ -392,13 +392,13 @@ public static class ResultExtensions
         public TLanding Finally<TLanding>(Func<TValue, TLanding> success,
             Func<ResultError, TLanding> failure)
         {
-            if (result is null || result.Value is null)
+            if (result is null)
             {
                 return failure(SystemErrors.NullResult);
             }
 
             return result.IsSuccess
-                ? success(result.Value)
+                ? success(result.Value!)
                 : failure(result.ResultError);
         }
     }
