@@ -21,6 +21,7 @@ using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
 using PhotoCatalog.ServiceDefaults;
+
 using Serilog;
 
 try
@@ -31,7 +32,7 @@ try
     Log.Information("Запуск веб-хоста...");
 
     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-   
+
 
     builder.AddServiceDefaults();
 
@@ -136,27 +137,27 @@ try
                 .ToResult()
                 .ToHttpResult();
         }
-    
+
         var file = request.Form.Files.GetFile("file");
-    
+
         if (file == null || file.Length == 0)
         {
             return ApplicationErrors.Http.FileNotUploaded
                 .ToResult()
                 .ToHttpResult();
         }
-    
+
         var tempFilePath = Path.GetTempFileName();
-    
+
         try
         {
             using (var stream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write))
             {
                 file.CopyTo(stream);
             }
-    
+
             var importRequest = new ImportPhotoRequest(tempFilePath);
-    
+
             return importPhotoUseCase.Execute(importRequest)
                 .ToResult()
                 .ToHttpResult();
@@ -213,9 +214,9 @@ try
 
     albumEndpointsGroup.MapDelete("/{id:int}",
         (int id, IAlbumCommandRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
-    
+
     RouteGroupBuilder foldersGroup = app.MapGroup("/api/folders");
-    
+
     // foldersGroup.MapPost("/", (CreateFolderRequest request, CreateFolderUseCase useCase) =>
     // {
     //     Result<FolderResponse> result = useCase.Execute(request);
