@@ -9,17 +9,17 @@ namespace PhotoCatalog.Test.Unit.Primitives.Result;
 /// </summary>
 public class ResultVoidSwitchTests
 {
-    private static readonly Error SwitchError = new("Switch.Error", "Pattern failed");
+    private static readonly ResultError SwitchResultError = new("Switch.Error", "Pattern failed");
 
     /// <summary>
     ///     Проверяет сопоставление успешного результата через паттерн свойств.
     /// </summary>
     [Fact]
-    public void Switch_PropertyPattern_OnSuccess_ShouldMatchCorrectBranch()
+    public void SwitchPropertyPatternOnSuccessShouldMatchCorrectBranch()
     {
-        var result = ResultVoid.Success();
+        ResultVoid result = ResultVoid.Success();
 
-        var status = result switch
+        string status = result switch
         {
             { IsSuccess: true } => "Success",
             { IsFailure: true } => "Failure",
@@ -33,17 +33,17 @@ public class ResultVoidSwitchTests
     ///     Проверяет глубокое сопоставление свойств ошибки внутри провального результата.
     /// </summary>
     [Fact]
-    public void Switch_NestedPropertyPattern_OnFailure_ShouldExtractNestedData()
+    public void SwitchNestedPropertyPatternOnFailureShouldExtractNestedData()
     {
-        var result = ResultVoid.Failure(SwitchError);
+        ResultVoid result = ResultVoid.Failure(SwitchResultError);
 
-        var errorDescription = result switch
+        string errorDescription = result switch
         {
             { IsSuccess: true } => "Success",
-            { IsFailure: true, Error: { Message: var desc } } => desc,
+            { IsFailure: true, ResultError.Message: var desc } => desc,
             _ => "Unknown"
         };
 
-        Assert.Equal(SwitchError.Message, errorDescription);
+        Assert.Equal(SwitchResultError.Message, errorDescription);
     }
 }

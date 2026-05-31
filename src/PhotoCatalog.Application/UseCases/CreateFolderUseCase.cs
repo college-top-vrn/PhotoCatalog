@@ -41,51 +41,61 @@ public class CreateFolderUseCase(
             if (parentResult.IsFailure)
             {
                 logger.Warning("Родительская папка с Id {ParentId} не найдена.", request.ParentFolderId);
-                return Result<FolderResponse>.Failure(ApplicationErrors.General.NotFound);
+                return Result.Failure<FolderResponse>(ApplicationErrors.General.NotFound);
             }
 
-            parentFolder = parentResult.Value!;
+            parentFolder = parentResult.Value;
         }
 
-        Result<Folder> createFolderResult = Folder.Create(parentFolder!.Id, request.Name);
+        if (parentFolder == null)
+        {
+            return Result.Failure<FolderResponse>(ApplicationErrors.General.NotFound);
+        }
+
+        Result<Folder> createFolderResult = Folder.Create(parentFolder.Id, request.Name);
         if (createFolderResult.IsFailure)
         {
             logger.Warning("Не удалось создать папку с Id {ParentId}: {ErrorCode}: {Error}",
                 parentFolder.Id,
-                createFolderResult.Error.Code,
-                createFolderResult.Error.Message);
-            return Result<FolderResponse>.Failure(createFolderResult.Error);
+                createFolderResult.ResultError.Code,
+                createFolderResult.ResultError.Message);
+            return Result.Failure<FolderResponse>(createFolderResult.ResultError);
         }
 
-        Folder folder = createFolderResult.Value!;
+        Folder? folder = createFolderResult.Value;
 
         ResultVoid beginTransactionResult = unitOfWork.BeginTransaction();
         if (beginTransactionResult.IsFailure)
         {
             logger.Error("Не удалось начать транзакцию: {ErrorCode}: {Error}",
-                beginTransactionResult.Error.Code,
-                beginTransactionResult.Error.Message);
+                beginTransactionResult.ResultError.Code,
+                beginTransactionResult.ResultError.Message);
+        }
+
+        if (folder == null)
+        {
+            return Result.Failure<FolderResponse>(ApplicationErrors.General.NotFound);
         }
 
         ResultVoid addFolderResult = folderCommandRepository.Add(folder);
         if (addFolderResult.IsFailure)
         {
             logger.Error("Не удалось добавить папку в репозиторий: {ErrorCode}: {Error}",
-                addFolderResult.Error.Code,
-                addFolderResult.Error.Message);
+                addFolderResult.ResultError.Code,
+                addFolderResult.ResultError.Message);
             unitOfWork.Rollback();
-            return Result<FolderResponse>.Failure(addFolderResult.Error);
+            return Result.Failure<FolderResponse>(addFolderResult.ResultError);
         }
 
         ResultVoid commitResult = unitOfWork.Commit();
         if (commitResult.IsFailure)
         {
             logger.Error("Не удалось зафиксировать изменения транзакции: {ErrorCode}: {Error}",
-                commitResult.Error.Code,
-                commitResult.Error.Message);
+                commitResult.ResultError.Code,
+                commitResult.ResultError.Message);
         }
 
         FolderResponse response = new(folder.Id, folder.Name, folder.ParentFolderId);
-        return Result<FolderResponse>.Success(response);
+        return Result.Success(response);
     }
 }

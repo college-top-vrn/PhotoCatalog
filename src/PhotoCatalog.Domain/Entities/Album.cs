@@ -37,7 +37,7 @@ public class Album
     /// <summary>
     ///     Получает уникальный идентификатор альбома.
     /// </summary>
-    public int Id { get; private set; }
+    public int Id { get; private init; }
 
     /// <summary>
     ///     Получает наименование альбома.
@@ -91,12 +91,12 @@ public class Album
     {
         if (string.IsNullOrEmpty(name))
         {
-            return Result<Album>.Failure(DomainErrors.Album.EmptyName);
+            return Result.Failure<Album>(DomainErrors.Album.EmptyName);
         }
 
         string trimmedName = name.Trim();
 
-        return Result<Album>.Success(new Album(trimmedName, id));
+        return Result.Success(new Album(trimmedName, id));
     }
 
     /// <summary>
@@ -179,11 +179,7 @@ public class Album
     /// <returns>Возвращает копию объекта <see cref="Album" /> </returns>
     public Album DeepCopy()
     {
-        Album clone = new();
-
-        clone.Id = Id;
-        clone.Name = Name;
-        clone.FolderId = FolderId;
+        Album clone = new() { Id = Id, Name = Name, FolderId = FolderId };
 
         clone._photoIds.AddRange(_photoIds);
 

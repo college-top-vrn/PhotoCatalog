@@ -8,6 +8,7 @@ namespace PhotoCatalog.Application.Fakes;
 /// </summary>
 public class FakeUnitOfWork : IUnitOfWork
 {
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
     /// <inheritdoc />
     public void Dispose()
     {

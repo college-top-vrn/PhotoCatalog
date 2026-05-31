@@ -26,7 +26,7 @@ public class RepositoriesNameСonvention
         ).Build();
 
     [Fact]
-    public void RepositoryInterfaces_Should_HaveRepositorySuffix()
+    public void RepositoryInterfacesShouldHaveRepositorySuffix()
     {
         Interfaces()
             .That()
@@ -37,7 +37,7 @@ public class RepositoriesNameСonvention
     }
 
     [Fact]
-    public void RepositoryImplementations_Should_HaveRepositorySuffix()
+    public void RepositoryImplementationsShouldHaveRepositorySuffix()
     {
         Classes()
             .That()

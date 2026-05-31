@@ -11,19 +11,20 @@ namespace PhotoCatalog.Test.Unit.Primitives.Result;
 /// </summary>
 public class ResultGenericCoreTests
 {
-    private static readonly Error TestError = new("Core.Error", "Test message");
+    private static readonly ResultError TestResultError = new("Core.Error", "Test message");
 
     /// <summary>
     ///     Проверяет инициализацию успешного состояния с валидным значением.
     /// </summary>
     [Fact]
-    public void Success_WithValidValue_ShouldInitializeSuccessState()
+    public void SuccessWithValidValueShouldInitializeSuccessState()
     {
-        var result = Result<int>.Success(10);
+        // TODO: Исправить магические числа
+        Result<int> result = PhotoCatalog.Domain.Primitives.Result.Success(10);
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
-        Assert.Equal(Error.None, result.Error);
+        Assert.Equal(ResultError.None, result.ResultError);
         Assert.Equal(10, result.Value);
     }
 
@@ -31,38 +32,39 @@ public class ResultGenericCoreTests
     ///     Проверяет защиту от передачи null при инициализации успешного состояния.
     /// </summary>
     [Fact]
-    public void Success_WithNullValue_ShouldReturnSystemNullValueError()
+    public void SuccessWithNullValueShouldReturnSystemNullValueError()
     {
-        var result = Result<string>.Success(null!);
+        Result<string> result = PhotoCatalog.Domain.Primitives.Result.Success<string>(null!);
 
         Assert.True(result.IsFailure);
-        Assert.Equal(SystemErrors.NullValue, result.Error);
+        Assert.Equal(SystemErrors.NullValue, result.ResultError);
     }
 
     /// <summary>
     ///     Проверяет инициализацию провального состояния.
     /// </summary>
     [Fact]
-    public void Failure_ShouldInitializeFailureStateWithDefaultValue()
+    public void FailureShouldInitializeFailureStateWithDefaultValue()
     {
-        var result = Result<Guid>.Failure(TestError);
+        Result<Guid> result = PhotoCatalog.Domain.Primitives.Result.Failure<Guid>(TestResultError);
 
         Assert.True(result.IsFailure);
-        Assert.Equal(TestError, result.Error);
-        Assert.Equal(default, result.Value);
+        Assert.Equal(TestResultError, result.ResultError);
+        Assert.Equal(Guid.Empty, result.Value);
     }
 
     /// <summary>
     ///     Проверяет неявное приведение обобщенного типа к ResultVoid.
     /// </summary>
     [Fact]
-    public void ImplicitOperator_ToResultVoid_ShouldMapStatusCorrectly()
+    public void ImplicitOperatorToResultVoidShouldMapStatusCorrectly()
     {
-        ResultVoid voidSuccess = Result<int>.Success(100);
-        ResultVoid voidFailure = Result<int>.Failure(TestError);
+        // TODO: Исправить магические числа
+        ResultVoid voidSuccess = PhotoCatalog.Domain.Primitives.Result.Success(100);
+        ResultVoid voidFailure = PhotoCatalog.Domain.Primitives.Result.Failure<int>(TestResultError);
 
         Assert.True(voidSuccess.IsSuccess);
         Assert.True(voidFailure.IsFailure);
-        Assert.Equal(TestError, voidFailure.Error);
+        Assert.Equal(TestResultError, voidFailure.ResultError);
     }
 }

@@ -16,6 +16,6 @@ public static class ResultVoidHttpExtensions
     {
         return result.IsSuccess
             ? Results.NoContent()
-            : result.Error.ToHttpResult();
+            : result.ResultError.ToHttpResult();
     }
 }

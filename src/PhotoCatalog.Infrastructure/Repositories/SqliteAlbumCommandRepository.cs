@@ -1,5 +1,7 @@
 using Dapper;
 
+using Microsoft.Data.Sqlite;
+
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Interfaces.Services;
@@ -37,19 +39,14 @@ public class SqliteAlbumCommandRepository : IAlbumCommandRepository
     /// <inheritdoc />
     public ResultVoid Add(Album album)
     {
-        if (album == null)
-        {
-            return ResultVoid.Failure(DomainErrors.Album.NullAlbum);
-        }
-
-        var sqliteUnitOfWork = _unitOfWork as SqliteUnitOfWork;
+        SqliteUnitOfWork? sqliteUnitOfWork = _unitOfWork as SqliteUnitOfWork;
         if (sqliteUnitOfWork?.Connection == null)
         {
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
 
-        var connection = sqliteUnitOfWork.Connection;
-        var transaction = sqliteUnitOfWork.Transaction;
+        SqliteConnection? connection = sqliteUnitOfWork.Connection;
+        SqliteTransaction? transaction = sqliteUnitOfWork.Transaction;
 
         connection.Execute(
             "INSERT INTO Albums (Id, Name, FolderId) VALUES (@Id, @Name, @FolderId)",
@@ -71,19 +68,14 @@ public class SqliteAlbumCommandRepository : IAlbumCommandRepository
     /// <inheritdoc />
     public ResultVoid Update(Album album)
     {
-        if (album == null)
-        {
-            return ResultVoid.Failure(DomainErrors.Album.NullAlbum);
-        }
-
-        var sqliteUnitOfWork = _unitOfWork as SqliteUnitOfWork;
+        SqliteUnitOfWork? sqliteUnitOfWork = _unitOfWork as SqliteUnitOfWork;
         if (sqliteUnitOfWork?.Connection == null)
         {
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
 
-        var connection = sqliteUnitOfWork.Connection;
-        var transaction = sqliteUnitOfWork.Transaction;
+        SqliteConnection? connection = sqliteUnitOfWork.Connection;
+        SqliteTransaction? transaction = sqliteUnitOfWork.Transaction;
 
         int rowsAffected = connection.Execute(
             "UPDATE Albums SET Name = @Name, FolderId = @FolderId WHERE Id = @Id",
@@ -115,14 +107,14 @@ public class SqliteAlbumCommandRepository : IAlbumCommandRepository
     /// <inheritdoc />
     public ResultVoid Delete(int id)
     {
-        var sqliteUnitOfWork = _unitOfWork as SqliteUnitOfWork;
+        SqliteUnitOfWork? sqliteUnitOfWork = _unitOfWork as SqliteUnitOfWork;
         if (sqliteUnitOfWork?.Connection == null)
         {
             return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
 
-        var connection = sqliteUnitOfWork.Connection;
-        var transaction = sqliteUnitOfWork.Transaction;
+        SqliteConnection? connection = sqliteUnitOfWork.Connection;
+        SqliteTransaction? transaction = sqliteUnitOfWork.Transaction;
 
         connection.Execute(
             "DELETE FROM AlbumPhotos WHERE AlbumId = @Id",

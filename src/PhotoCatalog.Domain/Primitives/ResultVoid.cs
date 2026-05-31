@@ -14,11 +14,11 @@ public readonly record struct ResultVoid
     ///     Приватный конструктор для инициализации внутреннего состояния.
     /// </summary>
     /// <param name="isSuccess">Флаг успешности операции.</param>
-    /// <param name="error">Объект ошибки.</param>
-    private ResultVoid(bool isSuccess, Error error)
+    /// <param name="resultError">Объект ошибки.</param>
+    private ResultVoid(bool isSuccess, ResultError resultError)
     {
         IsSuccess = isSuccess;
-        Error = error;
+        ResultError = resultError;
     }
 
     /// <summary>
@@ -32,32 +32,33 @@ public readonly record struct ResultVoid
     public bool IsFailure => !IsSuccess;
 
     /// <summary>
-    ///     Объект детализированной ошибки. Если операция успешна, содержит <see cref="Primitives.Error.None" />.
+    ///     Объект детализированной ошибки. Если операция успешна, содержит <see cref="ResultError.None" />.
     /// </summary>
-    public Error Error { get; }
+    public ResultError ResultError { get; }
 
     /// <summary>
     ///     Создает успешный результат без ошибок.
     /// </summary>
     /// <returns>
-    ///     Успешный <see cref="ResultVoid" />, где <see cref="IsSuccess" /> равно true, а <see cref="Error" /> равно
-    ///     <see cref="Primitives.Error.None" />.
+    ///     Успешный <see cref="ResultVoid" />, где <see cref="IsSuccess" /> равно true, а <see cref="ResultError" /> равно
+    ///     <see cref="ResultError.None" />.
     /// </returns>
     public static ResultVoid Success()
     {
-        return new ResultVoid(true, Error.None);
+        return new ResultVoid(true, ResultError.None);
     }
 
     /// <summary>
     ///     Создает провальный результат с указанной ошибкой.
     /// </summary>
-    /// <param name="error">Бизнес-ошибка, объясняющая причину провала.</param>
+    /// <param name="resultError">Бизнес-ошибка, объясняющая причину провала.</param>
     /// <returns>
-    ///     Провальный <see cref="ResultVoid" />, где <see cref="IsFailure" /> равно true, а <see cref="Error" /> содержит
+    ///     Провальный <see cref="ResultVoid" />, где <see cref="IsFailure" /> равно true, а <see cref="ResultError" />
+    ///     содержит
     ///     переданную ошибку.
     /// </returns>
-    public static ResultVoid Failure(Error error)
+    public static ResultVoid Failure(ResultError resultError)
     {
-        return new ResultVoid(false, error);
+        return new ResultVoid(false, resultError);
     }
 }

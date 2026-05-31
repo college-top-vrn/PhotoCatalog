@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using PhotoCatalog.Application.DTOs;
-using PhotoCatalog.Application.DTOs.Folders;
 using PhotoCatalog.Application.Errors;
 using PhotoCatalog.Application.Fakes;
 using PhotoCatalog.Application.UseCases;
@@ -20,6 +18,7 @@ using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Extensions;
 using PhotoCatalog.Infrastructure.Fakes;
+using PhotoCatalog.ServiceDefaults;
 
 using Serilog;
 
@@ -31,6 +30,9 @@ try
     Log.Information("Запуск веб-хоста...");
 
     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+
+    builder.AddServiceDefaults();
 
     Log.Logger = new LoggerConfiguration()
         .WriteTo.Console()
@@ -57,14 +59,16 @@ try
     builder.Services.AddSingleton<IFolderHierarchyValidator, FakeFolderHierarchyValidator>();
     builder.Services.AddSingleton<IUnitOfWork, FakeUnitOfWork>();
 
-    builder.Services.AddTransient<CreateFolderUseCase>();
-    builder.Services.AddTransient<DeletePhotoUseCase>();
-    builder.Services.AddTransient<AddTagToPhotoUseCase>();
-    builder.Services.AddTransient<MoveFolderUseCase>();
-    builder.Services.AddTransient<ImportPhotoUseCase>();
-    builder.Services.AddTransient<AddPhotoToAlbumUseCase>();
+    // builder.Services.AddTransient<CreateFolderUseCase>();
+    // builder.Services.AddTransient<DeletePhotoUseCase>();
+    // builder.Services.AddTransient<AddTagToPhotoUseCase>();
+    // builder.Services.AddTransient<MoveFolderUseCase>();
+    // builder.Services.AddTransient<ImportPhotoUseCase>();
+    // builder.Services.AddTransient<AddPhotoToAlbumUseCase>();
 
     WebApplication app = builder.Build();
+
+    app.MapDefaultEndpoints();
 
     app.UseSerilogRequestLogging();
 
@@ -73,9 +77,9 @@ try
         app.MapOpenApi();
         app.UseSwagger();
 
-        app.UseSwaggerUI(swagg =>
+        app.UseSwaggerUI(swagger =>
         {
-            swagg.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{name}");
+            swagger.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{name}");
         });
     }
 
@@ -83,40 +87,31 @@ try
 
     app.MapGroup("/api/tags");
 
-    app.MapGet("/{id}", (int id) =>
+    app.MapGet("/{id:int}", (int id) =>
     {
         FakeTagQueryRepository repository = new();
         Result<Tag> tag = repository.GetById(id);
-        if (tag.IsSuccess)
-        {
-            return Results.Ok(tag);
-        }
-
-        return Results.NotFound();
+        return tag.IsSuccess
+            ? Results.Ok(tag)
+            : Results.NotFound();
     });
 
-    app.MapPost("/{name}", (string name) =>
+    app.MapPost("/", () =>
     {
         FakeTagQueryRepository repository = new();
         Result<Tag> tag = repository.GetByName(name);
-        if (tag.IsSuccess)
-        {
-            return Results.Ok(tag);
-        }
-
-        return Results.NotFound();
+        return tag.IsSuccess
+            ? Results.Ok(tag)
+            : Results.NotFound();
     });
 
-    app.MapDelete("/{id}", (int id) =>
+    app.MapDelete("/{id:int}", (int id) =>
     {
         FakeTagCommandRepository repository = new();
         ResultVoid tag = repository.Delete(id);
-        if (tag.IsSuccess)
-        {
-            return Results.Ok(tag);
-        }
-
-        return Results.NotFound();
+        return tag.IsSuccess
+            ? Results.Ok(tag)
+            : Results.NotFound();
     });
 
     app.MapHealthChecks("/health");
@@ -132,7 +127,7 @@ try
                 .ToHttpResult();
         }
 
-        var file = request.Form.Files.GetFile("file");
+        IFormFile? file = request.Form.Files.GetFile("file");
 
         if (file == null || file.Length == 0)
         {
@@ -141,16 +136,16 @@ try
                 .ToHttpResult();
         }
 
-        var tempFilePath = Path.GetTempFileName();
+        string tempFilePath = Path.GetTempFileName();
 
         try
         {
-            using (var stream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write))
+            using (FileStream stream = new(tempFilePath, FileMode.Create, FileAccess.Write))
             {
                 file.CopyTo(stream);
             }
 
-            var importRequest = new ImportPhotoRequest(tempFilePath);
+            ImportPhotoRequest importRequest = new(tempFilePath);
 
             return importPhotoUseCase.Execute(importRequest)
                 .ToResult()
@@ -208,6 +203,26 @@ try
 
     albumEndpointsGroup.MapDelete("/{id:int}",
         (int id, IAlbumCommandRepository albumRepository) => albumRepository.Delete(id).ToHttpResult());
+
+    RouteGroupBuilder foldersGroup = app.MapGroup("/api/folders");
+
+    // foldersGroup.MapPost("/", (CreateFolderRequest request, CreateFolderUseCase useCase) =>
+    // {
+    //     Result<FolderResponse> result = useCase.Execute(request);
+    //     return result.ToHttpResult();
+    // });
+    //
+    // foldersGroup.MapPut("/{id:int}/move", (int id, MoveFolderRequest request, MoveFolderUseCase useCase) =>
+    // {
+    //     ResultVoid result = useCase.Execute(id, request.NewParentId);
+    //     return result.ToHttpResult();
+    // });
+    //
+    // foldersGroup.MapDelete("/{id:int}", (int id, DeleteFolderUseCase useCase) =>
+    // {
+    //     ResultVoid result = useCase.Execute(id);
+    //     return result.ToHttpResult();
+    // });
 
     app.Run();
 }

@@ -5,6 +5,7 @@ using Xunit;
 
 namespace PhotoCatalog.Test.Unit.Domain.Entities;
 
+// TODO: Исправить предупреждения
 /// <summary>
 ///     Содержит модульные тесты для проверки работы доменной сущности Folder.
 /// </summary>
@@ -14,11 +15,11 @@ public class FolderTest
     ///     Проверяет, что папка успешно создается, если переданное имя не пустое.
     /// </summary>
     [Fact]
-    public void CreateFunction_MustCreateFolder_IfParameterNameIsNotEmpty()
+    public void CreateFunctionMustCreateFolderIfParameterNameIsNotEmpty()
     {
         const string name = "Test";
         const int id = 1;
-        var folder = Folder.Create(id, name);
+        Result<Folder> folder = Folder.Create(id, name);
 
         Assert.Equal(id, folder.Value!.Id);
         Assert.Equal(name, folder.Value.Name);
@@ -28,11 +29,10 @@ public class FolderTest
     ///     Проверяет, что папка не создается, если переданное имя пустое.
     /// </summary>
     [Fact]
-    public void CreateFunction_DontCreateFolder_IfParameterNameIsEmpty()
+    public void CreateFunctionDontCreateFolderIfParameterNameIsEmpty()
     {
-        const string name = "";
         const int id = 1;
-        var folder = Folder.Create(id, string.Empty);
+        Result<Folder> folder = Folder.Create(id, string.Empty);
 
         Assert.True(folder.IsFailure);
     }
@@ -41,12 +41,12 @@ public class FolderTest
     ///     Проверяет, что имя папки успешно изменяется, если переданное новое имя не пустое.
     /// </summary>
     [Fact]
-    public void RenameFunction_RenameFolderName_IfParameterNameIsNotEmpty()
+    public void RenameFunctionRenameFolderNameIfParameterNameIsNotEmpty()
     {
         const string newName = "Test2";
         const string name = "Test";
         const int id = 1;
-        var folder = Folder.Create(id, name);
+        Result<Folder> folder = Folder.Create(id, name);
 
         folder.Value!.Rename(newName);
 
@@ -57,34 +57,35 @@ public class FolderTest
     ///     Проверяет, что имя папки не изменяется, если переданное новое имя пустое.
     /// </summary>
     [Fact]
-    public void RenameFunction_DontRenameFolderName_IfParameterNameIsEmpty()
+    public void RenameFunctionDontRenameFolderNameIfParameterNameIsEmpty()
     {
         const string newName = "";
         const string name = "Test";
         const int id = 1;
-        var folder = Folder.Create(id, name);
+        Result<Folder> folder = Folder.Create(id, name);
 
-        var actualError = folder.Value!.Rename(newName);
-        var expectedError = DomainErrors.Folder.EmptyName;
+        ResultVoid actualError = folder.Value!.Rename(newName);
+        ResultError expectedResultError = DomainErrors.Folder.EmptyName;
 
-        Assert.Equal(actualError.IsFailure, ResultVoid.Failure(expectedError).IsFailure);
+        Assert.Equal(actualError.IsFailure, ResultVoid.Failure(expectedResultError).IsFailure);
     }
 
     /// <summary>
-    ///     Проверяет, что папка успешно перемещается в другую папку, если идентификатор целевой папки не совпадает с идентификатором перемещаемой папки.
+    ///     Проверяет, что папка успешно перемещается в другую папку, если идентификатор целевой папки не совпадает с
+    ///     идентификатором перемещаемой папки.
     /// </summary>
     [Fact]
-    public void MoveToFunction_MoveToGivenFolder_IfFolderIdIsNotEqualToThisId()
+    public void MoveToFunctionMoveToGivenFolderIfFolderIdIsNotEqualToThisId()
     {
         const string name = "Test";
         const int id = 1;
-        var folder = Folder.Create(id, name);
+        Result<Folder> folder = Folder.Create(id, name);
 
         const string secondName = "Test2";
         const int secondId = 2;
-        var folder2 = Folder.Create(secondId, secondName);
+        Result<Folder> folder2 = Folder.Create(secondId, secondName);
 
-        var result = folder.Value!.MoveTo(folder2.Value!);
+        ResultVoid result = folder.Value!.MoveTo(folder2.Value!);
 
         Assert.True(result.IsSuccess);
     }
@@ -93,13 +94,13 @@ public class FolderTest
     ///     Проверяет, что папка не перемещается в саму себя, если идентификаторы совпадают.
     /// </summary>
     [Fact]
-    public void MoveToFunction_DontMoveToGivenFolder_IfFolderIdIsEqualToThisId()
+    public void MoveToFunctionDontMoveToGivenFolderIfFolderIdIsEqualToThisId()
     {
         const string name = "Test";
         const int id = 1;
-        var folder = Folder.Create(id, name);
+        Result<Folder> folder = Folder.Create(id, name);
 
-        var result = folder.Value!.MoveTo(folder.Value!);
+        ResultVoid result = folder.Value!.MoveTo(folder.Value!);
 
         Assert.True(result.IsFailure);
     }
@@ -108,13 +109,13 @@ public class FolderTest
     ///     Проверяет, что папка успешно перемещается в корень.
     /// </summary>
     [Fact]
-    public void MoveToRootFunction_MoveToRootSuccessfully()
+    public void MoveToRootFunctionMoveToRootSuccessfully()
     {
         const string name = "Test";
         const int id = 1;
-        var folder = Folder.Create(id, name);
+        Result<Folder> folder = Folder.Create(id, name);
 
-        var exception = folder.Value!.MoveToRoot();
+        ResultVoid exception = folder.Value!.MoveToRoot();
 
         Assert.True(exception.IsSuccess);
     }

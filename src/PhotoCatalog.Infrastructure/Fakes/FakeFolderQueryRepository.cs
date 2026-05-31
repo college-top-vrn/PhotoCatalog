@@ -17,11 +17,11 @@ public class FakeFolderQueryRepository(ConcurrentDictionary<int, Folder> folders
         {
             if (pair.Key == id)
             {
-                return Result<Folder>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Folder>.Failure(new Error("FolderRepository.FolderNotFound",
+        return Result.Failure<Folder>(new ResultError("FolderRepository.FolderNotFound",
             "Не удалось найти папку по идентификатору"));
     }
 }

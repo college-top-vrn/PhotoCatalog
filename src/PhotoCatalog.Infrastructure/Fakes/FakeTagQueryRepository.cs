@@ -27,11 +27,11 @@ public class FakeTagQueryRepository : ITagQueryRepository
         {
             if (pair.Key == id)
             {
-                return Result<Tag>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Tag>.Failure(InfrastructureErrors.Database.NotFound);
+        return Result.Failure<Tag>(InfrastructureErrors.Database.NotFound);
     }
 
     /// <inheritdoc />
@@ -41,8 +41,8 @@ public class FakeTagQueryRepository : ITagQueryRepository
         result.AddRange(_tags.Select(pair => pair.Value));
 
         return result.Count == 0
-            ? Result<IEnumerable<Tag>>.Failure(InfrastructureErrors.Database.NotFound)
-            : Result<IEnumerable<Tag>>.Success(result);
+            ? Result.Failure<IEnumerable<Tag>>(InfrastructureErrors.Database.NotFound)
+            : Result.Success<IEnumerable<Tag>>(result);
     }
 
     /// <inheritdoc />
@@ -52,10 +52,10 @@ public class FakeTagQueryRepository : ITagQueryRepository
         {
             if (pair.Name == name)
             {
-                return Result<Tag>.Success(pair);
+                return Result.Success(pair);
             }
         }
 
-        return Result<Tag>.Failure(InfrastructureErrors.Database.NotFound);
+        return Result.Failure<Tag>(InfrastructureErrors.Database.NotFound);
     }
 }

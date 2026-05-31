@@ -16,7 +16,7 @@ public class Folder
     /// <summary>
     ///     Идентификатор.
     /// </summary>
-    public int Id { get; private set; }
+    public int Id { get; private init; }
 
     /// <summary>
     ///     Идентификатор родителя.
@@ -37,8 +37,8 @@ public class Folder
     public static Result<Folder> Create(int id, string name)
     {
         return string.IsNullOrWhiteSpace(name)
-            ? Result<Folder>.Failure(DomainErrors.Folder.EmptyName)
-            : Result<Folder>.Success(new Folder { Id = id, Name = name });
+            ? Result.Failure<Folder>(DomainErrors.Folder.EmptyName)
+            : Result.Success(new Folder { Id = id, Name = name });
     }
 
     /// <summary>
@@ -89,9 +89,9 @@ public class Folder
     /// <summary>
     ///     Метод для глубокого копирования
     /// </summary>
-    /// <returns>Возвращает копию объекта <see cref="Folder"/> </returns>
+    /// <returns>Возвращает копию объекта <see cref="Folder" /> </returns>
     public Folder DeepCopy()
     {
-        return new Folder { Id = this.Id, Name = this.Name, ParentFolderId = this.ParentFolderId };
+        return new Folder { Id = Id, Name = Name, ParentFolderId = ParentFolderId };
     }
 }

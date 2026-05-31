@@ -32,13 +32,9 @@ public class FakeAlbumQueryRepository : IAlbumQueryRepository
     /// <inheritdoc />
     public Result<Album> GetById(int id)
     {
-        if (_albums.TryGetValue(id, out Album? album))
-        {
-            // Возвращаем глубокую копию, чтобы избежать модификации оригинала
-            return Result<Album>.Success(album.DeepCopy());
-        }
-
-        return Result<Album>.Failure(InfrastructureErrors.Database.NotFound);
+        return _albums.TryGetValue(id, out Album? album)
+            ? Result.Success(album.DeepCopy())
+            : Result.Failure<Album>(InfrastructureErrors.Database.NotFound);
     }
 
     /// <inheritdoc />
@@ -49,6 +45,6 @@ public class FakeAlbumQueryRepository : IAlbumQueryRepository
             .Select(album => album.DeepCopy())
             .ToList();
 
-        return Result<IReadOnlyCollection<Album>>.Success(albums.AsReadOnly());
+        return Result.Success<IReadOnlyCollection<Album>>(albums.AsReadOnly());
     }
 }

@@ -13,7 +13,7 @@ namespace PhotoCatalog.Domain.Interfaces.Repositories;
 ///     Реализация:
 ///     - Может работать независимо от транзакций записи.
 ///     - Для чтения используются отдельные, легковесные подключения к SQLite.
-///     - Все операции чтения возвращают <see cref="Result{T}"/> для унифицированной обработки ошибок.
+///     - Все операции чтения возвращают <see cref="Result{T}" /> для унифицированной обработки ошибок.
 ///     - Коллекции результатов возвращаются как неизменяемые (IReadOnlyCollection&lt;T&gt;) для защиты от модификаций.
 /// </remarks>
 public interface IPhotoQueryRepository
@@ -25,9 +25,15 @@ public interface IPhotoQueryRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с фотографией, если она найдена.</description></item>
-    ///         <item><description>Ошибка NotFound, если фотография не найдена.</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных.</description></item>
+    ///         <item>
+    ///             <description>Успех с фотографией, если она найдена.</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если фотография не найдена.</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных.</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     /// <remarks>
@@ -43,9 +49,15 @@ public interface IPhotoQueryRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с фотографией, если она найдена.</description></item>
-    ///         <item><description>Ошибка NotFound, если фотография не найдена.</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных.</description></item>
+    ///         <item>
+    ///             <description>Успех с фотографией, если она найдена.</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Ошибка NotFound, если фотография не найдена.</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных.</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     /// <remarks>
@@ -61,8 +73,12 @@ public interface IPhotoQueryRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с неизменяемой коллекцией фотографий альбома (может быть пустой).</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных.</description></item>
+    ///         <item>
+    ///             <description>Успех с неизменяемой коллекцией фотографий альбома (может быть пустой).</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных.</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     /// <remarks>
@@ -78,8 +94,12 @@ public interface IPhotoQueryRepository
     /// <returns>
     ///     Результат операции:
     ///     <list type="bullet">
-    ///         <item><description>Успех с неизменяемой коллекцией фотографий, содержащих указанные теги (может быть пустой).</description></item>
-    ///         <item><description>Инфраструктурную ошибку при сбое базы данных.</description></item>
+    ///         <item>
+    ///             <description>Успех с неизменяемой коллекцией фотографий, содержащих указанные теги (может быть пустой).</description>
+    ///         </item>
+    ///         <item>
+    ///             <description>Инфраструктурную ошибку при сбое базы данных.</description>
+    ///         </item>
     ///     </list>
     /// </returns>
     /// <remarks>
