@@ -16,6 +16,6 @@ public static class ResultHttpExtensions
     {
         return result.IsSuccess
             ? result.Value is null ? Results.NoContent() : Results.Ok(result.Value)
-            : result.Error.ToHttpResult();
+            : result.ResultError.ToHttpResult();
     }
 }

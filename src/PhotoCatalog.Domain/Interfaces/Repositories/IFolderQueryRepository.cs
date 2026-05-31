@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Primitives;
 

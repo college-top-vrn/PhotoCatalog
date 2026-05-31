@@ -1,3 +1,5 @@
+using System;
+
 using Dapper;
 
 using Microsoft.Data.Sqlite;
@@ -13,8 +15,8 @@ using Serilog;
 
 namespace PhotoCatalog.Infrastructure.Repositories;
 
-/// <inheritdoc />
-public class SqliteFolderCommandRepository : IFolderCommandRepository
+/// <inheritdoc cref="IFolderCommandRepository" />
+public class SqliteFolderCommandRepository : IFolderCommandRepository, IDisposable
 {
     private readonly ILogger _logger;
     private readonly SqliteUnitOfWork _unitOfWork;
@@ -25,6 +27,13 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
         _logger = logger;
     }
 
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
+    /// <inheritdoc />
+    public void Dispose()
+    {
+        _unitOfWork.Dispose();
+    }
+
     /// <inheritdoc />
     public ResultVoid Add(Folder folder)
     {
@@ -32,34 +41,36 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
         {
             _unitOfWork.BeginTransaction();
 
-            return _unitOfWork.Connection!
-                .Execute(
-                    """
-                    INSERT INTO Folders (Id, ParentFolderId, Name)
-                    VALUES (@Id, @ParentFolderId, @Name)
-                    """,
-                    new { folder.Id, folder.ParentFolderId, folder.Name })
-                .ToResult()
-                .Finally(
-                    _ =>
-                    {
-                        _unitOfWork.Commit();
-                        _logger.Information("Папка с Id = {FolderId} успешно добавлена", folder.Id);
-                        _unitOfWork.Dispose();
-                        return ResultVoid.Success();
-                    },
-                    _ =>
-                    {
-                        _unitOfWork.Rollback();
-                        _unitOfWork.Dispose();
-                        return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
-                    });
+            if (_unitOfWork.Connection != null)
+            {
+                return _unitOfWork.Connection
+                    .Execute(
+                        """
+                        INSERT INTO Folders (Id, ParentFolderId, Name)
+                        VALUES (@Id, @ParentFolderId, @Name)
+                        """,
+                        new { folder.Id, folder.ParentFolderId, folder.Name })
+                    .ToResult()
+                    .Finally(
+                        _ =>
+                        {
+                            _unitOfWork.Commit();
+                            _logger.Information("Папка с Id = {FolderId} успешно добавлена", folder.Id);
+                            return ResultVoid.Success();
+                        },
+                        _ =>
+                        {
+                            _unitOfWork.Rollback();
+                            return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
+                        });
+            }
+
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (SqliteException)
         {
             _logger.Error("Ошибка SQLite при добавлении папки с Id = {FolderId}", folder.Id);
             _unitOfWork.Rollback();
-            _unitOfWork.Dispose();
             return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
         }
     }
@@ -71,38 +82,40 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
         {
             _unitOfWork.BeginTransaction();
 
-            return _unitOfWork.Connection!
-                .Execute(
-                    """
-                    UPDATE Folders
-                    SET ParentFolderId = @ParentFolderId,
-                    Name = @Name
-                    WHERE Id = @Id
-                    """,
-                    new { folder.Id, folder.ParentFolderId, folder.Name }
-                )
-                .ToResult()
-                .Check(affectedRows => (affectedRows != 0).ToResult())
-                .Finally(
-                    _ =>
-                    {
-                        _unitOfWork.Commit();
-                        _logger.Information("Папка с Id = {FolderId} успешно обновлена", folder.Id);
-                        _unitOfWork.Dispose();
-                        return ResultVoid.Success();
-                    },
-                    _ =>
-                    {
-                        _unitOfWork.Rollback();
-                        _unitOfWork.Dispose();
-                        return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
-                    });
+            if (_unitOfWork.Connection != null)
+            {
+                return _unitOfWork.Connection
+                    .Execute(
+                        """
+                        UPDATE Folders
+                        SET ParentFolderId = @ParentFolderId,
+                        Name = @Name
+                        WHERE Id = @Id
+                        """,
+                        new { folder.Id, folder.ParentFolderId, folder.Name }
+                    )
+                    .ToResult()
+                    .Check(affectedRows => (affectedRows != 0).ToResult())
+                    .Finally(
+                        _ =>
+                        {
+                            _unitOfWork.Commit();
+                            _logger.Information("Папка с Id = {FolderId} успешно обновлена", folder.Id);
+                            return ResultVoid.Success();
+                        },
+                        _ =>
+                        {
+                            _unitOfWork.Rollback();
+                            return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
+                        });
+            }
+
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (SqliteException)
         {
             _logger.Error("Ошибка SQLite при обновлении папки с Id = {FolderId}", folder.Id);
             _unitOfWork.Rollback();
-            _unitOfWork.Dispose();
             return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
         }
     }
@@ -114,36 +127,38 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository
         {
             _unitOfWork.BeginTransaction();
 
-            return _unitOfWork.Connection!
-                .Execute(
-                    """
-                    DELETE FROM Folders
-                    WHERE Id = @Id
-                    """,
-                    new { Id = id }
-                )
-                .ToResult()
-                .Check(affectedRows => (affectedRows != 0).ToResult())
-                .Finally(
-                    _ =>
-                    {
-                        _unitOfWork.Commit();
-                        _logger.Information("Папка с Id = {FolderId} успешно удалена", id);
-                        _unitOfWork.Dispose();
-                        return ResultVoid.Success();
-                    },
-                    _ =>
-                    {
-                        _unitOfWork.Rollback();
-                        _unitOfWork.Dispose();
-                        return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
-                    });
+            if (_unitOfWork.Connection != null)
+            {
+                return _unitOfWork.Connection
+                    .Execute(
+                        """
+                        DELETE FROM Folders
+                        WHERE Id = @Id
+                        """,
+                        new { Id = id }
+                    )
+                    .ToResult()
+                    .Check(affectedRows => (affectedRows != 0).ToResult())
+                    .Finally(
+                        _ =>
+                        {
+                            _unitOfWork.Commit();
+                            _logger.Information("Папка с Id = {FolderId} успешно удалена", id);
+                            return ResultVoid.Success();
+                        },
+                        _ =>
+                        {
+                            _unitOfWork.Rollback();
+                            return ResultVoid.Failure(InfrastructureErrors.Database.NotFound);
+                        });
+            }
+
+            return ResultVoid.Failure(InfrastructureErrors.Database.ConnectionFailed);
         }
         catch (SqliteException)
         {
             _logger.Error("Ошибка SQLite при удалении папки с Id = {FolderId}", id);
             _unitOfWork.Rollback();
-            _unitOfWork.Dispose();
             return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
         }
     }

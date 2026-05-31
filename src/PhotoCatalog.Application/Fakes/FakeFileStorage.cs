@@ -12,7 +12,7 @@ public class FakeFileStorage : IFileStorage
     public Result<string> StoreFile(string sourcePath, string newFileName)
     {
         string fakePath = $"/fake-storage/{newFileName}";
-        return Result<string>.Success(fakePath);
+        return Result.Success(fakePath);
     }
 
     /// <inheritdoc />
@@ -24,6 +24,6 @@ public class FakeFileStorage : IFileStorage
     /// <inheritdoc />
     public Result<bool> FileExists(string filePath)
     {
-        return Result<bool>.Success(true);
+        return Result.Success(true);
     }
 }

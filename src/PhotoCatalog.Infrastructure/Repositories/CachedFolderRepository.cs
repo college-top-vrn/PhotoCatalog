@@ -23,11 +23,12 @@ namespace PhotoCatalog.Infrastructure.Repositories;
 ///     <see cref="CacheBypassException" />.
 /// </summary>
 /// <param name="innerQueryRepository">
-/// Оригинальный репозиторий, выполняющий
-/// реальные запросы к базе данных для получения данных.</param>
+///     Оригинальный репозиторий, выполняющий
+///     реальные запросы к базе данных для получения данных.
+/// </param>
 /// <param name="innerCommandRepository">
-/// Оригинальный репозиторий, выполняющий
-/// реальные запросы к базе данных для изменения данных.
+///     Оригинальный репозиторий, выполняющий
+///     реальные запросы к базе данных для изменения данных.
 /// </param>
 /// <param name="cache">Сервис гибридного кэширования.</param>
 /// <param name="logger">Логгер для записи событий работы декоратора.</param>
@@ -72,19 +73,20 @@ public class CachedFolderRepository(
                 null,
                 [CacheKeysFactory.GetFolderTag(id), CacheKeysFactory.GetFoldersTreeTag()]
             ).AsTask().GetAwaiter().GetResult();
-
-            return Result<Folder>.Success(cachedFolder!);
+            return cachedFolder != null
+                ? Result.Success(cachedFolder)
+                : Result.Failure<Folder>(InfrastructureErrors.Cache.UnknownResultError);
         }
         catch (CacheBypassException ex)
         {
             logger.Warning(ex,
                 "Не удалось получить папку с Id={FolderId} из внутреннего репозитория – результат не кэширован", id);
-            return Result<Folder>.Failure(InfrastructureErrors.Database.Sqlite);
+            return Result.Failure<Folder>(InfrastructureErrors.Database.Sqlite);
         }
         catch (Exception ex)
         {
             logger.Error(ex, "Непредвиденная ошибка при получении папки с Id={FolderId} из кэша", id);
-            return Result<Folder>.Failure(InfrastructureErrors.Cache.UnknownError);
+            return Result.Failure<Folder>(InfrastructureErrors.Cache.UnknownResultError);
         }
     }
 
@@ -115,7 +117,7 @@ public class CachedFolderRepository(
             {
                 logger.Warning(
                     "Операция {Operation} папки с Id={FolderId} завершилась ошибкой: {ErrorCode} {ErrorMessage}",
-                    operation.GetMethodInfo().Name, folderId, result.Error.Code, result.Error.Message);
+                    operation.GetMethodInfo().Name, folderId, result.ResultError.Code, result.ResultError.Message);
             }
 
             return result;
@@ -140,7 +142,7 @@ public class CachedFolderRepository(
         }
 
         logger.Warning("Папка с Id={FolderId} не получена: {ErrorCode} {ErrorMessage}",
-            id, result.Error.Code, result.Error.Message);
+            id, result.ResultError.Code, result.ResultError.Message);
         throw new CacheBypassException($"Папка с Id={id} не найдена или ошибка БД.");
     }
 }

@@ -10,36 +10,36 @@ namespace PhotoCatalog.Test.Unit.Primitives.Result;
 public class ResultTest
 {
     /// <summary>
-    ///     Проверяет, что фабричный метод <see cref="Result{T}.Success" /> возвращает объект
+    ///     Проверяет, что фабричный метод <see cref="Result.Success" /> возвращает объект
     ///     в успешном состоянии, содержащий ожидаемое значение и пустую ошибку.
     /// </summary>
     [Fact]
-    public void Success_ShouldReturnIsSuccessTrue_And_Value()
+    public void SuccessShouldReturnIsSuccessTrueAndValue()
     {
-        string expectedValue = "Тестовая строка";
+        const string expectedValue = "Тестовая строка";
 
-        Result<string> result = Result<string>.Success(expectedValue);
+        Result<string> result = PhotoCatalog.Domain.Primitives.Result.Success(expectedValue);
 
         Assert.True(result.IsSuccess);
         Assert.False(result.IsFailure);
-        Assert.Equal(Error.None, result.Error);
+        Assert.Equal(ResultError.None, result.ResultError);
         Assert.Equal(expectedValue, result.Value);
     }
 
     /// <summary>
-    ///     Проверяет, что фабричный метод <see cref="Result{T}.Failure" /> возвращает объект
+    ///     Проверяет, что фабричный метод <see cref="Result.Failure" /> возвращает объект
     ///     в состоянии ошибки, где свойство Value принимает значение по умолчанию (default).
     /// </summary>
     [Fact]
-    public void Failure_ShouldReturnIsFailureTrue_And_ValueShouldBeDefault()
+    public void FailureShouldReturnIsFailureTrueAndValueShouldBeDefault()
     {
-        Error expectedError = new("Test.Failure", "Тестовая ошибка");
+        ResultError expectedResultError = new("Test.Failure", "Тестовая ошибка");
 
-        Result<string> result = Result<string>.Failure(expectedError);
+        Result<string> result = PhotoCatalog.Domain.Primitives.Result.Failure<string>(expectedResultError);
 
         Assert.False(result.IsSuccess);
         Assert.True(result.IsFailure);
-        Assert.Equal(expectedError, result.Error);
+        Assert.Equal(expectedResultError, result.ResultError);
         Assert.Null(result.Value);
     }
 }

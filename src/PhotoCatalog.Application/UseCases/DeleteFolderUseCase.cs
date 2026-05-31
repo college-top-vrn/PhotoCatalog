@@ -41,9 +41,9 @@ public class DeleteFolderUseCase(
         if (beginTransactionResult.IsFailure)
         {
             logger.Error("Не удалось начать транзакцию: {ErrorCode}: {Error}",
-                beginTransactionResult.Error.Code,
-                beginTransactionResult.Error.Message);
-            return ResultVoid.Failure(beginTransactionResult.Error);
+                beginTransactionResult.ResultError.Code,
+                beginTransactionResult.ResultError.Message);
+            return ResultVoid.Failure(beginTransactionResult.ResultError);
         }
 
         ResultVoid deleteResult = folderCommandRepository.Delete(folderId);
@@ -51,9 +51,9 @@ public class DeleteFolderUseCase(
         {
             logger.Error("Не удалось удалить папку с Id {FolderId}: {ErrorCode}: {Error}",
                 folderId,
-                deleteResult.Error.Code,
-                deleteResult.Error.Message);
-            return ResultVoid.Failure(deleteResult.Error);
+                deleteResult.ResultError.Code,
+                deleteResult.ResultError.Message);
+            return ResultVoid.Failure(deleteResult.ResultError);
         }
 
         ResultVoid commitResult = unitOfWork.Commit();
@@ -63,9 +63,9 @@ public class DeleteFolderUseCase(
         }
 
         logger.Error("Не удалось зафиксировать изменения транзакции: {ErrorCode}: {Error}",
-            commitResult.Error.Code,
-            commitResult.Error.Message);
+            commitResult.ResultError.Code,
+            commitResult.ResultError.Message);
         unitOfWork.Rollback();
-        return ResultVoid.Failure(commitResult.Error);
+        return ResultVoid.Failure(commitResult.ResultError);
     }
 }

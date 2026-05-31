@@ -6,6 +6,7 @@ using Microsoft.Data.Sqlite;
 using NSubstitute;
 
 using PhotoCatalog.Domain.Entities;
+using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Infrastructure.Repositories;
 
 using Serilog;
@@ -14,45 +15,52 @@ using Xunit;
 
 namespace PhotoCatalog.Test.Integration.SqliteTagCommandQueryRepositoryTest;
 
+// TODO: Добавить документацию
+// TODO: Исправить предупржеднеия
 public class SqliteTagCommandRepositoryTests : IDisposable
 {
     private readonly SqliteConnection _keepAliveConnection;
-    private readonly string _connectionString;
-    private readonly ILogger _logger;
     private readonly SqliteTagCommandRepository _repoCommand;
     private readonly SqliteTagQueryRepository _repoQuery;
 
     public SqliteTagCommandRepositoryTests()
     {
-        _logger = Substitute.For<ILogger>();
+        ILogger logger = Substitute.For<ILogger>();
 
-        _connectionString = $"DataSource=file:memdb_{Guid.NewGuid()}?mode=memory&cache=shared";
+        string connectionString = $"DataSource=file:memdb_{Guid.NewGuid()}?mode=memory&cache=shared";
 
-        _keepAliveConnection = new SqliteConnection(_connectionString);
+        _keepAliveConnection = new SqliteConnection(connectionString);
         _keepAliveConnection.Open();
-        var scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TabelTest", "InitSchemaTest.sql");
+        string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TableTest", "InitSchemaTest.sql");
         if (!File.Exists(scriptPath))
         {
             scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InitSchemaTest.sql");
         }
 
-        var script = File.ReadAllText(scriptPath);
-        using (var command = _keepAliveConnection.CreateCommand())
+        string script = File.ReadAllText(scriptPath);
+        using (SqliteCommand command = _keepAliveConnection.CreateCommand())
         {
             command.CommandText = script;
             command.ExecuteNonQuery();
         }
 
-        _repoCommand = new SqliteTagCommandRepository(_connectionString, _logger);
-        _repoQuery = new SqliteTagQueryRepository(_connectionString, _logger);
+        _repoCommand = new SqliteTagCommandRepository(connectionString, logger);
+        _repoQuery = new SqliteTagQueryRepository(connectionString, logger);
+    }
+
+    // TODO: Заменить вызовом GC.SuppressFinalize(object)
+    public void Dispose()
+    {
+        _keepAliveConnection.Close();
+        _keepAliveConnection.Dispose();
     }
 
     [Fact]
-    public void Add_new_unique_tag_returns_success_and_persists()
+    public void AddNewUniqueTagReturnsSuccessAndPersists()
     {
-        var tag = Tag.Create("лес");
-        var result = _repoCommand.Add(tag.Value!);
-        var tagNew = _repoQuery.GetByName("лес");
+        Result<Tag> tag = Tag.Create("лес");
+        ResultVoid result = _repoCommand.Add(tag.Value!);
+        Result<Tag> tagNew = _repoQuery.GetByName("лес");
 
 
         Assert.True(result.IsSuccess);
@@ -61,55 +69,55 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void Add_duplicate_name_returns_failure()
+    public void AddDuplicateNameReturnsFailure()
     {
-        var tag1 = Tag.Create("горы");
-        var tag2 = Tag.Create("горы");
+        Result<Tag> tag1 = Tag.Create("горы");
+        Result<Tag> tag2 = Tag.Create("горы");
 
 
-        var firstResult = _repoCommand.Add(tag1.Value!);
+        ResultVoid firstResult = _repoCommand.Add(tag1.Value!);
         Assert.True(firstResult.IsSuccess);
 
-        var secondResult = _repoCommand.Add(tag2.Value!);
+        ResultVoid secondResult = _repoCommand.Add(tag2.Value!);
 
         Assert.True(secondResult.IsFailure);
     }
 
     [Fact]
-    public void Delete_existing_free_tag_returns_success()
+    public void DeleteExistingFreeTagReturnsSuccess()
     {
         _repoCommand.Add(Tag.Create("лес").Value!);
 
-        var tagId = _repoQuery.GetByName("лес").Value!.Id;
+        int tagId = _repoQuery.GetByName("лес").Value!.Id;
 
-        var deleteResult = _repoCommand.Delete(tagId);
+        ResultVoid deleteResult = _repoCommand.Delete(tagId);
 
         Assert.True(deleteResult.IsSuccess);
 
-        var result = _repoQuery.GetById(tagId);
+        Result<Tag> result = _repoQuery.GetById(tagId);
         Assert.True(result.IsFailure);
     }
 
     [Fact]
-    public void Delete_tag_used_by_photo_returns_failure()
+    public void DeleteTagUsedByPhotoReturnsFailure()
     {
-        var invalidId = 9999;
-        var deleteResult = _repoCommand.Delete(invalidId);
+        const int invalidId = 9999;
+        ResultVoid deleteResult = _repoCommand.Delete(invalidId);
 
 
         Assert.True(deleteResult.IsFailure);
     }
 
     [Fact]
-    public void Update_existing_free_tag_returns_success_and_persists()
+    public void UpdateExistingFreeTagReturnsSuccessAndPersists()
     {
-        var tagOld = Tag.Create("лес");
+        Result<Tag> tagOld = Tag.Create("лес");
         _repoCommand.Add(tagOld.Value!);
 
 
-        var tagNew = Tag.Create("поляна");
+        Result<Tag> tagNew = Tag.Create("поляна");
 
-        var result = _repoCommand.Update(tagNew.Value!);
+        ResultVoid result = _repoCommand.Update(tagNew.Value!);
 
         Assert.True(result.IsSuccess);
 
@@ -117,17 +125,11 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     }
 
     [Fact]
-    public void Update_tag_returns_failure()
+    public void UpdateTagReturnsFailure()
     {
-        var tagNew = Tag.Create("поляна");
+        Result<Tag> tagNew = Tag.Create("поляна");
 
-        var result = _repoCommand.Update(tagNew.Value!);
+        ResultVoid result = _repoCommand.Update(tagNew.Value!);
         Assert.True(result.IsFailure);
-    }
-
-    public void Dispose()
-    {
-        _keepAliveConnection.Close();
-        _keepAliveConnection.Dispose();
     }
 }

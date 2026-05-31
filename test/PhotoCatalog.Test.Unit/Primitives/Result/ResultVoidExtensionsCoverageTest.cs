@@ -12,71 +12,73 @@ namespace PhotoCatalog.Test.Unit.Primitives.Result;
 /// </summary>
 public class ResultVoidExtensionsCoverageTest
 {
-    private static readonly Error DomainError = new("Domain.Error", "Error description");
-    private static readonly Error ExceptionError = new("System.Exception", "Exception caught");
+    private static readonly ResultError DomainResultError = new("Domain.Error", "Error description");
+    private static readonly ResultError ExceptionResultError = new("System.Exception", "Exception caught");
 
     /// <summary>
     ///     Проверяет обе ветви метода Then (переход от ResultVoid к ResultVoid).
     /// </summary>
     [Fact]
-    public void ThenVoid_AllBranches_ShouldExecuteCorrectPath()
+    public void ThenVoidAllBranchesShouldExecuteCorrectPath()
     {
-        var successResult = ResultVoid.Success().Then(() => ResultVoid.Success());
-        var failureResult = ResultVoid.Failure(DomainError).Then(() => ResultVoid.Success());
+        ResultVoid successResult = ResultVoid.Success().Then(ResultVoid.Success);
+        ResultVoid failureResult = ResultVoid.Failure(DomainResultError).Then(ResultVoid.Success);
 
         Assert.True(successResult.IsSuccess);
         Assert.True(failureResult.IsFailure);
-        Assert.Equal(DomainError, failureResult.Error);
+        Assert.Equal(DomainResultError, failureResult.ResultError);
     }
 
     /// <summary>
     ///     Проверяет ветви try и catch метода-фабрики TryCatch.
     /// </summary>
     [Fact]
-    public void TryCatch_AllBranches_ShouldHandleSuccessAndException()
+    public void TryCatchAllBranchesShouldHandleSuccessAndException()
     {
-        var successResult = ResultVoidExtensions.TryCatch(
+        ResultVoid successResult = ResultVoidExtensions.TryCatch(
             () => { },
-            ex => ExceptionError);
+            _ => ExceptionResultError);
 
-        var exceptionResult = ResultVoidExtensions.TryCatch(
+        ResultVoid exceptionResult = ResultVoidExtensions.TryCatch(
             () => throw new InvalidOperationException(),
-            ex => ExceptionError);
+            _ => ExceptionResultError);
 
         Assert.True(successResult.IsSuccess);
         Assert.True(exceptionResult.IsFailure);
-        Assert.Equal(ExceptionError, exceptionResult.Error);
+        Assert.Equal(ExceptionResultError, exceptionResult.ResultError);
     }
 
     /// <summary>
     ///     Проверяет ветви метода ThenTry для операций без возвращаемого значения.
     /// </summary>
     [Fact]
-    public void ThenTryVoid_AllBranches_ShouldCoverFailureTryAndCatch()
+    public void ThenTryVoidAllBranchesShouldCoverFailureTryAndCatch()
     {
-        var failedPrevious = ResultVoid.Failure(DomainError).ThenTry(() => { }, _ => ExceptionError);
-        var trySuccess = ResultVoid.Success().ThenTry(() => { }, _ => ExceptionError);
-        var catchTriggered = ResultVoid.Success().ThenTry(() => throw new Exception(), _ => ExceptionError);
+        ResultVoid failedPrevious = ResultVoid.Failure(DomainResultError).ThenTry(() => { }, _ => ExceptionResultError);
+        ResultVoid trySuccess = ResultVoid.Success().ThenTry(() => { }, _ => ExceptionResultError);
+        //TODO: Выбросить более конкретный Exception
+        ResultVoid catchTriggered =
+            ResultVoid.Success().ThenTry(() => throw new Exception(), _ => ExceptionResultError);
 
-        Assert.Equal(DomainError, failedPrevious.Error);
+        Assert.Equal(DomainResultError, failedPrevious.ResultError);
         Assert.True(trySuccess.IsSuccess);
-        Assert.Equal(ExceptionError, catchTriggered.Error);
+        Assert.Equal(ExceptionResultError, catchTriggered.ResultError);
     }
 
     /// <summary>
     ///     Проверяет ветви выполнения методов побочных эффектов OnSuccess и OnFailure.
     /// </summary>
     [Fact]
-    public void SideEffects_AllBranches_ShouldTriggerBasedOnStatus()
+    public void SideEffectsAllBranchesShouldTriggerBasedOnStatus()
     {
-        var successCounter = 0;
-        var failureCounter = 0;
+        int successCounter = 0;
+        int failureCounter = 0;
 
         ResultVoid.Success()
             .OnSuccess(() => successCounter++)
             .OnFailure(_ => failureCounter++);
 
-        ResultVoid.Failure(DomainError)
+        ResultVoid.Failure(DomainResultError)
             .OnSuccess(() => successCounter++)
             .OnFailure(_ => failureCounter++);
 
@@ -88,10 +90,10 @@ public class ResultVoidExtensionsCoverageTest
     ///     Проверяет ветви метода Finally.
     /// </summary>
     [Fact]
-    public void Finally_AllBranches_ShouldMapCorrectly()
+    public void FinallyAllBranchesShouldMapCorrectly()
     {
-        var result1 = ResultVoid.Success().Finally(() => 1, _ => 0);
-        var result2 = ResultVoid.Failure(DomainError).Finally(() => 1, _ => 0);
+        int result1 = ResultVoid.Success().Finally(() => 1, _ => 0);
+        int result2 = ResultVoid.Failure(DomainResultError).Finally(() => 1, _ => 0);
 
         Assert.Equal(1, result1);
         Assert.Equal(0, result2);

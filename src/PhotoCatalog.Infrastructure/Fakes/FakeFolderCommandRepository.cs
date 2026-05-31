@@ -34,7 +34,7 @@ public class FakeFolderCommandRepository(
 
         if (deleteResult.IsFailure)
         {
-            return ResultVoid.Failure(deleteResult.Error);
+            return ResultVoid.Failure(deleteResult.ResultError);
         }
 
         Add(folder, folder.Id);
@@ -49,7 +49,7 @@ public class FakeFolderCommandRepository(
 
         if (searchResult.IsFailure)
         {
-            return ResultVoid.Failure(new Error("FolderRepository.CantDeleteFolder",
+            return ResultVoid.Failure(new ResultError("FolderRepository.CantDeleteFolder",
                 "Не удалось удалить папку"));
         }
 
@@ -79,7 +79,7 @@ public class FakeFolderCommandRepository(
         if (folders.TryAdd(id, folder).ToResult().IsFailure)
         {
             return ResultVoid
-                .Failure(new Error("FolderRepository.FolderWithSameIdAlreadyExist",
+                .Failure(new ResultError("FolderRepository.FolderWithSameIdAlreadyExist",
                     "Папка с похожим идентификатором уже существует"));
         }
 

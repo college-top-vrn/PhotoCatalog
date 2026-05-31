@@ -11,10 +11,10 @@
 ///     Понятное описание проблемы на естественном языке.
 ///     В первую очередь предназначено для логирования и помощи разработчикам при отладке.
 /// </param>
-public readonly record struct Error(string Code, string Message)
+public readonly record struct ResultError(string Code, string Message)
 {
     /// <summary>
     ///     Специальный объект, обозначающий отсутствие ошибки.
     /// </summary>
-    public static readonly Error None = new(string.Empty, string.Empty);
+    public static readonly ResultError None = new(string.Empty, string.Empty);
 }

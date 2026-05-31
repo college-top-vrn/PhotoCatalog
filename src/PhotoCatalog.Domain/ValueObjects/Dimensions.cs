@@ -1,6 +1,4 @@
-﻿using System;
-
-using PhotoCatalog.Domain.Primitives;
+﻿using PhotoCatalog.Domain.Primitives;
 
 namespace PhotoCatalog.Domain.ValueObjects;
 
@@ -48,7 +46,7 @@ public record Dimensions
     /// <remarks>
     ///     Допустимые значения: больше <c>0</c>.
     /// </remarks>
-    public int Width { get; init; }
+    public int Width { get; }
 
     /// <summary>
     ///     Высота изображения в пикселях.
@@ -56,7 +54,7 @@ public record Dimensions
     /// <remarks>
     ///     Допустимые значения: больше <c>0</c>.
     /// </remarks>
-    public int Height { get; init; }
+    public int Height { get; }
 
     /// <summary>
     ///     Создает объект Dimensions с валидацией инвариантов.
@@ -64,8 +62,8 @@ public record Dimensions
     /// <param name="width">Ширина в пикселях (больше 0)</param>
     /// <param name="height">Высота в пикселях (больше 0)</param>
     /// <returns>
-    ///     <see cref="Result{TSuccess}.Success" /> с валидными габаритами,
-    ///     или <see cref="Result{TSuccess}.Failure" /> с <see cref="DomainErrors.Dimensions.Invalid" />.
+    ///     <see cref="Result.Success" /> с валидными габаритами,
+    ///     или <see cref="Result.Failure{TSuccess}" /> с <see cref="DomainErrors.Dimensions.Invalid" />.
     /// </returns>
     /// <remarks>
     ///     Оба измерения должны быть больше 0.
@@ -76,9 +74,9 @@ public record Dimensions
         // Только проверка на положительные значения, без ограничений сверху
         if (width >= MinValues && height >= MinValues)
         {
-            return Result<Dimensions>.Success(new Dimensions(width, height));
+            return Result.Success(new Dimensions(width, height));
         }
 
-        return Result<Dimensions>.Failure(DomainErrors.Dimensions.Invalid);
+        return Result.Failure<Dimensions>(DomainErrors.Dimensions.Invalid);
     }
 }

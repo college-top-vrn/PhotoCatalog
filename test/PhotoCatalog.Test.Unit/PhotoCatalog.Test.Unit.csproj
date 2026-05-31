@@ -15,13 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj" />
+    <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
     <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
-    <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\UseCases\" />
+    <Folder Include="Application\UseCases\"/>
   </ItemGroup>
 
 </Project>

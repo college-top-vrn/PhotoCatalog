@@ -5,8 +5,10 @@ using System.Linq;
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Interfaces.Repositories;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Infrastructure.Errors;
 
 namespace PhotoCatalog.Infrastructure.Fakes;
+
 /// <summary>
 ///     Репозиторий для получения фотографий, имитирующий БД, и хранящий данные в оперативной памяти.
 /// </summary>
@@ -15,7 +17,7 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
     /// <summary>
     ///     Словарь альбомов.
     /// </summary>
-    private readonly ConcurrentDictionary<int, Photo> _photos = new();
+    private readonly IReadOnlyDictionary<int, Photo> _photos = new ConcurrentDictionary<int, Photo>();
 
 
     /// <inheritdoc />
@@ -25,11 +27,11 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
         {
             if (pair.Key == id)
             {
-                return Result<Photo>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
+        return Result.Failure<Photo>(new ResultError("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по идентификатору"));
     }
 
@@ -41,11 +43,11 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
         {
             if (pair.Value.RealPath == realPath)
             {
-                return Result<Photo>.Success(pair.Value);
+                return Result.Success(pair.Value);
             }
         }
 
-        return Result<Photo>.Failure(new Error("PhotoRepository.PhotoNotFound",
+        return Result.Failure<Photo>(new ResultError("PhotoRepository.PhotoNotFound",
             "Не удалось найти фото по заданному пути"));
     }
 
@@ -57,7 +59,12 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
 
         if (album.IsFailure)
         {
-            return Result<IReadOnlyCollection<Photo>>.Failure(album.Error);
+            return Result.Failure<IReadOnlyCollection<Photo>>(album.ResultError);
+        }
+
+        if (album.Value == null)
+        {
+            return Result.Failure<IReadOnlyCollection<Photo>>(InfrastructureErrors.Database.NotFound);
         }
 
         List<Photo> photos = (
@@ -69,12 +76,12 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
 
         if (photos.Count == 0)
         {
-            return Result<IReadOnlyCollection<Photo>>
-                .Failure(new Error("PhotoRepository.PhotosByAlbumAreNotFound",
+            return Result
+                .Failure<IReadOnlyCollection<Photo>>(new ResultError("PhotoRepository.PhotosByAlbumAreNotFound",
                     "Не найдены фотографии по соответствующиму альбому"));
         }
 
-        return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+        return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
     }
 
 
@@ -91,11 +98,11 @@ public class FakePhotoQueryRepository(IAlbumQueryRepository fakeAlbumRepository)
 
         if (photos.Count == 0)
         {
-            return Result<IReadOnlyCollection<Photo>>
-                .Failure(new Error("PhotoRepository.PhotosByTagsAreNotFound",
+            return Result
+                .Failure<IReadOnlyCollection<Photo>>(new ResultError("PhotoRepository.PhotosByTagsAreNotFound",
                     "Не найдены фотографии по соответствующим тегам"));
         }
 
-        return Result<IReadOnlyCollection<Photo>>.Success(photos.AsReadOnly());
+        return Result.Success<IReadOnlyCollection<Photo>>(photos.AsReadOnly());
     }
 }

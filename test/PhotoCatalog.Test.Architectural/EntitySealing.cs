@@ -42,7 +42,7 @@ public static class EntitySealing
     ///     PhotoCatalog.Domain.Entities.
     /// </summary>
     [Fact]
-    public static void DomainEntities_Should_Be_Sealed()
+    public static void DomainEntitiesShouldBeSealed()
     {
         Classes()
             .That()
@@ -61,7 +61,7 @@ public static class EntitySealing
     ///     PhotoCatalog.Domain.Entities.
     /// </summary>
     [Fact]
-    public static void ValueObjects_Should_Be_Sealed()
+    public static void ValueObjectsShouldBeSealed()
     {
         Classes()
             .That()

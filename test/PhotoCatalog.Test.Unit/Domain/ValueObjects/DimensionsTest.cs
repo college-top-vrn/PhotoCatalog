@@ -14,11 +14,12 @@ public class DimensionsTest
     ///     Проверяет, что валидные размеры (положительные числа) создаются успешно.
     /// </summary>
     [Fact]
-    public void Create_ValidWidthAndHeight_ReturnsSuccess()
+    public void CreateValidWidthAndHeightReturnsSuccess()
     {
-        var result = Dimensions.Create(100, 100);
+        Result<Dimensions> result = Dimensions.Create(100, 100);
 
         Assert.True(result.IsSuccess);
+        //TODO: Проверить на null
         Assert.Equal(100, result.Value.Width);
         Assert.Equal(100, result.Value.Height);
     }
@@ -27,12 +28,13 @@ public class DimensionsTest
     ///     Проверяет минимально допустимые размеры (1×1 пикселей).
     /// </summary>
     [Fact]
-    public void Create_MinimumValidSizeOne_ReturnsSuccess()
+    public void CreateMinimumValidSizeOneReturnsSuccess()
     {
         Result<Dimensions> result = Dimensions.Create(1, 1);
 
         Assert.True(result.IsSuccess);
-        Assert.Equal(1, result.Value.Width);
+        //TODO: Проверить на null
+        Assert.Equal(1, result.Value!.Width);
         Assert.Equal(1, result.Value.Height);
     }
 
@@ -40,40 +42,40 @@ public class DimensionsTest
     ///     Проверяет, что нулевые значения (0×0) отклоняются с ошибкой Invalid.
     /// </summary>
     [Fact]
-    public void Create_ZeroValues_ReturnsFailure()
+    public void CreateZeroValuesReturnsFailure()
     {
         Result<Dimensions> actual = Dimensions.Create(0, 0);
 
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.ResultError);
     }
 
     /// <summary>
     ///     Проверяет, что отрицательные значения отклоняются с ошибкой Invalid.
     /// </summary>
     [Fact]
-    public void Create_NegativeValues_ReturnsFailure()
+    public void CreateNegativeValuesReturnsFailure()
     {
         Result<Dimensions> actual = Dimensions.Create(-1, -1);
 
         Assert.False(actual.IsSuccess);
         Assert.True(actual.IsFailure);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actual.ResultError);
     }
 
     /// <summary>
     ///     Проверяет, что смешанные невалидные значения (отрицательная ширина, положительная высота) отклоняются.
     /// </summary>
     [Fact]
-    public void Create_MixedInvalidValues_ReturnsFailure()
+    public void CreateMixedInvalidValuesReturnsFailure()
     {
         Result<Dimensions> actualNegativeWidth = Dimensions.Create(-100, 500);
         Assert.False(actualNegativeWidth.IsSuccess);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeWidth.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeWidth.ResultError);
 
         Result<Dimensions> actualNegativeHeight = Dimensions.Create(500, -100);
         Assert.False(actualNegativeHeight.IsSuccess);
-        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeHeight.Error);
+        Assert.Equal(DomainErrors.Dimensions.Invalid, actualNegativeHeight.ResultError);
     }
 }

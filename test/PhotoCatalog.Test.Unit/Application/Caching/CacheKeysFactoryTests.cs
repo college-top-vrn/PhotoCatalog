@@ -13,7 +13,7 @@ public class CacheKeysFactoryTests
     ///     Проверяет, что метод GetFolderAlbumsKey возвращает ключ в правильном формате для валидного идентификатора.
     /// </summary>
     [Fact]
-    public void GetFolderAlbumsKey_WithValidId_ReturnsExpectedFormat()
+    public void GetFolderAlbumsKeyWithValidIdReturnsExpectedFormat()
     {
         const int folderId = 42;
         string key = CacheKeysFactory.GetFolderAlbumsKey(folderId);
@@ -24,7 +24,7 @@ public class CacheKeysFactoryTests
     ///     Проверяет, что метод GetFoldersTreeKey возвращает константное значение.
     /// </summary>
     [Fact]
-    public void GetFoldersTreeKey_ReturnsConstantValue()
+    public void GetFoldersTreeKeyReturnsConstantValue()
     {
         string key = CacheKeysFactory.GetFoldersTreeKey();
         Assert.Equal("key:folders-tree-key", key);
@@ -34,7 +34,7 @@ public class CacheKeysFactoryTests
     ///     Проверяет, что метод GetFolderTag возвращает тег в правильном формате для валидного идентификатора.
     /// </summary>
     [Fact]
-    public void GetFolderTag_WithValidId_ReturnsExpectedFormat()
+    public void GetFolderTagWithValidIdReturnsExpectedFormat()
     {
         const int folderId = 10;
         string tag = CacheKeysFactory.GetFolderTag(folderId);
@@ -45,7 +45,7 @@ public class CacheKeysFactoryTests
     ///     Проверяет, что метод GetFoldersTreeTag возвращает константное значение.
     /// </summary>
     [Fact]
-    public void GetFoldersTreeTag_ReturnsConstantValue()
+    public void GetFoldersTreeTagReturnsConstantValue()
     {
         string tag = CacheKeysFactory.GetFoldersTreeTag();
         Assert.Equal("tag:folders-tree-tag", tag);
@@ -55,7 +55,7 @@ public class CacheKeysFactoryTests
     ///     Проверяет, что ключ и тег для одной и той же папки различаются.
     /// </summary>
     [Fact]
-    public void KeyAndTag_ForSameFolder_ShouldBeDifferent()
+    public void KeyAndTagForSameFolderShouldBeDifferent()
     {
         const int folderId = 5;
         string key = CacheKeysFactory.GetFolderAlbumsKey(folderId);
@@ -70,7 +70,7 @@ public class CacheKeysFactoryTests
     [InlineData(0)]
     [InlineData(-1)]
     [InlineData(int.MaxValue)]
-    public void GetFolderAlbumsKey_WithEdgeValues_ContainsIdInString(int folderId)
+    public void GetFolderAlbumsKeyWithEdgeValuesContainsIdInString(int folderId)
     {
         string key = CacheKeysFactory.GetFolderAlbumsKey(folderId);
         Assert.Contains(folderId.ToString(), key);

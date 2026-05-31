@@ -16,7 +16,7 @@ public interface IFolderHierarchyValidator
     /// <param name="targetFolderId">Идентификатор папки, в которую планируется перемещение.</param>
     /// <returns>
     ///     Успешный результат, если цикл не обнаружен;
-    ///     результат с ошибкой <see cref="ApplicationErrors.Folders.CycleDetected" /> в противном случае.
+    ///     результат с ошибкой "ApplicationErrors.Folders.CycleDetected" в противном случае.
     /// </returns>
     ResultVoid CheckForCycles(int sourceFolderId, int targetFolderId);
 }

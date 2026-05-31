@@ -1,6 +1,4 @@
--- Важно: При каждом открытии соединения (ADO.NET) вызывать PRAGMA foreign_keys = ON;
-
-CREATE TABLE IF NOT EXISTS "Photos"
+﻿CREATE TABLE IF NOT EXISTS "Photos"
 (
     "Id"         INTEGER  NOT NULL,
     "RealPath"   TEXT     NOT NULL UNIQUE,

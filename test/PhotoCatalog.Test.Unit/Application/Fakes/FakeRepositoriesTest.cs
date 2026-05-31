@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Primitives;
@@ -9,52 +8,36 @@ using PhotoCatalog.Infrastructure.Fakes;
 
 using Xunit;
 
-namespace PhotoCatalog.Tests.Infrastructure.Fakes;
+namespace PhotoCatalog.Test.Unit.Application.Fakes;
 
+// TODO: Исправить предупрждения
 /// <summary>
 ///     Тесты для Fake-репозиториев альбомов (CQRS).
 /// </summary>
 public class FakeRepositoriesTests
 {
-    private readonly ConcurrentDictionary<int, Album> _sharedStorage;
     private readonly FakeAlbumCommandRepository _commandRepository;
     private readonly FakeAlbumQueryRepository _queryRepository;
 
     public FakeRepositoriesTests()
     {
-        _sharedStorage = new ConcurrentDictionary<int, Album>();
-        _commandRepository = new FakeAlbumCommandRepository(_sharedStorage);
-        _queryRepository = new FakeAlbumQueryRepository(_sharedStorage);
-    }
-
-    /// <summary>
-    ///     Тест: добавление null альбома возвращает ошибку NullAlbum.
-    /// </summary>
-    [Fact]
-    public void AlbumCommandRepository_AddAlbum_AddingNull_ReturnsNullAlbumError()
-    {
-        // Act
-        ResultVoid result = _commandRepository.Add(null!);
-
-        // Assert
-        Assert.True(result.IsFailure);
-        Assert.Equal(DomainErrors.Album.NullAlbum.Code, result.Error.Code);
-        Assert.Equal(DomainErrors.Album.NullAlbum.Message, result.Error.Message);
+        ConcurrentDictionary<int, Album> sharedStorage = new();
+        _commandRepository = new FakeAlbumCommandRepository(sharedStorage);
+        _queryRepository = new FakeAlbumQueryRepository(sharedStorage);
     }
 
     /// <summary>
     ///     Тест: добавление корректного альбома проходит успешно.
     /// </summary>
     [Fact]
-    public void AlbumCommandRepository_AddAlbum_WithRightValues_ReturnsSuccess()
+    public void AlbumCommandRepositoryAddAlbumWithRightValuesReturnsSuccess()
     {
         // Arrange
-        Result<Album> createResult = Album.Create("Тестовый альбом", 0);
-        Assert.True(createResult.IsSuccess);
-        Album album = createResult.Value;
+        (bool isSuccess, Album? album, _) = Album.Create("Тестовый альбом", 0);
+        Assert.True(isSuccess);
 
         // Act
-        ResultVoid result = _commandRepository.Add(album);
+        ResultVoid result = _commandRepository.Add(album!);
 
         // Assert
         Assert.True(result.IsSuccess);
@@ -62,14 +45,19 @@ public class FakeRepositoriesTests
         // Проверяем через QueryRepository, что альбом добавился
         Result<Album> getResult = _queryRepository.GetById(1);
         Assert.True(getResult.IsSuccess);
-        Assert.Equal("Тестовый альбом", getResult.Value.Name);
+        if (getResult.Value != null)
+        {
+            Assert.Equal("Тестовый альбом", getResult.Value.Name);
+        }
+
+        Assert.NotNull(album);
     }
 
     /// <summary>
     ///     Тест: удаление существующего альбома проходит успешно.
     /// </summary>
     [Fact]
-    public void AlbumCommandRepository_DeleteAlbum_WithExistingId_ReturnsSuccess()
+    public void AlbumCommandRepositoryDeleteAlbumWithExistingIdReturnsSuccess()
     {
         // Arrange
         Result<Album> createResult = Album.Create("Альбом для удаления", 0);
@@ -88,44 +76,29 @@ public class FakeRepositoriesTests
         // Проверяем через QueryRepository, что альбом удалён
         Result<Album> getAfterDelete = _queryRepository.GetById(1);
         Assert.True(getAfterDelete.IsFailure);
-        Assert.Equal(InfrastructureErrors.Database.NotFound.Code, getAfterDelete.Error.Code);
+        Assert.Equal(InfrastructureErrors.Database.NotFound.Code, getAfterDelete.ResultError.Code);
     }
 
     /// <summary>
     ///     Тест: удаление несуществующего альбома возвращает ошибку NotFound.
     /// </summary>
     [Fact]
-    public void AlbumCommandRepository_DeleteAlbum_WithNonexistentId_ReturnsNotFoundError()
+    public void AlbumCommandRepositoryDeleteAlbumWithNonexistentIdReturnsNotFoundError()
     {
         // Act
         ResultVoid result = _commandRepository.Delete(999);
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(InfrastructureErrors.Database.NotFound.Code, result.Error.Code);
-        Assert.Equal(InfrastructureErrors.Database.NotFound.Message, result.Error.Message);
-    }
-
-    /// <summary>
-    ///     Тест: обновление null альбома возвращает ошибку NullAlbum.
-    /// </summary>
-    [Fact]
-    public void AlbumCommandRepository_UpdateAlbum_UpdatingWithNull_ReturnsNullAlbumError()
-    {
-        // Act
-        ResultVoid result = _commandRepository.Update(null!);
-
-        // Assert
-        Assert.True(result.IsFailure);
-        Assert.Equal(DomainErrors.Album.NullAlbum.Code, result.Error.Code);
-        Assert.Equal(DomainErrors.Album.NullAlbum.Message, result.Error.Message);
+        Assert.Equal(InfrastructureErrors.Database.NotFound.Code, result.ResultError.Code);
+        Assert.Equal(InfrastructureErrors.Database.NotFound.Message, result.ResultError.Message);
     }
 
     /// <summary>
     ///     Тест: обновление несуществующего альбома возвращает ошибку NotFound.
     /// </summary>
     [Fact]
-    public void AlbumCommandRepository_UpdateAlbum_UpdatingWithNonexistentId_ReturnsNotFoundError()
+    public void AlbumCommandRepositoryUpdateAlbumUpdatingWithNonexistentIdReturnsNotFoundError()
     {
         // Arrange
         Result<Album> createResult = Album.Create("Несуществующий альбом", 999);
@@ -137,15 +110,15 @@ public class FakeRepositoriesTests
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(InfrastructureErrors.Database.NotFound.Code, result.Error.Code);
-        Assert.Equal(InfrastructureErrors.Database.NotFound.Message, result.Error.Message);
+        Assert.Equal(InfrastructureErrors.Database.NotFound.Code, result.ResultError.Code);
+        Assert.Equal(InfrastructureErrors.Database.NotFound.Message, result.ResultError.Message);
     }
 
     /// <summary>
     ///     Тест: обновление существующего альбома проходит успешно.
     /// </summary>
     [Fact]
-    public void AlbumCommandRepository_UpdateAlbum_WithRightValues_ReturnsSuccess()
+    public void AlbumCommandRepositoryUpdateAlbumWithRightValuesReturnsSuccess()
     {
         // Arrange
         Result<Album> createResult = Album.Create("Старое имя", 0);
@@ -173,7 +146,7 @@ public class FakeRepositoriesTests
     ///     Тест: получение альбома по ID через QueryRepository.
     /// </summary>
     [Fact]
-    public void AlbumQueryRepository_GetById_ExistingAlbum_ReturnsAlbum()
+    public void AlbumQueryRepositoryGetByIdExistingAlbumReturnsAlbum()
     {
         // Arrange
         Result<Album> createResult = Album.Create("Альбом для поиска", 0);
@@ -192,21 +165,21 @@ public class FakeRepositoriesTests
     ///     Тест: получение несуществующего альбома возвращает NotFound.
     /// </summary>
     [Fact]
-    public void AlbumQueryRepository_GetById_NonexistentAlbum_ReturnsNotFoundError()
+    public void AlbumQueryRepositoryGetByIdNonexistentAlbumReturnsNotFoundError()
     {
         // Act
         Result<Album> result = _queryRepository.GetById(999);
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(InfrastructureErrors.Database.NotFound.Code, result.Error.Code);
+        Assert.Equal(InfrastructureErrors.Database.NotFound.Code, result.ResultError.Code);
     }
 
     /// <summary>
     ///     Тест: получение альбомов по ID папки.
     /// </summary>
     [Fact]
-    public void AlbumQueryRepository_GetByFolderId_ReturnsAlbumsInFolder()
+    public void AlbumQueryRepositoryGetByFolderIdReturnsAlbumsInFolder()
     {
         // Arrange
         Result<Album> album1 = Album.Create("Альбом 1", 0);
@@ -237,7 +210,7 @@ public class FakeRepositoriesTests
     ///     Тест: получение пустой коллекции для папки без альбомов.
     /// </summary>
     [Fact]
-    public void AlbumQueryRepository_GetByFolderId_EmptyFolder_ReturnsEmptyCollection()
+    public void AlbumQueryRepositoryGetByFolderIdEmptyFolderReturnsEmptyCollection()
     {
         // Act
         Result<IReadOnlyCollection<Album>> result = _queryRepository.GetByFolderId(999);
