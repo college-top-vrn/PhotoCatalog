@@ -9,7 +9,7 @@ namespace PhotoCatalog.Domain.Entities;
 /// <summary>
 ///     Представляет основную сущность фотографии в системе, привязанную к физическому файлу.
 /// </summary>
-public class Photo
+public sealed class Photo
 {
     private readonly List<int> _tagIds = [];
 

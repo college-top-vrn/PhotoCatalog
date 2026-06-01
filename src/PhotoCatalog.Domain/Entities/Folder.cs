@@ -9,7 +9,7 @@ namespace PhotoCatalog.Domain.Entities;
 /// <remarks>
 ///     ВНИМАНИЕ: Не создавайте объект через конструктор по умолчанию.
 /// </remarks>
-public class Folder
+public sealed class Folder
 {
     private Folder() { }
 
