@@ -41,7 +41,7 @@ public static class EntitySealing
             .And()
             .AreNotSealed()
             .Should()
-            .NotExist()    
+            .NotExist()
             .Because("не должны иметь наследников")
             .Check(Architecture);
     }
@@ -61,9 +61,9 @@ public static class EntitySealing
             .And()
             .AreRecord()
             .And()
-            .AreNotSealed() 
+            .AreNotSealed()
             .Should()
-            .NotExist()    
+            .NotExist()
             .Because("не должны иметь наследников")
             .Check(Architecture);
     }
