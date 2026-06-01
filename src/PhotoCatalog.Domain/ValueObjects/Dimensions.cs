@@ -25,7 +25,7 @@ namespace PhotoCatalog.Domain.ValueObjects;
 /// }
 /// </code>
 /// </example>
-public record Dimensions
+public sealed record Dimensions
 {
     private const int MinValues = 1;
 

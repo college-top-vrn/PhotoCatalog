@@ -11,7 +11,7 @@ namespace PhotoCatalog.Domain.Entities;
 ///     Альбом отвечает за строгий контроль своего содержимого.
 ///     Альбом проверяет, чтобы одну и ту же фотографию нельзя было прикрепить дважды.
 /// </remarks>
-public class Album
+public sealed class Album
 {
     private readonly List<int> _photoIds = [];
 

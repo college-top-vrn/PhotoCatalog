@@ -5,7 +5,7 @@ namespace PhotoCatalog.Domain.Entities;
 /// <summary>
 ///     Представляет тег для фотографий.
 /// </summary>
-public class Tag
+public sealed class Tag
 {
     /// <summary>
     ///     Конструктор для Dapper.

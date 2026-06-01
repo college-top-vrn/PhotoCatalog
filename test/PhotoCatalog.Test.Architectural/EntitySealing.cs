@@ -17,25 +17,12 @@ namespace PhotoCatalog.Test.Architectural;
 public static class EntitySealing
 {
     /// <summary>
-    ///     Архитектура.
+    ///     Архитектура доменного слоя.
     /// </summary>
     private static readonly Architecture Architecture =
         new ArchLoader()
-            .LoadAssemblies(
-                typeof(Album).Assembly)
+            .LoadAssemblies(typeof(Album).Assembly)
             .Build();
-
-    /// <summary>
-    ///     Классы пространства имени PhotoCatalog.Domain.Entities.
-    /// </summary>
-    private static readonly IObjectProvider<IType> DomainLayerEntities =
-        Types().That().ResideInAssemblyMatching("PhotoCatalog.Domain.Entities.*");
-
-    /// <summary>
-    ///     Классы пространства имени PhotoCatalog.Domain.ValueObjects.
-    /// </summary>
-    private static readonly IObjectProvider<IType> DomainLayerValueObjects =
-        Types().That().ResideInAssemblyMatching("PhotoCatalog.Domain.ValueObjects.*");
 
     /// <summary>
     ///     Тест, проверяющий наличие модификатора sealed у всех классов пространства имени
@@ -46,32 +33,38 @@ public static class EntitySealing
     {
         Classes()
             .That()
-            .Are(DomainLayerEntities)
+            .ResideInAssembly(typeof(Album).Assembly)
+            .And()
+            .ResideInNamespaceMatching(@"^PhotoCatalog\.Domain\.Entities(\..*)?$")
             .And()
             .AreNotAbstract()
+            .And()
+            .AreNotSealed()
             .Should()
-            .BeSealed()
+            .NotExist()    
             .Because("не должны иметь наследников")
-            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 
     /// <summary>
-    ///     Тест, проверяющий наличие модификатора sealed у всех классов пространства имени
-    ///     PhotoCatalog.Domain.Entities.
+    ///     Тест, проверяющий наличие модификатора sealed у всех record-классов пространства имени
+    ///     PhotoCatalog.Domain.ValueObjects.
     /// </summary>
     [Fact]
     public static void ValueObjectsShouldBeSealed()
     {
         Classes()
             .That()
-            .Are(DomainLayerValueObjects)
+            .ResideInAssembly(typeof(Album).Assembly)
+            .And()
+            .ResideInNamespaceMatching(@"^PhotoCatalog\.Domain\.ValueObjects(\..*)?$")
             .And()
             .AreRecord()
+            .And()
+            .AreNotSealed() 
             .Should()
-            .BeSealed()
+            .NotExist()    
             .Because("не должны иметь наследников")
-            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 }
