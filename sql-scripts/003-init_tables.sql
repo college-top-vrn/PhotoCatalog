@@ -1,3 +1,9 @@
+CREATE TABLE tags
+(
+    id   UUID PRIMARY KEY DEFAULT uuidv7(),
+    name TEXT NOT NULL
+)
+
 CREATE TABLE photos
 (
     id          UUID PRIMARY KEY DEFAULT uuidv7(),
@@ -11,3 +17,11 @@ CREATE TABLE photos
 );
 
 CREATE INDEX idx_metadata ON photos USING gin (metadata);
+
+CREATE TABLE tags_and_photos_connections
+(
+    tag_id   UUID,
+    photo_id UUID,
+    CONSTRAINT fk_tag_id FOREIGN KEY (tag_id) REFERENCES tags (id),
+    CONSTRAINT fk_photo_id FOREIGN KEY (photo_id) REFERENCES photos (id)
+);
