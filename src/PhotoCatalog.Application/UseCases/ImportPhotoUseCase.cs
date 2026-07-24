@@ -2,6 +2,7 @@ using System.IO;
 
 using PhotoCatalog.Application.DTOs;
 using PhotoCatalog.Application.Errors;
+using PhotoCatalog.Application.Interfaces.Services;
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Extensions;
 using PhotoCatalog.Domain.Interfaces.Repositories;

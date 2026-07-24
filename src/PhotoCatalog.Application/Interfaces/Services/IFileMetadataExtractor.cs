@@ -1,7 +1,6 @@
 using PhotoCatalog.Domain.Primitives;
-using PhotoCatalog.Domain.ValueObjects;
 
-namespace PhotoCatalog.Domain.Interfaces.Services;
+namespace PhotoCatalog.Application.Interfaces.Services;
 
 /// <summary>
 ///     Контракт для извлечения метаданных из файлов.
@@ -14,11 +13,4 @@ public interface IFileMetadataExtractor
     /// <param name="filePath">Путь к файлу.</param>
     /// <returns>Хэш файла или ошибку.</returns>
     Result<string> CalculateHash(string filePath);
-
-    /// <summary>
-    ///     Возвращает размеры файла (например, ширина и высота).
-    /// </summary>
-    /// <param name="filePath">Путь к файлу.</param>
-    /// <returns>Размеры файла или ошибку.</returns>
-    Result<Dimensions> GetDimensions(string filePath);
 }
