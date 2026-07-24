@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 
 using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
@@ -9,7 +8,7 @@ using PhotoCatalog.Domain.ValueObjects;
 namespace PhotoCatalog.Domain.Entities;
 
 /// <summary>
-///     Представляет доменную сущность альбом.
+///     Представляет программную доменную сущность альбом.
 /// </summary>
 public sealed class Album : Entity, IDeeplyCopyable<Album>
 {
@@ -19,26 +18,21 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     public Name Name { get; private set; }
 
     /// <summary>
-    ///     Репозиторий идентификаторов фотографий.
+    ///     Репозиторий идентификаторов фотографий альбома.
     /// </summary>
-    public IdRepository PhotoIds { get; }
+    public IdRepository PhotoIdRepository { get; }
 
-    private Album(
-        Guid id,
-        Guid userId,
-        Name name,
-        List<Guid> photoIds
-    ) : base(id, userId)
+    private Album(Guid id, Guid userId, Name name, List<Guid> photoIds) : base(id, userId)
     {
         Name = name;
-        PhotoIds = IdRepository.Create(photoIds).Value!;
+        PhotoIdRepository = IdRepository.Create(photoIds).Value!;
     }
 
     /// <summary>
     ///     Создаёт новый альбом.
     /// </summary>
     /// <param name="id">идентификатор альбома.</param>
-    /// <param name="userId">идентификатор владельца альбома</param>
+    /// <param name="userId">идентификатор владельца альбома.</param>
     /// <param name="name">имя альбома.</param>
     /// <param name="photoIds">список идентификаторов фотографий альбома.</param>
     /// <returns>
@@ -50,40 +44,31 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///         <item>
     ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.Album.EmptyName" />, если имя пустое.
+    ///                 Ошибка <see cref="DomainErrors.Name.IsEmpty" />, если имя пустое;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Name.IsTooLong" />, если длина имени больше 50.
     ///             </description>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<Album> Create(
-        Guid id,
-        Guid userId,
-        string name,
-        List<Guid> photoIds)
+    public static Result<Album> Create(Guid id, Guid userId, string name, List<Guid> photoIds)
     {
-        var result = Name.Create(name);
+        Result<Name> result = Name.Create(name);
 
-        return result.IsFailure
-            ? Result.Failure<Album>(result.ResultError)
-            : Result.Success(new Album(
-                id,
-                userId,
-                result.Value!,
-                photoIds
-            ));
+        return result.IsSuccess
+            ? Result.Success(new Album(id, userId, result.Value!, photoIds))
+            : Result.Failure<Album>(result.ResultError);
     }
 
     /// <inheritdoc />
     public Album DeepCopy()
     {
-        List<Guid> photoIds = new(PhotoIds.Ids);
+        List<Guid> photoIds = new(PhotoIdRepository.Ids);
 
-        Album clone = new(
-            Id,
-            UserId,
-            Name,
-            photoIds
-        );
+        Album clone = new(Id, UserId, Name, photoIds);
 
         return clone;
     }
@@ -101,14 +86,19 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///         <item>
     ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.Album.EmptyName" />, если новое имя пустое.
+    ///                 Ошибка <see cref="DomainErrors.Name.IsEmpty" />, если имя пустое;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Name.IsTooLong" />, если длина имени больше 50.
     ///             </description>
     ///         </item>
     ///     </list>
     /// </returns>
     public ResultVoid Rename(string newName)
     {
-        var result = Name.Create(newName);
+        Result<Name> result = Name.Create(newName);
 
         if (result.IsFailure)
         {

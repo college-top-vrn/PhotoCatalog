@@ -5,7 +5,7 @@ namespace PhotoCatalog.Domain.ValueObjects.Photo;
 /// <summary>
 ///     ValueObject, представляющий собой ключ от физического файла из S3-хранилища.
 /// </summary>
-public record StorageKey
+public sealed record StorageKey
 {
     /// <summary>
     ///     Значение ключа.
@@ -38,7 +38,7 @@ public record StorageKey
             return Result.Failure<StorageKey>(DomainErrors.StorageKey.IsEmpty);
         }
 
-        var storageKey = new StorageKey(value);
+        StorageKey storageKey = new(value);
 
         return Result.Success(storageKey);
     }

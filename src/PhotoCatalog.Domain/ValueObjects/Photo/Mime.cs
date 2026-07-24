@@ -5,17 +5,14 @@ namespace PhotoCatalog.Domain.ValueObjects.Photo;
 /// <summary>
 ///     ValueObject, представляющий собой MIME файла
 /// </summary>
-public record Mime
+public sealed record Mime
 {
     /// <summary>
     ///     Значение MIME.
     /// </summary>
     public string Value { get; }
 
-    private Mime(string value)
-    {
-        Value = value;
-    }
+    private Mime(string value) => Value = value;
 
     /// <summary>
     ///     Создаёт новый MIME.
@@ -36,12 +33,9 @@ public record Mime
     /// </returns>
     public static Result<Mime> Create(string value)
     {
-        if (string.IsNullOrEmpty(value))
-        {
-            return Result.Failure<Mime>(DomainErrors.Mime.IsEmpty);
-        }
+        if (string.IsNullOrEmpty(value)) return Result.Failure<Mime>(DomainErrors.Mime.IsEmpty);
 
-        var mime = new Mime(value);
+        Mime mime = new(value);
 
         return Result.Success(mime);
     }

@@ -10,16 +10,16 @@ namespace PhotoCatalog.Domain.ValueObjects;
 /// <summary>
 ///     ValueObject, представляющий собой репозиторий идентификаторов.
 /// </summary>
-public class IdRepository
+public sealed class IdRepository
 {
-    private readonly List<Guid> _ids;
+    private readonly List<Guid> _idRepository;
 
     /// <summary>
     ///     Иммутабельный список идентификаторов.
     /// </summary>
-    public IImmutableList<Guid> Ids => _ids.ToImmutableList();
+    public IImmutableList<Guid> Ids => _idRepository.ToImmutableList();
     
-    private IdRepository(List<Guid> ids) => _ids = ids;
+    private IdRepository(List<Guid> idRepository) => _idRepository = idRepository;
     
     /// <summary>
     ///     Создаёт репозиторий идентификаторов.
@@ -36,9 +36,9 @@ public class IdRepository
     /// </returns>
     public static Result<IdRepository> Create(List<Guid> ids)
     {
-        var tags = new IdRepository(ids);
+        IdRepository idRepository = new(ids);
 
-        return Result.Success(tags);
+        return Result.Success(idRepository);
     }
     
     /// <summary>
@@ -61,12 +61,12 @@ public class IdRepository
     /// </returns>
     public ResultVoid Add(Guid id)
     {
-        if (_ids.Contains(id))
+        if (_idRepository.Contains(id))
         {
             return ResultVoid.Failure(DomainErrors.IdRepository.DuplicatedId);
         }
         
-        _ids.Add(id);
+        _idRepository.Add(id);
         return ResultVoid.Success();
     }
 
@@ -90,7 +90,7 @@ public class IdRepository
     /// </returns>
     public ResultVoid Remove(Guid id)
     {
-        return _ids.Remove(id)
+        return _idRepository.Remove(id)
             ? ResultVoid.Success()
             : ResultVoid.Failure(DomainErrors.IdRepository.IdNotFound);
     }

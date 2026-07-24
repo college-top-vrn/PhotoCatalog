@@ -7,7 +7,7 @@ using PhotoCatalog.Domain.ValueObjects;
 namespace PhotoCatalog.Domain.Entities;
 
 /// <summary>
-///     Представляет программный тег фотографии.
+///     Представляет программную доменную сущность тег.
 /// </summary>
 public sealed class Tag : Entity, IDeeplyCopyable<Tag>
 {
@@ -21,12 +21,7 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     /// </summary>
     public ColorHex ColorHex { get; }
 
-    private Tag(
-        Guid id,
-        Guid userId,
-        Name name,
-        ColorHex colorHex
-    ) : base(id, userId)
+    private Tag(Guid id, Guid userId, Name name, ColorHex colorHex) : base(id, userId)
     {
         Name = name;
         ColorHex = colorHex;
@@ -58,35 +53,20 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<Tag> Create(
-        Guid id,
-        Guid userId,
-        string nameValue,
-        string colorHexValue
-    )
+    public static Result<Tag> Create(Guid id, Guid userId, string nameValue, string colorHexValue)
     {
-        var name = Name.Create(nameValue);
+        Result<Name> name = Name.Create(nameValue);
 
         if (name.IsFailure) return Result.Failure<Tag>(name.ResultError);
 
-        var colorHex = ColorHex.Create(colorHexValue);
+        Result<ColorHex> colorHex = ColorHex.Create(colorHexValue);
 
-        return Result.Success(new Tag(
-            id,
-            userId,
-            name.Value!,
-            colorHex.Value!
-        ));
+        return Result.Success(new Tag(id, userId, name.Value!, colorHex.Value!));
     }
 
     /// <inheritdoc />
     public Tag DeepCopy()
     {
-        return new Tag(
-            Id,
-            UserId,
-            Name,
-            ColorHex
-        );
+        return new Tag(Id, UserId, Name, ColorHex);
     }
 }

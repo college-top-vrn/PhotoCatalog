@@ -5,7 +5,7 @@ namespace PhotoCatalog.Domain.ValueObjects;
 /// <summary>
 ///     ValueObject, представляющий собой HEX-код цвета.
 /// </summary>
-public record ColorHex
+public sealed record ColorHex
 {
     /// <summary>
     ///     Значение HEX-кода.

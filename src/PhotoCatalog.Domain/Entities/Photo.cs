@@ -10,7 +10,7 @@ using PhotoCatalog.Domain.ValueObjects.Photo;
 namespace PhotoCatalog.Domain.Entities;
 
 /// <summary>
-///     Представляет программную сущность физической фотографии, хранящейся в S3-хранилище.
+///     Представляет программную доменную сущность физической фотографии, хранящейся в S3-хранилище.
 /// </summary>
 public sealed class Photo : Entity, IDeeplyCopyable<Photo>
 {
@@ -40,9 +40,9 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     public JsonDocument Metadata { get; }
 
     /// <summary>
-    ///     Репозиторий для управлением списком идентификаторов тегов.
+    ///     Репозиторий идентификаторов тегов фотографии.
     /// </summary>
-    public IdRepository TagIds { get; }
+    public IdRepository TagIdRepository { get; }
 
     private Photo(
         Guid id,
@@ -52,14 +52,15 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         Mime mime,
         StorageKey storageKey,
         JsonDocument metadata,
-        List<Guid> tagIds) : base(id, userId)
+        List<Guid> tagIds) 
+        : base(id, userId)
     {
         CapturedAt = capturedAt;
         PhotoSize = photoSize;
         Mime = mime;
         StorageKey = storageKey;
         Metadata = metadata;
-        TagIds = IdRepository.Create(tagIds).Value!;
+        TagIdRepository = IdRepository.Create(tagIds).Value!;
     }
 
     /// <summary>
@@ -111,7 +112,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <inheritdoc />
     public Photo DeepCopy()
     {
-        List<Guid> tagIds = new(TagIds.Ids);
+        List<Guid> tagIds = new(TagIdRepository.Ids);
 
         Photo clone = new(
             Id,

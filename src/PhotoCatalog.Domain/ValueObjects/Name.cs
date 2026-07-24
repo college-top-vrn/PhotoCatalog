@@ -5,7 +5,7 @@ namespace PhotoCatalog.Domain.ValueObjects;
 /// <summary>
 ///     ValueObject, представляющий собой имя.
 /// </summary>
-public record Name
+public sealed record Name
 {
     /// <summary>
     ///     Значение имени.
@@ -25,12 +25,13 @@ public record Name
     ///         </item>
     ///         <item>
     ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.Name.IsEmpty"/>, если имя пустое или null;
+    ///                 Ошибка <see cref="DomainErrors.Name.IsEmpty"/>, если имя тега пустое;
     ///             </description>
     ///         </item>
     ///         <item>
     ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.Name.IsTooLong"/>, если длина имени больше 50;
+    ///                 Ошибка <see cref="DomainErrors.Name.IsTooLong"/>,
+    ///                 если длина имени тега превышает 50 символов.
     ///             </description>
     ///         </item>
     ///     </list>
@@ -39,13 +40,13 @@ public record Name
     {
         const int maxNameLength = 50;
 
-        var trimmedValue = value.Trim();
+        string trimmedValue = value.Trim();
 
         if (string.IsNullOrEmpty(value)) return Result.Failure<Name>(DomainErrors.Name.IsEmpty);
 
         if (value.Length > maxNameLength) return Result.Failure<Name>(DomainErrors.Name.IsTooLong);
 
-        var name = new Name(trimmedValue);
+        Name name = new(trimmedValue);
 
         return Result.Success(name);
     }

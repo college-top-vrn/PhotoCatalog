@@ -7,7 +7,7 @@ namespace PhotoCatalog.Domain.ValueObjects.Photo;
 /// <summary>
 ///     ValueObject, представляющий собой дату и время съёмки фотографии.
 /// </summary>
-public record CapturedAt
+public sealed record CapturedAt
 {
     /// <summary>
     ///     Значение даты и времени съёмки фотографии.
@@ -40,7 +40,7 @@ public record CapturedAt
             return Result.Failure<CapturedAt>(DomainErrors.CapturedAt.IsInvalid);
         }
 
-        var capturedAt = new CapturedAt(result);
+        CapturedAt capturedAt = new(result);
 
         return Result.Success(capturedAt);
     }
