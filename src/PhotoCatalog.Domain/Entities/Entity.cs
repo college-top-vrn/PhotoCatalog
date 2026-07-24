@@ -8,16 +8,24 @@ namespace PhotoCatalog.Domain.Entities;
 public abstract class Entity
 {
     /// <summary>
-    /// Идентификатор.
+    /// Идентификатор сущности.
     /// </summary>
     public Guid Id { get; }
+
+
+    /// <summary>
+    /// Идентификатор владельца сущности.
+    /// </summary>
+    public Guid UserId { get; }
 
     /// <summary>
     /// Конструктор.
     /// </summary>
-    /// <param name="id"></param>
-    protected Entity(Guid id)
+    /// <param name="id">идентификатор сущности.</param>
+    /// <param name="userId">идентификатор владельца сущности.</param>
+    protected Entity(Guid id, Guid userId)
     {
         Id = id;
+        UserId = userId;
     }
 }

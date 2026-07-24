@@ -58,7 +58,7 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     [Fact]
     public void AddNewUniqueTagReturnsSuccessAndPersists()
     {
-        Result<Tag> tag = Tag.Create("лес");
+        Result<Tag> tag = Tag.Create(TODO, TODO, "лес", TODO);
         ResultVoid result = _repoCommand.Add(tag.Value!);
         Result<Tag> tagNew = _repoQuery.GetByName("лес");
 
@@ -71,8 +71,8 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     [Fact]
     public void AddDuplicateNameReturnsFailure()
     {
-        Result<Tag> tag1 = Tag.Create("горы");
-        Result<Tag> tag2 = Tag.Create("горы");
+        Result<Tag> tag1 = Tag.Create(TODO, TODO, "горы", TODO);
+        Result<Tag> tag2 = Tag.Create(TODO, TODO, "горы", TODO);
 
 
         ResultVoid firstResult = _repoCommand.Add(tag1.Value!);
@@ -86,7 +86,7 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     [Fact]
     public void DeleteExistingFreeTagReturnsSuccess()
     {
-        _repoCommand.Add(Tag.Create("лес").Value!);
+        _repoCommand.Add(Tag.Create(TODO, TODO, "лес", TODO).Value!);
 
         int tagId = _repoQuery.GetByName("лес").Value!.Id;
 
@@ -111,11 +111,11 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     [Fact]
     public void UpdateExistingFreeTagReturnsSuccessAndPersists()
     {
-        Result<Tag> tagOld = Tag.Create("лес");
+        Result<Tag> tagOld = Tag.Create(TODO, TODO, "лес", TODO);
         _repoCommand.Add(tagOld.Value!);
 
 
-        Result<Tag> tagNew = Tag.Create("поляна");
+        Result<Tag> tagNew = Tag.Create(TODO, TODO, "поляна", TODO);
 
         ResultVoid result = _repoCommand.Update(tagNew.Value!);
 
@@ -127,7 +127,7 @@ public class SqliteTagCommandRepositoryTests : IDisposable
     [Fact]
     public void UpdateTagReturnsFailure()
     {
-        Result<Tag> tagNew = Tag.Create("поляна");
+        Result<Tag> tagNew = Tag.Create(TODO, TODO, "поляна", TODO);
 
         ResultVoid result = _repoCommand.Update(tagNew.Value!);
         Assert.True(result.IsFailure);

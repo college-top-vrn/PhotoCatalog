@@ -9,37 +9,39 @@ namespace PhotoCatalog.Domain.Entities;
 /// <summary>
 ///     Представляет доменную сущность альбом.
 /// </summary>
-/// <remarks>
-///     Отвечает за содержимое списка идентификаторов фотографий.
-/// </remarks>
 public sealed class Album : Entity, IDeeplyCopyable<Album>
 {
     /// <summary>
-    ///     Имя.
+    ///     Имя альбома.
     /// </summary>
     public string Name { get; private set; }
 
-    private readonly List<Guid> _photoIds = [];
+    private readonly List<Guid> _photoIds;
 
     /// <summary>
-    ///     Иммутабельная коллекция идентификаторов фотографий, принадлежащих альбому.
+    ///     Иммутабельный список идентификаторов фотографий альбома.
     /// </summary>
     public IImmutableList<Guid> PhotoIds => _photoIds.ToImmutableList();
 
-    /// <summary>
-    ///     Инициализирует новый экземпляр класса <see cref="Album" /> с указанным идентификатором и именем.
-    /// </summary>
-    /// <param name="id">идентификатор.</param>
-    /// <param name="name">имя.</param>
-    private Album(Guid id, string name) : base(id) => Name = name;
+    private Album(
+        Guid id,
+        Guid userId,
+        string name,
+        List<Guid> photoIds
+    ) : base(id, userId)
+    {
+        Name = name;
+        _photoIds = photoIds;
+    }
 
     /// <summary>
-    ///     Создаёт новый экземпляр альбома с проверкой валидности наименования.
+    ///     Создаёт новый альбом.
     /// </summary>
-    /// <param name="id">идентификатор создаваемого альбома.</param>
-    /// <param name="name">имя создаваемого альбома.</param>
+    /// <param name="id">идентификатор альбома.</param>
+    /// <param name="userId">идентификатор владельца альбома</param>
+    /// <param name="name">имя альбома.</param>
+    /// <param name="photoIds">список идентификаторов фотографий альбома.</param>
     /// <returns>
-    ///     Результат операции:
     ///     <list type="bullet">
     ///         <item>
     ///             <description>
@@ -53,7 +55,7 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<Album> Create(Guid id, string name)
+    public static Result<Album> Create(Guid id, Guid userId, string name, List<Guid> photoIds)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -62,15 +64,15 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
 
         string trimmedName = name.Trim();
 
-        return Result.Success(new Album(id, trimmedName));
+        return Result.Success(new Album(id, userId, trimmedName, photoIds));
     }
 
     /// <inheritdoc />
     public Album DeepCopy()
     {
-        Album clone = new(Id, Name);
+        List<Guid> photoIdsCopy = _photoIds.ConvertAll(photoId => Guid.Parse(photoId.ToString()));
 
-        clone._photoIds.AddRange(_photoIds);
+        Album clone = new(Id, UserId, Name, photoIdsCopy);
 
         return clone;
     }
@@ -80,7 +82,6 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// </summary>
     /// <param name="newName">новое имя альбома.</param>
     /// <returns>
-    ///     Результат операции:
     ///     <list type="bullet">
     ///         <item>
     ///             <description>
@@ -107,23 +108,10 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     }
 
     /// <summary>
-    ///     Восстанавливает коллекцию идентификаторов фотографий при материализации объекта из базы данных.
-    /// </summary>
-    /// <param name="photoIds">коллекция идентификаторов фотографий для восстановления.</param>
-    /// <returns>всегда успешный результат выполнения операции.</returns>
-    internal ResultVoid RestorePhotos(IEnumerable<Guid> photoIds)
-    {
-        _photoIds.AddRange(photoIds);
-
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
     ///     Добавляет идентификатор фотографии в альбом.
     /// </summary>
-    /// <param name="photoId">идентификатор добавляемой фотографии.</param>
+    /// <param name="photoId">идентификатор фотографии.</param>
     /// <returns>
-    ///     Результат операции:
     ///     <list type="bullet">
     ///         <item>
     ///             <description>
@@ -151,11 +139,10 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     }
 
     /// <summary>
-    ///     Удаляет фотографию из альбома.
+    ///     Удаляет идентификатор фотографии из альбома.
     /// </summary>
-    /// <param name="photoId">идентификатор удаляемой фотографии.</param>
+    /// <param name="photoId">идентификатор фотографии.</param>
     /// <returns>
-    /// Результат операции:
     ///     <list type="bullet">
     ///         <item>
     ///             <description>
