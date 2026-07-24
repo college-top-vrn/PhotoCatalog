@@ -1,6 +1,6 @@
 using System;
 
-namespace PhotoCatalog.Domain.Entities;
+namespace PhotoCatalog.Domain.Interfaces;
 
 /// <summary>
 /// Абстрактная сущность всех доменных моделей.

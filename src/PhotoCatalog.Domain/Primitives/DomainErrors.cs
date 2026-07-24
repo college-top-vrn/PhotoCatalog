@@ -8,16 +8,89 @@
 public static class DomainErrors
 {
     /// <summary>
-    ///     Ошибки для <see cref="Dimensions" />.
+    ///     Ошибки для <see cref="Name"/>
     /// </summary>
-    public static class Dimensions
+    public static class Name
     {
         /// <summary>
-        ///     Ошибка, когда ширина и высота меньше или равны нулю, или меньше разрешенного предела размера.
+        ///     Ошибка, обозначающая отсутствия имени.
         /// </summary>
-        public static readonly ResultError Invalid = new(
-            "Dimensions.Invalid",
-            "Ширина и высота должны быть строго больше нуля или меньше разрешенного предела размера.");
+        public static readonly ResultError IsEmpty = new(
+            "Name.IsEmpty",
+            "Имя пустое"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая слишком длинное имя.
+        /// </summary>
+        public static readonly ResultError IsTooLong = new(
+            "Name.IsTooLong",
+            "Имя слишком длинное"
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="CapturedAt"/>
+    /// </summary>
+    public static class CapturedAt
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая неправильный формат даты и времени.
+        /// </summary>
+        public static readonly ResultError IsInvalid = new(
+            "CapturedAt.IsInvalid",
+            "Формат даты и время съёмки неправильный."
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="Mime"/>
+    /// </summary>
+    public static class Mime
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая отсутсвие MIME у файла.
+        /// </summary>
+        public static readonly ResultError IsEmpty = new(
+            "Mime.IsEmpty",
+            "MIME файла пустой."
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="StorageKey"/>
+    /// </summary>
+    public static class StorageKey
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствия ключа от физического файла в S3-хранилище.
+        /// </summary>
+        public static readonly ResultError IsEmpty = new(
+            "StorageKey.IsEmpty",
+            "Ключ от физического файла в S3 пустой"
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="IdRepository"/>
+    /// </summary>
+    public static class IdRepository
+    {
+        /// <summary>
+        ///     Ошибка, означающая наличие дупликата данного идентификатора.
+        /// </summary>
+        public static readonly ResultError DuplicatedId = new(
+            "IdRepository.DuplicatedId",
+            "Данный идентификатор уже есть"
+        );
+
+        /// <summary>
+        ///     Ошибка, означающая отсутствие данного идентификатора.
+        /// </summary>
+        public static readonly ResultError IdNotFound = new(
+            "IdRepository.IdNotFound",
+            "Данный идентификатор не найден"
+        );
     }
 
     /// <summary>

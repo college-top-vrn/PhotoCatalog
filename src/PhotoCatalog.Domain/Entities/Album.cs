@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
+using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Domain.ValueObjects;
 
 namespace PhotoCatalog.Domain.Entities;
 
@@ -14,24 +16,22 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// <summary>
     ///     Имя альбома.
     /// </summary>
-    public string Name { get; private set; }
-
-    private readonly List<Guid> _photoIds;
+    public Name Name { get; private set; }
 
     /// <summary>
-    ///     Иммутабельный список идентификаторов фотографий альбома.
+    ///     Репозиторий идентификаторов фотографий.
     /// </summary>
-    public IImmutableList<Guid> PhotoIds => _photoIds.ToImmutableList();
+    public IdRepository PhotoIds { get; }
 
     private Album(
         Guid id,
         Guid userId,
-        string name,
+        Name name,
         List<Guid> photoIds
     ) : base(id, userId)
     {
         Name = name;
-        _photoIds = photoIds;
+        PhotoIds = IdRepository.Create(photoIds).Value!;
     }
 
     /// <summary>
@@ -55,24 +55,35 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<Album> Create(Guid id, Guid userId, string name, List<Guid> photoIds)
+    public static Result<Album> Create(
+        Guid id,
+        Guid userId,
+        string name,
+        List<Guid> photoIds)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            return Result.Failure<Album>(DomainErrors.Album.EmptyName);
-        }
+        var result = Name.Create(name);
 
-        string trimmedName = name.Trim();
-
-        return Result.Success(new Album(id, userId, trimmedName, photoIds));
+        return result.IsFailure
+            ? Result.Failure<Album>(result.ResultError)
+            : Result.Success(new Album(
+                id,
+                userId,
+                result.Value!,
+                photoIds
+            ));
     }
 
     /// <inheritdoc />
     public Album DeepCopy()
     {
-        List<Guid> photoIdsCopy = _photoIds.ConvertAll(photoId => Guid.Parse(photoId.ToString()));
+        List<Guid> photoIds = new(PhotoIds.Ids);
 
-        Album clone = new(Id, UserId, Name, photoIdsCopy);
+        Album clone = new(
+            Id,
+            UserId,
+            Name,
+            photoIds
+        );
 
         return clone;
     }
@@ -97,70 +108,15 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// </returns>
     public ResultVoid Rename(string newName)
     {
-        if (string.IsNullOrWhiteSpace(newName))
+        var result = Name.Create(newName);
+
+        if (result.IsFailure)
         {
-            return ResultVoid.Failure(DomainErrors.Album.EmptyName);
+            return ResultVoid.Failure(result.ResultError);
         }
 
-        Name = newName.Trim();
+        Name = result.Value!;
 
         return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Добавляет идентификатор фотографии в альбом.
-    /// </summary>
-    /// <param name="photoId">идентификатор фотографии.</param>
-    /// <returns>
-    ///     <list type="bullet">
-    ///         <item>
-    ///             <description>
-    ///                 Успех при успешном добавлении фотографии;
-    ///             </description>
-    ///         </item>
-    ///         <item>
-    ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.Album.DuplicatePhoto" />,
-    ///                 если фотография уже есть в альбоме.
-    ///             </description>
-    ///         </item>
-    ///     </list>
-    /// </returns>
-    public ResultVoid AddPhoto(Guid photoId)
-    {
-        if (_photoIds.Contains(photoId))
-        {
-            return ResultVoid.Failure(DomainErrors.Album.DuplicatePhoto);
-        }
-
-        _photoIds.Add(photoId);
-
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Удаляет идентификатор фотографии из альбома.
-    /// </summary>
-    /// <param name="photoId">идентификатор фотографии.</param>
-    /// <returns>
-    ///     <list type="bullet">
-    ///         <item>
-    ///             <description>
-    ///                 Успех при успешном удалении фотографии;
-    ///             </description>
-    ///         </item>
-    ///         <item>
-    ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.Album.NotFound" />,
-    ///                 если фотография не была найдена.
-    ///             </description>
-    ///         </item>
-    ///     </list>
-    /// </returns>
-    public ResultVoid RemovePhoto(Guid photoId)
-    {
-        return _photoIds.Remove(photoId)
-            ? ResultVoid.Success()
-            : ResultVoid.Failure(DomainErrors.Album.NotFound);
     }
 }

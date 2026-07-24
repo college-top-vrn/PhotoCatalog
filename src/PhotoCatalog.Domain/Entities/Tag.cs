@@ -1,6 +1,8 @@
 using System;
 
+using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Domain.ValueObjects;
 
 namespace PhotoCatalog.Domain.Entities;
 
@@ -12,18 +14,18 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     /// <summary>
     ///     Ммя тега.
     /// </summary>
-    public string Name { get; }
+    public Name Name { get; }
 
     /// <summary>
     ///     HEX-цвет тега.
     /// </summary>
-    public string ColorHex { get; }
+    public ColorHex ColorHex { get; }
 
     private Tag(
         Guid id,
         Guid userId,
-        string name,
-        string colorHex
+        Name name,
+        ColorHex colorHex
     ) : base(id, userId)
     {
         Name = name;
@@ -35,8 +37,8 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     /// </summary>
     /// <param name="id">идентификатор тега.</param>
     /// <param name="userId">идентификатор владельца тега.</param>
-    /// <param name="name">имя тега.</param>
-    /// <param name="colorHex">HEX-цвет тега</param>
+    /// <param name="nameValue">имя тега.</param>
+    /// <param name="colorHexValue">HEX-цвет тега.</param>
     /// <returns>
     ///     <list type="bullet">
     ///         <item>
@@ -46,12 +48,12 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     ///         </item>
     ///         <item>
     ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.Tag.EmptyName"/>, если имя тега пустое;
+    ///                 Ошибка <see cref="DomainErrors.Name.IsEmpty"/>, если имя тега пустое;
     ///             </description>
     ///         </item>
     ///         <item>
     ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.Tag.TooLong"/>, если длина имени тега превышает 50 символов.
+    ///                 Ошибка <see cref="DomainErrors.Name.IsTooLong"/>, если длина имени тега превышает 50 символов.
     ///             </description>
     ///         </item>
     ///     </list>
@@ -59,31 +61,21 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     public static Result<Tag> Create(
         Guid id,
         Guid userId,
-        string name,
-        string colorHex
+        string nameValue,
+        string colorHexValue
     )
     {
-        const int maxNameLength = 50;
+        var name = Name.Create(nameValue);
 
-        if (string.IsNullOrEmpty(name))
-        {
-            return Result.Failure<Tag>(DomainErrors.Tag.EmptyName);
-        }
+        if (name.IsFailure) return Result.Failure<Tag>(name.ResultError);
 
-        string trimmedName = name.Trim();
-
-        if (trimmedName.Length > maxNameLength)
-        {
-            return Result.Failure<Tag>(DomainErrors.Tag.TooLong);
-        }
-
-        string normalizedName = trimmedName.ToLowerInvariant();
+        var colorHex = ColorHex.Create(colorHexValue);
 
         return Result.Success(new Tag(
             id,
             userId,
-            normalizedName,
-            colorHex
+            name.Value!,
+            colorHex.Value!
         ));
     }
 
