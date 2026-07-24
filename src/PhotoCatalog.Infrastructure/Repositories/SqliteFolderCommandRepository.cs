@@ -71,7 +71,7 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository, IDisposab
         {
             _logger.Error("Ошибка SQLite при добавлении папки с Id = {FolderId}", folder.Id);
             _unitOfWork.Rollback();
-            return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
+            return ResultVoid.Failure(InfrastructureErrors.Database.Postgres);
         }
     }
 
@@ -116,7 +116,7 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository, IDisposab
         {
             _logger.Error("Ошибка SQLite при обновлении папки с Id = {FolderId}", folder.Id);
             _unitOfWork.Rollback();
-            return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
+            return ResultVoid.Failure(InfrastructureErrors.Database.Postgres);
         }
     }
 
@@ -159,7 +159,7 @@ public class SqliteFolderCommandRepository : IFolderCommandRepository, IDisposab
         {
             _logger.Error("Ошибка SQLite при удалении папки с Id = {FolderId}", id);
             _unitOfWork.Rollback();
-            return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
+            return ResultVoid.Failure(InfrastructureErrors.Database.Postgres);
         }
     }
 }
