@@ -1,73 +1,72 @@
+using System;
+
+using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Domain.ValueObjects;
 
 namespace PhotoCatalog.Domain.Entities;
 
 /// <summary>
-///     Представляет тег для фотографий.
+///     Представляет программную доменную сущность тег.
 /// </summary>
-public sealed class Tag
+public sealed class Tag : Entity, IDeeplyCopyable<Tag>
 {
     /// <summary>
-    ///     Конструктор для Dapper.
+    ///     Ммя тега.
     /// </summary>
-    private Tag() { }
+    public Name Name { get; }
 
     /// <summary>
-    ///     Приватный конструктор с нормализованным именем.
+    ///     HEX-цвет тега.
     /// </summary>
-    /// <param name="name">
-    ///     Нормализованное имя тега.
-    /// </param>
-    private Tag(string name)
+    public ColorHex ColorHex { get; }
+
+    private Tag(Guid id, Guid userId, Name name, ColorHex colorHex) : base(id, userId)
     {
         Name = name;
+        ColorHex = colorHex;
     }
 
     /// <summary>
-    ///     Уникальный идентификатор тега.
+    ///     Создаёт новый тег.
     /// </summary>
-    public int Id { get; private init; }
-
-    /// <summary>
-    ///     Нормализованное имя тега (в нижнем регистре).
-    /// </summary>
-    public string Name { get; private init; } = string.Empty;
-
-    /// <summary>
-    ///     Создает новый валидный тег.
-    /// </summary>
-    /// <param name="name">
-    ///     Имя тега (будет нормализовано).
-    /// </param>
+    /// <param name="id">идентификатор тега.</param>
+    /// <param name="userId">идентификатор владельца тега.</param>
+    /// <param name="nameValue">имя тега.</param>
+    /// <param name="colorHexValue">HEX-цвет тега.</param>
     /// <returns>
-    ///     Результат создания с тегом или ошибкой.
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех с созданным тегом;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Name.IsEmpty"/>, если имя тега пустое;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Name.IsTooLong"/>, если длина имени тега превышает 50 символов.
+    ///             </description>
+    ///         </item>
+    ///     </list>
     /// </returns>
-    public static Result<Tag> Create(string name)
+    public static Result<Tag> Create(Guid id, Guid userId, string nameValue, string colorHexValue)
     {
-        if (string.IsNullOrEmpty(name))
-        {
-            return Result.Failure<Tag>(DomainErrors.Tag.EmptyName);
-        }
+        Result<Name> name = Name.Create(nameValue);
 
-        string trimmedName = name.Trim();
+        if (name.IsFailure) return Result.Failure<Tag>(name.ResultError);
 
-        if (trimmedName.Length > 50)
-        {
-            return Result.Failure<Tag>(DomainErrors.Tag.TooLong);
-        }
+        Result<ColorHex> colorHex = ColorHex.Create(colorHexValue);
 
-        string normalizedName = trimmedName.ToLowerInvariant();
-
-        return Result.Success(new Tag(normalizedName));
+        return Result.Success(new Tag(id, userId, name.Value!, colorHex.Value!));
     }
 
-
-    /// <summary>
-    ///     Метод для глубокого копирования
-    /// </summary>
-    /// <returns> возвращает копию объекта <see cref="Tag" /> </returns>
+    /// <inheritdoc />
     public Tag DeepCopy()
     {
-        return new Tag { Id = Id, Name = Name };
+        return new Tag(Id, UserId, Name, ColorHex);
     }
 }

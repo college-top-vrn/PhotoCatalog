@@ -1,4 +1,4 @@
-﻿namespace PhotoCatalog.Domain.Primitives;
+namespace PhotoCatalog.Domain.Primitives;
 
 /// <summary>
 ///     Представляет структуру для стандартизированного описания бизнес-ошибок в домене.

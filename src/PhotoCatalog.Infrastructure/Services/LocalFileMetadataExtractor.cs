@@ -9,6 +9,7 @@ using MetadataExtractor.Formats.Gif;
 using MetadataExtractor.Formats.Jpeg;
 using MetadataExtractor.Formats.Png;
 
+using PhotoCatalog.Application.Interfaces.Services;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;

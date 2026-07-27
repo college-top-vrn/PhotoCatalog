@@ -86,7 +86,7 @@ public class SqliteFolderQueryRepository : IFolderQueryRepository, IDisposable
         {
             _logger.Error("Ошибка SQLite при получении папки с Id = {FolderId}", id);
             _unitOfWork.Rollback();
-            return Result.Failure<Folder>(InfrastructureErrors.Database.Sqlite);
+            return Result.Failure<Folder>(InfrastructureErrors.Database.Postgres);
         }
     }
 }

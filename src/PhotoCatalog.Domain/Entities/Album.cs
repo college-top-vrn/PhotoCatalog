@@ -1,188 +1,112 @@
+using System;
 using System.Collections.Generic;
 
+using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Domain.ValueObjects;
 
 namespace PhotoCatalog.Domain.Entities;
 
 /// <summary>
-///     Представляет доменную сущность виртуального альбома.
+///     Представляет программную доменную сущность альбом.
 /// </summary>
-/// <remarks>
-///     Альбом отвечает за строгий контроль своего содержимого.
-///     Альбом проверяет, чтобы одну и ту же фотографию нельзя было прикрепить дважды.
-/// </remarks>
-public sealed class Album
+public sealed class Album : Entity, IDeeplyCopyable<Album>
 {
-    private readonly List<int> _photoIds = [];
+    /// <summary>
+    ///     Имя альбома.
+    /// </summary>
+    public Name Name { get; private set; }
 
     /// <summary>
-    ///     Инициализирует новый экземпляр класса <see cref="Album" /> без параметров.
+    ///     Репозиторий идентификаторов фотографий альбома.
     /// </summary>
-    /// <remarks>
-    ///     Конструктор является приватным и используется исключительно для материализации объектов библиотекой Dapper.
-    /// </remarks>
-    private Album() { }
+    public IdRepository PhotoIdRepository { get; }
 
-    /// <summary>
-    ///     Инициализирует новый экземпляр класса <see cref="Album" /> с указанным наименованием.
-    /// </summary>
-    /// <param name="name">Наименование альбома.</param>
-    /// <param name="id"> id альбома</param>
-    private Album(string name, int id)
+    private Album(Guid id, Guid userId, Name name, List<Guid> photoIds) : base(id, userId)
     {
         Name = name;
-        Id = id;
+        PhotoIdRepository = IdRepository.Create(photoIds).Value!;
     }
 
     /// <summary>
-    ///     Получает уникальный идентификатор альбома.
+    ///     Создаёт новый альбом.
     /// </summary>
-    public int Id { get; private init; }
-
-    /// <summary>
-    ///     Получает наименование альбома.
-    /// </summary>
-    public string Name { get; private set; } = string.Empty;
-
-    /// <summary>
-    ///     Получает идентификатор папки, в которой расположен альбом.
-    /// </summary>
-    /// <value>Идентификатор папки или null, если альбом не перемещен в папку.</value>
-    public int? FolderId { get; private set; }
-
-    /// <summary>
-    ///     Получает коллекцию идентификаторов фотографий, принадлежащих альбому, доступную только для чтения.
-    /// </summary>
-    public IReadOnlyCollection<int> PhotoIds => _photoIds.AsReadOnly();
-
-    /// <summary>
-    ///     Восстанавливает коллекцию идентификаторов фотографий при материализации объекта из базы данных.
-    /// </summary>
-    /// <param name="photoIds">Коллекция идентификаторов фотографий для восстановления.</param>
-    /// <returns>Успешный результат выполнения операции.</returns>
-    /// <remarks>
-    ///     Метод имеет модификатор доступа internal.
-    ///     Метод используется только библиотекой Dapper.
-    /// </remarks>
-    internal ResultVoid RestorePhotos(IEnumerable<int> photoIds)
-    {
-        _photoIds.Clear();
-        _photoIds.AddRange(photoIds);
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Создает новый экземпляр альбома с проверкой валидности наименования.
-    /// </summary>
-    /// <param name="name">Наименование создаваемого альбома.</param>
-    /// <param name="id">Id создаваемого альбома</param>
+    /// <param name="id">идентификатор альбома.</param>
+    /// <param name="userId">идентификатор владельца альбома.</param>
+    /// <param name="name">имя альбома.</param>
+    /// <param name="photoIds">список идентификаторов фотографий альбома.</param>
     /// <returns>
-    ///     Результат операции:
     ///     <list type="bullet">
     ///         <item>
-    ///             <description>Успех с созданным альбомом;</description>
+    ///             <description>
+    ///                 Успех с созданным альбомом;
+    ///             </description>
     ///         </item>
     ///         <item>
-    ///             <description>Ошибка <see cref="DomainErrors.Album.EmptyName" />, если наименование пустое.</description>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Name.IsEmpty" />, если имя пустое;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Name.IsTooLong" />, если длина имени больше 50.
+    ///             </description>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<Album> Create(string name, int id)
+    public static Result<Album> Create(Guid id, Guid userId, string name, List<Guid> photoIds)
     {
-        if (string.IsNullOrEmpty(name))
-        {
-            return Result.Failure<Album>(DomainErrors.Album.EmptyName);
-        }
+        Result<Name> result = Name.Create(name);
 
-        string trimmedName = name.Trim();
+        return result.IsSuccess
+            ? Result.Success(new Album(id, userId, result.Value!, photoIds))
+            : Result.Failure<Album>(result.ResultError);
+    }
 
-        return Result.Success(new Album(trimmedName, id));
+    /// <inheritdoc />
+    public Album DeepCopy()
+    {
+        List<Guid> photoIds = new(PhotoIdRepository.Ids);
+
+        Album clone = new(Id, UserId, Name, photoIds);
+
+        return clone;
     }
 
     /// <summary>
-    ///     Изменяет наименование альбома на новое значение.
+    ///     Изменяет имя альбома на новое значение.
     /// </summary>
-    /// <param name="newName">Новое наименование альбома.</param>
+    /// <param name="newName">новое имя альбома.</param>
     /// <returns>
-    ///     Результат операции:
     ///     <list type="bullet">
     ///         <item>
-    ///             <description>Успех при успешном переименовании;</description>
+    ///             <description>
+    ///                 Успех при успешном переименовании;
+    ///             </description>
     ///         </item>
     ///         <item>
-    ///             <description>Ошибка <see cref="DomainErrors.Album.EmptyName" />, если новое наименование пустое.</description>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Name.IsEmpty" />, если имя пустое;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Name.IsTooLong" />, если длина имени больше 50.
+    ///             </description>
     ///         </item>
     ///     </list>
     /// </returns>
     public ResultVoid Rename(string newName)
     {
-        if (string.IsNullOrWhiteSpace(newName))
+        Result<Name> result = Name.Create(newName);
+
+        if (result.IsFailure)
         {
-            return ResultVoid.Failure(DomainErrors.Album.EmptyName);
+            return ResultVoid.Failure(result.ResultError);
         }
 
-        Name = newName.Trim();
+        Name = result.Value!;
+
         return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Перемещает альбом в указанную папку.
-    /// </summary>
-    /// <param name="folder">Папка назначения.</param>
-    /// <returns>Успешный результат выполнения операции.</returns>
-    public ResultVoid MoveToFolder(Folder folder)
-    {
-        FolderId = folder.Id;
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Добавляет фотографию в альбом.
-    /// </summary>
-    /// <param name="photoId">Идентификатор добавляемой фотографии.</param>
-    /// <returns>
-    ///     Результат операции:
-    ///     <list type="bullet">
-    ///         <item>
-    ///             <description>Успех при успешном добавлении фотографии;</description>
-    ///         </item>
-    ///         <item>
-    ///             <description>Ошибка <see cref="DomainErrors.Album.DuplicatePhoto" />, если фотография уже есть в альбоме.</description>
-    ///         </item>
-    ///     </list>
-    /// </returns>
-    public ResultVoid AddPhoto(int photoId)
-    {
-        if (_photoIds.Contains(photoId))
-        {
-            return ResultVoid.Failure(DomainErrors.Album.DuplicatePhoto);
-        }
-
-        _photoIds.Add(photoId);
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Удаляет фотографию из альбома.
-    /// </summary>
-    /// <param name="photoId">Идентификатор удаляемой фотографии.</param>
-    /// <returns>Успешный результат выполнения операции.</returns>
-    public ResultVoid RemovePhoto(int photoId)
-    {
-        _photoIds.Remove(photoId);
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Метод для глубокого копирования
-    /// </summary>
-    /// <returns>Возвращает копию объекта <see cref="Album" /> </returns>
-    public Album DeepCopy()
-    {
-        Album clone = new() { Id = Id, Name = Name, FolderId = FolderId };
-
-        clone._photoIds.AddRange(_photoIds);
-
-        return clone;
     }
 }

@@ -33,7 +33,7 @@ public class FakeRepositoriesTests
     public void AlbumCommandRepositoryAddAlbumWithRightValuesReturnsSuccess()
     {
         // Arrange
-        (bool isSuccess, Album? album, _) = Album.Create("Тестовый альбом", 0);
+        (bool isSuccess, Album? album, _) = Album.Create(0, TODO, TODO, TODO);
         Assert.True(isSuccess);
 
         // Act
@@ -60,7 +60,7 @@ public class FakeRepositoriesTests
     public void AlbumCommandRepositoryDeleteAlbumWithExistingIdReturnsSuccess()
     {
         // Arrange
-        Result<Album> createResult = Album.Create("Альбом для удаления", 0);
+        Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
         Assert.True(createResult.IsSuccess);
         _commandRepository.Add(createResult.Value);
 
@@ -101,7 +101,7 @@ public class FakeRepositoriesTests
     public void AlbumCommandRepositoryUpdateAlbumUpdatingWithNonexistentIdReturnsNotFoundError()
     {
         // Arrange
-        Result<Album> createResult = Album.Create("Несуществующий альбом", 999);
+        Result<Album> createResult = Album.Create(999, TODO, TODO, TODO);
         Assert.True(createResult.IsSuccess);
         Album album = createResult.Value;
 
@@ -121,7 +121,7 @@ public class FakeRepositoriesTests
     public void AlbumCommandRepositoryUpdateAlbumWithRightValuesReturnsSuccess()
     {
         // Arrange
-        Result<Album> createResult = Album.Create("Старое имя", 0);
+        Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
         Assert.True(createResult.IsSuccess);
         _commandRepository.Add(createResult.Value);
 
@@ -149,7 +149,7 @@ public class FakeRepositoriesTests
     public void AlbumQueryRepositoryGetByIdExistingAlbumReturnsAlbum()
     {
         // Arrange
-        Result<Album> createResult = Album.Create("Альбом для поиска", 0);
+        Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
         Assert.True(createResult.IsSuccess);
         _commandRepository.Add(createResult.Value);
 
@@ -182,8 +182,8 @@ public class FakeRepositoriesTests
     public void AlbumQueryRepositoryGetByFolderIdReturnsAlbumsInFolder()
     {
         // Arrange
-        Result<Album> album1 = Album.Create("Альбом 1", 0);
-        Result<Album> album2 = Album.Create("Альбом 2", 0);
+        Result<Album> album1 = Album.Create(0, TODO, TODO, TODO);
+        Result<Album> album2 = Album.Create(0, TODO, TODO, TODO);
 
         _commandRepository.Add(album1.Value);
         _commandRepository.Add(album2.Value);

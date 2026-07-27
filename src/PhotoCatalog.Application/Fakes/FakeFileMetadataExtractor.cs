@@ -1,3 +1,4 @@
+using PhotoCatalog.Application.Interfaces.Services;
 using PhotoCatalog.Domain.Interfaces.Services;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;

@@ -1,4 +1,4 @@
-﻿namespace PhotoCatalog.Domain.Primitives;
+namespace PhotoCatalog.Domain.Primitives;
 
 /// <summary>
 ///     Реестр критических системных ошибок, которые не связаны с бизнес-правилами,

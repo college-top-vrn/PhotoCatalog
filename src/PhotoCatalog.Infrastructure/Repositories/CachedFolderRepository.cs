@@ -81,7 +81,7 @@ public class CachedFolderRepository(
         {
             logger.Warning(ex,
                 "Не удалось получить папку с Id={FolderId} из внутреннего репозитория – результат не кэширован", id);
-            return Result.Failure<Folder>(InfrastructureErrors.Database.Sqlite);
+            return Result.Failure<Folder>(InfrastructureErrors.Database.Postgres);
         }
         catch (Exception ex)
         {
@@ -126,7 +126,7 @@ public class CachedFolderRepository(
         {
             logger.Error(ex, "Исключение при выполнении операции {Operation} папки с Id={FolderId}",
                 operation.GetMethodInfo().Name, folderId);
-            return ResultVoid.Failure(InfrastructureErrors.Database.Sqlite);
+            return ResultVoid.Failure(InfrastructureErrors.Database.Postgres);
         }
     }
 
