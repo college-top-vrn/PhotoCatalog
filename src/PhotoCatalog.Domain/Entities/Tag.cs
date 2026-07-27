@@ -61,7 +61,7 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
 
         Result<ColorHex> colorHex = ColorHex.Create(colorHexValue);
 
-        return Result.Success(new Tag(id, userId, name.Value!, colorHex.Value!));
+        return Result.Success(new Tag(id, userId, name.Value, colorHex.Value!));
     }
 
     /// <inheritdoc />

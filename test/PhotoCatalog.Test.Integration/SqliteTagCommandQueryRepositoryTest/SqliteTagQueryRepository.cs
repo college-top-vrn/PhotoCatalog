@@ -57,7 +57,7 @@ public class SqliteTagQueryRepositoryTests : IDisposable
     {
         using (SqliteCommand cmd = _keepAliveConnection.CreateCommand())
         {
-            cmd.CommandText = "INSERT INTO Tags (Id, Name) VALUES (0, 'лес')";
+            cmd.CommandText = "INSERT INTO Tags (Ids, Name) VALUES (0, 'лес')";
             cmd.ExecuteNonQuery();
         }
 
@@ -80,7 +80,7 @@ public class SqliteTagQueryRepositoryTests : IDisposable
     {
         using (SqliteCommand cmd = _keepAliveConnection.CreateCommand())
         {
-            cmd.CommandText = "INSERT INTO Tags (Id, Name) VALUES (0, 'лес')";
+            cmd.CommandText = "INSERT INTO Tags (Ids, Name) VALUES (0, 'лес')";
             cmd.ExecuteNonQuery();
         }
 

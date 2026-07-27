@@ -194,7 +194,7 @@ public class AddTagToPhotoUseCaseTests
 
     private static void SetIdViaReflection(object entity, int id)
     {
-        var field = entity.GetType().GetField("<Id>k__BackingField",
+        var field = entity.GetType().GetField("<Ids>k__BackingField",
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         field?.SetValue(entity, id);
     }

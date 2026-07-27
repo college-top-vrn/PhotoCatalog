@@ -40,7 +40,7 @@ public class CreateFolderUseCase(
             Result<Folder> parentResult = folderQueryRepository.GetById(request.ParentFolderId.Value);
             if (parentResult.IsFailure)
             {
-                logger.Warning("Родительская папка с Id {ParentId} не найдена.", request.ParentFolderId);
+                logger.Warning("Родительская папка с Ids {ParentId} не найдена.", request.ParentFolderId);
                 return Result.Failure<FolderResponse>(ApplicationErrors.General.NotFound);
             }
 
@@ -55,7 +55,7 @@ public class CreateFolderUseCase(
         Result<Folder> createFolderResult = Folder.Create(parentFolder.Id, request.Name);
         if (createFolderResult.IsFailure)
         {
-            logger.Warning("Не удалось создать папку с Id {ParentId}: {ErrorCode}: {Error}",
+            logger.Warning("Не удалось создать папку с Ids {ParentId}: {ErrorCode}: {Error}",
                 parentFolder.Id,
                 createFolderResult.ResultError.Code,
                 createFolderResult.ResultError.Message);

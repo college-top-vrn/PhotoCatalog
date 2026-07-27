@@ -30,6 +30,20 @@ public static class DomainErrors
     }
 
     /// <summary>
+    ///     Ошибки для <see cref="Metadata"/>
+    /// </summary>
+    public static class Metadata
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствие метаданных фотографии.
+        /// </summary>
+        public static readonly ResultError IsEmpty = new(
+            "Metadata.IsEmpty",
+            "Метаданные файла отсутствуют"
+        );
+    }
+
+    /// <summary>
     ///     Ошибки для <see cref="CapturedAt"/>
     /// </summary>
     public static class CapturedAt
@@ -72,15 +86,15 @@ public static class DomainErrors
     }
 
     /// <summary>
-    ///     Ошибки для <see cref="IdRepository"/>
+    ///     Ошибки для <see cref="Photo"/> и <see cref="Album"/>
     /// </summary>
-    public static class IdRepository
+    public static class Ids
     {
         /// <summary>
         ///     Ошибка, означающая наличие дупликата данного идентификатора.
         /// </summary>
         public static readonly ResultError DuplicatedId = new(
-            "IdRepository.DuplicatedId",
+            "Ids.DuplicatedId",
             "Данный идентификатор уже есть"
         );
 
@@ -88,7 +102,7 @@ public static class DomainErrors
         ///     Ошибка, означающая отсутствие данного идентификатора.
         /// </summary>
         public static readonly ResultError IdNotFound = new(
-            "IdRepository.IdNotFound",
+            "Ids.IdNotFound",
             "Данный идентификатор не найден"
         );
     }
@@ -152,26 +166,6 @@ public static class DomainErrors
         public static readonly ResultError NullPhoto = new(
             "Photo.NullPhoto",
             "Данная фотография пустая");
-    }
-
-    /// <summary>
-    ///     Ошибки для <see cref="Folder" />.
-    /// </summary>
-    public static class Folder
-    {
-        /// <summary>
-        ///     Ошибка, когда имя папки пустое.
-        /// </summary>
-        public static readonly ResultError EmptyName = new(
-            "Folder.EmptyName",
-            "Имя папки не может быть пустым.");
-
-        /// <summary>
-        ///     Ошибка, когда папка перемещается внутрь самой себя (циклическая ссылка).
-        /// </summary>
-        public static readonly ResultError CannotMoveToSelf = new(
-            "Folder.CannotMoveToSelf",
-            "Папка не может быть перемещена внутрь самой себя (циклическая ссылка).");
     }
 
     /// <summary>

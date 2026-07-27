@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
@@ -17,15 +18,17 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// </summary>
     public Name Name { get; private set; }
 
+    private readonly List<Guid> _photoIds;
+
     /// <summary>
-    ///     Репозиторий идентификаторов фотографий альбома.
+    ///     Иммутабельный список идентификаторов.
     /// </summary>
-    public IdRepository PhotoIdRepository { get; }
+    public IImmutableList<Guid> PhotoIds => _photoIds.ToImmutableList();
 
     private Album(Guid id, Guid userId, Name name, List<Guid> photoIds) : base(id, userId)
     {
         Name = name;
-        PhotoIdRepository = IdRepository.Create(photoIds).Value!;
+        _photoIds = photoIds;
     }
 
     /// <summary>
@@ -66,9 +69,7 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// <inheritdoc />
     public Album DeepCopy()
     {
-        List<Guid> photoIds = new(PhotoIdRepository.Ids);
-
-        Album clone = new(Id, UserId, Name, photoIds);
+        Album clone = new(Id, UserId, Name, _photoIds);
 
         return clone;
     }

@@ -169,7 +169,7 @@ try
     //         .ToHttpResult());
     //
     // albumEndpointsGroup.MapPost("/", (AlbumResponse album, IAlbumRepository albumRepository) => albumRepository
-    //     .Add(Album.Create(album.Name, album.Id).Value!)
+    //     .Add(Album.Create(album.Name, album.Ids).Value!)
     //     .ToHttpResult());
     //
     // albumEndpointsGroup.MapPost("/{albumId:int}/photos/{photoId:int}",

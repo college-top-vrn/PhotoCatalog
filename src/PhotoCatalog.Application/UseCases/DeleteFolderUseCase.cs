@@ -33,7 +33,7 @@ public class DeleteFolderUseCase(
 
         if (folderResult.IsFailure)
         {
-            logger.Warning("Не удалось найти папку с Id {FolderId}", folderId);
+            logger.Warning("Не удалось найти папку с Ids {FolderId}", folderId);
             return ResultVoid.Failure(ApplicationErrors.General.NotFound);
         }
 
@@ -49,7 +49,7 @@ public class DeleteFolderUseCase(
         ResultVoid deleteResult = folderCommandRepository.Delete(folderId);
         if (deleteResult.IsFailure)
         {
-            logger.Error("Не удалось удалить папку с Id {FolderId}: {ErrorCode}: {Error}",
+            logger.Error("Не удалось удалить папку с Ids {FolderId}: {ErrorCode}: {Error}",
                 folderId,
                 deleteResult.ResultError.Code,
                 deleteResult.ResultError.Message);

@@ -7,14 +7,14 @@ namespace PhotoCatalog.Domain.ValueObjects.Photo;
 /// <summary>
 ///     ValueObject, представляющий собой размер фотографии в битах.
 /// </summary>
-public sealed record PhotoSize
+public sealed record Size
 {
     /// <summary>
     ///     Значение размера.
     /// </summary>
     public Int64 Value { get; }
 
-    private PhotoSize(Int64 value) => Value = value;
+    private Size(Int64 value) => Value = value;
 
     /// <summary>
     ///     Создаёт новый размер.
@@ -27,10 +27,10 @@ public sealed record PhotoSize
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<PhotoSize> Create(Int64 value)
+    public static Result<Size> Create(Int64 value)
     {
-        PhotoSize photoSize = new(value);
+        Size size = new(value);
 
-        return Result.Success(photoSize);
+        return Result.Success(size);
     }
 }

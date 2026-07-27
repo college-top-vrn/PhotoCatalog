@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text.Json;
 
 using PhotoCatalog.Domain.Interfaces;
@@ -22,7 +23,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <summary>
     ///     Размер фотографии в битах.
     /// </summary>
-    public PhotoSize PhotoSize { get; }
+    public Size Size { get; }
 
     /// <summary>
     ///     Формат фотографии.
@@ -37,30 +38,33 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <summary>
     ///     Метаданные фотографии.
     /// </summary>
-    public JsonDocument Metadata { get; }
+    public Metadata Metadata { get; }
+
+
+    private readonly List<Guid> _tagIds;
 
     /// <summary>
-    ///     Репозиторий идентификаторов тегов фотографии.
+    ///     Иммутабельный список идентификаторов.
     /// </summary>
-    public IdRepository TagIdRepository { get; }
+    public IImmutableList<Guid> TagIds => _tagIds.ToImmutableList();
 
     private Photo(
         Guid id,
         Guid userId,
         CapturedAt capturedAt,
-        PhotoSize photoSize,
+        Size size,
         Mime mime,
         StorageKey storageKey,
-        JsonDocument metadata,
-        List<Guid> tagIds) 
+        Metadata metadata,
+        List<Guid> tagIds)
         : base(id, userId)
     {
         CapturedAt = capturedAt;
-        PhotoSize = photoSize;
+        Size = size;
         Mime = mime;
         StorageKey = storageKey;
         Metadata = metadata;
-        TagIdRepository = IdRepository.Create(tagIds).Value!;
+        _tagIds = tagIds;
     }
 
     /// <summary>
@@ -69,7 +73,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <param name="id">идентификатор фотографии.</param>
     /// <param name="userId">идентификатор владельца фотографии.</param>
     /// <param name="capturedAt">дата и время съёмки фотографии.</param>
-    /// <param name="photoSize">размер фотографии в битах.</param>
+    /// <param name="size">размер фотографии в битах.</param>
     /// <param name="mime">формат фотографии.</param>
     /// <param name="storageKey">ключ доступа к физической фотографии в S3-хранилище.</param>
     /// <param name="metadata">метаданные фотографии.</param>
@@ -87,10 +91,10 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         Guid id,
         Guid userId,
         CapturedAt capturedAt,
-        PhotoSize photoSize,
+        Size size,
         Mime mime,
         StorageKey storageKey,
-        JsonDocument metadata,
+        Metadata metadata,
         List<Guid> tags)
     {
         // TODO: реализовать валидатор MIME
@@ -99,7 +103,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
             id,
             userId,
             capturedAt,
-            photoSize,
+            size,
             mime,
             storageKey,
             metadata,
@@ -112,19 +116,71 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <inheritdoc />
     public Photo DeepCopy()
     {
-        List<Guid> tagIds = new(TagIdRepository.Ids);
-
         Photo clone = new(
             Id,
             UserId,
             CapturedAt,
-            PhotoSize,
+            Size,
             Mime,
             StorageKey,
             Metadata,
-            tagIds
+            _tagIds
         );
 
         return clone;
+    }
+
+    /// <summary>
+    ///     Добавляет идентификатор в список.
+    /// </summary>
+    /// <param name="id">идентификатор.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Ids.DuplicatedId"/>, если данный тег уже привязан.
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Add(Guid id)
+    {
+        if (_tagIds.Contains(id))
+        {
+            return ResultVoid.Failure(DomainErrors.Ids.DuplicatedId);
+        }
+
+        _tagIds.Add(id);
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Удаляет идентификатор из списка.
+    /// </summary>
+    /// <param name="id">идентификатор.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Ids.IdNotFound"/>, если тег не найден.
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Remove(Guid id)
+    {
+        return _tagIds.Remove(id)
+            ? ResultVoid.Success()
+            : ResultVoid.Failure(DomainErrors.Ids.IdNotFound);
     }
 }

@@ -7,6 +7,8 @@ namespace PhotoCatalog.Domain.ValueObjects;
 /// </summary>
 public sealed record Name
 {
+    const int MaxLength = 50;
+
     /// <summary>
     ///     Значение имени.
     /// </summary>
@@ -38,13 +40,11 @@ public sealed record Name
     /// </returns>
     public static Result<Name> Create(string value)
     {
-        const int maxNameLength = 50;
-
         string trimmedValue = value.Trim();
 
         if (string.IsNullOrEmpty(value)) return Result.Failure<Name>(DomainErrors.Name.IsEmpty);
 
-        if (value.Length > maxNameLength) return Result.Failure<Name>(DomainErrors.Name.IsTooLong);
+        if (value.Length > MaxLength) return Result.Failure<Name>(DomainErrors.Name.IsTooLong);
 
         Name name = new(trimmedValue);
 
