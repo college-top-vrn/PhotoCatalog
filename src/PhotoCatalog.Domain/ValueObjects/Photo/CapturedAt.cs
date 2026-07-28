@@ -33,7 +33,7 @@ public sealed record CapturedAt
     ///         </item>
     ///     </list>
     /// </returns>
-    public Result<CapturedAt> Create(string value)
+    public static Result<CapturedAt> Create(string value)
     {
         if (!DateTime.TryParse(value, out DateTime result))
         {
