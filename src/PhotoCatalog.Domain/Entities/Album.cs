@@ -101,16 +101,13 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     {
         Result<Name> result = Name.Create(newName);
 
-        if (result.IsFailure)
-        {
-            return ResultVoid.Failure(result.ResultError);
-        }
+        if (result.IsFailure) return ResultVoid.Failure(result.ResultError);
 
         Name = result.Value!;
 
         return ResultVoid.Success();
     }
-    
+
     /// <summary>
     ///     Добавляет идентификатор в список.
     /// </summary>
@@ -137,6 +134,7 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
         }
 
         _photoIds.Add(id);
+
         return ResultVoid.Success();
     }
 

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Text.Json;
 
 using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
-using PhotoCatalog.Domain.ValueObjects;
 using PhotoCatalog.Domain.ValueObjects.Photo;
 
 namespace PhotoCatalog.Domain.Entities;
@@ -13,7 +11,7 @@ namespace PhotoCatalog.Domain.Entities;
 /// <summary>
 ///     Представляет программную доменную сущность физической фотографии, хранящейся в S3-хранилище.
 /// </summary>
-public sealed class Photo : Entity, IDeeplyCopyable<Photo>
+public sealed class Photo : ObservableEntity, IDeeplyCopyable<Photo>
 {
     /// <summary>
     ///     Дата и время съёмки фотографии.
@@ -148,7 +146,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Add(Guid id)
+    public ResultVoid AttachTag(Guid id)
     {
         if (_tagIds.Contains(id))
         {
@@ -156,6 +154,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         }
 
         _tagIds.Add(id);
+
         return ResultVoid.Success();
     }
 
@@ -177,7 +176,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Remove(Guid id)
+    public ResultVoid DetachTag(Guid id)
     {
         return _tagIds.Remove(id)
             ? ResultVoid.Success()
