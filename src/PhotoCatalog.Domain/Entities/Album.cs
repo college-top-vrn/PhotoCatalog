@@ -110,4 +110,58 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
 
         return ResultVoid.Success();
     }
+    
+    /// <summary>
+    ///     Добавляет идентификатор в список.
+    /// </summary>
+    /// <param name="id">идентификатор.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Ids.DuplicatedId"/>, если данный тег уже привязан.
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Add(Guid id)
+    {
+        if (_photoIds.Contains(id))
+        {
+            return ResultVoid.Failure(DomainErrors.Ids.DuplicatedId);
+        }
+
+        _photoIds.Add(id);
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Удаляет идентификатор из списка.
+    /// </summary>
+    /// <param name="id">идентификатор.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Ids.IdNotFound"/>, если тег не найден.
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Remove(Guid id)
+    {
+        return _photoIds.Remove(id)
+            ? ResultVoid.Success()
+            : ResultVoid.Failure(DomainErrors.Ids.IdNotFound);
+    }
 }
