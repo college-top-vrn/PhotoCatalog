@@ -8,6 +8,36 @@
 public static class DomainErrors
 {
     /// <summary>
+    ///     Ошибки для <see cref="Observable"/>
+    /// </summary>
+    public static class Observable
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая наличия похожего наблюдателя.
+        /// </summary>
+        public static readonly ResultError SuchObserverAlreadyExists = new(
+            "ObservableEntity.SuchObserverAlreadyExists",
+            "Такой наблюдатель уже существует"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствия конкретного наблюдателя.
+        /// </summary>
+        public static readonly ResultError SuchObserverNotExists = new(
+            "ObservableEntity.SuchObserverNotExists",
+            "Такого наблюдателя не существует"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствия наблюдателей.
+        /// </summary>
+        public static readonly ResultError ObserversNotExist = new(
+            "ObservableEntity.ObserversNotExist",
+            "Нет существующих наблюдателей"
+        );
+    }
+
+    /// <summary>
     ///     Ошибки для <see cref="Name"/>
     /// </summary>
     public static class Name
