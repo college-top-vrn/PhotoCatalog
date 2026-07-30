@@ -11,7 +11,7 @@ namespace PhotoCatalog.Domain.Entities;
 /// <summary>
 ///     Представляет программную доменную сущность физической фотографии, хранящейся в S3-хранилище.
 /// </summary>
-public sealed class Photo : ObservableEntity, IDeeplyCopyable<Photo>
+public sealed class Photo : Entity, IDeeplyCopyable<Photo>
 {
     /// <summary>
     ///     Дата и время съёмки фотографии.
