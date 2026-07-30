@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
@@ -69,7 +70,9 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// <inheritdoc />
     public Album DeepCopy()
     {
-        Album clone = new(Id, UserId, Name, _photoIds);
+        List<Guid> newPhotoIds = _photoIds.Select(photoId => photoId).ToList();
+
+        Album clone = new(Id, UserId, Name, newPhotoIds);
 
         return clone;
     }
@@ -126,7 +129,7 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Add(Guid id)
+    public ResultVoid AddPhoto(Guid id)
     {
         if (_photoIds.Contains(id))
         {
@@ -156,7 +159,7 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Remove(Guid id)
+    public ResultVoid DeletePhoto(Guid id)
     {
         return _photoIds.Remove(id)
             ? ResultVoid.Success()

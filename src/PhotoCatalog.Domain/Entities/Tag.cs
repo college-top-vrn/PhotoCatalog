@@ -14,12 +14,12 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     /// <summary>
     ///     Ммя тега.
     /// </summary>
-    public Name Name { get; }
+    public Name Name { get; set; }
 
     /// <summary>
     ///     HEX-цвет тега.
     /// </summary>
-    public ColorHex ColorHex { get; }
+    public ColorHex ColorHex { get; set; }
 
     private Tag(Guid id, Guid userId, Name name, ColorHex colorHex) : base(id, userId)
     {

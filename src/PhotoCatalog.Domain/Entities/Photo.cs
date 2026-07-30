@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
@@ -16,27 +17,27 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <summary>
     ///     Дата и время съёмки фотографии.
     /// </summary>
-    public CapturedAt CapturedAt { get; }
+    public CapturedAt CapturedAt { get; set; }
 
     /// <summary>
     ///     Размер фотографии в битах.
     /// </summary>
-    public Size Size { get; }
+    public Size Size { get; set; }
 
     /// <summary>
     ///     Формат фотографии.
     /// </summary>
-    public Mime Mime { get; }
+    public Mime Mime { get; set; }
 
     /// <summary>
     ///     Ключ доступа к физической фотографии в S3-хранилище.
     /// </summary>
-    public StorageKey StorageKey { get; }
+    public StorageKey StorageKey { get; set; }
 
     /// <summary>
     ///     Метаданные фотографии.
     /// </summary>
-    public Metadata Metadata { get; }
+    public Metadata Metadata { get; set; }
 
 
     private readonly List<Guid> _tagIds;
@@ -114,6 +115,8 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <inheritdoc />
     public Photo DeepCopy()
     {
+        List<Guid> newTagIds = _tagIds.Select(tagId => tagId).ToList();
+
         Photo clone = new(
             Id,
             UserId,
@@ -122,7 +125,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
             Mime,
             StorageKey,
             Metadata,
-            _tagIds
+            newTagIds
         );
 
         return clone;
@@ -146,7 +149,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid AttachTag(Guid id)
+    public ResultVoid AddTag(Guid id)
     {
         if (_tagIds.Contains(id))
         {
@@ -176,7 +179,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid DetachTag(Guid id)
+    public ResultVoid DeleteTag(Guid id)
     {
         return _tagIds.Remove(id)
             ? ResultVoid.Success()
