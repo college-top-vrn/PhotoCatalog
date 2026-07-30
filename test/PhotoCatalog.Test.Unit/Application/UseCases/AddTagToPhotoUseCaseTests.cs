@@ -145,7 +145,7 @@
 //         var tag = CreateTagWithId(tagId);
 //
 //         // Добавляем тег первый раз через доменный метод
-//         var addResult = photo.AttachTag(tagId);
+//         var addResult = photo.AddTag(tagId);
 //         Assert.True(addResult.IsSuccess);
 //
 //         _tagQueryRepositoryMock.GetById(tagId).Returns(Result.Success<Tag>(tag));

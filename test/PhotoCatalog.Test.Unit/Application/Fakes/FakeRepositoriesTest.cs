@@ -37,7 +37,7 @@
 //         Assert.True(isSuccess);
 //
 //         // Act
-//         ResultVoid result = _commandRepository.Add(album!);
+//         ResultVoid result = _commandRepository.AddPhoto(album!);
 //
 //         // Assert
 //         Assert.True(result.IsSuccess);
@@ -62,7 +62,7 @@
 //         // Arrange
 //         Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
 //         Assert.True(createResult.IsSuccess);
-//         _commandRepository.Add(createResult.Value);
+//         _commandRepository.AddPhoto(createResult.Value);
 //
 //         Result<Album> getBeforeDelete = _queryRepository.GetById(1);
 //         Assert.True(getBeforeDelete.IsSuccess);
@@ -123,7 +123,7 @@
 //         // Arrange
 //         Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
 //         Assert.True(createResult.IsSuccess);
-//         _commandRepository.Add(createResult.Value);
+//         _commandRepository.AddPhoto(createResult.Value);
 //
 //         Result<Album> getAfterAdd = _queryRepository.GetById(1);
 //         Assert.True(getAfterAdd.IsSuccess);
@@ -151,7 +151,7 @@
 //         // Arrange
 //         Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
 //         Assert.True(createResult.IsSuccess);
-//         _commandRepository.Add(createResult.Value);
+//         _commandRepository.AddPhoto(createResult.Value);
 //
 //         // Act
 //         Result<Album> result = _queryRepository.GetById(1);
@@ -185,8 +185,8 @@
 //         Result<Album> album1 = Album.Create(0, TODO, TODO, TODO);
 //         Result<Album> album2 = Album.Create(0, TODO, TODO, TODO);
 //
-//         _commandRepository.Add(album1.Value);
-//         _commandRepository.Add(album2.Value);
+//         _commandRepository.AddPhoto(album1.Value);
+//         _commandRepository.AddPhoto(album2.Value);
 //
 //         Album? album1FromRepo = _queryRepository.GetById(1).Value;
 //         Album? album2FromRepo = _queryRepository.GetById(2).Value;
