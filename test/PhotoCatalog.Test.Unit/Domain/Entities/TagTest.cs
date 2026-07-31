@@ -1,7 +1,6 @@
 using System;
 
 using PhotoCatalog.Domain.Entities;
-using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
 
 using Xunit;
@@ -11,84 +10,62 @@ namespace PhotoCatalog.Test.Unit.Domain.Entities;
 public class TagTest
 {
     [Fact]
-    public void Create_CreatingTagWithCorrectValues_ReturnsResultWithTagAndSuccess()
+    public void Create_CreatingTagWithCorrectValues_ReturnsTagWithSuccess()
     {
-        Tag tag = Tag
-            .Create(
-                Guid.CreateVersion7(),
-                Guid.CreateVersion7(),
-                "Test",
-                "Test"
-            )
-            .Value!;
+        Name expectedName = Name.Create("Test").Value!;
+        ColorHex expectedColorHex = ColorHex.Create("Test").Value!;
 
-        Assert.True(
-            tag.Id != Guid.Empty ||
-            tag.UserId != Guid.Empty ||
-            tag.Name.Value != string.Empty ||
-            tag.ColorHex.Value != string.Empty
-        );
+        Tag tag = Tag.Create(
+            Guid.CreateVersion7(),
+            Guid.CreateVersion7(),
+            expectedName,
+            expectedColorHex
+        ).Value!;
+
+        Assert.Equal(tag.Name, expectedName);
+        Assert.Equal(tag.ColorHex, expectedColorHex);
     }
 
     [Fact]
-    public void Create_NotCreatingAlbumWithIncorrectName_ReturnsResultWithFailure()
+    public void DeepCopy_DeeplyCopyingOriginalTag_ReturnsTagCopy()
     {
-        Result<Tag> result = Tag
-            .Create(
-                Guid.CreateVersion7(),
-                Guid.CreateVersion7(),
-                "TestingTheMostAwesomeNameThatHaveEverExistedInThisWorld",
-                "Test"
-            );
+        Name name = Name.Create("Test").Value!;
+        ColorHex colorHex = ColorHex.Create("Test").Value!;
 
-        Assert.True(
-            result.Value is null &&
-            result.IsFailure
-        );
-    }
+        Tag original = Tag.Create(
+            Guid.CreateVersion7(),
+            Guid.CreateVersion7(),
+            name,
+            colorHex
+        ).Value!;
 
-    [Fact]
-    public void DeepCopy_DeeplyCopyingOriginalTag_ReturnsTag()
-    {
-        Tag originalTag = Tag
-            .Create(
-                Guid.CreateVersion7(),
-                Guid.CreateVersion7(),
-                "Test",
-                "Test"
-            )
-            .Value!;
+        Tag copy = original.DeepCopy();
 
-        Tag copiedTag = originalTag.DeepCopy();
-
-        Assert.True(
-            originalTag.Id == copiedTag.Id ||
-            originalTag.UserId == copiedTag.UserId ||
-            originalTag.Name.Value == copiedTag.Name.Value ||
-            originalTag.ColorHex.Value == copiedTag.ColorHex.Value
-        );
+        Assert.Equal(original.Id, copy.Id);
+        Assert.Equal(original.UserId, copy.UserId);
+        Assert.Equal(original.Name, copy.Name);
+        Assert.Equal(original.ColorHex, copy.ColorHex);
     }
 
     [Fact]
     public void DeepCopy_DeeplyCopiedTagChangesNotAffectingOriginalTag()
     {
-        Tag originalTag = Tag
-            .Create(
-                Guid.CreateVersion7(),
-                Guid.CreateVersion7(),
-                "Test",
-                "Test"
-            )
-            .Value!;
+        Name originalName = Name.Create("Original").Value!;
+        ColorHex originalColorHex = ColorHex.Create("Original").Value!;
 
-        Tag copiedTag = originalTag.DeepCopy();
+        Tag original = Tag.Create(
+            Guid.CreateVersion7(),
+            Guid.CreateVersion7(),
+            originalName,
+            originalColorHex
+        ).Value!;
 
-        copiedTag.Name = Name.Create("CopyName").Value!;
-        copiedTag.ColorHex = ColorHex.Create("CopyColorHex").Value!;
+        Tag copy = original.DeepCopy();
 
-        Assert.True(
-            originalTag.Name.Value != copiedTag.Name.Value ||
-            originalTag.ColorHex.Value != copiedTag.ColorHex.Value
-        );
+        copy.Name = Name.Create("Copy").Value!;
+        copy.ColorHex = ColorHex.Create("Copy").Value!;
+
+        Assert.NotEqual(original.Name, copy.Name);
+        Assert.NotEqual(original.ColorHex, copy.ColorHex);
     }
 }

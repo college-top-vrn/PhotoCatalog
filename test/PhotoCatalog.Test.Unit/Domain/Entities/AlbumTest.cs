@@ -3,6 +3,7 @@ using System.Linq;
 
 using PhotoCatalog.Domain.Entities;
 using PhotoCatalog.Domain.Primitives;
+using PhotoCatalog.Domain.ValueObjects;
 
 using Xunit;
 
@@ -11,120 +12,82 @@ namespace PhotoCatalog.Test.Unit.Domain.Entities;
 public class AlbumTest
 {
     [Fact]
-    public void Create_CreatingAlbumWithCorrectValues_ReturnsResultWithAlbumAndSuccess()
+    public void Create_CreatingAlbumWithCorrectValues_ReturnsSuccessWithAlbum()
     {
-        Result<Album> result = Album
-            .Create(
-                Guid.CreateVersion7(),
-                Guid.CreateVersion7(),
-                "Test",
-                [
-                    Guid.CreateVersion7(),
-                    Guid.CreateVersion7()
-                ]
-            );
+        Name expectedName = Name.Create("Test").Value!;
 
-        Assert.True(
-            result.Value!.Id != Guid.Empty ||
-            result.Value.UserId != Guid.Empty ||
-            result.Value.Name.Value.Length != 0 ||
-            result.Value.PhotoIds.Count != 0 &&
-            result.IsSuccess
-        );
-    }
-
-    [Fact]
-    public void Create_NotCreatingAlbumWithIncorrectName_ReturnsResultWithFailure()
-    {
-        Result<Album> result1 = Album.Create(
+        Result<Album> result = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            "TestingTheMostAwesomeNameThatHaveEverExistedInThisWorld",
+            expectedName,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
             ]
         );
 
-        Assert.True(
-            result1.Value is null &&
-            result1.IsFailure
-        );
+        Album album = result.Value!;
 
-        Result<Album> result2 = Album.Create(
+        Assert.True(result.IsSuccess);
+        Assert.Equal(expectedName, album.Name);
+        Assert.NotEmpty(album.PhotoIds);
+    }
+
+    [Fact]
+    public void DeepCopy_DeeplyCopyingOriginalAlbum_ReturnsAlbumCopy()
+    {
+        Name name = Name.Create("Test").Value!;
+
+        Album original = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            "",
+            name,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
             ]
-        );
-
-        Assert.True(
-            result2.Value is null &&
-            result2.IsFailure
-        );
-    }
-
-    [Fact]
-    public void DeepCopy_DeeplyCopyingOriginalObject_ReturnsAlbum()
-    {
-        Album original = Album
-            .Create(
-                Guid.CreateVersion7(),
-                Guid.CreateVersion7(),
-                "Test",
-                [
-                    Guid.CreateVersion7(),
-                    Guid.CreateVersion7()
-                ]
-            )
-            .Value!;
+        ).Value!;
 
         Album copy = original.DeepCopy();
 
-        Assert.True(
-            original.Id == copy.Id &&
-            original.UserId == copy.UserId &&
-            original.Name == copy.Name &&
-            original.PhotoIds.Count == copy.PhotoIds.Count
-        );
+        Assert.Equal(original.Id, copy.Id);
+        Assert.Equal(original.UserId, copy.UserId);
+        Assert.Equal(original.Name, copy.Name);
+        Assert.NotSame(original.PhotoIds, copy.PhotoIds);
     }
 
     [Fact]
-    public void DeepCopy_DeeplyCopiedObjectChangesNotAffectingOriginalObjectValues()
+    public void DeepCopy_ChangingAlbumCopyWithoutAffectingOriginalAlbum()
     {
-        Album original = Album
-            .Create(
+        Name originalName = Name.Create("Original").Value!;
+
+        Album original = Album.Create(
+            Guid.CreateVersion7(),
+            Guid.CreateVersion7(),
+            originalName,
+            [
                 Guid.CreateVersion7(),
-                Guid.CreateVersion7(),
-                "Original",
-                [
-                    Guid.CreateVersion7(),
-                    Guid.CreateVersion7()
-                ]
-            )
-            .Value!;
+                Guid.CreateVersion7()
+            ]
+        ).Value!;
+
+        Name copyName = Name.Create("Copy").Value!;
 
         Album copy = original.DeepCopy();
 
-        copy.Rename("Copy");
+        copy.Rename(copyName);
         copy.AddPhoto(Guid.CreateVersion7());
 
-        Assert.True(
-            original.Name != copy.Name &&
-            original.PhotoIds.Count != copy.PhotoIds.Count
-        );
+        Assert.NotEqual(original.Name, copy.Name);
+        Assert.NotEqual(original.PhotoIds.Count, copy.PhotoIds.Count);
     }
 
     [Fact]
     public void Rename_RenamingAlbumWithCorrectValue_ReturnsResultWithSuccess()
     {
-        const string oldName = "Test1";
-        const string newName = "Test2";
+        Name oldName = Name.Create("Old").Value!;
 
-        Result<Album> result = Album.Create(
+        Album album = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
             oldName,
@@ -132,120 +95,89 @@ public class AlbumTest
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
             ]
-        );
+        ).Value!;
 
-        var renameResult = result.Value!.Rename(newName);
+        Name newName = Name.Create("New").Value!;
 
-        Assert.True(
-            oldName != result.Value.Name.Value &&
-            renameResult.IsSuccess
-        );
+        ResultVoid renameResult = album.Rename(newName);
+
+        Assert.True(renameResult.IsSuccess);
+        Assert.NotEqual(oldName, album.Name);
     }
 
     [Fact]
-    public void Rename_NotRenamingAlbumWithIncorrectValue_ReturnsResultWithFailure()
+    public void AddPhoto_AddingUniquePhotoId_ReturnsSuccess()
     {
-        const string oldName = "Test1";
-        const string newName = "TestingTheMostAwesomeNameThatHaveEverExistedInThisWorld";
-
-        Result<Album> result = Album.Create(
+        Album album = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            oldName,
-            [
-                Guid.CreateVersion7(),
-                Guid.CreateVersion7()
-            ]
-        );
-
-        var renameResult = result.Value!.Rename(newName);
-
-        Assert.True(
-            oldName == result.Value.Name.Value &&
-            renameResult.IsFailure
-        );
-    }
-
-    [Fact]
-    public void AddPhoto_AddingUniquePhotoId_ReturnsResultWithSuccess()
-    {
-        Guid photoId = Guid.CreateVersion7();
-
-        Result<Album> result = Album.Create(
-            Guid.CreateVersion7(),
-            Guid.CreateVersion7(),
-            "Test",
+            Name.Create("Test").Value!,
             []
-        );
+        ).Value!;
 
-        ResultVoid addResult = result.Value!.AddPhoto(photoId);
+        Guid photoId = Guid.CreateVersion7();
 
-        Assert.True(
-            addResult.IsSuccess &&
-            result.Value.PhotoIds.FirstOrDefault(photoId) == photoId
-        );
+        ResultVoid addResult = album.AddPhoto(photoId);
+
+        Assert.True(addResult.IsSuccess);
+        Assert.Equal(album.PhotoIds.FirstOrDefault(photoId), photoId);
     }
 
     [Fact]
-    public void AddPhoto_AddingSimilarPhotoId_ReturnsResultWithFailureAndError()
+    public void AddPhoto_AddingSimilarPhotoId_ReturnsFailureWithError()
     {
         Guid photoId = Guid.CreateVersion7();
 
-        Result<Album> result = Album
+        Album album = Album
             .Create(
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
-                "Test",
+                Name.Create("Test").Value!,
                 [photoId]
-            );
+            ).Value!;
 
-        ResultVoid addResult = result.Value!.AddPhoto(photoId);
+        ResultVoid addResult = album.AddPhoto(photoId);
 
-        Assert.True(
-            addResult.IsFailure &&
-            addResult.ResultError == DomainErrors.Ids.DuplicatedId &&
-            result.Value.PhotoIds.Count == 1
-        );
+        Assert.True(addResult.IsFailure);
+        Assert.Equal(addResult.ResultError, DomainErrors.Ids.DuplicatedId);
+        Assert.Single(album.PhotoIds);
     }
 
     [Fact]
-    public void DeletePhoto_DeletingExistingPhotoId_ReturnsResultWithSuccess()
+    public void DeletePhoto_DeletingExistingPhotoId_ReturnsSuccess()
     {
         Guid photoId = Guid.CreateVersion7();
 
-        Result<Album> result = Album.Create(
-            Guid.CreateVersion7(),
-            Guid.CreateVersion7(),
-            "Test",
-            [photoId]
-        );
-
-        ResultVoid deleteResult = result.Value!.DeletePhoto(photoId);
-
-        Assert.True(
-            deleteResult.IsSuccess &&
-            result.Value.PhotoIds.Count == 0
-        );
-    }
-
-    [Fact]
-    public void DeletePhoto_DeletingNonExistingPhotoId_ReturnsResultWithFailureAndError()
-    {
-        Guid photoId = Guid.CreateVersion7();
-
-        Result<Album> result = Album
+        Album album = Album
             .Create(
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
-                "Test",
+                Name.Create("Test").Value!,
+                [photoId]
+            ).Value!;
+
+        ResultVoid deleteResult = album.DeletePhoto(photoId);
+
+        Assert.True(deleteResult.IsSuccess);
+        Assert.Empty(album.PhotoIds);
+    }
+
+    [Fact]
+    public void DeletePhoto_DeletingNonExistingPhotoId_ReturnsFailureWithError()
+    {
+        Guid photoId = Guid.CreateVersion7();
+
+        Album album = Album
+            .Create(
+                Guid.CreateVersion7(),
+                Guid.CreateVersion7(),
+                Name.Create("Test").Value!,
                 [Guid.CreateVersion7()]
-            );
+            ).Value!;
 
-        ResultVoid deleteResult = result.Value!.DeletePhoto(photoId);
+        ResultVoid deleteResult = album.DeletePhoto(photoId);
 
-        Assert.True(
-            deleteResult.IsFailure &&
-            deleteResult.ResultError == DomainErrors.Ids.IdNotFound
-        );
+        Assert.True(deleteResult.IsFailure);
+        Assert.Equal(deleteResult.ResultError, DomainErrors.Ids.IdNotFound);
     }
 }
