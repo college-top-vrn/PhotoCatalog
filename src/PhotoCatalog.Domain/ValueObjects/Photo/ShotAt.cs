@@ -12,7 +12,7 @@ public sealed record CapturedAt
     /// <summary>
     ///     Значение даты и времени съёмки фотографии.
     /// </summary>
-    public DateTime Value { get; }
+    public DateTimeOffset Value { get; }
 
     private CapturedAt(DateTime value) => Value = value;
 
