@@ -58,19 +58,17 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<Album> Create(Guid id, Guid userId, string name, List<Guid> photoIds)
+    public static Result<Album> Create(Guid id, Guid userId, Name name, List<Guid> photoIds)
     {
-        Result<Name> result = Name.Create(name);
-
-        return result.IsSuccess
-            ? Result.Success(new Album(id, userId, result.Value!, photoIds))
-            : Result.Failure<Album>(result.ResultError);
+        return Result.Success(new Album(id, userId, name, photoIds));
     }
 
     /// <inheritdoc />
     public Album DeepCopy()
     {
-        List<Guid> newPhotoIds = _photoIds.Select(photoId => photoId).ToList();
+        List<Guid> newPhotoIds = _photoIds
+            .Select(pi => new Guid(pi.ToString()))
+            .ToList();
 
         Album clone = new(Id, UserId, Name, newPhotoIds);
 
@@ -100,13 +98,9 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Rename(string newName)
+    public ResultVoid Rename(Name newName)
     {
-        Result<Name> result = Name.Create(newName);
-
-        if (result.IsFailure) return ResultVoid.Failure(result.ResultError);
-
-        Name = result.Value!;
+        Name = newName;
 
         return ResultVoid.Success();
     }

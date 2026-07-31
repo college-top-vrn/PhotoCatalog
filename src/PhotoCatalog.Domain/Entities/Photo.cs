@@ -17,7 +17,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <summary>
     ///     Дата и время съёмки фотографии.
     /// </summary>
-    public CapturedAt CapturedAt { get; set; }
+    public ShotAt ShotAt { get; set; }
 
     /// <summary>
     ///     Размер фотографии в битах.
@@ -50,7 +50,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     private Photo(
         Guid id,
         Guid userId,
-        CapturedAt capturedAt,
+        ShotAt shotAt,
         Size size,
         Mime mime,
         StorageKey storageKey,
@@ -58,7 +58,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         List<Guid> tagIds)
         : base(id, userId)
     {
-        CapturedAt = capturedAt;
+        ShotAt = shotAt;
         Size = size;
         Mime = mime;
         StorageKey = storageKey;
@@ -71,7 +71,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// </summary>
     /// <param name="id">идентификатор фотографии.</param>
     /// <param name="userId">идентификатор владельца фотографии.</param>
-    /// <param name="capturedAt">дата и время съёмки фотографии.</param>
+    /// <param name="shotAt">дата и время съёмки фотографии.</param>
     /// <param name="size">размер фотографии в битах.</param>
     /// <param name="mime">формат фотографии.</param>
     /// <param name="storageKey">ключ доступа к физической фотографии в S3-хранилище.</param>
@@ -89,7 +89,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     public static Result<Photo> Create(
         Guid id,
         Guid userId,
-        CapturedAt capturedAt,
+        ShotAt shotAt,
         Size size,
         Mime mime,
         StorageKey storageKey,
@@ -101,7 +101,7 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         var photo = new Photo(
             id,
             userId,
-            capturedAt,
+            shotAt,
             size,
             mime,
             storageKey,
@@ -115,12 +115,14 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// <inheritdoc />
     public Photo DeepCopy()
     {
-        List<Guid> newTagIds = _tagIds.Select(tagId => tagId).ToList();
+        List<Guid> newTagIds = _tagIds
+            .Select(ti => new Guid(ti.ToString()))
+            .ToList();
 
         Photo clone = new(
             Id,
             UserId,
-            CapturedAt,
+            ShotAt,
             Size,
             Mime,
             StorageKey,

@@ -32,8 +32,8 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     /// </summary>
     /// <param name="id">идентификатор тега.</param>
     /// <param name="userId">идентификатор владельца тега.</param>
-    /// <param name="nameValue">имя тега.</param>
-    /// <param name="colorHexValue">HEX-цвет тега.</param>
+    /// <param name="name">имя тега.</param>
+    /// <param name="colorHex">HEX-код цвета тега.</param>
     /// <returns>
     ///     <list type="bullet">
     ///         <item>
@@ -53,15 +53,9 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<Tag> Create(Guid id, Guid userId, string nameValue, string colorHexValue)
+    public static Result<Tag> Create(Guid id, Guid userId, Name name, ColorHex colorHex)
     {
-        Result<Name> name = Name.Create(nameValue);
-
-        if (name.IsFailure) return Result.Failure<Tag>(name.ResultError);
-
-        Result<ColorHex> colorHex = ColorHex.Create(colorHexValue);
-
-        return Result.Success(new Tag(id, userId, name.Value, colorHex.Value!));
+        return Result.Success(new Tag(id, userId, name, colorHex));
     }
 
     /// <inheritdoc />

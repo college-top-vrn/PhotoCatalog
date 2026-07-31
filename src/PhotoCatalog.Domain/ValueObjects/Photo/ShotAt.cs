@@ -7,14 +7,14 @@ namespace PhotoCatalog.Domain.ValueObjects.Photo;
 /// <summary>
 ///     ValueObject, представляющий собой дату и время съёмки фотографии.
 /// </summary>
-public sealed record CapturedAt
+public sealed record ShotAt
 {
     /// <summary>
     ///     Значение даты и времени съёмки фотографии.
     /// </summary>
     public DateTimeOffset Value { get; }
 
-    private CapturedAt(DateTime value) => Value = value;
+    private ShotAt(DateTime value) => Value = value;
 
     /// <summary>
     ///     Создаёт новую дату и время съёмки фотографии.
@@ -27,21 +27,21 @@ public sealed record CapturedAt
     ///         </item>
     ///         <item>
     ///             <description>
-    ///                 Ошибка <see cref="DomainErrors.CapturedAt.IsInvalid"/>,
+    ///                 Ошибка <see cref="DomainErrors.ShotAt.IsInvalid"/>,
     ///                 если формат даты и времени съёмки не подходит.
     ///             </description>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<CapturedAt> Create(string value)
+    public static Result<ShotAt> Create(string value)
     {
         if (!DateTime.TryParse(value, out DateTime result))
         {
-            return Result.Failure<CapturedAt>(DomainErrors.CapturedAt.IsInvalid);
+            return Result.Failure<ShotAt>(DomainErrors.ShotAt.IsInvalid);
         }
 
-        CapturedAt capturedAt = new(result);
+        ShotAt shotAt = new(result);
 
-        return Result.Success(capturedAt);
+        return Result.Success(shotAt);
     }
 }
