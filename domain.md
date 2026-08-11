@@ -1,3 +1,5 @@
+# Диаграмма классов доменного слоя
+
 ```mermaid
 classDiagram
 namespace ValueObjects {
@@ -181,22 +183,17 @@ IEntityGetterById ..> Entity
 IEntitiesGetterByParentEntityId ..> Entity
 
 namespace DomainEvents {
-    class IEvent {
-        <<Interface>>
-    }
-
-    class IHandler["IHandler&lt;in T&gt; where T : IEvent"] {
+    class IHandler~TEvent~ {
         <<Interface>>
         +Handle(T domainEvent) ResultVoid
     }
 
     class EventBus {
-        +ConcurrentDictionary&lt;Type, ImmutableList&lt;IHandler&lt;IEvent&gt;&gt;
-        +SubscribeAsync~TEvent~(IHandler~TEvent~ handler) Task
-        +UnsubscribeAsync~TEvent~(IHandler~TEvent~ handler) Task
-        +PublishAsync(IEvent domainEvent) Task
+        +ConcurrentDictionary&lt;Type, ImmutableList&lt;IHandler&lt;object&gt;&gt;
+        +SubscribeAsync~TEvent~(IHandler~TEvent~ handler) Task~ResultVoid~
+        +UnsubscribeAsync~TEvent~(IHandler~TEvent~ handler) Task~ResultVoid~
+        +PublishAsync(IEvent domainEvent) Task~ResultVoid~
     }
 }
-IEvent <.. IHandler
 IHandler <.. EventBus
 ```
