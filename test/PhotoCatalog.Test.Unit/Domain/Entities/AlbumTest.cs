@@ -19,7 +19,7 @@ public class AlbumTest
         Result<Album> result = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            expectedName,
+            expectedName, TODO,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
@@ -41,7 +41,7 @@ public class AlbumTest
         Album original = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            name,
+            name, TODO,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
@@ -64,7 +64,7 @@ public class AlbumTest
         Album original = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            originalName,
+            originalName, TODO,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
@@ -90,7 +90,7 @@ public class AlbumTest
         Album album = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            oldName,
+            oldName, TODO,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
@@ -111,7 +111,7 @@ public class AlbumTest
         Album album = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            Name.Create("Test").Value!,
+            Name.Create("Test").Value!, TODO,
             []
         ).Value!;
 
@@ -132,7 +132,7 @@ public class AlbumTest
             .Create(
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
-                Name.Create("Test").Value!,
+                Name.Create("Test").Value!, TODO,
                 [photoId]
             ).Value!;
 
@@ -152,7 +152,7 @@ public class AlbumTest
             .Create(
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
-                Name.Create("Test").Value!,
+                Name.Create("Test").Value!, TODO,
                 [photoId]
             ).Value!;
 
@@ -171,7 +171,7 @@ public class AlbumTest
             .Create(
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
-                Name.Create("Test").Value!,
+                Name.Create("Test").Value!, TODO,
                 [Guid.CreateVersion7()]
             ).Value!;
 
