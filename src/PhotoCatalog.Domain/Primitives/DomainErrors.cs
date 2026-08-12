@@ -8,6 +8,58 @@
 public static class DomainErrors
 {
     /// <summary>
+    ///     Ошибки для <see cref="EventBus"/>.
+    /// </summary>
+    public static class EventBus
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая невозможность добавить пару.
+        /// </summary>
+        public static readonly ResultError UnableToAddPair = new(
+            "EventBus.UnableToAddPair",
+            "Невозможно добавить пару"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая невозможность обновить пару.
+        /// </summary>
+        public static readonly ResultError UnableToUpdatePair = new(
+            "EventBus.UnableToUpdatePair",
+            "Невозможно обновить пару"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствие ключа в словаре.
+        /// </summary>
+        public static readonly ResultError KeyNotExists = new(
+            "EventBus.KeyNotExists",
+            "Ключ не существует"
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="Entity"/>.
+    /// </summary>
+    public static class Entity
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая наличие похожего доменного события.
+        /// </summary>
+        public static readonly ResultError SuchDomainEventAlreadyExists = new(
+            "Entity.SuchDomainEventAlreadyExists",
+            "Такое доменное событие уже существует"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая, что список доменных событий уже пуст.
+        /// </summary>
+        public static readonly ResultError DomainEventListIsAlreadyEmpty = new(
+            "Entity.DomainEventListIsAlreadyEmpty",
+            "Список доменных событий уже пуст"
+        );
+    }
+
+    /// <summary>
     ///     Ошибки для <see cref="Observable"/>
     /// </summary>
     public static class Observable
