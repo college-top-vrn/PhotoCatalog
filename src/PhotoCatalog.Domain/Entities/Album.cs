@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
 
@@ -19,6 +18,11 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// </summary>
     public Name Name { get; private set; }
 
+    /// <summary>
+    ///     Цвет альбома.
+    /// </summary>
+    public ColorHex ColorHex { get; private set; }
+
     private readonly List<Guid> _photoIds;
 
     /// <summary>
@@ -26,9 +30,16 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// </summary>
     public IImmutableList<Guid> PhotoIds => _photoIds.ToImmutableList();
 
-    private Album(Guid id, Guid userId, Name name, List<Guid> photoIds) : base(id, userId)
+    private Album(
+        Guid id,
+        Guid userId,
+        Name name,
+        ColorHex colorHex,
+        List<Guid> photoIds
+    ) : base(id, userId)
     {
         Name = name;
+        ColorHex = colorHex;
         _photoIds = photoIds;
     }
 
@@ -38,6 +49,7 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     /// <param name="id">идентификатор альбома.</param>
     /// <param name="userId">идентификатор владельца альбома.</param>
     /// <param name="name">имя альбома.</param>
+    /// <param name="colorHex"></param>
     /// <param name="photoIds">список идентификаторов фотографий альбома.</param>
     /// <returns>
     ///     <list type="bullet">
@@ -58,9 +70,21 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     ///         </item>
     ///     </list>
     /// </returns>
-    public static Result<Album> Create(Guid id, Guid userId, Name name, List<Guid> photoIds)
+    public static Result<Album> Create(
+        Guid id,
+        Guid userId,
+        Name name,
+        ColorHex colorHex,
+        List<Guid> photoIds
+    )
     {
-        return Result.Success(new Album(id, userId, name, photoIds));
+        return Result.Success(new Album(
+            id,
+            userId,
+            name,
+            colorHex,
+            photoIds
+        ));
     }
 
     /// <inheritdoc />
@@ -70,7 +94,7 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
             .Select(pi => new Guid(pi.ToString()))
             .ToList();
 
-        Album clone = new(Id, UserId, Name, newPhotoIds);
+        Album clone = new(Id, UserId, Name, ColorHex, newPhotoIds);
 
         return clone;
     }
@@ -101,6 +125,26 @@ public sealed class Album : Entity, IDeeplyCopyable<Album>
     public ResultVoid Rename(Name newName)
     {
         Name = newName;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Перекрашивает альбом.
+    /// </summary>
+    /// <param name="newColor">новый цвет.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Recolor(ColorHex newColor)
+    {
+        ColorHex = newColor;
 
         return ResultVoid.Success();
     }

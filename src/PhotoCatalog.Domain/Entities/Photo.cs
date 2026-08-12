@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects.Photo;
 
@@ -15,29 +14,24 @@ namespace PhotoCatalog.Domain.Entities;
 public sealed class Photo : Entity, IDeeplyCopyable<Photo>
 {
     /// <summary>
-    ///     Дата и время съёмки фотографии.
-    /// </summary>
-    public ShotAt ShotAt { get; set; }
-
-    /// <summary>
     ///     Размер фотографии в битах.
     /// </summary>
-    public Size Size { get; set; }
+    public Size Size { get; private set; }
 
     /// <summary>
     ///     Формат фотографии.
     /// </summary>
-    public Mime Mime { get; set; }
+    public Mime Mime { get; private set; }
 
     /// <summary>
     ///     Ключ доступа к физической фотографии в S3-хранилище.
     /// </summary>
-    public StorageKey StorageKey { get; set; }
+    public StorageKey StorageKey { get; private set; }
 
     /// <summary>
     ///     Метаданные фотографии.
     /// </summary>
-    public Metadata Metadata { get; set; }
+    public Metadata Metadata { get; private set; }
 
 
     private readonly List<Guid> _tagIds;
@@ -50,7 +44,6 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     private Photo(
         Guid id,
         Guid userId,
-        ShotAt shotAt,
         Size size,
         Mime mime,
         StorageKey storageKey,
@@ -58,7 +51,6 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         List<Guid> tagIds)
         : base(id, userId)
     {
-        ShotAt = shotAt;
         Size = size;
         Mime = mime;
         StorageKey = storageKey;
@@ -71,7 +63,6 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     /// </summary>
     /// <param name="id">идентификатор фотографии.</param>
     /// <param name="userId">идентификатор владельца фотографии.</param>
-    /// <param name="shotAt">дата и время съёмки фотографии.</param>
     /// <param name="size">размер фотографии в битах.</param>
     /// <param name="mime">формат фотографии.</param>
     /// <param name="storageKey">ключ доступа к физической фотографии в S3-хранилище.</param>
@@ -89,7 +80,6 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
     public static Result<Photo> Create(
         Guid id,
         Guid userId,
-        ShotAt shotAt,
         Size size,
         Mime mime,
         StorageKey storageKey,
@@ -101,7 +91,6 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         var photo = new Photo(
             id,
             userId,
-            shotAt,
             size,
             mime,
             storageKey,
@@ -122,7 +111,6 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         Photo clone = new(
             Id,
             UserId,
-            ShotAt,
             Size,
             Mime,
             StorageKey,
@@ -131,6 +119,86 @@ public sealed class Photo : Entity, IDeeplyCopyable<Photo>
         );
 
         return clone;
+    }
+
+    /// <summary>
+    ///     Изменить размер файла.
+    /// </summary>
+    /// <param name="newSize">новый размер.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Resize(Size newSize)
+    {
+        Size = newSize;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Изменить MIME-файла.
+    /// </summary>
+    /// <param name="newMime">новый MIME.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid ChangeMime(Mime newMime)
+    {
+        Mime = newMime;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Изменить ключ хранения файла.
+    /// </summary>
+    /// <param name="newStorageKey">новый ключ хранения.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid ChangeStorageKey(StorageKey newStorageKey)
+    {
+        StorageKey = newStorageKey;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Изменить метаданные файла.
+    /// </summary>
+    /// <param name="newMetadata">новые метаданные.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid ChangeMetadata(Metadata newMetadata)
+    {
+        Metadata = newMetadata;
+
+        return ResultVoid.Success();
     }
 
     /// <summary>

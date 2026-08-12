@@ -1,6 +1,5 @@
 using System;
 
-using PhotoCatalog.Domain.Interfaces;
 using PhotoCatalog.Domain.Primitives;
 using PhotoCatalog.Domain.ValueObjects;
 
@@ -14,12 +13,12 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     /// <summary>
     ///     Ммя тега.
     /// </summary>
-    public Name Name { get; set; }
+    public Name Name { get; private set; }
 
     /// <summary>
     ///     HEX-цвет тега.
     /// </summary>
-    public ColorHex ColorHex { get; set; }
+    public ColorHex ColorHex { get; private set; }
 
     private Tag(Guid id, Guid userId, Name name, ColorHex colorHex) : base(id, userId)
     {
@@ -62,5 +61,45 @@ public sealed class Tag : Entity, IDeeplyCopyable<Tag>
     public Tag DeepCopy()
     {
         return new Tag(Id, UserId, Name, ColorHex);
+    }
+
+    /// <summary>
+    ///     Переименовывает тег.
+    /// </summary>
+    /// <param name="newName">новое имя.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Rename(Name newName)
+    {
+        Name = newName;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Перекрашивает тег.
+    /// </summary>
+    /// <param name="newColor">новый цвет.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Recolor(ColorHex newColor)
+    {
+        ColorHex = newColor;
+
+        return ResultVoid.Success();
     }
 }

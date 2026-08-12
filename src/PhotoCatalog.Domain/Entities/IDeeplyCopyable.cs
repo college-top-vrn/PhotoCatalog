@@ -1,4 +1,4 @@
-namespace PhotoCatalog.Domain.Interfaces;
+namespace PhotoCatalog.Domain.Entities;
 
 /// <summary>
 /// Представляет механизм для создания глубокого копирования. 
