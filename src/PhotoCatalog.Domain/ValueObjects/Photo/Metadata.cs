@@ -23,7 +23,7 @@ public enum Orientation : byte
 /// <summary>
 ///     ValueObject, представляющий собой метаданные фотографии.
 /// </summary>
-public record Metadata
+public sealed record Metadata
 {
     /// <summary>
     ///     Производитель камеры.
@@ -61,11 +61,6 @@ public record Metadata
     public double? Iso { get; private set; }
 
     /// <summary>
-    ///     Имеет ли вспышку.
-    /// </summary>
-    public bool? HasFlashfire { get; private set; }
-
-    /// <summary>
     ///     Широта.
     /// </summary>
     public double? Latitude { get; private set; }
@@ -96,6 +91,11 @@ public record Metadata
     public DateTimeOffset? ShotAt { get; private set; }
 
     /// <summary>
+    ///     Имеет ли вспышку.
+    /// </summary>
+    public bool? HasFlashfire { get; private set; }
+
+    /// <summary>
     ///     Имеет ли расширенный динамический диапазон.
     /// </summary>
     public bool? HasHdr { get; private set; }
@@ -115,7 +115,7 @@ public record Metadata
     /// <summary>
     ///     Вложенный класс-строитель, позволяющий создать экземпляр класса <see cref="Metadata"/>.
     /// </summary>
-    public class Builder
+    public sealed class Builder
     {
         private Metadata _metadata;
 
@@ -202,17 +202,6 @@ public record Metadata
         }
 
         /// <summary>
-        ///     Присваивает свойству <see cref="Metadata.HasFlashfire"/> переданное значение.
-        /// </summary>
-        /// <param name="hasFlashfire">имеет ли вспышку.</param>
-        /// <returns>самого строителя.</returns>
-        public Builder SetHasFlashfire(bool hasFlashfire)
-        {
-            _metadata.HasFlashfire = hasFlashfire;
-            return this;
-        }
-
-        /// <summary>
         ///     Присваивает свойству <see cref="Metadata.Latitude"/> переданное значение.
         /// </summary>
         /// <param name="latitude">широта.</param>
@@ -275,6 +264,17 @@ public record Metadata
         public Builder SetShotAt(DateTimeOffset shotAt)
         {
             _metadata.ShotAt = shotAt;
+            return this;
+        }
+
+        /// <summary>
+        ///     Присваивает свойству <see cref="Metadata.HasFlashfire"/> переданное значение.
+        /// </summary>
+        /// <param name="hasFlashfire">имеет ли вспышку.</param>
+        /// <returns>самого строителя.</returns>
+        public Builder SetHasFlashfire(bool hasFlashfire)
+        {
+            _metadata.HasFlashfire = hasFlashfire;
             return this;
         }
 
