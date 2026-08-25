@@ -33,11 +33,11 @@
 //     public void AlbumCommandRepositoryAddAlbumWithRightValuesReturnsSuccess()
 //     {
 //         // Arrange
-//         (bool isSuccess, Album? album, _) = Album.Create(0, TODO, TODO, TODO);
+//         (bool isSuccess, Album? album, _) = Album.Create("Тестовый альбом", 0);
 //         Assert.True(isSuccess);
 //
 //         // Act
-//         ResultVoid result = _commandRepository.AddPhoto(album!);
+//         ResultVoid result = _commandRepository.Add(album!);
 //
 //         // Assert
 //         Assert.True(result.IsSuccess);
@@ -60,9 +60,9 @@
 //     public void AlbumCommandRepositoryDeleteAlbumWithExistingIdReturnsSuccess()
 //     {
 //         // Arrange
-//         Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
+//         Result<Album> createResult = Album.Create("Альбом для удаления", 0);
 //         Assert.True(createResult.IsSuccess);
-//         _commandRepository.AddPhoto(createResult.Value);
+//         _commandRepository.Add(createResult.Value);
 //
 //         Result<Album> getBeforeDelete = _queryRepository.GetById(1);
 //         Assert.True(getBeforeDelete.IsSuccess);
@@ -101,7 +101,7 @@
 //     public void AlbumCommandRepositoryUpdateAlbumUpdatingWithNonexistentIdReturnsNotFoundError()
 //     {
 //         // Arrange
-//         Result<Album> createResult = Album.Create(999, TODO, TODO, TODO);
+//         Result<Album> createResult = Album.Create("Несуществующий альбом", 999);
 //         Assert.True(createResult.IsSuccess);
 //         Album album = createResult.Value;
 //
@@ -121,9 +121,9 @@
 //     public void AlbumCommandRepositoryUpdateAlbumWithRightValuesReturnsSuccess()
 //     {
 //         // Arrange
-//         Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
+//         Result<Album> createResult = Album.Create("Старое имя", 0);
 //         Assert.True(createResult.IsSuccess);
-//         _commandRepository.AddPhoto(createResult.Value);
+//         _commandRepository.Add(createResult.Value);
 //
 //         Result<Album> getAfterAdd = _queryRepository.GetById(1);
 //         Assert.True(getAfterAdd.IsSuccess);
@@ -149,9 +149,9 @@
 //     public void AlbumQueryRepositoryGetByIdExistingAlbumReturnsAlbum()
 //     {
 //         // Arrange
-//         Result<Album> createResult = Album.Create(0, TODO, TODO, TODO);
+//         Result<Album> createResult = Album.Create("Альбом для поиска", 0);
 //         Assert.True(createResult.IsSuccess);
-//         _commandRepository.AddPhoto(createResult.Value);
+//         _commandRepository.Add(createResult.Value);
 //
 //         // Act
 //         Result<Album> result = _queryRepository.GetById(1);
@@ -182,11 +182,11 @@
 //     public void AlbumQueryRepositoryGetByFolderIdReturnsAlbumsInFolder()
 //     {
 //         // Arrange
-//         Result<Album> album1 = Album.Create(0, TODO, TODO, TODO);
-//         Result<Album> album2 = Album.Create(0, TODO, TODO, TODO);
+//         Result<Album> album1 = Album.Create("Альбом 1", 0);
+//         Result<Album> album2 = Album.Create("Альбом 2", 0);
 //
-//         _commandRepository.AddPhoto(album1.Value);
-//         _commandRepository.AddPhoto(album2.Value);
+//         _commandRepository.Add(album1.Value);
+//         _commandRepository.Add(album2.Value);
 //
 //         Album? album1FromRepo = _queryRepository.GetById(1).Value;
 //         Album? album2FromRepo = _queryRepository.GetById(2).Value;

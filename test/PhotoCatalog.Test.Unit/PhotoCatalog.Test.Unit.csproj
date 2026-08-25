@@ -4,21 +4,22 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk"/>
-    <PackageReference Include="xunit"/>
-    <PackageReference Include="xunit.runner.visualstudio"/>
-    <PackageReference Include="TngTech.ArchUnitNET.xUnit"/>
     <PackageReference Include="NSubstitute"/>
+    <PackageReference Include="xunit.v3.mtp-v2"/>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\PhotoCatalog.Application\PhotoCatalog.Application.csproj"/>
     <ProjectReference Include="..\..\src\PhotoCatalog.Domain\PhotoCatalog.Domain.csproj"/>
-    <ProjectReference Include="..\..\src\PhotoCatalog.Infrastructure\PhotoCatalog.Infrastructure.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
