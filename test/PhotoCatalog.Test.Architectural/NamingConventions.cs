@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+using Xunit;
 using ArchUnitNET.Domain;
 using ArchUnitNET.Loader;
-using ArchUnitNET.xUnit;
+using ArchUnitNET.xUnitV3;
 
 using PhotoCatalog.Domain.Interfaces.Repositories;
 
-using Xunit;
 
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 

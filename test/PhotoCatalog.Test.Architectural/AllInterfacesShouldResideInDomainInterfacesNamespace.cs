@@ -1,7 +1,7 @@
 using System;
 
 using ArchUnitNET.Loader;
-using ArchUnitNET.xUnit;
+using ArchUnitNET.xUnitV3;
 
 using PhotoCatalog.Domain.Interfaces.Repositories;
 
