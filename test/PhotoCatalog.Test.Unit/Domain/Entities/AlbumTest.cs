@@ -15,11 +15,13 @@ public class AlbumTest
     public void Create_CreatingAlbumWithCorrectValues_ReturnsSuccessWithAlbum()
     {
         Name expectedName = Name.Create("Test").Value!;
+        ColorHex expectedColor = ColorHex.Create("Test").Value!;
 
         Result<Album> result = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            expectedName, TODO,
+            expectedName,
+            expectedColor,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
@@ -28,6 +30,7 @@ public class AlbumTest
 
         Album album = result.Value!;
 
+        
         Assert.True(result.IsSuccess);
         Assert.Equal(expectedName, album.Name);
         Assert.NotEmpty(album.PhotoIds);
@@ -37,11 +40,13 @@ public class AlbumTest
     public void DeepCopy_DeeplyCopyingOriginalAlbum_ReturnsAlbumCopy()
     {
         Name name = Name.Create("Test").Value!;
+        ColorHex color = ColorHex.Create("Test").Value!;
 
         Album original = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            name, TODO,
+            name,
+            color,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
@@ -60,11 +65,13 @@ public class AlbumTest
     public void DeepCopy_ChangingAlbumCopyWithoutAffectingOriginalAlbum()
     {
         Name originalName = Name.Create("Original").Value!;
+        ColorHex originalColor = ColorHex.Create("Test").Value!;
 
         Album original = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            originalName, TODO,
+            originalName,
+            originalColor,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
@@ -72,10 +79,12 @@ public class AlbumTest
         ).Value!;
 
         Name copyName = Name.Create("Copy").Value!;
+        ColorHex copyColor = ColorHex.Create("Test2").Value!;
 
         Album copy = original.DeepCopy();
 
         copy.Rename(copyName);
+        copy.Recolor(copyColor);
         copy.AddPhoto(Guid.CreateVersion7());
 
         Assert.NotEqual(original.Name, copy.Name);
@@ -86,11 +95,13 @@ public class AlbumTest
     public void Rename_RenamingAlbumWithCorrectValue_ReturnsResultWithSuccess()
     {
         Name oldName = Name.Create("Old").Value!;
+        ColorHex oldColor = ColorHex.Create("Test").Value!;
 
         Album album = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            oldName, TODO,
+            oldName,
+            oldColor,
             [
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7()
@@ -111,7 +122,8 @@ public class AlbumTest
         Album album = Album.Create(
             Guid.CreateVersion7(),
             Guid.CreateVersion7(),
-            Name.Create("Test").Value!, TODO,
+            Name.Create("Test").Value!,
+            ColorHex.Create("Test").Value!,
             []
         ).Value!;
 
@@ -132,7 +144,8 @@ public class AlbumTest
             .Create(
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
-                Name.Create("Test").Value!, TODO,
+                Name.Create("Test").Value!,
+                ColorHex.Create("Test").Value!,
                 [photoId]
             ).Value!;
 
@@ -152,7 +165,8 @@ public class AlbumTest
             .Create(
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
-                Name.Create("Test").Value!, TODO,
+                Name.Create("Test").Value!,
+                ColorHex.Create("Test").Value!,
                 [photoId]
             ).Value!;
 
@@ -171,7 +185,8 @@ public class AlbumTest
             .Create(
                 Guid.CreateVersion7(),
                 Guid.CreateVersion7(),
-                Name.Create("Test").Value!, TODO,
+                Name.Create("Test").Value!,
+                ColorHex.Create("Test").Value!,
                 [Guid.CreateVersion7()]
             ).Value!;
 

@@ -15,7 +15,7 @@ public class EventBus
     /// <summary>
     ///     Обработчики.
     /// </summary>
-    private readonly ConcurrentDictionary<Type, ImmutableList<IHandler>> _eventHandlers = new();
+    public ConcurrentDictionary<Type, ImmutableHashSet<IHandler>> EventHandlers { get; } = new();
 
     /// <summary>
     ///     Добавить для события нового обработчика.
@@ -41,24 +41,31 @@ public class EventBus
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Subscribe(Type domainEvent, IHandler handler)
+    public ResultVoid Subscribe(Object domainEvent, IHandler handler)
     {
-        if (!_eventHandlers.ContainsKey(domainEvent))
+        while (true)
         {
-            ImmutableList<IHandler> handlerToAdd = [handler];
+            Type domainEventType = domainEvent.GetType();
 
-            return _eventHandlers.TryAdd(domainEvent, handlerToAdd)
-                ? ResultVoid.Success()
-                : ResultVoid.Failure(DomainErrors.EventBus.UnableToAddPair);
+            if (EventHandlers.TryGetValue(domainEventType, out ImmutableHashSet<IHandler>? currentHandlers))
+            {
+                ImmutableHashSet<IHandler> updatedHandlers = currentHandlers.Add(handler);
+
+                if (EventHandlers.TryUpdate(domainEventType, updatedHandlers, currentHandlers))
+                {
+                    return ResultVoid.Success();
+                }
+            }
+            else
+            {
+                ImmutableHashSet<IHandler> handlerToAdd = [handler];
+
+                if (EventHandlers.TryAdd(domainEventType, handlerToAdd))
+                {
+                    return ResultVoid.Success();
+                }
+            }
         }
-
-        _eventHandlers.TryGetValue(domainEvent, out ImmutableList<IHandler>? availableHandlers);
-
-        ImmutableList<IHandler> updatedHandlers = availableHandlers!.Add(handler);
-
-        return _eventHandlers.TryUpdate(domainEvent, updatedHandlers, availableHandlers)
-            ? ResultVoid.Success()
-            : ResultVoid.Failure(DomainErrors.EventBus.UnableToUpdatePair);
     }
 
     /// <summary>
@@ -85,20 +92,26 @@ public class EventBus
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Unsubscribe(Type domainEvent, IHandler handler)
+    public ResultVoid Unsubscribe(Object domainEvent, IHandler handler)
     {
-        if (!_eventHandlers.ContainsKey(domainEvent))
+        while (true)
         {
-            return ResultVoid.Failure(DomainErrors.EventBus.KeyNotExists);
+            Type domainEventType = domainEvent.GetType();
+
+            if (EventHandlers.TryGetValue(domainEventType, out ImmutableHashSet<IHandler>? currentHandlers))
+            {
+                ImmutableHashSet<IHandler> updatedHandlers = currentHandlers.Remove(handler);
+
+                if (EventHandlers.TryUpdate(domainEventType, updatedHandlers, currentHandlers))
+                {
+                    return ResultVoid.Success();
+                }
+            }
+            else
+            {
+                return ResultVoid.Failure(DomainErrors.EventBus.KeyNotExists);
+            }
         }
-
-        _eventHandlers.TryGetValue(domainEvent, out ImmutableList<IHandler>? availableHandlers);
-
-        ImmutableList<IHandler> updatedHandlers = availableHandlers!.Remove(handler);
-
-        return _eventHandlers.TryUpdate(domainEvent, updatedHandlers, availableHandlers)
-            ? ResultVoid.Success()
-            : ResultVoid.Failure(DomainErrors.EventBus.UnableToUpdatePair);
     }
 
     /// <summary>
@@ -119,21 +132,24 @@ public class EventBus
     ///         </item>
     ///     </list>
     /// </returns>
-    public ResultVoid Publish(Event domainEvent)
+    public ResultVoid Publish(Object domainEvent)
     {
-        Type domainEventType = domainEvent.GetType();
-
-        if (!_eventHandlers.ContainsKey(domainEventType))
+        while (true)
         {
-            return ResultVoid.Failure(DomainErrors.EventBus.KeyNotExists);
+            Type domainEventType = domainEvent.GetType();
+
+            if (!EventHandlers.ContainsKey(domainEventType))
+            {
+                return ResultVoid.Failure(DomainErrors.EventBus.KeyNotExists);
+            }
+
+            ImmutableHashSet<IHandler> handlers = EventHandlers
+                .FirstOrDefault(p => p.Key == domainEventType)
+                .Value;
+
+            foreach (var handler in handlers) handler.Handle(domainEvent);
+
+            return ResultVoid.Success();
         }
-
-        ImmutableList<IHandler> handlers = _eventHandlers
-            .FirstOrDefault(p => p.Key == domainEventType)
-            .Value;
-
-        handlers.ForEach(h => h.Handle(domainEvent));
-
-        return ResultVoid.Success();
     }
 }

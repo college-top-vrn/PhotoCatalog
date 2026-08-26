@@ -13,12 +13,12 @@ public abstract class Entity
     /// <summary>
     /// Идентификатор сущности.
     /// </summary>
-    protected Guid Id { get; }
+    public Guid Id { get; }
 
     /// <summary>
     /// Идентификатор владельца сущности.
     /// </summary>
-    protected Guid UserId { get; }
+    public Guid UserId { get; }
 
     /// <summary>
     /// Список доменных событий.
