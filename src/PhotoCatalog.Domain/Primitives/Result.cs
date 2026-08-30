@@ -14,7 +14,7 @@ public static class Result
     public static Result<T> Success<T>(T value)
     {
         return value is null
-            ? Failure<T>(SystemErrors.NullValue)
+            ? Failure<T>(SystemErrors.NullInitializer)
             : Result<T>.CreateInternal(value, true, ResultError.None);
     }
 

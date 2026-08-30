@@ -13,27 +13,11 @@ public static class DomainErrors
     public static class EventBus
     {
         /// <summary>
-        ///     Ошибка, обозначающая невозможность добавить пару.
+        ///     Ошибка, возникающая при отсутствии обработчика.
         /// </summary>
-        public static readonly ResultError UnableToAddPair = new(
-            "EventBus.UnableToAddPair",
-            "Невозможно добавить пару"
-        );
-
-        /// <summary>
-        ///     Ошибка, обозначающая невозможность обновить пару.
-        /// </summary>
-        public static readonly ResultError UnableToUpdatePair = new(
-            "EventBus.UnableToUpdatePair",
-            "Невозможно обновить пару"
-        );
-
-        /// <summary>
-        ///     Ошибка, обозначающая отсутствие ключа в словаре.
-        /// </summary>
-        public static readonly ResultError KeyNotExists = new(
-            "EventBus.KeyNotExists",
-            "Ключ не существует"
+        public static readonly ResultError HandlerNotFound = new(
+            "EventBus.HandlerNotFound",
+            "Невозможно найти обработчика."
         );
     }
 
