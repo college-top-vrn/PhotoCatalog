@@ -8,16 +8,169 @@
 public static class DomainErrors
 {
     /// <summary>
-    ///     Ошибки для <see cref="Dimensions" />.
+    ///     Ошибки для <see cref="EventBus"/>.
     /// </summary>
-    public static class Dimensions
+    public static class EventBus
     {
         /// <summary>
-        ///     Ошибка, когда ширина и высота меньше или равны нулю, или меньше разрешенного предела размера.
+        ///     Ошибка, возникающая при отсутствии обработчика.
         /// </summary>
-        public static readonly ResultError Invalid = new(
-            "Dimensions.Invalid",
-            "Ширина и высота должны быть строго больше нуля или меньше разрешенного предела размера.");
+        public static readonly ResultError HandlerNotFound = new(
+            "EventBus.HandlerNotFound",
+            "Невозможно найти обработчика."
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="Entity"/>.
+    /// </summary>
+    public static class Entity
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая наличие похожего доменного события.
+        /// </summary>
+        public static readonly ResultError SuchDomainEventAlreadyExists = new(
+            "Entity.SuchDomainEventAlreadyExists",
+            "Такое доменное событие уже существует"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая, что список доменных событий уже пуст.
+        /// </summary>
+        public static readonly ResultError DomainEventListIsAlreadyEmpty = new(
+            "Entity.DomainEventListIsAlreadyEmpty",
+            "Список доменных событий уже пуст"
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="Observable"/>
+    /// </summary>
+    public static class Observable
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая наличия похожего наблюдателя.
+        /// </summary>
+        public static readonly ResultError SuchObserverAlreadyExists = new(
+            "ObservableEntity.SuchObserverAlreadyExists",
+            "Такой наблюдатель уже существует"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствия конкретного наблюдателя.
+        /// </summary>
+        public static readonly ResultError SuchObserverNotExists = new(
+            "ObservableEntity.SuchObserverNotExists",
+            "Такого наблюдателя не существует"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствия наблюдателей.
+        /// </summary>
+        public static readonly ResultError ObserversNotExist = new(
+            "ObservableEntity.ObserversNotExist",
+            "Нет существующих наблюдателей"
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="Name"/>
+    /// </summary>
+    public static class Name
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствия имени.
+        /// </summary>
+        public static readonly ResultError IsEmpty = new(
+            "Name.IsEmpty",
+            "Имя пустое"
+        );
+
+        /// <summary>
+        ///     Ошибка, обозначающая слишком длинное имя.
+        /// </summary>
+        public static readonly ResultError IsTooLong = new(
+            "Name.IsTooLong",
+            "Имя слишком длинное"
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="Metadata"/>
+    /// </summary>
+    public static class Metadata
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствие метаданных фотографии.
+        /// </summary>
+        public static readonly ResultError IsEmpty = new(
+            "Metadata.IsEmpty",
+            "Метаданные файла отсутствуют"
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="CapturedAt"/>
+    /// </summary>
+    public static class CapturedAt
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая неправильный формат даты и времени.
+        /// </summary>
+        public static readonly ResultError IsInvalid = new(
+            "CapturedAt.IsInvalid",
+            "Формат даты и время съёмки неправильный."
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="Mime"/>
+    /// </summary>
+    public static class Mime
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая отсутсвие MIME у файла.
+        /// </summary>
+        public static readonly ResultError IsEmpty = new(
+            "Mime.IsEmpty",
+            "MIME файла пустой."
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="StorageKey"/>
+    /// </summary>
+    public static class StorageKey
+    {
+        /// <summary>
+        ///     Ошибка, обозначающая отсутствия ключа от физического файла в S3-хранилище.
+        /// </summary>
+        public static readonly ResultError IsEmpty = new(
+            "StorageKey.IsEmpty",
+            "Ключ от физического файла в S3 пустой"
+        );
+    }
+
+    /// <summary>
+    ///     Ошибки для <see cref="Photo"/> и <see cref="Album"/>
+    /// </summary>
+    public static class Ids
+    {
+        /// <summary>
+        ///     Ошибка, означающая наличие дупликата данного идентификатора.
+        /// </summary>
+        public static readonly ResultError DuplicatedId = new(
+            "Ids.DuplicatedId",
+            "Данный идентификатор уже есть"
+        );
+
+        /// <summary>
+        ///     Ошибка, означающая отсутствие данного идентификатора.
+        /// </summary>
+        public static readonly ResultError IdNotFound = new(
+            "Ids.IdNotFound",
+            "Данный идентификатор не найден"
+        );
     }
 
     /// <summary>
@@ -79,26 +232,6 @@ public static class DomainErrors
         public static readonly ResultError NullPhoto = new(
             "Photo.NullPhoto",
             "Данная фотография пустая");
-    }
-
-    /// <summary>
-    ///     Ошибки для <see cref="Folder" />.
-    /// </summary>
-    public static class Folder
-    {
-        /// <summary>
-        ///     Ошибка, когда имя папки пустое.
-        /// </summary>
-        public static readonly ResultError EmptyName = new(
-            "Folder.EmptyName",
-            "Имя папки не может быть пустым.");
-
-        /// <summary>
-        ///     Ошибка, когда папка перемещается внутрь самой себя (циклическая ссылка).
-        /// </summary>
-        public static readonly ResultError CannotMoveToSelf = new(
-            "Folder.CannotMoveToSelf",
-            "Папка не может быть перемещена внутрь самой себя (циклическая ссылка).");
     }
 
     /// <summary>

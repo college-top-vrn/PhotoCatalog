@@ -37,7 +37,7 @@ public class ResultGenericCoreTests
         Result<string> result = PhotoCatalog.Domain.Primitives.Result.Success<string>(null!);
 
         Assert.True(result.IsFailure);
-        Assert.Equal(SystemErrors.NullValue, result.ResultError);
+        Assert.Equal(SystemErrors.NullInitializer, result.ResultError);
     }
 
     /// <summary>

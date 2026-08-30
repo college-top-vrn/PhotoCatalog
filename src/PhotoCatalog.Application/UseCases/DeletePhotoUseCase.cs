@@ -1,61 +1,61 @@
-using PhotoCatalog.Application.Errors;
-using PhotoCatalog.Domain.Entities;
-using PhotoCatalog.Domain.Extensions;
-using PhotoCatalog.Domain.Interfaces.Repositories;
-using PhotoCatalog.Domain.Interfaces.Services;
-using PhotoCatalog.Domain.Primitives;
-
-using Serilog;
-
-namespace PhotoCatalog.Application.UseCases;
-
-/// <summary>
-///     Представляет прикладную сущность для удаления файла из репозитория и диска.
-/// </summary>
-/// <param name="photoQueryRepository">Репозиторий фотографий для получения данных.</param>
-/// <param name="photoCommandRepository">Репозиторий фотографий для добавления данных.</param>
-/// <param name="fileStorage">Хранилище файлов.</param>
-/// <param name="unitOfWork">Единица работы.</param>
-/// <param name="logger">Логгер.</param>
-public class DeletePhotoUseCase(
-    IPhotoQueryRepository photoQueryRepository,
-    IPhotoCommandRepository photoCommandRepository,
-    IFileStorage fileStorage,
-    IUnitOfWork unitOfWork,
-    ILogger logger)
-{
-    /// <summary>
-    ///     Метод для удаления файла в репозитории и на диске по идентификатору.
-    /// </summary>
-    /// <param name="photoId">идентификатор фотографии.</param>
-    /// <returns>
-    ///     Возвращает ResultVoid.Success(), если файл успешно удалился.
-    ///     Возвращает ResultVoid.Failure(), если файл неуспешно удалился.
-    /// </returns>
-    public ResultVoid Execute(int photoId)
-    {
-        Result<Photo>? photo = photoQueryRepository.GetById(photoId)
-            .ToResult(ApplicationErrors.General.NotFound)
-            .Value;
-
-        if (photo is { Value: null } or null)
-        {
-            return ResultVoid.Failure(ApplicationErrors.General.NotFound);
-        }
-
-        unitOfWork.BeginTransaction();
-
-        photoCommandRepository.Delete(photoId);
-
-
-        if (unitOfWork.Commit().IsSuccess)
-        {
-            fileStorage.DeleteFile(photo.Value.RealPath);
-            return ResultVoid.Success();
-        }
-
-        logger.Error("Orphaned file left on disk: {Path}", photo.Value.RealPath);
-
-        return ResultVoid.Failure(ApplicationErrors.Files.OrphanedFile);
-    }
-}
+// using PhotoCatalog.Application.Errors;
+// using PhotoCatalog.Domain.Entities;
+// using PhotoCatalog.Domain.Extensions;
+// using PhotoCatalog.Domain.Interfaces.Repositories;
+// using PhotoCatalog.Domain.Interfaces.Services;
+// using PhotoCatalog.Domain.Primitives;
+//
+// using Serilog;
+//
+// namespace PhotoCatalog.Application.UseCases;
+//
+// /// <summary>
+// ///     Представляет прикладную сущность для удаления файла из репозитория и диска.
+// /// </summary>
+// /// <param name="photoQueryRepository">Репозиторий фотографий для получения данных.</param>
+// /// <param name="photoCommandRepository">Репозиторий фотографий для добавления данных.</param>
+// /// <param name="fileStorage">Хранилище файлов.</param>
+// /// <param name="unitOfWork">Единица работы.</param>
+// /// <param name="logger">Логгер.</param>
+// public class DeletePhotoUseCase(
+//     IPhotoQueryRepository photoQueryRepository,
+//     IPhotoCommandRepository photoCommandRepository,
+//     IFileStorage fileStorage,
+//     IUnitOfWork unitOfWork,
+//     ILogger logger)
+// {
+//     /// <summary>
+//     ///     Метод для удаления файла в репозитории и на диске по идентификатору.
+//     /// </summary>
+//     /// <param name="photoId">идентификатор фотографии.</param>
+//     /// <returns>
+//     ///     Возвращает ResultVoid.Success(), если файл успешно удалился.
+//     ///     Возвращает ResultVoid.Failure(), если файл неуспешно удалился.
+//     /// </returns>
+//     public ResultVoid Execute(int photoId)
+//     {
+//         Result<Photo>? photo = photoQueryRepository.GetById(photoId)
+//             .ToResult(ApplicationErrors.General.NotFound)
+//             .Value;
+//
+//         if (photo is { Value: null } or null)
+//         {
+//             return ResultVoid.Failure(ApplicationErrors.General.NotFound);
+//         }
+//
+//         unitOfWork.BeginTransaction();
+//
+//         photoCommandRepository.Delete(photoId);
+//
+//
+//         if (unitOfWork.Commit().IsSuccess)
+//         {
+//             fileStorage.DeleteFile(photo.Value.RealPath);
+//             return ResultVoid.Success();
+//         }
+//
+//         logger.Error("Orphaned file left on disk: {Path}", photo.Value.RealPath);
+//
+//         return ResultVoid.Failure(ApplicationErrors.Files.OrphanedFile);
+//     }
+// }

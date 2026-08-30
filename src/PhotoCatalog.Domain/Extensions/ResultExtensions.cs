@@ -89,7 +89,7 @@ public static class ResultExtensions
         /// <example>
         ///     <code>
         ///     Result&lt;Details&gt; result = GetEntity()
-        ///         .Then(entity => FetchDetails(entity.Id));
+        ///         .Then(entity => FetchDetails(entity.Ids));
         ///     </code>
         /// </example>
         public Result<TNextValue> Then<TNextValue>(Func<TValue, Result<TNextValue>> nextStep)
@@ -214,7 +214,7 @@ public static class ResultExtensions
         /// <example>
         ///     <code>
         ///     Result&lt;Guid&gt; idResult = entityResult
-        ///         .Transform(entity => entity.Id);
+        ///         .Transform(entity => entity.Ids);
         ///     </code>
         /// </example>
         public Result<TNextValue> Transform<TNextValue>(Func<TValue, TNextValue> mapper)
@@ -335,7 +335,7 @@ public static class ResultExtensions
         /// <returns>Исходный результат без изменений.</returns>
         /// <example>
         ///     <code>
-        ///     result.OnSuccess(entity => Log.Info($"Сущность {entity.Id} обработана"));
+        ///     result.OnSuccess(entity => Log.Info($"Сущность {entity.Ids} обработана"));
         ///     </code>
         /// </example>
         public Result<TValue> OnSuccess(Action<TValue> action)

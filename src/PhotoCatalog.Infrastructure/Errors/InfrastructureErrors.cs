@@ -57,8 +57,8 @@ public static class InfrastructureErrors
         ///     Ошибка, соответствующая <see cref="Microsoft.Data.Sqlite.SqliteException" />.
         ///     Возникает при ошибке в SQLite запросе.
         /// </summary>
-        public static readonly ResultError Sqlite =
-            new("Database.Sqlite", "Ошибка Sqlite.");
+        public static readonly ResultError Postgres =
+            new("Database.Postgres", "Ошибка Postgres.");
 
         /// <summary>
         ///     Ошибка, когда элемент таблицы базы данных не найден.
@@ -168,8 +168,9 @@ public static class InfrastructureErrors
             "MetadataExtractor.NotAnImage",
             "Файл не является изображением или его формат не поддерживается.");
 
-        // TODO: Добавить XML документацию
         /// <summary>
+        ///     Ошибка ненайденных данных.
+        ///     Возникает, когда файл не имеет метаданных.
         /// </summary>
         public static readonly ResultError MetadataNotFound = new(
             "MetadataExtractor.MetadataNotFound", "Метаданные не найдены. ");

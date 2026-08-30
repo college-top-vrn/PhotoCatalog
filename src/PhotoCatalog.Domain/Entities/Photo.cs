@@ -1,149 +1,258 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 
 using PhotoCatalog.Domain.Primitives;
-using PhotoCatalog.Domain.ValueObjects;
+using PhotoCatalog.Domain.ValueObjects.Photo;
 
 namespace PhotoCatalog.Domain.Entities;
 
 /// <summary>
-///     Представляет основную сущность фотографии в системе, привязанную к физическому файлу.
+///     Представляет программную доменную сущность физической фотографии, хранящейся в S3-хранилище.
 /// </summary>
-public sealed class Photo
+public sealed class Photo : Entity, IDeeplyCopyable<Photo>
 {
-    private readonly List<int> _tagIds = [];
-
-    // TODO: Пофиксить предупреждение
     /// <summary>
-    ///     Конструктор для инициализации через ORM (Dapper).
+    ///     Размер фотографии в битах.
     /// </summary>
-    private Photo() { }
+    public Size Size { get; private set; }
 
     /// <summary>
-    ///     Уникальный идентификатор фотографии.
+    ///     Формат фотографии.
     /// </summary>
-    public int Id { get; private init; }
+    public Mime Mime { get; private set; }
 
     /// <summary>
-    ///     Полный путь к файлу на диске.
+    ///     Ключ доступа к физической фотографии в S3-хранилище.
     /// </summary>
-    public string RealPath { get; private init; } = string.Empty;
+    public StorageKey StorageKey { get; private set; }
 
     /// <summary>
-    ///     контрольная-сумма файла для проверки целостности.
+    ///     Метаданные фотографии.
     /// </summary>
-    public string FileHash { get; private set; } = string.Empty;
+    public Metadata Metadata { get; private set; }
+
+
+    private readonly List<Guid> _tagIds;
 
     /// <summary>
-    ///     Размеры изображения (ширина/высота).
+    ///     Иммутабельный список идентификаторов.
     /// </summary>
-    public Dimensions Dimensions { get; private set; }
+    public IImmutableList<Guid> TagIds => _tagIds.ToImmutableList();
 
-    /// <summary>
-    ///     Дата и время добавления фотографии в каталог (UTC).
-    /// </summary>
-    public DateTime AddedAt { get; private init; }
-
-    /// <summary>
-    ///     Список идентификаторов тегов, присвоенных данной фотографии.
-    /// </summary>
-    public IReadOnlyCollection<int> TagIds => _tagIds.AsReadOnly();
-
-    /// <summary>
-    ///     Восстанавливает состояние списка тегов из базы данных в обход бизнес-правил.
-    /// </summary>
-    /// <param name="tags">Список ID тегов.</param>
-    public ResultVoid RestoreTags(IEnumerable<int> tags)
+    private Photo(
+        Guid id,
+        Guid userId,
+        Size size,
+        Mime mime,
+        StorageKey storageKey,
+        Metadata metadata,
+        List<Guid> tagIds)
+        : base(id, userId)
     {
-        _tagIds.Clear();
-        _tagIds.AddRange(tags);
-        return ResultVoid.Success();
+        Size = size;
+        Mime = mime;
+        StorageKey = storageKey;
+        Metadata = metadata;
+        _tagIds = tagIds;
     }
 
     /// <summary>
-    ///     Фабричный метод для создания нового экземпляра фотографии.
+    ///     Создаёт новую фотографию.
     /// </summary>
-    /// <param name="realPath">Путь к файлу на диске.</param>
-    /// <returns>Результат выполнения операции с объектом <see cref="Photo" /> или ошибкой <c>Photo.EmptyPath</c>.</returns>
-    public static Result<Photo> Create(string realPath)
+    /// <param name="id">идентификатор фотографии.</param>
+    /// <param name="userId">идентификатор владельца фотографии.</param>
+    /// <param name="size">размер фотографии в битах.</param>
+    /// <param name="mime">формат фотографии.</param>
+    /// <param name="storageKey">ключ доступа к физической фотографии в S3-хранилище.</param>
+    /// <param name="metadata">метаданные фотографии.</param>
+    /// <param name="tags">список идентификаторов тегов фотографии.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех с созданной фотографией;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public static Result<Photo> Create(
+        Guid id,
+        Guid userId,
+        Size size,
+        Mime mime,
+        StorageKey storageKey,
+        Metadata metadata,
+        List<Guid> tags)
     {
-        return string.IsNullOrEmpty(realPath)
-            ? Result.Failure<Photo>(DomainErrors.Photo.EmptyPath)
-            : Result.Success(new Photo()); // TODO Сделать сборку фотографии зная её путь.
+        // TODO: реализовать валидатор MIME
+
+        var photo = new Photo(
+            id,
+            userId,
+            size,
+            mime,
+            storageKey,
+            metadata,
+            tags
+        );
+
+        return Result.Success(photo);
     }
 
-    /// <summary>
-    ///     Обновляет хеш-сумму файла.
-    /// </summary>
-    /// <param name="newHash">Новое строковое значение хеша.</param>
-    /// <returns>Результат выполнения операции.</returns>
-    public ResultVoid UpdateHash(string newHash)
-    {
-        FileHash = newHash;
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Устанавливает размеры изображения.
-    /// </summary>
-    /// <param name="newDimensions">Размеры изображения.</param>
-    public ResultVoid SetDimensions(Dimensions newDimensions)
-    {
-        Dimensions = newDimensions;
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Добавляет тег к фотографии.
-    /// </summary>
-    /// <param name="tagId">Идентификатор тега.</param>
-    /// <returns>Успех или ошибка <c>Photo.DuplicateTag</c>, если тег уже добавлен.</returns>
-    public ResultVoid AddTag(int tagId)
-    {
-        // TODO Сделать проверку на несуществующий тега
-
-        if (_tagIds.Contains(tagId))
-        {
-            return ResultVoid.Failure(DomainErrors.Photo.DuplicateTag);
-        }
-
-        _tagIds.Add(tagId);
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Удаляет тег из коллекции фотографии.
-    /// </summary>
-    /// <param name="tagId">Идентификатор тега для удаления.</param>
-    /// <returns>Успех или ошибка <c>Photo.TagNotExists</c>, если тег не найден.</returns>
-    public ResultVoid RemoveTag(int tagId)
-    {
-        if (!_tagIds.Contains(tagId))
-        {
-            return ResultVoid.Failure(DomainErrors.Photo.TagNotExists);
-        }
-
-        _tagIds.Remove(tagId);
-        return ResultVoid.Success();
-    }
-
-    /// <summary>
-    ///     Метод для глубокого копирования
-    /// </summary>
-    /// <returns> Возвращает копию объекта <see cref="Photo" /> </returns>
+    /// <inheritdoc />
     public Photo DeepCopy()
     {
-        Photo clone = new()
-        {
-            Id = Id,
-            RealPath = RealPath,
-            FileHash = FileHash,
-            Dimensions = Dimensions,
-            AddedAt = AddedAt
-        };
+        List<Guid> newTagIds = _tagIds
+            .Select(ti => new Guid(ti.ToString()))
+            .ToList();
 
-        clone._tagIds.AddRange(_tagIds);
+        Photo clone = new(
+            Id,
+            UserId,
+            Size,
+            Mime,
+            StorageKey,
+            Metadata,
+            newTagIds
+        );
 
         return clone;
+    }
+
+    /// <summary>
+    ///     Изменить размер файла.
+    /// </summary>
+    /// <param name="newSize">новый размер.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid Resize(Size newSize)
+    {
+        Size = newSize;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Изменить MIME-файла.
+    /// </summary>
+    /// <param name="newMime">новый MIME.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid ChangeMime(Mime newMime)
+    {
+        Mime = newMime;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Изменить ключ хранения файла.
+    /// </summary>
+    /// <param name="newStorageKey">новый ключ хранения.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid ChangeStorageKey(StorageKey newStorageKey)
+    {
+        StorageKey = newStorageKey;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Изменить метаданные файла.
+    /// </summary>
+    /// <param name="newMetadata">новые метаданные.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid ChangeMetadata(Metadata newMetadata)
+    {
+        Metadata = newMetadata;
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Добавляет идентификатор в список.
+    /// </summary>
+    /// <param name="id">идентификатор.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Ids.DuplicatedId"/>, если данный тег уже привязан.
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid AddTag(Guid id)
+    {
+        if (_tagIds.Contains(id))
+        {
+            return ResultVoid.Failure(DomainErrors.Ids.DuplicatedId);
+        }
+
+        _tagIds.Add(id);
+
+        return ResultVoid.Success();
+    }
+
+    /// <summary>
+    ///     Удаляет идентификатор из списка.
+    /// </summary>
+    /// <param name="id">идентификатор.</param>
+    /// <returns>
+    ///     <list type="bullet">
+    ///         <item>
+    ///             <description>
+    ///                 Успех;
+    ///             </description>
+    ///         </item>
+    ///         <item>
+    ///             <description>
+    ///                 Ошибка <see cref="DomainErrors.Ids.IdNotFound"/>, если тег не найден.
+    ///             </description>
+    ///         </item>
+    ///     </list>
+    /// </returns>
+    public ResultVoid DeleteTag(Guid id)
+    {
+        return _tagIds.Remove(id)
+            ? ResultVoid.Success()
+            : ResultVoid.Failure(DomainErrors.Ids.IdNotFound);
     }
 }
